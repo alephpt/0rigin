@@ -78,9 +78,9 @@ class SMFTSystem:
         # Create Hamiltonian oscillator system
         self.oscillators = HamiltonianKuramoto(
             N=N_oscillators,
-            coupling_strength=1.0,  # Coupling strength set by field
+            coupling_strength=1.0,  # Coupling strength (mean-field scaling applied in step)
             frequencies=oscillator_frequencies,
-            damping=1.0
+            damping=5.0  # Increased damping for stability
         )
 
         # Create mediator field σ(x,t)
@@ -194,7 +194,7 @@ class SMFTSystem:
 
         # Simple mediator dynamics: relax toward local order parameter
         # In full theory, this would be Klein-Gordon equation
-        damping = 1.0
+        damping = 5.0  # Increased damping for stability (matches oscillator damping)
         relaxation_rate = 1.0 / self.M
 
         # Source from oscillators
@@ -206,10 +206,12 @@ class SMFTSystem:
         else:
             diffusion = 0
 
-        # Damped relaxation dynamics
-        dσ_dt = -damping * (self.mediator_field.values - source) + diffusion
-
-        self.mediator_field.values += dσ_dt * dt
+        # Semi-implicit damping for stability
+        # Explicit update would be: σ_new = σ + dt * (-damping * (σ - source) + diffusion)
+        # Semi-implicit: σ_new = (σ + dt * (-damping * source + diffusion)) / (1 + damping * dt)
+        dσ_dt_undamped = -damping * source + diffusion
+        σ_temp = self.mediator_field.values + dσ_dt_undamped * dt
+        self.mediator_field.values = σ_temp / (1 + damping * dt)
         self.mediator_field.t += dt
 
     def compute_field_force_on_oscillators(
@@ -248,9 +250,10 @@ class SMFTSystem:
             field_value = np.sum(kernel * self.mediator_field.values)
 
             # Force is proportional to field value
-            # In full theory: F_i = -∂H/∂θ_i ∝ σ(x_i) sin(θ_i - Ψ(x_i))
+            # In full theory: F_i = -∂H/∂θ_i ∝ -σ(x_i) sin(θ_i - Ψ(x_i))
+            # Note: negative sign for restoring force
             phase_diff = self.oscillators.theta[i] - np.sum(kernel * self.phase_field.values)
-            forces[i] = field_value * np.sin(phase_diff)
+            forces[i] = -field_value * np.sin(phase_diff)
 
         return forces
 
