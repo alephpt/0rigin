@@ -86,6 +86,11 @@ class MediatorField:
         self.history = []
         self.time_history = []
 
+        # Validation flags
+        self.validate_energy = False
+        self.validate_state = False
+        self._initial_energy = None
+
     def compute_source_density(
         self,
         oscillator_phases: NDArray,
@@ -161,6 +166,12 @@ class MediatorField:
 
         self.t += dt
 
+        # Optional validation
+        if self.validate_state:
+            self._validate_state()
+        if self.validate_energy:
+            self.validate_energy_bounds()
+
     def _euler_step(self, rho: NDArray, dt: float):
         """Simple Euler integration."""
         # Compute Laplacian
@@ -183,17 +194,18 @@ class MediatorField:
             3. σ_dot(t+dt) = σ_dot(t) + acceleration·dt
             4. σ(t+dt) = σ(t+dt/2) + σ_dot(t+dt)·dt/2
 
-        Includes damping term -γ·σ_dot for numerical stability.
+        Uses semi-implicit damping for numerical stability.
         """
         # Half-step position update
         sigma_half = self.sigma + 0.5 * dt * self.sigma_dot
 
-        # Compute forces at half-step (with damping)
+        # Compute forces at half-step (damping applied semi-implicitly below)
         laplacian = self.grid.laplacian(sigma_half)
-        sigma_ddot = self.c**2 * laplacian - self.M**2 * sigma_half + self.g * rho - self.gamma * self.sigma_dot
+        sigma_ddot = self.c**2 * laplacian - self.M**2 * sigma_half + self.g * rho
 
-        # Full-step velocity update
-        self.sigma_dot += dt * sigma_ddot
+        # Full-step velocity update with semi-implicit damping
+        sigma_dot_temp = self.sigma_dot + dt * sigma_ddot
+        self.sigma_dot = sigma_dot_temp / (1 + self.gamma * dt)  # Semi-implicit damping
 
         # Complete position update
         self.sigma = sigma_half + 0.5 * dt * self.sigma_dot
@@ -297,6 +309,49 @@ class MediatorField:
             values[i] = self.sigma[ix, iy]
 
         return values
+
+    def _validate_state(self):
+        """
+        Check field state for NaN/Inf values.
+
+        Raises
+        ------
+        RuntimeError
+            If field contains invalid values.
+        """
+        if not np.all(np.isfinite(self.sigma)):
+            raise RuntimeError(f"Field σ contains NaN/Inf at t={self.t:.4f}")
+        if not np.all(np.isfinite(self.sigma_dot)):
+            raise RuntimeError(f"Field σ_dot contains NaN/Inf at t={self.t:.4f}")
+
+    def validate_energy_bounds(self, max_growth_factor: float = 10.0):
+        """
+        Validate that energy hasn't grown unreasonably.
+
+        Parameters
+        ----------
+        max_growth_factor : float
+            Maximum allowed energy growth factor from initial energy.
+
+        Raises
+        ------
+        RuntimeError
+            If energy exceeds bounds.
+        """
+        if self._initial_energy is None:
+            # Initialize on first call
+            self._initial_energy = self.compute_field_energy()
+            if self._initial_energy == 0:
+                self._initial_energy = 1e-10  # Avoid division by zero
+
+        current_energy = self.compute_field_energy()
+        growth_factor = current_energy / self._initial_energy
+
+        if growth_factor > max_growth_factor:
+            raise RuntimeError(
+                f"Energy grew {growth_factor:.2f}x from initial "
+                f"(current={current_energy:.2e}, initial={self._initial_energy:.2e}) at t={self.t:.4f}"
+            )
 
     def __repr__(self) -> str:
         """String representation."""

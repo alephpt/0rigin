@@ -55,14 +55,14 @@ def demo_basic_evolution():
 
     # Order parameter evolution
     axes[0, 0].plot(solution['t'], solution['R'], 'b-', linewidth=2)
-    axes[0, 0].set_xlabel('Time')
+    axes[0, 0].set_xlabel('Time (t)')
     axes[0, 0].set_ylabel('Global R')
     axes[0, 0].set_title('Synchronization Dynamics')
     axes[0, 0].grid(True, alpha=0.3)
 
     # Energy evolution
     axes[0, 1].plot(solution['t'], solution['energy'], 'r-', linewidth=2)
-    axes[0, 1].set_xlabel('Time')
+    axes[0, 1].set_xlabel('Time (t)')
     axes[0, 1].set_ylabel('Energy')
     axes[0, 1].set_title('System Energy')
     axes[0, 1].grid(True, alpha=0.3)
@@ -188,14 +188,14 @@ def demo_local_vs_global():
     # Local R(t)
     axes[0, 0].plot(sol_local['t'], sol_local['R'], 'b-', linewidth=2)
     axes[0, 0].set_title('Local Coupling: R(t)')
-    axes[0, 0].set_xlabel('Time')
+    axes[0, 0].set_xlabel('Time (t)')
     axes[0, 0].set_ylabel('R')
     axes[0, 0].grid(True, alpha=0.3)
 
     # Global R(t)
     axes[0, 1].plot(sol_global['t'], sol_global['R'], 'r-', linewidth=2)
     axes[0, 1].set_title('Global Coupling: R(t)')
-    axes[0, 1].set_xlabel('Time')
+    axes[0, 1].set_xlabel('Time (t)')
     axes[0, 1].set_ylabel('R')
     axes[0, 1].grid(True, alpha=0.3)
 

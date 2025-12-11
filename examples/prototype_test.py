@@ -176,7 +176,7 @@ def visualize_synchronization_transition(solution):
     # Time series of R
     ax1 = axes[0, 0]
     ax1.plot(solution['t'], solution['R'], 'b-', linewidth=1.5)
-    ax1.set_xlabel('Time')
+    ax1.set_xlabel('Time (t)')
     ax1.set_ylabel('Order Parameter R')
     ax1.set_title('Synchronization Dynamics')
     ax1.grid(True, alpha=0.3)
@@ -187,7 +187,7 @@ def visualize_synchronization_transition(solution):
     n_show = 20
     for i in range(n_show):
         ax2.plot(solution['t'], solution['phases'][:, i], alpha=0.6, linewidth=0.5)
-    ax2.set_xlabel('Time')
+    ax2.set_xlabel('Time (t)')
     ax2.set_ylabel('Phase θ')
     ax2.set_title(f'Phase Trajectories ({n_show} oscillators)')
     ax2.grid(True, alpha=0.3)

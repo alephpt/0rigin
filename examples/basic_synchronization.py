@@ -73,7 +73,7 @@ def example_basic_synchronization():
         ax1 = axes[idx, 0]
         ax1.plot(t, R, 'b-', label='R(t)')
         ax1.axhline(R_theory, color='r', linestyle='--', label=f'Theory: R={R_theory:.3f}')
-        ax1.set_xlabel('Time')
+        ax1.set_xlabel('Time (t)')
         ax1.set_ylabel('Order Parameter R')
         ax1.set_title(f'{label}')
         ax1.set_ylim([0, 1])
@@ -241,7 +241,7 @@ def example_network_coupling():
         # Plot results
         ax = axes[idx]
         ax.plot(solution['t'], solution['R'])
-        ax.set_xlabel('Time')
+        ax.set_xlabel('Time (t)')
         ax.set_ylabel('Order Parameter R')
         ax.set_title(f'{name} Network (N={N})')
         ax.set_ylim([0, 1])

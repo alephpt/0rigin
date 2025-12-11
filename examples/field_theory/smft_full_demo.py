@@ -162,7 +162,7 @@ def demo_local_coupling():
     # Order parameter evolution
     ax1 = fig.add_subplot(gs[0, :])
     ax1.plot(result['t'], result['R'], 'b-', linewidth=2)
-    ax1.set_xlabel('Time')
+    ax1.set_xlabel('Time (t)')
     ax1.set_ylabel('Order Parameter R')
     ax1.set_title('Synchronization Evolution')
     ax1.grid(True, alpha=0.3)
@@ -203,7 +203,7 @@ def demo_local_coupling():
     # Energy evolution
     ax_energy = fig.add_subplot(gs[2, 2])
     ax_energy.plot(result['t'], result['field_energy'], 'r-', linewidth=2)
-    ax_energy.set_xlabel('Time')
+    ax_energy.set_xlabel('Time (t)')
     ax_energy.set_ylabel('Field Energy')
     ax_energy.set_title('Field Energy Evolution')
     ax_energy.grid(True, alpha=0.3)

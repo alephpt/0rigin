@@ -51,7 +51,7 @@ def test_energy_conservation():
 
     # Energy
     axes[0, 0].plot(solution['t'], energy)
-    axes[0, 0].set_xlabel('Time')
+    axes[0, 0].set_xlabel('Time (t)')
     axes[0, 0].set_ylabel('Energy')
     axes[0, 0].set_title('Energy Conservation (γ=0)')
     axes[0, 0].grid(True)
@@ -71,7 +71,7 @@ def test_energy_conservation():
 
     # Order parameter
     axes[1, 0].plot(solution['t'], solution['R'])
-    axes[1, 0].set_xlabel('Time')
+    axes[1, 0].set_xlabel('Time (t)')
     axes[1, 0].set_ylabel('R')
     axes[1, 0].set_title('Order Parameter')
     axes[1, 0].grid(True)
@@ -140,20 +140,20 @@ def test_overdamped_limit():
                        label=f'γ={gamma}', color=color)
 
     # Format plots
-    axes[0, 0].set_xlabel('Time')
+    axes[0, 0].set_xlabel('Time (t)')
     axes[0, 0].set_ylabel('R')
     axes[0, 0].set_title('Order Parameter vs Damping')
     axes[0, 0].legend()
     axes[0, 0].grid(True)
 
-    axes[0, 1].set_xlabel('Time')
+    axes[0, 1].set_xlabel('Time (t)')
     axes[0, 1].set_ylabel('|p|')
     axes[0, 1].set_title('Mean Momentum')
     axes[0, 1].legend()
     axes[0, 1].set_yscale('log')
     axes[0, 1].grid(True)
 
-    axes[1, 0].set_xlabel('Time')
+    axes[1, 0].set_xlabel('Time (t)')
     axes[1, 0].set_ylabel('Energy')
     axes[1, 0].set_title('Total Energy')
     axes[1, 0].legend()

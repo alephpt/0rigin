@@ -70,7 +70,7 @@ def demo_lorentzian_synchronization():
         ax.plot(solution['t'], solution['R'], 'b-', linewidth=2)
         ax.axhline(R_theory, color='r', linestyle='--',
                    label=f'Theory: {R_theory:.3f}')
-        ax.set_xlabel('Time')
+        ax.set_xlabel('Time (t)')
         ax.set_ylabel('Order Parameter R')
         ax.set_title(f'{label}\nK = {K:.2f}')
         ax.set_ylim([0, 1])
@@ -119,7 +119,7 @@ def demo_distribution_comparison():
         # Plot
         ax = axes[idx]
         ax.plot(solution['t'], solution['R'], linewidth=2)
-        ax.set_xlabel('Time')
+        ax.set_xlabel('Time (t)')
         ax.set_ylabel('Order Parameter R')
         ax.set_title(name)
         ax.set_ylim([0, 1])

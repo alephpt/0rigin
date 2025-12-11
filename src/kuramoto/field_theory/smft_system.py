@@ -293,11 +293,14 @@ class SMFTSystem:
         # Add field coupling
         total_force = coupling_force + field_forces
 
-        dp_dt = self.oscillators.frequencies + total_force - self.oscillators.gamma * self.oscillators.p
+        # Semi-implicit damping for stability (same as mediator field)
+        dp_dt_undamped = self.oscillators.frequencies + total_force
 
         # Update
         self.oscillators.theta += dtheta_dt * dt
-        self.oscillators.p += dp_dt * dt
+        # Apply semi-implicit damping: p_new = (p_old + dp_dt_undamped * dt) / (1 + gamma * dt)
+        p_temp = self.oscillators.p + dp_dt_undamped * dt
+        self.oscillators.p = p_temp / (1 + self.oscillators.gamma * dt)
         self.oscillators.t += dt
 
         # Update mediator field from new oscillator state
