@@ -316,6 +316,39 @@ class SMFTSystem:
 
         self.t += dt
 
+    def _initialize_storage(self, n_steps: int, store_interval: int) -> dict:
+        """Initialize storage arrays for evolution."""
+        n_store = n_steps // store_interval
+        return {
+            'n_store': n_store,
+            't_array': np.zeros(n_store),
+            'theta_trajectory': np.zeros((n_store, self.N)),
+            'R_global': np.zeros(n_store),
+            'mediator_history': [],
+            'sync_history': [],
+            'energy_history': np.zeros(n_store),
+            'store_idx': 0
+        }
+
+    def _store_state(self, storage: dict) -> None:
+        """Store current state in storage arrays."""
+        idx = storage['store_idx']
+        storage['t_array'][idx] = self.t
+        storage['theta_trajectory'][idx] = self.oscillators.theta
+
+        # Global order parameter
+        z = np.mean(np.exp(1j * self.oscillators.theta))
+        storage['R_global'][idx] = np.abs(z)
+
+        # Field snapshots
+        storage['mediator_history'].append(self.mediator_field.values.copy())
+        storage['sync_history'].append(self.sync_field.values.copy())
+
+        # Energy
+        storage['energy_history'][idx] = self.oscillators.compute_hamiltonian()
+
+        storage['store_idx'] += 1
+
     def evolve(
         self,
         t_span: Tuple[float, float],
@@ -348,46 +381,25 @@ class SMFTSystem:
         t0, tf = t_span
         n_steps = int((tf - t0) / dt)
 
-        # Storage
-        n_store = n_steps // store_interval
-        t_array = np.zeros(n_store)
-        theta_trajectory = np.zeros((n_store, self.N))
-        R_global = np.zeros(n_store)
-        mediator_history = []
-        sync_history = []
-        energy_history = np.zeros(n_store)
+        # Initialize storage
+        storage = self._initialize_storage(n_steps, store_interval)
 
         # Time evolution
-        store_idx = 0
         for step in range(n_steps):
             # Coupled step
             self.step(dt, diffusion_coeff, kernel_width)
 
-            # Store
+            # Store state periodically
             if (step + 1) % store_interval == 0:
-                t_array[store_idx] = self.t
-                theta_trajectory[store_idx] = self.oscillators.theta
-
-                # Global order parameter
-                z = np.mean(np.exp(1j * self.oscillators.theta))
-                R_global[store_idx] = np.abs(z)
-
-                # Field snapshots
-                mediator_history.append(self.mediator_field.values.copy())
-                sync_history.append(self.sync_field.values.copy())
-
-                # Energy
-                energy_history[store_idx] = self.oscillators.compute_hamiltonian()
-
-                store_idx += 1
+                self._store_state(storage)
 
         return {
-            't': t_array,
-            'theta': theta_trajectory,
-            'R': R_global,
-            'mediator_field': np.array(mediator_history),
-            'sync_field': np.array(sync_history),
-            'energy': energy_history,
+            't': storage['t_array'],
+            'theta': storage['theta_trajectory'],
+            'R': storage['R_global'],
+            'mediator_field': np.array(storage['mediator_history']),
+            'sync_field': np.array(storage['sync_history']),
+            'energy': storage['energy_history'],
             'positions': self.oscillator_positions
         }
 

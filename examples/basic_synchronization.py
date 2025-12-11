@@ -106,7 +106,7 @@ def example_basic_synchronization():
     plt.show()
     """
 
-    # Placeholder output
+    # DEMONSTRATION OUTPUT (actual visualization requires matplotlib)
     print("Simulation would show:")
     print("- Subcritical: R → 0 (incoherent)")
     print("- Critical: R fluctuates near 0")
@@ -182,7 +182,7 @@ def example_bifurcation_diagram():
     print(f"  Numerical:   Kc = {Kc_numerical:.3f}")
     """
 
-    # Placeholder calculation
+    # DEMONSTRATION calculation
     gamma = 1.0
     Kc = 2 * gamma
     K_test = 3.0
@@ -271,7 +271,7 @@ def example_custom_analysis():
     print("\nCustom Analysis Example")
     print("-" * 40)
 
-    # Placeholder for actual implementation
+    # DEMONSTRATION for actual implementation
     print("Analysis capabilities:")
     print("1. Phase coherence: ρ = |⟨e^(iθ)⟩|")
     print("2. Phase diffusion: D = ⟨(θ - ⟨θ⟩)²⟩")

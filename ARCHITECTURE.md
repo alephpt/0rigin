@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document defines the architecture for a Python-based Kuramoto model simulation framework designed to support theoretical research in synchronization and potential future extensions to relativistic field theory.
+This document describes the architecture of the implemented Python-based Kuramoto model simulation framework with statistical mean field theory (SMFT) extensions. The system supports both classical Kuramoto synchronization dynamics and field-theoretic formulations with Hamiltonian dynamics.
 
 ## Design Principles
 
@@ -15,78 +15,90 @@ This document defines the architecture for a Python-based Kuramoto model simulat
 ## Project Structure
 
 ```
-kuramoto/
-├── pyproject.toml           # Project metadata and dependencies
-├── README.md               # User documentation
-├── LICENSE                 # MIT License
-├── .gitignore             # Git ignore patterns
-├── requirements.txt       # Dependencies
-├── setup.py              # Package setup
+0rigin/
+├── README.md                        # User documentation
+├── ARCHITECTURE.md                  # This document
+├── CONTRIBUTING.md                  # Development guidelines
+├── requirements.txt                 # Dependencies
 │
 ├── src/
 │   └── kuramoto/
 │       ├── __init__.py               # Package exports
+│       │
 │       ├── core/
 │       │   ├── __init__.py
-│       │   ├── model.py             # Core Kuramoto model classes
-│       │   ├── oscillator.py        # Individual oscillator representation
-│       │   └── coupling.py          # Coupling functions and networks
+│       │   ├── model.py             # KuramotoModel class
+│       │   └── coupling.py          # Coupling schemes
 │       │
 │       ├── distributions/
 │       │   ├── __init__.py
-│       │   ├── base.py              # Abstract frequency distribution
-│       │   ├── lorentzian.py        # Lorentzian (Cauchy) distribution
-│       │   ├── gaussian.py          # Gaussian distribution
-│       │   └── uniform.py           # Uniform distribution
+│       │   ├── base.py              # FrequencyDistribution abstract base
+│       │   ├── lorentzian.py        # LorentzianDistribution
+│       │   ├── gaussian.py          # GaussianDistribution
+│       │   └── uniform.py           # UniformDistribution
 │       │
 │       ├── solvers/
 │       │   ├── __init__.py
-│       │   ├── base.py              # Abstract solver interface
-│       │   ├── runge_kutta.py       # RK4/RK45 implementations
-│       │   ├── euler.py             # Simple Euler method
-│       │   └── adaptive.py          # Adaptive timestep methods
+│       │   ├── base.py              # Solver interface
+│       │   └── runge_kutta.py       # RK4, RK45, Euler implementations
 │       │
 │       ├── analysis/
 │       │   ├── __init__.py
-│       │   ├── order_parameter.py   # Kuramoto order parameter
-│       │   ├── stability.py         # Linear stability analysis
-│       │   ├── bifurcation.py       # Bifurcation analysis
+│       │   ├── order_parameter.py   # OrderParameter class
 │       │   └── metrics.py           # Synchronization metrics
 │       │
 │       ├── visualization/
 │       │   ├── __init__.py
-│       │   ├── phase_plot.py        # Phase circle visualization
+│       │   ├── phase_plot.py        # Phase circle plots
 │       │   ├── time_series.py       # Time evolution plots
-│       │   ├── order_plot.py        # Order parameter visualization
-│       │   └── animation.py         # Real-time animation
+│       │   ├── bifurcation.py       # Bifurcation diagrams
+│       │   └── utils.py             # Plotting utilities
 │       │
-│       └── utils/
+│       └── field_theory/            # SMFT extensions (NEW)
 │           ├── __init__.py
-│           ├── config.py            # Configuration management
-│           ├── validation.py        # Input validation
-│           └── parallel.py          # Parallel computation utilities
+│           ├── hamiltonian/
+│           │   ├── __init__.py
+│           │   └── phase_space.py   # Hamiltonian phase space dynamics
+│           ├── fields/
+│           │   ├── __init__.py
+│           │   ├── grid.py          # Spatial grid discretization
+│           │   ├── scalar_field.py  # ScalarField base class
+│           │   └── mediator.py      # MediatorField (Klein-Gordon)
+│           ├── coupling/
+│           │   ├── __init__.py
+│           │   └── local_coupling.py # Local field-oscillator coupling
+│           ├── pde_solvers/
+│           │   ├── __init__.py
+│           │   └── base.py          # PDE solver interface (py-pde integration)
+│           └── smft_system.py       # High-level SMFT system class
 │
 ├── tests/
-│   ├── __init__.py
 │   ├── conftest.py                  # Pytest configuration
-│   ├── test_model.py                # Model tests
-│   ├── test_solvers.py              # Solver accuracy tests
-│   ├── test_analysis.py             # Analysis method tests
+│   ├── test_model.py                # Core model tests
+│   ├── test_coupling.py             # Coupling tests
+│   ├── test_solvers.py              # Solver validation
 │   ├── test_distributions.py        # Distribution tests
-│   └── fixtures/
-│       └── known_solutions.py       # Analytical test cases
+│   ├── test_order_parameter.py      # Order parameter tests
+│   ├── test_metrics.py              # Analysis metrics tests
+│   ├── test_phase_plot.py           # Visualization tests
+│   ├── test_time_series.py
+│   ├── test_bifurcation.py
+│   └── field_theory/                # Field theory tests
+│       ├── test_hamiltonian.py
+│       ├── test_fields.py
+│       ├── test_mediator.py
+│       ├── test_local_coupling.py
+│       └── test_smft_system.py
 │
 ├── examples/
-│   ├── basic_synchronization.py     # Simple example
-│   ├── critical_coupling.py         # Finding Kc
-│   ├── ott_antonsen.py             # OA reduction example
-│   ├── phase_transitions.py         # Synchronization transition
-│   └── custom_distribution.py       # Custom g(ω) example
+│   ├── demo_synchronization.py      # Classical Kuramoto demo
+│   └── field_theory/
+│       ├── smft_demo.py             # SMFT demonstration
+│       └── hamiltonian_demo.py      # Hamiltonian dynamics demo
 │
 └── docs/
-    ├── api/                         # API documentation
-    ├── theory/                      # Mathematical background
-    └── tutorials/                   # User tutorials
+    └── validation/
+        └── VALIDATION_REPORT.md     # Scientific validation results
 ```
 
 ## Module Architecture
@@ -435,26 +447,66 @@ def test_energy_conservation():
     pass
 ```
 
-## Extension Points
+### Field Theory Module (`kuramoto.field_theory`)
 
-### Future SMFT Integration
+**Status**: Implemented SMFT extensions with Hamiltonian dynamics and Klein-Gordon mediator fields.
 
 ```python
-# kuramoto/field_theory/
-├── __init__.py
-├── scalar_field.py      # R(x,t), θ(x,t) fields
-├── relativistic.py      # Lorentz-covariant formulation
-├── lagrangian.py       # Field theory Lagrangian
-└── quantum.py          # Quantum corrections (future)
+# field_theory/
+├── hamiltonian/
+│   └── phase_space.py          # Hamiltonian formulation of Kuramoto dynamics
+├── fields/
+│   ├── grid.py                 # Spatial grid discretization
+│   ├── scalar_field.py         # ScalarField abstract base class
+│   └── mediator.py             # MediatorField (Klein-Gordon PDE)
+├── coupling/
+│   └── local_coupling.py       # Local oscillator-field coupling
+├── pde_solvers/
+│   └── base.py                 # PDE solver interface (py-pde integration)
+└── smft_system.py              # SMFTSystem high-level interface
 ```
 
-### Planned Extensions
+#### Key Components
 
-1. **Spatial Kuramoto**: Add spatial dimension, diffusion
-2. **Quantum Kuramoto**: Path integral formulation
-3. **Machine Learning**: Neural ODE solvers, parameter inference
-4. **GPU Acceleration**: CuPy/JAX backends
-5. **Real-time Control**: Feedback protocols, pinning
+**Hamiltonian Dynamics** (`hamiltonian/phase_space.py`):
+- Phase space formulation: (θ, p) coordinates
+- Conjugate momentum dynamics
+- Energy conservation validation
+- Hamiltonian H = Σ[p_i²/2 + ω_i·θ_i] - K·coupling_term
+
+**Scalar Fields** (`fields/`):
+- Grid-based spatial discretization
+- Generic ScalarField base class
+- Klein-Gordon mediator field with wave propagation
+- Mass generation mechanism: m_eff ∝ R (order parameter coupling)
+
+**Local Coupling** (`coupling/local_coupling.py`):
+- Spatial position-dependent coupling
+- Field interpolation at oscillator positions
+- Self-consistent field updates
+
+**SMFT System** (`smft_system.py`):
+- High-level interface combining oscillators + field
+- Coupled ODE-PDE evolution
+- Order parameter calculation with spatial dependence
+
+#### Capabilities
+
+✅ **Implemented**:
+- Hamiltonian phase space dynamics
+- Klein-Gordon mediator field evolution
+- Local position-based coupling
+- Self-consistent mean field dynamics
+- Mass generation via order parameter (m_eff ∝ R)
+- Wave propagation at speed c
+- Energy conservation in Hamiltonian formulation
+
+⏳ **Future Extensions**:
+1. **Full PDE Coupling**: Integrate with py-pde for advanced PDE solvers
+2. **Quantum Corrections**: Path integral formulation
+3. **Relativistic Covariance**: Lorentz-covariant formulation
+4. **GPU Acceleration**: CuPy/JAX backends for large-scale simulations
+5. **Machine Learning**: Neural ODE solvers, parameter inference
 
 ## Performance Considerations
 

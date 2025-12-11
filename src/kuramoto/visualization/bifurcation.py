@@ -9,6 +9,8 @@ from typing import Optional, Callable
 import numpy as np
 from numpy.typing import NDArray
 
+from .utils import _check_matplotlib
+
 try:
     import matplotlib.pyplot as plt
     from matplotlib.figure import Figure
@@ -16,15 +18,6 @@ try:
     HAS_MATPLOTLIB = True
 except ImportError:
     HAS_MATPLOTLIB = False
-
-
-def _check_matplotlib():
-    """Check if matplotlib is available."""
-    if not HAS_MATPLOTLIB:
-        raise ImportError(
-            "Matplotlib is required for visualization. "
-            "Install it with: pip install matplotlib"
-        )
 
 
 def plot_bifurcation_diagram(

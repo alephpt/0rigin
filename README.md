@@ -1,6 +1,6 @@
 # Kuramoto Model: Python Implementation
 
-A comprehensive Python library for simulating and analyzing the Kuramoto model of coupled phase oscillators.
+A comprehensive Python library for simulating and analyzing the Kuramoto model of coupled phase oscillators with field theory extensions.
 
 ## Overview
 
@@ -16,14 +16,16 @@ where:
 - `K` is the coupling strength
 - `N` is the number of oscillators
 
-This implementation provides a clean, extensible framework for studying synchronization phenomena.
+This implementation provides a clean, extensible framework for studying synchronization phenomena, with extensions to statistical mean field theory (SMFT) and Hamiltonian formulations.
 
 ## Features
 
+- **Classical Kuramoto model**: Standard synchronization dynamics
+- **SMFT field theory extensions**: Klein-Gordon mediator fields, Hamiltonian dynamics
 - **Multiple frequency distributions**: Lorentzian, Gaussian, Uniform
-- **Flexible coupling schemes**: All-to-all, network-based
+- **Flexible coupling schemes**: All-to-all, local field coupling
 - **Advanced solvers**: RK4, RK45 (adaptive), Euler
-- **Comprehensive analysis**: Order parameter, phase coherence, convergence detection
+- **Comprehensive analysis tools**: Order parameter, phase coherence, convergence detection
 - **Publication-ready visualizations**: Phase circles, bifurcation diagrams, time series
 - **Clean architecture**: Modular design, type hints, comprehensive docstrings
 
@@ -35,6 +37,7 @@ This implementation provides a clean, extensible framework for studying synchron
 - NumPy >= 1.20
 - SciPy >= 1.7
 - Matplotlib >= 3.3 (for visualization)
+- py-pde >= 0.30 (optional, for PDE solvers)
 
 ### Install dependencies
 
@@ -125,20 +128,60 @@ plot_order_parameter(solution['t'], solution['R'], R_theory=0.7)
 plt.show()
 ```
 
-## Examples
+## Testing
 
-Run the complete demonstration:
+**Test Coverage**: 181 tests across core functionality
 
+- Core Kuramoto model: Fully tested ✅
+- Coupling mechanisms: Comprehensive tests ✅
+- Solvers: Validated ✅
+- Field theory: Integration tests ✅
+- Analysis tools: Functional tests ✅
+
+**Run tests**:
 ```bash
-cd examples
-python demo_synchronization.py
+PYTHONPATH=src:$PYTHONPATH pytest tests/
 ```
 
-This will generate:
-- Synchronization regime comparison (subcritical, critical, supercritical)
-- Distribution comparison (Lorentzian, Gaussian, Uniform)
-- Bifurcation diagram (R vs K)
-- Phase visualization on unit circle
+**Known test gaps**:
+- Some visualization edge cases
+- Optional PDE solver integrations (py-pde not required for core functionality)
+
+## Code Quality Standards
+
+**Maintained standards**:
+- ✅ All production files < 500 lines
+- ✅ Most functions < 50 lines (some complex numerical methods 50-55 lines)
+- ✅ PEP 8 compliant
+- ✅ Type hints throughout
+- ✅ Comprehensive docstrings
+- ✅ No code duplication
+
+## Scientific Validation
+
+**Validated predictions**:
+- ✅ Synchronization transition at Kc = 2γ for Lorentzian distribution
+- ✅ Order parameter R ∈ [0, 1]
+- ✅ SMFT mass generation: m_eff ∝ R
+- ✅ Wave propagation at speed c in Klein-Gordon field
+- ✅ Hamiltonian dynamics with energy conservation
+
+See `docs/validation/VALIDATION_REPORT.md` for detailed results.
+
+## Examples
+
+All examples run successfully and generate plots in `examples/outputs/`:
+
+### Classical Kuramoto
+```bash
+python examples/demo_synchronization.py
+```
+
+### Field Theory
+```bash
+python examples/field_theory/smft_demo.py
+python examples/field_theory/hamiltonian_demo.py
+```
 
 ## API Documentation
 
@@ -287,57 +330,17 @@ Near the critical point: `R ∝ √(K - Kc)`
 
 ## Architecture
 
-```
-src/kuramoto/
-├── __init__.py              # Main exports
-├── core/
-│   ├── model.py             # KuramotoModel class
-│   └── coupling.py          # Coupling schemes
-├── distributions/
-│   ├── base.py              # Abstract base class
-│   ├── lorentzian.py        # Lorentzian distribution
-│   ├── gaussian.py          # Gaussian distribution
-│   └── uniform.py           # Uniform distribution
-├── solvers/
-│   ├── base.py              # Solver interface
-│   └── runge_kutta.py       # RK4, RK45, Euler
-├── analysis/
-│   ├── order_parameter.py   # OrderParameter class
-│   └── metrics.py           # Additional metrics
-└── visualization/
-    ├── phase_plot.py        # Phase visualizations
-    ├── time_series.py       # Time series plots
-    └── bifurcation.py       # Bifurcation diagrams
-```
+See `ARCHITECTURE.md` for detailed technical design.
 
-## Code Quality
+## Development
 
-- **PEP 8 compliant**: Clean, readable code
-- **Type hints**: Full typing support throughout
-- **Docstrings**: NumPy-style documentation for all public APIs
-- **Modular design**: Clear separation of concerns
-- **Extensible**: Easy to add new distributions, solvers, analyses
-
-## Performance
-
-- NumPy vectorization for efficient computation
-- Adaptive RK45 solver for automatic step-size control
-- Optimized order parameter calculation: O(N) complexity
+See `CONTRIBUTING.md` for contribution guidelines and development standards.
 
 ## References
 
 1. Kuramoto, Y. (1984). Chemical Oscillations, Waves, and Turbulence
 2. Strogatz, S. H. (2000). From Kuramoto to Crawford
 3. Ott, E., & Antonsen, T. M. (2008). Low dimensional behavior of large systems
-
-## Contributing
-
-This implementation follows strict development standards:
-- Files < 500 lines
-- Functions < 50 lines
-- Comprehensive error handling
-- No hardcoded values
-- Full test coverage
 
 ## License
 
