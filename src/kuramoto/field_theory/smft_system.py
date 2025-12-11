@@ -45,15 +45,39 @@ class SMFTSystem:
 
     def __init__(
         self,
-        grid_shape: Tuple[int, int],
-        N_oscillators: int,
+        grid_shape: Tuple[int, int] = None,
+        N_oscillators: int = None,
+        N: int = None,
         coupling: Literal['local', 'global'] = 'local',
         mediator_mass: float = 10.0,
         oscillator_frequencies: Optional[NDArray] = None,
         grid_size: Tuple[float, float] = (1.0, 1.0),
         boundary: str = 'periodic'
     ):
-        """Initialize SMFT system."""
+        """Initialize SMFT system.
+
+        Raises
+        ------
+        ValueError
+            If grid_shape has negative dimensions or N <= 0
+        """
+        # Support both N and N_oscillators
+        if N is not None:
+            N_oscillators = N
+        if N_oscillators is None:
+            raise ValueError("Must provide N_oscillators or N")
+
+        # Validate grid_shape
+        if grid_shape is not None:
+            if len(grid_shape) != 2:
+                raise ValueError(f"grid_shape must be (Nx, Ny), got {grid_shape}")
+            if grid_shape[0] <= 0 or grid_shape[1] <= 0:
+                raise ValueError(
+                    f"Grid dimensions must be positive, got {grid_shape}"
+                )
+        else:
+            grid_shape = (50, 50)  # Default
+
         self.grid_shape = grid_shape
         self.N = N_oscillators
         self.coupling_type = coupling

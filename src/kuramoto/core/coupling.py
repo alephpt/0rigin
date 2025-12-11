@@ -111,8 +111,29 @@ class NetworkCoupling(Coupling):
         strength: float,
         normalize: bool = True
     ):
-        """Initialize network coupling."""
-        self.adjacency = np.asarray(adjacency_matrix)
+        """Initialize network coupling.
+
+        Raises
+        ------
+        ValueError
+            If adjacency matrix is not square or has invalid values
+        """
+        adj = np.asarray(adjacency_matrix)
+
+        if adj.ndim != 2:
+            raise ValueError(
+                f"Adjacency matrix must be 2D, got shape {adj.shape}"
+            )
+        if adj.shape[0] != adj.shape[1]:
+            raise ValueError(
+                f"Adjacency matrix must be square, got shape {adj.shape}"
+            )
+        if np.any(adj < 0):
+            raise ValueError("Adjacency matrix cannot have negative values")
+        if np.any(~np.isfinite(adj)):
+            raise ValueError("Adjacency matrix contains non-finite values")
+
+        self.adjacency = adj
         self.strength = strength
         self.normalize = normalize
         self.N = len(self.adjacency)
@@ -257,8 +278,47 @@ class HigherHarmonicCoupling(Coupling):
     """
 
     def __init__(self, harmonics: dict):
-        """Initialize higher harmonic coupling."""
-        self.harmonics = harmonics
+        """Initialize higher harmonic coupling.
+
+        Raises
+        ------
+        ValueError
+            If harmonics dict is empty or contains invalid values
+        TypeError
+            If harmonics dict has invalid structure
+        """
+        if not harmonics:
+            # Empty harmonics - store empty dict (compute_field will return zeros)
+            self.harmonics = {}
+        else:
+            # Validate harmonics structure
+            validated_harmonics = {}
+            for n, params in harmonics.items():
+                # Validate harmonic number
+                try:
+                    n_int = int(n)
+                    if n_int != n:
+                        raise TypeError(f"Harmonic number must be integer, got {n}")
+                except (TypeError, ValueError):
+                    raise TypeError(f"Harmonic number must be integer, got {type(n).__name__}")
+
+                # Validate parameters
+                try:
+                    if isinstance(params, (list, tuple)) and len(params) == 2:
+                        K_n, alpha_n = params
+                        K_n = float(K_n)
+                        alpha_n = float(alpha_n)
+                    else:
+                        raise ValueError(f"Harmonic parameters must be (K_n, alpha_n) tuple, got {params}")
+                except (TypeError, ValueError) as e:
+                    raise ValueError(f"Invalid harmonic parameters for n={n}: {e}")
+
+                if not np.isfinite(K_n) or not np.isfinite(alpha_n):
+                    raise ValueError(f"Harmonics must have finite values, got K_n={K_n}, alpha_n={alpha_n}")
+
+                validated_harmonics[n_int] = (K_n, alpha_n)
+
+            self.harmonics = validated_harmonics
 
     def compute_field(self, phases: NDArray) -> NDArray:
         """

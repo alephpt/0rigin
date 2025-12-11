@@ -81,7 +81,17 @@ class Solver(ABC):
             Time points.
         y : NDArray
             Solution trajectory, shape (len(t), len(y0)).
+
+        Raises
+        ------
+        ValueError
+            If initial state contains NaN/Inf
         """
+        # Validate initial state
+        y0 = np.asarray(y0)
+        if not np.all(np.isfinite(y0)):
+            raise ValueError("Initial state contains non-finite values")
+
         t0, tf = t_span
 
         if t_eval is not None:

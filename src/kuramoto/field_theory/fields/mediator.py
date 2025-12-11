@@ -32,20 +32,22 @@ class MediatorField:
 
     def __init__(
         self,
-        grid: SpatialGrid,
+        grid: Optional[SpatialGrid] = None,
         wave_speed: float = 1.0,
         mass: float = 1.0,
         coupling_constant: float = 1.0,
         damping: float = 0.1,
         initial_field: Optional[NDArray] = None,
-        initial_velocity: Optional[NDArray] = None
+        initial_velocity: Optional[NDArray] = None,
+        phi: Optional[NDArray] = None,
+        pi_phi: Optional[NDArray] = None
     ):
         """
         Initialize Klein-Gordon mediator field.
 
         Parameters
         ----------
-        grid : SpatialGrid
+        grid : SpatialGrid, optional
             Underlying spatial grid.
         wave_speed : float
             Wave propagation speed c.
@@ -59,26 +61,97 @@ class MediatorField:
             Initial field configuration σ(x,0).
         initial_velocity : NDArray, optional
             Initial time derivative ∂σ/∂t(x,0).
+        phi : NDArray, optional
+            Alternative name for initial_field (for compatibility).
+        pi_phi : NDArray, optional
+            Alternative name for initial_velocity (for compatibility).
+
+        Raises
+        ------
+        ValueError
+            If mass <= 0, wave_speed <= 0, or field shapes are invalid
+        TypeError
+            If grid is not a SpatialGrid instance
         """
+        # Support both naming conventions
+        if phi is not None:
+            initial_field = phi
+        if pi_phi is not None:
+            initial_velocity = pi_phi
+
+        # Validate parameters
+        if mass <= 0:
+            raise ValueError(f"Mass must be positive, got {mass}")
+        if wave_speed <= 0:
+            raise ValueError(f"Wave speed must be positive, got {wave_speed}")
+
+        # Handle grid initialization
+        if grid is None:
+            # Infer grid from initial field if provided
+            if initial_field is not None:
+                shape = initial_field.shape
+                if len(shape) != 2:
+                    raise ValueError(
+                        f"Initial field must be 2D, got shape {shape}"
+                    )
+                # Create default grid
+                grid = SpatialGrid(Nx=shape[0], Ny=shape[1])
+            else:
+                raise ValueError("Must provide either grid or initial_field")
+
+        if not isinstance(grid, SpatialGrid):
+            raise TypeError(
+                f"Grid must be SpatialGrid instance, got {type(grid).__name__}"
+            )
+
+        # Validate field shapes if provided
+        if initial_field is not None and initial_velocity is not None:
+            if initial_field.shape != initial_velocity.shape:
+                raise ValueError(
+                    f"Initial field shape {initial_field.shape} must match "
+                    f"initial velocity shape {initial_velocity.shape}"
+                )
+
+        # Check for 3D fields (should be 2D)
+        if initial_field is not None and initial_field.ndim == 3:
+            raise ValueError(
+                f"Field must be 2D, got 3D array with shape {initial_field.shape}"
+            )
+        if initial_velocity is not None and initial_velocity.ndim == 3:
+            raise ValueError(
+                f"Field must be 2D, got 3D array with shape {initial_velocity.shape}"
+            )
+
         self.grid = grid
         self.c = wave_speed
         self.M = mass
+        self.mass = mass  # Alias for compatibility
         self.g = coupling_constant
         self.gamma = damping
 
-        # Field value σ(x,t)
+        # Field value σ(x,t) or phi
         if initial_field is None:
             self.sigma = np.zeros((grid.Nx, grid.Ny))
         else:
-            assert initial_field.shape == (grid.Nx, grid.Ny)
+            if initial_field.shape != (grid.Nx, grid.Ny):
+                raise ValueError(
+                    f"Initial field shape {initial_field.shape} must match "
+                    f"grid shape ({grid.Nx}, {grid.Ny})"
+                )
             self.sigma = initial_field.copy()
+        self.phi = self.sigma  # Alias
 
-        # Time derivative ∂σ/∂t
+        # Time derivative ∂σ/∂t or pi_phi
         if initial_velocity is None:
             self.sigma_dot = np.zeros((grid.Nx, grid.Ny))
         else:
-            assert initial_velocity.shape == (grid.Nx, grid.Ny)
+            if initial_velocity.shape != (grid.Nx, grid.Ny):
+                raise ValueError(
+                    f"Initial velocity shape {initial_velocity.shape} must match "
+                    f"grid shape ({grid.Nx}, {grid.Ny})"
+                )
             self.sigma_dot = initial_velocity.copy()
+        self.pi_phi = self.sigma_dot  # Alias
 
         self.t = 0.0
 

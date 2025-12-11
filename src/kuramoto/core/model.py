@@ -58,29 +58,63 @@ class KuramotoModel:
     def __init__(
         self,
         N: int,
-        coupling: Union[float, Coupling],
-        frequencies: Union[NDArray, FrequencyDistribution, str],
+        coupling: Union[float, Coupling] = 1.0,
+        frequencies: Union[NDArray, FrequencyDistribution, str] = 'lorentzian',
         initial_phases: Optional[NDArray] = None
     ):
-        """Initialize Kuramoto model."""
-        self.N = N
+        """Initialize Kuramoto model.
+
+        Raises
+        ------
+        ValueError
+            If N <= 0, coupling < 0, or array shapes incompatible
+        TypeError
+            If arguments have wrong type
+        """
+        # Validate N
+        if not isinstance(N, (int, np.integer)):
+            raise TypeError(f"N must be an integer, got {type(N).__name__}")
+        if N <= 0:
+            raise ValueError(f"N must be positive, got {N}")
+
+        self.N = int(N)
         self.t = 0.0
 
         # Set up coupling
-        if isinstance(coupling, (int, float)):
-            self.coupling = SinusoidalCoupling(strength=coupling)
-        else:
+        if isinstance(coupling, Coupling):
             self.coupling = coupling
+        elif isinstance(coupling, (int, float, np.number)):
+            if coupling < 0:
+                raise ValueError(f"Coupling strength must be non-negative, got {coupling}")
+            self.coupling = SinusoidalCoupling(strength=float(coupling))
+        else:
+            raise TypeError(
+                f"Coupling must be a number or Coupling object, got {type(coupling).__name__}"
+            )
 
         # Set up frequencies
         self.frequencies = self._initialize_frequencies(frequencies)
+        if len(self.frequencies) != self.N:
+            raise ValueError(
+                f"Frequency array length ({len(self.frequencies)}) must match N ({self.N})"
+            )
 
         # Set up initial phases
         if initial_phases is None:
-            self.phases = np.random.uniform(0, 2 * np.pi, N)
+            self.phases = np.random.uniform(0, 2 * np.pi, self.N)
         else:
-            self.phases = np.asarray(initial_phases)
-            assert len(self.phases) == N, "Initial phases must have length N"
+            # Check for complex dtype before conversion
+            initial_phases_arr = np.asarray(initial_phases)
+            if np.iscomplexobj(initial_phases_arr):
+                raise TypeError("Initial phases must be real, not complex")
+
+            # Convert to float
+            initial_phases = np.asarray(initial_phases, dtype=float)
+            if len(initial_phases) != self.N:
+                raise ValueError(
+                    f"Initial phases length ({len(initial_phases)}) must match N ({self.N})"
+                )
+            self.phases = initial_phases
 
         # Storage for solution history
         self._solution_t = None
@@ -116,8 +150,16 @@ class KuramotoModel:
 
         else:
             # Direct array
-            freq_array = np.asarray(frequencies)
-            assert len(freq_array) == self.N, "Frequency array must have length N"
+            try:
+                freq_array = np.asarray(frequencies, dtype=float)
+            except (ValueError, TypeError) as e:
+                raise TypeError(f"Frequencies must be numeric array, got {type(frequencies).__name__}: {e}")
+
+            if freq_array.ndim != 1:
+                raise ValueError(
+                    f"Frequency array must be 1D, got shape {freq_array.shape}"
+                )
+
             return freq_array
 
     def equations_of_motion(self, t: float, phases: NDArray) -> NDArray:
@@ -174,7 +216,39 @@ class KuramotoModel:
             - 'phases': Phase trajectories
             - 'R': Order parameter amplitude
             - 'Psi': Order parameter phase
+
+        Raises
+        ------
+        ValueError
+            If t_span is invalid (t_end <= t_start) or dt < 0
+        TypeError
+            If t_span is not a tuple
         """
+        # Validate t_span
+        if not isinstance(t_span, tuple) or len(t_span) != 2:
+            raise TypeError("t_span must be a tuple (t_start, t_end)")
+
+        t_start, t_end = t_span
+        try:
+            t_start = float(t_start)
+            t_end = float(t_end)
+        except (ValueError, TypeError):
+            raise TypeError("t_span values must be numeric")
+
+        if t_end <= t_start:
+            raise ValueError(
+                f"Invalid time span: t_end ({t_end}) must be greater than t_start ({t_start})"
+            )
+
+        # Validate dt if provided
+        if dt is not None:
+            try:
+                dt = float(dt)
+            except (ValueError, TypeError):
+                raise TypeError("dt must be numeric")
+            if dt < 0:
+                raise ValueError(f"dt must be non-negative, got {dt}")
+
         # Initialize solver
         if isinstance(solver, str):
             solver_obj = self._get_solver(solver, **solver_kwargs)
