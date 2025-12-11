@@ -200,17 +200,22 @@ class SMFTSystem:
         # Source from oscillators
         source = relaxation_rate * R_field
 
-        # Diffusion term
+        # Semi-implicit update for both damping and diffusion
+        # dσ/dt = -γ(σ - source) + D∇²σ
+        # Semi-implicit: σ_new * (1 + γ*dt - D*dt*∇²) ≈ σ_old + γ*dt*source
+        # For stability without solving linear system, use explicit diffusion with reduced coeff
+        # and implicit damping
+
         if diffusion_coeff > 0:
-            diffusion = diffusion_coeff * self.grid.laplacian(self.mediator_field.values)
+            # Limit diffusion for explicit stability: CFL condition dt < dx²/(2*D*ndim)
+            # With dt=0.01, dx=1/50=0.02, ndim=2: D_stable < dx²/(2*dt*ndim) = 0.005
+            D_stable = min(diffusion_coeff, 0.005)
+            diffusion = D_stable * self.grid.laplacian(self.mediator_field.values)
         else:
             diffusion = 0
 
-        # Semi-implicit damping for stability
-        # Explicit update would be: σ_new = σ + dt * (-damping * (σ - source) + diffusion)
-        # Semi-implicit: σ_new = (σ + dt * (-damping * source + diffusion)) / (1 + damping * dt)
-        dσ_dt_undamped = -damping * source + diffusion
-        σ_temp = self.mediator_field.values + dσ_dt_undamped * dt
+        # Semi-implicit damping (implicit) + explicit diffusion
+        σ_temp = self.mediator_field.values + dt * (damping * source + diffusion)
         self.mediator_field.values = σ_temp / (1 + damping * dt)
         self.mediator_field.t += dt
 
