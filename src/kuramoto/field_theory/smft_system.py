@@ -35,6 +35,9 @@ class SMFTSystem:
         Coupling type: 'local' or 'global'.
     mediator_mass : float
         Mass M of mediator field (M→∞ recovers Kuramoto).
+    mass_gap : float, optional
+        Mass gap parameter Δ from SMFT theory (energy scale).
+        Default 1.0.
     oscillator_frequencies : NDArray, optional
         Natural frequencies. Random if None.
     grid_size : tuple of float, optional
@@ -50,6 +53,7 @@ class SMFTSystem:
         N: int = None,
         coupling: Literal['local', 'global'] = 'local',
         mediator_mass: float = 10.0,
+        mass_gap: float = 1.0,
         oscillator_frequencies: Optional[NDArray] = None,
         grid_size: Tuple[float, float] = (1.0, 1.0),
         boundary: str = 'periodic'
@@ -78,10 +82,15 @@ class SMFTSystem:
         else:
             grid_shape = (50, 50)  # Default
 
+        # Validate mass_gap
+        if mass_gap <= 0:
+            raise ValueError(f"mass_gap must be positive, got {mass_gap}")
+
         self.grid_shape = grid_shape
         self.N = N_oscillators
         self.coupling_type = coupling
         self.M = mediator_mass
+        self.Delta = mass_gap  # SMFT mass gap (energy scale)
 
         # Create spatial grid
         self.grid = SpatialGrid(
@@ -429,23 +438,75 @@ class SMFTSystem:
 
     def compute_effective_mass(self) -> NDArray:
         """
-        Compute effective mass field m_eff(x,t).
+        Compute effective mass field m_eff(x,t) per SMFT theory.
 
-        In field theory, effective mass emerges from curvature of
-        potential around equilibrium.
+        From R.Christopher (2025) SMFT paper:
+            m_eff(x) = Δ · R(x)
+
+        Where:
+            Δ is the mass gap (vacuum potential energy scale)
+            R(x) is local synchronization order parameter [0,1]
+
+        Physical interpretation:
+            High synchronization R → high mass (trapped energy E=mc²)
+            Low synchronization R → low mass (approaches massless)
+            R=0 → m=0 (Weyl spinors, massless fermions)
+            R=1 → m=Δ (maximum mass)
 
         Returns
         -------
         NDArray
-            Effective mass field.
+            Effective mass field m_eff(x,t).
+
+        References
+        ----------
+        R. Christopher, "Synchronization Mass Field Theory (SMFT)",
+        Dec 2025, Section 2.1
         """
-        # Simple model: m_eff ∝ 1 / R(x)
-        # Where R is low (incoherent), mass is high (slow dynamics)
-        epsilon = 0.01  # Regularization
-        m_eff = self.M / (self.sync_field.values + epsilon)
+        # SMFT formula: m ∝ R (mass from phase-locking)
+        m_eff = self.Delta * self.sync_field.values
 
         self.mass_field = m_eff
         return m_eff
+
+    def compute_chiral_mass(self, theta: float = 0.0) -> Tuple[NDArray, NDArray]:
+        """
+        Compute chiral decomposition of effective mass.
+
+        From SMFT theory (R.Christopher 2025, Section 2.3):
+            m_eff = Δ · R(x) · e^(iθγ⁵)
+                  = Δ · R(x) · [cos(θ) + iγ⁵sin(θ)]
+
+        Decomposes into orthogonal components:
+            Scalar mass:      m_S = Δ·R·cos(θ)  (parity-conserving)
+            Pseudoscalar mass: m_P = Δ·R·sin(θ)  (parity-violating)
+
+        Parameters
+        ----------
+        theta : float
+            Chiral angle in radians.
+            theta=0     → pure scalar mass (m_P=0)
+            theta=π/2   → pure pseudoscalar mass (m_S=0)
+            theta=π/4   → equal scalar/pseudoscalar components
+
+        Returns
+        -------
+        m_scalar : NDArray
+            Scalar mass component field.
+        m_pseudoscalar : NDArray
+            Pseudoscalar mass component field.
+
+        References
+        ----------
+        R. Christopher, "SMFT", Dec 2025, Section 2.3
+        """
+        R = self.sync_field.values
+
+        # Chiral decomposition via Euler's formula
+        m_scalar = self.Delta * R * np.cos(theta)
+        m_pseudoscalar = self.Delta * R * np.sin(theta)
+
+        return m_scalar, m_pseudoscalar
 
     def test_heavy_mass_limit(self, M_values: list) -> dict:
         """
@@ -491,5 +552,5 @@ class SMFTSystem:
         return (
             f"SMFTSystem(grid={self.grid_shape}, "
             f"N={self.N}, coupling='{self.coupling_type}', "
-            f"M={self.M:.1f}, t={self.t:.2f})"
+            f"M={self.M:.1f}, Delta={self.Delta:.2f}, t={self.t:.2f})"
         )
