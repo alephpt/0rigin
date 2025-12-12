@@ -1,0 +1,27 @@
+
+📊 Data logging enabled:
+  Progress CSV: /home/persist/neotec/0rigin/examples/validation/outputs/phase_diagram/scan_progress.csv
+  Text log: /home/persist/neotec/0rigin/examples/validation/outputs/phase_diagram/scan_log.txt
+  State PNGs: /home/persist/neotec/0rigin/examples/validation/outputs/phase_diagram/states/
+  Checkpoint: /home/persist/neotec/0rigin/examples/validation/outputs/phase_diagram/checkpoint.npz
+
+Scanning 400 universes...
+  Evolution time: 0.5 time units per simulation
+  Estimated runtime: ~3 minutes
+
+[  0.2%] (1/400) K= 0.10, Δ=0.10 | ETA: 0.0m ... R=0.085, L=5669.43, σ_E=0.197 → saved 001.png
+[  0.5%] (2/400) K= 0.62, Δ=0.10 | ETA: 346.4m ... R=0.092, L=2883.30, σ_E=0.034 → saved 002.png
+[  0.8%] (3/400) K= 1.14, Δ=0.10 | ETA: 462.6m ... R=0.081, L=3744.28, σ_E=0.067 → saved 003.png
+[  1.0%] (4/400) K= 1.66, Δ=0.10 | ETA: 521.6m ... R=0.095, L=5352.68, σ_E=0.064 → saved 004.png
+[  1.2%] (5/400) K= 2.18, Δ=0.10 | ETA: 556.3m ... R=0.080, L=3486.80, σ_E=0.089 → saved 005.png
+[  1.5%] (6/400) K= 2.71, Δ=0.10 | ETA: 577.7m ... R=0.095, L=3158.61, σ_E=0.080 → saved 006.png
+[  1.8%] (7/400) K= 3.23, Δ=0.10 | ETA: 593.0m ... R=0.086, L=4890.81, σ_E=0.021 → saved 007.png
+[  2.0%] (8/400) K= 3.75, Δ=0.10 | ETA: 603.4m ... R=0.099, L=3715.57, σ_E=0.038 → saved 008.png
+[  2.2%] (9/400) K= 4.27, Δ=0.10 | ETA: 611.7m ... R=0.068, L=6556.35, σ_E=0.037 → saved 009.png
+[  2.5%] (10/400) K= 4.79, Δ=0.10 | ETA: 617.7m ... R=0.098, L=4955.89, σ_E=0.129 → saved 010.png
+[  2.8%] (11/400) K= 5.31, Δ=0.10 | ETA: 622.4m ... R=0.098, L=5595.90, σ_E=0.143 → saved 011.png
+[  3.0%] (12/400) K= 5.83, Δ=0.10 | ETA: 626.3m ... R=0.080, L=4777.32, σ_E=0.038 → saved 012.png
+[  3.2%] (13/400) K= 6.35, Δ=0.10 | ETA: 628.9m ... R=0.088, L=5241.63, σ_E=0.109 → saved 013.png
+[  3.5%] (14/400) K= 6.87, Δ=0.10 | ETA: 631.1m ... R=0.071, L=3317.07, σ_E=0.017 → saved 014.png
+[  3.8%] (15/400) K= 7.39, Δ=0.10 | ETA: 632.6m ... R=0.101, L=4231.45, σ_E=0.114 → saved 015.png
+[  4.0%] (16/400) K= 7.92, Δ=0.10 | ETA: 633.7m ... 
