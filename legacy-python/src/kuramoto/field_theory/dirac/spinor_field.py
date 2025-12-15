@@ -4,7 +4,7 @@ Dirac spinor field on spatial grid.
 Implements 4-component complex spinor field Ψ(x,t) evolving via Dirac equation:
     i∂_tΨ = [(-iγ^i∂_i) + m(x,t)]Ψ
 
-where m(x,t) = Δ·R(x,t)·e^(iθγ^5) is the SMFT mass operator.
+where m(x,t) = Δ·R(x,t)·e^(iθγ^5) is the MSFT mass operator.
 """
 
 from typing import Tuple, Optional
@@ -12,7 +12,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from ..fields.grid import SpatialGrid
-from .gamma_matrices import get_gamma_matrices_3plus1, mass_operator_smft
+from .gamma_matrices import get_gamma_matrices_3plus1, mass_operator_MSFT
 
 
 class DiracSpinorField:
@@ -229,7 +229,7 @@ class DiracSpinorField:
                 R = mass_field[i, j] if mass_field.shape == (self.Nx, self.Ny) else mass_field.flatten()[i * self.Ny + j]
 
                 # Mass operator at this point
-                m_op = mass_operator_smft(Delta, R, chiral_angle, self.γ5)
+                m_op = mass_operator_MSFT(Delta, R, chiral_angle, self.γ5)
 
                 # Apply to spinor
                 H_psi[i, j, :] += m_op @ self.psi[i, j, :]
@@ -398,14 +398,14 @@ def validate_free_dirac_evolution():
     return np.abs(norm_final - 1.0) < 0.1
 
 
-def validate_smft_mass_coupling():
+def validate_MSFT_mass_coupling():
     """
-    Validate coupling to SMFT mass field m = Δ·R.
+    Validate coupling to MSFT mass field m = Δ·R.
 
     Check that mass field affects energy and evolution.
     Mass term contributes m·Ψ to Hamiltonian, so higher R → higher energy.
     """
-    print("\nValidating SMFT mass coupling...")
+    print("\nValidating MSFT mass coupling...")
 
     grid = SpatialGrid(Nx=32, Ny=32, Lx=1.0, Ly=1.0, boundary='periodic')
 
@@ -482,7 +482,7 @@ if __name__ == "__main__":
     print("=" * 70)
 
     test1 = validate_free_dirac_evolution()
-    test2 = validate_smft_mass_coupling()
+    test2 = validate_MSFT_mass_coupling()
 
     print("\n" + "=" * 70)
     if test1 and test2:

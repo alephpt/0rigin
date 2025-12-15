@@ -1,5 +1,5 @@
 """
-Demonstration of Self-consistent Mean Field Theory (SMFT) system.
+Demonstration of Self-consistent Mean Field Theory (MSFT) system.
 
 Shows the complete integration of discrete oscillators with continuous
 mediator fields, illustrating the bridge between particle and field descriptions.
@@ -13,17 +13,17 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from src.kuramoto.field_theory import SMFTSystem
+from src.kuramoto.field_theory import MSFTSystem
 
 
 def demo_basic_evolution():
-    """Basic SMFT system evolution."""
+    """Basic MSFT system evolution."""
     print("=" * 60)
-    print("SMFT System: Basic Evolution")
+    print("MSFT System: Basic Evolution")
     print("=" * 60)
 
     # Create system
-    system = SMFTSystem(
+    system = MSFTSystem(
         grid_shape=(50, 50),
         N_oscillators=100,
         coupling='local',
@@ -92,8 +92,8 @@ def demo_basic_evolution():
     plt.colorbar(im2, ax=axes[1, 1])
 
     plt.tight_layout()
-    plt.savefig('smft_basic_evolution.png', dpi=150, bbox_inches='tight')
-    print("\nPlot saved: smft_basic_evolution.png")
+    plt.savefig('MSFT_basic_evolution.png', dpi=150, bbox_inches='tight')
+    print("\nPlot saved: MSFT_basic_evolution.png")
 
     return solution
 
@@ -101,7 +101,7 @@ def demo_basic_evolution():
 def demo_mass_scaling():
     """Demonstrate M→∞ limit recovery of Kuramoto model."""
     print("\n" + "=" * 60)
-    print("SMFT System: Mass Scaling Test")
+    print("MSFT System: Mass Scaling Test")
     print("=" * 60)
 
     # Test different masses
@@ -110,7 +110,7 @@ def demo_mass_scaling():
 
     print("\nTesting mediator mass scaling...")
     for M in M_values:
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(30, 30),
             N_oscillators=80,
             coupling='local',
@@ -132,8 +132,8 @@ def demo_mass_scaling():
     plt.title('Heavy Mass Limit: M→∞ Recovery')
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('smft_mass_scaling.png', dpi=150, bbox_inches='tight')
-    print("\nPlot saved: smft_mass_scaling.png")
+    plt.savefig('MSFT_mass_scaling.png', dpi=150, bbox_inches='tight')
+    print("\nPlot saved: MSFT_mass_scaling.png")
 
     return M_values, R_final_values
 
@@ -141,7 +141,7 @@ def demo_mass_scaling():
 def demo_local_vs_global():
     """Compare local vs global coupling."""
     print("\n" + "=" * 60)
-    print("SMFT System: Local vs Global Coupling")
+    print("MSFT System: Local vs Global Coupling")
     print("=" * 60)
 
     N = 100
@@ -149,7 +149,7 @@ def demo_local_vs_global():
 
     # Local coupling
     print("\nLocal coupling system...")
-    system_local = SMFTSystem(
+    system_local = MSFTSystem(
         grid_shape=(40, 40),
         N_oscillators=N,
         coupling='local',
@@ -161,7 +161,7 @@ def demo_local_vs_global():
 
     # Global coupling
     print("Global coupling system...")
-    system_global = SMFTSystem(
+    system_global = MSFTSystem(
         grid_shape=(40, 40),
         N_oscillators=N,
         coupling='global',
@@ -220,17 +220,17 @@ def demo_local_vs_global():
     plt.colorbar(im2, ax=axes[1, 1])
 
     plt.tight_layout()
-    plt.savefig('smft_local_vs_global.png', dpi=150, bbox_inches='tight')
-    print("\nPlot saved: smft_local_vs_global.png")
+    plt.savefig('MSFT_local_vs_global.png', dpi=150, bbox_inches='tight')
+    print("\nPlot saved: MSFT_local_vs_global.png")
 
 
 def demo_effective_mass():
     """Demonstrate effective mass field computation."""
     print("\n" + "=" * 60)
-    print("SMFT System: Effective Mass Field")
+    print("MSFT System: Effective Mass Field")
     print("=" * 60)
 
-    system = SMFTSystem(
+    system = MSFTSystem(
         grid_shape=(50, 50),
         N_oscillators=150,
         coupling='local',
@@ -281,14 +281,14 @@ def demo_effective_mass():
     plt.colorbar(im3, ax=axes[2])
 
     plt.tight_layout()
-    plt.savefig('smft_effective_mass.png', dpi=150, bbox_inches='tight')
-    print("\nPlot saved: smft_effective_mass.png")
+    plt.savefig('MSFT_effective_mass.png', dpi=150, bbox_inches='tight')
+    print("\nPlot saved: MSFT_effective_mass.png")
 
 
 def main():
     """Run all demonstrations."""
     print("\n" + "=" * 60)
-    print("SMFT SYSTEM DEMONSTRATIONS")
+    print("MSFT SYSTEM DEMONSTRATIONS")
     print("=" * 60)
 
     # Run demos
@@ -301,10 +301,10 @@ def main():
     print("All demonstrations complete!")
     print("=" * 60)
     print("\nGenerated files:")
-    print("  - smft_basic_evolution.png")
-    print("  - smft_mass_scaling.png")
-    print("  - smft_local_vs_global.png")
-    print("  - smft_effective_mass.png")
+    print("  - MSFT_basic_evolution.png")
+    print("  - MSFT_mass_scaling.png")
+    print("  - MSFT_local_vs_global.png")
+    print("  - MSFT_effective_mass.png")
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ import numpy as np
 from numpy.testing import assert_allclose
 
 from kuramoto.field_theory import (
-    SMFTSystem,
+    MSFTSystem,
     HamiltonianKuramoto,
     SpatialGrid,
     ScalarField
@@ -19,7 +19,7 @@ class TestHeavyMassLimit:
 
     def test_increasing_mass_convergence(self):
         """Test that R converges as M increases."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(15, 15),
             N_oscillators=30,
             coupling='local'
@@ -39,7 +39,7 @@ class TestHeavyMassLimit:
         frequencies = np.random.normal(0, 1, N)
 
         # Light mass
-        system_light = SMFTSystem(
+        system_light = MSFTSystem(
             grid_shape=(15, 15),
             N_oscillators=N,
             mediator_mass=1.0,
@@ -47,7 +47,7 @@ class TestHeavyMassLimit:
         )
 
         # Heavy mass
-        system_heavy = SMFTSystem(
+        system_heavy = MSFTSystem(
             grid_shape=(15, 15),
             N_oscillators=N,
             mediator_mass=100.0,

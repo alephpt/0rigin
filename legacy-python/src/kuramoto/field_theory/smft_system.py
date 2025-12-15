@@ -1,5 +1,5 @@
 """
-Self-consistent Mean Field Theory (SMFT) system integration.
+Self-consistent Mean Field Theory (MSFT) system integration.
 
 Couples discrete oscillators to continuous mediator fields, bridging
 the gap between discrete Kuramoto dynamics and field theory.
@@ -14,7 +14,7 @@ from .hamiltonian import HamiltonianKuramoto
 from .coupling import LocalFieldCoupling, FermionMassDemo
 
 
-class SMFTSystem:
+class MSFTSystem:
     """
     Self-consistent Mean Field Theory system.
 
@@ -36,7 +36,7 @@ class SMFTSystem:
     mediator_mass : float
         Mass M of mediator field (M→∞ recovers Kuramoto).
     mass_gap : float, optional
-        Mass gap parameter Δ from SMFT theory (energy scale).
+        Mass gap parameter Δ from MSFT theory (energy scale).
         Default 1.0.
     oscillator_frequencies : NDArray, optional
         Natural frequencies. Random if None.
@@ -58,7 +58,7 @@ class SMFTSystem:
         grid_size: Tuple[float, float] = (1.0, 1.0),
         boundary: str = 'periodic'
     ):
-        """Initialize SMFT system.
+        """Initialize MSFT system.
 
         Raises
         ------
@@ -90,7 +90,7 @@ class SMFTSystem:
         self.N = N_oscillators
         self.coupling_type = coupling
         self.M = mediator_mass
-        self.Delta = mass_gap  # SMFT mass gap (energy scale)
+        self.Delta = mass_gap  # MSFT mass gap (energy scale)
 
         # Create spatial grid
         self.grid = SpatialGrid(
@@ -438,9 +438,9 @@ class SMFTSystem:
 
     def compute_effective_mass(self) -> NDArray:
         """
-        Compute effective mass field m_eff(x,t) per SMFT theory.
+        Compute effective mass field m_eff(x,t) per MSFT theory.
 
-        From R.Christopher (2025) SMFT paper:
+        From R.Christopher (2025) MSFT paper:
             m_eff(x) = Δ · R(x)
 
         Where:
@@ -460,10 +460,10 @@ class SMFTSystem:
 
         References
         ----------
-        R. Christopher, "Synchronization Mass Field Theory (SMFT)",
+        R. Christopher, "Mass Synchronization Field Theory (MSFT)",
         Dec 2025, Section 2.1
         """
-        # SMFT formula: m ∝ R (mass from phase-locking)
+        # MSFT formula: m ∝ R (mass from phase-locking)
         m_eff = self.Delta * self.sync_field.values
 
         self.mass_field = m_eff
@@ -473,7 +473,7 @@ class SMFTSystem:
         """
         Compute chiral decomposition of effective mass.
 
-        From SMFT theory (R.Christopher 2025, Section 2.3):
+        From MSFT theory (R.Christopher 2025, Section 2.3):
             m_eff = Δ · R(x) · e^(iθγ⁵)
                   = Δ · R(x) · [cos(θ) + iγ⁵sin(θ)]
 
@@ -498,7 +498,7 @@ class SMFTSystem:
 
         References
         ----------
-        R. Christopher, "SMFT", Dec 2025, Section 2.3
+        R. Christopher, "MSFT", Dec 2025, Section 2.3
         """
         R = self.sync_field.values
 
@@ -550,7 +550,7 @@ class SMFTSystem:
     def __repr__(self) -> str:
         """String representation."""
         return (
-            f"SMFTSystem(grid={self.grid_shape}, "
+            f"MSFTSystem(grid={self.grid_shape}, "
             f"N={self.N}, coupling='{self.coupling_type}', "
             f"M={self.M:.1f}, Delta={self.Delta:.2f}, t={self.t:.2f})"
         )

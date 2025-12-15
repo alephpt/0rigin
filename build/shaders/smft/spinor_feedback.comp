@@ -1,0 +1,164 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+// Include complex arithmetic and precision libraries
+#include "../include/complex.glsl"
+#include "../include/precision.glsl"
+
+/**
+ * @file spinor_feedback.comp
+ * @brief Compute spinor density ρ = |ψ|² for MSFT bidirectional coupling
+ *
+ * Implements: ρ(x,y) = Σᵢ |ψᵢ(x,y)|² = Σᵢ (ψᵢ*·ψᵢ)
+ *
+ * MSFT Backward Coupling (Soliton Handoff):
+ * - Input: Ψ(x,y) = (ψ₁, ψ₂, ψ₃, ψ₄) complex 4-spinor field
+ * - Output: ρ(x,y) spinor density (real, positive)
+ *
+ * Physics Interpretation:
+ * - ρ = probability density for Dirac fermion
+ * - High ρ → suppress Kuramoto synchronization (soliton dominance)
+ * - Low ρ → allow Kuramoto synchronization (phase dominance)
+ *
+ * This completes the bidirectional loop:
+ * θ → R → m → Ψ → ρ → θ
+ *
+ * Precision:
+ * - Uses Kahan summation for norm computation (Hazard B mitigation)
+ * - Prevents FP32 accumulation error
+ *
+ * Workgroup: 16×16 threads
+ * Grid: Nx × Ny spatial points
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+// Push constants for simulation parameters
+layout(push_constant) uniform PushConstants {
+    float dt;              // Time step (not used here)
+    float K;               // Coupling strength (not used here)
+    float damping;         // Damping (not used here)
+    float Delta;           // MSFT mass gap (not used here)
+    float chiral_angle;    // Chiral angle (not used here)
+    uint Nx;               // Grid width
+    uint Ny;               // Grid height
+    uint N_total;          // Total oscillators
+    uint normalize_density;  // Normalize ρ by max value (0/1)
+} params;
+
+// Storage buffers
+layout(set = 0, binding = 0) readonly buffer PsiBuffer {
+    vec2 psi[];  // Dirac spinor field (4 components × 2 floats each = 8 floats per point)
+                 // Layout: [ψ₁.re, ψ₁.im, ψ₂.re, ψ₂.im, ψ₃.re, ψ₃.im, ψ₄.re, ψ₄.im] repeated
+};
+
+layout(set = 0, binding = 1) buffer SpinorDensityBuffer {
+    float spinor_density[];  // Output: ρ(x,y) = |ψ|²
+};
+
+// Optional: Global max density for normalization (requires atomic operations)
+// For now, we clamp to [0, 1] assuming typical spinor norm ~ 1
+
+/**
+ * @brief Compute spinor density using conservative precision
+ *
+ * ρ = Σᵢ |ψᵢ|² = Σᵢ (ψᵢ.re² + ψᵢ.im²)
+ *
+ * Uses Kahan summation to minimize FP32 accumulation error
+ * Critical for maintaining probability conservation
+ */
+float compute_spinor_density_conservative(vec2 spinor[4]) {
+    // Use Kahan summation for high precision
+    KahanSum sum = kahan_init();
+
+    for (int i = 0; i < 4; i++) {
+        // |ψᵢ|² = ψᵢ.re² + ψᵢ.im² = dot(ψᵢ, ψᵢ)
+        highp_float term = highp_float(dot(spinor[i], spinor[i]));
+        kahan_add(sum, term);
+    }
+
+    return float(kahan_result(sum));
+}
+
+/**
+ * @brief Standard spinor density computation (faster, less precise)
+ *
+ * ρ = Σᵢ |ψᵢ|²
+ *
+ * Uses direct FP32 accumulation (acceptable for short simulations)
+ */
+float compute_spinor_density_fast(vec2 spinor[4]) {
+    float rho = 0.0;
+
+    for (int i = 0; i < 4; i++) {
+        rho += dot(spinor[i], spinor[i]);
+    }
+
+    return rho;
+}
+
+/**
+ * @brief Compute local energy density (optional diagnostic)
+ *
+ * ε = ⟨ψ|H|ψ⟩ (requires H·ψ from previous computation)
+ *
+ * Not used in main MSFT loop, but useful for energy conservation checks
+ */
+float compute_energy_density(vec2 spinor[4], vec2 H_spinor[4]) {
+    KahanSum energy = kahan_init();
+
+    for (int i = 0; i < 4; i++) {
+        // ⟨ψᵢ|H|ψᵢ⟩ = Re(ψᵢ* · (Hψ)ᵢ)
+        highp_float real_part = highp_float(
+            spinor[i].x * H_spinor[i].x + spinor[i].y * H_spinor[i].y
+        );
+        kahan_add(energy, real_part);
+    }
+
+    return float(kahan_result(energy));
+}
+
+/**
+ * @brief Compute spinor current density (optional diagnostic)
+ *
+ * J^μ = ψ̄·γ^μ·ψ (probability current)
+ *
+ * For spatial current J^x, J^y
+ */
+void compute_current_density(vec2 spinor[4], out vec2 J_spatial) {
+    // J^x = ψ̄·γ^x·ψ (requires conjugate transpose)
+    // Simplified: J^x ∝ Im(ψ₁*·ψ₂ + ψ₂*·ψ₁ - ψ₃*·ψ₄ - ψ₄*·ψ₃)
+
+    // This is a placeholder - full implementation requires proper γ matrix action
+    J_spatial = vec2(0.0, 0.0);
+}
+
+void main() {
+    uvec2 global_id = gl_GlobalInvocationID.xy;
+
+    // Bounds check
+    if (global_id.x >= params.Nx || global_id.y >= params.Ny) {
+        return;
+    }
+
+    uint idx = global_id.y * params.Nx + global_id.x;
+
+    // Load spinor components
+    vec2 spinor[4];
+    for (int i = 0; i < 4; i++) {
+        spinor[i] = psi[idx * 4 + i];
+    }
+
+    // Compute spinor density with conservative precision
+    float rho = compute_spinor_density_conservative(spinor);
+
+    // Optional: Normalize by maximum density
+    if (params.normalize_density == 1) {
+        // Assume typical spinor norm ~ 1, clamp to [0, 1]
+        // For true normalization, would need global reduction to find max
+        rho = clamp(rho, 0.0, 1.0);
+    }
+
+    // Write output
+    spinor_density[idx] = rho;
+}

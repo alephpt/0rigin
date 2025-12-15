@@ -1,5 +1,5 @@
 """
-Validation script for SMFT system integration.
+Validation script for MSFT system integration.
 
 Tests all integration points and generates validation report.
 """
@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.kuramoto.field_theory import (
-    SMFTSystem,
+    MSFTSystem,
     HamiltonianKuramoto,
     SpatialGrid,
     ScalarField
@@ -31,7 +31,7 @@ def validate_discrete_continuum():
 
     print("\nTesting continuum limit convergence...")
     for N in N_values:
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=grid_shape,
             N_oscillators=N,
             coupling='local'
@@ -63,7 +63,7 @@ def validate_hamiltonian_field():
     print("VALIDATION 2: Hamiltonian ↔ Field Dynamics")
     print("="*60)
 
-    system = SMFTSystem(
+    system = MSFTSystem(
         grid_shape=(20, 20),
         N_oscillators=50,
         coupling='local',
@@ -105,7 +105,7 @@ def validate_local_global():
     freq = np.random.normal(0, 1, N)
 
     # Local coupling
-    system_local = SMFTSystem(
+    system_local = MSFTSystem(
         grid_shape=(30, 30),
         N_oscillators=N,
         coupling='local',
@@ -113,7 +113,7 @@ def validate_local_global():
     )
 
     # Global coupling
-    system_global = SMFTSystem(
+    system_global = MSFTSystem(
         grid_shape=(30, 30),
         N_oscillators=N,
         coupling='global',
@@ -195,7 +195,7 @@ def validate_heavy_mass_limit():
 
     print("\nTesting mass scaling...")
     for M in M_values:
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(20, 20),
             N_oscillators=50,
             mediator_mass=M
@@ -224,7 +224,7 @@ def validate_full_system():
     print("VALIDATION 6: Full System Evolution")
     print("="*60)
 
-    system = SMFTSystem(
+    system = MSFTSystem(
         grid_shape=(40, 40),
         N_oscillators=100,
         coupling='local',
@@ -270,7 +270,7 @@ def validate_full_system():
 def main():
     """Run all validations."""
     print("\n" + "="*60)
-    print("SMFT SYSTEM INTEGRATION VALIDATION")
+    print("MSFT SYSTEM INTEGRATION VALIDATION")
     print("="*60)
     print("\nValidating all integration points...")
 
@@ -301,7 +301,7 @@ def main():
 
     if n_passed == n_total:
         print("\n✓ ALL INTEGRATION POINTS VALIDATED")
-        print("\nThe SMFT system successfully integrates:")
+        print("\nThe MSFT system successfully integrates:")
         print("  • Discrete oscillators with continuous fields")
         print("  • Hamiltonian phase space with field dynamics")
         print("  • Local and global coupling mechanisms")

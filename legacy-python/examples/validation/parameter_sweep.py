@@ -1,5 +1,5 @@
 """
-Parameter Sweep for SMFT-Dirac Coupling
+Parameter Sweep for MSFT-Dirac Coupling
 
 Systematically explores parameter space to find stable configurations:
 - K (Kuramoto coupling): [1.0, 2.0, 3.0, 5.0, 8.0, 10.0]
@@ -20,12 +20,12 @@ import time
 
 import sys
 sys.path.insert(0, '/home/persist/neotec/0rigin/src')
-from kuramoto.field_theory import SMFTSystem
+from kuramoto.field_theory import MSFTSystem
 from kuramoto.field_theory.dirac.gamma_matrices import get_gamma_matrices_3plus1
 from kuramoto.field_theory.dirac.spinor_field import DiracSpinorField, SpatialGrid
 
 print("="*80)
-print(" PARAMETER SWEEP: Finding Stable SMFT-Dirac Configurations")
+print(" PARAMETER SWEEP: Finding Stable MSFT-Dirac Configurations")
 print("="*80)
 print("\nGoal: Systematically explore parameter space to LEARN system behavior")
 print("      and find configurations with stable synchronization + confinement")
@@ -45,7 +45,7 @@ print(f"  Total runs: {len(K_values)} × {len(momentum_values)} = {len(K_values)
 # Fixed parameters
 grid_size = 32
 n_steps = 100  # Shorter than full demo for speed
-dt_smft = 0.01
+dt_MSFT = 0.01
 dt_dirac = 0.0001
 chiral_angle = 0.0  # Pure scalar mass
 
@@ -68,7 +68,7 @@ results = {
 # Run parameter sweep
 # =============================================================================
 print(f"\nRunning {len(K_values) * len(momentum_values)} simulations...")
-print(f"  Simulation length: {n_steps} steps ({n_steps * dt_smft:.1f} time units)")
+print(f"  Simulation length: {n_steps} steps ({n_steps * dt_MSFT:.1f} time units)")
 print(f"  Estimated runtime: ~{len(K_values) * len(momentum_values) * 0.5:.0f} seconds")
 print()
 
@@ -80,41 +80,41 @@ for K in K_values:
         run_count += 1
         print(f"[{run_count}/{len(K_values)*len(momentum_values)}] K={K:.1f}, p_x={p_x:.1f} ... ", end='', flush=True)
 
-        # Initialize SMFT system
-        smft = SMFTSystem(N=grid_size**2, grid_shape=(grid_size, grid_size), mass_gap=2.5)
+        # Initialize MSFT system
+        MSFT = MSFTSystem(N=grid_size**2, grid_shape=(grid_size, grid_size), mass_gap=2.5)
 
         # CRITICAL: Override coupling strength
-        smft.oscillators.coupling_strength = K
+        MSFT.oscillators.coupling_strength = K
 
         # Seed synchronization pattern
         n = grid_size
         x_coord, y_coord = np.meshgrid(np.arange(n), np.arange(n))
         pattern = 0.3 + 0.4 * np.cos(2*np.pi*x_coord/n * 1.5) * np.cos(2*np.pi*y_coord/n * 1.5)
-        smft.sync_field.values = pattern.flatten()
+        MSFT.sync_field.values = pattern.flatten()
 
         # Initialize spinor
         grid = SpatialGrid(Nx=grid_size, Ny=grid_size, Lx=1.0, Ly=1.0, boundary='periodic')
         spinor = DiracSpinorField(grid, initial_state='plane_wave', momentum=(p_x, 0.0))
 
         # Record initial state
-        R_initial = smft.sync_field.values.mean()
+        R_initial = MSFT.sync_field.values.mean()
 
         # Evolve coupled system
         try:
             for step in range(n_steps):
-                smft.step(dt=dt_smft)
+                MSFT.step(dt=dt_MSFT)
 
-                R_field = smft.sync_field.values.reshape(smft.grid_shape)
-                m_field = smft.compute_effective_mass().reshape(smft.grid_shape)
+                R_field = MSFT.sync_field.values.reshape(MSFT.grid_shape)
+                m_field = MSFT.compute_effective_mass().reshape(MSFT.grid_shape)
 
                 # Evolve spinor
-                substeps = int(dt_smft / dt_dirac)
+                substeps = int(dt_MSFT / dt_dirac)
                 for sub in range(substeps):
                     spinor.step_rk4(dt_dirac, m_field, chiral_angle=chiral_angle,
-                                  Delta=smft.Delta, normalize=True)
+                                  Delta=MSFT.Delta, normalize=True)
 
             # Measure observables
-            R_final = smft.sync_field.values.mean()
+            R_final = MSFT.sync_field.values.mean()
             R_change = R_final - R_initial
             R_stability = abs(R_final - 0.7)  # How far from target R=0.7
 
@@ -303,7 +303,7 @@ for rank, idx in enumerate(top_indices[:3], 1):
                 color='white', fontweight='bold', fontsize=14,
                 bbox=dict(boxstyle='circle', fc='blue', alpha=0.7))
 
-fig.suptitle('SMFT-Dirac Parameter Space Exploration', fontsize=16, fontweight='bold', y=0.995)
+fig.suptitle('MSFT-Dirac Parameter Space Exploration', fontsize=16, fontweight='bold', y=0.995)
 
 output = '/tmp/parameter_sweep_phase_diagrams.png'
 plt.savefig(output, dpi=150, bbox_inches='tight')
@@ -324,7 +324,7 @@ best_idx = np.argmax(score)
 print(f"  Best config: K={results['K'][best_idx]:.1f}, p_x={results['momentum'][best_idx]:.1f}")
 print(f"    → R={results['R_final'][best_idx]:.3f}, confinement={results['confinement'][best_idx]:.1f}")
 print(f"\nNext steps:")
-print(f"  1. Use best parameters in complete_smft_dirac_demo.py")
+print(f"  1. Use best parameters in complete_MSFT_dirac_demo.py")
 print(f"  2. Run full 100-step evolution with visualization")
 print(f"  3. If still unstable, refine search around best config")
 print("="*80)

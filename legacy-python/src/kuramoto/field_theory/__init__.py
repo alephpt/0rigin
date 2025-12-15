@@ -3,7 +3,7 @@
 from .hamiltonian import HamiltonianKuramoto
 from .fields import SpatialGrid, ScalarField, MediatorField
 from .pde_solvers import PDESolver, PDE_AVAILABLE
-from .smft_system import SMFTSystem
+from .MSFT_system import MSFTSystem
 from .coupling import LocalFieldCoupling, FermionMassDemo
 
 __all__ = [
@@ -13,7 +13,7 @@ __all__ = [
     'MediatorField',
     'PDESolver',
     'PDE_AVAILABLE',
-    'SMFTSystem',
+    'MSFTSystem',
     'LocalFieldCoupling',
     'FermionMassDemo'
 ]

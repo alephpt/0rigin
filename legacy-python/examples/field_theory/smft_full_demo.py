@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Complete SMFT Field Theory Demonstration.
+Complete MSFT Field Theory Demonstration.
 
 Demonstrates full integration of:
 1. Klein-Gordon mediator field
@@ -391,7 +391,7 @@ def performance_benchmark():
 def main():
     """Run all demonstrations."""
     print("\n" + "="*70)
-    print(" "*15 + "SMFT FIELD THEORY - FULL DEMONSTRATION")
+    print(" "*15 + "MSFT FIELD THEORY - FULL DEMONSTRATION")
     print("="*70)
 
     # Test 1: Klein-Gordon propagation

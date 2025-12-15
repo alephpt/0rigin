@@ -1,7 +1,7 @@
 """
-JAX-Accelerated COMPLETE SMFT+Dirac Phase Diagram
+JAX-Accelerated COMPLETE MSFT+Dirac Phase Diagram
 
-Implements THE COMPLETE SMFT ENGINE:
+Implements THE COMPLETE MSFT ENGINE:
 1. Hamiltonian Kuramoto oscillators with coupling
 2. Synchronization field R(x,y)
 3. Mass field m = Δ·R
@@ -23,7 +23,7 @@ import time
 import os
 
 print("="*80)
-print(" JAX-ACCELERATED COMPLETE SMFT+DIRAC PHASE DIAGRAM")
+print(" JAX-ACCELERATED COMPLETE MSFT+DIRAC PHASE DIAGRAM")
 print("="*80)
 print(f"JAX version: {jax.__version__}")
 print(f"JAX devices: {jax.devices()}")
@@ -47,8 +47,8 @@ print(f"  Total simulations:     {resolution}×{resolution} = {resolution**2}")
 
 # Simulation parameters
 grid_size = 32
-n_steps_smft = 100  # SMFT steps (REDUCED FOR FAST TESTING - was 10000)
-dt_smft = 0.01
+n_steps_MSFT = 100  # MSFT steps (REDUCED FOR FAST TESTING - was 10000)
+dt_MSFT = 0.01
 damping = 5.0
 
 # Dirac CFL parameters
@@ -58,17 +58,17 @@ damping = 5.0
 dt_base = 0.005
 Delta_max_safe = Delta_max  # Maximum Δ in parameter sweep
 dt_dirac_min = min(dt_base, 0.5 / (2.0 * Delta_max_safe + 1e-10))  # CFL-limited timestep
-substeps_max = int(jnp.ceil(dt_smft / dt_dirac_min))  # Maximum substeps needed
+substeps_max = int(jnp.ceil(dt_MSFT / dt_dirac_min))  # Maximum substeps needed
 chiral_angle = 0.0  # Pure scalar mass (θ=0)
 
 print(f"\nSimulation Parameters:")
 print(f"  Grid: {grid_size}×{grid_size} = {grid_size**2} oscillators")
-print(f"  SMFT steps: {n_steps_smft}")
-print(f"  SMFT dt: {dt_smft}")
+print(f"  MSFT steps: {n_steps_MSFT}")
+print(f"  MSFT dt: {dt_MSFT}")
 print(f"  Dirac dt (base): {dt_base}")
 print(f"  Dirac dt (CFL-limited at Δ_max={Delta_max_safe}): {dt_dirac_min:.6f}")
-print(f"  Dirac substeps per SMFT step: {substeps_max}")
-print(f"  Total time: {n_steps_smft * dt_smft:.1f} units")
+print(f"  Dirac substeps per MSFT step: {substeps_max}")
+print(f"  Total time: {n_steps_MSFT * dt_MSFT:.1f} units")
 print(f"  Damping: γ = {damping}")
 print(f"\n  CRITICAL: Adaptive CFL timestep prevents explosion at high Δ!")
 
@@ -115,7 +115,7 @@ def get_gamma_matrices():
 β = γ0        # Beta (mass term)
 
 # =============================================================================
-# SMFT Physics Kernels
+# MSFT Physics Kernels
 # =============================================================================
 
 @jit
@@ -135,9 +135,9 @@ def compute_local_R_field(phases):
     return R_field
 
 @jit
-def smft_step(theta, p, K, Delta, dt, omega, damping, spinor_density=None):
+def MSFT_step(theta, p, K, Delta, dt, omega, damping, spinor_density=None):
     """
-    Single SMFT step: Hamiltonian Kuramoto + mass feedback + spinor density coupling.
+    Single MSFT step: Hamiltonian Kuramoto + mass feedback + spinor density coupling.
 
     CRITICAL FEEDBACK LOOP: Spinor density |ψ|² couples back to vacuum oscillators!
     This prevents "ghost particles" and enables soliton formation.
@@ -275,17 +275,17 @@ def dirac_step_rk4(psi, m_field, dt, Delta, theta_chiral):
     return psi_new
 
 # =============================================================================
-# Coupled SMFT+Dirac Evolution
+# Coupled MSFT+Dirac Evolution
 # =============================================================================
 
 # @partial(jit, static_argnums=(6,7,8))  # DISABLED FOR FAST TESTING - causes slow compilation
 def evolve_coupled(K, Delta, theta_init, p_init, psi_init, omega, n_steps,
-                  dt_smft, dt_dirac, damping, theta_chiral, substeps):
+                  dt_MSFT, dt_dirac, damping, theta_chiral, substeps):
     """
-    Full coupled SMFT+Dirac evolution.
+    Full coupled MSFT+Dirac evolution.
 
-    For each SMFT step:
-        1. Evolve SMFT (oscillators + sync field)
+    For each MSFT step:
+        1. Evolve MSFT (oscillators + sync field)
         2. Compute mass field m = Δ·R
         3. Evolve Dirac spinor `substeps` times with dt_dirac
 
@@ -294,11 +294,11 @@ def evolve_coupled(K, Delta, theta_init, p_init, psi_init, omega, n_steps,
     def coupled_step(carry, i):
         theta, p, psi = carry
 
-        # Compute spinor density BEFORE SMFT step for feedback
+        # Compute spinor density BEFORE MSFT step for feedback
         density = jnp.sum(jnp.abs(psi)**2, axis=2)  # ρ = Ψ†Ψ
 
-        # 1. SMFT step WITH spinor density feedback (critical for soliton formation!)
-        theta_new, p_new, R_field = smft_step(theta, p, K, Delta, dt_smft, omega, damping, density)
+        # 1. MSFT step WITH spinor density feedback (critical for soliton formation!)
+        theta_new, p_new, R_field = MSFT_step(theta, p, K, Delta, dt_MSFT, omega, damping, density)
 
         # 2. Dirac substeps with mass coupling using fori_loop for JAX tracing
         def dirac_substep(i, psi_state):
@@ -356,8 +356,8 @@ def compute_observables(R_history, R_fields, densities):
 # =============================================================================
 
 def simulate_single(K, Delta, key):
-    """Simulate single (K, Δ) point with COMPLETE SMFT+Dirac physics."""
-    # Initialize SMFT
+    """Simulate single (K, Δ) point with COMPLETE MSFT+Dirac physics."""
+    # Initialize MSFT
     theta_init = jax.random.uniform(key, (grid_size, grid_size)) * 2 * jnp.pi
     p_init = jnp.zeros((grid_size, grid_size))
     omega = jnp.zeros((grid_size, grid_size))
@@ -384,12 +384,12 @@ def simulate_single(K, Delta, key):
 
     # Compute adaptive dt_dirac for this Delta value (CFL safety)
     dt_dirac_adaptive = min(dt_base, 0.5 / (2.0 * Delta + 1e-10))
-    substeps_adaptive = int(jnp.ceil(dt_smft / dt_dirac_adaptive))
+    substeps_adaptive = int(jnp.ceil(dt_MSFT / dt_dirac_adaptive))
 
     # Evolve coupled system with CORRECT PHYSICS!
     theta_final, p_final, psi_final, R_history, R_fields, densities = evolve_coupled(
         K, Delta, theta_init, p_init, psi_init, omega,
-        n_steps_smft, dt_smft, dt_dirac_adaptive, damping, chiral_angle, substeps_adaptive
+        n_steps_MSFT, dt_MSFT, dt_dirac_adaptive, damping, chiral_angle, substeps_adaptive
     )
 
     # Compute observables
@@ -404,7 +404,7 @@ def simulate_single(K, Delta, key):
 # =============================================================================
 
 print("\n" + "="*80)
-print(f" RUNNING COMPLETE SMFT+DIRAC SIMULATION")
+print(f" RUNNING COMPLETE MSFT+DIRAC SIMULATION")
 print("="*80)
 print(f"\nPhysics Implemented (ALL BUGS FIXED):")
 print(f"  ✓ Hamiltonian Kuramoto oscillators")
@@ -414,7 +414,7 @@ print(f"  ✓ Dirac spinor field (4-component)")
 print(f"  ✓ CORRECT Hamiltonian: H = -iα·∇ + βm (Lorentz-invariant!)")
 print(f"  ✓ CORRECT feedback loop: |ψ|² → vacuum phases (no ghost particles!)")
 print(f"  ✓ CORRECT CFL timestep: dt = min(dt_base, 0.5/(2Δ)) (no explosions!)")
-print(f"  ✓ Coupled SMFT-Dirac evolution")
+print(f"  ✓ Coupled MSFT-Dirac evolution")
 print(f"  ✓ Spinor localization (IPR)")
 print(f"  ✓ Energy stability tracking")
 print(f"\nCRITICAL PHYSICS CORRECTIONS APPLIED:")
@@ -469,7 +469,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.join(script_dir, 'outputs', 'phase_diagram_jax_complete')
 os.makedirs(data_dir, exist_ok=True)
 
-data_file = os.path.join(data_dir, 'complete_smft_dirac_results.npz')
+data_file = os.path.join(data_dir, 'complete_MSFT_dirac_results.npz')
 np.savez_compressed(data_file,
                    K_values=np.array(K_values),
                    Delta_values=np.array(Delta_values),
@@ -479,7 +479,7 @@ np.savez_compressed(data_file,
                    energy_stability_map=energy_stability_map,
                    resolution=resolution,
                    grid_size=grid_size,
-                   n_steps=n_steps_smft,
+                   n_steps=n_steps_MSFT,
                    elapsed_time=elapsed)
 
 print(f"\n💾 Data saved: {data_file}")
@@ -528,7 +528,7 @@ ax1 = fig.add_subplot(gs[0, 0])
 im1 = ax1.contourf(K_grid, Delta_grid, phase_map.T,
                    levels=[-0.5, 0.5, 1.5, 2.5, 3.5],
                    colors=['#0000FF', '#FF0000', '#FF8800', '#FFD700'], alpha=0.7)
-ax1.set_title('Complete SMFT+Dirac Phase Diagram', fontweight='bold', fontsize=14)
+ax1.set_title('Complete MSFT+Dirac Phase Diagram', fontweight='bold', fontsize=14)
 ax1.set_xlabel('K (Kuramoto Coupling)', fontsize=12)
 ax1.set_ylabel('Δ (Mass Gap)', fontsize=12)
 ax1.grid(True, alpha=0.3)
@@ -560,7 +560,7 @@ ax4.set_ylabel('Δ', fontsize=12)
 plt.colorbar(im4, ax=ax4, label='σ_E / ⟨E⟩')
 ax4.grid(True, alpha=0.3)
 
-fig.suptitle(f'Complete SMFT+Dirac Phase Diagram ({elapsed:.1f}s, JAX-Accelerated)',
+fig.suptitle(f'Complete MSFT+Dirac Phase Diagram ({elapsed:.1f}s, JAX-Accelerated)',
              fontsize=16, fontweight='bold', y=0.98)
 
 output = os.path.join(data_dir, 'phase_diagram_complete.png')
@@ -572,7 +572,7 @@ print(f"✓ Visualization saved: {output}")
 # =============================================================================
 
 print("\n" + "="*80)
-print(" COMPLETE SMFT+DIRAC SIMULATION SUMMARY")
+print(" COMPLETE MSFT+DIRAC SIMULATION SUMMARY")
 print("="*80)
 print(f"\nPhysics:")
 print(f"  ✓ Hamiltonian Kuramoto (proper coupling)")

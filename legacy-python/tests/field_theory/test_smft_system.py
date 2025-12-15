@@ -1,5 +1,5 @@
 """
-Tests for SMFT system initialization and evolution.
+Tests for MSFT system initialization and evolution.
 """
 
 import pytest
@@ -7,7 +7,7 @@ import numpy as np
 from numpy.testing import assert_allclose
 
 from kuramoto.field_theory import (
-    SMFTSystem,
+    MSFTSystem,
     HamiltonianKuramoto,
     SpatialGrid,
     ScalarField,
@@ -16,12 +16,12 @@ from kuramoto.field_theory import (
 )
 
 
-class TestSMFTSystemInitialization:
-    """Test SMFT system initialization and setup."""
+class TestMSFTSystemInitialization:
+    """Test MSFT system initialization and setup."""
 
     def test_system_creation(self):
         """Test basic system creation."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(20, 20),
             N_oscillators=50,
             coupling='local',
@@ -36,7 +36,7 @@ class TestSMFTSystemInitialization:
 
     def test_component_creation(self):
         """Test that all components are created."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(15, 15),
             N_oscillators=30,
             coupling='global'
@@ -64,7 +64,7 @@ class TestSMFTSystemInitialization:
         N = 25
         frequencies = np.random.normal(0, 2, N)
 
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(10, 10),
             N_oscillators=N,
             oscillator_frequencies=frequencies
@@ -81,7 +81,7 @@ class TestFullSystemEvolution:
 
     def test_short_evolution(self):
         """Test short time evolution maintains consistency."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(10, 10),
             N_oscillators=20,
             coupling='local',
@@ -117,7 +117,7 @@ class TestFullSystemEvolution:
         # Use narrow frequency distribution
         frequencies = np.random.normal(0, 0.5, N)
 
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(15, 15),
             N_oscillators=N,
             oscillator_frequencies=frequencies,
@@ -145,7 +145,7 @@ class TestFullSystemEvolution:
         final_R_values = []
 
         for g in coupling_strengths:
-            system = SMFTSystem(
+            system = MSFTSystem(
                 grid_shape=grid_shape,
                 N_oscillators=N,
                 coupling='global',

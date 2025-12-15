@@ -1,5 +1,5 @@
 #pragma once
-#include <Nova/Nova.h>
+#include "Nova.h"
 #include <vulkan/vulkan.h>
 #include <vector>
 #include <complex>

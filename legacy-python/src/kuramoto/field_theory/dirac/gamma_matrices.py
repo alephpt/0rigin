@@ -6,7 +6,7 @@ Uses the Dirac (standard) representation.
 
 References
 ----------
-R. Christopher, "Synchronization Mass Field Theory (SMFT)", Dec 2025
+R. Christopher, "Mass Synchronization Field Theory (MSFT)", Dec 2025
 B. Thaller, "The Dirac Equation", Springer (1992)
 M. Peskin & D. Schroeder, "An Introduction to Quantum Field Theory" (1995)
 """
@@ -232,16 +232,16 @@ def chiral_projectors(gamma5: NDArray) -> Tuple[NDArray, NDArray]:
     return P_L, P_R
 
 
-def mass_operator_smft(
+def mass_operator_MSFT(
     Delta: float,
     R: float,
     theta: float,
     gamma5: NDArray
 ) -> NDArray:
     """
-    Construct SMFT mass operator m = Δ·R·exp(iθγ^5).
+    Construct MSFT mass operator m = Δ·R·exp(iθγ^5).
 
-    From R.Christopher (2025) SMFT PDF:
+    From R.Christopher (2025) MSFT PDF:
         m(x,t) = Δ · R(x,t) · e^(iθγ^5)
                = Δ · R · [cos(θ)·I + i·sin(θ)·γ^5]
 
@@ -269,11 +269,11 @@ def mass_operator_smft(
     --------
     >>> γ0, γ1, γ2, γ3, γ5 = get_gamma_matrices_3plus1()
     >>> # Pure scalar mass (θ=0)
-    >>> m_scalar = mass_operator_smft(2.0, 0.5, 0.0, γ5)
+    >>> m_scalar = mass_operator_MSFT(2.0, 0.5, 0.0, γ5)
     >>> np.allclose(m_scalar, 1.0 * np.eye(4))
     True
     >>> # Pure pseudoscalar (θ=π/2)
-    >>> m_pseudo = mass_operator_smft(2.0, 0.5, np.pi/2, γ5)
+    >>> m_pseudo = mass_operator_MSFT(2.0, 0.5, np.pi/2, γ5)
     >>> np.allclose(m_pseudo, 1.0j * γ5)
     True
     """
@@ -334,22 +334,22 @@ if __name__ == "__main__":
     print(f"  Chiral properties: {'✓ PASS' if results_1d['chiral_properties'] else '✗ FAIL'}")
     print(f"  Max error: {results_1d['max_error']:.2e}")
 
-    # Test SMFT mass operator
-    print("\n[3/3] Testing SMFT Mass Operator...")
+    # Test MSFT mass operator
+    print("\n[3/3] Testing MSFT Mass Operator...")
     γ0, γ1, γ2, γ3, γ5 = get_gamma_matrices_3plus1()
 
     # Pure scalar (θ=0)
-    m_s = mass_operator_smft(2.0, 0.5, 0.0, γ5)
+    m_s = mass_operator_MSFT(2.0, 0.5, 0.0, γ5)
     scalar_correct = np.allclose(m_s, 1.0 * np.eye(4))
     print(f"  Scalar mass (θ=0): {'✓ PASS' if scalar_correct else '✗ FAIL'}")
 
     # Pure pseudoscalar (θ=π/2)
-    m_p = mass_operator_smft(2.0, 0.5, np.pi/2, γ5)
+    m_p = mass_operator_MSFT(2.0, 0.5, np.pi/2, γ5)
     pseudo_correct = np.allclose(m_p, 1.0j * γ5)
     print(f"  Pseudoscalar mass (θ=π/2): {'✓ PASS' if pseudo_correct else '✗ FAIL'}")
 
     # Mixed (θ=π/4)
-    m_mix = mass_operator_smft(2.0, 0.5, np.pi/4, γ5)
+    m_mix = mass_operator_MSFT(2.0, 0.5, np.pi/4, γ5)
     expected_mix = 1.0 * (np.cos(np.pi/4) * np.eye(4) + 1j * np.sin(np.pi/4) * γ5)
     mixed_correct = np.allclose(m_mix, expected_mix)
     print(f"  Mixed mass (θ=π/4): {'✓ PASS' if mixed_correct else '✗ FAIL'}")

@@ -30,18 +30,113 @@ endif()
 
 message(STATUS "Vulkan SDK: ${Vulkan_INCLUDE_DIRS}")
 
+# SDL2
+find_package(SDL2 REQUIRED)
+if(NOT SDL2_FOUND)
+    message(FATAL_ERROR "SDL2 not found")
+endif()
+
 # ============================================================================
-# SUBDIRECTORIES
+# NOVA LIBRARY
 # ============================================================================
+
+# Collect Nova source files
+file(GLOB_RECURSE NOVA_SOURCES
+    lib/Nova/*.cpp
+    lib/Nova/Core/*.cpp
+    lib/Nova/Core/modules/*.cpp
+    lib/Nova/Core/modules/pipeline/*.cpp
+    lib/Nova/Core/modules/camera/*.cpp
+    lib/Nova/Core/modules/atomic/*.cpp
+    lib/Nova/Core/components/*.cpp
+)
+
+# Remove example and test files from Nova sources
+list(FILTER NOVA_SOURCES EXCLUDE REGEX ".*Example.*")
+list(FILTER NOVA_SOURCES EXCLUDE REGEX ".*test.*")
+list(FILTER NOVA_SOURCES EXCLUDE REGEX ".*extern/fastgltf.*")
 
 # Nova library
-add_subdirectory(lib/Nova)
+add_library(Nova STATIC ${NOVA_SOURCES})
 
-# Nova SMFT library
-add_subdirectory(lib/Nova/Core/smft)
+target_include_directories(Nova PUBLIC
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${CMAKE_SOURCE_DIR}/lib/Nova/Core
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
 
-# Examples
-add_subdirectory(examples/vulkan)
+target_link_libraries(Nova PUBLIC
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+)
+
+# ============================================================================
+# IMGUI LIBRARY
+# ============================================================================
+
+file(GLOB IMGUI_SOURCES
+    lib/imgui/*.cpp
+    lib/imgui/backends/imgui_impl_sdl2.cpp
+    lib/imgui/backends/imgui_impl_vulkan.cpp
+)
+
+add_library(imgui STATIC ${IMGUI_SOURCES})
+
+target_include_directories(imgui PUBLIC
+    ${CMAKE_SOURCE_DIR}/lib/imgui
+    ${CMAKE_SOURCE_DIR}/lib/imgui/backends
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+# ============================================================================
+# MSFT APPLICATION
+# ============================================================================
+
+# MSFT sources
+set(MSFT_SOURCES
+    src/MSFT.cpp
+    src/MSFTEngine.cpp
+    main.cpp
+)
+
+add_executable(MSFT ${MSFT_SOURCES})
+
+target_include_directories(MSFT PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(MSFT PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    pthread
+    dl
+    m
+)
+
+# Set output directory
+set_target_properties(MSFT PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# ============================================================================
+# SHADERS
+# ============================================================================
+
+# Copy shaders to build directory
+add_custom_command(TARGET MSFT POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/shaders
+    ${CMAKE_BINARY_DIR}/shaders
+)
 
 # ============================================================================
 # SUMMARY
@@ -49,14 +144,15 @@ add_subdirectory(examples/vulkan)
 
 message(STATUS "")
 message(STATUS "===============================================")
-message(STATUS " 0rigin: SMFT+Dirac GPU Simulation")
+message(STATUS " 0rigin: MSFT+Dirac GPU Simulation")
 message(STATUS "===============================================")
 message(STATUS "")
 message(STATUS "  Vulkan SDK: ${Vulkan_INCLUDE_DIRS}")
 message(STATUS "  Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "")
 message(STATUS "  Targets:")
-message(STATUS "    • NovaSMFT (static library)")
-message(STATUS "    • smft_test (executable)")
+message(STATUS "    • Nova (static library)")
+message(STATUS "    • imgui (static library)")
+message(STATUS "    • MSFT (executable)")
 message(STATUS "")
 message(STATUS "===============================================")

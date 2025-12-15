@@ -179,7 +179,7 @@ sigma = ifft2(sigma_k)           # Back to real space
 
 ---
 
-## Fermion Coupling (SMFT)
+## Fermion Coupling (MSFT)
 
 ### Dirac Equation with Synchronization Mass
 
@@ -260,7 +260,7 @@ R'(x',t') = R(x,t)  (scalar)
 ### Week 4
 - [ ] Fermion coupling
 - [ ] Mass generation demonstration
-- [ ] Full SMFT integration
+- [ ] Full MSFT integration
 
 ---
 

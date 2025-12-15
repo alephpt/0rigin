@@ -1,5 +1,5 @@
 """
-SMFT Phase Diagram: Map of Existence
+MSFT Phase Diagram: Map of Existence
 
 Scans the (K, Δ) parameter space to find regions where stable bound states form.
 
@@ -29,12 +29,12 @@ import os
 import sys
 sys.path.insert(0, '/home/persist/neotec/0rigin/src')
 sys.stdout.reconfigure(line_buffering=True)  # Force unbuffered output
-from kuramoto.field_theory import SMFTSystem
+from kuramoto.field_theory import MSFTSystem
 from kuramoto.field_theory.dirac.gamma_matrices import get_gamma_matrices_3plus1
 from kuramoto.field_theory.dirac.spinor_field import DiracSpinorField, SpatialGrid
 
 print("="*80)
-print(" SMFT PHASE DIAGRAM: MAPPING THE UNIVERSE")
+print(" MSFT PHASE DIAGRAM: MAPPING THE UNIVERSE")
 print("="*80)
 print("\nScanning (K, Δ) parameter space to discover regions of existence:")
 print("  • Dead Zone: Vacuum fails to nucleate")
@@ -62,7 +62,7 @@ print(f"  Total simulations:     {resolution}×{resolution} = {resolution**2}")
 # Fixed parameters
 grid_size = 32
 n_steps = 10000  # Long evolution to reach equilibrium
-dt_smft = 0.01
+dt_MSFT = 0.01
 dt_dirac = 0.0001
 chiral_angle = 0.0
 momentum = (0.0, 0.0)  # Start with zero momentum for confinement test
@@ -124,7 +124,7 @@ print(f"  Checkpoint: {npz_checkpoint}")
 # The Scanner: Iterate Over All (K, Δ) Coordinates
 # =============================================================================
 print(f"\nScanning {resolution**2} universes...")
-print(f"  Evolution time: {n_steps * dt_smft:.1f} time units per simulation")
+print(f"  Evolution time: {n_steps * dt_MSFT:.1f} time units per simulation")
 print(f"  Estimated runtime: ~{resolution**2 * 0.5 / 60:.0f} minutes")
 print()
 
@@ -144,34 +144,34 @@ for i in range(resolution):
         print(f"[{progress:5.1f}%] ({sim_count}/{resolution**2}) K={K:5.2f}, Δ={Delta:4.2f} | ETA: {eta/60:.1f}m ... ", end='', flush=True)
 
         try:
-            # Initialize SMFT system
-            smft = SMFTSystem(N=grid_size**2, grid_shape=(grid_size, grid_size),
+            # Initialize MSFT system
+            MSFT = MSFTSystem(N=grid_size**2, grid_shape=(grid_size, grid_size),
                             mass_gap=Delta)
-            smft.oscillators.coupling_strength = K
+            MSFT.oscillators.coupling_strength = K
 
             # Seed synchronization
             n = grid_size
             x_coord, y_coord = np.meshgrid(np.arange(n), np.arange(n))
             pattern = 0.3 + 0.4 * np.cos(2*np.pi*x_coord/n * 1.5) * np.cos(2*np.pi*y_coord/n * 1.5)
-            smft.sync_field.values = pattern.flatten()
+            MSFT.sync_field.values = pattern.flatten()
 
             # Initialize spinor
             grid = SpatialGrid(Nx=grid_size, Ny=grid_size, Lx=1.0, Ly=1.0, boundary='periodic')
             spinor = DiracSpinorField(grid, initial_state='plane_wave', momentum=momentum)
 
             # Record initial state
-            R_initial = smft.sync_field.values.mean()
+            R_initial = MSFT.sync_field.values.mean()
             energy_history = []
 
             # Evolve
             for step in range(n_steps):
-                smft.step(dt=dt_smft)
+                MSFT.step(dt=dt_MSFT)
 
-                R_field = smft.sync_field.values.reshape(smft.grid_shape)
-                m_field = smft.compute_effective_mass().reshape(smft.grid_shape)
+                R_field = MSFT.sync_field.values.reshape(MSFT.grid_shape)
+                m_field = MSFT.compute_effective_mass().reshape(MSFT.grid_shape)
 
                 # Evolve spinor
-                substeps = int(dt_smft / dt_dirac)
+                substeps = int(dt_MSFT / dt_dirac)
                 for sub in range(substeps):
                     spinor.step_rk4(dt_dirac, m_field, chiral_angle=chiral_angle,
                                   Delta=Delta, normalize=True)
@@ -183,7 +183,7 @@ for i in range(resolution):
                     energy_history.append(energy)
 
             # Measure observables
-            R_final = smft.sync_field.values.mean()
+            R_final = MSFT.sync_field.values.mean()
             R_change = R_final - R_initial
 
             density = spinor.compute_density()
@@ -438,7 +438,7 @@ ax9.set_ylabel('Δ', fontsize=12)
 plt.colorbar(im9, ax=ax9, label='Norm')
 ax9.grid(True, alpha=0.3)
 
-fig.suptitle('SMFT Phase Diagram: The Map of Existence', fontsize=18, fontweight='bold', y=0.995)
+fig.suptitle('MSFT Phase Diagram: The Map of Existence', fontsize=18, fontweight='bold', y=0.995)
 
 output = os.path.join(data_dir, 'phase_diagram_complete.png')
 plt.savefig(output, dpi=150, bbox_inches='tight')
@@ -458,7 +458,7 @@ print(f"  • Bound States: {bound_count} regions with stable confinement")
 print(f"\nNext Steps:")
 if bound_count > 0:
     print(f"  ✓ Found {bound_count} bound state islands!")
-    print(f"  → Use these (K, Δ) values in complete_smft_dirac_demo.py")
+    print(f"  → Use these (K, Δ) values in complete_MSFT_dirac_demo.py")
     print(f"  → Investigate if multiple islands = particle spectrum")
 else:
     print(f"  ✗ No bound states found in this parameter range")

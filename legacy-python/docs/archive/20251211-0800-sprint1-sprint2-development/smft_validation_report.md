@@ -1,19 +1,19 @@
-# SMFTSystem Fix Validation Report
+# MSFTSystem Fix Validation Report
 
 ## Executive Summary
-✅ **PASS** - The SMFTSystem damping bug has been successfully fixed. Energy explosion issue is eliminated.
+✅ **PASS** - The MSFTSystem damping bug has been successfully fixed. Energy explosion issue is eliminated.
 
 ## Test Results
 
 ### 1. Demo Execution
 - **Status**: ✅ Success
-- **Command**: `python examples/field_theory/smft_demo.py`
+- **Command**: `python examples/field_theory/MSFT_demo.py`
 - **Result**: Completed without errors, all 4 plots generated
 - **Files Generated**:
-  - `smft_basic_evolution.png` (111K)
-  - `smft_mass_scaling.png` (57K)
-  - `smft_local_vs_global.png` (146K)
-  - `smft_effective_mass.png` (82K)
+  - `MSFT_basic_evolution.png` (111K)
+  - `MSFT_mass_scaling.png` (57K)
+  - `MSFT_local_vs_global.png` (146K)
+  - `MSFT_effective_mass.png` (82K)
 
 ### 2. Energy Conservation Tests
 All configurations tested with 1000 timesteps:
@@ -34,7 +34,7 @@ All configurations tested with 1000 timesteps:
 - Energy bounded within reasonable physical limits
 
 ### 3. Code Verification
-**Fixed Code Location**: `/home/persist/neotec/0rigin/src/kuramoto/field_theory/smft_system.py:296-303`
+**Fixed Code Location**: `/home/persist/neotec/0rigin/src/kuramoto/field_theory/MSFT_system.py:296-303`
 
 ```python
 # Semi-implicit damping for stability (same as mediator field)
@@ -57,7 +57,7 @@ self.oscillators.p = p_temp / (1 + self.oscillators.gamma * dt)
 
 | Criterion | Status | Evidence |
 |-----------|--------|----------|
-| smft_demo.py completes without errors | ✅ | Ran successfully, generated all plots |
+| MSFT_demo.py completes without errors | ✅ | Ran successfully, generated all plots |
 | Energy remains bounded | ✅ | Max energy < 10× initial in all tests |
 | Final R is valid number in [0, 1] | ✅ | All R values between 0.076 and 0.348 |
 | All 4 plots render successfully | ✅ | All PNG files generated with expected sizes |
@@ -65,7 +65,7 @@ self.oscillators.p = p_temp / (1 + self.oscillators.gamma * dt)
 
 ## Conclusion
 
-The damping bug in SMFTSystem has been successfully resolved. The semi-implicit integration scheme prevents energy explosion while maintaining physical accuracy. The system now exhibits expected behavior:
+The damping bug in MSFTSystem has been successfully resolved. The semi-implicit integration scheme prevents energy explosion while maintaining physical accuracy. The system now exhibits expected behavior:
 
 1. **Stable Evolution**: Energy remains bounded throughout simulation
 2. **Physical Validity**: Order parameter R stays within [0,1]

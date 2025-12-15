@@ -1,7 +1,7 @@
 """
 Bidirectional coupling between oscillators and fields.
 
-Implements the SMFT coupling mechanism:
+Implements the MSFT coupling mechanism:
     - Oscillators → Field: via density ρ(x,t)
     - Field → Oscillators: via local sampling σ(x_j,t)
 """

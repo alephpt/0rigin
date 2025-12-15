@@ -16,7 +16,7 @@ from kuramoto.field_theory import (
     MediatorField,
     LocalFieldCoupling,
     FermionMassDemo,
-    SMFTSystem
+    MSFTSystem
 )
 
 
@@ -169,9 +169,9 @@ def test_mass_generation():
     print(f"✓ Mass generation (<m>={avg_mass:.3f})")
 
 
-def test_smft_system():
-    """Test SMFTSystem with new components."""
-    system = SMFTSystem(
+def test_MSFT_system():
+    """Test MSFTSystem with new components."""
+    system = MSFTSystem(
         grid_shape=(16, 16),
         N_oscillators=20,
         coupling='local',
@@ -182,7 +182,7 @@ def test_smft_system():
 
     assert 'R' in result
     assert len(result['R']) > 0
-    print(f"✓ SMFT system integration (R={result['R'][-1]:.3f})")
+    print(f"✓ MSFT system integration (R={result['R'][-1]:.3f})")
 
 
 def test_full_integration():
@@ -222,7 +222,7 @@ def run_all_tests():
         ("Fermion mass init", test_fermion_mass_init),
         ("Mass from R", test_mass_from_R),
         ("Mass generation", test_mass_generation),
-        ("SMFT system", test_smft_system),
+        ("MSFT system", test_MSFT_system),
         ("Full integration", test_full_integration),
     ]
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SMFT Single Point Deep Simulation
+MSFT Single Point Deep Simulation
 ==================================
 
 Target: K=27.21, Δ=36.18 (Bright spot from phase diagram)
@@ -8,7 +8,7 @@ Resolution: 128×128 oscillator grid (maximum detail)
 Steps: 50,000 (deep time evolution, t=500)
 Initial: Gaussian spinor centered at (64, 64)
 
-Physics: Full SMFT with Hamiltonian dynamics, mass feedback, field coupling
+Physics: Full MSFT with Hamiltonian dynamics, mass feedback, field coupling
 """
 
 import numpy as np
@@ -20,7 +20,7 @@ from jax import jit
 from functools import partial
 
 print("="*80)
-print(" SMFT SINGLE POINT DEEP SIMULATION")
+print(" MSFT SINGLE POINT DEEP SIMULATION")
 print("="*80)
 print(f"\nJAX version: {jax.__version__}")
 print(f"JAX devices: {jax.devices()}")
@@ -49,7 +49,7 @@ print(f"  Damping: γ = {damping}")
 print(f"  Initial: Gaussian spinor at center ({grid_size//2}, {grid_size//2})")
 
 # =============================================================================
-# SMFT Physics (JAX-JIT Compiled)
+# MSFT Physics (JAX-JIT Compiled)
 # =============================================================================
 
 @jit
@@ -72,9 +72,9 @@ def compute_local_R_field(phases):
     return R_field
 
 @jit
-def hamiltonian_smft_step(theta, p, K, Delta, dt, omega, damping):
+def hamiltonian_MSFT_step(theta, p, K, Delta, dt, omega, damping):
     """
-    Single SMFT step with Hamiltonian dynamics + mass feedback.
+    Single MSFT step with Hamiltonian dynamics + mass feedback.
 
     Physics:
     1. Hamiltonian coupling: H = -K·R·cos(θ_i - φ_local)
@@ -104,20 +104,20 @@ def hamiltonian_smft_step(theta, p, K, Delta, dt, omega, damping):
     p_temp = p + total_force * dt
     p_new = p_temp / (1.0 + damping * dt)
 
-    # Mass field (SMFT): m = Δ·R
+    # Mass field (MSFT): m = Δ·R
     m_field = Delta * R_field
 
     return theta_new, p_new, R_field, m_field
 
 @partial(jit, static_argnums=(4,))
-def evolve_smft(K, Delta, initial_theta, initial_p, n_steps, dt, omega, damping):
+def evolve_MSFT(K, Delta, initial_theta, initial_p, n_steps, dt, omega, damping):
     """
-    Full SMFT evolution with proper Hamiltonian dynamics.
+    Full MSFT evolution with proper Hamiltonian dynamics.
     Returns snapshots at key timesteps.
     """
     def step_fn(carry, i):
         theta, p = carry
-        theta_new, p_new, R_field, m_field = hamiltonian_smft_step(
+        theta_new, p_new, R_field, m_field = hamiltonian_MSFT_step(
             theta, p, K, Delta, dt, omega, damping
         )
 
@@ -183,7 +183,7 @@ print("="*80)
 print("\nCompiling JAX kernels (first run)...")
 start_time = time.time()
 
-theta_final, p_final, store_flags, step_ids, R_fields, m_fields = evolve_smft(
+theta_final, p_final, store_flags, step_ids, R_fields, m_fields = evolve_MSFT(
     K, Delta, theta_init, p_init, n_steps, dt, omega, damping
 )
 
@@ -228,7 +228,7 @@ print(" GENERATING VISUALIZATION")
 print("="*80)
 
 fig, axes = plt.subplots(len(snapshots), 2, figsize=(14, 4*len(snapshots)))
-fig.suptitle(f'SMFT Deep Time Evolution: K={K}, Δ={Delta}\n128×128 Grid, 50k Steps',
+fig.suptitle(f'MSFT Deep Time Evolution: K={K}, Δ={Delta}\n128×128 Grid, 50k Steps',
              fontsize=16, fontweight='bold')
 
 for row, (step, t, R, m) in enumerate(snapshots):
@@ -252,11 +252,11 @@ for row, (step, t, R, m) in enumerate(snapshots):
 
 plt.tight_layout()
 
-output_dir = "examples/validation/outputs/smft_single_point"
+output_dir = "examples/validation/outputs/MSFT_single_point"
 import os
 os.makedirs(output_dir, exist_ok=True)
 
-output_file = f"{output_dir}/smft_K{K:.2f}_D{Delta:.2f}_128x128_50k.png"
+output_file = f"{output_dir}/MSFT_K{K:.2f}_D{Delta:.2f}_128x128_50k.png"
 plt.savefig(output_file, dpi=150, bbox_inches='tight')
 print(f"\n✓ Visualization saved: {output_file}")
 
@@ -296,7 +296,7 @@ else:
 print(f"\nPhase Classification: {phase}")
 
 print("\n" + "="*80)
-print(" SMFT SINGLE POINT SIMULATION COMPLETE")
+print(" MSFT SINGLE POINT SIMULATION COMPLETE")
 print("="*80)
 print(f"\nOutput: {output_file}")
 print(f"Parameters: K={K}, Δ={Delta}")

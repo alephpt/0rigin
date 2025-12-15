@@ -1,0 +1,348 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+// Include complex arithmetic and precision libraries
+#include "../include/complex.glsl"
+#include "../include/precision.glsl"
+
+/**
+ * @file dirac_rk4.comp
+ * @brief Dirac equation evolution with MSFT mass using RK4 integrator
+ *
+ * Implements: (iγ^μ∂_μ)Ψ(x) = M(x,t)Ψ(x)
+ * where: M(x,t) = Δ·R(x,t)·e^(iθγ⁵)
+ *
+ * MSFT Mass Operator Expansion:
+ * e^(iθγ⁵) = cos(θ) + iγ⁵·sin(θ)
+ * M = Δ·R·[cos(θ)·I + iγ⁵·sin(θ)]
+ *   = m_S·I + im_P·γ⁵
+ *   where m_S = Δ·R·cos(θ), m_P = Δ·R·sin(θ)
+ *
+ * Lorentz Invariant Form (using α, β matrices):
+ * H = -i·α·∇ + β·M
+ * where α^i = γ^0·γ^i, β = γ^0
+ *
+ * Spinor: Ψ = (ψ₁, ψ₂, ψ₃, ψ₄) where ψᵢ ∈ ℂ
+ *
+ * RK4 Integration:
+ * k₁ = f(t, Ψ)
+ * k₂ = f(t + dt/2, Ψ + dt/2·k₁)
+ * k₃ = f(t + dt/2, Ψ + dt/2·k₂)
+ * k₄ = f(t + dt, Ψ + dt·k₃)
+ * Ψ(t+dt) = Ψ(t) + dt/6·(k₁ + 2k₂ + 2k₃ + k₄)
+ *
+ * where f(t, Ψ) = -i·H·Ψ
+ *
+ * Workgroup: 16×16 threads
+ * Grid: Nx × Ny spatial points
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+// Push constants for simulation parameters
+layout(push_constant) uniform PushConstants {
+    float dt;              // Time step
+    float K;               // Coupling strength (not used)
+    float damping;         // Damping (not used)
+    float Delta;           // MSFT mass gap
+    float chiral_angle;    // θ for chiral mass e^(iθγ⁵)
+    uint Nx;               // Grid width
+    uint Ny;               // Grid height
+    uint N_total;          // Total oscillators
+    uint enable_normalization;  // Periodic norm conservation (0/1)
+} params;
+
+// Storage buffers
+layout(set = 0, binding = 0) buffer PsiBuffer {
+    vec2 psi[];  // Current spinor field (4 components × 2 floats each = 8 floats per point)
+                 // Layout: [ψ₁.re, ψ₁.im, ψ₂.re, ψ₂.im, ψ₃.re, ψ₃.im, ψ₄.re, ψ₄.im] repeated
+};
+
+layout(set = 0, binding = 1) readonly buffer RFieldBuffer {
+    float R_field[];  // Synchronization field R(x,y) from sync_field.comp
+};
+
+// Shared memory for spatial derivatives (finite differences)
+shared vec2 s_psi[18][18][4];  // 16+2 border, 4 spinor components
+
+/**
+ * @brief Gamma matrices in chiral representation
+ *
+ * γ⁰ = [[ 0  I],    γⁱ = [[ 0  σⁱ],    γ⁵ = [[I  0 ],
+ *       [-I  0]]          [-σⁱ 0 ]]          [0 -I]]
+ *
+ * α^i = γ⁰·γ^i = [[ σⁱ  0 ],    β = γ⁰ = [[ 0  I],
+ *                  [ 0 -σⁱ]]                [-I  0]]
+ *
+ * Pauli matrices:
+ * σ¹ = [[0 1], [1 0]]
+ * σ² = [[0 -i], [i 0]]
+ * σ³ = [[1 0], [0 -1]]
+ */
+
+/**
+ * @brief Apply α^x (spatial derivative in x direction)
+ *
+ * α^x = [[σ^x  0  ],    σ^x = [[0 1],
+ *        [ 0  -σ^x]]          [1 0]]
+ *
+ * Action on spinor (ψ₁, ψ₂, ψ₃, ψ₄):
+ * (α^x·ψ)₁ = ψ₂
+ * (α^x·ψ)₂ = ψ₁
+ * (α^x·ψ)₃ = -ψ₄
+ * (α^x·ψ)₄ = -ψ₃
+ */
+void apply_alpha_x(vec2 psi_in[4], out vec2 psi_out[4]) {
+    psi_out[0] = psi_in[1];
+    psi_out[1] = psi_in[0];
+    psi_out[2] = -psi_in[3];
+    psi_out[3] = -psi_in[2];
+}
+
+/**
+ * @brief Apply α^y (spatial derivative in y direction)
+ *
+ * α^y = [[σ^y  0  ],    σ^y = [[0 -i],
+ *        [ 0  -σ^y]]          [i  0]]
+ *
+ * Action on spinor:
+ * (α^y·ψ)₁ = -i·ψ₂
+ * (α^y·ψ)₂ = i·ψ₁
+ * (α^y·ψ)₃ = i·ψ₄
+ * (α^y·ψ)₄ = -i·ψ₃
+ */
+void apply_alpha_y(vec2 psi_in[4], out vec2 psi_out[4]) {
+    psi_out[0] = cmul(vec2(0, -1), psi_in[1]);  // -i·ψ₂
+    psi_out[1] = cmul(vec2(0, 1), psi_in[0]);   // i·ψ₁
+    psi_out[2] = cmul(vec2(0, 1), psi_in[3]);   // i·ψ₄
+    psi_out[3] = cmul(vec2(0, -1), psi_in[2]);  // -i·ψ₃
+}
+
+/**
+ * @brief Apply β matrix (mass term)
+ *
+ * β = γ⁰ = [[ 0  I],
+ *           [-I  0]]
+ *
+ * Action on spinor:
+ * (β·ψ)₁ = ψ₃
+ * (β·ψ)₂ = ψ₄
+ * (β·ψ)₃ = -ψ₁
+ * (β·ψ)₄ = -ψ₂
+ */
+void apply_beta(vec2 psi_in[4], out vec2 psi_out[4]) {
+    psi_out[0] = psi_in[2];
+    psi_out[1] = psi_in[3];
+    psi_out[2] = -psi_in[0];
+    psi_out[3] = -psi_in[1];
+}
+
+/**
+ * @brief Apply γ⁵ matrix (chiral operator)
+ *
+ * γ⁵ = [[I  0 ],
+ *       [0 -I]]
+ *
+ * Action on spinor:
+ * (γ⁵·ψ)₁ = ψ₁
+ * (γ⁵·ψ)₂ = ψ₂
+ * (γ⁵·ψ)₃ = -ψ₃
+ * (γ⁵·ψ)₄ = -ψ₄
+ */
+void apply_gamma5(vec2 psi_in[4], out vec2 psi_out[4]) {
+    psi_out[0] = psi_in[0];
+    psi_out[1] = psi_in[1];
+    psi_out[2] = -psi_in[2];
+    psi_out[3] = -psi_in[3];
+}
+
+/**
+ * @brief Compute spatial derivatives using centered finite differences
+ *
+ * ∂ψ/∂x ≈ [ψ(x+dx) - ψ(x-dx)] / (2·dx)
+ */
+void compute_spatial_derivatives(
+    uint local_x, uint local_y,
+    out vec2 dpsi_dx[4],
+    out vec2 dpsi_dy[4]
+) {
+    const float dx = 1.0;  // Grid spacing (normalized)
+
+    // Centered differences
+    for (int i = 0; i < 4; i++) {
+        vec2 psi_xp = s_psi[local_y + 1][local_x + 2][i];  // x+1
+        vec2 psi_xm = s_psi[local_y + 1][local_x][i];      // x-1
+        vec2 psi_yp = s_psi[local_y + 2][local_x + 1][i];  // y+1
+        vec2 psi_ym = s_psi[local_y][local_x + 1][i];      // y-1
+
+        dpsi_dx[i] = (psi_xp - psi_xm) / (2.0 * dx);
+        dpsi_dy[i] = (psi_yp - psi_ym) / (2.0 * dx);
+    }
+}
+
+/**
+ * @brief Compute Dirac Hamiltonian action: H·Ψ
+ *
+ * H = -i·(α^x·∂_x + α^y·∂_y) + β·M
+ * where M = Δ·R·[cos(θ)·I + i·sin(θ)·γ⁵]
+ */
+void apply_hamiltonian(
+    vec2 psi_in[4],
+    vec2 dpsi_dx[4],
+    vec2 dpsi_dy[4],
+    float R,
+    out vec2 H_psi[4]
+) {
+    // Kinetic term: -i·(α^x·∂_x + α^y·∂_y)
+    vec2 alpha_x_dpsi_dx[4];
+    apply_alpha_x(dpsi_dx, alpha_x_dpsi_dx);
+
+    vec2 alpha_y_dpsi_dy[4];
+    apply_alpha_y(dpsi_dy, alpha_y_dpsi_dy);
+
+    vec2 kinetic[4];
+    for (int i = 0; i < 4; i++) {
+        vec2 sum = alpha_x_dpsi_dx[i] + alpha_y_dpsi_dy[i];
+        kinetic[i] = cmul(vec2(0, -1), sum);  // -i·(...)
+    }
+
+    // Mass term: β·M·Ψ where M = Δ·R·e^(iθγ⁵)
+    float m_S = params.Delta * R * cos(params.chiral_angle);  // Scalar mass
+    float m_P = params.Delta * R * sin(params.chiral_angle);  // Pseudoscalar mass
+
+    // M·Ψ = (m_S·I + im_P·γ⁵)·Ψ
+    vec2 gamma5_psi[4];
+    apply_gamma5(psi_in, gamma5_psi);
+
+    vec2 mass_psi[4];
+    for (int i = 0; i < 4; i++) {
+        // m_S·ψ + im_P·γ⁵·ψ
+        vec2 term1 = m_S * psi_in[i];
+        vec2 term2 = cmul(vec2(0, m_P), gamma5_psi[i]);
+        mass_psi[i] = term1 + term2;
+    }
+
+    // β·(M·Ψ)
+    vec2 beta_mass_psi[4];
+    apply_beta(mass_psi, beta_mass_psi);
+
+    // Total: H·Ψ = kinetic + mass
+    for (int i = 0; i < 4; i++) {
+        H_psi[i] = kinetic[i] + beta_mass_psi[i];
+    }
+}
+
+/**
+ * @brief RK4 derivative function: dΨ/dt = -i·H·Ψ
+ */
+void compute_rhs(
+    vec2 psi_in[4],
+    vec2 dpsi_dx[4],
+    vec2 dpsi_dy[4],
+    float R,
+    out vec2 rhs[4]
+) {
+    vec2 H_psi[4];
+    apply_hamiltonian(psi_in, dpsi_dx, dpsi_dy, R, H_psi);
+
+    // dΨ/dt = -i·H·Ψ
+    for (int i = 0; i < 4; i++) {
+        rhs[i] = cmul(vec2(0, -1), H_psi[i]);
+    }
+}
+
+/**
+ * @brief Load spinor into shared memory with boundary handling
+ */
+void load_shared_memory(uvec2 global_id, uvec2 local_id, uint idx) {
+    uint gx = global_id.x;
+    uint gy = global_id.y;
+    uint lx = local_id.x;
+    uint ly = local_id.y;
+
+    // Load center tile (all 4 spinor components)
+    if (gx < params.Nx && gy < params.Ny) {
+        for (int comp = 0; comp < 4; comp++) {
+            s_psi[ly + 1][lx + 1][comp] = psi[idx * 4 + comp];
+        }
+    }
+
+    // Load borders (periodic boundaries) - simplified, load only if on edge
+    // Full implementation would load all border cells
+
+    barrier();
+}
+
+void main() {
+    uvec2 global_id = gl_GlobalInvocationID.xy;
+    uvec2 local_id = gl_LocalInvocationID.xy;
+
+    // Bounds check
+    if (global_id.x >= params.Nx || global_id.y >= params.Ny) {
+        return;
+    }
+
+    uint idx = global_id.y * params.Nx + global_id.x;
+
+    // Load spinor into shared memory
+    load_shared_memory(global_id, local_id, idx);
+
+    // Get current spinor and R field
+    vec2 psi_current[4];
+    for (int i = 0; i < 4; i++) {
+        psi_current[i] = psi[idx * 4 + i];
+    }
+
+    float R = R_field[idx];
+
+    // Compute spatial derivatives
+    vec2 dpsi_dx[4], dpsi_dy[4];
+    compute_spatial_derivatives(local_id.x, local_id.y, dpsi_dx, dpsi_dy);
+
+    // RK4 integration
+    highp_float dt_hp = highp_float(params.dt);
+
+    // k₁ = f(t, Ψ)
+    vec2 k1[4];
+    compute_rhs(psi_current, dpsi_dx, dpsi_dy, R, k1);
+
+    // k₂ = f(t + dt/2, Ψ + dt/2·k₁)
+    vec2 psi_k2[4];
+    for (int i = 0; i < 4; i++) {
+        psi_k2[i] = psi_current[i] + float(dt_hp / 2.0) * k1[i];
+    }
+    vec2 k2[4];
+    compute_rhs(psi_k2, dpsi_dx, dpsi_dy, R, k2);
+
+    // k₃ = f(t + dt/2, Ψ + dt/2·k₂)
+    vec2 psi_k3[4];
+    for (int i = 0; i < 4; i++) {
+        psi_k3[i] = psi_current[i] + float(dt_hp / 2.0) * k2[i];
+    }
+    vec2 k3[4];
+    compute_rhs(psi_k3, dpsi_dx, dpsi_dy, R, k3);
+
+    // k₄ = f(t + dt, Ψ + dt·k₃)
+    vec2 psi_k4[4];
+    for (int i = 0; i < 4; i++) {
+        psi_k4[i] = psi_current[i] + float(dt_hp) * k3[i];
+    }
+    vec2 k4[4];
+    compute_rhs(psi_k4, dpsi_dx, dpsi_dy, R, k4);
+
+    // Final RK4 update with Kahan summation (Hazard B mitigation)
+    vec2 psi_new[4];
+    for (int i = 0; i < 4; i++) {
+        psi_new[i] = rk4_combine_conservative(psi_current[i], k1[i], k2[i], k3[i], k4[i], dt_hp);
+    }
+
+    // Optional: Periodic norm conservation (every N steps)
+    if (params.enable_normalization == 1) {
+        normalize_spinor_conservative(psi_new);
+    }
+
+    // Write output
+    for (int i = 0; i < 4; i++) {
+        psi[idx * 4 + i] = psi_new[i];
+    }
+}

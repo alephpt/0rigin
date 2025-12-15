@@ -6,7 +6,7 @@ import pytest
 import numpy as np
 from numpy.testing import assert_allclose
 
-from kuramoto.field_theory import SMFTSystem
+from kuramoto.field_theory import MSFTSystem
 
 
 class TestLocalGlobalCoupling:
@@ -14,7 +14,7 @@ class TestLocalGlobalCoupling:
 
     def test_local_coupling_spatial_structure(self):
         """Test that local coupling creates spatial structure."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(30, 30),
             N_oscillators=100,
             coupling='local',
@@ -32,7 +32,7 @@ class TestLocalGlobalCoupling:
 
     def test_global_coupling_uniform_field(self):
         """Test that global coupling creates more uniform field."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(20, 20),
             N_oscillators=50,
             coupling='global',

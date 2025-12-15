@@ -1,0 +1,5 @@
+/home/persist/neotec/0rigin/build/CMakeFiles/Nova.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/imgui.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/MSFT.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/edit_cache.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/rebuild_cache.dir

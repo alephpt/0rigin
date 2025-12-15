@@ -1,7 +1,7 @@
 """
-JAX-Accelerated SMFT Phase Diagram with ACTUAL PHYSICS
+JAX-Accelerated MSFT Phase Diagram with ACTUAL PHYSICS
 
-Implements proper SMFT dynamics:
+Implements proper MSFT dynamics:
 1. Hamiltonian oscillator coupling with damping
 2. Mass feedback: m = Δ·R
 3. Spatial field coupling
@@ -21,7 +21,7 @@ import time
 import os
 
 print("="*80)
-print(" JAX-ACCELERATED SMFT PHASE DIAGRAM (PROPER PHYSICS)")
+print(" JAX-ACCELERATED MSFT PHASE DIAGRAM (PROPER PHYSICS)")
 print("="*80)
 print(f"JAX version: {jax.__version__}")
 print(f"JAX devices: {jax.devices()}")
@@ -56,7 +56,7 @@ print(f"  Time: {n_steps * dt:.1f} units")
 print(f"  Damping: γ = {damping}")
 
 # =============================================================================
-# JAX SMFT Physics Kernels (JIT-compiled)
+# JAX MSFT Physics Kernels (JIT-compiled)
 # =============================================================================
 
 @jit
@@ -83,16 +83,16 @@ def compute_local_R_field(phases):
     return R_field
 
 @jit
-def hamiltonian_smft_step(theta, p, K, Delta, dt, omega, damping):
+def hamiltonian_MSFT_step(theta, p, K, Delta, dt, omega, damping):
     """
-    Single SMFT step with Hamiltonian dynamics + mass feedback.
+    Single MSFT step with Hamiltonian dynamics + mass feedback.
 
     Physics:
     1. Hamiltonian coupling: H = -K·R·cos(θ_i - φ_local)
     2. Mass feedback: m(x) = Δ·R(x)
     3. Damped dynamics: dp/dt = F - γ·p
 
-    Matches SMFTSystem.step() from smft_system.py:298-350
+    Matches MSFTSystem.step() from MSFT_system.py:298-350
     """
     # Compute local R field (synchronization amplitude)
     R_field = compute_local_R_field(theta)
@@ -122,20 +122,20 @@ def hamiltonian_smft_step(theta, p, K, Delta, dt, omega, damping):
     p_temp = p + total_force * dt
     p_new = p_temp / (1.0 + damping * dt)
 
-    # Mass field (SMFT): m = Δ·R
+    # Mass field (MSFT): m = Δ·R
     m_field = Delta * R_field
 
     return theta_new, p_new, R_field, m_field
 
 @partial(jit, static_argnums=(4,))
-def evolve_smft(K, Delta, initial_theta, initial_p, n_steps, dt, omega, damping):
+def evolve_MSFT(K, Delta, initial_theta, initial_p, n_steps, dt, omega, damping):
     """
-    Full SMFT evolution with proper Hamiltonian dynamics.
+    Full MSFT evolution with proper Hamiltonian dynamics.
     Returns final state + observables.
     """
     def step_fn(carry, i):
         theta, p = carry
-        theta_new, p_new, R_field, m_field = hamiltonian_smft_step(
+        theta_new, p_new, R_field, m_field = hamiltonian_MSFT_step(
             theta, p, K, Delta, dt, omega, damping
         )
         # Store R every step for analysis
@@ -183,7 +183,7 @@ def compute_observables(theta_final, R_history, R_fields, m_fields):
 # =============================================================================
 
 def simulate_single(K, Delta, key):
-    """Simulate single (K, Δ) point with proper SMFT physics."""
+    """Simulate single (K, Δ) point with proper MSFT physics."""
     # Initialize phases randomly
     theta_init = jax.random.uniform(key, (grid_size, grid_size)) * 2 * jnp.pi
 
@@ -208,7 +208,7 @@ def simulate_single(K, Delta, key):
     theta_init = theta_init * (1.0 + 2.0 * spinor_amplitude)
 
     # Evolve
-    theta_final, p_final, R_history, R_fields, m_fields = evolve_smft(
+    theta_final, p_final, R_history, R_fields, m_fields = evolve_MSFT(
         K, Delta, theta_init, p_init, n_steps, dt, omega, damping
     )
 
@@ -224,7 +224,7 @@ def simulate_single(K, Delta, key):
 # =============================================================================
 
 print("\n" + "="*80)
-print(f" RUNNING SEQUENTIAL SMFT SIMULATION ({resolution}×{resolution} = {resolution**2})")
+print(f" RUNNING SEQUENTIAL MSFT SIMULATION ({resolution}×{resolution} = {resolution**2})")
 print("="*80)
 
 start_time = time.time()
@@ -234,7 +234,7 @@ print("\nCompiling JAX kernels (first run)...")
 master_key = jax.random.PRNGKey(42)
 
 print(f"Running simulations sequentially (batch_size=1 for low RAM)...")
-print(f"  Each simulation: {n_steps} steps of proper SMFT dynamics")
+print(f"  Each simulation: {n_steps} steps of proper MSFT dynamics")
 print(f"  Total: {resolution**2} simulations")
 
 # Pre-allocate result arrays
@@ -283,7 +283,7 @@ data_dir = os.path.join(script_dir, 'outputs', 'phase_diagram_jax')
 os.makedirs(data_dir, exist_ok=True)
 
 # Save complete data
-data_file = os.path.join(data_dir, 'jax_smft_results.npz')
+data_file = os.path.join(data_dir, 'jax_MSFT_results.npz')
 np.savez_compressed(data_file,
                    K_values=np.array(K_values),
                    Delta_values=np.array(Delta_values),
@@ -346,7 +346,7 @@ ax1 = fig.add_subplot(gs[0, 0])
 im1 = ax1.contourf(K_grid_np, Delta_grid_np, phase_map.T,
                    levels=[-0.5, 0.5, 1.5, 2.5, 3.5],
                    colors=['#0000FF', '#FF0000', '#FF8800', '#FFD700'], alpha=0.7)
-ax1.set_title('JAX-SMFT Phase Diagram (High-Pass Filter)', fontweight='bold', fontsize=14)
+ax1.set_title('JAX-MSFT Phase Diagram (High-Pass Filter)', fontweight='bold', fontsize=14)
 ax1.set_xlabel('K (Kuramoto Coupling)', fontsize=12)
 ax1.set_ylabel('Δ (Mass Gap)', fontsize=12)
 ax1.grid(True, alpha=0.3)
@@ -384,10 +384,10 @@ ax4.set_ylabel('Δ', fontsize=12)
 plt.colorbar(im4, ax=ax4, label='σ_E / ⟨E⟩')
 ax4.grid(True, alpha=0.3)
 
-fig.suptitle(f'JAX-SMFT Phase Diagram ({elapsed:.1f}s, {n_steps} steps/sim, Proper Hamiltonian)',
+fig.suptitle(f'JAX-MSFT Phase Diagram ({elapsed:.1f}s, {n_steps} steps/sim, Proper Hamiltonian)',
              fontsize=16, fontweight='bold', y=0.98)
 
-output = os.path.join(data_dir, 'phase_diagram_jax_smft.png')
+output = os.path.join(data_dir, 'phase_diagram_jax_MSFT.png')
 plt.savefig(output, dpi=150, bbox_inches='tight')
 print(f"✓ Visualization saved: {output}")
 
@@ -396,7 +396,7 @@ print(f"✓ Visualization saved: {output}")
 # =============================================================================
 
 print("\n" + "="*80)
-print(" JAX-SMFT ACCELERATION SUMMARY")
+print(" JAX-MSFT ACCELERATION SUMMARY")
 print("="*80)
 print(f"\nPhysics Implementation:")
 print(f"  ✓ Hamiltonian oscillator dynamics with damping (γ={damping})")

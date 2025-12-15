@@ -1,0 +1,146 @@
+[
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/components/genesis.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/components/genesis.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/components/genesis.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/components/genesis.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/components/logger.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/components/logger.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/components/logger.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/components/obj_loader.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/components/obj_loader.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/components/obj_loader.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/components/obj_loader.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/core.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/core.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/core.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/core.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/atomic/atomic.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/atomic/atomic.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/atomic/atomic.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/atomic/atomic.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/camera.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/camera.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/perspective.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/perspective.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/device.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/device.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/device.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/device.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/management.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/management.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/management.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/management.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/pipeline.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/pipeline/pipeline.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/pipeline/pipeline.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/pipeline.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/scene.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/pipeline/scene.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/pipeline/scene.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/scene.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/presentation.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/presentation.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/presentation.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/presentation.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Core/modules/render.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Core/modules/render.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Core/modules/render.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Core/modules/render.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/Nova.dir/lib/Nova/Nova.cpp.o -c /home/persist/neotec/0rigin/lib/Nova/Nova.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/Nova/Nova.cpp",
+  "output": "CMakeFiles/Nova.dir/lib/Nova/Nova.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -I/usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_sdl2.cpp.o -c /home/persist/neotec/0rigin/lib/imgui/backends/imgui_impl_sdl2.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/imgui/backends/imgui_impl_sdl2.cpp",
+  "output": "CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_sdl2.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -I/usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_vulkan.cpp.o -c /home/persist/neotec/0rigin/lib/imgui/backends/imgui_impl_vulkan.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/imgui/backends/imgui_impl_vulkan.cpp",
+  "output": "CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_vulkan.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -I/usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/imgui.dir/lib/imgui/imgui.cpp.o -c /home/persist/neotec/0rigin/lib/imgui/imgui.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/imgui/imgui.cpp",
+  "output": "CMakeFiles/imgui.dir/lib/imgui/imgui.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -I/usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/imgui.dir/lib/imgui/imgui_demo.cpp.o -c /home/persist/neotec/0rigin/lib/imgui/imgui_demo.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/imgui/imgui_demo.cpp",
+  "output": "CMakeFiles/imgui.dir/lib/imgui/imgui_demo.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -I/usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/imgui.dir/lib/imgui/imgui_draw.cpp.o -c /home/persist/neotec/0rigin/lib/imgui/imgui_draw.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/imgui/imgui_draw.cpp",
+  "output": "CMakeFiles/imgui.dir/lib/imgui/imgui_draw.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -I/usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/imgui.dir/lib/imgui/imgui_tables.cpp.o -c /home/persist/neotec/0rigin/lib/imgui/imgui_tables.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/imgui/imgui_tables.cpp",
+  "output": "CMakeFiles/imgui.dir/lib/imgui/imgui_tables.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -I/usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/imgui.dir/lib/imgui/imgui_widgets.cpp.o -c /home/persist/neotec/0rigin/lib/imgui/imgui_widgets.cpp",
+  "file": "/home/persist/neotec/0rigin/lib/imgui/imgui_widgets.cpp",
+  "output": "CMakeFiles/imgui.dir/lib/imgui/imgui_widgets.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/MSFT.cpp.o -c /home/persist/neotec/0rigin/src/MSFT.cpp",
+  "file": "/home/persist/neotec/0rigin/src/MSFT.cpp",
+  "output": "CMakeFiles/MSFT.dir/src/MSFT.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
+  "output": "CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
+  "file": "/home/persist/neotec/0rigin/main.cpp",
+  "output": "CMakeFiles/MSFT.dir/main.cpp.o"
+}
+]

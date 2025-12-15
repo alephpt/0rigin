@@ -1,5 +1,5 @@
 """
-Comprehensive tests for complete SMFT field theory implementation.
+Comprehensive tests for complete MSFT field theory implementation.
 
 Tests:
 1. Klein-Gordon mediator field
@@ -17,7 +17,7 @@ from kuramoto.field_theory import (
     MediatorField,
     LocalFieldCoupling,
     FermionMassDemo,
-    SMFTSystem
+    MSFTSystem
 )
 
 
@@ -329,9 +329,9 @@ class TestFermionMassDemo:
 class TestSystemIntegration:
     """Test full system integration."""
 
-    def test_smft_system_with_new_components(self):
-        """Test that SMFTSystem works with new components."""
-        system = SMFTSystem(
+    def test_MSFT_system_with_new_components(self):
+        """Test that MSFTSystem works with new components."""
+        system = MSFTSystem(
             grid_shape=(16, 16),
             N_oscillators=20,
             coupling='local',

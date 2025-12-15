@@ -6,7 +6,7 @@
 
 This archive contains developmental artifacts from Sprint 1 & 2 of the 0rigin project, covering:
 - Classical Kuramoto model implementation
-- SMFT (Synchronization-Mass Field Theory) development
+- MSFT (Synchronization-Mass Field Theory) development
 - Integration and validation work
 
 These documents were archived during repository cleanup and professionalization to maintain a clean project structure while preserving the development history.
@@ -23,7 +23,7 @@ These documents were archived during repository cleanup and professionalization 
 ### Implementation Documentation
 - `proposal.md` - Initial project proposal
 - `IMPLEMENTATION_DESIGN.md` - Detailed implementation design decisions
-- `SMFT_IMPLEMENTATION.md` - SMFT specific implementation details
+- `MSFT_IMPLEMENTATION.md` - MSFT specific implementation details
 - `field_theory_integration.md` - Integration approach for field theory
 - `FIELD_THEORY_QUICKSTART.md` - Quick start guide for field theory module
 
@@ -35,7 +35,7 @@ These documents were archived during repository cleanup and professionalization 
 
 ### Quality Assurance and Validation
 - `QA_REPORT_FINAL.md` - Final QA report with test results
-- `smft_validation_report.md` - SMFT validation results and analysis
+- `MSFT_validation_report.md` - MSFT validation results and analysis
 - `bug_investigation_report.md` - Documentation of bug fixes and investigations
 - `post_implementation_analysis.md` - Post-implementation review and analysis
 
@@ -46,7 +46,7 @@ These documents were archived during repository cleanup and professionalization 
 
 The work documented in this archive resulted in:
 1. A working implementation of the classical Kuramoto model
-2. Novel SMFT field theory implementation with Hamiltonian dynamics
+2. Novel MSFT field theory implementation with Hamiltonian dynamics
 3. Validated energy conservation and overdamped limit behavior
 4. Discovery of effective mass scaling relationship (m_eff ∝ R)
 5. Comprehensive test suite with >95% coverage

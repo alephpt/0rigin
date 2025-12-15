@@ -20,7 +20,7 @@ from kuramoto.core.coupling import (
     HigherHarmonicCoupling
 )
 from kuramoto.solvers import EulerSolver, RK4Solver as RungeKutta4Solver
-from kuramoto.field_theory import MediatorField, SMFTSystem
+from kuramoto.field_theory import MediatorField, MSFTSystem
 try:
     from kuramoto.field_theory.coupling import LocalFieldCoupling
     from kuramoto.field_theory.fields.grid import SpatialGrid
@@ -257,13 +257,13 @@ class TestFieldTheoryErrors(unittest.TestCase):
         self.assertEqual(value, 1.0)  # Last element
 
     def test_hamiltonian_with_incompatible_parameters(self):
-        """Test SMFTSystem with invalid parameters."""
+        """Test MSFTSystem with invalid parameters."""
         grid_shape = (10, 10)
 
         # Invalid parameters
         with self.assertRaises((ValueError, TypeError)):
             # Invalid grid shape
-            system = SMFTSystem(
+            system = MSFTSystem(
                 grid_shape=(-1, 10),  # Negative dimensions
                 N=10,
                 coupling='local'

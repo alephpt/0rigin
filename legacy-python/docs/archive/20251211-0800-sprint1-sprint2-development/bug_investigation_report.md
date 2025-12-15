@@ -3,12 +3,12 @@
 ## Overview
 Two demo scripts are generating images with empty subplots:
 1. **local_coupling_demo.png** - Oscillator Phases subplot is empty
-2. **smft_basic_evolution.png** - Bottom 2 panels (Final Sync Field & Final Mediator Field) are empty
+2. **MSFT_basic_evolution.png** - Bottom 2 panels (Final Sync Field & Final Mediator Field) are empty
 
 ## Bug #1: Empty Oscillator Phases Plot in local_coupling_demo.png
 
 ### Location
-- **File**: `/home/persist/neotec/0rigin/examples/field_theory/smft_full_demo.py`
+- **File**: `/home/persist/neotec/0rigin/examples/field_theory/MSFT_full_demo.py`
 - **Lines**: 186-201 (Oscillator Phases plotting section)
 
 ### Root Cause
@@ -24,20 +24,20 @@ Looking at the scatter plot code (lines 188-201):
 ### Specific Issue
 The positions used for plotting (lines 188-189) are the INITIAL positions created before evolution, but they need to match what was actually used during evolution. The evolve_coupled_system doesn't return positions, so we can't verify they match.
 
-## Bug #2: Empty Field Plots in smft_basic_evolution.png
+## Bug #2: Empty Field Plots in MSFT_basic_evolution.png
 
 ### Location
-- **File**: `/home/persist/neotec/0rigin/examples/field_theory/smft_demo.py`
+- **File**: `/home/persist/neotec/0rigin/examples/field_theory/MSFT_demo.py`
 - **Lines**: 70-92 (Final field plotting section)
 
 ### Root Cause
-The SMFTSystem.evolve() method is experiencing numerical instability leading to NaN values:
+The MSFTSystem.evolve() method is experiencing numerical instability leading to NaN values:
 - Console output shows: "Final R: nan" and "Energy conservation: nan"
 - This indicates the simulation diverged, producing NaN values in the fields
 - When imshow() tries to plot NaN arrays, it shows empty plots
 
 ### Evidence
-From the console output when running smft_demo.py:
+From the console output when running MSFT_demo.py:
 ```
 RuntimeWarning: overflow encountered in square
 RuntimeWarning: overflow encountered in add
@@ -54,11 +54,11 @@ Energy conservation: nan
 
 ## Additional Findings
 
-### smft_demo.py Issues
-- Uses relative paths for saving images (line 95: 'smft_basic_evolution.png')
-- Should use absolute paths like smft_full_demo.py does
+### MSFT_demo.py Issues
+- Uses relative paths for saving images (line 95: 'MSFT_basic_evolution.png')
+- Should use absolute paths like MSFT_full_demo.py does
 
-### smft_full_demo.py Issues
+### MSFT_full_demo.py Issues
 - Missing data validation before plotting
 - No checks for NaN/infinity values
 - No error handling for failed simulations
@@ -93,7 +93,7 @@ Energy conservation: nan
 
 ### Bug #1 - Missing positions data
 ```python
-# Line 187-189 in smft_full_demo.py
+# Line 187-189 in MSFT_full_demo.py
 final_phases = result['phases'][-1]  # Gets phases correctly
 scatter = ax_phase.scatter(
     positions[:, 0],  # Uses LOCAL positions, not from result
@@ -105,7 +105,7 @@ scatter = ax_phase.scatter(
 
 ### Bug #2 - NaN field data
 ```python
-# Lines 71-72 in smft_demo.py
+# Lines 71-72 in MSFT_demo.py
 im1 = axes[1, 0].imshow(
     solution['sync_field'][-1].T,  # This contains NaN values
     ...

@@ -6,7 +6,7 @@ import pytest
 import numpy as np
 from numpy.testing import assert_allclose
 
-from kuramoto.field_theory import SMFTSystem
+from kuramoto.field_theory import MSFTSystem
 
 
 class TestDiscreteToContiuumIntegration:
@@ -14,7 +14,7 @@ class TestDiscreteToContiuumIntegration:
 
     def test_local_order_parameter_computation(self):
         """Test that local R(x,y) is computed correctly."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(20, 20),
             N_oscillators=10,
             coupling='local'
@@ -36,7 +36,7 @@ class TestDiscreteToContiuumIntegration:
 
     def test_local_order_parameter_bounds(self):
         """Test that local R ∈ [0,1]."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(15, 15),
             N_oscillators=50,
             coupling='local'
@@ -59,7 +59,7 @@ class TestDiscreteToContiuumIntegration:
 
         variances = []
         for N in N_values:
-            system = SMFTSystem(
+            system = MSFTSystem(
                 grid_shape=grid_shape,
                 N_oscillators=N,
                 coupling='local'

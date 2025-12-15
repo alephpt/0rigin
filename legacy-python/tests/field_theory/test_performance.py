@@ -7,7 +7,7 @@ import numpy as np
 import time
 from numpy.testing import assert_allclose
 
-from kuramoto.field_theory import SMFTSystem
+from kuramoto.field_theory import MSFTSystem
 
 
 class TestPerformance:
@@ -15,7 +15,7 @@ class TestPerformance:
 
     def test_small_system_performance(self):
         """Test small system meets performance target."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(20, 20),
             N_oscillators=50,
             coupling='local',
@@ -31,7 +31,7 @@ class TestPerformance:
 
     def test_medium_system_performance(self):
         """Test medium system performance."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(50, 50),
             N_oscillators=200,
             coupling='local',
@@ -53,7 +53,7 @@ def test_integration_example():
     This is the example from the task specification.
     """
     # Create system
-    system = SMFTSystem(
+    system = MSFTSystem(
         grid_shape=(100, 100),
         N_oscillators=200,
         coupling='local',

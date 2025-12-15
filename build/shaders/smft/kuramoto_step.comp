@@ -1,0 +1,197 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+// Include complex arithmetic and precision libraries
+#include "../include/complex.glsl"
+#include "../include/precision.glsl"
+
+/**
+ * @file kuramoto_step.comp
+ * @brief Kuramoto oscillator evolution with MSFT spinor feedback
+ *
+ * Implements: dθᵢ/dt = ωᵢ + (K/N)Σⱼsin(θⱼ - θᵢ) + spinor_feedback(x,y)
+ *
+ * MSFT Bidirectional Coupling:
+ * - Forward: θ → R → m → ψ
+ * - Backward: |ψ|² → θ (soliton handoff)
+ *
+ * Workgroup: 16×16 threads
+ * Grid: Nx × Ny oscillators mapped to 2D spatial grid
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+// Push constants for simulation parameters
+layout(push_constant) uniform PushConstants {
+    float dt;              // Time step
+    float K;               // Coupling strength
+    float damping;         // Phase damping γ
+    float Delta;           // MSFT mass gap
+    float chiral_angle;    // θ for chiral mass
+    uint Nx;               // Grid width
+    uint Ny;               // Grid height
+    uint N_total;          // Total oscillators
+    uint enable_feedback;  // Enable spinor feedback (0/1)
+} params;
+
+// Storage buffers
+layout(set = 0, binding = 0) buffer ThetaBuffer {
+    float theta[];  // Current phases
+};
+
+layout(set = 0, binding = 1) buffer ThetaOutBuffer {
+    float theta_out[];  // Updated phases
+};
+
+layout(set = 0, binding = 2) readonly buffer OmegaBuffer {
+    float omega[];  // Natural frequencies
+};
+
+layout(set = 0, binding = 3) readonly buffer SpinorDensityBuffer {
+    float spinor_density[];  // |ψ(x,y)|² from previous step
+};
+
+// Shared memory for local synchronization computation
+shared float s_theta[18][18];  // 16+2 border for neighbors
+
+/**
+ * @brief Compute local synchronization coupling force
+ *
+ * K/N · Σ_neighbors sin(θⱼ - θᵢ)
+ *
+ * Uses 8-neighborhood (Moore neighborhood) for spatial coupling
+ */
+float compute_coupling_force(uint local_x, uint local_y, float theta_i) {
+    float coupling = 0.0;
+
+    // Sum over 8 neighbors
+    for (int dy = -1; dy <= 1; dy++) {
+        for (int dx = -1; dx <= 1; dx++) {
+            if (dx == 0 && dy == 0) continue;  // Skip self
+
+            uint nx = local_x + 1 + dx;
+            uint ny = local_y + 1 + dy;
+
+            float theta_j = s_theta[ny][nx];
+            coupling += sin(theta_j - theta_i);
+        }
+    }
+
+    // Normalize by number of neighbors (8 for interior, less for boundaries)
+    return (params.K / 8.0) * coupling;
+}
+
+/**
+ * @brief Compute spinor density feedback force
+ *
+ * F_spinor = -Δ · (ρ/ρ_max) · sin(θ)
+ *
+ * This implements the "soliton handoff" mechanism from R.Christopher paper:
+ * High spinor density → suppress phase synchronization
+ * Low spinor density → allow phase synchronization
+ */
+float compute_spinor_feedback(uint idx, float theta_i) {
+    if (params.enable_feedback == 0) {
+        return 0.0;
+    }
+
+    float rho = spinor_density[idx];
+
+    // Normalize by maximum density (assume max ~1.0 for normalized spinor)
+    float rho_normalized = clamp(rho, 0.0, 1.0);
+
+    // Feedback proportional to mass gap and density
+    return -params.Delta * rho_normalized * sin(theta_i);
+}
+
+/**
+ * @brief Load theta values into shared memory with boundary handling
+ */
+void load_shared_memory(uvec2 global_id, uvec2 local_id) {
+    uint gx = global_id.x;
+    uint gy = global_id.y;
+    uint lx = local_id.x;
+    uint ly = local_id.y;
+
+    // Load center tile
+    if (gx < params.Nx && gy < params.Ny) {
+        uint idx = gy * params.Nx + gx;
+        s_theta[ly + 1][lx + 1] = theta[idx];
+    }
+
+    // Load borders (with wrapping for periodic boundaries)
+    // Left border
+    if (lx == 0) {
+        uint border_x = (gx == 0) ? (params.Nx - 1) : (gx - 1);
+        if (gy < params.Ny) {
+            uint idx = gy * params.Nx + border_x;
+            s_theta[ly + 1][0] = theta[idx];
+        }
+    }
+
+    // Right border
+    if (lx == 15) {
+        uint border_x = (gx == params.Nx - 1) ? 0 : (gx + 1);
+        if (gy < params.Ny) {
+            uint idx = gy * params.Nx + border_x;
+            s_theta[ly + 1][17] = theta[idx];
+        }
+    }
+
+    // Top border
+    if (ly == 0) {
+        uint border_y = (gy == 0) ? (params.Ny - 1) : (gy - 1);
+        if (gx < params.Nx) {
+            uint idx = border_y * params.Nx + gx;
+            s_theta[0][lx + 1] = theta[idx];
+        }
+    }
+
+    // Bottom border
+    if (ly == 15) {
+        uint border_y = (gy == params.Ny - 1) ? 0 : (gy + 1);
+        if (gx < params.Nx) {
+            uint idx = border_y * params.Nx + gx;
+            s_theta[17][lx + 1] = theta[idx];
+        }
+    }
+
+    barrier();  // Wait for all threads to finish loading
+}
+
+void main() {
+    uvec2 global_id = gl_GlobalInvocationID.xy;
+    uvec2 local_id = gl_LocalInvocationID.xy;
+
+    // Bounds check
+    if (global_id.x >= params.Nx || global_id.y >= params.Ny) {
+        return;
+    }
+
+    uint idx = global_id.y * params.Nx + global_id.x;
+
+    // Load theta values into shared memory
+    load_shared_memory(global_id, local_id);
+
+    // Get current phase and natural frequency
+    float theta_i = theta[idx];
+    float omega_i = omega[idx];
+
+    // Compute forces
+    float coupling_force = compute_coupling_force(local_id.x, local_id.y, theta_i);
+    float spinor_force = compute_spinor_feedback(idx, theta_i);
+    float damping_force = -params.damping * sin(theta_i);
+
+    // Total force
+    float total_force = omega_i + coupling_force + spinor_force + damping_force;
+
+    // Euler integration: θ(t+dt) = θ(t) + dt·(dθ/dt)
+    float theta_new = theta_i + params.dt * total_force;
+
+    // Wrap to [-π, π]
+    const float PI = 3.14159265359;
+    theta_new = mod(theta_new + PI, 2.0 * PI) - PI;
+
+    // Write output
+    theta_out[idx] = theta_new;
+}

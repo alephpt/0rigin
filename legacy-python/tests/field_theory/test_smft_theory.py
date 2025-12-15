@@ -1,5 +1,5 @@
 """
-Tests validating SMFT theory alignment.
+Tests validating MSFT theory alignment.
 
 Tests the corrected mass formula implementation:
     m_eff = Δ · R  (NOT m ∝ 1/R)
@@ -17,15 +17,15 @@ import numpy as np
 import pytest
 from numpy.testing import assert_allclose
 
-from kuramoto.field_theory import SMFTSystem
+from kuramoto.field_theory import MSFTSystem
 
 
 class TestMassFormula:
-    """Test correct SMFT mass formula: m = Δ·R."""
+    """Test correct MSFT mass formula: m = Δ·R."""
 
     def test_mass_proportional_to_sync(self):
         """Verify m_eff ∝ R (not m ∝ 1/R)."""
-        system = SMFTSystem(N=10, mass_gap=2.0)
+        system = MSFTSystem(N=10, mass_gap=2.0)
 
         # Set known sync values
         system.sync_field.values[:] = 0.5
@@ -37,7 +37,7 @@ class TestMassFormula:
 
     def test_mass_zero_at_zero_sync(self):
         """Test R=0 → m=0 (massless limit)."""
-        system = SMFTSystem(N=10, mass_gap=2.0)
+        system = MSFTSystem(N=10, mass_gap=2.0)
 
         # Zero sync
         system.sync_field.values[:] = 0.0
@@ -47,7 +47,7 @@ class TestMassFormula:
 
     def test_mass_maximum_at_full_sync(self):
         """Test R=1 → m=Δ (maximum mass)."""
-        system = SMFTSystem(N=10, mass_gap=2.0)
+        system = MSFTSystem(N=10, mass_gap=2.0)
 
         # Full sync
         system.sync_field.values[:] = 1.0
@@ -57,7 +57,7 @@ class TestMassFormula:
 
     def test_mass_linear_scaling(self):
         """Test mass scales linearly with R."""
-        system = SMFTSystem(N=10, mass_gap=1.0)
+        system = MSFTSystem(N=10, mass_gap=1.0)
 
         # Low sync
         system.sync_field.values[:] = 0.1
@@ -80,33 +80,33 @@ class TestMassGapParameter:
 
     def test_default_mass_gap(self):
         """Test default mass_gap value."""
-        system = SMFTSystem(N=10)
+        system = MSFTSystem(N=10)
         assert system.Delta == 1.0, "Default mass_gap should be 1.0"
 
     def test_custom_mass_gap(self):
         """Test custom mass_gap value."""
-        system = SMFTSystem(N=10, mass_gap=5.0)
+        system = MSFTSystem(N=10, mass_gap=5.0)
         assert system.Delta == 5.0, "Should use provided mass_gap"
 
     def test_mass_gap_validation_zero(self):
         """Test validation rejects zero mass_gap."""
         with pytest.raises(ValueError, match="mass_gap must be positive"):
-            SMFTSystem(N=10, mass_gap=0.0)
+            MSFTSystem(N=10, mass_gap=0.0)
 
     def test_mass_gap_validation_negative(self):
         """Test validation rejects negative mass_gap."""
         with pytest.raises(ValueError, match="mass_gap must be positive"):
-            SMFTSystem(N=10, mass_gap=-1.0)
+            MSFTSystem(N=10, mass_gap=-1.0)
 
     def test_mass_gap_scales_mass(self):
         """Test that mass_gap scales the effective mass."""
         # System with Delta=1.0
-        system1 = SMFTSystem(N=10, mass_gap=1.0)
+        system1 = MSFTSystem(N=10, mass_gap=1.0)
         system1.sync_field.values[:] = 0.5
         m1 = system1.compute_effective_mass().mean()
 
         # System with Delta=3.0
-        system2 = SMFTSystem(N=10, mass_gap=3.0)
+        system2 = MSFTSystem(N=10, mass_gap=3.0)
         system2.sync_field.values[:] = 0.5
         m2 = system2.compute_effective_mass().mean()
 
@@ -120,7 +120,7 @@ class TestChiralDecomposition:
 
     def test_pure_scalar_mass(self):
         """Test pure scalar mass at theta=0."""
-        system = SMFTSystem(N=10, mass_gap=2.0)
+        system = MSFTSystem(N=10, mass_gap=2.0)
         system.sync_field.values[:] = 0.5
 
         m_s, m_p = system.compute_chiral_mass(theta=0.0)
@@ -133,7 +133,7 @@ class TestChiralDecomposition:
 
     def test_pure_pseudoscalar_mass(self):
         """Test pure pseudoscalar mass at theta=π/2."""
-        system = SMFTSystem(N=10, mass_gap=2.0)
+        system = MSFTSystem(N=10, mass_gap=2.0)
         system.sync_field.values[:] = 0.5
 
         m_s, m_p = system.compute_chiral_mass(theta=np.pi/2)
@@ -146,7 +146,7 @@ class TestChiralDecomposition:
 
     def test_equal_components(self):
         """Test equal scalar/pseudoscalar components at theta=π/4."""
-        system = SMFTSystem(N=10, mass_gap=2.0)
+        system = MSFTSystem(N=10, mass_gap=2.0)
         system.sync_field.values[:] = 0.5
 
         m_s, m_p = system.compute_chiral_mass(theta=np.pi/4)
@@ -161,7 +161,7 @@ class TestChiralDecomposition:
 
     def test_orthogonality_condition(self):
         """Verify orthogonality: m_s² + m_p² = (Δ·R)²."""
-        system = SMFTSystem(N=10, mass_gap=2.0)
+        system = MSFTSystem(N=10, mass_gap=2.0)
         system.sync_field.values[:] = 0.5
 
         # Test at various angles
@@ -179,7 +179,7 @@ class TestChiralDecomposition:
 
     def test_chiral_angle_sweep(self):
         """Test chiral decomposition across full angle range."""
-        system = SMFTSystem(N=10, mass_gap=1.5)
+        system = MSFTSystem(N=10, mass_gap=1.5)
         system.sync_field.values[:] = 0.8
 
         angles = np.linspace(0, 2*np.pi, 20)
@@ -202,7 +202,7 @@ class TestTheoryConsistency:
 
     def test_high_sync_gives_high_mass(self):
         """Verify high sync → high mass (not inverse)."""
-        system = SMFTSystem(N=10, mass_gap=1.0)
+        system = MSFTSystem(N=10, mass_gap=1.0)
 
         # Low sync
         system.sync_field.values[:] = 0.1
@@ -216,7 +216,7 @@ class TestTheoryConsistency:
 
     def test_mass_monotonic_with_sync(self):
         """Test mass increases monotonically with sync."""
-        system = SMFTSystem(N=10, mass_gap=1.0)
+        system = MSFTSystem(N=10, mass_gap=1.0)
 
         R_values = np.linspace(0, 1, 11)
         masses = []
@@ -238,7 +238,7 @@ class TestTheoryConsistency:
 
     def test_mass_field_stored(self):
         """Test that compute_effective_mass stores result."""
-        system = SMFTSystem(N=10, mass_gap=1.0)
+        system = MSFTSystem(N=10, mass_gap=1.0)
         system.sync_field.values[:] = 0.7
 
         # Initially None
@@ -253,7 +253,7 @@ class TestTheoryConsistency:
 
     def test_spatial_variation(self):
         """Test that spatially varying sync gives spatially varying mass."""
-        system = SMFTSystem(N=10, grid_shape=(10, 10), mass_gap=1.0)
+        system = MSFTSystem(N=10, grid_shape=(10, 10), mass_gap=1.0)
 
         # Create spatial variation in sync
         X, Y = np.meshgrid(np.linspace(0, 1, 10), np.linspace(0, 1, 10))
@@ -274,7 +274,7 @@ class TestBugRegression:
 
     def test_no_division_by_sync(self):
         """Ensure mass formula doesn't divide by sync (old bug)."""
-        system = SMFTSystem(N=10, mass_gap=1.0)
+        system = MSFTSystem(N=10, mass_gap=1.0)
 
         # Near-zero sync should give near-zero mass (not infinity!)
         system.sync_field.values[:] = 1e-10
@@ -289,7 +289,7 @@ class TestBugRegression:
 
     def test_no_epsilon_regularization(self):
         """Ensure no epsilon regularization is used (old bug)."""
-        system = SMFTSystem(N=10, mass_gap=1.0)
+        system = MSFTSystem(N=10, mass_gap=1.0)
 
         # Exact zero sync
         system.sync_field.values[:] = 0.0
@@ -300,7 +300,7 @@ class TestBugRegression:
 
     def test_correct_direction_of_proportionality(self):
         """Test mass increases (not decreases) with sync."""
-        system = SMFTSystem(N=10, mass_gap=1.0)
+        system = MSFTSystem(N=10, mass_gap=1.0)
 
         # Test multiple sync levels
         sync_levels = [0.2, 0.4, 0.6, 0.8]

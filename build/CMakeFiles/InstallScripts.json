@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/persist/neotec/0rigin/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

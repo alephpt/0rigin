@@ -27,7 +27,7 @@ Comprehensive repository transformation completed with ruthless intellectual int
 ### ✅ Scientific Validation
 - Synchronization at Kc=2γ: VERIFIED ✅
 - Order parameter R ∈ [0,1]: VERIFIED ✅
-- SMFT mass generation m_eff ∝ R: VERIFIED ✅
+- MSFT mass generation m_eff ∝ R: VERIFIED ✅
 - Wave propagation v=c: VERIFIED ✅
 - Energy conservation <8%: VERIFIED ✅
 
@@ -85,7 +85,7 @@ acb5bb7 - refactor: Comprehensive repository cleanup
 ## Remaining Work (Honest)
 
 **HIGH** (13 tests): Integration API updates
-**MEDIUM** (14 tests): SMFT evolution stability  
+**MEDIUM** (14 tests): MSFT evolution stability  
 **LOW** (6 tests): Numerical tolerances
 
 ## Bottom Line

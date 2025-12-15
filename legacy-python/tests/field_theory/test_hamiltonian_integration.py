@@ -6,7 +6,7 @@ import pytest
 import numpy as np
 from numpy.testing import assert_allclose
 
-from kuramoto.field_theory import SMFTSystem
+from kuramoto.field_theory import MSFTSystem
 
 
 class TestHamiltonianFieldIntegration:
@@ -14,7 +14,7 @@ class TestHamiltonianFieldIntegration:
 
     def test_field_force_on_oscillators(self):
         """Test that field exerts force on oscillators."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(20, 20),
             N_oscillators=30,
             coupling='local',
@@ -33,7 +33,7 @@ class TestHamiltonianFieldIntegration:
 
     def test_energy_conservation_no_damping(self):
         """Test energy behavior in conservative case."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(15, 15),
             N_oscillators=20,
             coupling='local',
@@ -55,7 +55,7 @@ class TestHamiltonianFieldIntegration:
 
     def test_coupled_step_updates_both(self):
         """Test that single step updates oscillators and field."""
-        system = SMFTSystem(
+        system = MSFTSystem(
             grid_shape=(10, 10),
             N_oscillators=15,
             coupling='local'

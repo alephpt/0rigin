@@ -1,17 +1,17 @@
-# SMFT Comprehensive Validation Roadmap
+# MSFT Comprehensive Validation Roadmap
 
 ## Executive Summary
 
-This roadmap outlines the complete validation plan for **Synchronization Mass Field Theory (SMFT)** against 13 major physics tests organized into 3 tiers, plus 4 mathematical consistency checks. The validation is structured into 4 sequential phases over approximately 3-4 weeks.
+This roadmap outlines the complete validation plan for **Mass Synchronization Field Theory (MSFT)** against 13 major physics tests organized into 3 tiers, plus 4 mathematical consistency checks. The validation is structured into 4 sequential phases over approximately 3-4 weeks.
 
-**Goal**: Determine whether SMFT is a viable alternative/complement to Standard Model mass generation, or identify where and why it fails.
+**Goal**: Determine whether MSFT is a viable alternative/complement to Standard Model mass generation, or identify where and why it fails.
 
 ---
 
 ## Current Status
 
 **COMPLETED**:
-- ✅ Complete coupled Dirac-Kuramoto implementation (`complete_smft_dirac_demo.py`)
+- ✅ Complete coupled Dirac-Kuramoto implementation (`complete_MSFT_dirac_demo.py`)
 - ✅ Numerical stability achieved (norm conservation: 1.000000 exact)
 - ✅ Mass-synchronization relation validated (m/ΔR = 1.000000)
 - ✅ Coupled dynamics: Dirac spinor ← Kuramoto synchronization field
@@ -29,17 +29,17 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 4. **Dispersion Relation** - Validate E² = p² + m²
 
 ### Tier 1: Must Pass (Fundamental Physics)
-5. **Higgs Mechanism** - Compare SMFT mass generation to Higgs VEV
+5. **Higgs Mechanism** - Compare MSFT mass generation to Higgs VEV
 6. **Parity Violation** - Test chiral preference via γ^5 structure
 7. **Equivalence Principle** - Verify m_gravitational = m_inertial
 
 ### Tier 2: Competitive Edge (Beyond Standard Model)
 8. **Galactic Rotation Curves** - Dark matter via synchronization gradients
 9. **Muon g-2 Anomaly** - Synchronization corrections to magnetic moment
-10. **Proton Radius Puzzle** - SMFT contribution to nuclear scale
+10. **Proton Radius Puzzle** - MSFT contribution to nuclear scale
 
 ### Tier 3: Mechanism Check (Proof of Concept)
-11. **Casimir Effect** - Vacuum fluctuations in SMFT field
+11. **Casimir Effect** - Vacuum fluctuations in MSFT field
 12. **BCS Superconductivity** - Cooper pair synchronization analogy
 13. **Quantized Inertia** - Synchronization boundary conditions
 
@@ -74,7 +74,7 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 - **Output**: `outputs/dispersion_relation.png` - E² vs p²+m² scatter plot
 
 **Success Criteria**: ALL 4 tests pass → Proceed to Phase 2
-**Failure**: Document WHICH test failed and WHY → Fundamental problem with SMFT
+**Failure**: Document WHICH test failed and WHY → Fundamental problem with MSFT
 
 **Estimated Time**: 2-3 days
 
@@ -134,7 +134,7 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 ### 3.1 BCS Superconductivity Analogy
 **File**: `phase3_mechanisms/bcs_analogy.py`
 
-- **Computable**: Compare SMFT gap equation to BCS
+- **Computable**: Compare MSFT gap equation to BCS
 - **Method**: Show Δ·R(T) has similar T-dependence to BCS gap Δ_BCS(T)
 - **Theory**: Both involve collective synchronization → gap
 - **Output**: `outputs/bcs_analogy.png` - Gap vs temperature comparison
@@ -144,7 +144,7 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 ### 3.2 Casimir Effect Connection
 **File**: `phase3_mechanisms/casimir_vacuum.py`
 
-- **Computable**: Compute vacuum fluctuations ⟨R²⟩ - ⟨R⟩² in SMFT field
+- **Computable**: Compute vacuum fluctuations ⟨R²⟩ - ⟨R⟩² in MSFT field
 - **Method**: Measure zero-point energy between boundaries
 - **Theory**: Synchronization field should have vacuum structure
 - **Output**: `outputs/casimir_vacuum.png` - Vacuum energy vs boundary separation
@@ -156,7 +156,7 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 
 - **Computable**: Test if θ ≠ 0 breaks left-right symmetry
 - **Method**: Evolve left-handed vs right-handed spinors with chiral mass
-- **Physics**: Parity violation in weak force ↔ chiral SMFT mass
+- **Physics**: Parity violation in weak force ↔ chiral MSFT mass
 - **Output**: `outputs/parity_chirality.png` - L vs R spinor evolution
 
 **Pass Criteria**: Asymmetric evolution for θ ≠ 0
@@ -175,7 +175,7 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 
 **Muon g-2 & Proton Radius**:
 - Theoretical: Synchronization could modify QED/QCD coupling constants
-- Limitation: Need full QED+SMFT loop calculations
+- Limitation: Need full QED+MSFT loop calculations
 - Conclusion: Possible avenue, requires beyond-current-scope work
 
 **Quantized Inertia**:
@@ -184,7 +184,7 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 - Conclusion: Interesting idea, needs rigorous derivation
 
 **Equivalence Principle**:
-- Theoretical: If m_SMFT couples to gravity, need to derive gravitational interaction
+- Theoretical: If m_MSFT couples to gravity, need to derive gravitational interaction
 - Limitation: General relativity coupling not in current framework
 - Conclusion: Open question
 
@@ -199,17 +199,17 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 - Create summary tables (Pass/Fail/Partial for each test)
 - Identify patterns in successes and failures
 
-### 4.2 Generate `SMFT_VALIDATION_REPORT.md`
+### 4.2 Generate `MSFT_VALIDATION_REPORT.md`
 
 **Structure**:
 
 ```markdown
-# SMFT Comprehensive Validation Report
+# MSFT Comprehensive Validation Report
 
 ## Executive Summary
 - High-level verdict: Pass/Fail/Partial
 - Key findings in 3-5 bullet points
-- Implications for SMFT viability
+- Implications for MSFT viability
 
 ## Part I: Mathematical Consistency
 - Test 1: Dimensional Analysis [PASS/FAIL]
@@ -243,10 +243,10 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 - Quantized Inertia: Theoretical speculation
 
 ## Part IV: Comparative Analysis
-- SMFT vs Standard Model: Side-by-side comparison table
-- Strengths of SMFT
+- MSFT vs Standard Model: Side-by-side comparison table
+- Strengths of MSFT
 - Weaknesses / Failures
-- Where SMFT adds value (if any)
+- Where MSFT adds value (if any)
 
 ## Part V: Open Questions & Future Work
 - What tests could not be completed and why
@@ -275,27 +275,27 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 | **Phase 1** | Days 1-3 | `mathematical_consistency.py`, 4 plots, analysis | None |
 | **Phase 2** | Days 4-8 | 4 dynamics scripts, 4+ plots, quantitative analysis | Phase 1 PASS |
 | **Phase 3** | Days 9-13 | 3 computational scripts, analytical docs, 3+ plots | Phase 2 complete |
-| **Phase 4** | Days 14-20 | `SMFT_VALIDATION_REPORT.md`, summary visualizations | All phases |
+| **Phase 4** | Days 14-20 | `MSFT_VALIDATION_REPORT.md`, summary visualizations | All phases |
 | **Total** | **~3-4 weeks** | **7+ scripts, 15+ plots, comprehensive report** | Sequential |
 
 ---
 
 ## Success Criteria
 
-### PASS (SMFT is viable):
+### PASS (MSFT is viable):
 - ✅ All 4 mathematical tests pass
 - ✅ At least 3/4 dynamics tests pass quantitatively
 - ✅ At least 2/3 Tier 1 tests show agreement
 - ✅ At least 1/3 Tier 2 tests show promise
 - ✅ Mechanisms show qualitative similarity to known physics
 
-### PARTIAL (SMFT is interesting but limited):
+### PARTIAL (MSFT is interesting but limited):
 - ✅ Mathematical tests pass
 - ⚠️ 2/4 dynamics tests pass
 - ⚠️ 1/3 Tier 1 tests pass
 - ❌ Tier 2/3 tests inconclusive
 
-### FAIL (SMFT is fundamentally flawed):
+### FAIL (MSFT is fundamentally flawed):
 - ❌ Any mathematical test fails
 - ❌ Dynamics tests show unphysical behavior
 - ❌ No agreement with Tier 1 physics
@@ -307,7 +307,7 @@ This roadmap outlines the complete validation plan for **Synchronization Mass Fi
 ```
 examples/validation/
 ├── IMPLEMENTATION_ROADMAP.md           # This document
-├── SMFT_VALIDATION_REPORT.md          # Final comprehensive report (Phase 4)
+├── MSFT_VALIDATION_REPORT.md          # Final comprehensive report (Phase 4)
 │
 ├── phase1_mathematical/
 │   ├── mathematical_consistency.py    # All 4 math tests
@@ -342,7 +342,7 @@ examples/validation/
 │   │   └── parity_chirality.png
 │   └── README.md                      # Phase 3 summary
 │
-└── complete_smft_dirac_demo.py        # Moved from examples/field_theory/
+└── complete_MSFT_dirac_demo.py        # Moved from examples/field_theory/
 ```
 
 ---
@@ -355,7 +355,7 @@ examples/validation/
    - Run and verify results
 
 2. **If Phase 1 passes**: Begin Phase 2 implementation
-3. **If Phase 1 fails**: STOP, analyze failure, document why SMFT is fundamentally broken
+3. **If Phase 1 fails**: STOP, analyze failure, document why MSFT is fundamentally broken
 
 ---
 
@@ -371,8 +371,8 @@ examples/validation/
 ### What We CANNOT Compute (Require Analytical Work):
 - Full Higgs mechanism comparison (need electroweak theory)
 - Galactic rotation curves (need astrophysical scale)
-- Muon g-2 loop corrections (need QED+SMFT)
-- Proton radius puzzle (need QCD+SMFT)
+- Muon g-2 loop corrections (need QED+MSFT)
+- Proton radius puzzle (need QCD+MSFT)
 - Equivalence principle (need GR coupling)
 
 ### Philosophy:
@@ -382,11 +382,11 @@ examples/validation/
 
 ## Contact & Questions
 
-This roadmap provides a systematic path to comprehensive SMFT validation. Each phase builds on the previous, with clear success criteria and deliverables.
+This roadmap provides a systematic path to comprehensive MSFT validation. Each phase builds on the previous, with clear success criteria and deliverables.
 
 **Critical decision points**:
 - Phase 1 pass/fail determines if we proceed
 - Phase 2 results inform Phase 3 focus
 - Phase 4 synthesizes everything into actionable conclusions
 
-Let's determine once and for all: **Is SMFT physics or fantasy?**
+Let's determine once and for all: **Is MSFT physics or fantasy?**

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/MSFT.dir/link.d CMakeFiles/MSFT.dir/src/MSFT.cpp.o CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o CMakeFiles/MSFT.dir/main.cpp.o -o bin/MSFT  libNova.a libimgui.a /lib/libvulkan.so /usr/lib/libSDL2main.a /usr/lib/libSDL2-2.0.so.0.3200.60 -lpthread -ldl -lm

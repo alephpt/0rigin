@@ -2,14 +2,14 @@
 
 ## Overview
 
-The Self-consistent Mean Field Theory (SMFT) system successfully integrates all field theory components into a cohesive framework that bridges discrete oscillator dynamics with continuous field representations.
+The Self-consistent Mean Field Theory (MSFT) system successfully integrates all field theory components into a cohesive framework that bridges discrete oscillator dynamics with continuous field representations.
 
 ## Architecture
 
 ### Component Hierarchy
 
 ```
-SMFTSystem (High-level Integration)
+MSFTSystem (High-level Integration)
 ├── SpatialGrid (Spatial discretization)
 ├── ScalarField (Field representations)
 │   ├── Mediator field σ(x,t)
@@ -103,10 +103,10 @@ mediator_mass = 100.0  # Heavy limit
 ### High-level Interface
 
 ```python
-from kuramoto.field_theory import SMFTSystem
+from kuramoto.field_theory import MSFTSystem
 
 # Create integrated system
-system = SMFTSystem(
+system = MSFTSystem(
     grid_shape=(100, 100),      # Spatial resolution
     N_oscillators=200,           # Discrete oscillators
     coupling='local',            # Coupling type
@@ -218,7 +218,7 @@ VALIDATION SUMMARY:
 ### Basic Evolution
 
 ```python
-system = SMFTSystem(
+system = MSFTSystem(
     grid_shape=(50, 50),
     N_oscillators=100,
     coupling='local'
@@ -237,7 +237,7 @@ plt.ylabel('Order Parameter R')
 ```python
 M_values = [1, 10, 100]
 for M in M_values:
-    system = SMFTSystem(
+    system = MSFTSystem(
         grid_shape=(30, 30),
         N_oscillators=80,
         mediator_mass=M
@@ -264,7 +264,7 @@ plt.colorbar(label='m_eff(x,y)')
   field_theory_integration.md  (this file)
 
 /examples/field_theory/
-  smft_demo.py                 (demonstrations)
+  MSFT_demo.py                 (demonstrations)
   validate_integration.py      (validation suite)
 
 /tests/
@@ -292,7 +292,7 @@ plt.colorbar(label='m_eff(x,y)')
 ## References
 
 ### Internal
-- `src/kuramoto/field_theory/smft_system.py` - Main integration class
+- `src/kuramoto/field_theory/MSFT_system.py` - Main integration class
 - `tests/test_field_theory_integration.py` - Integration tests
 - `examples/field_theory/validate_integration.py` - Validation suite
 

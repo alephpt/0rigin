@@ -66,7 +66,7 @@ Total Runtime:  ~120s
 - Local-global coupling: 2/2 ✅
 - Mass limits: 2/4
 - Performance: 3/3 ✅
-- **SMFT system: 3/6** (3 evolution tests fail)
+- **MSFT system: 3/6** (3 evolution tests fail)
 
 #### test_field_theory_full.py (19/22 - 0.47s)
 - Mediator field: 6/6 ✅
@@ -93,9 +93,9 @@ Total Runtime:  ~120s
 - Indicates numerical stability edge cases
 
 ### MEDIUM PRIORITY (10 failures)
-**test_smft_system.py::TestFullSystemEvolution** - 3 failures
+**test_MSFT_system.py::TestFullSystemEvolution** - 3 failures
 - short_evolution, synchronization_emergence, phase_transition
-- Component integration issues in SMFT system
+- Component integration issues in MSFT system
 
 **test_field_theory/** - 7 failures
 - Mass limit convergence tests
@@ -180,7 +180,7 @@ test_coupling.py                0.25s  (29 tests, avg 0.01s/test)
    - Eliminate warnings
 
 ### Short Term (Sprint 2-3)
-4. **Stabilize SMFT evolution tests** (3 failures)
+4. **Stabilize MSFT evolution tests** (3 failures)
    - Debug component integration
    - Verify physics accuracy
 

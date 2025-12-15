@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
-Verify that the SMFTSystem energy explosion bug is fixed.
+Verify that the MSFTSystem energy explosion bug is fixed.
 Tests multiple configurations to ensure energy remains bounded.
 """
 
 import sys
 sys.path.insert(0, '/home/persist/neotec/0rigin/src')
 
-from kuramoto.field_theory.smft_system import SMFTSystem
+from kuramoto.field_theory.MSFT_system import MSFTSystem
 import numpy as np
 
 def test_energy_conservation(mass=10.0, coupling='local', steps=1000):
@@ -15,7 +15,7 @@ def test_energy_conservation(mass=10.0, coupling='local', steps=1000):
     print(f"\nTesting: mass={mass}, coupling={coupling}")
 
     # Create system
-    model = SMFTSystem(
+    model = MSFTSystem(
         grid_shape=(10, 10),
         N_oscillators=20,
         coupling=coupling,
@@ -57,7 +57,7 @@ def test_energy_conservation(mass=10.0, coupling='local', steps=1000):
 def main():
     """Run comprehensive energy stability tests."""
     print("=" * 60)
-    print("SMFTSystem Energy Stability Verification")
+    print("MSFTSystem Energy Stability Verification")
     print("=" * 60)
 
     tests = [

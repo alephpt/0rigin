@@ -272,11 +272,11 @@ Add proper "Time (t)" labels to all temporal plots.
 
 ### Files to Modify
 
-#### File 1: /home/persist/neotec/0rigin/examples/field_theory/smft_full_demo.py
+#### File 1: /home/persist/neotec/0rigin/examples/field_theory/MSFT_full_demo.py
 **Line 165** - Change from `'Time'` to `'Time (t)'`
 **Line 206** - Change from `'Time'` to `'Time (t)'`
 
-#### File 2: /home/persist/neotec/0rigin/examples/field_theory/smft_demo.py
+#### File 2: /home/persist/neotec/0rigin/examples/field_theory/MSFT_demo.py
 **Line 58** - Change from `'Time'` to `'Time (t)'`
 **Line 65** - Change from `'Time'` to `'Time (t)'`
 **Line 191** - Change from `'Time'` to `'Time (t)'`
@@ -303,8 +303,8 @@ Add proper "Time (t)" labels to all temporal plots.
 
 | File | Lines to Update | Count |
 |------|----------------|-------|
-| smft_full_demo.py | 165, 206 | 2 |
-| smft_demo.py | 58, 65, 191, 198 | 4 |
+| MSFT_full_demo.py | 165, 206 | 2 |
+| MSFT_demo.py | 58, 65, 191, 198 | 4 |
 | hamiltonian_demo.py | 54, 74, 143, 149, 156 | 5 |
 | basic_synchronization.py | 244 | 1 |
 | prototype_test.py | 179, 190 | 2 |
@@ -340,8 +340,8 @@ Add proper "Time (t)" labels to all temporal plots.
 - [ ] Verify warning message clarity
 
 ### Phase 4: Visualization Labels
-- [ ] Update smft_full_demo.py (2 locations)
-- [ ] Update smft_demo.py (4 locations)
+- [ ] Update MSFT_full_demo.py (2 locations)
+- [ ] Update MSFT_demo.py (4 locations)
 - [ ] Update hamiltonian_demo.py (5 locations)
 - [ ] Update basic_synchronization.py (1 location)
 - [ ] Update prototype_test.py (2 locations)

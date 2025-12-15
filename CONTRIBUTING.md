@@ -139,7 +139,7 @@ src/kuramoto/
 ├── solvers/           # ODE solvers
 ├── analysis/          # Analysis tools
 ├── visualization/     # Plotting functions
-└── field_theory/      # SMFT extensions
+└── field_theory/      # MSFT extensions
 ```
 
 Place new code in the appropriate module. If creating a new module, discuss with maintainers first.

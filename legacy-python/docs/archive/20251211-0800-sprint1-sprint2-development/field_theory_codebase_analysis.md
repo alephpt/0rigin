@@ -210,7 +210,7 @@ src/kuramoto/
 │   │   ├── base.py           # Abstract field model
 │   │   ├── kuramoto_field.py # Kuramoto on grid
 │   │   ├── ginzburg_landau.py # R(x,t) dynamics
-│   │   └── smft.py           # Full SMFT with fermions
+│   │   └── MSFT.py           # Full MSFT with fermions
 │   ├── solvers/
 │   │   ├── finite_diff.py    # Finite difference methods
 │   │   ├── spectral.py       # FFT-based methods
@@ -332,7 +332,7 @@ pip install jax          # Autodiff + JIT + GPU
 3. Add coupled R-θ dynamics
 4. Test convergence as N→∞
 
-### Phase 4: SMFT Integration (Week 4)
+### Phase 4: MSFT Integration (Week 4)
 1. Add fermion field coupling
 2. Implement mass generation
 3. Verify scaling m_eff ∝ √(K-Kc)
@@ -393,4 +393,4 @@ pip install jax          # Autodiff + JIT + GPU
 
 The Sprint 1 codebase provides a solid foundation but requires a **parallel field theory module** rather than direct extension. The modular architecture enables code sharing where appropriate, but fundamental differences in state representation, solvers, and scaling necessitate specialized implementations. With focused development and the recommended Option B architecture, field theory can be successfully integrated while preserving the discrete Kuramoto implementation.
 
-**Final Recommendation**: Proceed with Option B (parallel module) starting with basic grid infrastructure and PDE solvers, then progressively add Kuramoto field dynamics, continuum limits, and ultimately SMFT fermion coupling.
+**Final Recommendation**: Proceed with Option B (parallel module) starting with basic grid infrastructure and PDE solvers, then progressively add Kuramoto field dynamics, continuum limits, and ultimately MSFT fermion coupling.
