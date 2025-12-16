@@ -142,5 +142,29 @@
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
   "file": "/home/persist/neotec/0rigin/main.cpp",
   "output": "CMakeFiles/MSFT.dir/main.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.o -c /home/persist/neotec/0rigin/test_msft_gpu.cpp",
+  "file": "/home/persist/neotec/0rigin/test_msft_gpu.cpp",
+  "output": "CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
+  "output": "CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o -c /home/persist/neotec/0rigin/test_descriptor_bindings.cpp",
+  "file": "/home/persist/neotec/0rigin/test_descriptor_bindings.cpp",
+  "output": "CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
+  "output": "CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o"
 }
 ]

@@ -155,6 +155,32 @@ MSFT/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/build
 .PHONY : MSFT/fast
 
+#=============================================================================
+# Target rules for targets named test_msft_gpu
+
+# Build rule for target.
+test_msft_gpu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_msft_gpu
+.PHONY : test_msft_gpu
+
+# fast build rule for target.
+test_msft_gpu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/build
+.PHONY : test_msft_gpu/fast
+
+#=============================================================================
+# Target rules for targets named test_descriptor_bindings
+
+# Build rule for target.
+test_descriptor_bindings: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_descriptor_bindings
+.PHONY : test_descriptor_bindings
+
+# fast build rule for target.
+test_descriptor_bindings/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/build
+.PHONY : test_descriptor_bindings/fast
+
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
 
@@ -713,6 +739,8 @@ src/MSFTEngine.o: src/MSFTEngine.cpp.o
 # target to build an object file
 src/MSFTEngine.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o
 .PHONY : src/MSFTEngine.cpp.o
 
 src/MSFTEngine.i: src/MSFTEngine.cpp.i
@@ -721,6 +749,8 @@ src/MSFTEngine.i: src/MSFTEngine.cpp.i
 # target to preprocess a source file
 src/MSFTEngine.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.i
 .PHONY : src/MSFTEngine.cpp.i
 
 src/MSFTEngine.s: src/MSFTEngine.cpp.s
@@ -729,7 +759,57 @@ src/MSFTEngine.s: src/MSFTEngine.cpp.s
 # target to generate assembly for a file
 src/MSFTEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.s
 .PHONY : src/MSFTEngine.cpp.s
+
+test_descriptor_bindings.o: test_descriptor_bindings.cpp.o
+.PHONY : test_descriptor_bindings.o
+
+# target to build an object file
+test_descriptor_bindings.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o
+.PHONY : test_descriptor_bindings.cpp.o
+
+test_descriptor_bindings.i: test_descriptor_bindings.cpp.i
+.PHONY : test_descriptor_bindings.i
+
+# target to preprocess a source file
+test_descriptor_bindings.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.i
+.PHONY : test_descriptor_bindings.cpp.i
+
+test_descriptor_bindings.s: test_descriptor_bindings.cpp.s
+.PHONY : test_descriptor_bindings.s
+
+# target to generate assembly for a file
+test_descriptor_bindings.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.s
+.PHONY : test_descriptor_bindings.cpp.s
+
+test_msft_gpu.o: test_msft_gpu.cpp.o
+.PHONY : test_msft_gpu.o
+
+# target to build an object file
+test_msft_gpu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.o
+.PHONY : test_msft_gpu.cpp.o
+
+test_msft_gpu.i: test_msft_gpu.cpp.i
+.PHONY : test_msft_gpu.i
+
+# target to preprocess a source file
+test_msft_gpu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.i
+.PHONY : test_msft_gpu.cpp.i
+
+test_msft_gpu.s: test_msft_gpu.cpp.s
+.PHONY : test_msft_gpu.s
+
+# target to generate assembly for a file
+test_msft_gpu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.s
+.PHONY : test_msft_gpu.cpp.s
 
 # Help Target
 help:
@@ -742,6 +822,8 @@ help:
 	@echo "... MSFT"
 	@echo "... Nova"
 	@echo "... imgui"
+	@echo "... test_descriptor_bindings"
+	@echo "... test_msft_gpu"
 	@echo "... lib/Nova/Core/components/genesis.o"
 	@echo "... lib/Nova/Core/components/genesis.i"
 	@echo "... lib/Nova/Core/components/genesis.s"
@@ -814,6 +896,12 @@ help:
 	@echo "... src/MSFTEngine.o"
 	@echo "... src/MSFTEngine.i"
 	@echo "... src/MSFTEngine.s"
+	@echo "... test_descriptor_bindings.o"
+	@echo "... test_descriptor_bindings.i"
+	@echo "... test_descriptor_bindings.s"
+	@echo "... test_msft_gpu.o"
+	@echo "... test_msft_gpu.i"
+	@echo "... test_msft_gpu.s"
 .PHONY : help
 
 

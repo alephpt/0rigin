@@ -60,4 +60,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Nova.dir/DependInfo.cmake"
   "CMakeFiles/imgui.dir/DependInfo.cmake"
   "CMakeFiles/MSFT.dir/DependInfo.cmake"
+  "CMakeFiles/test_msft_gpu.dir/DependInfo.cmake"
+  "CMakeFiles/test_descriptor_bindings.dir/DependInfo.cmake"
   )

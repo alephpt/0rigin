@@ -1,5 +1,7 @@
 /home/persist/neotec/0rigin/build/CMakeFiles/Nova.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/imgui.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/MSFT.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_msft_gpu.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_descriptor_bindings.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/edit_cache.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/rebuild_cache.dir

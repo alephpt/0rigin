@@ -2,6 +2,8 @@
 #include <cstring>
 #include <algorithm>
 #include <cmath>
+#include <fstream>
+#include <vector>
 
 /**
  * MSFTEngine Implementation - Phase 1 Skeleton
@@ -71,18 +73,27 @@ MSFTEngine::MSFTEngine(Nova* nova)
       _R_field_buffer(VK_NULL_HANDLE),
       _gravity_x_buffer(VK_NULL_HANDLE),
       _gravity_y_buffer(VK_NULL_HANDLE),
+      _spinor_density_buffer(VK_NULL_HANDLE),
       _theta_memory(VK_NULL_HANDLE),
       _theta_out_memory(VK_NULL_HANDLE),
       _omega_memory(VK_NULL_HANDLE),
       _R_field_memory(VK_NULL_HANDLE),
       _gravity_x_memory(VK_NULL_HANDLE),
       _gravity_y_memory(VK_NULL_HANDLE),
+      _spinor_density_memory(VK_NULL_HANDLE),
       _kuramoto_pipeline(VK_NULL_HANDLE),
       _sync_pipeline(VK_NULL_HANDLE),
       _gravity_pipeline(VK_NULL_HANDLE),
-      _descriptor_set(VK_NULL_HANDLE),
-      _descriptor_layout(VK_NULL_HANDLE),
-      _pipeline_layout(VK_NULL_HANDLE),
+      _kuramoto_descriptor_set(VK_NULL_HANDLE),
+      _sync_descriptor_set(VK_NULL_HANDLE),
+      _gravity_descriptor_set(VK_NULL_HANDLE),
+      _kuramoto_descriptor_layout(VK_NULL_HANDLE),
+      _sync_descriptor_layout(VK_NULL_HANDLE),
+      _gravity_descriptor_layout(VK_NULL_HANDLE),
+      _kuramoto_pipeline_layout(VK_NULL_HANDLE),
+      _sync_pipeline_layout(VK_NULL_HANDLE),
+      _gravity_pipeline_layout(VK_NULL_HANDLE),
+      _descriptor_pool(VK_NULL_HANDLE),
       _spinor_buffer(VK_NULL_HANDLE),
       _spinor_memory(VK_NULL_HANDLE),
       _dirac_pipeline(VK_NULL_HANDLE) {
@@ -219,7 +230,7 @@ void MSFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     uploadToGPU();
 
     // Phase 3: Create compute pipelines
-    // createPipelines();
+    createPipelines();
 }
 
 void MSFTEngine::setInitialPhases(const std::vector<float>& theta) {
@@ -267,45 +278,197 @@ void MSFTEngine::setNaturalFrequencies(const std::vector<float>& omega) {
 }
 
 void MSFTEngine::step(float dt, float K, float damping) {
-    // FULL MSFT EVOLUTION (to be implemented in Phases 2-4):
-    //
-    // The complete MSFT theory requires evolving both classical (Kuramoto) and
-    // quantum (Dirac) components with bidirectional coupling between them.
-    //
-    // 1. Evolve Kuramoto phases: dθ/dt = ω + K·coupling + spinor_feedback
-    //    Dispatch: kuramoto_step.comp
-    //    The spinor density |Ψ|² provides feedback to phase evolution
-    //
-    // 2. Compute sync field: R(x) = |⟨e^(iθ)⟩|
-    //    Dispatch: sync_field.comp
-    //    Local averaging of phase coherence in neighborhoods
-    //
-    // 3. Compute mass field: m(x) = Δ · R(x)
-    //    Can be CPU-side calculation or GPU shader (mass_field.comp)
-    //    This is the effective mass that emerges from synchronization
-    //
-    // 4. Apply chiral rotation: m_chiral = m · e^(iθ_chiral·γ^5)
-    //    Creates left/right handed mass term for parity violation
-    //    Will be implemented in chiral_rotation.comp shader
-    //
-    // 5. Evolve Dirac spinor: (iγ^μ∂_μ)Ψ = m_chiral·Ψ
-    //    Dispatch: dirac_evolution.comp (to be created)
-    //    Full relativistic quantum evolution with emergent mass
-    //
-    // 6. Compute spinor feedback: |Ψ|² → phase coupling strength
-    //    Enables bidirectional quantum-classical bridge
-    //    The "soliton handoff" mechanism between scales
-    //
-    // Current implementation: CPU-side stub for Phase 1
-    // This temporary code will be replaced by GPU compute in Phase 4
+    /**
+     * Phase 4: GPU Compute Dispatch Implementation
+     *
+     * Executes the MSFT simulation step using GPU compute shaders:
+     * 1. kuramoto_step: Evolve phases θ(t) → θ(t+dt)
+     * 2. sync_field: Compute synchronization field R(x)
+     * 3. gravity_field: Compute gravitational field g(x) = -Δ·∇R(x)
+     */
 
-    // Temporary placeholder: simple CPU-side synchronization calculation
-    size_t total_size = _Nx * _Ny;
-    for (size_t i = 0; i < total_size; ++i) {
-        // Simple placeholder: R = cos(theta) for testing
-        // Real implementation uses neighborhood averaging on GPU
-        _R_field_data[i] = 0.5f * (1.0f + std::cos(_theta_data[i]));
+    // Verify pipelines are created
+    if (_kuramoto_pipeline == VK_NULL_HANDLE ||
+        _sync_pipeline == VK_NULL_HANDLE ||
+        _gravity_pipeline == VK_NULL_HANDLE) {
+        // Pipelines not ready, fall back to CPU placeholder
+        size_t total_size = _Nx * _Ny;
+        for (size_t i = 0; i < total_size; ++i) {
+            _R_field_data[i] = 0.5f * (1.0f + std::cos(_theta_data[i]));
+        }
+        return;
     }
+
+    VkDevice device = _nova->_architect->logical_device;
+
+    // 1. Upload current data to GPU
+    uploadToGPU();
+
+    // 2. Create command pool for compute operations
+    VkCommandPool commandPool;
+    VkCommandPoolCreateInfo poolInfo{};
+    poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    poolInfo.queueFamilyIndex = _nova->_architect->queues.indices.compute_family.value_or(
+        _nova->_architect->queues.indices.graphics_family.value());  // Use compute or graphics queue
+    poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+
+    if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
+        // In production, throw exception
+        return;
+    }
+
+    // 3. Create command buffer
+    VkCommandBufferAllocateInfo allocInfo{};
+    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    allocInfo.commandPool = commandPool;
+    allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocInfo.commandBufferCount = 1;
+
+    VkCommandBuffer commandBuffer;
+    if (vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer) != VK_SUCCESS) {
+        vkDestroyCommandPool(device, commandPool, nullptr);
+        return;
+    }
+
+    // 4. Begin recording commands
+    VkCommandBufferBeginInfo beginInfo{};
+    beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+    VkResult result = vkBeginCommandBuffer(commandBuffer, &beginInfo);
+    if (result != VK_SUCCESS) {
+        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+        vkDestroyCommandPool(device, commandPool, nullptr);
+        return;
+    }
+
+    // 5. Prepare push constants
+    struct PushConstants {
+        float dt;
+        float K;
+        float damping;
+        float Delta;
+        float chiral_angle;
+        float Nx;
+        float Ny;
+        float N_total;
+        float neighborhood_radius;
+    } pushConstants;
+
+    pushConstants.dt = dt;
+    pushConstants.K = K;
+    pushConstants.damping = damping;
+    pushConstants.Delta = _Delta;
+    pushConstants.chiral_angle = _chiral_angle;
+    pushConstants.Nx = static_cast<float>(_Nx);
+    pushConstants.Ny = static_cast<float>(_Ny);
+    pushConstants.N_total = static_cast<float>(_Nx * _Ny);
+    pushConstants.neighborhood_radius = 1.0f;  // Default to immediate neighbors
+
+    // Calculate workgroup counts (shaders use local_size_x = 16, local_size_y = 16)
+    uint32_t workgroupsX = (_Nx + 15) / 16;
+    uint32_t workgroupsY = (_Ny + 15) / 16;
+
+    // 6. Dispatch kuramoto_step shader with its specific descriptor set and pipeline layout
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _kuramoto_pipeline);
+    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
+                           _kuramoto_pipeline_layout, 0, 1, &_kuramoto_descriptor_set, 0, nullptr);
+    vkCmdPushConstants(commandBuffer, _kuramoto_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
+                      0, sizeof(pushConstants), &pushConstants);
+    vkCmdDispatch(commandBuffer, workgroupsX, workgroupsY, 1);
+
+    // 7. Memory barrier between shaders
+    VkMemoryBarrier memBarrier{};
+    memBarrier.sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
+    memBarrier.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
+    memBarrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+
+    vkCmdPipelineBarrier(commandBuffer,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        0, 1, &memBarrier, 0, nullptr, 0, nullptr);
+
+    // 8. Copy theta_out back to theta for next iteration
+    VkBufferCopy copyRegion{};
+    copyRegion.size = sizeof(float) * _Nx * _Ny;
+    vkCmdCopyBuffer(commandBuffer, _theta_out_buffer, _theta_buffer, 1, &copyRegion);
+
+    // Another barrier after copy
+    vkCmdPipelineBarrier(commandBuffer,
+                        VK_PIPELINE_STAGE_TRANSFER_BIT,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        0, 1, &memBarrier, 0, nullptr, 0, nullptr);
+
+    // 9. Dispatch sync_field shader with its specific descriptor set and pipeline layout
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _sync_pipeline);
+    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
+                           _sync_pipeline_layout, 0, 1, &_sync_descriptor_set, 0, nullptr);
+    vkCmdPushConstants(commandBuffer, _sync_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
+                      0, sizeof(pushConstants), &pushConstants);
+    vkCmdDispatch(commandBuffer, workgroupsX, workgroupsY, 1);
+
+    // 10. Memory barrier
+    vkCmdPipelineBarrier(commandBuffer,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        0, 1, &memBarrier, 0, nullptr, 0, nullptr);
+
+    // 11. Dispatch gravity_field shader with its specific descriptor set and pipeline layout
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _gravity_pipeline);
+    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
+                           _gravity_pipeline_layout, 0, 1, &_gravity_descriptor_set, 0, nullptr);
+    vkCmdPushConstants(commandBuffer, _gravity_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
+                      0, sizeof(pushConstants), &pushConstants);
+    vkCmdDispatch(commandBuffer, workgroupsX, workgroupsY, 1);
+
+    // 12. End command buffer recording
+    result = vkEndCommandBuffer(commandBuffer);
+    if (result != VK_SUCCESS) {
+        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+        vkDestroyCommandPool(device, commandPool, nullptr);
+        return;
+    }
+
+    // 13. Submit command buffer to compute queue
+    VkSubmitInfo submitInfo{};
+    submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &commandBuffer;
+
+    VkQueue computeQueue = _nova->_architect->queues.compute ?
+        _nova->_architect->queues.compute : _nova->_architect->queues.graphics;
+
+    // Create fence for synchronization
+    VkFenceCreateInfo fenceInfo{};
+    fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+
+    VkFence fence;
+    result = vkCreateFence(device, &fenceInfo, nullptr, &fence);
+    if (result != VK_SUCCESS) {
+        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+        vkDestroyCommandPool(device, commandPool, nullptr);
+        return;
+    }
+
+    // Submit work to GPU
+    result = vkQueueSubmit(computeQueue, 1, &submitInfo, fence);
+    if (result != VK_SUCCESS) {
+        vkDestroyFence(device, fence, nullptr);
+        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+        vkDestroyCommandPool(device, commandPool, nullptr);
+        return;
+    }
+
+    // 14. Wait for GPU to complete
+    vkWaitForFences(device, 1, &fence, VK_TRUE, UINT64_MAX);
+
+    // 15. Download results from GPU
+    downloadFromGPU();
+
+    // 16. Cleanup
+    vkDestroyFence(device, fence, nullptr);
+    vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+    vkDestroyCommandPool(device, commandPool, nullptr);
 }
 
 std::vector<float> MSFTEngine::getSyncField() const {
@@ -356,22 +519,15 @@ std::vector<float> MSFTEngine::getPhaseField() const {
 
 std::vector<float> MSFTEngine::getGravitationalField() const {
     /**
-     * Compute gravitational field g(x,y) = -Δ · ∇R(x,y) from synchronization field.
+     * Return gravitational field g(x,y) = -Δ · ∇R(x,y) from GPU computation.
      *
      * Returns 2D vector field as interleaved (gx, gy) pairs.
      *
-     * Physical Implementation (0.md Step 8 - Bekenstein-Hawking):
-     * ────────────────────────────────────────────────────────────
-     * PHASE 1 (Current - CPU Implementation):
-     * - CPU-side gradient computation using central differences
-     * - Validates physics before GPU shader implementation
-     * - Formula: ∂R/∂x ≈ (R(x+Δx) - R(x-Δx))/(2Δx)
-     * - Periodic boundary conditions
-     *
-     * PHASE 2+ (Future - GPU Implementation):
-     * - Will use gravity_field.comp shader for GPU acceleration
-     * - Same physics, 100x+ faster on large grids
-     * - Memory layout: separate gx, gy buffers on GPU
+     * Phase 4 Implementation (GPU-accelerated):
+     * ─────────────────────────────────────────
+     * - GPU computes gradients via gravity_field.comp shader
+     * - Results stored in _gravity_x_data and _gravity_y_data
+     * - This method combines them into interleaved format
      *
      * Physics Interpretation:
      * ─────────────────────
@@ -398,36 +554,47 @@ std::vector<float> MSFTEngine::getGravitationalField() const {
      * - This IS "mass attracts mass" via gravity!
      */
 
-    std::vector<float> R_field = getSyncField();
     std::vector<float> g_field(2 * _Nx * _Ny);  // Interleaved (gx, gy)
 
-    // Grid spacing (assume unit spacing)
-    float dx = 1.0f;
-    float dy = 1.0f;
+    // Check if GPU computation has been performed
+    if (_gravity_x_data.empty() || _gravity_y_data.empty()) {
+        // Fallback: CPU computation if GPU not ready
+        std::vector<float> R_field = getSyncField();
 
-    for (uint32_t y = 0; y < _Ny; y++) {
-        for (uint32_t x = 0; x < _Nx; x++) {
-            uint32_t idx = y * _Nx + x;
+        // Grid spacing (assume unit spacing)
+        float dx = 1.0f;
+        float dy = 1.0f;
 
-            // Periodic boundary conditions
-            uint32_t x_plus = (x + 1) % _Nx;
-            uint32_t x_minus = (x + _Nx - 1) % _Nx;
-            uint32_t y_plus = (y + 1) % _Ny;
-            uint32_t y_minus = (y + _Ny - 1) % _Ny;
+        for (uint32_t y = 0; y < _Ny; y++) {
+            for (uint32_t x = 0; x < _Nx; x++) {
+                uint32_t idx = y * _Nx + x;
 
-            uint32_t idx_xp = y * _Nx + x_plus;
-            uint32_t idx_xm = y * _Nx + x_minus;
-            uint32_t idx_yp = y_plus * _Nx + x;
-            uint32_t idx_ym = y_minus * _Nx + x;
+                // Periodic boundary conditions
+                uint32_t x_plus = (x + 1) % _Nx;
+                uint32_t x_minus = (x + _Nx - 1) % _Nx;
+                uint32_t y_plus = (y + 1) % _Ny;
+                uint32_t y_minus = (y + _Ny - 1) % _Ny;
 
-            // Central differences for gradients
-            float dR_dx = (R_field[idx_xp] - R_field[idx_xm]) / (2.0f * dx);
-            float dR_dy = (R_field[idx_yp] - R_field[idx_ym]) / (2.0f * dy);
+                uint32_t idx_xp = y * _Nx + x_plus;
+                uint32_t idx_xm = y * _Nx + x_minus;
+                uint32_t idx_yp = y_plus * _Nx + x;
+                uint32_t idx_ym = y_minus * _Nx + x;
 
-            // Gravitational field: g = -Δ · ∇R
-            // Negative sign: gravity pulls toward mass (opposite of gradient)
-            g_field[2*idx + 0] = -_Delta * dR_dx;  // gx component
-            g_field[2*idx + 1] = -_Delta * dR_dy;  // gy component
+                // Central differences for gradients
+                float dR_dx = (R_field[idx_xp] - R_field[idx_xm]) / (2.0f * dx);
+                float dR_dy = (R_field[idx_yp] - R_field[idx_ym]) / (2.0f * dy);
+
+                // Gravitational field: g = -Δ · ∇R
+                // Negative sign: gravity pulls toward mass (opposite of gradient)
+                g_field[2*idx + 0] = -_Delta * dR_dx;  // gx component
+                g_field[2*idx + 1] = -_Delta * dR_dy;  // gy component
+            }
+        }
+    } else {
+        // Use GPU-computed gravity field
+        for (uint32_t i = 0; i < _Nx * _Ny; i++) {
+            g_field[2*i + 0] = _gravity_x_data[i];  // gx component
+            g_field[2*i + 1] = _gravity_y_data[i];  // gy component
         }
     }
 
@@ -520,8 +687,11 @@ void MSFTEngine::createBuffers() {
 
     // Create buffers for physics fields
     // Using STORAGE_BUFFER for compute shader access
+    // Adding TRANSFER flags for buffer copies
     // Using HOST_VISIBLE | HOST_COHERENT for CPU upload/download
-    VkBufferUsageFlags storageUsage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
+    VkBufferUsageFlags storageUsage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT |
+                                      VK_BUFFER_USAGE_TRANSFER_SRC_BIT |
+                                      VK_BUFFER_USAGE_TRANSFER_DST_BIT;
     VkMemoryPropertyFlags hostProperties = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
                                           VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
 
@@ -550,19 +720,414 @@ void MSFTEngine::createBuffers() {
     // Spinor field buffer (4 complex components per grid point)
     createBuffer(spinorSize, storageUsage, hostProperties,
                 _spinor_buffer, _spinor_memory);
+
+    // Spinor density buffer (|Ψ|² for quantum-classical feedback)
+    createBuffer(gridSize, storageUsage, hostProperties,
+                _spinor_density_buffer, _spinor_density_memory);
 }
 
 void MSFTEngine::createPipelines() {
-    // Phase 3: Shader loading and pipeline creation
-    // This will:
-    // 1. Load kuramoto_step.comp and sync_field.comp shaders
-    // 2. Create compute pipeline for each shader
-    // 3. Create descriptor set layout for buffer bindings
-    // 4. Create pipeline layout with push constants
-    // 5. Allocate descriptor sets
+    /**
+     * Phase 3: Compute Pipeline Creation
+     *
+     * Creates 3 compute pipelines for MSFT GPU execution with SEPARATE descriptor sets:
+     * 1. kuramoto_step.comp - Phase evolution using Kuramoto dynamics
+     *    Bindings: theta, theta_out, omega, spinor_density
+     * 2. sync_field.comp - Synchronization field R(x) calculation
+     *    Bindings: theta, R_field
+     * 3. gravity_field.comp - Gravitational field g(x) = -Δ·∇R(x)
+     *    Bindings: R_field, gravity_x, gravity_y
+     */
+
+    VkDevice device = _nova->_architect->logical_device;
+
+    // Helper lambda to load SPIR-V shader file
+    auto loadShaderFile = [](const std::string& path) -> std::vector<uint32_t> {
+        std::ifstream file(path, std::ios::ate | std::ios::binary);
+
+        if (!file.is_open()) {
+            // In production, throw exception
+            return {};
+        }
+
+        size_t fileSize = static_cast<size_t>(file.tellg());
+        std::vector<uint32_t> buffer(fileSize / sizeof(uint32_t));
+
+        file.seekg(0);
+        file.read(reinterpret_cast<char*>(buffer.data()), fileSize);
+        file.close();
+
+        return buffer;
+    };
+
+    // Helper lambda to create shader module from SPIR-V code
+    auto createShaderModule = [device](const std::vector<uint32_t>& code) -> VkShaderModule {
+        VkShaderModuleCreateInfo createInfo{};
+        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        createInfo.codeSize = code.size() * sizeof(uint32_t);
+        createInfo.pCode = code.data();
+
+        VkShaderModule shaderModule;
+        if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+            return VK_NULL_HANDLE;
+        }
+
+        return shaderModule;
+    };
+
+    // 1. Create descriptor set layouts for each shader (each has different bindings)
+
+    // Kuramoto shader layout: theta, theta_out, omega, spinor_density (4 bindings)
+    std::vector<VkDescriptorSetLayoutBinding> kuramoto_bindings = {
+        // Binding 0: theta_buffer (input phases)
+        {
+            .binding = 0,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        },
+        // Binding 1: theta_out_buffer (output phases)
+        {
+            .binding = 1,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        },
+        // Binding 2: omega_buffer (natural frequencies)
+        {
+            .binding = 2,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        },
+        // Binding 3: spinor_density_buffer (quantum feedback)
+        {
+            .binding = 3,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        }
+    };
+
+    VkDescriptorSetLayoutCreateInfo kuramoto_layout_info{};
+    kuramoto_layout_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+    kuramoto_layout_info.bindingCount = static_cast<uint32_t>(kuramoto_bindings.size());
+    kuramoto_layout_info.pBindings = kuramoto_bindings.data();
+
+    if (vkCreateDescriptorSetLayout(device, &kuramoto_layout_info, nullptr, &_kuramoto_descriptor_layout) != VK_SUCCESS) {
+        // In production, throw exception
+        return;
+    }
+
+    // Sync shader layout: theta, R_field (2 bindings)
+    std::vector<VkDescriptorSetLayoutBinding> sync_bindings = {
+        // Binding 0: theta_buffer (input phases)
+        {
+            .binding = 0,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        },
+        // Binding 1: R_field_buffer (output sync field)
+        {
+            .binding = 1,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        }
+    };
+
+    VkDescriptorSetLayoutCreateInfo sync_layout_info{};
+    sync_layout_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+    sync_layout_info.bindingCount = static_cast<uint32_t>(sync_bindings.size());
+    sync_layout_info.pBindings = sync_bindings.data();
+
+    if (vkCreateDescriptorSetLayout(device, &sync_layout_info, nullptr, &_sync_descriptor_layout) != VK_SUCCESS) {
+        // In production, throw exception
+        return;
+    }
+
+    // Gravity shader layout: R_field, gravity_x, gravity_y (3 bindings)
+    std::vector<VkDescriptorSetLayoutBinding> gravity_bindings = {
+        // Binding 0: R_field_buffer (input sync field)
+        {
+            .binding = 0,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        },
+        // Binding 1: gravity_x_buffer (output x-component)
+        {
+            .binding = 1,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        },
+        // Binding 2: gravity_y_buffer (output y-component)
+        {
+            .binding = 2,
+            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            .descriptorCount = 1,
+            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
+            .pImmutableSamplers = nullptr
+        }
+    };
+
+    VkDescriptorSetLayoutCreateInfo gravity_layout_info{};
+    gravity_layout_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+    gravity_layout_info.bindingCount = static_cast<uint32_t>(gravity_bindings.size());
+    gravity_layout_info.pBindings = gravity_bindings.data();
+
+    if (vkCreateDescriptorSetLayout(device, &gravity_layout_info, nullptr, &_gravity_descriptor_layout) != VK_SUCCESS) {
+        // In production, throw exception
+        return;
+    }
+
+    // 2. Define push constants structure for shader parameters
+    VkPushConstantRange pushConstantRange{};
+    pushConstantRange.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
+    pushConstantRange.offset = 0;
+    pushConstantRange.size = sizeof(float) * 9;  // 9 floats: dt, K, damping, Delta, chiral_angle, Nx, Ny, N_total, neighborhood_radius
+
+    // 3. Create pipeline layouts for each shader
+
+    // Kuramoto pipeline layout
+    VkPipelineLayoutCreateInfo kuramoto_pipeline_layout_info{};
+    kuramoto_pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+    kuramoto_pipeline_layout_info.setLayoutCount = 1;
+    kuramoto_pipeline_layout_info.pSetLayouts = &_kuramoto_descriptor_layout;
+    kuramoto_pipeline_layout_info.pushConstantRangeCount = 1;
+    kuramoto_pipeline_layout_info.pPushConstantRanges = &pushConstantRange;
+
+    if (vkCreatePipelineLayout(device, &kuramoto_pipeline_layout_info, nullptr, &_kuramoto_pipeline_layout) != VK_SUCCESS) {
+        // In production, throw exception
+        return;
+    }
+
+    // Sync pipeline layout
+    VkPipelineLayoutCreateInfo sync_pipeline_layout_info{};
+    sync_pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+    sync_pipeline_layout_info.setLayoutCount = 1;
+    sync_pipeline_layout_info.pSetLayouts = &_sync_descriptor_layout;
+    sync_pipeline_layout_info.pushConstantRangeCount = 1;
+    sync_pipeline_layout_info.pPushConstantRanges = &pushConstantRange;
+
+    if (vkCreatePipelineLayout(device, &sync_pipeline_layout_info, nullptr, &_sync_pipeline_layout) != VK_SUCCESS) {
+        // In production, throw exception
+        return;
+    }
+
+    // Gravity pipeline layout
+    VkPipelineLayoutCreateInfo gravity_pipeline_layout_info{};
+    gravity_pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+    gravity_pipeline_layout_info.setLayoutCount = 1;
+    gravity_pipeline_layout_info.pSetLayouts = &_gravity_descriptor_layout;
+    gravity_pipeline_layout_info.pushConstantRangeCount = 1;
+    gravity_pipeline_layout_info.pPushConstantRanges = &pushConstantRange;
+
+    if (vkCreatePipelineLayout(device, &gravity_pipeline_layout_info, nullptr, &_gravity_pipeline_layout) != VK_SUCCESS) {
+        // In production, throw exception
+        return;
+    }
+
+    // 4. Create descriptor pool for all descriptor sets
+    // Total buffers needed: kuramoto(4) + sync(2) + gravity(3) = 9
+    std::vector<VkDescriptorPoolSize> poolSizes = {
+        { VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 9 }  // 9 total storage buffers
+    };
+
+    VkDescriptorPoolCreateInfo poolInfo{};
+    poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+    poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
+    poolInfo.pPoolSizes = poolSizes.data();
+    poolInfo.maxSets = 3;  // 3 descriptor sets (kuramoto, sync, gravity)
+
+    if (vkCreateDescriptorPool(device, &poolInfo, nullptr, &_descriptor_pool) != VK_SUCCESS) {
+        // In production, throw exception
+        return;
+    }
+
+    // 5. Allocate descriptor sets for each pipeline
+
+    // Allocate kuramoto descriptor set
+    VkDescriptorSetAllocateInfo kuramoto_alloc_info{};
+    kuramoto_alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+    kuramoto_alloc_info.descriptorPool = _descriptor_pool;
+    kuramoto_alloc_info.descriptorSetCount = 1;
+    kuramoto_alloc_info.pSetLayouts = &_kuramoto_descriptor_layout;
+
+    if (vkAllocateDescriptorSets(device, &kuramoto_alloc_info, &_kuramoto_descriptor_set) != VK_SUCCESS) {
+        // In production, throw exception
+        vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
+        _descriptor_pool = VK_NULL_HANDLE;
+        return;
+    }
+
+    // Allocate sync descriptor set
+    VkDescriptorSetAllocateInfo sync_alloc_info{};
+    sync_alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+    sync_alloc_info.descriptorPool = _descriptor_pool;
+    sync_alloc_info.descriptorSetCount = 1;
+    sync_alloc_info.pSetLayouts = &_sync_descriptor_layout;
+
+    if (vkAllocateDescriptorSets(device, &sync_alloc_info, &_sync_descriptor_set) != VK_SUCCESS) {
+        // In production, throw exception
+        vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
+        _descriptor_pool = VK_NULL_HANDLE;
+        return;
+    }
+
+    // Allocate gravity descriptor set
+    VkDescriptorSetAllocateInfo gravity_alloc_info{};
+    gravity_alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+    gravity_alloc_info.descriptorPool = _descriptor_pool;
+    gravity_alloc_info.descriptorSetCount = 1;
+    gravity_alloc_info.pSetLayouts = &_gravity_descriptor_layout;
+
+    if (vkAllocateDescriptorSets(device, &gravity_alloc_info, &_gravity_descriptor_set) != VK_SUCCESS) {
+        // In production, throw exception
+        vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
+        _descriptor_pool = VK_NULL_HANDLE;
+        return;
+    }
+
     // 6. Update descriptor sets with buffer bindings
 
-    // Stub for Phase 1
+    // Update kuramoto descriptor set (theta, theta_out, omega, spinor_density)
+    {
+        std::vector<VkDescriptorBufferInfo> kuramoto_buffer_infos = {
+            { _theta_buffer, 0, VK_WHOLE_SIZE },
+            { _theta_out_buffer, 0, VK_WHOLE_SIZE },
+            { _omega_buffer, 0, VK_WHOLE_SIZE },
+            { _spinor_density_buffer, 0, VK_WHOLE_SIZE }
+        };
+
+        std::vector<VkWriteDescriptorSet> kuramoto_writes;
+        for (size_t i = 0; i < kuramoto_buffer_infos.size(); ++i) {
+            VkWriteDescriptorSet write{};
+            write.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+            write.dstSet = _kuramoto_descriptor_set;
+            write.dstBinding = static_cast<uint32_t>(i);
+            write.dstArrayElement = 0;
+            write.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            write.descriptorCount = 1;
+            write.pBufferInfo = &kuramoto_buffer_infos[i];
+            kuramoto_writes.push_back(write);
+        }
+
+        vkUpdateDescriptorSets(device, static_cast<uint32_t>(kuramoto_writes.size()),
+                              kuramoto_writes.data(), 0, nullptr);
+    }
+
+    // Update sync descriptor set (theta, R_field)
+    {
+        std::vector<VkDescriptorBufferInfo> sync_buffer_infos = {
+            { _theta_buffer, 0, VK_WHOLE_SIZE },
+            { _R_field_buffer, 0, VK_WHOLE_SIZE }
+        };
+
+        std::vector<VkWriteDescriptorSet> sync_writes;
+        for (size_t i = 0; i < sync_buffer_infos.size(); ++i) {
+            VkWriteDescriptorSet write{};
+            write.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+            write.dstSet = _sync_descriptor_set;
+            write.dstBinding = static_cast<uint32_t>(i);
+            write.dstArrayElement = 0;
+            write.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            write.descriptorCount = 1;
+            write.pBufferInfo = &sync_buffer_infos[i];
+            sync_writes.push_back(write);
+        }
+
+        vkUpdateDescriptorSets(device, static_cast<uint32_t>(sync_writes.size()),
+                              sync_writes.data(), 0, nullptr);
+    }
+
+    // Update gravity descriptor set (R_field, gravity_x, gravity_y)
+    {
+        std::vector<VkDescriptorBufferInfo> gravity_buffer_infos = {
+            { _R_field_buffer, 0, VK_WHOLE_SIZE },
+            { _gravity_x_buffer, 0, VK_WHOLE_SIZE },
+            { _gravity_y_buffer, 0, VK_WHOLE_SIZE }
+        };
+
+        std::vector<VkWriteDescriptorSet> gravity_writes;
+        for (size_t i = 0; i < gravity_buffer_infos.size(); ++i) {
+            VkWriteDescriptorSet write{};
+            write.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+            write.dstSet = _gravity_descriptor_set;
+            write.dstBinding = static_cast<uint32_t>(i);
+            write.dstArrayElement = 0;
+            write.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            write.descriptorCount = 1;
+            write.pBufferInfo = &gravity_buffer_infos[i];
+            gravity_writes.push_back(write);
+        }
+
+        vkUpdateDescriptorSets(device, static_cast<uint32_t>(gravity_writes.size()),
+                              gravity_writes.data(), 0, nullptr);
+    }
+
+    // 7. Load and create compute pipelines for each shader
+
+    // Helper lambda to create compute pipeline with specific layout
+    auto createComputePipeline = [device, &loadShaderFile, &createShaderModule]
+        (const std::string& shaderPath, VkPipelineLayout pipelineLayout) -> VkPipeline {
+        // Load SPIR-V shader
+        auto shaderCode = loadShaderFile(shaderPath);
+        if (shaderCode.empty()) {
+            return VK_NULL_HANDLE;
+        }
+
+        // Create shader module
+        VkShaderModule shaderModule = createShaderModule(shaderCode);
+        if (shaderModule == VK_NULL_HANDLE) {
+            return VK_NULL_HANDLE;
+        }
+
+        // Create compute pipeline
+        VkPipelineShaderStageCreateInfo shaderStageInfo{};
+        shaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        shaderStageInfo.stage = VK_SHADER_STAGE_COMPUTE_BIT;
+        shaderStageInfo.module = shaderModule;
+        shaderStageInfo.pName = "main";
+
+        VkComputePipelineCreateInfo pipelineInfo{};
+        pipelineInfo.sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
+        pipelineInfo.stage = shaderStageInfo;
+        pipelineInfo.layout = pipelineLayout;  // Use specific layout for this pipeline
+
+        VkPipeline pipeline;
+        if (vkCreateComputePipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo,
+                                     nullptr, &pipeline) != VK_SUCCESS) {
+            vkDestroyShaderModule(device, shaderModule, nullptr);
+            return VK_NULL_HANDLE;
+        }
+
+        // Cleanup shader module (pipeline keeps reference internally)
+        vkDestroyShaderModule(device, shaderModule, nullptr);
+
+        return pipeline;
+    };
+
+    // Create the three compute pipelines with their specific layouts
+    _kuramoto_pipeline = createComputePipeline("/home/persist/neotec/0rigin/shaders/smft/kuramoto_step.comp.spv",
+                                               _kuramoto_pipeline_layout);
+    _sync_pipeline = createComputePipeline("/home/persist/neotec/0rigin/shaders/smft/sync_field.comp.spv",
+                                           _sync_pipeline_layout);
+    _gravity_pipeline = createComputePipeline("/home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv",
+                                              _gravity_pipeline_layout);
+
+    // Note: We keep descriptor pool alive for lifetime of engine (cleanup in destructor)
+    // Store it as member variable if needed for cleanup
 }
 
 void MSFTEngine::uploadToGPU() {
@@ -617,6 +1182,14 @@ void MSFTEngine::uploadToGPU() {
         vkMapMemory(device, _spinor_memory, 0, spinorSizeBytes, 0, &mappedMemory);
         memcpy(mappedMemory, _spinor_field.data(), spinorSizeBytes);
         vkUnmapMemory(device, _spinor_memory);
+    }
+
+    // Initialize spinor density buffer to zero (will be computed from spinor field)
+    if (_spinor_density_memory != VK_NULL_HANDLE) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _spinor_density_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memset(mappedMemory, 0, gridSizeBytes);
+        vkUnmapMemory(device, _spinor_density_memory);
     }
 }
 
@@ -690,13 +1263,36 @@ void MSFTEngine::destroyResources() {
             _sync_pipeline = VK_NULL_HANDLE;
         }
 
-        if (_pipeline_layout != VK_NULL_HANDLE) {
-            vkDestroyPipelineLayout(device, _pipeline_layout, nullptr);
-            _pipeline_layout = VK_NULL_HANDLE;
+        // Destroy pipeline layouts
+        if (_kuramoto_pipeline_layout != VK_NULL_HANDLE) {
+            vkDestroyPipelineLayout(device, _kuramoto_pipeline_layout, nullptr);
+            _kuramoto_pipeline_layout = VK_NULL_HANDLE;
         }
-        if (_descriptor_layout != VK_NULL_HANDLE) {
-            vkDestroyDescriptorSetLayout(device, _descriptor_layout, nullptr);
-            _descriptor_layout = VK_NULL_HANDLE;
+        if (_sync_pipeline_layout != VK_NULL_HANDLE) {
+            vkDestroyPipelineLayout(device, _sync_pipeline_layout, nullptr);
+            _sync_pipeline_layout = VK_NULL_HANDLE;
+        }
+        if (_gravity_pipeline_layout != VK_NULL_HANDLE) {
+            vkDestroyPipelineLayout(device, _gravity_pipeline_layout, nullptr);
+            _gravity_pipeline_layout = VK_NULL_HANDLE;
+        }
+
+        // Destroy descriptor set layouts
+        if (_kuramoto_descriptor_layout != VK_NULL_HANDLE) {
+            vkDestroyDescriptorSetLayout(device, _kuramoto_descriptor_layout, nullptr);
+            _kuramoto_descriptor_layout = VK_NULL_HANDLE;
+        }
+        if (_sync_descriptor_layout != VK_NULL_HANDLE) {
+            vkDestroyDescriptorSetLayout(device, _sync_descriptor_layout, nullptr);
+            _sync_descriptor_layout = VK_NULL_HANDLE;
+        }
+        if (_gravity_descriptor_layout != VK_NULL_HANDLE) {
+            vkDestroyDescriptorSetLayout(device, _gravity_descriptor_layout, nullptr);
+            _gravity_descriptor_layout = VK_NULL_HANDLE;
+        }
+        if (_descriptor_pool != VK_NULL_HANDLE) {
+            vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
+            _descriptor_pool = VK_NULL_HANDLE;
         }
 
         // Destroy buffers
@@ -728,6 +1324,10 @@ void MSFTEngine::destroyResources() {
             vkDestroyBuffer(device, _gravity_y_buffer, nullptr);
             _gravity_y_buffer = VK_NULL_HANDLE;
         }
+        if (_spinor_density_buffer != VK_NULL_HANDLE) {
+            vkDestroyBuffer(device, _spinor_density_buffer, nullptr);
+            _spinor_density_buffer = VK_NULL_HANDLE;
+        }
 
         // Free memory
         if (_spinor_memory != VK_NULL_HANDLE) {
@@ -757,6 +1357,10 @@ void MSFTEngine::destroyResources() {
         if (_gravity_y_memory != VK_NULL_HANDLE) {
             vkFreeMemory(device, _gravity_y_memory, nullptr);
             _gravity_y_memory = VK_NULL_HANDLE;
+        }
+        if (_spinor_density_memory != VK_NULL_HANDLE) {
+            vkFreeMemory(device, _spinor_density_memory, nullptr);
+            _spinor_density_memory = VK_NULL_HANDLE;
         }
     }
 }

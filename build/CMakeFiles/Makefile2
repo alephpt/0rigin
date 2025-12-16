@@ -66,12 +66,16 @@ CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/build
 all: CMakeFiles/Nova.dir/all
 all: CMakeFiles/imgui.dir/all
 all: CMakeFiles/MSFT.dir/all
+all: CMakeFiles/test_msft_gpu.dir/all
+all: CMakeFiles/test_descriptor_bindings.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/Nova.dir/codegen
 codegen: CMakeFiles/imgui.dir/codegen
 codegen: CMakeFiles/MSFT.dir/codegen
+codegen: CMakeFiles/test_msft_gpu.dir/codegen
+codegen: CMakeFiles/test_descriptor_bindings.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -82,6 +86,8 @@ preinstall:
 clean: CMakeFiles/Nova.dir/clean
 clean: CMakeFiles/imgui.dir/clean
 clean: CMakeFiles/MSFT.dir/clean
+clean: CMakeFiles/test_msft_gpu.dir/clean
+clean: CMakeFiles/test_descriptor_bindings.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -180,6 +186,72 @@ CMakeFiles/MSFT.dir/codegen:
 CMakeFiles/MSFT.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/clean
 .PHONY : CMakeFiles/MSFT.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_msft_gpu.dir
+
+# All Build rule for target.
+CMakeFiles/test_msft_gpu.dir/all: CMakeFiles/Nova.dir/all
+CMakeFiles/test_msft_gpu.dir/all: CMakeFiles/imgui.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=31,32,33 "Built target test_msft_gpu"
+.PHONY : CMakeFiles/test_msft_gpu.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_msft_gpu.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 26
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_msft_gpu.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_msft_gpu.dir/rule
+
+# Convenience name for target.
+test_msft_gpu: CMakeFiles/test_msft_gpu.dir/rule
+.PHONY : test_msft_gpu
+
+# codegen rule for target.
+CMakeFiles/test_msft_gpu.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=31,32,33 "Finished codegen for target test_msft_gpu"
+.PHONY : CMakeFiles/test_msft_gpu.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_msft_gpu.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/clean
+.PHONY : CMakeFiles/test_msft_gpu.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_descriptor_bindings.dir
+
+# All Build rule for target.
+CMakeFiles/test_descriptor_bindings.dir/all: CMakeFiles/Nova.dir/all
+CMakeFiles/test_descriptor_bindings.dir/all: CMakeFiles/imgui.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=28,29,30 "Built target test_descriptor_bindings"
+.PHONY : CMakeFiles/test_descriptor_bindings.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_descriptor_bindings.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 26
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_descriptor_bindings.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_descriptor_bindings.dir/rule
+
+# Convenience name for target.
+test_descriptor_bindings: CMakeFiles/test_descriptor_bindings.dir/rule
+.PHONY : test_descriptor_bindings
+
+# codegen rule for target.
+CMakeFiles/test_descriptor_bindings.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=28,29,30 "Finished codegen for target test_descriptor_bindings"
+.PHONY : CMakeFiles/test_descriptor_bindings.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_descriptor_bindings.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/clean
+.PHONY : CMakeFiles/test_descriptor_bindings.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

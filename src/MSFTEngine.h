@@ -113,6 +113,7 @@ private:
     VkBuffer _R_field_buffer;      // Synchronization field R(x,y)
     VkBuffer _gravity_x_buffer;    // Gravitational field x-component gx(x,y)
     VkBuffer _gravity_y_buffer;    // Gravitational field y-component gy(x,y)
+    VkBuffer _spinor_density_buffer; // Spinor density |Ψ|² for quantum-classical feedback
 
     VkDeviceMemory _theta_memory;       // Memory for theta buffer
     VkDeviceMemory _theta_out_memory;   // Memory for theta_out buffer
@@ -120,13 +121,28 @@ private:
     VkDeviceMemory _R_field_memory;     // Memory for R_field buffer
     VkDeviceMemory _gravity_x_memory;   // Memory for gravity_x buffer
     VkDeviceMemory _gravity_y_memory;   // Memory for gravity_y buffer
+    VkDeviceMemory _spinor_density_memory; // Memory for spinor density buffer
 
     VkPipeline _kuramoto_pipeline;     // Compute pipeline for phase evolution
     VkPipeline _sync_pipeline;         // Compute pipeline for R field calculation
     VkPipeline _gravity_pipeline;      // Compute pipeline for gravity field ∇R(x,y)
-    VkDescriptorSet _descriptor_set;   // Descriptor set for buffer bindings
-    VkDescriptorSetLayout _descriptor_layout;  // Layout for descriptors
-    VkPipelineLayout _pipeline_layout;  // Pipeline layout
+
+    // Separate descriptor sets for each pipeline (each shader has different bindings)
+    VkDescriptorSet _kuramoto_descriptor_set;   // Descriptor set for kuramoto shader
+    VkDescriptorSet _sync_descriptor_set;       // Descriptor set for sync shader
+    VkDescriptorSet _gravity_descriptor_set;    // Descriptor set for gravity shader
+
+    // Separate descriptor layouts for each pipeline
+    VkDescriptorSetLayout _kuramoto_descriptor_layout;  // Layout for kuramoto descriptors
+    VkDescriptorSetLayout _sync_descriptor_layout;      // Layout for sync descriptors
+    VkDescriptorSetLayout _gravity_descriptor_layout;   // Layout for gravity descriptors
+
+    // Separate pipeline layouts
+    VkPipelineLayout _kuramoto_pipeline_layout;  // Pipeline layout for kuramoto
+    VkPipelineLayout _sync_pipeline_layout;      // Pipeline layout for sync
+    VkPipelineLayout _gravity_pipeline_layout;   // Pipeline layout for gravity
+
+    VkDescriptorPool _descriptor_pool;  // Descriptor pool for all descriptor sets
 
     // CPU-side data mirrors for host access
     std::vector<float> _theta_data;     // Host mirror of phase field

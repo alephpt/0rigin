@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_descriptor_bindings.dir/link.d CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o -o bin/test_descriptor_bindings  libNova.a libimgui.a /lib/libvulkan.so /usr/lib/libSDL2main.a /usr/lib/libSDL2-2.0.so.0.3200.60 -lpthread -ldl -lm

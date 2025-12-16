@@ -128,6 +128,65 @@ set_target_properties(MSFT PROPERTIES
 )
 
 # ============================================================================
+# TEST EXECUTABLE FOR GPU PIPELINE
+# ============================================================================
+
+add_executable(test_msft_gpu
+    test_msft_gpu.cpp
+    src/MSFTEngine.cpp
+)
+
+target_include_directories(test_msft_gpu PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_msft_gpu PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    pthread
+    dl
+    m
+)
+
+set_target_properties(test_msft_gpu PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test executable: Descriptor binding validation
+add_executable(test_descriptor_bindings
+    test_descriptor_bindings.cpp
+    src/MSFTEngine.cpp
+)
+
+target_include_directories(test_descriptor_bindings PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_descriptor_bindings PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    pthread
+    dl
+    m
+)
+
+set_target_properties(test_descriptor_bindings PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# ============================================================================
 # SHADERS
 # ============================================================================
 
