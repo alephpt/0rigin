@@ -150,8 +150,10 @@ private:
     // component: 0-3 for the 4 Dirac components
     std::complex<float> getSpinorComponent(uint32_t x, uint32_t y, uint32_t component) const;
 
-    // Internal helper methods (stubs for Phase 1)
+    // Internal helper methods
     void createBuffers();       // Phase 2: Allocate Vulkan buffers
     void createPipelines();     // Phase 3: Load and compile shaders
+    void uploadToGPU();         // Upload CPU data to GPU buffers
+    void downloadFromGPU();     // Download GPU results to CPU arrays
     void destroyResources();    // Cleanup all Vulkan resources
 };

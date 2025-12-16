@@ -1,0 +1,133 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+// Include precision library
+#include "../include/precision.glsl"
+
+/**
+ * @file gravity_field.comp
+ * @brief Compute gravitational field from synchronization field gradients
+ *
+ * Implements: g(x,y) = -Δ · ∇R(x,y)
+ *
+ * MSFT Gravity Emergence (0.md Step 8):
+ * - Gravity is surface tension of synchronization field R(x)
+ * - Where R(x) changes rapidly (gradients ∇R), "surface tension" pulls phases into sync
+ * - This surface tension IS the gravitational field - no separate force!
+ * - Mass m(x) = Δ·R(x) and gravity g(x) ∝ -∇R(x) emerge simultaneously
+ *
+ * Physical Interpretation (Bekenstein-Hawking):
+ * - Δ = √(ℏc/G) = Planck Mass (vacuum surface tension)
+ * - High R regions (massive, synchronized) create ∇R gradients
+ * - These gradients "pull" nearby oscillators into phase
+ * - Observable as gravitational attraction without separate gravity force
+ *
+ * Numerical Method:
+ * - Central difference for ∇R: ∂R/∂x ≈ (R(x+Δx) - R(x-Δx))/(2Δx)
+ * - Periodic boundary conditions
+ * - Returns 2D vector field (gx, gy)
+ *
+ * User Insight:
+ * "G emerges as stable when phase couples and both mass and gravity arise
+ * simultaneously.. mass is what is arisen, gravity is the field responding to it"
+ *
+ * Workgroup: 16×16 threads
+ * Grid: Nx × Ny spatial points
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+// Push constants for simulation parameters
+layout(push_constant) uniform PushConstants {
+    float dt;              // Time step (not used here)
+    float K;               // Coupling strength (not used here)
+    float damping;         // Damping (not used here)
+    float Delta;           // MSFT mass gap Δ = √(ℏc/G) - Planck mass
+    float chiral_angle;    // Chiral angle (not used here)
+    uint Nx;               // Grid width
+    uint Ny;               // Grid height
+    uint N_total;          // Total oscillators
+    uint neighborhood_radius;  // Not used here
+} params;
+
+// Storage buffers
+layout(set = 0, binding = 0) readonly buffer RFieldBuffer {
+    float R_field[];  // Input: synchronization field R(x,y) from sync_field.comp
+};
+
+layout(set = 0, binding = 1) buffer GravityXBuffer {
+    float gx[];  // Output: x-component of gravitational field
+};
+
+layout(set = 0, binding = 2) buffer GravityYBuffer {
+    float gy[];  // Output: y-component of gravitational field
+};
+
+/**
+ * Main compute shader - Calculate gravitational field at each grid point
+ */
+void main() {
+    uint x = gl_GlobalInvocationID.x;
+    uint y = gl_GlobalInvocationID.y;
+
+    // Bounds check
+    if (x >= params.Nx || y >= params.Ny) return;
+
+    uint idx = y * params.Nx + x;
+
+    // Spatial grid spacing (assume unit spacing for simplicity)
+    float dx = 1.0;
+    float dy = 1.0;
+
+    // Get neighboring R values with periodic boundary conditions
+    uint x_plus = (x + 1) % params.Nx;
+    uint x_minus = (x + params.Nx - 1) % params.Nx;
+    uint y_plus = (y + 1) % params.Ny;
+    uint y_minus = (y + params.Ny - 1) % params.Ny;
+
+    uint idx_xp = y * params.Nx + x_plus;
+    uint idx_xm = y * params.Nx + x_minus;
+    uint idx_yp = y_plus * params.Nx + x;
+    uint idx_ym = y_minus * params.Nx + x;
+
+    float R_xp = R_field[idx_xp];  // R(x+Δx, y)
+    float R_xm = R_field[idx_xm];  // R(x-Δx, y)
+    float R_yp = R_field[idx_yp];  // R(x, y+Δy)
+    float R_ym = R_field[idx_ym];  // R(x, y-Δy)
+
+    // Central difference for gradients
+    // ∂R/∂x ≈ (R(x+Δx) - R(x-Δx))/(2Δx)
+    float dR_dx = (R_xp - R_xm) / (2.0 * dx);
+    float dR_dy = (R_yp - R_ym) / (2.0 * dy);
+
+    // Gravitational field: g = -Δ · ∇R
+    // Negative sign: gradients point "uphill" in R, but gravity pulls "downhill"
+    // This creates attraction toward high-R (massive) regions
+    gx[idx] = -params.Delta * dR_dx;
+    gy[idx] = -params.Delta * dR_dy;
+
+    /**
+     * Physical Interpretation:
+     *
+     * Positive ∇R (R increasing): Gradient points toward high-synchronization region
+     * Gravitational field g ∝ -∇R points OPPOSITE (pulls toward mass)
+     *
+     * Example:
+     * - Center has R=0.9 (synchronized, massive)
+     * - Edge has R=0.1 (chaotic, light)
+     * - ∇R points outward (from low to high R)
+     * - g points inward (gravitational attraction to center)
+     *
+     * Observable Prediction:
+     * - Nearby low-R oscillators feel force ∝ g
+     * - This force pulls their phases into sync with high-R region
+     * - Over time, R spreads from center → gravitational "mass attracts"
+     * - This IS gravity - no separate force needed!
+     *
+     * Bekenstein-Hawking Connection:
+     * - Δ = √(ℏc/G) sets "stiffness" of vacuum surface
+     * - Large Δ (strong gravity) → strong g for same ∇R
+     * - Small Δ (weak gravity) → weak g for same ∇R
+     * - G is emergent from measuring how defects respond to ∇R
+     */
+}

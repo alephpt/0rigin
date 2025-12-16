@@ -69,12 +69,17 @@ MSFTEngine::MSFTEngine(Nova* nova)
       _theta_out_buffer(VK_NULL_HANDLE),
       _omega_buffer(VK_NULL_HANDLE),
       _R_field_buffer(VK_NULL_HANDLE),
+      _gravity_x_buffer(VK_NULL_HANDLE),
+      _gravity_y_buffer(VK_NULL_HANDLE),
       _theta_memory(VK_NULL_HANDLE),
       _theta_out_memory(VK_NULL_HANDLE),
       _omega_memory(VK_NULL_HANDLE),
       _R_field_memory(VK_NULL_HANDLE),
+      _gravity_x_memory(VK_NULL_HANDLE),
+      _gravity_y_memory(VK_NULL_HANDLE),
       _kuramoto_pipeline(VK_NULL_HANDLE),
       _sync_pipeline(VK_NULL_HANDLE),
+      _gravity_pipeline(VK_NULL_HANDLE),
       _descriptor_set(VK_NULL_HANDLE),
       _descriptor_layout(VK_NULL_HANDLE),
       _pipeline_layout(VK_NULL_HANDLE),
@@ -171,6 +176,8 @@ void MSFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     _theta_data.resize(total_size, 0.0f);
     _omega_data.resize(total_size, 0.0f);
     _R_field_data.resize(total_size, 0.0f);
+    _gravity_x_data.resize(total_size, 0.0f);
+    _gravity_y_data.resize(total_size, 0.0f);
 
     // Allocate spinor field (4 components per grid point)
     // Each grid point has a 4-component complex Dirac spinor
@@ -206,7 +213,10 @@ void MSFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     }
 
     // Phase 2: Create Vulkan buffers
-    // createBuffers();
+    createBuffers();
+
+    // Upload initial data to GPU
+    uploadToGPU();
 
     // Phase 3: Create compute pipelines
     // createPipelines();
@@ -223,8 +233,15 @@ void MSFTEngine::setInitialPhases(const std::vector<float>& theta) {
     // Copy phase data to CPU buffer
     _theta_data = theta;
 
-    // Phase 2: Upload to GPU buffer
-    // uploadToBuffer(_theta_buffer, _theta_data.data(), sizeof(float) * _theta_data.size());
+    // Upload to GPU buffer if it exists
+    if (_theta_memory != VK_NULL_HANDLE) {
+        VkDevice device = _nova->_architect->logical_device;
+        size_t gridSizeBytes = sizeof(float) * _Nx * _Ny;
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _theta_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memcpy(mappedMemory, _theta_data.data(), gridSizeBytes);
+        vkUnmapMemory(device, _theta_memory);
+    }
 }
 
 void MSFTEngine::setNaturalFrequencies(const std::vector<float>& omega) {
@@ -238,8 +255,15 @@ void MSFTEngine::setNaturalFrequencies(const std::vector<float>& omega) {
     // Copy frequency data to CPU buffer
     _omega_data = omega;
 
-    // Phase 2: Upload to GPU buffer
-    // uploadToBuffer(_omega_buffer, _omega_data.data(), sizeof(float) * _omega_data.size());
+    // Upload to GPU buffer if it exists
+    if (_omega_memory != VK_NULL_HANDLE) {
+        VkDevice device = _nova->_architect->logical_device;
+        size_t gridSizeBytes = sizeof(float) * _Nx * _Ny;
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _omega_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memcpy(mappedMemory, _omega_data.data(), gridSizeBytes);
+        vkUnmapMemory(device, _omega_memory);
+    }
 }
 
 void MSFTEngine::step(float dt, float K, float damping) {
@@ -429,20 +453,103 @@ std::complex<float> MSFTEngine::getSpinorComponent(uint32_t x, uint32_t y, uint3
 
 void MSFTEngine::createBuffers() {
     // Phase 2: Vulkan buffer allocation
-    // This will create:
-    // - _theta_buffer: Current phases (storage buffer)
-    // - _theta_out_buffer: Updated phases (storage buffer)
-    // - _omega_buffer: Natural frequencies (storage buffer, read-only)
-    // - _R_field_buffer: Synchronization field (storage buffer)
-    //
-    // Each buffer needs:
-    // 1. VkBufferCreateInfo with VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
-    // 2. vkCreateBuffer
-    // 3. vkGetBufferMemoryRequirements
-    // 4. vkAllocateMemory with VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
-    // 5. vkBindBufferMemory
+    // Get Vulkan device from Nova
+    VkDevice device = _nova->_architect->logical_device;
+    VkPhysicalDevice physicalDevice = _nova->_architect->physical_device;
 
-    // Stub for Phase 1
+    // Calculate buffer sizes
+    VkDeviceSize gridSize = sizeof(float) * _Nx * _Ny;
+    VkDeviceSize spinorSize = sizeof(float) * 8 * _Nx * _Ny;  // 4 complex components = 8 floats
+
+    // Helper lambda to find memory type
+    auto findMemoryType = [physicalDevice](uint32_t typeFilter, VkMemoryPropertyFlags properties) -> uint32_t {
+        VkPhysicalDeviceMemoryProperties memProperties;
+        vkGetPhysicalDeviceMemoryProperties(physicalDevice, &memProperties);
+
+        for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
+            if ((typeFilter & (1 << i)) &&
+                (memProperties.memoryTypes[i].propertyFlags & properties) == properties) {
+                return i;
+            }
+        }
+
+        // Should handle error properly in production
+        return 0;
+    };
+
+    // Helper lambda to create buffer
+    auto createBuffer = [device, findMemoryType](
+        VkDeviceSize size,
+        VkBufferUsageFlags usage,
+        VkMemoryPropertyFlags properties,
+        VkBuffer& buffer,
+        VkDeviceMemory& bufferMemory) {
+
+        // Create buffer
+        VkBufferCreateInfo bufferInfo{};
+        bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+        bufferInfo.size = size;
+        bufferInfo.usage = usage;
+        bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+        if (vkCreateBuffer(device, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
+            // In production, throw exception
+            return;
+        }
+
+        // Get memory requirements
+        VkMemoryRequirements memRequirements;
+        vkGetBufferMemoryRequirements(device, buffer, &memRequirements);
+
+        // Allocate memory
+        VkMemoryAllocateInfo allocInfo{};
+        allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+        allocInfo.allocationSize = memRequirements.size;
+        allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
+
+        if (vkAllocateMemory(device, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
+            // In production, throw exception
+            vkDestroyBuffer(device, buffer, nullptr);
+            buffer = VK_NULL_HANDLE;
+            return;
+        }
+
+        // Bind memory to buffer
+        vkBindBufferMemory(device, buffer, bufferMemory, 0);
+    };
+
+    // Create buffers for physics fields
+    // Using STORAGE_BUFFER for compute shader access
+    // Using HOST_VISIBLE | HOST_COHERENT for CPU upload/download
+    VkBufferUsageFlags storageUsage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
+    VkMemoryPropertyFlags hostProperties = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
+                                          VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
+
+    // Phase field buffers
+    createBuffer(gridSize, storageUsage, hostProperties,
+                _theta_buffer, _theta_memory);
+
+    createBuffer(gridSize, storageUsage, hostProperties,
+                _theta_out_buffer, _theta_out_memory);
+
+    // Natural frequency buffer
+    createBuffer(gridSize, storageUsage, hostProperties,
+                _omega_buffer, _omega_memory);
+
+    // Synchronization field buffer
+    createBuffer(gridSize, storageUsage, hostProperties,
+                _R_field_buffer, _R_field_memory);
+
+    // Gravity field buffers (separate x and y components)
+    createBuffer(gridSize, storageUsage, hostProperties,
+                _gravity_x_buffer, _gravity_x_memory);
+
+    createBuffer(gridSize, storageUsage, hostProperties,
+                _gravity_y_buffer, _gravity_y_memory);
+
+    // Spinor field buffer (4 complex components per grid point)
+    createBuffer(spinorSize, storageUsage, hostProperties,
+                _spinor_buffer, _spinor_memory);
 }
 
 void MSFTEngine::createPipelines() {
@@ -458,52 +565,200 @@ void MSFTEngine::createPipelines() {
     // Stub for Phase 1
 }
 
+void MSFTEngine::uploadToGPU() {
+    // Upload CPU-side data to GPU buffers
+    VkDevice device = _nova->_architect->logical_device;
+
+    size_t gridSizeBytes = sizeof(float) * _Nx * _Ny;
+
+    // Upload theta data
+    if (_theta_memory != VK_NULL_HANDLE && !_theta_data.empty()) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _theta_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memcpy(mappedMemory, _theta_data.data(), gridSizeBytes);
+        vkUnmapMemory(device, _theta_memory);
+    }
+
+    // Upload omega data
+    if (_omega_memory != VK_NULL_HANDLE && !_omega_data.empty()) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _omega_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memcpy(mappedMemory, _omega_data.data(), gridSizeBytes);
+        vkUnmapMemory(device, _omega_memory);
+    }
+
+    // Initialize R_field buffer to zero (will be computed by shader)
+    if (_R_field_memory != VK_NULL_HANDLE) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _R_field_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memset(mappedMemory, 0, gridSizeBytes);
+        vkUnmapMemory(device, _R_field_memory);
+    }
+
+    // Initialize gravity buffers to zero
+    if (_gravity_x_memory != VK_NULL_HANDLE) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _gravity_x_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memset(mappedMemory, 0, gridSizeBytes);
+        vkUnmapMemory(device, _gravity_x_memory);
+    }
+
+    if (_gravity_y_memory != VK_NULL_HANDLE) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _gravity_y_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memset(mappedMemory, 0, gridSizeBytes);
+        vkUnmapMemory(device, _gravity_y_memory);
+    }
+
+    // Upload spinor field data (4 complex components = 8 floats per grid point)
+    if (_spinor_memory != VK_NULL_HANDLE && !_spinor_field.empty()) {
+        size_t spinorSizeBytes = sizeof(std::complex<float>) * _spinor_field.size();
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _spinor_memory, 0, spinorSizeBytes, 0, &mappedMemory);
+        memcpy(mappedMemory, _spinor_field.data(), spinorSizeBytes);
+        vkUnmapMemory(device, _spinor_memory);
+    }
+}
+
+void MSFTEngine::downloadFromGPU() {
+    // Download GPU results back to CPU-side arrays
+    VkDevice device = _nova->_architect->logical_device;
+
+    size_t gridSizeBytes = sizeof(float) * _Nx * _Ny;
+
+    // Download updated theta field (from theta_out buffer)
+    if (_theta_out_memory != VK_NULL_HANDLE) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _theta_out_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memcpy(_theta_data.data(), mappedMemory, gridSizeBytes);
+        vkUnmapMemory(device, _theta_out_memory);
+    }
+
+    // Download synchronization field
+    if (_R_field_memory != VK_NULL_HANDLE) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _R_field_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memcpy(_R_field_data.data(), mappedMemory, gridSizeBytes);
+        vkUnmapMemory(device, _R_field_memory);
+    }
+
+    // Download gravity field components
+    if (_gravity_x_memory != VK_NULL_HANDLE && !_gravity_x_data.empty()) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _gravity_x_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memcpy(_gravity_x_data.data(), mappedMemory, gridSizeBytes);
+        vkUnmapMemory(device, _gravity_x_memory);
+    }
+
+    if (_gravity_y_memory != VK_NULL_HANDLE && !_gravity_y_data.empty()) {
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _gravity_y_memory, 0, gridSizeBytes, 0, &mappedMemory);
+        memcpy(_gravity_y_data.data(), mappedMemory, gridSizeBytes);
+        vkUnmapMemory(device, _gravity_y_memory);
+    }
+
+    // Download updated spinor field
+    if (_spinor_memory != VK_NULL_HANDLE && !_spinor_field.empty()) {
+        size_t spinorSizeBytes = sizeof(std::complex<float>) * _spinor_field.size();
+        void* mappedMemory = nullptr;
+        vkMapMemory(device, _spinor_memory, 0, spinorSizeBytes, 0, &mappedMemory);
+        memcpy(_spinor_field.data(), mappedMemory, spinorSizeBytes);
+        vkUnmapMemory(device, _spinor_memory);
+    }
+}
+
 void MSFTEngine::destroyResources() {
     // Cleanup Vulkan resources in reverse order of creation
-    // Phase 2 will implement proper cleanup:
+    if (_nova && _nova->_architect) {
+        VkDevice device = _nova->_architect->logical_device;
 
-    // if (_nova && _nova->initialized) {
-    //     VkDevice device = ... // Get from Nova
-    //
-    //     // Destroy pipelines
-    //     if (_dirac_pipeline != VK_NULL_HANDLE)
-    //         vkDestroyPipeline(device, _dirac_pipeline, nullptr);
-    //     if (_kuramoto_pipeline != VK_NULL_HANDLE)
-    //         vkDestroyPipeline(device, _kuramoto_pipeline, nullptr);
-    //     if (_sync_pipeline != VK_NULL_HANDLE)
-    //         vkDestroyPipeline(device, _sync_pipeline, nullptr);
-    //
-    //     if (_pipeline_layout != VK_NULL_HANDLE)
-    //         vkDestroyPipelineLayout(device, _pipeline_layout, nullptr);
-    //     if (_descriptor_layout != VK_NULL_HANDLE)
-    //         vkDestroyDescriptorSetLayout(device, _descriptor_layout, nullptr);
-    //
-    //     // Destroy buffers
-    //     if (_spinor_buffer != VK_NULL_HANDLE)
-    //         vkDestroyBuffer(device, _spinor_buffer, nullptr);
-    //     if (_theta_buffer != VK_NULL_HANDLE)
-    //         vkDestroyBuffer(device, _theta_buffer, nullptr);
-    //     if (_theta_out_buffer != VK_NULL_HANDLE)
-    //         vkDestroyBuffer(device, _theta_out_buffer, nullptr);
-    //     if (_omega_buffer != VK_NULL_HANDLE)
-    //         vkDestroyBuffer(device, _omega_buffer, nullptr);
-    //     if (_R_field_buffer != VK_NULL_HANDLE)
-    //         vkDestroyBuffer(device, _R_field_buffer, nullptr);
-    //
-    //     // Free memory
-    //     if (_spinor_memory != VK_NULL_HANDLE)
-    //         vkFreeMemory(device, _spinor_memory, nullptr);
-    //     if (_theta_memory != VK_NULL_HANDLE)
-    //         vkFreeMemory(device, _theta_memory, nullptr);
-    //     if (_theta_out_memory != VK_NULL_HANDLE)
-    //         vkFreeMemory(device, _theta_out_memory, nullptr);
-    //     if (_omega_memory != VK_NULL_HANDLE)
-    //         vkFreeMemory(device, _omega_memory, nullptr);
-    //     if (_R_field_memory != VK_NULL_HANDLE)
-    //         vkFreeMemory(device, _R_field_memory, nullptr);
-    // }
+        // Destroy pipelines (Phase 3 - will be created later)
+        if (_dirac_pipeline != VK_NULL_HANDLE) {
+            vkDestroyPipeline(device, _dirac_pipeline, nullptr);
+            _dirac_pipeline = VK_NULL_HANDLE;
+        }
+        if (_gravity_pipeline != VK_NULL_HANDLE) {
+            vkDestroyPipeline(device, _gravity_pipeline, nullptr);
+            _gravity_pipeline = VK_NULL_HANDLE;
+        }
+        if (_kuramoto_pipeline != VK_NULL_HANDLE) {
+            vkDestroyPipeline(device, _kuramoto_pipeline, nullptr);
+            _kuramoto_pipeline = VK_NULL_HANDLE;
+        }
+        if (_sync_pipeline != VK_NULL_HANDLE) {
+            vkDestroyPipeline(device, _sync_pipeline, nullptr);
+            _sync_pipeline = VK_NULL_HANDLE;
+        }
 
-    // Stub for Phase 1
+        if (_pipeline_layout != VK_NULL_HANDLE) {
+            vkDestroyPipelineLayout(device, _pipeline_layout, nullptr);
+            _pipeline_layout = VK_NULL_HANDLE;
+        }
+        if (_descriptor_layout != VK_NULL_HANDLE) {
+            vkDestroyDescriptorSetLayout(device, _descriptor_layout, nullptr);
+            _descriptor_layout = VK_NULL_HANDLE;
+        }
+
+        // Destroy buffers
+        if (_spinor_buffer != VK_NULL_HANDLE) {
+            vkDestroyBuffer(device, _spinor_buffer, nullptr);
+            _spinor_buffer = VK_NULL_HANDLE;
+        }
+        if (_theta_buffer != VK_NULL_HANDLE) {
+            vkDestroyBuffer(device, _theta_buffer, nullptr);
+            _theta_buffer = VK_NULL_HANDLE;
+        }
+        if (_theta_out_buffer != VK_NULL_HANDLE) {
+            vkDestroyBuffer(device, _theta_out_buffer, nullptr);
+            _theta_out_buffer = VK_NULL_HANDLE;
+        }
+        if (_omega_buffer != VK_NULL_HANDLE) {
+            vkDestroyBuffer(device, _omega_buffer, nullptr);
+            _omega_buffer = VK_NULL_HANDLE;
+        }
+        if (_R_field_buffer != VK_NULL_HANDLE) {
+            vkDestroyBuffer(device, _R_field_buffer, nullptr);
+            _R_field_buffer = VK_NULL_HANDLE;
+        }
+        if (_gravity_x_buffer != VK_NULL_HANDLE) {
+            vkDestroyBuffer(device, _gravity_x_buffer, nullptr);
+            _gravity_x_buffer = VK_NULL_HANDLE;
+        }
+        if (_gravity_y_buffer != VK_NULL_HANDLE) {
+            vkDestroyBuffer(device, _gravity_y_buffer, nullptr);
+            _gravity_y_buffer = VK_NULL_HANDLE;
+        }
+
+        // Free memory
+        if (_spinor_memory != VK_NULL_HANDLE) {
+            vkFreeMemory(device, _spinor_memory, nullptr);
+            _spinor_memory = VK_NULL_HANDLE;
+        }
+        if (_theta_memory != VK_NULL_HANDLE) {
+            vkFreeMemory(device, _theta_memory, nullptr);
+            _theta_memory = VK_NULL_HANDLE;
+        }
+        if (_theta_out_memory != VK_NULL_HANDLE) {
+            vkFreeMemory(device, _theta_out_memory, nullptr);
+            _theta_out_memory = VK_NULL_HANDLE;
+        }
+        if (_omega_memory != VK_NULL_HANDLE) {
+            vkFreeMemory(device, _omega_memory, nullptr);
+            _omega_memory = VK_NULL_HANDLE;
+        }
+        if (_R_field_memory != VK_NULL_HANDLE) {
+            vkFreeMemory(device, _R_field_memory, nullptr);
+            _R_field_memory = VK_NULL_HANDLE;
+        }
+        if (_gravity_x_memory != VK_NULL_HANDLE) {
+            vkFreeMemory(device, _gravity_x_memory, nullptr);
+            _gravity_x_memory = VK_NULL_HANDLE;
+        }
+        if (_gravity_y_memory != VK_NULL_HANDLE) {
+            vkFreeMemory(device, _gravity_y_memory, nullptr);
+            _gravity_y_memory = VK_NULL_HANDLE;
+        }
+    }
 }
 
 // SHADER IMPLEMENTATION PLAN (Phases 2-4):
