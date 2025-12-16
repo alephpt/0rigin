@@ -330,6 +330,86 @@ std::vector<float> MSFTEngine::getPhaseField() const {
     return _theta_data;
 }
 
+std::vector<float> MSFTEngine::getGravitationalField() const {
+    /**
+     * Compute gravitational field g(x,y) = -Δ · ∇R(x,y) from synchronization field.
+     *
+     * Returns 2D vector field as interleaved (gx, gy) pairs.
+     *
+     * Physical Implementation (0.md Step 8 - Bekenstein-Hawking):
+     * ────────────────────────────────────────────────────────────
+     * PHASE 1 (Current - CPU Implementation):
+     * - CPU-side gradient computation using central differences
+     * - Validates physics before GPU shader implementation
+     * - Formula: ∂R/∂x ≈ (R(x+Δx) - R(x-Δx))/(2Δx)
+     * - Periodic boundary conditions
+     *
+     * PHASE 2+ (Future - GPU Implementation):
+     * - Will use gravity_field.comp shader for GPU acceleration
+     * - Same physics, 100x+ faster on large grids
+     * - Memory layout: separate gx, gy buffers on GPU
+     *
+     * Physics Interpretation:
+     * ─────────────────────
+     * - R(x) is synchronization field (order parameter)
+     * - ∇R points "uphill" toward high-R (synchronized, massive) regions
+     * - g = -Δ·∇R points "downhill" (pulls toward mass)
+     * - This IS gravitational attraction - no separate force!
+     *
+     * Bekenstein-Hawking Connection:
+     * ──────────────────────────────
+     * - Δ = √(ℏc/G) = Planck Mass (vacuum surface tension)
+     * - G emergent from measuring defect response to ∇R
+     * - Large Δ (strong gravity) → strong g for same ∇R
+     * - Small Δ (weak gravity) → weak g for same ∇R
+     *
+     * Observable Prediction:
+     * ─────────────────────
+     * Example: Localized high-R region (synchronized blob)
+     * - Center: R = 0.9 (synchronized, massive)
+     * - Edge: R = 0.1 (chaotic, light)
+     * - ∇R points radially outward (increasing R)
+     * - g points radially inward (gravitational pull to center)
+     * - Over time: nearby oscillators pulled into sync → R spreads
+     * - This IS "mass attracts mass" via gravity!
+     */
+
+    std::vector<float> R_field = getSyncField();
+    std::vector<float> g_field(2 * _Nx * _Ny);  // Interleaved (gx, gy)
+
+    // Grid spacing (assume unit spacing)
+    float dx = 1.0f;
+    float dy = 1.0f;
+
+    for (uint32_t y = 0; y < _Ny; y++) {
+        for (uint32_t x = 0; x < _Nx; x++) {
+            uint32_t idx = y * _Nx + x;
+
+            // Periodic boundary conditions
+            uint32_t x_plus = (x + 1) % _Nx;
+            uint32_t x_minus = (x + _Nx - 1) % _Nx;
+            uint32_t y_plus = (y + 1) % _Ny;
+            uint32_t y_minus = (y + _Ny - 1) % _Ny;
+
+            uint32_t idx_xp = y * _Nx + x_plus;
+            uint32_t idx_xm = y * _Nx + x_minus;
+            uint32_t idx_yp = y_plus * _Nx + x;
+            uint32_t idx_ym = y_minus * _Nx + x;
+
+            // Central differences for gradients
+            float dR_dx = (R_field[idx_xp] - R_field[idx_xm]) / (2.0f * dx);
+            float dR_dy = (R_field[idx_yp] - R_field[idx_ym]) / (2.0f * dy);
+
+            // Gravitational field: g = -Δ · ∇R
+            // Negative sign: gravity pulls toward mass (opposite of gradient)
+            g_field[2*idx + 0] = -_Delta * dR_dx;  // gx component
+            g_field[2*idx + 1] = -_Delta * dR_dy;  // gy component
+        }
+    }
+
+    return g_field;
+}
+
 std::complex<float> MSFTEngine::getSpinorComponent(uint32_t x, uint32_t y, uint32_t component) const {
     // Validate inputs
     if (x >= _Nx || y >= _Ny || component >= 4) {

@@ -78,6 +78,25 @@ public:
      */
     std::vector<float> getPhaseField() const;
 
+    /**
+     * Get the gravitational field g(x,y) = -Δ · ∇R(x,y)
+     * Returns 2D vector field as interleaved (gx, gy) pairs
+     *
+     * Physical Interpretation (0.md Step 8 - Bekenstein-Hawking):
+     * - Gravity is surface tension of synchronization field R(x)
+     * - Spatial gradients ∇R create "pull" toward high-R (massive) regions
+     * - This IS gravitational attraction - no separate gravity force
+     * - g points from low-R to high-R regions (attracts to mass)
+     *
+     * Example Usage:
+     *   auto g = getGravitationalField();
+     *   float gx_at_ij = g[2*(j*Nx + i) + 0];  // x-component at (i,j)
+     *   float gy_at_ij = g[2*(j*Nx + i) + 1];  // y-component at (i,j)
+     *
+     * @return Vector of interleaved (gx, gy) values (size = 2 * Nx * Ny)
+     */
+    std::vector<float> getGravitationalField() const;
+
 private:
     // Nova graphics engine instance
     Nova* _nova;
@@ -92,22 +111,29 @@ private:
     VkBuffer _theta_out_buffer;    // Updated phase field after step
     VkBuffer _omega_buffer;        // Natural frequencies ω(x,y)
     VkBuffer _R_field_buffer;      // Synchronization field R(x,y)
+    VkBuffer _gravity_x_buffer;    // Gravitational field x-component gx(x,y)
+    VkBuffer _gravity_y_buffer;    // Gravitational field y-component gy(x,y)
 
-    VkDeviceMemory _theta_memory;      // Memory for theta buffer
-    VkDeviceMemory _theta_out_memory;  // Memory for theta_out buffer
-    VkDeviceMemory _omega_memory;      // Memory for omega buffer
-    VkDeviceMemory _R_field_memory;    // Memory for R_field buffer
+    VkDeviceMemory _theta_memory;       // Memory for theta buffer
+    VkDeviceMemory _theta_out_memory;   // Memory for theta_out buffer
+    VkDeviceMemory _omega_memory;       // Memory for omega buffer
+    VkDeviceMemory _R_field_memory;     // Memory for R_field buffer
+    VkDeviceMemory _gravity_x_memory;   // Memory for gravity_x buffer
+    VkDeviceMemory _gravity_y_memory;   // Memory for gravity_y buffer
 
     VkPipeline _kuramoto_pipeline;     // Compute pipeline for phase evolution
     VkPipeline _sync_pipeline;         // Compute pipeline for R field calculation
+    VkPipeline _gravity_pipeline;      // Compute pipeline for gravity field ∇R(x,y)
     VkDescriptorSet _descriptor_set;   // Descriptor set for buffer bindings
     VkDescriptorSetLayout _descriptor_layout;  // Layout for descriptors
     VkPipelineLayout _pipeline_layout;  // Pipeline layout
 
     // CPU-side data mirrors for host access
-    std::vector<float> _theta_data;    // Host mirror of phase field
-    std::vector<float> _omega_data;    // Host mirror of frequencies
-    std::vector<float> _R_field_data;  // Host mirror of sync field
+    std::vector<float> _theta_data;     // Host mirror of phase field
+    std::vector<float> _omega_data;     // Host mirror of frequencies
+    std::vector<float> _R_field_data;   // Host mirror of sync field
+    std::vector<float> _gravity_x_data; // Host mirror of gravity field x-component
+    std::vector<float> _gravity_y_data; // Host mirror of gravity field y-component
 
     // Spinor field data (4-component complex Dirac spinor)
     // Each point (x,y) has 4 complex components for the Dirac spinor
