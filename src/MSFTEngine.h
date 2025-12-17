@@ -61,6 +61,17 @@ public:
     void step(float dt, float K, float damping);
 
     /**
+     * Execute stochastic time step with MSR noise formalism
+     * @param dt Time step size (0.01 baseline)
+     * @param K Kuramoto coupling strength (1.0 baseline)
+     * @param damping Phase damping coefficient (0.1 baseline)
+     * @param sigma_theta Phase noise amplitude (0.05 baseline)
+     * @param sigma_psi Spinor noise amplitude (0.05 baseline)
+     */
+    void stepStochastic(float dt, float K, float damping,
+                       float sigma_theta, float sigma_psi);
+
+    /**
      * Get the current synchronization field R(x,y)
      * @return Vector of R values (size = Nx * Ny)
      */
@@ -105,6 +116,7 @@ private:
     uint32_t _Nx, _Ny;  // Grid dimensions
     float _Delta;        // Mass gap parameter
     float _chiral_angle; // Chiral mass angle
+    uint32_t _time_step; // Current timestep (for PRNG seeding)
 
     // Vulkan GPU resources (to be implemented in Phase 2)
     VkBuffer _theta_buffer;        // Current phase field θ(x,y)
@@ -161,6 +173,13 @@ private:
 
     // Dirac evolution pipeline (Phase 3)
     VkPipeline _dirac_pipeline;     // Compute pipeline for Dirac evolution
+
+    // Stochastic pipelines for MSR formalism
+    VkPipeline _kuramoto_stochastic_pipeline;  // Stochastic phase evolution
+    VkPipeline _dirac_stochastic_pipeline;     // Stochastic Dirac evolution
+    VkDescriptorSet _dirac_descriptor_set;     // Descriptor set for Dirac shader
+    VkDescriptorSetLayout _dirac_descriptor_layout; // Layout for Dirac descriptors
+    VkPipelineLayout _dirac_pipeline_layout;   // Pipeline layout for Dirac
 
     // Helper to access spinor component at grid point (x,y)
     // component: 0-3 for the 4 Dirac components
