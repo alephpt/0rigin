@@ -232,6 +232,25 @@ set_target_properties(test_stochastic_cpu PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# Comprehensive Dirac-Kuramoto test with full data output
+add_executable(test_dirac_stochastic_full
+    test/test_dirac_stochastic_full.cpp
+)
+
+target_include_directories(test_dirac_stochastic_full PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_dirac_stochastic_full PRIVATE
+    pthread
+    m
+    stdc++fs
+)
+
+set_target_properties(test_dirac_stochastic_full PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # ============================================================================
 # SHADERS
 # ============================================================================
