@@ -113,6 +113,39 @@ public:
      */
     std::vector<float> getGravitationalField() const;
 
+    /**
+     * Initialize Dirac spinor field with Gaussian wavepacket
+     * CPU-only implementation - GPU shaders exceed timeout budget
+     *
+     * @param x0 Center x-coordinate of Gaussian
+     * @param y0 Center y-coordinate of Gaussian
+     * @param sigma Gaussian width parameter
+     * @param amplitude Initial amplitude (normalized automatically)
+     */
+    void initializeDiracField(float x0, float y0, float sigma, float amplitude);
+
+    /**
+     * Step coupled Kuramoto-Dirac evolution with mass coupling
+     * CPU-only implementation - GPU shaders exceed timeout budget
+     *
+     * Physics:
+     * - Dirac evolution: i·dΨ/dt = [-iα·∇ + β·m(x)]Ψ
+     * - Mass coupling: m(x,y) = Δ·R(x,y) from synchronization field
+     * - Feedback: Ψ density influences phase field via coupling λ
+     *
+     * @param dt Time step size
+     * @param lambda_coupling Coupling strength for Ψ→θ feedback
+     */
+    void stepWithDirac(float dt, float lambda_coupling);
+
+    /**
+     * Get Dirac spinor density |Ψ|² for analysis
+     * CPU-only implementation - GPU shaders exceed timeout budget
+     *
+     * @return Vector of density values |Ψ|² (size = Nx * Ny)
+     */
+    std::vector<float> getDiracDensity() const;
+
 private:
     // Nova graphics engine instance
     Nova* _nova;
@@ -171,6 +204,10 @@ private:
     // Spinor field data (4-component complex Dirac spinor)
     // Each point (x,y) has 4 complex components for the Dirac spinor
     std::vector<std::complex<float>> _spinor_field;  // 4 * Nx * Ny components
+
+    // Dirac field state (CPU-side, avoiding GPU timeouts)
+    std::vector<std::complex<float>> _psi;  // Spinor field (4 components × N)
+    bool _dirac_initialized;
 
     // Additional buffers for spinor evolution (Phase 2)
     VkBuffer _spinor_buffer;        // Current spinor field Ψ(x,y)
