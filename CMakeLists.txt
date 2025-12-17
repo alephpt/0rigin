@@ -132,7 +132,7 @@ set_target_properties(MSFT PROPERTIES
 # ============================================================================
 
 add_executable(test_msft_gpu
-    test_msft_gpu.cpp
+    test/test_msft_gpu.cpp
     src/MSFTEngine.cpp
 )
 
@@ -160,7 +160,7 @@ set_target_properties(test_msft_gpu PROPERTIES
 
 # Test executable: Descriptor binding validation
 add_executable(test_descriptor_bindings
-    test_descriptor_bindings.cpp
+    test/test_descriptor_bindings.cpp
     src/MSFTEngine.cpp
 )
 

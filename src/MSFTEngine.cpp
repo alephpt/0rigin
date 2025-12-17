@@ -1525,7 +1525,7 @@ void MSFTEngine::stepStochastic(float dt, float K, float damping,
         uint32_t N_total;
         uint32_t neighborhood_radius;
     } sync_push = {
-        dt, K, damping, _Delta, _chiral_angle, _Nx, _Ny, _Nx * _Ny, 5
+        dt, K, damping, _Delta, _chiral_angle, _Nx, _Ny, _Nx * _Ny, 1  // neighborhood_radius must be 1 to match sync_field.comp shared memory size [18][18]
     };
 
     vkCmdPushConstants(commandBuffer, _sync_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,

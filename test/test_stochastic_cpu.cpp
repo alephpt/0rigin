@@ -29,7 +29,7 @@
 #include <iomanip>
 #include <chrono>
 #include <string>
-#include <sys/stat.h>
+#include <filesystem>
 
 // Physical constants
 const float DELTA = 2.5f;        // Mass gap parameter
@@ -65,7 +65,7 @@ struct Spinor {
 // ============================================================================
 
 void create_output_dir() {
-    system("mkdir -p /home/persist/neotec/0rigin/output");
+    std::filesystem::create_directories("/home/persist/neotec/0rigin/output");
 }
 
 int idx(int x, int y) {
