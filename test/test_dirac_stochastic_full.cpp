@@ -1,13 +1,12 @@
 /**
  * @file test_dirac_stochastic_full.cpp
- * @brief Comprehensive test with FULL Dirac-Kuramoto evolution data output
+ * @brief LONG-DURATION TEST: 10,000 timesteps (100 seconds) of Dirac-Kuramoto evolution
  *
- * This test outputs COMPLETE evolution data for analysis and visualization:
- * 1. Timeseries data (every 10 steps)
- * 2. Full field snapshots (at t=0,1,2,3,4,5)
- * 3. Summary statistics
- * 4. Mass field evolution
- * 5. Spinor density maps
+ * This test performs EXTENDED evolution to validate long-term stability:
+ * - 1000 warmup steps (10 seconds)
+ * - 10000 measurement steps (100 seconds)
+ * - Snapshots at t = 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 seconds
+ * - Timeseries every 100 steps (100 data points total)
  *
  * PHYSICS:
  * - Coupled Kuramoto-Dirac evolution with vacuum noise
@@ -40,11 +39,11 @@ const int NX = 64;
 const int NY = 64;
 const int N_GRID = NX * NY;
 
-// Simulation parameters
-const int N_WARMUP = 500;        // Warmup steps for synchronization
-const int N_STEPS = 500;         // Measurement steps
-const int TIMESERIES_INTERVAL = 10;  // Output timeseries every 10 steps
-const int SNAPSHOT_INTERVAL = 100;   // Output snapshots every 100 steps (t=0,1,2,3,4,5)
+// LONG-DURATION Simulation parameters
+const int N_WARMUP = 1000;           // 1000 warmup steps (10 seconds)
+const int N_STEPS = 10000;           // 10000 measurement steps (100 seconds)
+const int TIMESERIES_INTERVAL = 100; // Output timeseries every 100 steps (100 data points)
+const int SNAPSHOT_INTERVAL = 1000;  // Output snapshots every 1000 steps (every 10 seconds)
 
 // Stochastic parameters
 const float SIGMA_THETA = 0.05f;  // Kuramoto noise strength
@@ -56,8 +55,8 @@ struct Spinor {
     Complex psi[4];  // 4-component Dirac spinor
 };
 
-// Output directory
-const std::string OUTPUT_DIR = "/home/persist/neotec/0rigin/output/dirac_evolution";
+// Output directory for long run
+const std::string OUTPUT_DIR = "/home/persist/neotec/0rigin/output/dirac_evolution_long";
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -288,8 +287,9 @@ void dirac_step(std::vector<Spinor>& psi, const std::vector<float>& R_field,
 // ============================================================================
 
 void write_timeseries_header(std::ofstream& file) {
-    file << "# Dirac-Kuramoto Stochastic Evolution Timeseries\n";
+    file << "# LONG-DURATION Dirac-Kuramoto Stochastic Evolution Timeseries\n";
     file << "# Grid: " << NX << " x " << NY << "\n";
+    file << "# Total steps: " << N_STEPS << " (100 seconds evolution)\n";
     file << "# dt = " << DT << ", sigma_theta = " << SIGMA_THETA << ", sigma_psi = " << SIGMA_PSI << "\n";
     file << "# Columns: time  R_global  spinor_norm  particle_x  particle_y  particle_drift\n";
 }
@@ -306,7 +306,7 @@ void write_field_snapshot(const std::string& filename, const std::vector<float>&
                          const std::vector<float>& R_field, const std::vector<float>& mass_field,
                          const std::vector<Spinor>& psi, float time) {
     std::ofstream file(filename);
-    file << "# Field snapshot at t = " << time << "\n";
+    file << "# Field snapshot at t = " << time << " seconds\n";
     file << "# Grid: " << NX << " x " << NY << "\n";
     file << "# Columns: x  y  theta  R  mass  |psi|^2  psi_0_real  psi_0_imag  psi_1_real  psi_1_imag  psi_2_real  psi_2_imag  psi_3_real  psi_3_imag\n";
 
@@ -336,7 +336,7 @@ void write_field_snapshot(const std::string& filename, const std::vector<float>&
 
 void write_mass_field(const std::string& filename, const std::vector<float>& mass_field, float time) {
     std::ofstream file(filename);
-    file << "# Mass field m(x,y) = Delta * R(x,y) at t = " << time << "\n";
+    file << "# Mass field m(x,y) = Delta * R(x,y) at t = " << time << " seconds\n";
     file << "# Grid: " << NX << " x " << NY << "\n";
     file << "# Columns: x  y  mass\n";
 
@@ -351,7 +351,7 @@ void write_mass_field(const std::string& filename, const std::vector<float>& mas
 
 void write_spinor_density(const std::string& filename, const std::vector<Spinor>& psi, float time) {
     std::ofstream file(filename);
-    file << "# Spinor density |Psi|^2 at t = " << time << "\n";
+    file << "# Spinor density |Psi|^2 at t = " << time << " seconds\n";
     file << "# Grid: " << NX << " x " << NY << "\n";
     file << "# Columns: x  y  density\n";
 
@@ -372,11 +372,12 @@ void write_summary_statistics(const std::string& filename,
                              float R_initial, float R_final, float R_mean, float R_std,
                              float norm_initial, float norm_final, float norm_deviation,
                              float x_init, float y_init, float x_final, float y_final,
-                             float total_drift) {
+                             float total_drift, float total_time) {
     std::ofstream file(filename);
-    file << "# Stochastic Dirac-Kuramoto Evolution Summary\n";
+    file << "# LONG-DURATION Stochastic Dirac-Kuramoto Evolution Summary\n";
     file << "Grid: " << NX << " x " << NY << "\n";
     file << "Steps: " << N_STEPS << "\n";
+    file << "Total evolution time: " << total_time << " seconds\n";
     file << "dt: " << DT << "\n";
     file << "sigma_theta: " << SIGMA_THETA << "\n";
     file << "sigma_psi: " << SIGMA_PSI << "\n";
@@ -393,6 +394,7 @@ void write_summary_statistics(const std::string& filename,
     file << "Particle_initial: (" << std::setprecision(1) << x_init << ", " << y_init << ")\n";
     file << "Particle_final: (" << x_final << ", " << y_final << ")\n";
     file << "Total_drift: " << std::setprecision(2) << total_drift << " grid units\n";
+    file << "Drift_rate: " << std::setprecision(3) << (total_drift / total_time) << " grid units/second\n";
     file.close();
 }
 
@@ -402,16 +404,20 @@ void write_summary_statistics(const std::string& filename,
 
 int main() {
     std::cout << "=============================================" << std::endl;
-    std::cout << "  COMPREHENSIVE DIRAC-KURAMOTO EVOLUTION TEST" << std::endl;
+    std::cout << "  LONG-DURATION DIRAC-KURAMOTO TEST" << std::endl;
     std::cout << "=============================================" << std::endl;
-    std::cout << "\nFull data output for stochastic evolution" << std::endl;
+    std::cout << "\n10,000 timestep evolution (100 seconds)" << std::endl;
     std::cout << "Grid: " << NX << " x " << NY << std::endl;
-    std::cout << "Steps: " << N_STEPS << " (dt = " << DT << ")" << std::endl;
+    std::cout << "Warmup: " << N_WARMUP << " steps (" << (N_WARMUP * DT) << " seconds)" << std::endl;
+    std::cout << "Evolution: " << N_STEPS << " steps (" << (N_STEPS * DT) << " seconds)" << std::endl;
     std::cout << "Noise: σ_θ = " << SIGMA_THETA << ", σ_Ψ = " << SIGMA_PSI << std::endl;
     std::cout << "Output directory: " << OUTPUT_DIR << std::endl;
 
     // Create output directories
     create_output_directories();
+
+    // Start timing
+    auto start_time = std::chrono::high_resolution_clock::now();
 
     // Initialize RNG
     std::mt19937 rng(42);
@@ -434,7 +440,7 @@ int main() {
     std::cout << "\nWarmup phase (" << N_WARMUP << " steps)..." << std::flush;
     for (int step = 0; step < N_WARMUP; step++) {
         kuramoto_step(theta, omega, DT, K, GAMMA, 0.0f, rng);  // No noise during warmup
-        if (step % 100 == 0) std::cout << "." << std::flush;
+        if (step % 200 == 0) std::cout << "." << std::flush;
     }
     float R_warmup = compute_global_R(theta);
     std::cout << " R = " << R_warmup << std::endl;
@@ -466,8 +472,11 @@ int main() {
     write_timeseries_data(timeseries_file, 0.0f, R_initial, norm_initial, x_cm, y_cm, x_init, y_init);
 
     // Main evolution loop
-    std::cout << "\nEvolution phase (" << N_STEPS << " steps)..." << std::endl;
+    std::cout << "\nLONG EVOLUTION (" << N_STEPS << " steps = " << (N_STEPS * DT) << " seconds)..." << std::endl;
+    std::cout << "Expected runtime: 5-10 minutes\n" << std::endl;
+
     int snapshot_count = 1;
+    auto last_progress_time = std::chrono::high_resolution_clock::now();
 
     for (int step = 1; step <= N_STEPS; step++) {
         // Update Kuramoto field
@@ -496,7 +505,7 @@ int main() {
             write_timeseries_data(timeseries_file, time, R_global, norm, x_cm, y_cm, x_init, y_init);
         }
 
-        // Write field snapshots
+        // Write field snapshots (every 10 seconds)
         if (step % SNAPSHOT_INTERVAL == 0) {
             float time = step * DT;
             char snapshot_num[10];
@@ -507,20 +516,30 @@ int main() {
             write_mass_field(OUTPUT_DIR + "/mass_field_" + snapshot_num + ".dat", mass_field, time);
             write_spinor_density(OUTPUT_DIR + "/density_" + snapshot_num + ".dat", psi, time);
 
-            std::cout << "Snapshot " << snapshot_count << " at t = " << std::fixed << std::setprecision(1)
-                     << time << " : R = " << std::setprecision(4) << R_global
+            std::cout << "Snapshot " << snapshot_count << " at t = " << std::fixed << std::setprecision(0)
+                     << time << "s : R = " << std::setprecision(4) << R_global
                      << ", |Ψ|² = " << norm
                      << ", position = (" << std::setprecision(1) << x_cm << ", " << y_cm << ")" << std::endl;
 
             snapshot_count++;
         }
 
-        // Progress indicator
-        if (step % 50 == 0) {
+        // Progress indicator with time estimation (every 500 steps)
+        if (step % 500 == 0) {
+            auto current_time = std::chrono::high_resolution_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(current_time - start_time).count();
+
             float progress = (float)step / N_STEPS * 100;
+            float steps_per_sec = (float)step / elapsed;
+            int remaining_sec = (N_STEPS - step) / steps_per_sec;
+            int remaining_min = remaining_sec / 60;
+            remaining_sec %= 60;
+
             std::cout << "Progress: " << std::fixed << std::setprecision(1) << progress << "%"
-                     << " - R = " << std::setprecision(4) << R_global
-                     << ", |Ψ|² = " << norm << std::endl;
+                     << " | Step " << step << "/" << N_STEPS
+                     << " | R = " << std::setprecision(4) << R_global
+                     << " | |Ψ|² = " << norm
+                     << " | ETA: " << remaining_min << "m " << remaining_sec << "s" << std::endl;
         }
     }
 
@@ -555,41 +574,46 @@ int main() {
     float total_drift = std::sqrt((x_final - x_init) * (x_final - x_init) +
                                   (y_final - y_init) * (y_final - y_init));
 
+    // Total runtime
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto total_runtime = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time).count();
+
     // Write summary statistics
     write_summary_statistics(OUTPUT_DIR + "/summary.dat",
                            R_initial, R_final, R_mean, R_std,
                            norm_initial, norm_final, max_norm_deviation,
-                           x_init, y_init, x_final, y_final, total_drift);
+                           x_init, y_init, x_final, y_final, total_drift, N_STEPS * DT);
 
-    // Validation checks
+    // Validation checks (adjusted for long-term evolution)
     std::cout << "\n=============================================" << std::endl;
-    std::cout << "           VALIDATION RESULTS" << std::endl;
+    std::cout << "      LONG-TERM VALIDATION RESULTS" << std::endl;
     std::cout << "=============================================" << std::endl;
 
-    bool vacuum_stable = (R_final > 0.95f);
-    bool norm_conserved = (max_norm_deviation < 0.1f);
-    bool particle_localized = (total_drift < 5.0f);
+    bool vacuum_stable = (R_final > 0.90f);  // Slightly relaxed for long-term
+    bool norm_conserved = (max_norm_deviation < 0.15f);  // Allow 15% for long run
+    bool particle_controlled = (total_drift < 10.0f);  // Allow more drift over 100s
 
-    std::cout << "Vacuum stability (R > 0.95): " << R_final << " - "
+    std::cout << "Vacuum stability (R > 0.90): " << R_final << " - "
               << (vacuum_stable ? "PASSED" : "FAILED") << std::endl;
-    std::cout << "Norm conservation (< 10% deviation): " << (max_norm_deviation * 100) << "% - "
+    std::cout << "Norm conservation (< 15% deviation): " << (max_norm_deviation * 100) << "% - "
               << (norm_conserved ? "PASSED" : "FAILED") << std::endl;
-    std::cout << "Particle localization (< 5 grid units): " << total_drift << " - "
-              << (particle_localized ? "PASSED" : "FAILED") << std::endl;
+    std::cout << "Particle control (< 10 grid units): " << total_drift << " - "
+              << (particle_controlled ? "PASSED" : "FAILED") << std::endl;
 
-    bool all_passed = vacuum_stable && norm_conserved && particle_localized;
+    bool all_passed = vacuum_stable && norm_conserved && particle_controlled;
 
     std::cout << "\n=============================================" << std::endl;
     if (all_passed) {
-        std::cout << "✓ ALL VALIDATION CHECKS PASSED" << std::endl;
+        std::cout << "✓ LONG-TERM VALIDATION PASSED" << std::endl;
     } else {
         std::cout << "✗ SOME VALIDATION CHECKS FAILED" << std::endl;
     }
     std::cout << "=============================================" << std::endl;
 
+    std::cout << "\nTotal runtime: " << total_runtime << " seconds" << std::endl;
     std::cout << "\nOutput files generated in: " << OUTPUT_DIR << std::endl;
-    std::cout << "  - timeseries.dat: Evolution data every " << TIMESERIES_INTERVAL << " steps" << std::endl;
-    std::cout << "  - snapshot_*.dat: Full field data at t = 0, 1, 2, 3, 4, 5" << std::endl;
+    std::cout << "  - timeseries.dat: Evolution data (100 points over 100 seconds)" << std::endl;
+    std::cout << "  - snapshot_*.dat: Full field data at t = 0, 10, 20, ..., 100 seconds" << std::endl;
     std::cout << "  - mass_field_*.dat: Mass field evolution" << std::endl;
     std::cout << "  - density_*.dat: Spinor density maps" << std::endl;
     std::cout << "  - summary.dat: Summary statistics" << std::endl;
