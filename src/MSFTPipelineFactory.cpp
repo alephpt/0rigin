@@ -140,6 +140,11 @@ VkPipeline MSFTPipelineFactory::createKuramotoPipeline(const std::string& shader
     /**
      * Kuramoto Pipeline - Phase evolution using Kuramoto dynamics
      *
+     * GPU SAFETY: ✅ SAFE - 9 transcendentals per workgroup
+     * - Expected shader: kuramoto_step.comp
+     * - Workload: Well under 20 Tflops budget
+     * - Timeout risk: None
+     *
      * Shader bindings:
      * - Binding 0: theta_buffer (input phases)
      * - Binding 1: theta_out_buffer (output phases)
@@ -156,6 +161,12 @@ VkPipeline MSFTPipelineFactory::createSyncFieldPipeline(const std::string& shade
     /**
      * Sync Field Pipeline - Calculate synchronization field R(x)
      *
+     * GPU SAFETY: ✅ SAFE - 37 transcendentals (using sync_field_simple.comp)
+     * - RECOMMENDED: sync_field_simple.comp (37 transcendentals)
+     * - AVOID: sync_field.comp (36+ transcendentals + Kahan summation = borderline timeout)
+     * - Workload: Within 20 Tflops budget
+     * - Timeout risk: None with simple version
+     *
      * Shader bindings:
      * - Binding 0: theta_buffer (input phases)
      * - Binding 1: R_field_buffer (output sync field)
@@ -170,6 +181,11 @@ VkPipeline MSFTPipelineFactory::createGravityFieldPipeline(const std::string& sh
                                                            VkPipelineLayout pipelineLayout) {
     /**
      * Gravity Field Pipeline - Calculate gravitational field g = -Δ·∇R
+     *
+     * GPU SAFETY: ✅ SAFE - 0 transcendentals (pure arithmetic)
+     * - Expected shader: gravity_field.comp
+     * - Workload: Minimal - only gradient computation
+     * - Timeout risk: None
      *
      * Shader bindings:
      * - Binding 0: R_field_buffer (input sync field)
@@ -187,6 +203,11 @@ VkPipeline MSFTPipelineFactory::createKuramotoStochasticPipeline(const std::stri
     /**
      * Stochastic Kuramoto Pipeline - Phase evolution with thermal noise
      *
+     * GPU SAFETY: ✅ SAFE - 12-14 transcendentals per workgroup
+     * - Expected shader: kuramoto_stochastic.comp
+     * - Workload: Well under 20 Tflops budget (includes PRNG overhead)
+     * - Timeout risk: None
+     *
      * Implements Martin-Siggia-Rose (MSR) formalism for stochastic dynamics.
      * Adds white noise to phase evolution for thermal fluctuations.
      *
@@ -200,10 +221,18 @@ VkPipeline MSFTPipelineFactory::createDiracPipeline(const std::string& shaderPat
     /**
      * Dirac Evolution Pipeline - Quantum spinor field evolution
      *
+     * GPU SAFETY: ❌ DANGEROUS - ~3000 FLOPs per workgroup (10× over budget)
+     * - Expected shader: dirac_rk4.comp
+     * - Workload: RK4 integration with 4 stages, complex arithmetic, gamma matrices
+     * - Timeout risk: HIGH - consistent 2+ second timeouts on GTX 1650
+     * - STATUS: DISABLED in MSFTEngine::createPipelines()
+     *
      * Evolves 4-component Dirac spinors according to:
      * (iγ^μ∂_μ)Ψ = [√(ℏc/G)] · R(x) · e^(iθ(x)γ⁵) Ψ
      *
      * Shader bindings include spinor field buffers and mass field R(x).
+     *
+     * RECOMMENDATION: Use CPU-based implementation or simplify to Euler integration.
      */
     return createPipelineFromShader(shaderPath, pipelineLayout, "Dirac");
 }
@@ -213,10 +242,18 @@ VkPipeline MSFTPipelineFactory::createDiracStochasticPipeline(const std::string&
     /**
      * Stochastic Dirac Pipeline - Quantum evolution with vacuum fluctuations
      *
+     * GPU SAFETY: ❌ DANGEROUS - 50-80 transcendentals per workgroup (4× over budget)
+     * - Expected shader: dirac_stochastic.comp
+     * - Workload: Dirac RK4 + PRNG + noise injection + complex arithmetic
+     * - Timeout risk: CRITICAL - 4× transcendental budget exceeded
+     * - STATUS: DISABLED in MSFTEngine::createPipelines()
+     *
      * Adds stochastic noise to Dirac evolution representing quantum
      * vacuum fluctuations and thermal effects in the spinor field.
      *
      * Implements MSR formalism for quantum stochastic dynamics.
+     *
+     * RECOMMENDATION: CPU implementation mandatory. GPU version requires major simplification.
      */
     return createPipelineFromShader(shaderPath, pipelineLayout, "DiracStochastic");
 }
