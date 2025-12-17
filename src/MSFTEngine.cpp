@@ -235,6 +235,9 @@ void MSFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     // Upload initial data to GPU
     uploadToGPU();
 
+    // Initialize pipeline factory with device
+    _pipelineFactory = std::make_unique<MSFTPipelineFactory>(_nova->_architect->logical_device);
+
     // Phase 3: Create compute pipelines
     createPipelines();
 }
@@ -251,13 +254,9 @@ void MSFTEngine::setInitialPhases(const std::vector<float>& theta) {
     _theta_data = theta;
 
     // Upload to GPU buffer if it exists
-    if (_theta_memory != VK_NULL_HANDLE) {
-        VkDevice device = _nova->_architect->logical_device;
+    if (_theta_memory != VK_NULL_HANDLE && _bufferManager) {
         size_t gridSizeBytes = sizeof(float) * _Nx * _Ny;
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _theta_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memcpy(mappedMemory, _theta_data.data(), gridSizeBytes);
-        vkUnmapMemory(device, _theta_memory);
+        _bufferManager->uploadData(_theta_memory, _theta_data.data(), gridSizeBytes);
     }
 }
 
@@ -273,13 +272,9 @@ void MSFTEngine::setNaturalFrequencies(const std::vector<float>& omega) {
     _omega_data = omega;
 
     // Upload to GPU buffer if it exists
-    if (_omega_memory != VK_NULL_HANDLE) {
-        VkDevice device = _nova->_architect->logical_device;
+    if (_omega_memory != VK_NULL_HANDLE && _bufferManager) {
         size_t gridSizeBytes = sizeof(float) * _Nx * _Ny;
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _omega_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memcpy(mappedMemory, _omega_data.data(), gridSizeBytes);
-        vkUnmapMemory(device, _omega_memory);
+        _bufferManager->uploadData(_omega_memory, _omega_data.data(), gridSizeBytes);
     }
 }
 
@@ -305,50 +300,31 @@ void MSFTEngine::step(float dt, float K, float damping) {
         return;
     }
 
-    VkDevice device = _nova->_architect->logical_device;
+    // Initialize compute dispatcher if needed
+    if (!_compute) {
+        uint32_t queueFamily = _nova->_architect->queues.indices.compute_family.value_or(
+            _nova->_architect->queues.indices.graphics_family.value());
+        VkQueue queue = _nova->_architect->queues.compute ?
+            _nova->_architect->queues.compute : _nova->_architect->queues.graphics;
 
-    // 1. Upload current data to GPU
+        _compute = std::make_unique<MSFTCompute>(
+            _nova->_architect->logical_device, queue, queueFamily);
+
+        if (!_compute->initialize()) {
+            _compute.reset();
+            return;
+        }
+    }
+
+    // Upload current data to GPU
     uploadToGPU();
 
-    // 2. Create command pool for compute operations
-    VkCommandPool commandPool;
-    VkCommandPoolCreateInfo poolInfo{};
-    poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-    poolInfo.queueFamilyIndex = _nova->_architect->queues.indices.compute_family.value_or(
-        _nova->_architect->queues.indices.graphics_family.value());  // Use compute or graphics queue
-    poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-
-    if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
-        // In production, throw exception
+    // Begin compute batch
+    if (!_compute->beginBatch()) {
         return;
     }
 
-    // 3. Create command buffer
-    VkCommandBufferAllocateInfo allocInfo{};
-    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-    allocInfo.commandPool = commandPool;
-    allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-    allocInfo.commandBufferCount = 1;
-
-    VkCommandBuffer commandBuffer;
-    if (vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer) != VK_SUCCESS) {
-        vkDestroyCommandPool(device, commandPool, nullptr);
-        return;
-    }
-
-    // 4. Begin recording commands
-    VkCommandBufferBeginInfo beginInfo{};
-    beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-    VkResult result = vkBeginCommandBuffer(commandBuffer, &beginInfo);
-    if (result != VK_SUCCESS) {
-        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-        vkDestroyCommandPool(device, commandPool, nullptr);
-        return;
-    }
-
-    // 5. Prepare push constants
+    // Prepare push constants
     struct PushConstants {
         float dt;
         float K;
@@ -369,112 +345,47 @@ void MSFTEngine::step(float dt, float K, float damping) {
     pushConstants.Nx = static_cast<float>(_Nx);
     pushConstants.Ny = static_cast<float>(_Ny);
     pushConstants.N_total = static_cast<float>(_Nx * _Ny);
-    pushConstants.neighborhood_radius = 1.0f;  // Default to immediate neighbors
+    pushConstants.neighborhood_radius = 1.0f;
 
-    // Calculate workgroup counts (shaders use local_size_x = 16, local_size_y = 16)
-    uint32_t workgroupsX = (_Nx + 15) / 16;
-    uint32_t workgroupsY = (_Ny + 15) / 16;
+    // Calculate workgroup counts
+    uint32_t workgroupsX, workgroupsY;
+    MSFTCompute::calculateWorkgroups(_Nx, _Ny, workgroupsX, workgroupsY);
 
-    // 6. Dispatch kuramoto_step shader with its specific descriptor set and pipeline layout
-    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _kuramoto_pipeline);
-    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
-                           _kuramoto_pipeline_layout, 0, 1, &_kuramoto_descriptor_set, 0, nullptr);
-    vkCmdPushConstants(commandBuffer, _kuramoto_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
-                      0, sizeof(pushConstants), &pushConstants);
-    vkCmdDispatch(commandBuffer, workgroupsX, workgroupsY, 1);
+    // Dispatch kuramoto shader
+    _compute->dispatchKuramoto(_kuramoto_pipeline, _kuramoto_pipeline_layout,
+                               _kuramoto_descriptor_set, &pushConstants,
+                               sizeof(pushConstants), workgroupsX, workgroupsY);
 
-    // 7. Memory barrier between shaders
-    VkMemoryBarrier memBarrier{};
-    memBarrier.sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
-    memBarrier.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
-    memBarrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+    // Memory barrier
+    _compute->insertMemoryBarrier();
 
-    vkCmdPipelineBarrier(commandBuffer,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        0, 1, &memBarrier, 0, nullptr, 0, nullptr);
-
-    // 8. Copy theta_out back to theta for next iteration
-    VkBufferCopy copyRegion{};
-    copyRegion.size = sizeof(float) * _Nx * _Ny;
-    vkCmdCopyBuffer(commandBuffer, _theta_out_buffer, _theta_buffer, 1, &copyRegion);
+    // Copy theta_out back to theta
+    _compute->copyBuffer(_theta_out_buffer, _theta_buffer,
+                        sizeof(float) * _Nx * _Ny);
 
     // Another barrier after copy
-    vkCmdPipelineBarrier(commandBuffer,
-                        VK_PIPELINE_STAGE_TRANSFER_BIT,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        0, 1, &memBarrier, 0, nullptr, 0, nullptr);
+    _compute->insertMemoryBarrier();
 
-    // 9. Dispatch sync_field shader with its specific descriptor set and pipeline layout
-    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _sync_pipeline);
-    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
-                           _sync_pipeline_layout, 0, 1, &_sync_descriptor_set, 0, nullptr);
-    vkCmdPushConstants(commandBuffer, _sync_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
-                      0, sizeof(pushConstants), &pushConstants);
-    vkCmdDispatch(commandBuffer, workgroupsX, workgroupsY, 1);
+    // Dispatch sync field shader
+    _compute->dispatchSyncField(_sync_pipeline, _sync_pipeline_layout,
+                                _sync_descriptor_set, &pushConstants,
+                                sizeof(pushConstants), workgroupsX, workgroupsY);
 
-    // 10. Memory barrier
-    vkCmdPipelineBarrier(commandBuffer,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        0, 1, &memBarrier, 0, nullptr, 0, nullptr);
+    // Memory barrier
+    _compute->insertMemoryBarrier();
 
-    // 11. Dispatch gravity_field shader with its specific descriptor set and pipeline layout
-    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _gravity_pipeline);
-    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
-                           _gravity_pipeline_layout, 0, 1, &_gravity_descriptor_set, 0, nullptr);
-    vkCmdPushConstants(commandBuffer, _gravity_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
-                      0, sizeof(pushConstants), &pushConstants);
-    vkCmdDispatch(commandBuffer, workgroupsX, workgroupsY, 1);
+    // Dispatch gravity field shader
+    _compute->dispatchGravityField(_gravity_pipeline, _gravity_pipeline_layout,
+                                   _gravity_descriptor_set, &pushConstants,
+                                   sizeof(pushConstants), workgroupsX, workgroupsY);
 
-    // 12. End command buffer recording
-    result = vkEndCommandBuffer(commandBuffer);
-    if (result != VK_SUCCESS) {
-        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-        vkDestroyCommandPool(device, commandPool, nullptr);
+    // Submit batch and wait for completion
+    if (!_compute->submitBatch(true)) {
         return;
     }
 
-    // 13. Submit command buffer to compute queue
-    VkSubmitInfo submitInfo{};
-    submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-    submitInfo.commandBufferCount = 1;
-    submitInfo.pCommandBuffers = &commandBuffer;
-
-    VkQueue computeQueue = _nova->_architect->queues.compute ?
-        _nova->_architect->queues.compute : _nova->_architect->queues.graphics;
-
-    // Create fence for synchronization
-    VkFenceCreateInfo fenceInfo{};
-    fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
-
-    VkFence fence;
-    result = vkCreateFence(device, &fenceInfo, nullptr, &fence);
-    if (result != VK_SUCCESS) {
-        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-        vkDestroyCommandPool(device, commandPool, nullptr);
-        return;
-    }
-
-    // Submit work to GPU
-    result = vkQueueSubmit(computeQueue, 1, &submitInfo, fence);
-    if (result != VK_SUCCESS) {
-        vkDestroyFence(device, fence, nullptr);
-        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-        vkDestroyCommandPool(device, commandPool, nullptr);
-        return;
-    }
-
-    // 14. Wait for GPU to complete
-    vkWaitForFences(device, 1, &fence, VK_TRUE, UINT64_MAX);
-
-    // 15. Download results from GPU
+    // Download results from GPU
     downloadFromGPU();
-
-    // 16. Cleanup
-    vkDestroyFence(device, fence, nullptr);
-    vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-    vkDestroyCommandPool(device, commandPool, nullptr);
 }
 
 std::vector<float> MSFTEngine::getSyncField() const {
@@ -625,111 +536,54 @@ std::complex<float> MSFTEngine::getSpinorComponent(uint32_t x, uint32_t y, uint3
 }
 
 void MSFTEngine::createBuffers() {
-    // Phase 2: Vulkan buffer allocation
-    // Get Vulkan device from Nova
+    // Phase 2: Vulkan buffer allocation using MSFTBufferManager
     VkDevice device = _nova->_architect->logical_device;
     VkPhysicalDevice physicalDevice = _nova->_architect->physical_device;
+
+    // Initialize buffer manager
+    _bufferManager = std::make_unique<MSFTBufferManager>(device, physicalDevice);
 
     // Calculate buffer sizes
     VkDeviceSize gridSize = sizeof(float) * _Nx * _Ny;
     VkDeviceSize spinorSize = sizeof(float) * 8 * _Nx * _Ny;  // 4 complex components = 8 floats
 
-    // Helper lambda to find memory type
-    auto findMemoryType = [physicalDevice](uint32_t typeFilter, VkMemoryPropertyFlags properties) -> uint32_t {
-        VkPhysicalDeviceMemoryProperties memProperties;
-        vkGetPhysicalDeviceMemoryProperties(physicalDevice, &memProperties);
+    // Create phase field buffers
+    auto [theta_buf, theta_mem] = _bufferManager->createStorageBuffer(gridSize);
+    _theta_buffer = theta_buf;
+    _theta_memory = theta_mem;
 
-        for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
-            if ((typeFilter & (1 << i)) &&
-                (memProperties.memoryTypes[i].propertyFlags & properties) == properties) {
-                return i;
-            }
-        }
+    auto [theta_out_buf, theta_out_mem] = _bufferManager->createStorageBuffer(gridSize);
+    _theta_out_buffer = theta_out_buf;
+    _theta_out_memory = theta_out_mem;
 
-        // Should handle error properly in production
-        return 0;
-    };
+    // Create natural frequency buffer
+    auto [omega_buf, omega_mem] = _bufferManager->createStorageBuffer(gridSize);
+    _omega_buffer = omega_buf;
+    _omega_memory = omega_mem;
 
-    // Helper lambda to create buffer
-    auto createBuffer = [device, findMemoryType](
-        VkDeviceSize size,
-        VkBufferUsageFlags usage,
-        VkMemoryPropertyFlags properties,
-        VkBuffer& buffer,
-        VkDeviceMemory& bufferMemory) {
+    // Create synchronization field buffer
+    auto [r_field_buf, r_field_mem] = _bufferManager->createStorageBuffer(gridSize);
+    _R_field_buffer = r_field_buf;
+    _R_field_memory = r_field_mem;
 
-        // Create buffer
-        VkBufferCreateInfo bufferInfo{};
-        bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-        bufferInfo.size = size;
-        bufferInfo.usage = usage;
-        bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+    // Create gravity field buffers (separate x and y components)
+    auto [grav_x_buf, grav_x_mem] = _bufferManager->createStorageBuffer(gridSize);
+    _gravity_x_buffer = grav_x_buf;
+    _gravity_x_memory = grav_x_mem;
 
-        if (vkCreateBuffer(device, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
-            // In production, throw exception
-            return;
-        }
+    auto [grav_y_buf, grav_y_mem] = _bufferManager->createStorageBuffer(gridSize);
+    _gravity_y_buffer = grav_y_buf;
+    _gravity_y_memory = grav_y_mem;
 
-        // Get memory requirements
-        VkMemoryRequirements memRequirements;
-        vkGetBufferMemoryRequirements(device, buffer, &memRequirements);
+    // Create spinor field buffer (4 complex components per grid point)
+    auto [spinor_buf, spinor_mem] = _bufferManager->createStorageBuffer(spinorSize);
+    _spinor_buffer = spinor_buf;
+    _spinor_memory = spinor_mem;
 
-        // Allocate memory
-        VkMemoryAllocateInfo allocInfo{};
-        allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        allocInfo.allocationSize = memRequirements.size;
-        allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
-
-        if (vkAllocateMemory(device, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
-            // In production, throw exception
-            vkDestroyBuffer(device, buffer, nullptr);
-            buffer = VK_NULL_HANDLE;
-            return;
-        }
-
-        // Bind memory to buffer
-        vkBindBufferMemory(device, buffer, bufferMemory, 0);
-    };
-
-    // Create buffers for physics fields
-    // Using STORAGE_BUFFER for compute shader access
-    // Adding TRANSFER flags for buffer copies
-    // Using HOST_VISIBLE | HOST_COHERENT for CPU upload/download
-    VkBufferUsageFlags storageUsage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT |
-                                      VK_BUFFER_USAGE_TRANSFER_SRC_BIT |
-                                      VK_BUFFER_USAGE_TRANSFER_DST_BIT;
-    VkMemoryPropertyFlags hostProperties = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
-                                          VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
-
-    // Phase field buffers
-    createBuffer(gridSize, storageUsage, hostProperties,
-                _theta_buffer, _theta_memory);
-
-    createBuffer(gridSize, storageUsage, hostProperties,
-                _theta_out_buffer, _theta_out_memory);
-
-    // Natural frequency buffer
-    createBuffer(gridSize, storageUsage, hostProperties,
-                _omega_buffer, _omega_memory);
-
-    // Synchronization field buffer
-    createBuffer(gridSize, storageUsage, hostProperties,
-                _R_field_buffer, _R_field_memory);
-
-    // Gravity field buffers (separate x and y components)
-    createBuffer(gridSize, storageUsage, hostProperties,
-                _gravity_x_buffer, _gravity_x_memory);
-
-    createBuffer(gridSize, storageUsage, hostProperties,
-                _gravity_y_buffer, _gravity_y_memory);
-
-    // Spinor field buffer (4 complex components per grid point)
-    createBuffer(spinorSize, storageUsage, hostProperties,
-                _spinor_buffer, _spinor_memory);
-
-    // Spinor density buffer (|Ψ|² for quantum-classical feedback)
-    createBuffer(gridSize, storageUsage, hostProperties,
-                _spinor_density_buffer, _spinor_density_memory);
+    // Create spinor density buffer (|Ψ|² for quantum-classical feedback)
+    auto [spinor_dens_buf, spinor_dens_mem] = _bufferManager->createStorageBuffer(gridSize);
+    _spinor_density_buffer = spinor_dens_buf;
+    _spinor_density_memory = spinor_dens_mem;
 }
 
 void MSFTEngine::createPipelines() {
@@ -746,40 +600,6 @@ void MSFTEngine::createPipelines() {
      */
 
     VkDevice device = _nova->_architect->logical_device;
-
-    // Helper lambda to load SPIR-V shader file
-    auto loadShaderFile = [](const std::string& path) -> std::vector<uint32_t> {
-        std::ifstream file(path, std::ios::ate | std::ios::binary);
-
-        if (!file.is_open()) {
-            // In production, throw exception
-            return {};
-        }
-
-        size_t fileSize = static_cast<size_t>(file.tellg());
-        std::vector<uint32_t> buffer(fileSize / sizeof(uint32_t));
-
-        file.seekg(0);
-        file.read(reinterpret_cast<char*>(buffer.data()), fileSize);
-        file.close();
-
-        return buffer;
-    };
-
-    // Helper lambda to create shader module from SPIR-V code
-    auto createShaderModule = [device](const std::vector<uint32_t>& code) -> VkShaderModule {
-        VkShaderModuleCreateInfo createInfo{};
-        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-        createInfo.codeSize = code.size() * sizeof(uint32_t);
-        createInfo.pCode = code.data();
-
-        VkShaderModule shaderModule;
-        if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
-            return VK_NULL_HANDLE;
-        }
-
-        return shaderModule;
-    };
 
     // 1. Create descriptor set layouts for each shader (each has different bindings)
 
@@ -1082,167 +902,115 @@ void MSFTEngine::createPipelines() {
                               gravity_writes.data(), 0, nullptr);
     }
 
-    // 7. Load and create compute pipelines for each shader
+    // 7. Create compute pipelines using factory
+    // Note: Factory is already created in initialize() method
 
-    // Helper lambda to create compute pipeline with specific layout
-    auto createComputePipeline = [device, &loadShaderFile, &createShaderModule]
-        (const std::string& shaderPath, VkPipelineLayout pipelineLayout) -> VkPipeline {
-        // Load SPIR-V shader
-        auto shaderCode = loadShaderFile(shaderPath);
-        if (shaderCode.empty()) {
-            return VK_NULL_HANDLE;
-        }
+    // Create the three compute pipelines with their specific layouts using factory
+    _kuramoto_pipeline = _pipelineFactory->createKuramotoPipeline(
+        "/home/persist/neotec/0rigin/shaders/smft/kuramoto_step.comp.spv",
+        _kuramoto_pipeline_layout);
 
-        // Create shader module
-        VkShaderModule shaderModule = createShaderModule(shaderCode);
-        if (shaderModule == VK_NULL_HANDLE) {
-            return VK_NULL_HANDLE;
-        }
+    _sync_pipeline = _pipelineFactory->createSyncFieldPipeline(
+        "/home/persist/neotec/0rigin/shaders/smft/sync_field.comp.spv",
+        _sync_pipeline_layout);
 
-        // Create compute pipeline
-        VkPipelineShaderStageCreateInfo shaderStageInfo{};
-        shaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-        shaderStageInfo.stage = VK_SHADER_STAGE_COMPUTE_BIT;
-        shaderStageInfo.module = shaderModule;
-        shaderStageInfo.pName = "main";
+    _gravity_pipeline = _pipelineFactory->createGravityFieldPipeline(
+        "/home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv",
+        _gravity_pipeline_layout);
 
-        VkComputePipelineCreateInfo pipelineInfo{};
-        pipelineInfo.sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
-        pipelineInfo.stage = shaderStageInfo;
-        pipelineInfo.layout = pipelineLayout;  // Use specific layout for this pipeline
+    // Create stochastic pipelines if layouts exist
+    if (_kuramoto_pipeline_layout != VK_NULL_HANDLE) {
+        _kuramoto_stochastic_pipeline = _pipelineFactory->createKuramotoStochasticPipeline(
+            "/home/persist/neotec/0rigin/shaders/smft/kuramoto_stochastic.comp.spv",
+            _kuramoto_pipeline_layout);
+    }
 
-        VkPipeline pipeline;
-        if (vkCreateComputePipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo,
-                                     nullptr, &pipeline) != VK_SUCCESS) {
-            vkDestroyShaderModule(device, shaderModule, nullptr);
-            return VK_NULL_HANDLE;
-        }
+    // Create Dirac pipelines if layouts exist
+    if (_dirac_pipeline_layout != VK_NULL_HANDLE) {
+        _dirac_pipeline = _pipelineFactory->createDiracPipeline(
+            "/home/persist/neotec/0rigin/shaders/smft/dirac.comp.spv",
+            _dirac_pipeline_layout);
 
-        // Cleanup shader module (pipeline keeps reference internally)
-        vkDestroyShaderModule(device, shaderModule, nullptr);
-
-        return pipeline;
-    };
-
-    // Create the three compute pipelines with their specific layouts
-    _kuramoto_pipeline = createComputePipeline("/home/persist/neotec/0rigin/shaders/smft/kuramoto_step.comp.spv",
-                                               _kuramoto_pipeline_layout);
-    _sync_pipeline = createComputePipeline("/home/persist/neotec/0rigin/shaders/smft/sync_field.comp.spv",
-                                           _sync_pipeline_layout);
-    _gravity_pipeline = createComputePipeline("/home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv",
-                                              _gravity_pipeline_layout);
+        _dirac_stochastic_pipeline = _pipelineFactory->createDiracStochasticPipeline(
+            "/home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp.spv",
+            _dirac_pipeline_layout);
+    }
 
     // Note: We keep descriptor pool alive for lifetime of engine (cleanup in destructor)
     // Store it as member variable if needed for cleanup
 }
 
 void MSFTEngine::uploadToGPU() {
-    // Upload CPU-side data to GPU buffers
-    VkDevice device = _nova->_architect->logical_device;
+    // Upload CPU-side data to GPU buffers using buffer manager
+    if (!_bufferManager) return;
 
     size_t gridSizeBytes = sizeof(float) * _Nx * _Ny;
 
     // Upload theta data
     if (_theta_memory != VK_NULL_HANDLE && !_theta_data.empty()) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _theta_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memcpy(mappedMemory, _theta_data.data(), gridSizeBytes);
-        vkUnmapMemory(device, _theta_memory);
+        _bufferManager->uploadData(_theta_memory, _theta_data.data(), gridSizeBytes);
     }
 
     // Upload omega data
     if (_omega_memory != VK_NULL_HANDLE && !_omega_data.empty()) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _omega_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memcpy(mappedMemory, _omega_data.data(), gridSizeBytes);
-        vkUnmapMemory(device, _omega_memory);
+        _bufferManager->uploadData(_omega_memory, _omega_data.data(), gridSizeBytes);
     }
 
     // Initialize R_field buffer to zero (will be computed by shader)
     if (_R_field_memory != VK_NULL_HANDLE) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _R_field_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memset(mappedMemory, 0, gridSizeBytes);
-        vkUnmapMemory(device, _R_field_memory);
+        _bufferManager->clearBuffer(_R_field_memory, gridSizeBytes);
     }
 
     // Initialize gravity buffers to zero
     if (_gravity_x_memory != VK_NULL_HANDLE) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _gravity_x_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memset(mappedMemory, 0, gridSizeBytes);
-        vkUnmapMemory(device, _gravity_x_memory);
+        _bufferManager->clearBuffer(_gravity_x_memory, gridSizeBytes);
     }
 
     if (_gravity_y_memory != VK_NULL_HANDLE) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _gravity_y_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memset(mappedMemory, 0, gridSizeBytes);
-        vkUnmapMemory(device, _gravity_y_memory);
+        _bufferManager->clearBuffer(_gravity_y_memory, gridSizeBytes);
     }
 
     // Upload spinor field data (4 complex components = 8 floats per grid point)
     if (_spinor_memory != VK_NULL_HANDLE && !_spinor_field.empty()) {
         size_t spinorSizeBytes = sizeof(std::complex<float>) * _spinor_field.size();
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _spinor_memory, 0, spinorSizeBytes, 0, &mappedMemory);
-        memcpy(mappedMemory, _spinor_field.data(), spinorSizeBytes);
-        vkUnmapMemory(device, _spinor_memory);
+        _bufferManager->uploadData(_spinor_memory, _spinor_field.data(), spinorSizeBytes);
     }
 
     // Initialize spinor density buffer to zero (will be computed from spinor field)
     if (_spinor_density_memory != VK_NULL_HANDLE) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _spinor_density_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memset(mappedMemory, 0, gridSizeBytes);
-        vkUnmapMemory(device, _spinor_density_memory);
+        _bufferManager->clearBuffer(_spinor_density_memory, gridSizeBytes);
     }
 }
 
 void MSFTEngine::downloadFromGPU() {
-    // Download GPU results back to CPU-side arrays
-    VkDevice device = _nova->_architect->logical_device;
+    // Download GPU results back to CPU-side arrays using buffer manager
+    if (!_bufferManager) return;
 
     size_t gridSizeBytes = sizeof(float) * _Nx * _Ny;
 
     // Download updated theta field (from theta_out buffer)
     if (_theta_out_memory != VK_NULL_HANDLE) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _theta_out_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memcpy(_theta_data.data(), mappedMemory, gridSizeBytes);
-        vkUnmapMemory(device, _theta_out_memory);
+        _bufferManager->downloadData(_theta_out_memory, _theta_data.data(), gridSizeBytes);
     }
 
     // Download synchronization field
     if (_R_field_memory != VK_NULL_HANDLE) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _R_field_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memcpy(_R_field_data.data(), mappedMemory, gridSizeBytes);
-        vkUnmapMemory(device, _R_field_memory);
+        _bufferManager->downloadData(_R_field_memory, _R_field_data.data(), gridSizeBytes);
     }
 
     // Download gravity field components
     if (_gravity_x_memory != VK_NULL_HANDLE && !_gravity_x_data.empty()) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _gravity_x_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memcpy(_gravity_x_data.data(), mappedMemory, gridSizeBytes);
-        vkUnmapMemory(device, _gravity_x_memory);
+        _bufferManager->downloadData(_gravity_x_memory, _gravity_x_data.data(), gridSizeBytes);
     }
 
     if (_gravity_y_memory != VK_NULL_HANDLE && !_gravity_y_data.empty()) {
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _gravity_y_memory, 0, gridSizeBytes, 0, &mappedMemory);
-        memcpy(_gravity_y_data.data(), mappedMemory, gridSizeBytes);
-        vkUnmapMemory(device, _gravity_y_memory);
+        _bufferManager->downloadData(_gravity_y_memory, _gravity_y_data.data(), gridSizeBytes);
     }
 
     // Download updated spinor field
     if (_spinor_memory != VK_NULL_HANDLE && !_spinor_field.empty()) {
         size_t spinorSizeBytes = sizeof(std::complex<float>) * _spinor_field.size();
-        void* mappedMemory = nullptr;
-        vkMapMemory(device, _spinor_memory, 0, spinorSizeBytes, 0, &mappedMemory);
-        memcpy(_spinor_field.data(), mappedMemory, spinorSizeBytes);
-        vkUnmapMemory(device, _spinor_memory);
+        _bufferManager->downloadData(_spinor_memory, _spinor_field.data(), spinorSizeBytes);
     }
 }
 
@@ -1251,23 +1019,19 @@ void MSFTEngine::destroyResources() {
     if (_nova && _nova->_architect) {
         VkDevice device = _nova->_architect->logical_device;
 
-        // Destroy pipelines (Phase 3 - will be created later)
-        if (_dirac_pipeline != VK_NULL_HANDLE) {
-            vkDestroyPipeline(device, _dirac_pipeline, nullptr);
-            _dirac_pipeline = VK_NULL_HANDLE;
+        // Destroy all pipelines via factory
+        if (_pipelineFactory) {
+            _pipelineFactory->destroyAllPipelines();
+            _pipelineFactory.reset();
         }
-        if (_gravity_pipeline != VK_NULL_HANDLE) {
-            vkDestroyPipeline(device, _gravity_pipeline, nullptr);
-            _gravity_pipeline = VK_NULL_HANDLE;
-        }
-        if (_kuramoto_pipeline != VK_NULL_HANDLE) {
-            vkDestroyPipeline(device, _kuramoto_pipeline, nullptr);
-            _kuramoto_pipeline = VK_NULL_HANDLE;
-        }
-        if (_sync_pipeline != VK_NULL_HANDLE) {
-            vkDestroyPipeline(device, _sync_pipeline, nullptr);
-            _sync_pipeline = VK_NULL_HANDLE;
-        }
+
+        // Clear pipeline handles
+        _dirac_pipeline = VK_NULL_HANDLE;
+        _gravity_pipeline = VK_NULL_HANDLE;
+        _kuramoto_pipeline = VK_NULL_HANDLE;
+        _sync_pipeline = VK_NULL_HANDLE;
+        _kuramoto_stochastic_pipeline = VK_NULL_HANDLE;
+        _dirac_stochastic_pipeline = VK_NULL_HANDLE;
 
         // Destroy pipeline layouts
         if (_kuramoto_pipeline_layout != VK_NULL_HANDLE) {
@@ -1281,6 +1045,10 @@ void MSFTEngine::destroyResources() {
         if (_gravity_pipeline_layout != VK_NULL_HANDLE) {
             vkDestroyPipelineLayout(device, _gravity_pipeline_layout, nullptr);
             _gravity_pipeline_layout = VK_NULL_HANDLE;
+        }
+        if (_dirac_pipeline_layout != VK_NULL_HANDLE) {
+            vkDestroyPipelineLayout(device, _dirac_pipeline_layout, nullptr);
+            _dirac_pipeline_layout = VK_NULL_HANDLE;
         }
 
         // Destroy descriptor set layouts
@@ -1296,78 +1064,40 @@ void MSFTEngine::destroyResources() {
             vkDestroyDescriptorSetLayout(device, _gravity_descriptor_layout, nullptr);
             _gravity_descriptor_layout = VK_NULL_HANDLE;
         }
+        if (_dirac_descriptor_layout != VK_NULL_HANDLE) {
+            vkDestroyDescriptorSetLayout(device, _dirac_descriptor_layout, nullptr);
+            _dirac_descriptor_layout = VK_NULL_HANDLE;
+        }
         if (_descriptor_pool != VK_NULL_HANDLE) {
             vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
             _descriptor_pool = VK_NULL_HANDLE;
         }
 
-        // Destroy buffers
-        if (_spinor_buffer != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device, _spinor_buffer, nullptr);
-            _spinor_buffer = VK_NULL_HANDLE;
-        }
-        if (_theta_buffer != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device, _theta_buffer, nullptr);
-            _theta_buffer = VK_NULL_HANDLE;
-        }
-        if (_theta_out_buffer != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device, _theta_out_buffer, nullptr);
-            _theta_out_buffer = VK_NULL_HANDLE;
-        }
-        if (_omega_buffer != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device, _omega_buffer, nullptr);
-            _omega_buffer = VK_NULL_HANDLE;
-        }
-        if (_R_field_buffer != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device, _R_field_buffer, nullptr);
-            _R_field_buffer = VK_NULL_HANDLE;
-        }
-        if (_gravity_x_buffer != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device, _gravity_x_buffer, nullptr);
-            _gravity_x_buffer = VK_NULL_HANDLE;
-        }
-        if (_gravity_y_buffer != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device, _gravity_y_buffer, nullptr);
-            _gravity_y_buffer = VK_NULL_HANDLE;
-        }
-        if (_spinor_density_buffer != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device, _spinor_density_buffer, nullptr);
-            _spinor_density_buffer = VK_NULL_HANDLE;
+        // Destroy all buffers via buffer manager
+        if (_bufferManager) {
+            _bufferManager->destroyAllBuffers();
+            _bufferManager.reset();
         }
 
-        // Free memory
-        if (_spinor_memory != VK_NULL_HANDLE) {
-            vkFreeMemory(device, _spinor_memory, nullptr);
-            _spinor_memory = VK_NULL_HANDLE;
-        }
-        if (_theta_memory != VK_NULL_HANDLE) {
-            vkFreeMemory(device, _theta_memory, nullptr);
-            _theta_memory = VK_NULL_HANDLE;
-        }
-        if (_theta_out_memory != VK_NULL_HANDLE) {
-            vkFreeMemory(device, _theta_out_memory, nullptr);
-            _theta_out_memory = VK_NULL_HANDLE;
-        }
-        if (_omega_memory != VK_NULL_HANDLE) {
-            vkFreeMemory(device, _omega_memory, nullptr);
-            _omega_memory = VK_NULL_HANDLE;
-        }
-        if (_R_field_memory != VK_NULL_HANDLE) {
-            vkFreeMemory(device, _R_field_memory, nullptr);
-            _R_field_memory = VK_NULL_HANDLE;
-        }
-        if (_gravity_x_memory != VK_NULL_HANDLE) {
-            vkFreeMemory(device, _gravity_x_memory, nullptr);
-            _gravity_x_memory = VK_NULL_HANDLE;
-        }
-        if (_gravity_y_memory != VK_NULL_HANDLE) {
-            vkFreeMemory(device, _gravity_y_memory, nullptr);
-            _gravity_y_memory = VK_NULL_HANDLE;
-        }
-        if (_spinor_density_memory != VK_NULL_HANDLE) {
-            vkFreeMemory(device, _spinor_density_memory, nullptr);
-            _spinor_density_memory = VK_NULL_HANDLE;
-        }
+        // Clear buffer handles
+        _spinor_buffer = VK_NULL_HANDLE;
+        _theta_buffer = VK_NULL_HANDLE;
+        _theta_out_buffer = VK_NULL_HANDLE;
+        _omega_buffer = VK_NULL_HANDLE;
+        _R_field_buffer = VK_NULL_HANDLE;
+        _gravity_x_buffer = VK_NULL_HANDLE;
+        _gravity_y_buffer = VK_NULL_HANDLE;
+        _spinor_density_buffer = VK_NULL_HANDLE;
+
+        // Clear memory handles
+        _spinor_memory = VK_NULL_HANDLE;
+        _theta_memory = VK_NULL_HANDLE;
+        _theta_out_memory = VK_NULL_HANDLE;
+        _omega_memory = VK_NULL_HANDLE;
+        _R_field_memory = VK_NULL_HANDLE;
+        _gravity_x_memory = VK_NULL_HANDLE;
+        _gravity_y_memory = VK_NULL_HANDLE;
+        _spinor_density_memory = VK_NULL_HANDLE;
     }
 }
 
@@ -1425,57 +1155,39 @@ void MSFTEngine::stepStochastic(float dt, float K, float damping,
         return;
     }
 
-    VkDevice device = _nova->_architect->logical_device;
+    // Initialize compute dispatcher if needed
+    if (!_compute) {
+        uint32_t queueFamily = _nova->_architect->queues.indices.compute_family.value_or(
+            _nova->_architect->queues.indices.graphics_family.value());
+        VkQueue queue = _nova->_architect->queues.compute ?
+            _nova->_architect->queues.compute : _nova->_architect->queues.graphics;
 
-    // 1. Upload current data to GPU
+        _compute = std::make_unique<MSFTCompute>(
+            _nova->_architect->logical_device, queue, queueFamily);
+
+        if (!_compute->initialize()) {
+            _compute.reset();
+            return;
+        }
+    }
+
+    // Upload current data to GPU
     uploadToGPU();
 
-    // 2. Create command pool for compute operations
-    VkCommandPool commandPool;
-    VkCommandPoolCreateInfo poolInfo{};
-    poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-    poolInfo.queueFamilyIndex = _nova->_architect->queues.indices.compute_family.value_or(
-        _nova->_architect->queues.indices.graphics_family.value());
-    poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-
-    if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
+    // Begin compute batch
+    if (!_compute->beginBatch()) {
         return;
     }
 
-    // 3. Create command buffer
-    VkCommandBufferAllocateInfo allocInfo{};
-    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-    allocInfo.commandPool = commandPool;
-    allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-    allocInfo.commandBufferCount = 1;
-
-    VkCommandBuffer commandBuffer;
-    if (vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer) != VK_SUCCESS) {
-        vkDestroyCommandPool(device, commandPool, nullptr);
-        return;
-    }
-
-    // 4. Begin command buffer recording
-    VkCommandBufferBeginInfo beginInfo{};
-    beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-    if (vkBeginCommandBuffer(commandBuffer, &beginInfo) != VK_SUCCESS) {
-        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-        vkDestroyCommandPool(device, commandPool, nullptr);
-        return;
-    }
-
-    // 5. Dispatch stochastic Kuramoto shader
-    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _kuramoto_stochastic_pipeline);
-    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
-                           _kuramoto_pipeline_layout, 0, 1, &_kuramoto_descriptor_set, 0, nullptr);
+    // Calculate workgroup counts
+    uint32_t workgroupsX, workgroupsY;
+    MSFTCompute::calculateWorkgroups(_Nx, _Ny, workgroupsX, workgroupsY);
 
     // Push constants for stochastic Kuramoto
-    struct {
+    struct KuramotoPush {
         float dt;
         float K;
-        float sigma;       // sigma_theta
+        float sigma;
         float damping;
         float omega_mean;
         uint32_t Nx;
@@ -1485,36 +1197,22 @@ void MSFTEngine::stepStochastic(float dt, float K, float damping,
         dt, K, sigma_theta, damping, 0.0f, _Nx, _Ny, _time_step
     };
 
-    vkCmdPushConstants(commandBuffer, _kuramoto_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
-                       0, sizeof(kuramoto_push), &kuramoto_push);
+    // Dispatch stochastic Kuramoto
+    _compute->dispatchKuramoto(_kuramoto_stochastic_pipeline,
+                               _kuramoto_pipeline_layout,
+                               _kuramoto_descriptor_set,
+                               &kuramoto_push, sizeof(kuramoto_push),
+                               workgroupsX, workgroupsY);
 
-    // Dispatch with 16x16 workgroups
-    uint32_t workgroup_x = (_Nx + 15) / 16;
-    uint32_t workgroup_y = (_Ny + 15) / 16;
-    vkCmdDispatch(commandBuffer, workgroup_x, workgroup_y, 1);
-
-    // Memory barrier before sync field
-    VkMemoryBarrier barrier{};
-    barrier.sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
-    barrier.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
-    barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
-
-    vkCmdPipelineBarrier(commandBuffer,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        0, 1, &barrier, 0, nullptr, 0, nullptr);
+    // Memory barrier
+    _compute->insertMemoryBarrier();
 
     // Swap theta buffers
     std::swap(_theta_buffer, _theta_out_buffer);
     std::swap(_theta_memory, _theta_out_memory);
 
-    // 6. Dispatch sync field shader
-    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _sync_pipeline);
-    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
-                           _sync_pipeline_layout, 0, 1, &_sync_descriptor_set, 0, nullptr);
-
-    // Push constants for sync field
-    struct {
+    // Push constants for sync and gravity
+    struct SyncPush {
         float dt;
         float K;
         float damping;
@@ -1525,44 +1223,33 @@ void MSFTEngine::stepStochastic(float dt, float K, float damping,
         uint32_t N_total;
         uint32_t neighborhood_radius;
     } sync_push = {
-        dt, K, damping, _Delta, _chiral_angle, _Nx, _Ny, _Nx * _Ny, 1  // neighborhood_radius must be 1 to match sync_field.comp shared memory size [18][18]
+        dt, K, damping, _Delta, _chiral_angle, _Nx, _Ny,
+        _Nx * _Ny, 1  // neighborhood_radius = 1
     };
 
-    vkCmdPushConstants(commandBuffer, _sync_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
-                       0, sizeof(sync_push), &sync_push);
+    // Dispatch sync field
+    _compute->dispatchSyncField(_sync_pipeline, _sync_pipeline_layout,
+                                _sync_descriptor_set,
+                                &sync_push, sizeof(sync_push),
+                                workgroupsX, workgroupsY);
 
-    vkCmdDispatch(commandBuffer, workgroup_x, workgroup_y, 1);
+    // Barrier before gravity
+    _compute->insertMemoryBarrier();
 
-    // Barrier before gravity field
-    vkCmdPipelineBarrier(commandBuffer,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        0, 1, &barrier, 0, nullptr, 0, nullptr);
+    // Dispatch gravity field
+    _compute->dispatchGravityField(_gravity_pipeline, _gravity_pipeline_layout,
+                                   _gravity_descriptor_set,
+                                   &sync_push, sizeof(sync_push),
+                                   workgroupsX, workgroupsY);
 
-    // 7. Dispatch gravity field shader
-    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _gravity_pipeline);
-    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
-                           _gravity_pipeline_layout, 0, 1, &_gravity_descriptor_set, 0, nullptr);
+    // Barrier before Dirac
+    _compute->insertMemoryBarrier();
 
-    vkCmdPushConstants(commandBuffer, _gravity_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
-                       0, sizeof(sync_push), &sync_push);
+    // Dispatch stochastic Dirac if available
+    if (_dirac_stochastic_pipeline != VK_NULL_HANDLE &&
+        _dirac_descriptor_set != VK_NULL_HANDLE) {
 
-    vkCmdDispatch(commandBuffer, workgroup_x, workgroup_y, 1);
-
-    // Barrier before Dirac stochastic
-    vkCmdPipelineBarrier(commandBuffer,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                        0, 1, &barrier, 0, nullptr, 0, nullptr);
-
-    // 8. Dispatch stochastic Dirac shader
-    if (_dirac_stochastic_pipeline != VK_NULL_HANDLE && _dirac_descriptor_set != VK_NULL_HANDLE) {
-        vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _dirac_stochastic_pipeline);
-        vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
-                               _dirac_pipeline_layout, 0, 1, &_dirac_descriptor_set, 0, nullptr);
-
-        // Push constants for stochastic Dirac
-        struct {
+        struct DiracPush {
             float dt;
             float K;
             float sigma_psi;
@@ -1575,35 +1262,18 @@ void MSFTEngine::stepStochastic(float dt, float K, float damping,
             dt, K, sigma_psi, damping, _Delta, _Nx, _Ny, _time_step
         };
 
-        vkCmdPushConstants(commandBuffer, _dirac_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
-                          0, sizeof(dirac_push), &dirac_push);
-
-        vkCmdDispatch(commandBuffer, workgroup_x, workgroup_y, 1);
+        _compute->dispatchDiracEvolution(_dirac_stochastic_pipeline,
+                                        _dirac_pipeline_layout,
+                                        _dirac_descriptor_set,
+                                        &dirac_push, sizeof(dirac_push),
+                                        workgroupsX, workgroupsY);
     }
 
-    // 9. End command buffer recording
-    if (vkEndCommandBuffer(commandBuffer) != VK_SUCCESS) {
-        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-        vkDestroyCommandPool(device, commandPool, nullptr);
+    // Submit batch and wait
+    if (!_compute->submitBatch(true)) {
         return;
     }
 
-    // 10. Submit command buffer to compute queue
-    VkSubmitInfo submitInfo{};
-    submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-    submitInfo.commandBufferCount = 1;
-    submitInfo.pCommandBuffers = &commandBuffer;
-
-    VkQueue computeQueue = _nova->_architect->queues.compute ?
-        _nova->_architect->queues.compute : _nova->_architect->queues.graphics;
-
-    vkQueueSubmit(computeQueue, 1, &submitInfo, VK_NULL_HANDLE);
-    vkQueueWaitIdle(computeQueue);
-
-    // 11. Download results from GPU
+    // Download results from GPU
     downloadFromGPU();
-
-    // 12. Cleanup
-    vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-    vkDestroyCommandPool(device, commandPool, nullptr);
 }

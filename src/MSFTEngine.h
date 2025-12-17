@@ -1,8 +1,12 @@
 #pragma once
 #include "Nova.h"
+#include "MSFTPipelineFactory.h"
+#include "MSFTBufferManager.h"
+#include "MSFTCompute.h"
 #include <vulkan/vulkan.h>
 #include <vector>
 #include <complex>
+#include <memory>
 
 /**
  * MSFTEngine - Mass Synchronization Field Theory Physics Compute Engine
@@ -191,4 +195,13 @@ private:
     void uploadToGPU();         // Upload CPU data to GPU buffers
     void downloadFromGPU();     // Download GPU results to CPU arrays
     void destroyResources();    // Cleanup all Vulkan resources
+
+    // Pipeline factory for managing shader compilation
+    std::unique_ptr<MSFTPipelineFactory> _pipelineFactory;
+
+    // Compute dispatcher for GPU operations
+    std::unique_ptr<MSFTCompute> _compute;
+
+    // Buffer manager for handling Vulkan buffer operations
+    std::unique_ptr<MSFTBufferManager> _bufferManager;
 };

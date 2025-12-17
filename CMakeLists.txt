@@ -99,6 +99,9 @@ target_include_directories(imgui PUBLIC
 set(MSFT_SOURCES
     src/MSFT.cpp
     src/MSFTEngine.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
     main.cpp
 )
 
@@ -134,6 +137,9 @@ set_target_properties(MSFT PROPERTIES
 add_executable(test_msft_gpu
     test/test_msft_gpu.cpp
     src/MSFTEngine.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
 )
 
 target_include_directories(test_msft_gpu PRIVATE
@@ -162,6 +168,9 @@ set_target_properties(test_msft_gpu PROPERTIES
 add_executable(test_descriptor_bindings
     test/test_descriptor_bindings.cpp
     src/MSFTEngine.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
 )
 
 target_include_directories(test_descriptor_bindings PRIVATE
@@ -190,6 +199,9 @@ set_target_properties(test_descriptor_bindings PROPERTIES
 add_executable(test_stochastic_particle
     test/test_stochastic_particle.cpp
     src/MSFTEngine.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
 )
 
 target_include_directories(test_stochastic_particle PRIVATE
