@@ -238,6 +238,9 @@ void MSFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     // Initialize pipeline factory with device
     _pipelineFactory = std::make_unique<MSFTPipelineFactory>(_nova->_architect->logical_device);
 
+    // Initialize descriptor manager with device
+    _descriptorManager = std::make_unique<MSFTDescriptorManager>(_nova->_architect->logical_device);
+
     // Phase 3: Create compute pipelines
     createPipelines();
 }
@@ -601,121 +604,31 @@ void MSFTEngine::createPipelines() {
 
     VkDevice device = _nova->_architect->logical_device;
 
-    // 1. Create descriptor set layouts for each shader (each has different bindings)
+    // 1. Create descriptor set layouts for each shader using descriptor manager
 
     // Kuramoto shader layout: theta, theta_out, omega, spinor_density (4 bindings)
-    std::vector<VkDescriptorSetLayoutBinding> kuramoto_bindings = {
-        // Binding 0: theta_buffer (input phases)
-        {
-            .binding = 0,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        },
-        // Binding 1: theta_out_buffer (output phases)
-        {
-            .binding = 1,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        },
-        // Binding 2: omega_buffer (natural frequencies)
-        {
-            .binding = 2,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        },
-        // Binding 3: spinor_density_buffer (quantum feedback)
-        {
-            .binding = 3,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        }
-    };
+    std::vector<VkDescriptorSetLayoutBinding> kuramoto_bindings;
+    kuramoto_bindings.push_back(_descriptorManager->createBinding(0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
+    kuramoto_bindings.push_back(_descriptorManager->createBinding(1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
+    kuramoto_bindings.push_back(_descriptorManager->createBinding(2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
+    kuramoto_bindings.push_back(_descriptorManager->createBinding(3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
 
-    VkDescriptorSetLayoutCreateInfo kuramoto_layout_info{};
-    kuramoto_layout_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
-    kuramoto_layout_info.bindingCount = static_cast<uint32_t>(kuramoto_bindings.size());
-    kuramoto_layout_info.pBindings = kuramoto_bindings.data();
-
-    if (vkCreateDescriptorSetLayout(device, &kuramoto_layout_info, nullptr, &_kuramoto_descriptor_layout) != VK_SUCCESS) {
-        // In production, throw exception
-        return;
-    }
+    _kuramoto_descriptor_layout = _descriptorManager->createDescriptorSetLayout(kuramoto_bindings);
 
     // Sync shader layout: theta, R_field (2 bindings)
-    std::vector<VkDescriptorSetLayoutBinding> sync_bindings = {
-        // Binding 0: theta_buffer (input phases)
-        {
-            .binding = 0,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        },
-        // Binding 1: R_field_buffer (output sync field)
-        {
-            .binding = 1,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        }
-    };
+    std::vector<VkDescriptorSetLayoutBinding> sync_bindings;
+    sync_bindings.push_back(_descriptorManager->createBinding(0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
+    sync_bindings.push_back(_descriptorManager->createBinding(1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
 
-    VkDescriptorSetLayoutCreateInfo sync_layout_info{};
-    sync_layout_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
-    sync_layout_info.bindingCount = static_cast<uint32_t>(sync_bindings.size());
-    sync_layout_info.pBindings = sync_bindings.data();
-
-    if (vkCreateDescriptorSetLayout(device, &sync_layout_info, nullptr, &_sync_descriptor_layout) != VK_SUCCESS) {
-        // In production, throw exception
-        return;
-    }
+    _sync_descriptor_layout = _descriptorManager->createDescriptorSetLayout(sync_bindings);
 
     // Gravity shader layout: R_field, gravity_x, gravity_y (3 bindings)
-    std::vector<VkDescriptorSetLayoutBinding> gravity_bindings = {
-        // Binding 0: R_field_buffer (input sync field)
-        {
-            .binding = 0,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        },
-        // Binding 1: gravity_x_buffer (output x-component)
-        {
-            .binding = 1,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        },
-        // Binding 2: gravity_y_buffer (output y-component)
-        {
-            .binding = 2,
-            .descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-            .descriptorCount = 1,
-            .stageFlags = VK_SHADER_STAGE_COMPUTE_BIT,
-            .pImmutableSamplers = nullptr
-        }
-    };
+    std::vector<VkDescriptorSetLayoutBinding> gravity_bindings;
+    gravity_bindings.push_back(_descriptorManager->createBinding(0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
+    gravity_bindings.push_back(_descriptorManager->createBinding(1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
+    gravity_bindings.push_back(_descriptorManager->createBinding(2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER));
 
-    VkDescriptorSetLayoutCreateInfo gravity_layout_info{};
-    gravity_layout_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
-    gravity_layout_info.bindingCount = static_cast<uint32_t>(gravity_bindings.size());
-    gravity_layout_info.pBindings = gravity_bindings.data();
-
-    if (vkCreateDescriptorSetLayout(device, &gravity_layout_info, nullptr, &_gravity_descriptor_layout) != VK_SUCCESS) {
-        // In production, throw exception
-        return;
-    }
+    _gravity_descriptor_layout = _descriptorManager->createDescriptorSetLayout(gravity_bindings);
 
     // 2. Define push constants structure for shader parameters
     VkPushConstantRange pushConstantRange{};
@@ -764,143 +677,38 @@ void MSFTEngine::createPipelines() {
         return;
     }
 
-    // 4. Create descriptor pool for all descriptor sets
+    // 4. Create descriptor pool for all descriptor sets using descriptor manager
     // Total buffers needed: kuramoto(4) + sync(2) + gravity(3) = 9
     std::vector<VkDescriptorPoolSize> poolSizes = {
         { VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 9 }  // 9 total storage buffers
     };
 
-    VkDescriptorPoolCreateInfo poolInfo{};
-    poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-    poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
-    poolInfo.pPoolSizes = poolSizes.data();
-    poolInfo.maxSets = 3;  // 3 descriptor sets (kuramoto, sync, gravity)
+    _descriptor_pool = _descriptorManager->createDescriptorPool(3, poolSizes);
 
-    if (vkCreateDescriptorPool(device, &poolInfo, nullptr, &_descriptor_pool) != VK_SUCCESS) {
-        // In production, throw exception
-        return;
-    }
+    // 5. Allocate descriptor sets for each pipeline using descriptor manager
 
-    // 5. Allocate descriptor sets for each pipeline
+    _kuramoto_descriptor_set = _descriptorManager->allocateDescriptorSet(
+        _descriptor_pool, _kuramoto_descriptor_layout);
 
-    // Allocate kuramoto descriptor set
-    VkDescriptorSetAllocateInfo kuramoto_alloc_info{};
-    kuramoto_alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-    kuramoto_alloc_info.descriptorPool = _descriptor_pool;
-    kuramoto_alloc_info.descriptorSetCount = 1;
-    kuramoto_alloc_info.pSetLayouts = &_kuramoto_descriptor_layout;
+    _sync_descriptor_set = _descriptorManager->allocateDescriptorSet(
+        _descriptor_pool, _sync_descriptor_layout);
 
-    if (vkAllocateDescriptorSets(device, &kuramoto_alloc_info, &_kuramoto_descriptor_set) != VK_SUCCESS) {
-        // In production, throw exception
-        vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
-        _descriptor_pool = VK_NULL_HANDLE;
-        return;
-    }
+    _gravity_descriptor_set = _descriptorManager->allocateDescriptorSet(
+        _descriptor_pool, _gravity_descriptor_layout);
 
-    // Allocate sync descriptor set
-    VkDescriptorSetAllocateInfo sync_alloc_info{};
-    sync_alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-    sync_alloc_info.descriptorPool = _descriptor_pool;
-    sync_alloc_info.descriptorSetCount = 1;
-    sync_alloc_info.pSetLayouts = &_sync_descriptor_layout;
-
-    if (vkAllocateDescriptorSets(device, &sync_alloc_info, &_sync_descriptor_set) != VK_SUCCESS) {
-        // In production, throw exception
-        vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
-        _descriptor_pool = VK_NULL_HANDLE;
-        return;
-    }
-
-    // Allocate gravity descriptor set
-    VkDescriptorSetAllocateInfo gravity_alloc_info{};
-    gravity_alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-    gravity_alloc_info.descriptorPool = _descriptor_pool;
-    gravity_alloc_info.descriptorSetCount = 1;
-    gravity_alloc_info.pSetLayouts = &_gravity_descriptor_layout;
-
-    if (vkAllocateDescriptorSets(device, &gravity_alloc_info, &_gravity_descriptor_set) != VK_SUCCESS) {
-        // In production, throw exception
-        vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
-        _descriptor_pool = VK_NULL_HANDLE;
-        return;
-    }
-
-    // 6. Update descriptor sets with buffer bindings
+    // 6. Update descriptor sets with buffer bindings using descriptor manager
 
     // Update kuramoto descriptor set (theta, theta_out, omega, spinor_density)
-    {
-        std::vector<VkDescriptorBufferInfo> kuramoto_buffer_infos = {
-            { _theta_buffer, 0, VK_WHOLE_SIZE },
-            { _theta_out_buffer, 0, VK_WHOLE_SIZE },
-            { _omega_buffer, 0, VK_WHOLE_SIZE },
-            { _spinor_density_buffer, 0, VK_WHOLE_SIZE }
-        };
-
-        std::vector<VkWriteDescriptorSet> kuramoto_writes;
-        for (size_t i = 0; i < kuramoto_buffer_infos.size(); ++i) {
-            VkWriteDescriptorSet write{};
-            write.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-            write.dstSet = _kuramoto_descriptor_set;
-            write.dstBinding = static_cast<uint32_t>(i);
-            write.dstArrayElement = 0;
-            write.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-            write.descriptorCount = 1;
-            write.pBufferInfo = &kuramoto_buffer_infos[i];
-            kuramoto_writes.push_back(write);
-        }
-
-        vkUpdateDescriptorSets(device, static_cast<uint32_t>(kuramoto_writes.size()),
-                              kuramoto_writes.data(), 0, nullptr);
-    }
+    _descriptorManager->updateDescriptorSet(_kuramoto_descriptor_set,
+        { _theta_buffer, _theta_out_buffer, _omega_buffer, _spinor_density_buffer });
 
     // Update sync descriptor set (theta, R_field)
-    {
-        std::vector<VkDescriptorBufferInfo> sync_buffer_infos = {
-            { _theta_buffer, 0, VK_WHOLE_SIZE },
-            { _R_field_buffer, 0, VK_WHOLE_SIZE }
-        };
-
-        std::vector<VkWriteDescriptorSet> sync_writes;
-        for (size_t i = 0; i < sync_buffer_infos.size(); ++i) {
-            VkWriteDescriptorSet write{};
-            write.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-            write.dstSet = _sync_descriptor_set;
-            write.dstBinding = static_cast<uint32_t>(i);
-            write.dstArrayElement = 0;
-            write.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-            write.descriptorCount = 1;
-            write.pBufferInfo = &sync_buffer_infos[i];
-            sync_writes.push_back(write);
-        }
-
-        vkUpdateDescriptorSets(device, static_cast<uint32_t>(sync_writes.size()),
-                              sync_writes.data(), 0, nullptr);
-    }
+    _descriptorManager->updateDescriptorSet(_sync_descriptor_set,
+        { _theta_buffer, _R_field_buffer });
 
     // Update gravity descriptor set (R_field, gravity_x, gravity_y)
-    {
-        std::vector<VkDescriptorBufferInfo> gravity_buffer_infos = {
-            { _R_field_buffer, 0, VK_WHOLE_SIZE },
-            { _gravity_x_buffer, 0, VK_WHOLE_SIZE },
-            { _gravity_y_buffer, 0, VK_WHOLE_SIZE }
-        };
-
-        std::vector<VkWriteDescriptorSet> gravity_writes;
-        for (size_t i = 0; i < gravity_buffer_infos.size(); ++i) {
-            VkWriteDescriptorSet write{};
-            write.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-            write.dstSet = _gravity_descriptor_set;
-            write.dstBinding = static_cast<uint32_t>(i);
-            write.dstArrayElement = 0;
-            write.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-            write.descriptorCount = 1;
-            write.pBufferInfo = &gravity_buffer_infos[i];
-            gravity_writes.push_back(write);
-        }
-
-        vkUpdateDescriptorSets(device, static_cast<uint32_t>(gravity_writes.size()),
-                              gravity_writes.data(), 0, nullptr);
-    }
+    _descriptorManager->updateDescriptorSet(_gravity_descriptor_set,
+        { _R_field_buffer, _gravity_x_buffer, _gravity_y_buffer });
 
     // 7. Create compute pipelines using factory
     // Note: Factory is already created in initialize() method
@@ -1051,27 +859,18 @@ void MSFTEngine::destroyResources() {
             _dirac_pipeline_layout = VK_NULL_HANDLE;
         }
 
-        // Destroy descriptor set layouts
-        if (_kuramoto_descriptor_layout != VK_NULL_HANDLE) {
-            vkDestroyDescriptorSetLayout(device, _kuramoto_descriptor_layout, nullptr);
-            _kuramoto_descriptor_layout = VK_NULL_HANDLE;
+        // Destroy descriptor resources via descriptor manager
+        if (_descriptorManager) {
+            _descriptorManager->destroyAll();
+            _descriptorManager.reset();
         }
-        if (_sync_descriptor_layout != VK_NULL_HANDLE) {
-            vkDestroyDescriptorSetLayout(device, _sync_descriptor_layout, nullptr);
-            _sync_descriptor_layout = VK_NULL_HANDLE;
-        }
-        if (_gravity_descriptor_layout != VK_NULL_HANDLE) {
-            vkDestroyDescriptorSetLayout(device, _gravity_descriptor_layout, nullptr);
-            _gravity_descriptor_layout = VK_NULL_HANDLE;
-        }
-        if (_dirac_descriptor_layout != VK_NULL_HANDLE) {
-            vkDestroyDescriptorSetLayout(device, _dirac_descriptor_layout, nullptr);
-            _dirac_descriptor_layout = VK_NULL_HANDLE;
-        }
-        if (_descriptor_pool != VK_NULL_HANDLE) {
-            vkDestroyDescriptorPool(device, _descriptor_pool, nullptr);
-            _descriptor_pool = VK_NULL_HANDLE;
-        }
+
+        // Clear descriptor handles (already destroyed by manager)
+        _kuramoto_descriptor_layout = VK_NULL_HANDLE;
+        _sync_descriptor_layout = VK_NULL_HANDLE;
+        _gravity_descriptor_layout = VK_NULL_HANDLE;
+        _dirac_descriptor_layout = VK_NULL_HANDLE;
+        _descriptor_pool = VK_NULL_HANDLE;
 
         // Destroy all buffers via buffer manager
         if (_bufferManager) {

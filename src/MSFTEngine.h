@@ -3,6 +3,7 @@
 #include "MSFTPipelineFactory.h"
 #include "MSFTBufferManager.h"
 #include "MSFTCompute.h"
+#include "MSFTDescriptorManager.h"
 #include <vulkan/vulkan.h>
 #include <vector>
 #include <complex>
@@ -204,4 +205,7 @@ private:
 
     // Buffer manager for handling Vulkan buffer operations
     std::unique_ptr<MSFTBufferManager> _bufferManager;
+
+    // Descriptor manager for handling Vulkan descriptor operations
+    std::unique_ptr<MSFTDescriptorManager> _descriptorManager;
 };
