@@ -86,6 +86,17 @@ public:
                                              VkPipelineLayout pipelineLayout);
 
     /**
+     * Create accumulation pipeline for operator splitting
+     * Used to accumulate theta and R fields over N substeps for time averaging.
+     * GPU-safe: only arithmetic operations, no transcendentals.
+     * @param shaderPath Path to accumulate.comp.spv shader
+     * @param pipelineLayout Pre-created pipeline layout for accumulation
+     * @return Created pipeline or VK_NULL_HANDLE on failure
+     */
+    VkPipeline createAccumulationPipeline(const std::string& shaderPath,
+                                          VkPipelineLayout pipelineLayout);
+
+    /**
      * Destroy a specific pipeline
      * @param pipeline Pipeline to destroy
      */

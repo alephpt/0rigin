@@ -100,10 +100,94 @@ CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTEngine.cpp -o CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.s
 
+CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o: CMakeFiles/MSFT.dir/flags.make
+CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o: /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp
+CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o: CMakeFiles/MSFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o -MF CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o.d -o CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp
+
+CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp > CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.i
+
+CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp -o CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.s
+
+CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o: CMakeFiles/MSFT.dir/flags.make
+CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o: /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp
+CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o: CMakeFiles/MSFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o -MF CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o.d -o CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp
+
+CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp > CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.i
+
+CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp -o CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.s
+
+CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o: CMakeFiles/MSFT.dir/flags.make
+CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o: /home/persist/neotec/0rigin/src/MSFTCompute.cpp
+CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o: CMakeFiles/MSFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o -MF CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o.d -o CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp
+
+CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTCompute.cpp > CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.i
+
+CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTCompute.cpp -o CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.s
+
+CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o: CMakeFiles/MSFT.dir/flags.make
+CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o: /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp
+CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o: CMakeFiles/MSFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o -MF CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o.d -o CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp
+
+CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp > CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.i
+
+CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp -o CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.s
+
+CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o: CMakeFiles/MSFT.dir/flags.make
+CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o: /home/persist/neotec/0rigin/src/DiracEvolution.cpp
+CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o: CMakeFiles/MSFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o -MF CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o.d -o CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp
+
+CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/DiracEvolution.cpp > CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.i
+
+CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/DiracEvolution.cpp -o CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.s
+
+CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o: CMakeFiles/MSFT.dir/flags.make
+CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o: /home/persist/neotec/0rigin/src/output/OutputManager.cpp
+CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o: CMakeFiles/MSFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o -MF CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o.d -o CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp
+
+CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/output/OutputManager.cpp > CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.i
+
+CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/output/OutputManager.cpp -o CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.s
+
 CMakeFiles/MSFT.dir/main.cpp.o: CMakeFiles/MSFT.dir/flags.make
 CMakeFiles/MSFT.dir/main.cpp.o: /home/persist/neotec/0rigin/main.cpp
 CMakeFiles/MSFT.dir/main.cpp.o: CMakeFiles/MSFT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MSFT.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/MSFT.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MSFT.dir/main.cpp.o -MF CMakeFiles/MSFT.dir/main.cpp.o.d -o CMakeFiles/MSFT.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp
 
 CMakeFiles/MSFT.dir/main.cpp.i: cmake_force
@@ -118,6 +202,12 @@ CMakeFiles/MSFT.dir/main.cpp.s: cmake_force
 MSFT_OBJECTS = \
 "CMakeFiles/MSFT.dir/src/MSFT.cpp.o" \
 "CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o" \
+"CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o" \
+"CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o" \
+"CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o" \
+"CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o" \
+"CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o" \
+"CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o" \
 "CMakeFiles/MSFT.dir/main.cpp.o"
 
 # External object files for target MSFT
@@ -125,6 +215,12 @@ MSFT_EXTERNAL_OBJECTS =
 
 bin/MSFT: CMakeFiles/MSFT.dir/src/MSFT.cpp.o
 bin/MSFT: CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o
+bin/MSFT: CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o
+bin/MSFT: CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o
+bin/MSFT: CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o
+bin/MSFT: CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o
+bin/MSFT: CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o
+bin/MSFT: CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o
 bin/MSFT: CMakeFiles/MSFT.dir/main.cpp.o
 bin/MSFT: CMakeFiles/MSFT.dir/build.make
 bin/MSFT: CMakeFiles/MSFT.dir/compiler_depend.ts
@@ -134,7 +230,7 @@ bin/MSFT: /lib/libvulkan.so
 bin/MSFT: /usr/lib/libSDL2main.a
 bin/MSFT: /usr/lib/libSDL2-2.0.so.0.3200.60
 bin/MSFT: CMakeFiles/MSFT.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable bin/MSFT"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable bin/MSFT"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MSFT.dir/link.txt --verbose=$(VERBOSE)
 	/usr/bin/cmake -E copy_directory /home/persist/neotec/0rigin/shaders /home/persist/neotec/0rigin/build/shaders
 

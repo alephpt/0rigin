@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_split_operator_validation.dir/link.d CMakeFiles/test_split_operator_validation.dir/test/test_split_operator_validation.cpp.o CMakeFiles/test_split_operator_validation.dir/src/DiracEvolution.cpp.o -o bin/test_split_operator_validation  -lfftw3f -lpthread -lm

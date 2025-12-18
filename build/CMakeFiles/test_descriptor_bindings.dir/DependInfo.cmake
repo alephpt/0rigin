@@ -8,8 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/persist/neotec/0rigin/src/DiracEvolution.cpp" "CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.o" "gcc" "CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o" "gcc" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/MSFTCompute.cpp" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o" "gcc" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o" "gcc" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o.d"
   "/home/persist/neotec/0rigin/src/MSFTEngine.cpp" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o" "gcc" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o.d"
-  "/home/persist/neotec/0rigin/test_descriptor_bindings.cpp" "CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o" "gcc" "CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o" "gcc" "CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_descriptor_bindings.cpp" "CMakeFiles/test_descriptor_bindings.dir/test/test_descriptor_bindings.cpp.o" "gcc" "CMakeFiles/test_descriptor_bindings.dir/test/test_descriptor_bindings.cpp.o.d"
   "" "bin/test_descriptor_bindings" "gcc" "CMakeFiles/test_descriptor_bindings.dir/link.d"
   )
 

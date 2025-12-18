@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_ehrenfest_validation.dir/link.d CMakeFiles/test_ehrenfest_validation.dir/test/test_ehrenfest_validation.cpp.o CMakeFiles/test_ehrenfest_validation.dir/src/DiracEvolution.cpp.o CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o -o bin/test_ehrenfest_validation  -lfftw3f -lpthread -lm

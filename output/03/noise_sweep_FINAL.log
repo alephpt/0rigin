@@ -1,0 +1,300 @@
+=== MSFT Rigorous CPU Noise Sweep ===
+Methodology aligned with immediate.md requirements
+
+GPU: AMD Radeon RX 6800 XT (RADV NAVI21)
+Grid: 128 × 128
+Damping γ = 0.1 (ACTIVE)
+Warmup steps: 5000 (t = 50)
+Measurement steps: 10000 (t = 100)
+
+Noise sweep σ values: 0 1e-05 0.0001 0.001 0.01 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.5 0.6 0.7 0.8 0.9 1 1.5 2 3 
+
+
+=== σ = 0.000000e+00 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 0.0000e+00)...
+  Step     0: R = 1.0000, L =    16384
+  Step  2000: R = 1.0000, L =    16384
+  Step  4000: R = 1.0000, L =    16384
+  Step  6000: R = 1.0000, L =    16384
+  Step  8000: R = 1.0000, L =    16384
+  Step  9999: R = 1.0000, L =    16384
+FINAL: R_final = 1.0000, R_mean = 1.0000 ± 0.0000, L_final = 16384
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_0.dat
+
+=== σ = 1.0000e-05 ===
+R_initial = 0.9984
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 1.0000e-05)...
+  Step     0: R = 1.0000, L =    16384
+  Step  2000: R = 1.0000, L =    16384
+  Step  4000: R = 1.0000, L =    16384
+  Step  6000: R = 1.0000, L =    16384
+  Step  8000: R = 1.0000, L =    16384
+  Step  9999: R = 1.0000, L =    16384
+FINAL: R_final = 1.0000, R_mean = 1.0000 ± 0.0000, L_final = 16384
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_99.dat
+
+=== σ = 1.0000e-04 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 1.0000e-04)...
+  Step     0: R = 1.0000, L =    16384
+  Step  2000: R = 1.0000, L =    16384
+  Step  4000: R = 1.0000, L =    16384
+  Step  6000: R = 1.0000, L =    16384
+  Step  8000: R = 1.0000, L =    16384
+  Step  9999: R = 1.0000, L =    16384
+FINAL: R_final = 1.0000, R_mean = 1.0000 ± 0.0000, L_final = 16384
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_999.dat
+
+=== σ = 1.0000e-03 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 1.0000e-03)...
+  Step     0: R = 1.0000, L =    16384
+  Step  2000: R = 1.0000, L =    16383
+  Step  4000: R = 1.0000, L =    16383
+  Step  6000: R = 1.0000, L =    16383
+  Step  8000: R = 1.0000, L =    16383
+  Step  9999: R = 1.0000, L =    16384
+FINAL: R_final = 1.0000, R_mean = 1.0000 ± 0.0000, L_final = 16384
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_10000.dat
+
+=== σ = 1.0000e-02 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 1.0000e-02)...
+  Step     0: R = 1.0000, L =    16383
+  Step  2000: R = 1.0000, L =    16383
+  Step  4000: R = 1.0000, L =    16383
+  Step  6000: R = 1.0000, L =    16383
+  Step  8000: R = 1.0000, L =    16383
+  Step  9999: R = 1.0000, L =    16383
+FINAL: R_final = 1.0000, R_mean = 1.0000 ± 0.0000, L_final = 16383
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_99999.dat
+
+=== σ = 5.0000e-02 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 5.0000e-02)...
+  Step     0: R = 1.0000, L =    16383
+  Step  2000: R = 0.9991, L =    16345
+  Step  4000: R = 0.9992, L =    16345
+  Step  6000: R = 0.9992, L =    16345
+  Step  8000: R = 0.9992, L =    16345
+  Step  9999: R = 0.9992, L =    16345
+FINAL: R_final = 0.9992, R_mean = 0.9992 ± 0.0002, L_final = 16345
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_500000.dat
+
+=== σ = 1.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 1.0000e-01)...
+  Step     0: R = 0.9999, L =    16382
+  Step  2000: R = 0.9965, L =    16229
+  Step  4000: R = 0.9967, L =    16234
+  Step  6000: R = 0.9966, L =    16231
+  Step  8000: R = 0.9966, L =    16230
+  Step  9999: R = 0.9966, L =    16228
+FINAL: R_final = 0.9966, R_mean = 0.9966 ± 0.0002, L_final = 16228
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_1000000.dat
+
+=== σ = 1.5000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 1.5000e-01)...
+  Step     0: R = 0.9999, L =    16378
+  Step  2000: R = 0.9925, L =    16042
+  Step  4000: R = 0.9922, L =    16035
+  Step  6000: R = 0.9924, L =    16039
+  Step  8000: R = 0.9925, L =    16044
+  Step  9999: R = 0.9922, L =    16034
+FINAL: R_final = 0.9922, R_mean = 0.9924 ± -nan, L_final = 16034
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_1500000.dat
+
+=== σ = 2.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 2.0000e-01)...
+  Step     0: R = 0.9998, L =    16372
+  Step  2000: R = 0.9865, L =    15774
+  Step  4000: R = 0.9864, L =    15777
+  Step  6000: R = 0.9863, L =    15766
+  Step  8000: R = 0.9862, L =    15770
+  Step  9999: R = 0.9868, L =    15780
+FINAL: R_final = 0.9868, R_mean = 0.9864 ± 0.0003, L_final = 15780
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_2000000.dat
+
+=== σ = 2.5000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 2.5000e-01)...
+  Step     0: R = 0.9997, L =    16365
+  Step  2000: R = 0.9788, L =    15432
+  Step  4000: R = 0.9782, L =    15417
+  Step  6000: R = 0.9784, L =    15429
+  Step  8000: R = 0.9790, L =    15437
+  Step  9999: R = 0.9793, L =    15451
+FINAL: R_final = 0.9793, R_mean = 0.9787 ± 0.0003, L_final = 15451
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_2500000.dat
+
+=== σ = 3.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 3.0000e-01)...
+  Step     0: R = 0.9996, L =    16357
+  Step  2000: R = 0.9684, L =    15009
+  Step  4000: R = 0.9680, L =    14995
+  Step  6000: R = 0.9694, L =    15026
+  Step  8000: R = 0.9679, L =    14975
+  Step  9999: R = 0.9692, L =    15020
+FINAL: R_final = 0.9692, R_mean = 0.9688 ± 0.0004, L_final = 15020
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_3000000.dat
+
+=== σ = 3.5000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 3.5000e-01)...
+  Step     0: R = 0.9994, L =    16347
+  Step  2000: R = 0.9579, L =    14545
+  Step  4000: R = 0.9557, L =    14481
+  Step  6000: R = 0.9575, L =    14509
+  Step  8000: R = 0.9567, L =    14520
+  Step  9999: R = 0.9574, L =    14536
+FINAL: R_final = 0.9574, R_mean = 0.9573 ± 0.0006, L_final = 14536
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_3499999.dat
+
+=== σ = 4.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 4.0000e-01)...
+  Step     0: R = 0.9992, L =    16337
+  Step  2000: R = 0.9440, L =    13986
+  Step  4000: R = 0.9448, L =    14013
+  Step  6000: R = 0.9435, L =    13970
+  Step  8000: R = 0.9438, L =    13961
+  Step  9999: R = 0.9439, L =    13999
+FINAL: R_final = 0.9439, R_mean = 0.9440 ± 0.0008, L_final = 13999
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_4000000.dat
+
+=== σ = 5.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 5.0000e-01)...
+  Step     0: R = 0.9988, L =    16312
+  Step  2000: R = 0.9087, L =    12657
+  Step  4000: R = 0.9102, L =    12701
+  Step  6000: R = 0.9097, L =    12662
+  Step  8000: R = 0.9084, L =    12574
+  Step  9999: R = 0.9095, L =    12623
+FINAL: R_final = 0.9095, R_mean = 0.9092 ± 0.0011, L_final = 12623
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_5000000.dat
+
+=== σ = 6.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 6.0000e-01)...
+  Step     0: R = 0.9982, L =    16278
+  Step  2000: R = 0.8679, L =    11174
+  Step  4000: R = 0.8609, L =    11023
+  Step  6000: R = 0.8630, L =    11102
+  Step  8000: R = 0.8600, L =    10997
+  Step  9999: R = 0.8632, L =    11062
+FINAL: R_final = 0.8632, R_mean = 0.8617 ± 0.0016, L_final = 11062
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_6000000.dat
+
+=== σ = 7.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 7.0000e-01)...
+  Step     0: R = 0.9975, L =    16240
+  Step  2000: R = 0.7947, L =     9075
+  Step  4000: R = 0.7948, L =     9064
+  Step  6000: R = 0.7993, L =     9168
+  Step  8000: R = 0.7932, L =     9071
+  Step  9999: R = 0.7995, L =     9181
+FINAL: R_final = 0.7995, R_mean = 0.7983 ± 0.0031, L_final = 9181
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_6999999.dat
+
+=== σ = 8.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 8.0000e-01)...
+  Step     0: R = 0.9968, L =    16200
+  Step  2000: R = 0.6976, L =     6820
+  Step  4000: R = 0.6929, L =     6671
+  Step  6000: R = 0.6876, L =     6635
+  Step  8000: R = 0.6934, L =     6797
+  Step  9999: R = 0.6955, L =     6738
+FINAL: R_final = 0.6955, R_mean = 0.6939 ± 0.0037, L_final = 6738
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_8000000.dat
+
+=== σ = 9.0000e-01 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 9.0000e-01)...
+  Step     0: R = 0.9960, L =    16150
+  Step  2000: R = 0.5453, L =     4362
+  Step  4000: R = 0.5329, L =     4234
+  Step  6000: R = 0.5301, L =     4177
+  Step  8000: R = 0.5315, L =     4175
+  Step  9999: R = 0.5194, L =     4132
+FINAL: R_final = 0.5194, R_mean = 0.5336 ± 0.0088, L_final = 4132
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_8999999.dat
+
+=== σ = 1.0000e+00 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 1.0000e+00)...
+  Step     0: R = 0.9950, L =    16095
+  Step  2000: R = 0.3517, L =     2369
+  Step  4000: R = 0.3527, L =     2397
+  Step  6000: R = 0.3541, L =     2382
+  Step  8000: R = 0.3462, L =     2408
+  Step  9999: R = 0.3532, L =     2412
+FINAL: R_final = 0.3532, R_mean = 0.3559 ± 0.0106, L_final = 2412
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_10000000.dat
+
+=== σ = 1.5000e+00 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 1.5000e+00)...
+  Step     0: R = 0.9889, L =    15750
+  Step  2000: R = 0.0645, L =      680
+  Step  4000: R = 0.0677, L =      704
+  Step  6000: R = 0.0765, L =      714
+  Step  8000: R = 0.0710, L =      725
+  Step  9999: R = 0.0618, L =      732
+FINAL: R_final = 0.0618, R_mean = 0.0734 ± 0.0070, L_final = 732
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_15000000.dat
+
+=== σ = 2.0000e+00 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 2.0000e+00)...
+  Step     0: R = 0.9804, L =    15281
+  Step  2000: R = 0.0386, L =      542
+  Step  4000: R = 0.0248, L =      538
+  Step  6000: R = 0.0235, L =      537
+  Step  8000: R = 0.0319, L =      529
+  Step  9999: R = 0.0191, L =      512
+FINAL: R_final = 0.0191, R_mean = 0.0330 ± 0.0058, L_final = 512
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_20000000.dat
+
+=== σ = 3.0000e+00 ===
+R_initial = 0.9983
+Warmup phase (σ = 0)... R_warmup = 1.0000
+Measurement phase (σ = 3.0000e+00)...
+  Step     0: R = 0.9563, L =    14005
+  Step  2000: R = 0.0192, L =      418
+  Step  4000: R = 0.0094, L =      435
+  Step  6000: R = 0.0140, L =      429
+  Step  8000: R = 0.0131, L =      462
+  Step  9999: R = 0.0191, L =      412
+FINAL: R_final = 0.0191, R_mean = 0.0128 ± 0.0053, L_final = 412
+Wrote /home/persist/neotec/0rigin/output/noise_sweep/timeseries_sigma_30000000.dat
+
+=== EXPERIMENT COMPLETE ===
+Summary: /home/persist/neotec/0rigin/output/noise_sweep/summary.dat

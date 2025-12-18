@@ -318,6 +318,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/presentation.cpp.o: \
  /usr/include/SDL2/SDL_quit.h /usr/include/SDL2/SDL_gesture.h \
  /usr/include/SDL2/SDL_touch.h \
  /home/persist/neotec/0rigin/lib/Nova/Core/modules/.././modules/camera/./perspective.h \
+ /home/persist/neotec/0rigin/lib/Nova/Core/modules/.././components/resource_registry.h \
  /usr/include/c++/15.2.1/span /usr/include/c++/15.2.1/set \
  /usr/include/c++/15.2.1/bits/stl_tree.h \
  /usr/include/c++/15.2.1/bits/stl_set.h \

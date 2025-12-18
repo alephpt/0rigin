@@ -2,13 +2,19 @@ bin/test_descriptor_bindings: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/Scrt1.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
-  CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/test/test_descriptor_bindings.cpp.o \
   CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.o \
   libNova.a \
   libimgui.a \
   /lib/libvulkan.so \
   /usr/lib/libSDL2main.a \
   /usr/lib/libSDL2-2.0.so.0.3200.60 \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libdl.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
@@ -45,9 +51,19 @@ bin/test_descriptor_bindings: \
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o:
 
-CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o:
+CMakeFiles/test_descriptor_bindings.dir/test/test_descriptor_bindings.cpp.o:
 
 CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o:
+
+CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o:
+
+CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o:
+
+CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o:
+
+CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o:
+
+CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.o:
 
 libNova.a:
 
@@ -58,6 +74,8 @@ libimgui.a:
 /usr/lib/libSDL2main.a:
 
 /usr/lib/libSDL2-2.0.so.0.3200.60:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a:
 

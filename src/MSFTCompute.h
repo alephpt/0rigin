@@ -59,8 +59,17 @@ public:
                                uint32_t groupCountX,
                                uint32_t groupCountY);
 
+    void dispatchAccumulation(VkPipeline pipeline,
+                             VkPipelineLayout layout,
+                             VkDescriptorSet descriptorSet,
+                             const void* pushConstants,
+                             size_t pushSize,
+                             uint32_t groupCountX,
+                             uint32_t groupCountY);
+
     // Buffer operations
     void copyBuffer(VkBuffer src, VkBuffer dst, VkDeviceSize size);
+    void fillBuffer(VkBuffer buffer, uint32_t value, VkDeviceSize size);
 
     // Synchronization
     void insertMemoryBarrier();

@@ -1,0 +1,16 @@
+#version 450
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+layout(set = 0, binding = 0) buffer OutputBuffer {
+    float output_data[];
+};
+
+void main() {
+    uvec2 gid = gl_GlobalInvocationID.xy;
+    uint idx = gid.y * 128 + gid.x;  // Hardcoded for 128x128 grid
+
+    if (gid.x < 128 && gid.y < 128) {
+        output_data[idx] = 42.0;  // Write a known value
+    }
+}

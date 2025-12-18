@@ -4,12 +4,19 @@ bin/MSFT: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/MSFT.dir/src/MSFT.cpp.o \
   CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o \
+  CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o \
+  CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o \
+  CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o \
+  CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o \
+  CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o \
+  CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o \
   CMakeFiles/MSFT.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
   /lib/libvulkan.so \
   /usr/lib/libSDL2main.a \
   /usr/lib/libSDL2-2.0.so.0.3200.60 \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libdl.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
@@ -50,6 +57,18 @@ CMakeFiles/MSFT.dir/src/MSFT.cpp.o:
 
 CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o:
 
+CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o:
+
+CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o:
+
+CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o:
+
+CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o:
+
+CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o:
+
+CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o:
+
 CMakeFiles/MSFT.dir/main.cpp.o:
 
 libNova.a:
@@ -61,6 +80,8 @@ libimgui.a:
 /usr/lib/libSDL2main.a:
 
 /usr/lib/libSDL2-2.0.so.0.3200.60:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a:
 

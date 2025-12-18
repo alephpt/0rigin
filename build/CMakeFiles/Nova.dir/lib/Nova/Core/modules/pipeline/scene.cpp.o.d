@@ -318,6 +318,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/scene.cpp.o: \
  /usr/include/SDL2/SDL_quit.h /usr/include/SDL2/SDL_gesture.h \
  /usr/include/SDL2/SDL_touch.h \
  /home/persist/neotec/0rigin/lib/Nova/Core/modules/pipeline/../.././modules/camera/./perspective.h \
+ /home/persist/neotec/0rigin/lib/Nova/Core/modules/pipeline/../.././components/resource_registry.h \
  /usr/include/c++/15.2.1/span /usr/include/c++/15.2.1/cstring \
  /usr/include/c++/15.2.1/chrono /usr/include/c++/15.2.1/bits/chrono.h \
  /usr/include/c++/15.2.1/ratio /usr/include/c++/15.2.1/ctime \

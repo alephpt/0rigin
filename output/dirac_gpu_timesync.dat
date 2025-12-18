@@ -1,0 +1,11 @@
+# step  time  avg_R  max_R  max_density  status
+0 0 0 0 0.0127323 stable
+10 0.1 0 0 0.0127201 stable
+20 0.2 0 0 0.0126876 stable
+30 0.3 0 0 0.0126349 stable
+40 0.4 0 0 0.0125622 stable
+50 0.5 0 0 0.0124815 stable
+60 0.6 0 0 0.0124703 stable
+70 0.7 0 0 0.0124394 stable
+80 0.8 0 0 0.0123888 stable
+90 0.9 0 0 0.0123189 stable

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_operator_splitting_cpu.dir/link.d CMakeFiles/test_operator_splitting_cpu.dir/test/test_operator_splitting_cpu.cpp.o -o bin/test_operator_splitting_cpu

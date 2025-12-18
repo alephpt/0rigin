@@ -319,6 +319,7 @@ CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o: \
  /usr/include/SDL2/SDL_quit.h /usr/include/SDL2/SDL_gesture.h \
  /usr/include/SDL2/SDL_touch.h \
  /home/persist/neotec/0rigin/lib/Nova/./Core/./modules/camera/./perspective.h \
+ /home/persist/neotec/0rigin/lib/Nova/./Core/./components/resource_registry.h \
  /usr/include/c++/15.2.1/span \
  /home/persist/neotec/0rigin/lib/Nova/./Core/config.h \
  /usr/include/c++/15.2.1/future /usr/include/c++/15.2.1/mutex \
@@ -386,22 +387,37 @@ CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o: \
  /usr/include/c++/15.2.1/bits/this_thread_sleep.h /usr/include/sys/time.h \
  /usr/include/semaphore.h /usr/include/bits/semaphore.h \
  /usr/include/c++/15.2.1/bits/atomic_futex.h \
+ /home/persist/neotec/0rigin/src/MSFTPipelineFactory.h \
+ /home/persist/neotec/0rigin/src/MSFTBufferManager.h \
+ /usr/include/c++/15.2.1/utility \
+ /usr/include/c++/15.2.1/bits/stl_relops.h \
+ /usr/include/c++/15.2.1/cstring \
+ /home/persist/neotec/0rigin/src/MSFTCompute.h \
+ /usr/include/c++/15.2.1/memory \
+ /usr/include/c++/15.2.1/bits/stl_tempbuf.h \
+ /usr/include/c++/15.2.1/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/15.2.1/bits/shared_ptr_atomic.h \
+ /usr/include/c++/15.2.1/backward/auto_ptr.h \
+ /usr/include/c++/15.2.1/bits/ranges_uninitialized.h \
+ /usr/include/c++/15.2.1/bits/ranges_algobase.h \
+ /usr/include/c++/15.2.1/pstl/glue_memory_defs.h \
+ /usr/include/c++/15.2.1/pstl/execution_defs.h \
+ /home/persist/neotec/0rigin/src/MSFTDescriptorManager.h \
  /usr/include/c++/15.2.1/complex /usr/include/c++/15.2.1/sstream \
  /usr/include/c++/15.2.1/istream /usr/include/c++/15.2.1/ostream \
  /usr/include/c++/15.2.1/bits/ostream.tcc \
  /usr/include/c++/15.2.1/bits/istream.tcc \
- /usr/include/c++/15.2.1/bits/sstream.tcc /usr/include/c++/15.2.1/cstring \
+ /usr/include/c++/15.2.1/bits/sstream.tcc \
+ /home/persist/neotec/0rigin/src/DiracEvolution.h \
  /usr/include/c++/15.2.1/algorithm \
  /usr/include/c++/15.2.1/bits/stl_algo.h \
  /usr/include/c++/15.2.1/bits/algorithmfwd.h \
  /usr/include/c++/15.2.1/bits/stl_heap.h \
  /usr/include/c++/15.2.1/bits/uniform_int_dist.h \
- /usr/include/c++/15.2.1/bits/stl_tempbuf.h \
  /usr/include/c++/15.2.1/bits/ranges_algo.h \
- /usr/include/c++/15.2.1/bits/ranges_algobase.h \
  /usr/include/c++/15.2.1/pstl/glue_algorithm_defs.h \
- /usr/include/c++/15.2.1/pstl/execution_defs.h \
  /usr/include/c++/15.2.1/fstream /usr/include/c++/15.2.1/bits/codecvt.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/15.2.1/bits/fstream.tcc
+ /usr/include/c++/15.2.1/bits/fstream.tcc \
+ /usr/include/c++/15.2.1/iostream

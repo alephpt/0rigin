@@ -1,0 +1,20 @@
+=== EHRENFEST THEOREM VALIDATION ===
+Extended to 50000 steps (5000 time units)
+Diagnostics: E(t), Ehrenfest, quantum velocity
+
+[1] Kuramoto warmup...
+  Defect contrast ΔR: 0.0618101
+
+[2] Initialize Dirac...
+[DiracEvolution] Initialized 128x128 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (48, 64) with σ=5
+  Initial CoM: (48, 64)
+
+[3] Coupled evolution with FULL diagnostics...
+  Step       0: dist=15.99, E=0.6770, norm=1.0000
+
+=== DIAGNOSTICS COMPLETE ===
+Analyze output/10/ehrenfest/:
+  1. energy.dat → Check E < 0 (binding) and |dE/dt| small (conservation)
+  2. ehrenfest.dat → Check ratio ≈ 1.0 (Ehrenfest holds)
+  3. trajectory.dat → Check if d(t) grows unbounded (escape)

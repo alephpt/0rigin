@@ -143,12 +143,31 @@ void MSFTCompute::dispatchDiracEvolution(VkPipeline pipeline,
                    pushConstants, pushSize, groupCountX, groupCountY);
 }
 
+void MSFTCompute::dispatchAccumulation(VkPipeline pipeline,
+                                      VkPipelineLayout layout,
+                                      VkDescriptorSet descriptorSet,
+                                      const void* pushConstants,
+                                      size_t pushSize,
+                                      uint32_t groupCountX,
+                                      uint32_t groupCountY) {
+    dispatchCompute(pipeline, layout, descriptorSet,
+                   pushConstants, pushSize, groupCountX, groupCountY);
+}
+
 void MSFTCompute::copyBuffer(VkBuffer src, VkBuffer dst, VkDeviceSize size) {
     if (!_isRecording) return;
 
     VkBufferCopy copyRegion{};
     copyRegion.size = size;
     vkCmdCopyBuffer(_commandBuffer, src, dst, 1, &copyRegion);
+}
+
+void MSFTCompute::fillBuffer(VkBuffer buffer, uint32_t value, VkDeviceSize size) {
+    if (!_isRecording) return;
+
+    // vkCmdFillBuffer requires size to be multiple of 4 and ≤ VK_WHOLE_SIZE
+    // Fills buffer with the specified 32-bit value
+    vkCmdFillBuffer(_commandBuffer, buffer, 0, size, value);
 }
 
 void MSFTCompute::insertMemoryBarrier() {

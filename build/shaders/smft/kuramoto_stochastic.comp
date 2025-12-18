@@ -1,0 +1,219 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+// Include complex arithmetic and precision libraries
+#include "../include/complex.glsl"
+#include "../include/precision.glsl"
+
+/**
+ * @file kuramoto_stochastic.comp
+ * @brief Stochastic Kuramoto oscillator with Euler-Maruyama integration
+ *
+ * Implements: dθᵢ = (ωᵢ + K·Σⱼsin(θⱼ - θᵢ))dt + σ·dW
+ *
+ * For noise sweep experiment (Determinism.md Phase 1)
+ *
+ * PRNG: PCG (Permuted Congruential Generator) - industry standard
+ * Gaussian: Box-Muller transform
+ * Integration: Euler-Maruyama scheme (proper noise scaling)
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+// Push constants for simulation parameters
+layout(push_constant) uniform PushConstants {
+    float dt;              // Time step
+    float K;               // Coupling strength
+    float sigma;           // Noise amplitude (σ)
+    float damping;         // Phase damping γ (CRITICAL for stability)
+    float omega_mean;      // Mean natural frequency
+    uint Nx;               // Grid width
+    uint Ny;               // Grid height
+    uint time_step;        // Current timestep (for PRNG seed)
+} params;
+
+// Storage buffers
+layout(set = 0, binding = 0) buffer ThetaBuffer {
+    float theta[];  // Current phases
+};
+
+layout(set = 0, binding = 1) buffer ThetaOutBuffer {
+    float theta_out[];  // Updated phases
+};
+
+// Shared memory for local synchronization computation
+shared float s_theta[18][18];  // 16+2 border for neighbors
+
+// ============================================================================
+// PCG Random Number Generator (32-bit)
+// ============================================================================
+
+uint pcg_state;
+
+uint pcg_hash(uint seed) {
+    uint state = seed * 747796405u + 2891336453u;
+    uint word = ((state >> ((state >> 28u) + 4u)) ^ state) * 277803737u;
+    return (word >> 22u) ^ word;
+}
+
+void pcg_init(uint seed) {
+    pcg_state = pcg_hash(seed);
+}
+
+// Returns uniform random float in [0, 1)
+float pcg_random() {
+    pcg_state = pcg_state * 747796405u + 2891336453u;
+    uint word = ((pcg_state >> ((pcg_state >> 28u) + 4u)) ^ pcg_state) * 277803737u;
+    word = (word >> 22u) ^ word;
+    return float(word) / 4294967296.0;
+}
+
+// ============================================================================
+// Box-Muller Transform for Gaussian Random Numbers
+// ============================================================================
+
+// Returns standard normal N(0,1)
+float randn() {
+    float u1 = pcg_random();
+    float u2 = pcg_random();
+
+    // Avoid log(0)
+    u1 = max(u1, 1e-10);
+
+    const float PI = 3.14159265359;
+    float r = sqrt(-2.0 * log(u1));
+    float theta_rand = 2.0 * PI * u2;
+
+    return r * cos(theta_rand);
+}
+
+// ============================================================================
+// Kuramoto Coupling
+// ============================================================================
+
+/**
+ * @brief Load theta values into shared memory with boundary handling
+ */
+void load_shared_memory(uvec2 global_id, uvec2 local_id) {
+    uint gx = global_id.x;
+    uint gy = global_id.y;
+    uint lx = local_id.x;
+    uint ly = local_id.y;
+
+    // Load center tile
+    if (gx < params.Nx && gy < params.Ny) {
+        uint idx = gy * params.Nx + gx;
+        s_theta[ly + 1][lx + 1] = theta[idx];
+    }
+
+    // Load borders (with wrapping for periodic boundaries)
+    // Left border
+    if (lx == 0) {
+        uint border_x = (gx == 0) ? (params.Nx - 1) : (gx - 1);
+        if (gy < params.Ny) {
+            uint idx = gy * params.Nx + border_x;
+            s_theta[ly + 1][0] = theta[idx];
+        }
+    }
+
+    // Right border
+    if (lx == 15) {
+        uint border_x = (gx == params.Nx - 1) ? 0 : (gx + 1);
+        if (gy < params.Ny) {
+            uint idx = gy * params.Nx + border_x;
+            s_theta[ly + 1][17] = theta[idx];
+        }
+    }
+
+    // Top border
+    if (ly == 0) {
+        uint border_y = (gy == 0) ? (params.Ny - 1) : (gy - 1);
+        if (gx < params.Nx) {
+            uint idx = border_y * params.Nx + gx;
+            s_theta[0][lx + 1] = theta[idx];
+        }
+    }
+
+    // Bottom border
+    if (ly == 15) {
+        uint border_y = (gy == params.Ny - 1) ? 0 : (gy + 1);
+        if (gx < params.Nx) {
+            uint idx = border_y * params.Nx + gx;
+            s_theta[17][lx + 1] = theta[idx];
+        }
+    }
+
+    barrier();  // Wait for all threads to finish loading
+}
+
+/**
+ * @brief Compute local synchronization coupling force
+ *
+ * K/N · Σ_neighbors sin(θⱼ - θᵢ)
+ */
+float compute_coupling_force(uint local_x, uint local_y, float theta_i) {
+    float coupling = 0.0;
+
+    // Sum over 8 neighbors (Moore neighborhood)
+    for (int dy = -1; dy <= 1; dy++) {
+        for (int dx = -1; dx <= 1; dx++) {
+            if (dx == 0 && dy == 0) continue;  // Skip self
+
+            uint nx = local_x + 1 + dx;
+            uint ny = local_y + 1 + dy;
+
+            float theta_j = s_theta[ny][nx];
+            coupling += sin(theta_j - theta_i);
+        }
+    }
+
+    // Normalize by number of neighbors
+    return (params.K / 8.0) * coupling;
+}
+
+// ============================================================================
+// Main Compute Shader
+// ============================================================================
+
+void main() {
+    uvec2 global_id = gl_GlobalInvocationID.xy;
+    uvec2 local_id = gl_LocalInvocationID.xy;
+
+    // Bounds check
+    if (global_id.x >= params.Nx || global_id.y >= params.Ny) {
+        return;
+    }
+
+    uint idx = global_id.y * params.Nx + global_id.x;
+
+    // Initialize PRNG with unique seed per thread
+    // Seed = spatial_position + time_step
+    uint seed = global_id.x + global_id.y * 65536u + params.time_step * 16777216u;
+    pcg_init(seed);
+
+    // Load theta values into shared memory
+    load_shared_memory(global_id, local_id);
+
+    // Get current phase
+    float theta_i = theta[idx];
+
+    // Compute deterministic drift
+    float omega_i = params.omega_mean;  // Could make this per-oscillator later
+    float coupling_force = compute_coupling_force(local_id.x, local_id.y, theta_i);
+    float damping_force = -params.damping * sin(theta_i);  // CRITICAL: Provides dissipation
+
+    float drift = omega_i + coupling_force + damping_force;
+
+    // Stochastic term: σ·√(dt)·N(0,1)
+    float noise = params.sigma * sqrt(params.dt) * randn();
+
+    // Euler-Maruyama update: θ(t+dt) = θ(t) + drift·dt + σ·√(dt)·dW
+    float theta_new = theta_i + drift * params.dt + noise;
+
+    // Wrap to [-π, π]
+    const float PI = 3.14159265359;
+    theta_new = mod(theta_new + PI, 2.0 * PI) - PI;
+
+    // Write output
+    theta_out[idx] = theta_new;
+}

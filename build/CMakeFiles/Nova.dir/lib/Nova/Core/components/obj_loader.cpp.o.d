@@ -383,6 +383,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/components/obj_loader.cpp.o: \
  /usr/include/SDL2/SDL_quit.h /usr/include/SDL2/SDL_gesture.h \
  /usr/include/SDL2/SDL_touch.h \
  /home/persist/neotec/0rigin/lib/Nova/Core/components/.././modules/camera/./perspective.h \
+ /home/persist/neotec/0rigin/lib/Nova/Core/components/.././components/resource_registry.h \
  /usr/include/c++/15.2.1/span /usr/include/glm/gtx/quaternion.hpp \
  /usr/include/glm/gtc/constants.hpp \
  /usr/include/glm/ext/scalar_constants.hpp \

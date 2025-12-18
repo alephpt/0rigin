@@ -239,6 +239,74 @@ set_target_properties(test_stochastic_particle PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# Test executable: Simple timesync verification
+add_executable(test_timesync_simple
+    test/test_timesync_simple.cpp
+    src/MSFTEngine.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
+    src/MSFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_timesync_simple PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_timesync_simple PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    fftw3f
+    pthread
+    dl
+    m
+)
+
+set_target_properties(test_timesync_simple PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test executable: Dirac GPU timesync validation
+add_executable(test_dirac_gpu_timesync
+    test/test_dirac_gpu_timesync.cpp
+    src/MSFTEngine.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
+    src/MSFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_dirac_gpu_timesync PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_dirac_gpu_timesync PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    fftw3f
+    pthread
+    dl
+    m
+)
+
+set_target_properties(test_dirac_gpu_timesync PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # Test executable: Operator splitting validation (infrastructure only)
 add_executable(test_operator_splitting
     test/test_operator_splitting.cpp

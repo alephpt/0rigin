@@ -82,6 +82,15 @@ public:
     void clearBuffer(VkDeviceMemory memory, VkDeviceSize size);
 
     /**
+     * Create accumulator buffers for operator splitting time averaging
+     * Creates two storage buffers initialized to zero for accumulating
+     * theta and R values over N substeps.
+     * @param size Buffer size in bytes
+     * @return Pair of (theta_sum_buffer, theta_sum_memory) and (R_sum_buffer, R_sum_memory) as vector
+     */
+    std::vector<std::pair<VkBuffer, VkDeviceMemory>> createAccumulatorBuffers(VkDeviceSize size);
+
+    /**
      * Destroy a specific buffer and free its memory
      * @param buffer Buffer handle
      * @param memory Memory handle

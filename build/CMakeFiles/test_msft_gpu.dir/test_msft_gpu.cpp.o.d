@@ -365,6 +365,7 @@ CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.o: \
  /usr/include/SDL2/SDL_quit.h /usr/include/SDL2/SDL_gesture.h \
  /usr/include/SDL2/SDL_touch.h \
  /home/persist/neotec/0rigin/lib/Nova/./Core/./modules/camera/./perspective.h \
+ /home/persist/neotec/0rigin/lib/Nova/./Core/./components/resource_registry.h \
  /usr/include/c++/15.2.1/span \
  /home/persist/neotec/0rigin/lib/Nova/./Core/config.h \
  /usr/include/c++/15.2.1/future /usr/include/c++/15.2.1/mutex \

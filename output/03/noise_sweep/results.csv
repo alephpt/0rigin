@@ -1,0 +1,9 @@
+sigma,R_global_mean,R_global_std,R_local_mean,R_local_std,L_mean,L_std,phase_variance
+0,-nan,nan,0,0,0,0,-nan
+1e-06,nan,nan,0,0,0,0,nan
+1e-05,-nan,-nan,0,0,0,0,-nan
+0.0001,nan,nan,0,0,0,0,nan
+0.001,nan,nan,0,0,0,0,nan
+0.01,-nan,-nan,0,0,0,0,-nan
+0.1,-nan,-nan,0,0,0,0,-nan
+1,-nan,-nan,0,0,0,0,-nan

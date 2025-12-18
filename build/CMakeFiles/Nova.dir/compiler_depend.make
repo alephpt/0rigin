@@ -653,6 +653,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/components/logger.cpp.o: /home/persist/neotec/
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stddef.h
 
 CMakeFiles/Nova.dir/lib/Nova/Core/components/obj_loader.cpp.o: /home/persist/neotec/0rigin/lib/Nova/Core/components/obj_loader.cpp \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.h \
@@ -1239,6 +1240,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/components/obj_loader.cpp.o: /home/persist/neo
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h
 
 CMakeFiles/Nova.dir/lib/Nova/Core/core.cpp.o: /home/persist/neotec/0rigin/lib/Nova/Core/core.cpp \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.h \
@@ -2745,6 +2747,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/perspective.cpp.o: /home/persis
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h
 
 CMakeFiles/Nova.dir/lib/Nova/Core/modules/device.cpp.o: /home/persist/neotec/0rigin/lib/Nova/Core/modules/device.cpp \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.h \
@@ -2753,6 +2756,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/device.cpp.o: /home/persist/neotec/0ri
   /home/persist/neotec/0rigin/lib/Nova/Core/components/vk_memory.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/atomic/atomic.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/pipeline/pipeline.h \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/vk_memory.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/core.h \
   /usr/include/SDL2/SDL_blendmode.h \
   /usr/include/SDL2/SDL_config.h \
@@ -3162,6 +3166,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/device.cpp.o: /home/persist/neotec/0ri
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h
 
 CMakeFiles/Nova.dir/lib/Nova/Core/modules/management.cpp.o: /home/persist/neotec/0rigin/lib/Nova/Core/modules/management.cpp \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.h \
@@ -4022,6 +4027,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/pipeline.cpp.o: /home/persist
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h
 
 CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/scene.cpp.o: /home/persist/neotec/0rigin/lib/Nova/Core/modules/pipeline/scene.cpp \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.h \
@@ -4542,6 +4548,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/scene.cpp.o: /home/persist/ne
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/xmmintrin.h
 
 CMakeFiles/Nova.dir/lib/Nova/Core/modules/presentation.cpp.o: /home/persist/neotec/0rigin/lib/Nova/Core/modules/presentation.cpp \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.h \
@@ -4959,6 +4966,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/presentation.cpp.o: /home/persist/neot
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h
 
 CMakeFiles/Nova.dir/lib/Nova/Core/modules/render.cpp.o: /home/persist/neotec/0rigin/lib/Nova/Core/modules/render.cpp \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.h \
@@ -5372,6 +5380,7 @@ CMakeFiles/Nova.dir/lib/Nova/Core/modules/render.cpp.o: /home/persist/neotec/0ri
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h
 
 CMakeFiles/Nova.dir/lib/Nova/Nova.cpp.o: /home/persist/neotec/0rigin/lib/Nova/Nova.cpp \
+  /home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/camera.h \
   /home/persist/neotec/0rigin/lib/Nova/Core/components/logger.h \
@@ -7452,6 +7461,8 @@ CMakeFiles/Nova.dir/lib/Nova/Nova.cpp.o: /home/persist/neotec/0rigin/lib/Nova/No
 /usr/include/c++/15.2.1/bits/stream_iterator.h:
 
 /home/persist/neotec/0rigin/lib/Nova/Core/components/obj_loader.cpp:
+
+/home/persist/neotec/0rigin/lib/Nova/Core/components/resource_registry.h:
 
 /home/persist/neotec/0rigin/lib/Nova/Core/modules/camera/perspective.h:
 

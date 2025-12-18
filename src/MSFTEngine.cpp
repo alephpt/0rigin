@@ -1,4 +1,5 @@
 #include "MSFTEngine.h"
+#include "DiracEvolution.h"
 #include <cstring>
 #include <algorithm>
 #include <cmath>
@@ -113,7 +114,19 @@ MSFTEngine::MSFTEngine(Nova* nova)
       _dirac_descriptor_set(VK_NULL_HANDLE),
       _dirac_descriptor_layout(VK_NULL_HANDLE),
       _dirac_pipeline_layout(VK_NULL_HANDLE),
-      _dirac_initialized(false)  // Initialize Dirac field flag
+      _dirac_evolution(nullptr),
+      _dirac_initialized(false),  // Initialize Dirac field flag
+      _substep_count(0),
+      _substep_ratio(10),  // Default: 10 Kuramoto steps per Dirac step
+      _lambda_coupling(0.0f),
+      _theta_sum_buffer(VK_NULL_HANDLE),
+      _R_sum_buffer(VK_NULL_HANDLE),
+      _theta_sum_memory(VK_NULL_HANDLE),
+      _R_sum_memory(VK_NULL_HANDLE),
+      _accumulation_pipeline(VK_NULL_HANDLE),
+      _accumulation_descriptor_set(VK_NULL_HANDLE),
+      _accumulation_descriptor_layout(VK_NULL_HANDLE),
+      _accumulation_pipeline_layout(VK_NULL_HANDLE)
 {
     // Ensure Nova is initialized before creating managers
     if (!nova || !nova->initialized) {
@@ -138,6 +151,12 @@ MSFTEngine::MSFTEngine(Nova* nova)
 }
 
 MSFTEngine::~MSFTEngine() {
+    // Clean up Dirac evolution
+    if (_dirac_evolution) {
+        delete _dirac_evolution;
+        _dirac_evolution = nullptr;
+    }
+
     // Clean up all Vulkan resources
     destroyResources();
 }
@@ -281,6 +300,21 @@ void MSFTEngine::step(float dt, float K, float damping) {
                                    &gravity_push, sizeof(gravity_push),
                                    workgroupsX, workgroupsY);
 
+    // Step 4: Accumulate for operator splitting (if enabled)
+    if (_accumulation_pipeline && _substep_ratio > 1) {
+        _compute->insertMemoryBarrier();
+
+        struct AccumulatePush {
+            uint32_t grid_size;
+        } accumulate_push = { _Nx };
+
+        _compute->dispatchAccumulation(_accumulation_pipeline,
+                                      _accumulation_pipeline_layout,
+                                      _accumulation_descriptor_set,
+                                      &accumulate_push, sizeof(accumulate_push),
+                                      workgroupsX, workgroupsY);
+    }
+
     // Submit batch and wait
     if (!_compute->submitBatch(true)) {
         std::cerr << "[MSFTEngine] Failed to submit compute batch" << std::endl;
@@ -290,12 +324,48 @@ void MSFTEngine::step(float dt, float K, float damping) {
     // Download results from GPU
     downloadFromGPU();
 
+    // Operator splitting: Check if we need to update Dirac (slow subsystem)
+    if (_substep_ratio > 1 && _dirac_initialized) {
+        _substep_count++;
+
+        if (_substep_count >= _substep_ratio) {
+            // Download accumulated sums
+            std::vector<float> theta_sum(_Nx * _Ny);
+            std::vector<float> R_sum(_Nx * _Ny);
+            _bufferManager->downloadData(_theta_sum_memory, theta_sum.data(),
+                                        theta_sum.size() * sizeof(float));
+            _bufferManager->downloadData(_R_sum_memory, R_sum.data(),
+                                        R_sum.size() * sizeof(float));
+
+            // Compute time averages
+            for (size_t i = 0; i < theta_sum.size(); ++i) {
+                _theta_avg[i] = theta_sum[i] / _substep_ratio;
+                _R_avg[i] = R_sum[i] / _substep_ratio;
+            }
+
+            // Evolve Dirac with averaged fields (CPU-side)
+            updateAveragedFields(_theta_avg, _R_avg);
+            stepWithDirac(dt * _substep_ratio, _lambda_coupling);
+
+            // Upload new frozen Dirac density
+            auto psi_density = getDiracDensity();
+            _bufferManager->uploadData(_spinor_density_memory, psi_density.data(),
+                                       psi_density.size() * sizeof(float));
+
+            // Reset accumulators
+            _compute->beginBatch();
+            size_t buffer_size = _Nx * _Ny * sizeof(float);
+            _compute->fillBuffer(_theta_sum_buffer, 0, buffer_size);
+            _compute->fillBuffer(_R_sum_buffer, 0, buffer_size);
+            _compute->submitBatch(true);
+
+            _substep_count = 0;
+        }
+    }
+
     // Swap theta buffers for next iteration
     std::swap(_theta_buffer, _theta_out_buffer);
     std::swap(_theta_memory, _theta_out_memory);
-
-    // Also swap in descriptor sets (both kuramoto and sync reference theta_buffer)
-    // This is handled by recreating descriptor sets in Phase 3
 }
 
 void MSFTEngine::stepStochastic(float dt, float K, float damping,
@@ -439,52 +509,54 @@ void MSFTEngine::createBuffers() {
     size_t float_size = sizeof(float) * _Nx * _Ny;
     size_t spinor_size = sizeof(std::complex<float>) * 4 * _Nx * _Ny;
 
-    // Create buffers using buffer manager
-    auto theta_pair = _bufferManager->createBuffer(float_size, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                                   VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    // Create buffers using buffer manager - all need HOST_VISIBLE for CPU access
+    auto theta_pair = _bufferManager->createStorageBuffer(float_size);
     _theta_buffer = theta_pair.first;
     _theta_memory = theta_pair.second;
 
-    auto theta_out_pair = _bufferManager->createBuffer(float_size, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                                       VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    auto theta_out_pair = _bufferManager->createStorageBuffer(float_size);
     _theta_out_buffer = theta_out_pair.first;
     _theta_out_memory = theta_out_pair.second;
 
-    auto omega_pair = _bufferManager->createBuffer(float_size, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                                   VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    auto omega_pair = _bufferManager->createStorageBuffer(float_size);
     _omega_buffer = omega_pair.first;
     _omega_memory = omega_pair.second;
 
-    auto R_field_pair = _bufferManager->createBuffer(float_size, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                                     VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    auto R_field_pair = _bufferManager->createStorageBuffer(float_size);
     _R_field_buffer = R_field_pair.first;
     _R_field_memory = R_field_pair.second;
 
-    auto gravity_x_pair = _bufferManager->createBuffer(float_size, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                                       VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    auto gravity_x_pair = _bufferManager->createStorageBuffer(float_size);
     _gravity_x_buffer = gravity_x_pair.first;
     _gravity_x_memory = gravity_x_pair.second;
 
-    auto gravity_y_pair = _bufferManager->createBuffer(float_size, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                                       VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    auto gravity_y_pair = _bufferManager->createStorageBuffer(float_size);
     _gravity_y_buffer = gravity_y_pair.first;
     _gravity_y_memory = gravity_y_pair.second;
 
-    auto spinor_density_pair = _bufferManager->createBuffer(float_size, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                                            VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    auto spinor_density_pair = _bufferManager->createStorageBuffer(float_size);
     _spinor_density_buffer = spinor_density_pair.first;
     _spinor_density_memory = spinor_density_pair.second;
 
-    auto spinor_pair = _bufferManager->createBuffer(spinor_size, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-                                                    VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    auto spinor_pair = _bufferManager->createStorageBuffer(spinor_size);
     _spinor_buffer = spinor_pair.first;
     _spinor_memory = spinor_pair.second;
+
+    // Create accumulator buffers for operator splitting (GPU-side time averaging)
+    auto accumulators = _bufferManager->createAccumulatorBuffers(float_size);
+    if (accumulators.size() == 2) {
+        _theta_sum_buffer = accumulators[0].first;
+        _theta_sum_memory = accumulators[0].second;
+        _R_sum_buffer = accumulators[1].first;
+        _R_sum_memory = accumulators[1].second;
+    }
 
     // Verify all buffers were created
     if (_theta_buffer == VK_NULL_HANDLE || _theta_out_buffer == VK_NULL_HANDLE ||
         _omega_buffer == VK_NULL_HANDLE || _R_field_buffer == VK_NULL_HANDLE ||
         _gravity_x_buffer == VK_NULL_HANDLE || _gravity_y_buffer == VK_NULL_HANDLE ||
-        _spinor_density_buffer == VK_NULL_HANDLE || _spinor_buffer == VK_NULL_HANDLE) {
+        _spinor_density_buffer == VK_NULL_HANDLE || _spinor_buffer == VK_NULL_HANDLE ||
+        _theta_sum_buffer == VK_NULL_HANDLE || _R_sum_buffer == VK_NULL_HANDLE) {
         std::cerr << "[MSFTEngine] Failed to create one or more buffers" << std::endl;
         destroyResources();
         return;
@@ -494,6 +566,7 @@ void MSFTEngine::createBuffers() {
         std::cout << "[MSFTEngine] Created GPU buffers for " << _Nx << "x" << _Ny << " grid" << std::endl;
         std::cout << "  Phase buffers: " << float_size << " bytes each" << std::endl;
         std::cout << "  Spinor buffer: " << spinor_size << " bytes" << std::endl;
+        std::cout << "  Accumulator buffers: " << float_size << " bytes each (operator splitting)" << std::endl;
     }
 }
 
@@ -716,6 +789,54 @@ void MSFTEngine::createPipelines() {
         }
     }
 
+    // Create Accumulation pipeline for operator splitting
+    {
+        std::vector<VkDescriptorSetLayoutBinding> bindings = {
+            {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr}, // theta (readonly)
+            {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr}, // R (readonly)
+            {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr}, // theta_sum (read-write)
+            {3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr}  // R_sum (read-write)
+        };
+
+        _accumulation_descriptor_layout = _descriptorManager->createDescriptorSetLayout(bindings);
+
+        VkPushConstantRange pushRange{};
+        pushRange.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
+        pushRange.offset = 0;
+        pushRange.size = sizeof(uint32_t);  // grid_size
+
+        VkPipelineLayoutCreateInfo layoutInfo{};
+        layoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+        layoutInfo.setLayoutCount = 1;
+        layoutInfo.pSetLayouts = &_accumulation_descriptor_layout;
+        layoutInfo.pushConstantRangeCount = 1;
+        layoutInfo.pPushConstantRanges = &pushRange;
+
+        vkCreatePipelineLayout(_nova->_architect->logical_device, &layoutInfo, nullptr, &_accumulation_pipeline_layout);
+
+        _accumulation_pipeline = _pipelineFactory->createAccumulationPipeline(
+            "shaders/smft/accumulate.comp.spv", _accumulation_pipeline_layout);
+
+        _accumulation_descriptor_set = _descriptorManager->allocateDescriptorSet(
+            _descriptor_pool, _accumulation_descriptor_layout);
+
+        VkDescriptorBufferInfo bufferInfos[] = {
+            {_theta_buffer, 0, VK_WHOLE_SIZE},
+            {_R_field_buffer, 0, VK_WHOLE_SIZE},
+            {_theta_sum_buffer, 0, VK_WHOLE_SIZE},
+            {_R_sum_buffer, 0, VK_WHOLE_SIZE}
+        };
+
+        VkWriteDescriptorSet descriptorWrites[] = {
+            {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET, nullptr, _accumulation_descriptor_set, 0, 0, 1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, nullptr, &bufferInfos[0], nullptr},
+            {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET, nullptr, _accumulation_descriptor_set, 1, 0, 1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, nullptr, &bufferInfos[1], nullptr},
+            {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET, nullptr, _accumulation_descriptor_set, 2, 0, 1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, nullptr, &bufferInfos[2], nullptr},
+            {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET, nullptr, _accumulation_descriptor_set, 3, 0, 1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, nullptr, &bufferInfos[3], nullptr}
+        };
+
+        vkUpdateDescriptorSets(_nova->_architect->logical_device, 4, descriptorWrites, 0, nullptr);
+    }
+
     if (_nova) {
         std::cout << "[MSFTEngine] Created compute pipelines" << std::endl;
         if (_kuramoto_pipeline) std::cout << "  ✓ Kuramoto pipeline" << std::endl;
@@ -723,6 +844,7 @@ void MSFTEngine::createPipelines() {
         if (_gravity_pipeline) std::cout << "  ✓ Gravity field pipeline" << std::endl;
         if (_kuramoto_stochastic_pipeline) std::cout << "  ✓ Stochastic Kuramoto pipeline" << std::endl;
         if (_dirac_stochastic_pipeline) std::cout << "  ✓ Stochastic Dirac pipeline" << std::endl;
+        if (_accumulation_pipeline) std::cout << "  ✓ Accumulation pipeline (operator splitting)" << std::endl;
     }
 }
 
@@ -826,162 +948,155 @@ void MSFTEngine::destroyResources() {
 void MSFTEngine::initializeDiracField(float x0, float y0, float sigma, float amplitude) {
     /**
      * Initialize Dirac spinor field with Gaussian wavepacket
-     * CPU-only implementation - GPU shaders exceed timeout budget
-     *
-     * Creates a Gaussian wavepacket centered at (x0, y0) with width sigma.
-     * For simplicity, we start with a scalar field (only ψ₀ non-zero).
-     * Full 4-component spinor can be added later if needed.
+     * Uses split-operator DiracEvolution class
      */
 
-    // Ensure psi vector is allocated (4 components per grid point)
-    _psi.resize(4 * _Nx * _Ny);
-
-    // Initialize all components to zero
-    std::fill(_psi.begin(), _psi.end(), std::complex<float>(0.0f, 0.0f));
-
-    // Create Gaussian wavepacket in component 0
-    float norm_sum = 0.0f;
-
-    for (uint32_t y = 0; y < _Ny; y++) {
-        for (uint32_t x = 0; x < _Nx; x++) {
-            // Distance from center
-            float dx = float(x) - x0;
-            float dy = float(y) - y0;
-            float r2 = dx * dx + dy * dy;
-
-            // Gaussian envelope
-            float gauss = amplitude * std::exp(-r2 / (2.0f * sigma * sigma));
-
-            // Set component 0 (scalar approximation)
-            uint32_t idx = (y * _Nx + x) * 4;  // 4 components per point
-            _psi[idx] = std::complex<float>(gauss, 0.0f);
-
-            // Accumulate norm
-            norm_sum += gauss * gauss;
-        }
+    // Create DiracEvolution instance if not exists
+    if (!_dirac_evolution) {
+        _dirac_evolution = new DiracEvolution(_Nx, _Ny);
     }
 
-    // Normalize wavefunction: ∫|ψ|² = 1
-    if (norm_sum > 0.0f) {
-        float norm_factor = 1.0f / std::sqrt(norm_sum);
-        for (auto& psi_comp : _psi) {
-            psi_comp *= norm_factor;
-        }
-    }
+    // Initialize with Gaussian wavepacket
+    _dirac_evolution->initialize(x0, y0, sigma);
 
     _dirac_initialized = true;
 
     // Log initialization
     if (_nova) {
+        float norm = _dirac_evolution->getNorm();
         std::cout << "[MSFTEngine] Dirac field initialized: "
                   << "center=(" << x0 << "," << y0 << "), "
                   << "sigma=" << sigma << ", "
-                  << "norm=" << norm_sum << std::endl;
+                  << "norm=" << norm << std::endl;
     }
 }
 
 void MSFTEngine::stepWithDirac(float dt, float lambda_coupling) {
     /**
      * Step coupled Kuramoto-Dirac evolution with mass coupling
-     * CPU-only implementation - GPU shaders exceed timeout budget
+     * CPU-only implementation - uses split-operator method for unitary evolution
      *
      * Physics:
-     * - Dirac equation: i·dΨ/dt = [-iα·∇ + β·m(x)]Ψ
+     * - Dirac evolution: i·dΨ/dt = [-iα·∇ + β·m(x)]Ψ
      * - Mass coupling: m(x,y) = Δ·R(x,y) from synchronization field
-     * - Simple Euler integration for CPU efficiency
-     * - Feedback: Ψ density influences phase field via lambda_coupling
+     * - Feedback: Ψ density influences phase field via coupling λ
      */
 
-    if (!_dirac_initialized) {
-        // Initialize with default Gaussian at center
-        initializeDiracField(_Nx/2.0f, _Ny/2.0f, 5.0f, 1.0f);
+    if (!_dirac_initialized || !_dirac_evolution) {
+        std::cerr << "[MSFTEngine::stepWithDirac] ERROR: Dirac field not initialized" << std::endl;
+        return;
     }
-
-    // Create temporary buffer for new psi values
-    std::vector<std::complex<float>> psi_new = _psi;
 
     // Get current synchronization field for mass coupling
     std::vector<float> R_field = getSyncField();
 
-    // Euler integration of Dirac equation
-    for (uint32_t y = 0; y < _Ny; y++) {
-        for (uint32_t x = 0; x < _Nx; x++) {
-            uint32_t idx = y * _Nx + x;
-            uint32_t psi_idx = idx * 4;  // 4 components per point
-
-            // Get mass field: m(x,y) = Δ·R(x,y)
-            float mass = _Delta * R_field[idx];
-
-            // For scalar approximation, only evolve component 0
-            std::complex<float> psi0 = _psi[psi_idx];
-
-            // Compute spatial derivatives (finite differences with periodic BC)
-            uint32_t xp = ((x + 1) % _Nx);
-            uint32_t xm = ((x + _Nx - 1) % _Nx);
-            uint32_t yp = ((y + 1) % _Ny);
-            uint32_t ym = ((y + _Ny - 1) % _Ny);
-
-            std::complex<float> dpsi_dx = (_psi[y * _Nx * 4 + xp * 4] - _psi[y * _Nx * 4 + xm * 4]) * 0.5f;
-            std::complex<float> dpsi_dy = (_psi[yp * _Nx * 4 + x * 4] - _psi[ym * _Nx * 4 + x * 4]) * 0.5f;
-
-            // Simplified Hamiltonian: H = -i·∇ + m(x)
-            // For scalar field: dΨ/dt = -i·H·Ψ = -i(-i·∇ + m)Ψ = -∇Ψ - i·m·Ψ
-            std::complex<float> dpsi_dt = -(dpsi_dx + dpsi_dy)
-                                         - std::complex<float>(0.0f, mass) * psi0;
-
-            // Euler update
-            psi_new[psi_idx] = psi0 + dt * dpsi_dt;
-
-            // Optional: Feedback to phase field (via lambda_coupling)
-            if (lambda_coupling > 0.0f && _theta_data.size() > idx) {
-                // Density-weighted phase shift
-                float density = std::norm(psi0);
-                _theta_data[idx] += lambda_coupling * dt * density;
-            }
-        }
+    // Compute mass field: m(x,y) = Δ·R(x,y)
+    std::vector<float> mass_field(_Nx * _Ny);
+    for (uint32_t i = 0; i < _Nx * _Ny; i++) {
+        mass_field[i] = _Delta * R_field[i];
     }
 
-    // Update psi with new values
-    _psi = psi_new;
+    // Split-operator evolution step (unitary, preserves norm exactly)
+    _dirac_evolution->step(mass_field, dt);
 
-    // Optional: Re-upload phase data to GPU if modified
-    if (lambda_coupling > 0.0f && _theta_buffer != VK_NULL_HANDLE) {
-        uploadToGPU();
+    // Optional: Feedback to phase field (via lambda_coupling)
+    if (lambda_coupling > 0.0f && _theta_data.size() == _Nx * _Ny) {
+        std::vector<float> density = _dirac_evolution->getDensity();
+        for (uint32_t i = 0; i < _Nx * _Ny; i++) {
+            _theta_data[i] += lambda_coupling * dt * density[i];
+        }
+
+        // Re-upload phase data to GPU if modified
+        if (_theta_buffer != VK_NULL_HANDLE) {
+            uploadToGPU();
+        }
     }
 }
 
 std::vector<float> MSFTEngine::getDiracDensity() const {
     /**
      * Get Dirac spinor density |Ψ|² for analysis
-     * CPU-only implementation - GPU shaders exceed timeout budget
+     * CPU-only implementation - uses split-operator DiracEvolution class
      *
      * Returns density at each grid point.
-     * For scalar field: |Ψ|² = |ψ₀|²
-     * For full spinor: |Ψ|² = |ψ₀|² + |ψ₁|² + |ψ₂|² + |ψ₃|²
+     * Full spinor: |Ψ|² = |ψ₀|² + |ψ₁|² + |ψ₂|² + |ψ₃|²
      */
 
-    std::vector<float> density(_Nx * _Ny, 0.0f);
-
-    if (!_dirac_initialized || _psi.empty()) {
-        return density;  // Return zeros if not initialized
+    if (!_dirac_initialized || !_dirac_evolution) {
+        return std::vector<float>(_Nx * _Ny, 0.0f);  // Return zeros if not initialized
     }
 
-    for (uint32_t y = 0; y < _Ny; y++) {
-        for (uint32_t x = 0; x < _Nx; x++) {
-            uint32_t idx = y * _Nx + x;
-            uint32_t psi_idx = idx * 4;  // 4 components per point
+    return _dirac_evolution->getDensity();
+}
 
-            // Sum density over all 4 components (most will be zero for scalar case)
-            float rho = 0.0f;
-            for (int comp = 0; comp < 4; comp++) {
-                if (psi_idx + comp < _psi.size()) {
-                    rho += std::norm(_psi[psi_idx + comp]);
-                }
-            }
+// ============================================================================
+// OPERATOR SPLITTING METHODS (GPU-CPU Hybrid with Adiabatic Approximation)
+// ============================================================================
 
-            density[idx] = rho;
-        }
+void MSFTEngine::setSubstepRatio(int N) {
+    /**
+     * Set the substep ratio for operator splitting
+     * N = number of fast Kuramoto steps per slow Dirac step
+     *
+     * Typical values based on timescale separation:
+     * - N = 10 for testing/debugging
+     * - N = 100 for production (matches ~100× physical timescale ratio)
+     */
+    _substep_ratio = N;
+    _substep_count = 0;  // Reset counter
+}
+
+void MSFTEngine::updateAveragedFields(const std::vector<float>& theta_avg,
+                                      const std::vector<float>& R_avg) {
+    /**
+     * Update time-averaged fields for Dirac evolution
+     * Called internally after GPU accumulation and averaging completes
+     *
+     * These averaged fields represent the "slow" variables seen by the
+     * fast-timescale Kuramoto subsystem during operator splitting.
+     */
+    _theta_avg = theta_avg;
+    _R_avg = R_avg;
+}
+
+void MSFTEngine::initializeHybrid(float x0, float y0, float sigma) {
+    /**
+     * Initialize hybrid GPU-CPU system with operator splitting
+     *
+     * Sets up:
+     * 1. Kuramoto (GPU) - already initialized via initialize()
+     * 2. Dirac (CPU) - Gaussian wavepacket at defect location
+     * 3. Accumulator buffers (GPU) - for time averaging
+     * 4. Averaged field storage (CPU)
+     */
+
+    // Initialize Dirac field at defect location
+    initializeDiracField(x0, y0, sigma, 1.0f);
+
+    // Initialize averaged field storage
+    size_t total = _Nx * _Ny;
+    _theta_avg.resize(total);
+    _R_avg.resize(total);
+
+    // Initialize accumulators to current state
+    std::vector<float> theta_init = getPhaseField();
+    std::vector<float> R_init = getSyncField();
+    _theta_avg = theta_init;
+    _R_avg = R_init;
+
+    // Upload initial Dirac density to GPU (frozen for N steps)
+    auto psi_density = getDiracDensity();
+    if (_spinor_density_buffer != VK_NULL_HANDLE && _spinor_density_memory != VK_NULL_HANDLE) {
+        _bufferManager->uploadData(_spinor_density_memory, psi_density.data(),
+                                    psi_density.size() * sizeof(float));
     }
 
-    return density;
+    // Reset operator splitting state
+    _substep_count = 0;
+    if (_substep_ratio == 0) {
+        _substep_ratio = 10;  // Default value
+    }
+
+    std::cout << "[MSFTEngine] Hybrid system initialized with N=" << _substep_ratio
+              << " substeps" << std::endl;
 }

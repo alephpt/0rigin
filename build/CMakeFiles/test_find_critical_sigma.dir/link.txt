@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_find_critical_sigma.dir/link.d CMakeFiles/test_find_critical_sigma.dir/test/test_find_critical_sigma.cpp.o CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o -o bin/test_find_critical_sigma  -lpthread -lm

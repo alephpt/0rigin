@@ -136,6 +136,22 @@ void MSFTBufferManager::clearBuffer(VkDeviceMemory memory, VkDeviceSize size) {
     unmapMemory(memory);
 }
 
+std::vector<std::pair<VkBuffer, VkDeviceMemory>> MSFTBufferManager::createAccumulatorBuffers(VkDeviceSize size) {
+    std::vector<std::pair<VkBuffer, VkDeviceMemory>> accumulators;
+
+    // Create theta_sum accumulator buffer
+    auto theta_sum = createStorageBuffer(size);
+    clearBuffer(theta_sum.second, size);  // Initialize to zero
+    accumulators.push_back(theta_sum);
+
+    // Create R_sum accumulator buffer
+    auto R_sum = createStorageBuffer(size);
+    clearBuffer(R_sum.second, size);  // Initialize to zero
+    accumulators.push_back(R_sum);
+
+    return accumulators;
+}
+
 void MSFTBufferManager::destroyBuffer(VkBuffer buffer, VkDeviceMemory memory) {
     // Remove from managed buffers list
     auto it = std::remove_if(_managedBuffers.begin(), _managedBuffers.end(),

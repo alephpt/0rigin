@@ -1,0 +1,26 @@
+# Euler vs RK4 Comparison at Critical Steps
+# Format: step euler_mean_R euler_std_R euler_mean_psi euler_max_psi rk4_mean_R rk4_std_R rk4_mean_psi rk4_max_psi
+
+# Step 0 (initial state - identical)
+0 0.315021 0.158577 1.52588e-05 0.0127324 0.315021 0.158577 1.52588e-05 0.0127324
+
+# Step 5000 (both stable)
+5000 0.908479 0.105854 1.52588e-05 0.00101401 0.908479 0.105854 1.52588e-05 0.00101401
+
+# Step 19780 (Euler about to fail)
+19780 0.316392 0.159272 inf inf 0.971621 0.0805272 1.52588e-05 0.00101737
+
+# Step 19781 (Euler FAILS)
+19781 nan nan inf inf 0.971622 0.0805324 1.52588e-05 0.00101737
+
+# Step 25000 (RK4 continues stable)
+25000 nan nan nan 0 0.97656 0.0695754 1.52588e-05 0.000691655
+
+# Step 50000 (final)
+50000 nan nan nan 0 0.98308 0.0546461 1.52588e-05 0.000291901
+
+# Summary Statistics
+# Euler: Failed at step 19,781 (39.6% complete)
+# RK4: Stable for all 50,000 steps (100% complete)
+# Performance overhead: 13% (230.4s vs 203.6s)
+# Stability gain: 2.5× longer stable simulation

@@ -1,0 +1,47 @@
+=== Phase 2: Scenario 1 - CRITICAL VALIDATION ===
+Grid: 128x128
+Strengthened defect: radius=15, ω_defect=1.5
+Extended evolution: 50000 steps
+
+[1] Creating STRONG defect...
+  Defect points: 697
+
+[2] Kuramoto warmup (1000 steps)...
+  Step    0: <R> = 0.9688
+  Step  200: <R> = 0.9770
+  Step  400: <R> = 0.9816
+  Step  600: <R> = 0.9855
+  Step  800: <R> = 0.9855
+
+  R at defect center: 0.3558
+  R at background: 1.0000
+  Defect contrast ΔR: 0.6442
+
+[3] Initializing Dirac wavepacket...
+[DiracEvolution] Initialized 128x128 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (48.0000, 64.0000) with σ=5.0000
+  Initial CoM: (48.0000, 64.0000)
+  Initial <β>: 1.0000
+
+[4] Coupled evolution with diagnostics...
+  Step      0: dist=15.99, R=0.9997
+  Step   5000: dist=7.54, R=0.9559
+  Step  10000: dist=13.48, R=0.9873
+  Step  15000: dist=2.24, R=0.9898
+  Step  20000: dist=19.35, R=0.9999
+  Step  25000: dist=10.43, R=0.9820
+  Step  30000: dist=2.15, R=0.9635
+  Step  35000: dist=4.62, R=0.9592
+  Step  40000: dist=1.04, R=0.9783
+  Step  45000: dist=6.98, R=0.9897
+
+=== CRITICAL DIAGNOSTICS COMPLETE ===
+Output:
+  - trajectory.dat (standard tracking)
+  - force_alignment.dat (F·v validation)
+  - core_density.dat (ρ_defect vs time)
+
+Analyze these files to verify:
+  1. Force-velocity alignment > 0.5 (F·v test)
+  2. Core density increases initially (localization)
+  3. Distance remains bounded over 50k steps (orbit)

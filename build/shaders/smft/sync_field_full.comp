@@ -1,0 +1,161 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+// Include complex arithmetic and precision libraries
+#include "../include/complex.glsl"
+#include "../include/precision.glsl"
+
+/**
+ * Full precision sync_field shader with:
+ * - Kahan summation for numerical stability
+ * - Complex exponential math
+ * - Proper shared memory corner loading (BUG FIX)
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+layout(push_constant) uniform PushConstants {
+    float dt;
+    float K;
+    float damping;
+    float Delta;
+    float chiral_angle;
+    uint Nx;
+    uint Ny;
+    uint N_total;
+    uint neighborhood_radius;
+} params;
+
+layout(set = 0, binding = 0) readonly buffer ThetaBuffer {
+    float theta[];
+};
+
+layout(set = 0, binding = 1) buffer RFieldBuffer {
+    float R_field[];
+};
+
+shared float s_theta[18][18];
+
+void load_shared_memory(uvec2 global_id, uvec2 local_id) {
+    uint gx = global_id.x;
+    uint gy = global_id.y;
+    uint lx = local_id.x;
+    uint ly = local_id.y;
+
+    // Load center tile
+    if (gx < params.Nx && gy < params.Ny) {
+        uint idx = gy * params.Nx + gx;
+        s_theta[ly + 1][lx + 1] = theta[idx];
+    }
+
+    // Load borders with periodic wrapping
+    if (lx == 0) {
+        uint border_x = (gx == 0) ? (params.Nx - 1) : (gx - 1);
+        if (gy < params.Ny) {
+            s_theta[ly + 1][0] = theta[gy * params.Nx + border_x];
+        }
+    }
+
+    if (lx == 15) {
+        uint border_x = (gx == params.Nx - 1) ? 0 : (gx + 1);
+        if (gy < params.Ny) {
+            s_theta[ly + 1][17] = theta[gy * params.Nx + border_x];
+        }
+    }
+
+    if (ly == 0) {
+        uint border_y = (gy == 0) ? (params.Ny - 1) : (gy - 1);
+        if (gx < params.Nx) {
+            s_theta[0][lx + 1] = theta[border_y * params.Nx + gx];
+        }
+    }
+
+    if (ly == 15) {
+        uint border_y = (gy == params.Ny - 1) ? 0 : (gy + 1);
+        if (gx < params.Nx) {
+            s_theta[17][lx + 1] = theta[border_y * params.Nx + gx];
+        }
+    }
+
+    // CRITICAL FIX: Load corner cells
+    if (lx == 0 && ly == 0) {
+        uint cx = (gx == 0) ? (params.Nx - 1) : (gx - 1);
+        uint cy = (gy == 0) ? (params.Ny - 1) : (gy - 1);
+        s_theta[0][0] = theta[cy * params.Nx + cx];
+    }
+
+    if (lx == 15 && ly == 0) {
+        uint cx = (gx == params.Nx - 1) ? 0 : (gx + 1);
+        uint cy = (gy == 0) ? (params.Ny - 1) : (gy - 1);
+        s_theta[0][17] = theta[cy * params.Nx + cx];
+    }
+
+    if (lx == 0 && ly == 15) {
+        uint cx = (gx == 0) ? (params.Nx - 1) : (gx - 1);
+        uint cy = (gy == params.Ny - 1) ? 0 : (gy + 1);
+        s_theta[17][0] = theta[cy * params.Nx + cx];
+    }
+
+    if (lx == 15 && ly == 15) {
+        uint cx = (gx == params.Nx - 1) ? 0 : (gx + 1);
+        uint cy = (gy == params.Ny - 1) ? 0 : (gy + 1);
+        s_theta[17][17] = theta[cy * params.Nx + cx];
+    }
+
+    barrier();
+}
+
+float compute_local_R(uint local_x, uint local_y) {
+    // Kahan summation for real and imaginary parts
+    KahanSum sum_real = kahan_init();
+    KahanSum sum_imag = kahan_init();
+
+    uint neighbor_count = 0;
+    int radius = int(params.neighborhood_radius);
+
+    for (int dy = -radius; dy <= radius; dy++) {
+        for (int dx = -radius; dx <= radius; dx++) {
+            uint nx = local_x + 1 + uint(dx);
+            uint ny = local_y + 1 + uint(dy);
+
+            float theta_j = s_theta[ny][nx];
+
+            // e^(iθⱼ) = cos(θⱼ) + i·sin(θⱼ)
+            complex phase_vector = cexp_i(theta_j);
+
+            // Accumulate with Kahan summation
+            kahan_add(sum_real, highp_float(phase_vector.x));
+            kahan_add(sum_imag, highp_float(phase_vector.y));
+
+            neighbor_count++;
+        }
+    }
+
+    // Compute average: ⟨e^(iθ)⟩ = Σe^(iθⱼ) / N
+    complex avg_phase = vec2(
+        float(kahan_result(sum_real)) / float(neighbor_count),
+        float(kahan_result(sum_imag)) / float(neighbor_count)
+    );
+
+    // R = |⟨e^(iθ)⟩|
+    float R = cabs(avg_phase);
+
+    return clamp(R, 0.0, 1.0);
+}
+
+void main() {
+    uvec2 global_id = gl_GlobalInvocationID.xy;
+    uvec2 local_id = gl_LocalInvocationID.xy;
+
+    if (global_id.x >= params.Nx || global_id.y >= params.Ny) {
+        return;
+    }
+
+    uint idx = global_id.y * params.Nx + global_id.x;
+
+    load_shared_memory(global_id, local_id);
+
+    float R_local = compute_local_R(local_id.x, local_id.y);
+
+    R_field[idx] = R_local;
+}

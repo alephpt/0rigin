@@ -1,0 +1,43 @@
+#version 450
+
+// GPU-side accumulation shader for time averaging
+// Used in operator splitting: accumulates theta and R over N substeps
+// for computing time-averaged fields needed by slow Dirac subsystem
+
+layout(local_size_x = 16, local_size_y = 16) in;
+
+layout(push_constant) uniform PushConstants {
+    uint grid_size;
+} params;
+
+layout(binding = 0) readonly buffer ThetaBuffer {
+    float theta[];
+};
+
+layout(binding = 1) readonly buffer RBuffer {
+    float R[];
+};
+
+layout(binding = 2) buffer ThetaSumBuffer {
+    float theta_sum[];
+};
+
+layout(binding = 3) buffer RSumBuffer {
+    float R_sum[];
+};
+
+void main() {
+    uint x = gl_GlobalInvocationID.x;
+    uint y = gl_GlobalInvocationID.y;
+
+    if (x >= params.grid_size || y >= params.grid_size) {
+        return;
+    }
+
+    uint idx = y * params.grid_size + x;
+
+    // Accumulate current values
+    // GPU-safe: only 2 reads + 2 read-modify-writes, no transcendentals
+    theta_sum[idx] += theta[idx];
+    R_sum[idx] += R[idx];
+}

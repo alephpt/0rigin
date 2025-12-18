@@ -258,6 +258,29 @@ VkPipeline MSFTPipelineFactory::createDiracStochasticPipeline(const std::string&
     return createPipelineFromShader(shaderPath, pipelineLayout, "DiracStochastic");
 }
 
+VkPipeline MSFTPipelineFactory::createAccumulationPipeline(const std::string& shaderPath,
+                                                           VkPipelineLayout pipelineLayout) {
+    /**
+     * Accumulation Pipeline - GPU-side time averaging for operator splitting
+     *
+     * GPU SAFETY: ✅ SAFE - Only 4 operations per invocation (extremely cheap)
+     * - Expected shader: accumulate.comp
+     * - Workload: 2 reads + 2 read-modify-writes (theta_sum += theta, R_sum += R)
+     * - Transcendentals: 0
+     * - Timeout risk: NONE - <0.1ms for 256×256 grid
+     *
+     * Accumulates theta and R field values over N substeps for computing
+     * time-averaged fields needed by the slow Dirac subsystem in operator splitting.
+     *
+     * Part of adiabatic approximation implementation where fast Kuramoto subsystem
+     * runs on GPU every timestep, and results are accumulated for Dirac evolution
+     * every N timesteps.
+     *
+     * Bindings: theta (readonly), R (readonly), theta_sum (read-write), R_sum (read-write)
+     */
+    return createPipelineFromShader(shaderPath, pipelineLayout, "Accumulation");
+}
+
 void MSFTPipelineFactory::destroyPipeline(VkPipeline pipeline) {
     if (pipeline != VK_NULL_HANDLE) {
         vkDestroyPipeline(_device, pipeline, nullptr);

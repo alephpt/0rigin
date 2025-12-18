@@ -146,6 +146,35 @@ public:
      */
     std::vector<float> getDiracDensity() const;
 
+    /**
+     * Set the substep ratio N for operator splitting adiabatic approximation
+     * N = ratio of fast (Kuramoto) to slow (Dirac) timescales
+     * Typical values: 10 (testing), 100 (production)
+     *
+     * @param N Number of Kuramoto substeps per Dirac step
+     */
+    void setSubstepRatio(int N);
+
+    /**
+     * Initialize hybrid GPU-CPU system with operator splitting
+     * Sets up Kuramoto (GPU), Dirac (CPU), and accumulator buffers
+     *
+     * @param x0 Dirac wavepacket center x
+     * @param y0 Dirac wavepacket center y
+     * @param sigma Gaussian width
+     */
+    void initializeHybrid(float x0, float y0, float sigma);
+
+    /**
+     * Update time-averaged fields for Dirac evolution
+     * Called internally after accumulation completes
+     *
+     * @param theta_avg Time-averaged phase field
+     * @param R_avg Time-averaged sync field
+     */
+    void updateAveragedFields(const std::vector<float>& theta_avg,
+                              const std::vector<float>& R_avg);
+
 private:
     // Nova graphics engine instance
     Nova* _nova;
@@ -206,8 +235,27 @@ private:
     std::vector<std::complex<float>> _spinor_field;  // 4 * Nx * Ny components
 
     // Dirac field state (CPU-side, avoiding GPU timeouts)
-    std::vector<std::complex<float>> _psi;  // Spinor field (4 components × N)
+    class DiracEvolution* _dirac_evolution;  // Split-operator Dirac evolution
     bool _dirac_initialized;
+
+    // Operator splitting state for GPU-CPU hybrid
+    int _substep_count;              // Current substep counter
+    int _substep_ratio;              // N = Kuramoto steps per Dirac step
+    std::vector<float> _theta_avg;   // Time-averaged theta for Dirac
+    std::vector<float> _R_avg;       // Time-averaged R for Dirac
+    float _lambda_coupling;          // Coupling strength for operator splitting
+
+    // GPU accumulator buffers for time averaging
+    VkBuffer _theta_sum_buffer;      // Accumulator for theta averaging
+    VkBuffer _R_sum_buffer;          // Accumulator for R averaging
+    VkDeviceMemory _theta_sum_memory;
+    VkDeviceMemory _R_sum_memory;
+
+    // Accumulation pipeline and descriptors
+    VkPipeline _accumulation_pipeline;
+    VkDescriptorSet _accumulation_descriptor_set;
+    VkDescriptorSetLayout _accumulation_descriptor_layout;
+    VkPipelineLayout _accumulation_pipeline_layout;
 
     // Additional buffers for spinor evolution (Phase 2)
     VkBuffer _spinor_buffer;        // Current spinor field Ψ(x,y)
