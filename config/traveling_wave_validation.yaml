@@ -1,0 +1,60 @@
+---
+test_name: "traveling_wave_surfing"
+description: "Phase 2.2: Validate particle surfing on traveling synchronization wave"
+
+# Grid configuration
+grid:
+  size_x: 128            # Larger grid for wave propagation
+  size_y: 64
+
+# Physics parameters
+physics:
+  delta: 2.5             # Mass gap parameter
+  coupling: 0.5          # Stronger coupling for wave interaction
+  dt: 0.05               # Larger timestep for wave propagation
+  total_steps: 200       # Long evolution to observe surfing
+  K: 2.0                 # Stronger Kuramoto coupling for wave stability
+  damping: 0.05          # Reduced damping to allow wave propagation
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0: 32.0             # Place wavepacket ahead of wave front
+    y0: 32.0             # Center in y-direction
+    sigma: 4.0           # Slightly larger wavepacket
+    amplitude: 1.0
+
+  kuramoto:
+    # Phase gradient creates traveling wave
+    # θ(x,y) = k_x * x → wave velocity v = ω/k ≈ K*k/(1+k²)
+    phase_distribution: "phase_gradient"
+    wave_vector_x: 0.3   # k_x = 0.3 → wavelength λ = 2π/k ≈ 21 grid points
+    wave_vector_y: 0.0   # Propagates in +x direction only
+    omega_distribution: "zero"
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [10]   # N=10 for validated accuracy
+
+# Validation tolerances
+validation:
+  norm_tolerance: 1.0e-3         # Relaxed for longer evolution
+  energy_tolerance: 5.0e-2       # Allow 5% energy drift
+  velocity_lock_tolerance: 0.15  # |v_particle - v_wave|/v_wave < 15%
+  correlation_threshold: 0.6     # Correlation ρ(v_p, ∇R) > 0.6
+  lock_duration: 5.0             # Must maintain lock for >5 time units
+
+# Output configuration
+output:
+  directory: "output/traveling_wave_validation"
+  save_every: 1                   # Save every step for velocity tracking
+  formats: ["csv"]
+
+# Diagnostics
+diagnostics:
+  track_wave_velocity: true       # Measure wave front velocity
+  track_particle_velocity: true   # Measure CoM velocity
+  track_correlation: true         # Compute corr(v_p, ∇R)
+  track_energy_transfer: true     # Compute dE/dt and v·F
