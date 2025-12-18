@@ -20,6 +20,7 @@
  * BASELINE: σ_θ = σ_Ψ = 0.05 (13× below critical σ_c ≈ 0.65)
  */
 
+#include "../src/MSFTCommon.h"
 #include <iostream>
 #include <vector>
 #include <complex>
@@ -79,45 +80,7 @@ int idx(int x, int y) {
 // KURAMOTO DYNAMICS
 // ============================================================================
 
-/**
- * @brief Compute local synchronization field R(x,y)
- */
-std::vector<float> compute_local_R(const std::vector<float>& theta) {
-    std::vector<float> R(N_GRID);
-
-    for (int y = 0; y < NY; y++) {
-        for (int x = 0; x < NX; x++) {
-            // Compute local average over 3x3 neighborhood
-            Complex z(0, 0);
-            int count = 0;
-
-            for (int dy = -1; dy <= 1; dy++) {
-                for (int dx = -1; dx <= 1; dx++) {
-                    int i = idx(x + dx, y + dy);
-                    z += Complex(std::cos(theta[i]), std::sin(theta[i]));
-                    count++;
-                }
-            }
-
-            z /= float(count);
-            R[idx(x, y)] = std::abs(z);
-        }
-    }
-
-    return R;
-}
-
-/**
- * @brief Compute global Kuramoto order parameter
- */
-float compute_global_R(const std::vector<float>& theta) {
-    Complex z(0, 0);
-    for (float t : theta) {
-        z += Complex(std::cos(t), std::sin(t));
-    }
-    z /= float(N_GRID);
-    return std::abs(z);
-}
+// Use compute_local_R and compute_global_R from MSFTCommon instead
 
 /**
  * @brief Kuramoto step with Euler-Maruyama stochastic integration
@@ -346,7 +309,7 @@ TestResult test_vacuum_stability(float sigma_theta, float sigma_psi) {
         if (step % 100 == 0) std::cout << "." << std::flush;
     }
 
-    float R_warmup = compute_global_R(theta);
+    float R_warmup = MSFT::compute_global_R(theta);
     std::cout << " R = " << R_warmup << std::endl;
 
     // Evolution with noise
@@ -356,7 +319,7 @@ TestResult test_vacuum_stability(float sigma_theta, float sigma_psi) {
     for (int step = 0; step < N_STEPS; step++) {
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
-        float R = compute_global_R(theta);
+        float R = MSFT::compute_global_R(theta);
         R_history.push_back(R);
 
         if (step % 100 == 0) {
@@ -414,7 +377,7 @@ TestResult test_norm_conservation(float sigma_theta, float sigma_psi) {
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
         // Compute R field
-        std::vector<float> R_field = compute_local_R(theta);
+        std::vector<float> R_field = MSFT::compute_local_R(theta, NX, NY);
 
         // Update Dirac
         dirac_step(psi, R_field, DT, sigma_psi, rng);
@@ -479,7 +442,7 @@ TestResult test_particle_localization(float sigma_theta, float sigma_psi) {
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
         // Compute R field
-        std::vector<float> R_field = compute_local_R(theta);
+        std::vector<float> R_field = MSFT::compute_local_R(theta, NX, NY);
 
         // Update Dirac
         dirac_step(psi, R_field, DT, sigma_psi, rng);

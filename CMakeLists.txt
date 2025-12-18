@@ -308,6 +308,7 @@ set_target_properties(test_operator_splitting_full PROPERTIES
 # Test executable: CPU-based stochastic validation
 add_executable(test_stochastic_cpu
     test/test_stochastic_cpu.cpp
+    src/MSFTCommon.cpp
 )
 
 target_include_directories(test_stochastic_cpu PRIVATE
@@ -326,6 +327,7 @@ set_target_properties(test_stochastic_cpu PROPERTIES
 # Comprehensive Dirac-Kuramoto test with full data output
 add_executable(test_dirac_stochastic_full
     test/test_dirac_stochastic_full.cpp
+    src/MSFTCommon.cpp
 )
 
 # Split-operator validation test
@@ -366,6 +368,7 @@ set_target_properties(test_split_operator_validation PROPERTIES
 add_executable(test_scenario1_defect
     test/test_scenario1_defect.cpp
     src/DiracEvolution.cpp
+    src/MSFTCommon.cpp
 )
 
 target_include_directories(test_scenario1_defect PRIVATE
@@ -400,6 +403,91 @@ target_link_libraries(test_ehrenfest_validation PRIVATE
 )
 
 set_target_properties(test_ehrenfest_validation PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Simple warmup test
+add_executable(test_simple_warmup
+    test/test_simple_warmup.cpp
+    src/MSFTEngine.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
+    src/MSFTDescriptorManager.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTCommon.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_simple_warmup PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+)
+
+target_link_libraries(test_simple_warmup PRIVATE
+    Nova
+    imgui
+    Vulkan::Vulkan
+    glfw
+    pthread
+    fftw3f
+    m
+)
+
+set_target_properties(test_simple_warmup PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Noise sweep test
+add_executable(test_noise_sweep
+    test/test_noise_sweep.cpp
+    src/MSFTEngine.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
+    src/MSFTDescriptorManager.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTCommon.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_noise_sweep PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+)
+
+target_link_libraries(test_noise_sweep PRIVATE
+    Nova
+    imgui
+    Vulkan::Vulkan
+    glfw
+    pthread
+    fftw3f
+    m
+)
+
+set_target_properties(test_noise_sweep PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Energy fix test
+add_executable(test_energy_fix
+    test/test_energy_fix.cpp
+    src/MSFTCommon.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_energy_fix PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_energy_fix PRIVATE
+    pthread
+    m
+    fftw3f
+)
+
+set_target_properties(test_energy_fix PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
