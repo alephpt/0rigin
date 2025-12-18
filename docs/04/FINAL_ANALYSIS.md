@@ -7,7 +7,7 @@
 
 ## Summary
 
-The GPU hangs **consistently** when running `test_msft_gpu`, even with old/reverted code. This is NOT caused by our R_global/damping changes.
+The GPU hangs **consistently** when running `test_smft_gpu`, even with old/reverted code. This is NOT caused by our R_global/damping changes.
 
 **Root cause:** The shader code or buffer setup has a latent bug that causes GPU timeout.
 
@@ -18,7 +18,7 @@ The GPU hangs **consistently** when running `test_msft_gpu`, even with old/rever
 ### GPU Crash Pattern (13 crashes so far)
 ```
 amdgpu: ring comp_1.X.X timeout
-Process test_msft_gpu
+Process test_smft_gpu
 Ring reset failed
 GPU reset begin!
 GPU reset(X) succeeded!
@@ -31,7 +31,7 @@ Different compute rings each time (comp_1.1.1, comp_1.2.0, comp_1.3.0), suggesti
 ## Critical Code Analysis
 
 ### The Infinite Wait
-**File:** `src/MSFTEngine.cpp:463`
+**File:** `src/SMFTEngine.cpp:463`
 ```cpp
 vkWaitForFences(device, 1, &fence, VK_TRUE, UINT64_MAX);
 ```
@@ -137,7 +137,7 @@ Looking at the successful output from Dec 16:
 - VRAM fresh
 
 ### H2: Different test was run
-- The "working" run might not have been `test_msft_gpu`
+- The "working" run might not have been `test_smft_gpu`
 - Could have been noise_sweep test (different code path)
 - That test might not trigger the hang
 
@@ -150,7 +150,7 @@ Looking at the successful output from Dec 16:
 
 ## Buffer Initialization Analysis
 
-**File:** `test_msft_gpu.cpp:62-64`
+**File:** `test_smft_gpu.cpp:62-64`
 ```cpp
 engine.setInitialPhases(initial_phases);
 engine.setNaturalFrequencies(frequencies);
@@ -169,7 +169,7 @@ engine.setNaturalFrequencies(frequencies);
 ## Recommended Fix (Without Running Code)
 
 ### Option 1: Add Timeout
-**File:** `src/MSFTEngine.cpp:463`
+**File:** `src/SMFTEngine.cpp:463`
 ```cpp
 // OLD:
 vkWaitForFences(device, 1, &fence, VK_TRUE, UINT64_MAX);
@@ -190,7 +190,7 @@ if (result == VK_TIMEOUT) {
 This prevents system hang, allows error reporting.
 
 ### Option 2: Validate Buffer Upload
-**File:** `src/MSFTEngine.cpp:1140-1145`
+**File:** `src/SMFTEngine.cpp:1140-1145`
 ```cpp
 // After uploading theta:
 if (_theta_memory != VK_NULL_HANDLE && !_theta_data.empty()) {
@@ -239,7 +239,7 @@ If this works → Kahan summation or complex math problem.
 Clear GPU state completely. This is non-negotiable.
 
 ### Step 2: Apply Option 1 (Timeout)
-Edit `src/MSFTEngine.cpp:463` to add 5-second timeout.
+Edit `src/SMFTEngine.cpp:463` to add 5-second timeout.
 
 This prevents GPU hang from crashing system.
 
@@ -249,7 +249,7 @@ Add NaN checks after buffer upload.
 This catches bad data before GPU sees it.
 
 ### Step 4: Test with validation
-Run `test_msft_gpu` ONCE after reboot.
+Run `test_smft_gpu` ONCE after reboot.
 
 If timeout triggers → we get error message instead of hang.
 If validation fails → we know buffer upload is broken.

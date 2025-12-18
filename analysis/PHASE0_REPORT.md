@@ -1,7 +1,7 @@
 # Phase 0: Deterministic Characterization - Final Report
 
 **Date**: 2025-12-16
-**Experiment**: MSFT Kuramoto Model (128×128, dt=0.01, K=1.0, Δ=2.5)
+**Experiment**: SMFT Kuramoto Model (128×128, dt=0.01, K=1.0, Δ=2.5)
 **Duration**: 1000 timesteps (t = 0 → 10)
 **Gate Requirement**: Show λ > 0 (chaos) to proceed with "effective stochasticity" hypothesis
 
@@ -89,7 +89,7 @@ This is like **critical slowing down** near a phase transition:
 
 ---
 
-## Implications for MSFT
+## Implications for SMFT
 
 ### 1. No Effective Stochasticity from Deterministic Chaos
 

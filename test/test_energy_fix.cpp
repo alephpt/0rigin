@@ -4,7 +4,7 @@
  */
 
 #include "../src/DiracEvolution.h"
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -37,7 +37,7 @@ const int OUTPUT_INTERVAL = 100;
 
 using Complex = std::complex<float>;
 
-// Use functions from MSFTCommon instead of duplicating
+// Use functions from SMFTCommon instead of duplicating
 
 int main() {
     std::cout << "=== ENERGY DIAGNOSTIC FIX VERIFICATION ===" << std::endl;
@@ -64,10 +64,10 @@ int main() {
 
     std::cout << "\n[1] Kuramoto warmup..." << std::endl;
     for (int step = 0; step < KURAMOTO_WARMUP; step++) {
-        MSFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
+        SMFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
     }
 
-    auto R_field = MSFT::compute_local_R(theta, NX, NY);
+    auto R_field = SMFT::compute_local_R(theta, NX, NY);
     float defect_R = R_field[DEFECT_Y*NX+DEFECT_X];
     float background_R = R_field[10*NX+10];
     float delta_R = background_R - defect_R;
@@ -89,8 +89,8 @@ int main() {
     float E_initial = 0.0f;
     for (int step = 0; step <= COUPLED_STEPS; step++) {
         if (step > 0) {
-            MSFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
-            R_field = MSFT::compute_local_R(theta, NX, NY);
+            SMFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
+            R_field = SMFT::compute_local_R(theta, NX, NY);
             std::vector<float> mass_field(N_GRID);
             for (uint32_t i = 0; i < N_GRID; i++) {
                 mass_field[i] = DELTA * R_field[i];
@@ -99,7 +99,7 @@ int main() {
         }
 
         if (step % OUTPUT_INTERVAL == 0) {
-            R_field = MSFT::compute_local_R(theta, NX, NY);
+            R_field = SMFT::compute_local_R(theta, NX, NY);
             std::vector<float> mass_field(N_GRID);
             for (uint32_t i = 0; i < N_GRID; i++) {
                 mass_field[i] = DELTA * R_field[i];

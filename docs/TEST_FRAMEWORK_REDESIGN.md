@@ -3,8 +3,8 @@
 ## Problem
 
 **Current state**: 43 separate test executables with duplicated code
-- test_msft_gpu.cpp
-- test_msft_validation.cpp
+- test_smft_gpu.cpp
+- test_smft_validation.cpp
 - test_descriptor_bindings.cpp
 - test_stochastic_cpu.cpp
 - ... (39 more)
@@ -23,7 +23,7 @@
 ### Architecture
 
 ```
-bin/msft_test [scenario] [options]
+bin/smft_test [scenario] [options]
 
 Scenarios:
   phase1/split_operator       - Phase 1 validation (Dirac split-operator)
@@ -45,7 +45,7 @@ Scenarios:
 
 ```cpp
 // src/testing/TestFramework.h
-class MSFTTestFramework {
+class SMFTTestFramework {
 public:
     // Shared infrastructure
     void initializeKuramoto(params);
@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
 
 **Phase 2: Extract Scenarios**
 1. `test/scenarios/Phase1*.cpp` - Phase 1 validations
-2. `test/scenarios/Phase2*.cpp` - Phase 2 MSFT coupling
+2. `test/scenarios/Phase2*.cpp` - Phase 2 SMFT coupling
 3. `test/scenarios/Validation*.cpp` - GPU/infrastructure tests
 4. `test/scenarios/Stochastic*.cpp` - MSR formalism tests
 
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
 ### CRITICAL (Do Now - Before Scenario 2)
 - Extract common Kuramoto evolution → `KuramotoSim`
 - Extract diagnostics → `Diagnostics` (force alignment, core density, energy)
-- Create single entry point `msft_test`
+- Create single entry point `smft_test`
 - Migrate Phase 2 Scenario 1 to new framework
 
 ### HIGH (Before Phase 3)
@@ -130,7 +130,7 @@ int main(int argc, char** argv) {
 2. **Consistency**: Same parameter sets across all tests
 3. **Maintainability**: Single codebase to update
 4. **Build Speed**: 1 executable vs 43
-5. **Discoverability**: `msft_test --list` shows all scenarios
+5. **Discoverability**: `smft_test --list` shows all scenarios
 6. **Reproducibility**: Standardized output format
 
 ---
@@ -139,18 +139,18 @@ int main(int argc, char** argv) {
 
 ```bash
 # Run Phase 2 Scenario 1 with custom parameters
-$ ./bin/msft_test phase2/defect_localization \
+$ ./bin/smft_test phase2/defect_localization \
     --delta 0.5 \
     --defect_radius 15 \
     --steps 50000 \
     --output output/10/
 
 # List all available scenarios
-$ ./bin/msft_test --list
+$ ./bin/smft_test --list
 
 # Run validation suite
-$ ./bin/msft_test phase1/all
-$ ./bin/msft_test phase2/all
+$ ./bin/smft_test phase1/all
+$ ./bin/smft_test phase2/all
 ```
 
 ---

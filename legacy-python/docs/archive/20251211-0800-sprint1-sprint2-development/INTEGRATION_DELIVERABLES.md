@@ -11,14 +11,14 @@
 
 ### Integration Code
 
-- [x] **MSFTSystem class** (`src/kuramoto/field_theory/MSFT_system.py`)
+- [x] **SMFTSystem class** (`src/kuramoto/field_theory/SMFT_system.py`)
   - 430 lines (under 500 limit ✓)
   - All functions < 50 lines ✓
   - Nesting < 3 levels ✓
   - Clean, documented, type-hinted
 
 - [x] **Module exports** (`src/kuramoto/field_theory/__init__.py`)
-  - Added MSFTSystem to exports
+  - Added SMFTSystem to exports
   - Maintains backward compatibility
 
 ### Integration Tests
@@ -60,7 +60,7 @@
 
 ### Examples & Validation
 
-- [x] **Demo script** (`examples/field_theory/MSFT_demo.py`)
+- [x] **Demo script** (`examples/field_theory/SMFT_demo.py`)
   - Basic evolution
   - Mass scaling study
   - Local vs global comparison
@@ -207,14 +207,14 @@ All Sprint 1 tests passing:
 │   └── field_theory_integration.md   (Comprehensive guide)
 │
 ├── src/kuramoto/field_theory/
-│   ├── MSFT_system.py                (Integration class)
+│   ├── SMFT_system.py                (Integration class)
 │   └── __init__.py                   (Exports)
 │
 ├── tests/
 │   └── test_field_theory_integration.py (Integration tests)
 │
 └── examples/field_theory/
-    ├── MSFT_demo.py                  (Demonstrations)
+    ├── SMFT_demo.py                  (Demonstrations)
     └── validate_integration.py       (Validation suite)
 ```
 
@@ -224,7 +224,7 @@ All Sprint 1 tests passing:
 
 **Parallel Work**:
 - @developer implemented: MediatorField, LocalFieldCoupling, FermionMassDemo
-- @integration implemented: MSFTSystem, tests, validation, documentation
+- @integration implemented: SMFTSystem, tests, validation, documentation
 
 **Integration**:
 - Clean interfaces maintained
@@ -238,7 +238,7 @@ All Sprint 1 tests passing:
 ## ✅ Anti-Duplication Verification
 
 **Searches Performed**:
-1. `mcp__omni__search` for existing MSFT/integration code → None found ✓
+1. `mcp__omni__search` for existing SMFT/integration code → None found ✓
 2. Codebase grep for duplicate APIs → None found ✓
 3. File system scan for variants → None found ✓
 
@@ -266,9 +266,9 @@ All Sprint 1 tests passing:
 
 ### New Files (5)
 
-1. `src/kuramoto/field_theory/MSFT_system.py` (430 lines)
+1. `src/kuramoto/field_theory/SMFT_system.py` (430 lines)
 2. `tests/test_field_theory_integration.py` (560 lines)
-3. `examples/field_theory/MSFT_demo.py` (380 lines)
+3. `examples/field_theory/SMFT_demo.py` (380 lines)
 4. `examples/field_theory/validate_integration.py` (450 lines)
 5. `docs/field_theory_integration.md` (comprehensive)
 
@@ -308,7 +308,7 @@ Handoff includes:
 
 ✅ **ALL DELIVERABLES COMPLETE**
 
-The MSFT field theory system successfully integrates discrete oscillator dynamics with continuous field representations, providing a cohesive framework that:
+The SMFT field theory system successfully integrates discrete oscillator dynamics with continuous field representations, providing a cohesive framework that:
 
 - Bridges particle and field descriptions
 - Maintains 100% backward compatibility

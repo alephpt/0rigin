@@ -1,5 +1,5 @@
 1. keep the code clean, modular, reusable - whenever possible
-2. make sure tests are distinct injections of our MSFT engine
+2. make sure tests are distinct injections of our SMFT engine
 3. make sure documents and outputs are done in the correct directories with the correct subdirectory labeling
 4. we want expectations, methodologies, results and summaries documented and anything that can be visualized should be visualized.
 5. unless you have confirmed that the GPU code is working, use the CPU code

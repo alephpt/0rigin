@@ -8,7 +8,7 @@
 
 ## Session Overview
 
-Executed comprehensive deep analysis of 0rigin MSFT GPU simulation project, identified critical issues, and resolved 3 major categories of problems through coordinated agent deployment.
+Executed comprehensive deep analysis of 0rigin SMFT GPU simulation project, identified critical issues, and resolved 3 major categories of problems through coordinated agent deployment.
 
 ---
 
@@ -26,7 +26,7 @@ Executed comprehensive deep analysis of 0rigin MSFT GPU simulation project, iden
 ### Code Quality Violations
 
 **CRITICAL (5 violations)**:
-1. MSFTEngine.cpp: 1,608 lines (320% over 500-line limit) - God Object anti-pattern
+1. SMFTEngine.cpp: 1,608 lines (320% over 500-line limit) - God Object anti-pattern
 2. createPipelines() function: 402 lines (804% over 50-line limit)
 3. Test coverage <30% (target: 80%)
 4. Security: 4 command injection vulnerabilities
@@ -35,7 +35,7 @@ Executed comprehensive deep analysis of 0rigin MSFT GPU simulation project, iden
 **HIGH (5 violations)**:
 - stepStochastic(): 208 lines
 - step(): 192 lines  
-- msft_pipeline.cpp: 572 lines
+- smft_pipeline.cpp: 572 lines
 - test_dirac_stochastic_full.cpp: 621 lines
 - test_stochastic_cpu.cpp: 612 lines
 
@@ -54,7 +54,7 @@ Executed comprehensive deep analysis of 0rigin MSFT GPU simulation project, iden
 
 **Fixed**: 2 broken test targets
 - test_descriptor_bindings
-- test_msft_gpu
+- test_smft_gpu
 
 **Root Cause**: CMakeLists.txt had incorrect source file paths
 
@@ -72,7 +72,7 @@ Executed comprehensive deep analysis of 0rigin MSFT GPU simulation project, iden
 | File | Vulnerability | Fix |
 |------|---------------|-----|
 | test_stochastic_cpu.cpp | `system("mkdir -p ...")` | `std::filesystem::create_directories()` |
-| test_msft_headless.cpp | `system("mkdir -p ...")` | `std::filesystem::create_directories()` |
+| test_smft_headless.cpp | `system("mkdir -p ...")` | `std::filesystem::create_directories()` |
 | test_noise_sweep_corrected.cpp | `system("mkdir -p ...")` | `std::filesystem::create_directories()` |
 | test_output_structure.cpp | `system("mkdir -p ...")` | `std::filesystem::create_directories()` |
 
@@ -96,7 +96,7 @@ amdgpu: VRAM is lost due to GPU reset!
 ```
 
 **Root Cause**:
-- `MSFTEngine.cpp` line 1528: Set `neighborhood_radius = 5`
+- `SMFTEngine.cpp` line 1528: Set `neighborhood_radius = 5`
 - Shader `sync_field.comp`: Has `s_theta[18][18]` array (supports radius=1 only)
 - With radius=5: Shader accesses indices -4 to 21 (out of bounds 0-17)
 - Result: GPU state corruption → compute ring timeout → full GPU reset
@@ -120,9 +120,9 @@ amdgpu: VRAM is lost due to GPU reset!
 
 **Files Changed** (6 files):
 - CMakeLists.txt (test target fixes)
-- src/MSFTEngine.cpp (GPU buffer overflow fix)
+- src/SMFTEngine.cpp (GPU buffer overflow fix)
 - test/test_stochastic_cpu.cpp (security fix)
-- test/test_msft_headless.cpp (security fix)
+- test/test_smft_headless.cpp (security fix)
 - test/test_noise_sweep_corrected.cpp (security fix)
 - test/test_output_structure.cpp (security fix)
 
@@ -146,10 +146,10 @@ amdgpu: VRAM is lost due to GPU reset!
 ## Outstanding Issues (Not Fixed Yet)
 
 ### High Priority (Next Sprint):
-1. **Refactor MSFTEngine** (3-5 days)
-   - Extract MSFTPipelineFactory
-   - Extract MSFTBufferManager
-   - Extract MSFTCompute
+1. **Refactor SMFTEngine** (3-5 days)
+   - Extract SMFTPipelineFactory
+   - Extract SMFTBufferManager
+   - Extract SMFTCompute
    - Target: All files <500 lines, functions <50 lines
 
 2. **Improve Test Coverage** (1-2 weeks)
@@ -183,7 +183,7 @@ amdgpu: VRAM is lost due to GPU reset!
 **Workaround**: Documented project state in SESSION_SUMMARY.md (this file)
 
 **Recommended Structure** (for when PDL tools available):
-- Roadmap: "MSFT Experimental Validation" (18 months)
+- Roadmap: "SMFT Experimental Validation" (18 months)
 - Phase 1: GPU Infrastructure (completed)
 - Phase 2: Stochastic Integration (completed)
 - Phase 3: Dirac Coupling (active)
@@ -216,7 +216,7 @@ amdgpu: VRAM is lost due to GPU reset!
 
 **Immediate** (Start next session):
 1. Test GPU fix once hardware stable (run CPU tests first)
-2. Begin MSFTEngine refactoring (highest technical debt)
+2. Begin SMFTEngine refactoring (highest technical debt)
 3. Set up CI/CD to prevent future regressions
 
 **This Week**:

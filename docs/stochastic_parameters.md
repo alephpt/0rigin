@@ -1,4 +1,4 @@
-# Stochastic Parameters for MSFT Implementation
+# Stochastic Parameters for SMFT Implementation
 
 **Date:** 2025-12-17
 **Status:** Parameter Specification
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-This document specifies the parameter choices for stochastic MSFT implementation, justified by both theoretical considerations and experimental validation. With the critical noise threshold measured at σ_c ≈ 0.65-0.80 (65,000× above falsification threshold), we can confidently select noise amplitudes that balance physical realism with computational stability.
+This document specifies the parameter choices for stochastic SMFT implementation, justified by both theoretical considerations and experimental validation. With the critical noise threshold measured at σ_c ≈ 0.65-0.80 (65,000× above falsification threshold), we can confidently select noise amplitudes that balance physical realism with computational stability.
 
 ---
 
@@ -286,7 +286,7 @@ private:
 ### 6.1 Baseline Experiment
 
 ```cpp
-MSFTExperiment baseline = {
+SMFTExperiment baseline = {
     // Grid
     .Nx = 128,
     .Ny = 128,
@@ -321,7 +321,7 @@ void parameter_sweep() {
 
     for (float sigma : sigma_values) {
         for (float lambda : lambda_values) {
-            MSFTExperiment exp = baseline;
+            SMFTExperiment exp = baseline;
             exp.sigma_theta = sigma;
             exp.sigma_psi = sigma;
             exp.lambda = lambda;
@@ -337,7 +337,7 @@ void parameter_sweep() {
 
 ```cpp
 void study_particle_formation() {
-    MSFTExperiment exp = baseline;
+    SMFTExperiment exp = baseline;
 
     // Create initial defect
     create_vortex_pair(exp.theta_initial, 64, 64, separation=20);
@@ -510,7 +510,7 @@ void validate_physics() {
 ### 10.1 Recommended Baseline Parameters
 
 ```cpp
-StochasticMSFTParams recommended = {
+StochasticSMFTParams recommended = {
     // Noise (safely below critical)
     .sigma_theta = 0.05,  // 13× safety margin
     .sigma_psi = 0.05,    // Matched to phase noise
@@ -547,7 +547,7 @@ StochasticMSFTParams recommended = {
 4. Explore parameter space systematically
 5. Measure critical exponents near σ_c
 
-The parameter choices are conservative, physically motivated, and computationally efficient. They provide a solid foundation for exploring stochastic MSFT dynamics while maintaining the synchronization necessary for mass generation.
+The parameter choices are conservative, physically motivated, and computationally efficient. They provide a solid foundation for exploring stochastic SMFT dynamics while maintaining the synchronization necessary for mass generation.
 
 ---
 

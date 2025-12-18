@@ -23,7 +23,7 @@
  * BASELINE: σ_θ = σ_Ψ = 0.05 (13× below critical σ_c ≈ 0.65)
  */
 
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 #include "../src/output/OutputManager.h"
 #include <iostream>
 #include <vector>
@@ -80,7 +80,7 @@ int idx(int x, int y) {
 // KURAMOTO DYNAMICS
 // ============================================================================
 
-// Use compute_local_R and compute_global_R from MSFTCommon instead
+// Use compute_local_R and compute_global_R from SMFTCommon instead
 
 /**
  * @brief Kuramoto step with Euler-Maruyama stochastic integration
@@ -288,7 +288,7 @@ struct TestResult {
  * @brief Test 1: Synchronized vacuum stability
  */
 TestResult test_vacuum_stability(float sigma_theta, float sigma_psi,
-                                MSFT::OutputManager& output_manager,
+                                SMFT::OutputManager& output_manager,
                                 const std::string& test_dir) {
     std::cout << "\n=== Test 1: Vacuum Stability (σ_θ = " << sigma_theta
               << ", σ_Ψ = " << sigma_psi << ") ===" << std::endl;
@@ -311,7 +311,7 @@ TestResult test_vacuum_stability(float sigma_theta, float sigma_psi,
         if (step % 100 == 0) std::cout << "." << std::flush;
     }
 
-    float R_warmup = MSFT::compute_global_R(theta);
+    float R_warmup = SMFT::compute_global_R(theta);
     std::cout << " R = " << R_warmup << std::endl;
 
     // Evolution with noise
@@ -322,7 +322,7 @@ TestResult test_vacuum_stability(float sigma_theta, float sigma_psi,
     for (int step = 0; step < N_STEPS; step++) {
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
-        float R = MSFT::compute_global_R(theta);
+        float R = SMFT::compute_global_R(theta);
         R_history.push_back(R);
         time_history.push_back(step * DT);
 
@@ -372,7 +372,7 @@ TestResult test_vacuum_stability(float sigma_theta, float sigma_psi,
  * @brief Test 2: Spinor norm conservation
  */
 TestResult test_norm_conservation(float sigma_theta, float sigma_psi,
-                                 MSFT::OutputManager& output_manager,
+                                 SMFT::OutputManager& output_manager,
                                  const std::string& test_dir) {
     std::cout << "\n=== Test 2: Spinor Norm Conservation (σ_Ψ = " << sigma_psi << ") ===" << std::endl;
 
@@ -399,7 +399,7 @@ TestResult test_norm_conservation(float sigma_theta, float sigma_psi,
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
         // Compute R field
-        std::vector<float> R_field = MSFT::compute_local_R(theta, NX, NY);
+        std::vector<float> R_field = SMFT::compute_local_R(theta, NX, NY);
 
         // Update Dirac
         dirac_step(psi, R_field, DT, sigma_psi, rng);
@@ -460,7 +460,7 @@ TestResult test_norm_conservation(float sigma_theta, float sigma_psi,
  * @brief Test 3: Particle localization
  */
 TestResult test_particle_localization(float sigma_theta, float sigma_psi,
-                                     MSFT::OutputManager& output_manager,
+                                     SMFT::OutputManager& output_manager,
                                      const std::string& test_dir) {
     std::cout << "\n=== Test 3: Particle Localization (σ_Ψ = " << sigma_psi << ") ===" << std::endl;
 
@@ -489,7 +489,7 @@ TestResult test_particle_localization(float sigma_theta, float sigma_psi,
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
         // Compute R field
-        std::vector<float> R_field = MSFT::compute_local_R(theta, NX, NY);
+        std::vector<float> R_field = SMFT::compute_local_R(theta, NX, NY);
 
         // Update Dirac
         dirac_step(psi, R_field, DT, sigma_psi, rng);
@@ -553,7 +553,7 @@ TestResult test_particle_localization(float sigma_theta, float sigma_psi,
 /**
  * @brief Test 4: Critical threshold behavior
  */
-TestResult test_critical_behavior(MSFT::OutputManager& output_manager,
+TestResult test_critical_behavior(SMFT::OutputManager& output_manager,
                                  const std::string& test_dir) {
     std::cout << "\n=== Test 4: Critical Threshold Behavior ===" << std::endl;
 
@@ -601,7 +601,7 @@ int main() {
     std::cout << "Critical noise: σ_c ≈ " << SIGMA_CRITICAL << std::endl;
 
     // Initialize OutputManager
-    MSFT::OutputManager output_manager;
+    SMFT::OutputManager output_manager;
     std::string experiment_dir = output_manager.createExperimentDirectory("stochastic_cpu_validation");
 
     // Save experiment metadata

@@ -4,12 +4,12 @@
 Critical GPU compute ring timeout caused by buffer overflow in sync_field shader.
 
 ## Root Cause
-- **Location**: `MSFTEngine.cpp` line 1528 in `stepStochastic()` function
+- **Location**: `SMFTEngine.cpp` line 1528 in `stepStochastic()` function
 - **Problem**: `neighborhood_radius` was set to `5` but shader's shared memory `s_theta[18][18]` only supports radius=1
 - **Effect**: Out-of-bounds memory access causing GPU hang and compute ring timeout
 
 ## Fix Applied
-Changed line 1528 in `MSFTEngine.cpp`:
+Changed line 1528 in `SMFTEngine.cpp`:
 ```cpp
 // BEFORE (incorrect):
 } sync_push = {

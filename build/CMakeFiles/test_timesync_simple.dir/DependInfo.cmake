@@ -9,11 +9,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/persist/neotec/0rigin/src/DiracEvolution.cpp" "CMakeFiles/test_timesync_simple.dir/src/DiracEvolution.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/DiracEvolution.cpp.o.d"
-  "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp" "CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.o.d"
-  "/home/persist/neotec/0rigin/src/MSFTCompute.cpp" "CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.o.d"
-  "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp" "CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.o.d"
-  "/home/persist/neotec/0rigin/src/MSFTEngine.cpp" "CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.o.d"
-  "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp" "CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp" "CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/SMFTCompute.cpp" "CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp" "CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/SMFTEngine.cpp" "CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp" "CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_timesync_simple.cpp" "CMakeFiles/test_timesync_simple.dir/test/test_timesync_simple.cpp.o" "gcc" "CMakeFiles/test_timesync_simple.dir/test/test_timesync_simple.cpp.o.d"
   "" "bin/test_timesync_simple" "gcc" "CMakeFiles/test_timesync_simple.dir/link.d"
   )

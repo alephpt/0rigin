@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test_operator_splitting_full.dir/link.d"
+  "CMakeFiles/test_operator_splitting_full.dir/src/SMFTCommon.cpp.o"
+  "CMakeFiles/test_operator_splitting_full.dir/src/SMFTCommon.cpp.o.d"
   "CMakeFiles/test_operator_splitting_full.dir/test/test_operator_splitting_full.cpp.o"
   "CMakeFiles/test_operator_splitting_full.dir/test/test_operator_splitting_full.cpp.o.d"
   "bin/test_operator_splitting_full"

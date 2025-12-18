@@ -11,7 +11,7 @@
 
 ### The Question
 
-Can the Mass Synchronization Field Theory (MSFT) tolerate thermal noise while maintaining localized particle-like structures (solitons)?
+Can the Synchronization Mass Field Theory (SMFT) tolerate thermal noise while maintaining localized particle-like structures (solitons)?
 
 **Path A (Deterministic)**: System is fundamentally deterministic. Any noise destroys synchronization.
 - Prediction: σ_c ≪ 10^-5 (extremely fragile)
@@ -237,7 +237,7 @@ float variance = sum_sq / 10000 - mean*mean;
 **Procedure**:
 - Set σ = 0
 - Run for 1000 steps
-- Compare to previous deterministic runs (test_msft_phase0)
+- Compare to previous deterministic runs (test_smft_phase0)
 
 **Success Criteria**:
 - Results match within numerical precision (~10^-6)
@@ -295,13 +295,13 @@ print(f"Critical threshold: σ_c = {sigma_c_fit:.2e}")
 │         ├─ Formalize MSR action
 │         ├─ Calculate σ_physical = ℓ_P
 │         ├─ Verify σ_physical ≪ σ_c
-│         └─ Publish: "Stochastic MSFT"
+│         └─ Publish: "Stochastic SMFT"
 │
 └─ NO → Path A required ✗
           ├─ Abandon MSR formalism
           ├─ Write deterministic Lagrangian
           ├─ Noise sweep → Appendix A
-          └─ Publish: "Deterministic MSFT"
+          └─ Publish: "Deterministic SMFT"
 ```
 
 ---
@@ -334,8 +334,8 @@ build/output/noise_sweep/
 
 **Implementation**:
 - `shaders/smft/kuramoto_stochastic.comp` - Stochastic integrator with PRNG
-- `src/MSFTEngine.h` - Added `stepStochastic()` method
-- `src/MSFTEngine.cpp` - Implementation of stochastic stepping
+- `src/SMFTEngine.h` - Added `stepStochastic()` method
+- `src/SMFTEngine.cpp` - Implementation of stochastic stepping
 - `test/test_noise_sweep.cpp` - Main experiment driver
 
 **Documentation**:

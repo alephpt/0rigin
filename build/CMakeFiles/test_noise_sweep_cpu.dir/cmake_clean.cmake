@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test_noise_sweep_cpu.dir/link.d"
-  "CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o"
-  "CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o.d"
+  "CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o"
+  "CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o.d"
   "CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.o"
   "CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.o.d"
   "bin/test_noise_sweep_cpu"

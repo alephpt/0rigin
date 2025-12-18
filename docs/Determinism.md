@@ -43,7 +43,7 @@ $$\langle F(t)F(0)\rangle = k_B T \cdot K(t)$$
 
 This connects the "effective noise" to the memory kernel and temperature.
 
-### What This Means for MSFT
+### What This Means for SMFT
 
 **If your hypothesis is correct**:
 1. The Dirac spinor $\Psi$ (fast variable) generates fluctuations
@@ -263,7 +263,7 @@ $$\sigma_c > \sigma_{eff}$$
 ### If Effective Stochasticity Is Validated:
 
 **The Lagrangian becomes**:
-$$\mathcal{L}_{MSFT} = \mathcal{L}_{Dirac}[\Psi] + \mathcal{L}_{Vacuum}[R,\theta] + \mathcal{L}_{Int}[\Psi,R,\theta]$$
+$$\mathcal{L}_{SMFT} = \mathcal{L}_{Dirac}[\Psi] + \mathcal{L}_{Vacuum}[R,\theta] + \mathcal{L}_{Int}[\Psi,R,\theta]$$
 
 where the **effective MSR action** emerges from coarse-graining:
 $$S_{MSR,eff} = \int d^4x \left[\tilde{\theta}(\dot{\theta} - \omega - \mathcal{F}) - i\sigma^2_{eff}\tilde{\theta}^2\right]$$
@@ -275,7 +275,7 @@ $$\sigma^2_{eff} = f[\langle|\Psi|^2\rangle, K, \Delta]$$
 
 ### What You Must Calculate:
 
-**Derivation required**: Starting from deterministic $\mathcal{L}_{MSFT}$, derive $\sigma^2_{eff}$ using projection operator methods.
+**Derivation required**: Starting from deterministic $\mathcal{L}_{SMFT}$, derive $\sigma^2_{eff}$ using projection operator methods.
 
 **This is a substantial calculation** (PhD-level). Outline:
 
@@ -412,7 +412,7 @@ If your system is not chaotic ($\lambda \leq 0$), the "effective stochasticity" 
 
 **The experiment is now richer**: You're not just testing "does noise break synchronization" but "does the system generate its own noise and survive it?"
 
-**The theory becomes deeper**: If validated, MSFT is a deterministic fundamental theory with emergent thermodynamics—a much stronger claim than either pure Path A or pure Path B.
+**The theory becomes deeper**: If validated, SMFT is a deterministic fundamental theory with emergent thermodynamics—a much stronger claim than either pure Path A or pure Path B.
 
 **The bar is higher**: You need:
 1. Chaos verification (Lyapunov)

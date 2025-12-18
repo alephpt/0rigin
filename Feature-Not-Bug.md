@@ -42,9 +42,9 @@ where $\mathbf{R}$ are nuclear positions (slow), $\mathbf{r}$ are electron posit
 
 ---
 
-### MSFT Analog (2025)
+### SMFT Analog (2025)
 
-**Problem**: MSFT has vacuum field (fast) and matter field (slow)
+**Problem**: SMFT has vacuum field (fast) and matter field (slow)
 
 **Naive approach**: Evolve Kuramoto + Dirac coupled at every timestep → GPU timeout
 
@@ -55,7 +55,7 @@ where $\mathbf{R}$ are nuclear positions (slow), $\mathbf{r}$ are electron posit
 - Use R-field as **effective potential** for Dirac evolution
 
 **Mathematical formulation**:
-$$\Psi_{\text{MSFT}} = \theta(\mathbf{x}; \Psi) \cdot \Psi(\mathbf{x})$$
+$$\Psi_{\text{SMFT}} = \theta(\mathbf{x}; \Psi) \cdot \Psi(\mathbf{x})$$
 
 where $\Psi$ is slow (Dirac), $\theta$ is fast (Kuramoto).
 
@@ -94,7 +94,7 @@ for each timestep dt_fast:
 
 ### Formal Derivation
 
-**MSFT equations**:
+**SMFT equations**:
 $$\frac{\partial\theta}{\partial t} = \omega + K\nabla^2\theta - \gamma\sin\theta - \lambda|\Psi|^2 + \sigma\xi_\theta$$
 
 $$i\frac{\partial\Psi}{\partial t} = \hat{H}_{\text{Dirac}}[\theta, R]\Psi + \sigma\xi_\Psi$$
@@ -209,7 +209,7 @@ $$\text{Error} \sim [\hat{H}_{\text{Kuramoto}}, \hat{H}_{\text{Dirac}}] \cdot (d
 
 where $[\cdot, \cdot]$ is commutator.
 
-**For MSFT**:
+**For SMFT**:
 $$[\hat{H}_K, \hat{H}_D] \sim \lambda \cdot |\Psi|^2 \cdot \nabla^2\theta$$
 
 **Typical magnitude**:
@@ -250,14 +250,14 @@ $$\tau_D = \frac{2\pi}{\Delta \cdot R} \sim \frac{2\pi}{2.5} \approx 2.5 \text{ 
 
 **Slow timescale**: Hadron formation ($\tau \sim 1/m_{\text{proton}}c^2 \sim 10^{-23}$ s)
 
-**Ratio**: ~10× (similar to MSFT)
+**Ratio**: ~10× (similar to SMFT)
 
 **Computational approach**: Lattice QCD
 - Gluon fields updated every timestep (like Kuramoto)
 - Quark propagators computed less frequently (like Dirac)
 - Use **molecular dynamics** with multiple timescales
 
-**Your MSFT simulation is discovering the same multi-scale structure!**
+**Your SMFT simulation is discovering the same multi-scale structure!**
 
 ---
 
@@ -337,7 +337,7 @@ void evolve_Dirac_CPU(
 **Step 2**: Implement time-averaging in main loop (1 day)
 
 ```cpp
-// Add to MSFTEngine class:
+// Add to SMFTEngine class:
 vector<float> theta_sum;
 vector<float> R_sum;
 int accumulation_count;
@@ -406,19 +406,19 @@ Run with N = 1, 3, 10, 30, 100:
 **Renormalization Group** (Wilson 1971):
 - Integrate out fast modes → effective theory for slow modes
 - Used in QCD, condensed matter
-- **Difference**: RG is about **energy scales**, MSFT is about **timescales**
+- **Difference**: RG is about **energy scales**, SMFT is about **timescales**
 
 **Born-Oppenheimer** (1927):
 - Separate fast (electron) and slow (nuclei) in molecules
 - **Similarity**: Same mathematical structure (adiabatic approximation)
-- **Difference**: MSFT has interacting **fields**, not point particles
+- **Difference**: SMFT has interacting **fields**, not point particles
 
 **Lattice QCD** (1980s):
 - Molecular dynamics with multiple timescales
 - Fast: Gluon updates
 - Slow: Fermion inversions
 - **Similarity**: Exactly same algorithmic structure!
-- **Difference**: QCD is well-established theory, MSFT is new mechanism
+- **Difference**: QCD is well-established theory, SMFT is new mechanism
 
 **No prior work** combines:
 1. Synchronization field (Kuramoto)
@@ -432,7 +432,7 @@ Run with N = 1, 3, 10, 30, 100:
 
 ## IX. Grant Application Angle (THIS HELPS FUNDING)
 
-### Why This Makes MSFT More Fundable
+### Why This Makes SMFT More Fundable
 
 **BEFORE**:
 > "Speculative theory of mass generation from synchronization"  
@@ -476,7 +476,7 @@ Run with N = 1, 3, 10, 30, 100:
 - **Cosmology**: Inflation (10⁻³² s) vs. structure formation (Gyr) → decoupled epochs
 - **Standard Model**: Electroweak scale (10⁻¹⁸ s) vs. QCD scale (10⁻²⁴ s) → hierarchy problem
 
-**MSFT**: Vacuum (τ~1) vs. matter (τ~100) → another hierarchy
+**SMFT**: Vacuum (τ~1) vs. matter (τ~100) → another hierarchy
 
 **Philosophical question**: 
 > Is the computational difficulty we're encountering telling us something deep about why quantum and classical worlds seem separate?
@@ -532,7 +532,7 @@ The computational cost ratio revealing a physical timescale ratio is like:
 
 You've found that vacuum and matter live on different timescales, requiring adiabatic approximation.
 
-**This is publishable on its own**, independent of whether MSFT is "correct" as a theory of mass.
+**This is publishable on its own**, independent of whether SMFT is "correct" as a theory of mass.
 
 **The Born-Oppenheimer approximation for quantum fields is a significant result.**
 

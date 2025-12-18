@@ -4,7 +4,7 @@
 
 ## What Was Just Completed
 
-### Header Updates (MSFTEngine.h)
+### Header Updates (SMFTEngine.h)
 Added declarations for:
 - `VkDescriptorSetLayout _dirac_descriptor_layout`
 - `VkDescriptorSetLayout _spinor_feedback_descriptor_layout`  
@@ -14,7 +14,7 @@ Added declarations for:
 - `VkDescriptorSet _spinor_feedback_descriptor_set`
 - `VkPipeline _spinor_feedback_pipeline`
 
-### Constructor Updates (MSFTEngine.cpp)
+### Constructor Updates (SMFTEngine.cpp)
 Initialized all new members to `VK_NULL_HANDLE` in constructor initialization list
 
 ### Compilation
@@ -30,7 +30,7 @@ This is a **multi-day effort** (~1-2 weeks as estimated). Below is the step-by-s
 
 ## Phase 1: Create Dirac Descriptor Set Layout (Day 1)
 
-### File: src/MSFTEngine.cpp
+### File: src/SMFTEngine.cpp
 ### Location: In `initVulkan()` function, after gravity descriptor layout creation
 
 ### Code to Add:
@@ -342,7 +342,7 @@ vkUpdateDescriptorSets(device, 2, feedback_writes, 0, nullptr);
 
 ## Phase 7: Initialize Spinor Field (Day 3)
 
-### File: src/MSFTEngine.cpp
+### File: src/SMFTEngine.cpp
 ### Location: In `initVulkan()` after buffer creation
 
 ### Code to Add:
@@ -396,7 +396,7 @@ std::cout << "Initialized spinor field with Gaussian wavepacket (σ=" << sigma <
 
 ## Phase 8: Add Dispatch Calls to step() (Day 4)
 
-### File: src/MSFTEngine.cpp  
+### File: src/SMFTEngine.cpp  
 ### Location: Line 497, after gravity_field dispatch, before vkEndCommandBuffer
 
 ### Code to Add:
@@ -447,8 +447,8 @@ vkCmdPipelineBarrier(_compute_command_buffer,
 
 ## Phase 9: Add Cleanup Code (Day 4)
 
-### File: src/MSFTEngine.cpp
-### Location: In destructor `~MSFTEngine()`
+### File: src/SMFTEngine.cpp
+### Location: In destructor `~SMFTEngine()`
 
 ### Code to Add (before existing cleanup):
 
@@ -493,13 +493,13 @@ if (_spinor_feedback_descriptor_layout != VK_NULL_HANDLE) {
 
 ### Test 1: Compilation
 ```bash
-make MSFT
+make SMFT
 ```
 Expected: Clean build with no errors
 
 ### Test 2: Initialization
 ```bash
-./bin/MSFT
+./bin/SMFT
 ```
 Expected: No Vulkan validation errors, spinor field initialized
 

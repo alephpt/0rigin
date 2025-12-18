@@ -4,8 +4,8 @@
  */
 
 #include "../lib/Nova/Nova.h"
-#include "../src/MSFTEngine.h"
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTEngine.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -31,7 +31,7 @@ int main() {
     Nova nova(config);
     nova.initialized = true;
 
-    MSFTEngine engine(&nova);
+    SMFTEngine engine(&nova);
     engine.initialize(Nx, Ny, 2.5f, 0.0f);
 
     // Set random initial phases
@@ -44,7 +44,7 @@ int main() {
 
     // Check IC upload
     std::vector<float> theta_check = engine.getPhaseField();
-    float R_initial = MSFT::compute_global_R(theta_check);
+    float R_initial = SMFT::compute_global_R(theta_check);
     std::cout << "R_initial (after IC upload): " << R_initial << std::endl;
     std::cout << "First 10 phases: ";
     for (int i = 0; i < 10; i++) {
@@ -59,7 +59,7 @@ int main() {
 
         if (step % 200 == 0) {
             std::vector<float> theta = engine.getPhaseField();
-            float R = MSFT::compute_global_R(theta);
+            float R = SMFT::compute_global_R(theta);
             std::cout << "  Step " << step << ": R_global = " << R;
             std::cout << ", first_phase = " << theta[0];
             std::cout << ", mean_phase = " << (std::accumulate(theta.begin(), theta.end(), 0.0) / theta.size());
@@ -69,7 +69,7 @@ int main() {
 
     // Final check
     std::vector<float> theta_final = engine.getPhaseField();
-    float R_final = MSFT::compute_global_R(theta_final);
+    float R_final = SMFT::compute_global_R(theta_final);
     std::cout << "\n=== RESULT ===" << std::endl;
     std::cout << "R_final (after warmup): " << R_final << std::endl;
     std::cout << "First 10 phases: ";

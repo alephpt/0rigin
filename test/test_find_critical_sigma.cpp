@@ -3,14 +3,14 @@
  * Sweep from σ = 10⁻⁴ to σ = 10
  */
 
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
 #include <random>
 #include <iomanip>
 
-using namespace MSFT;
+using namespace SMFT;
 
 int main() {
     std::cout << "=== Finding Critical Noise Threshold ===" << std::endl << std::endl;

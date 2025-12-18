@@ -4,13 +4,13 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#include "MSFT_buffers.hpp"
+#include "SMFT_buffers.hpp"
 
-namespace MSFT {
+namespace SMFT {
 
 /**
  * @file observables.hpp
- * @brief Comprehensive observables computation for MSFT+Dirac system
+ * @brief Comprehensive observables computation for SMFT+Dirac system
  *
  * OBSERVABLE CATEGORIES:
  * ======================
@@ -117,16 +117,16 @@ public:
     void initialize(uint32_t grid_x, uint32_t grid_y, float dx = 1.0f);
 
     /**
-     * @brief Compute all observables from current MSFT state
+     * @brief Compute all observables from current SMFT state
      *
-     * @param buffers MSFT GPU buffers (theta, R, psi, density)
+     * @param buffers SMFT GPU buffers (theta, R, psi, density)
      * @param Delta Mass gap parameter
      * @param time Current simulation time
      * @param timestep Current timestep number
      * @return Complete observable set
      */
     AllObservables compute(
-        const MSFTBuffers& buffers,
+        const SMFTBuffers& buffers,
         float Delta,
         float time,
         uint32_t timestep
@@ -135,18 +135,18 @@ public:
     /**
      * @brief Compute synchronization observables only
      */
-    SyncObservables computeSyncObservables(const MSFTBuffers& buffers);
+    SyncObservables computeSyncObservables(const SMFTBuffers& buffers);
 
     /**
      * @brief Compute spinor observables only
      */
-    SpinorObservables computeSpinorObservables(const MSFTBuffers& buffers);
+    SpinorObservables computeSpinorObservables(const SMFTBuffers& buffers);
 
     /**
      * @brief Compute field theory observables only
      */
     FieldTheoryObservables computeFieldTheoryObservables(
-        const MSFTBuffers& buffers,
+        const SMFTBuffers& buffers,
         float Delta
     );
 
@@ -154,7 +154,7 @@ public:
      * @brief Compute conservation law checks
      */
     ConservationObservables computeConservationObservables(
-        const MSFTBuffers& buffers,
+        const SMFTBuffers& buffers,
         const AllObservables& previous,
         float dt
     );
@@ -278,5 +278,5 @@ private:
     std::vector<TimePoint> series_;
 };
 
-} // namespace MSFT
+} // namespace SMFT
 } // namespace Nova

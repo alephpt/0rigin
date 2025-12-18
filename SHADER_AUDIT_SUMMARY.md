@@ -14,7 +14,7 @@
 
 ## Quick Fix
 
-**In `src/MSFTEngine.cpp` line 913, change**:
+**In `src/SMFTEngine.cpp` line 913, change**:
 ```cpp
 // BEFORE (HIGH RISK):
 _sync_pipeline = _pipelineFactory->createSyncFieldPipeline(
@@ -90,7 +90,7 @@ _sync_pipeline = _pipelineFactory->createSyncFieldPipeline(
 ## Immediate Actions Required
 
 ### 1. Change Sync Field Shader (5 minutes)
-Edit `src/MSFTEngine.cpp` line 913:
+Edit `src/SMFTEngine.cpp` line 913:
 - Change `sync_field.comp.spv` → `sync_field_simple.comp.spv`
 - Rebuild: `cd build && make`
 
@@ -114,7 +114,7 @@ const uint32_t Ny = 128;  // Instead of 256
 ### 4. Verify Fix (5 minutes)
 ```bash
 cd /home/persist/neotec/0rigin/build
-./bin/test_msft_gpu  # Should not timeout now
+./bin/test_smft_gpu  # Should not timeout now
 ```
 
 ## Future Work

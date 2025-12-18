@@ -15,8 +15,8 @@
  */
 
 #include "../lib/Nova/Nova.h"
-#include "../src/MSFTEngine.h"
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTEngine.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -96,10 +96,10 @@ float compute_localization(const std::vector<float>& R_field) {
     return L;
 }
 
-// compute_global_R now provided by MSFTCommon.h
+// compute_global_R now provided by SMFTCommon.h
 
 int main() {
-    std::cout << "=== MSFT Noise Sweep Experiment ===" << std::endl;
+    std::cout << "=== SMFT Noise Sweep Experiment ===" << std::endl;
     std::cout << "Directive.md Phase 2: Measuring σ_c\n" << std::endl;
 
     create_output_dirs();
@@ -146,7 +146,7 @@ int main() {
 
         // Initialize Nova (compute-only mode)
         NovaConfig config = {
-            .name = "MSFT Noise Sweep",
+            .name = "SMFT Noise Sweep",
             .screen = {800, 600},
             .debug_level = "info",
             .dimensions = "2D",
@@ -156,8 +156,8 @@ int main() {
         Nova nova(config);
         nova.initialized = true;
 
-        // Initialize MSFT engine
-        MSFTEngine engine(&nova);
+        // Initialize SMFT engine
+        SMFTEngine engine(&nova);
         engine.initialize(Nx, Ny, 2.5f, 0.0f);
 
         // Set initial conditions (random phases)
@@ -181,7 +181,7 @@ int main() {
 
         // Check warmup success (compute R_global)
         std::vector<float> theta_after_warmup = engine.getPhaseField();
-        float R_global_warmup = MSFT::compute_global_R(theta_after_warmup);
+        float R_global_warmup = SMFT::compute_global_R(theta_after_warmup);
         std::cout << "\n  R_global after warmup: " << R_global_warmup << std::endl;
 
         if (R_global_warmup < 0.5) {
@@ -206,13 +206,13 @@ int main() {
             std::vector<float> theta_field = engine.getPhaseField();
 
             // Compute observables
-            float R_global = MSFT::compute_global_R(theta_field);  // CRITICAL: True order parameter
+            float R_global = SMFT::compute_global_R(theta_field);  // CRITICAL: True order parameter
             float L = compute_localization(R_field);
-            Statistics R_local_stats = compute_stats(R_field);  // Local R average (for MSFT spatial structure)
+            Statistics R_local_stats = compute_stats(R_field);  // Local R average (for SMFT spatial structure)
             Statistics theta_stats = compute_stats(theta_field);
 
             R_global_series.push_back(R_global);  // What we need for falsification test
-            R_local_mean_series.push_back(R_local_stats.mean);  // For MSFT defect analysis
+            R_local_mean_series.push_back(R_local_stats.mean);  // For SMFT defect analysis
             L_series.push_back(L);
             phase_var_series.push_back(theta_stats.variance);
 

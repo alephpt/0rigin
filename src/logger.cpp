@@ -2,23 +2,23 @@
 #include <iostream>
 #include <sys/stat.h>
 
-namespace MSFT {
+namespace SMFT {
 
-MSFTLogger::MSFTLogger(const LogConfig& config) : config_(config) {}
+SMFTLogger::SMFTLogger(const LogConfig& config) : config_(config) {}
 
-MSFTLogger::~MSFTLogger() {
+SMFTLogger::~SMFTLogger() {
     if (initialized_) {
         finalize();
     }
 }
 
-void MSFTLogger::initialize() {
+void SMFTLogger::initialize() {
     createOutputDirectory();
     openFiles();
     initialized_ = true;
 }
 
-void MSFTLogger::log(const AllObservables& obs, bool force) {
+void SMFTLogger::log(const AllObservables& obs, bool force) {
     if (!initialized_) return;
     log_counter_++;
     if (!force && (log_counter_ % config_.log_frequency != 0)) return;
@@ -26,34 +26,34 @@ void MSFTLogger::log(const AllObservables& obs, bool force) {
     // ...
 }
 
-void MSFTLogger::updateProgress(uint32_t current_step, uint32_t total_steps, float time) {
+void SMFTLogger::updateProgress(uint32_t current_step, uint32_t total_steps, float time) {
     // ...
 }
 
-void MSFTLogger::logPerformance(const PerformanceMetrics& metrics) {
+void SMFTLogger::logPerformance(const PerformanceMetrics& metrics) {
     // ...
 }
 
-void MSFTLogger::logParameters(const std::map<std::string, float>& params) {
+void SMFTLogger::logParameters(const std::map<std::string, float>& params) {
     // ...
 }
 
-void MSFTLogger::finalize() {
+void SMFTLogger::finalize() {
     closeFiles();
     initialized_ = false;
 }
 
-void MSFTLogger::createOutputDirectory() {
+void SMFTLogger::createOutputDirectory() {
     struct stat st = {0};
     if (stat(config_.output_dir.c_str(), &st) == -1) {
         mkdir(config_.output_dir.c_str(), 0700);
     }
 }
-void MSFTLogger::openFiles(){}
-void MSFTLogger::closeFiles(){}
-void MSFTLogger::writeCSVHeader(){}
-void MSFTLogger::writeJSONHeader(){}
-std::string MSFTLogger::getTimestamp() const { return "";}
-std::string MSFTLogger::formatDuration(double seconds) const { return "";}
+void SMFTLogger::openFiles(){}
+void SMFTLogger::closeFiles(){}
+void SMFTLogger::writeCSVHeader(){}
+void SMFTLogger::writeJSONHeader(){}
+std::string SMFTLogger::getTimestamp() const { return "";}
+std::string SMFTLogger::formatDuration(double seconds) const { return "";}
 
-} // namespace MSFT
+} // namespace SMFT

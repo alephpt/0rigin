@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the architecture of the implemented Python-based Kuramoto model simulation framework with statistical mean field theory (MSFT) extensions. The system supports both classical Kuramoto synchronization dynamics and field-theoretic formulations with Hamiltonian dynamics.
+This document describes the architecture of the implemented Python-based Kuramoto model simulation framework with statistical mean field theory (SMFT) extensions. The system supports both classical Kuramoto synchronization dynamics and field-theoretic formulations with Hamiltonian dynamics.
 
 ## Design Principles
 
@@ -54,7 +54,7 @@ This document describes the architecture of the implemented Python-based Kuramot
 │       │   ├── bifurcation.py       # Bifurcation diagrams
 │       │   └── utils.py             # Plotting utilities
 │       │
-│       └── field_theory/            # MSFT extensions (NEW)
+│       └── field_theory/            # SMFT extensions (NEW)
 │           ├── __init__.py
 │           ├── hamiltonian/
 │           │   ├── __init__.py
@@ -70,7 +70,7 @@ This document describes the architecture of the implemented Python-based Kuramot
 │           ├── pde_solvers/
 │           │   ├── __init__.py
 │           │   └── base.py          # PDE solver interface (py-pde integration)
-│           └── MSFT_system.py       # High-level MSFT system class
+│           └── SMFT_system.py       # High-level SMFT system class
 │
 ├── tests/
 │   ├── conftest.py                  # Pytest configuration
@@ -88,12 +88,12 @@ This document describes the architecture of the implemented Python-based Kuramot
 │       ├── test_fields.py
 │       ├── test_mediator.py
 │       ├── test_local_coupling.py
-│       └── test_MSFT_system.py
+│       └── test_SMFT_system.py
 │
 ├── examples/
 │   ├── demo_synchronization.py      # Classical Kuramoto demo
 │   └── field_theory/
-│       ├── MSFT_demo.py             # MSFT demonstration
+│       ├── SMFT_demo.py             # SMFT demonstration
 │       └── hamiltonian_demo.py      # Hamiltonian dynamics demo
 │
 └── docs/
@@ -449,7 +449,7 @@ def test_energy_conservation():
 
 ### Field Theory Module (`kuramoto.field_theory`)
 
-**Status**: Implemented MSFT extensions with Hamiltonian dynamics and Klein-Gordon mediator fields.
+**Status**: Implemented SMFT extensions with Hamiltonian dynamics and Klein-Gordon mediator fields.
 
 ```python
 # field_theory/
@@ -463,7 +463,7 @@ def test_energy_conservation():
 │   └── local_coupling.py       # Local oscillator-field coupling
 ├── pde_solvers/
 │   └── base.py                 # PDE solver interface (py-pde integration)
-└── MSFT_system.py              # MSFTSystem high-level interface
+└── SMFT_system.py              # SMFTSystem high-level interface
 ```
 
 #### Key Components
@@ -485,7 +485,7 @@ def test_energy_conservation():
 - Field interpolation at oscillator positions
 - Self-consistent field updates
 
-**MSFT System** (`MSFT_system.py`):
+**SMFT System** (`SMFT_system.py`):
 - High-level interface combining oscillators + field
 - Coupled ODE-PDE evolution
 - Order parameter calculation with spatial dependence

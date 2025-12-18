@@ -1,4 +1,4 @@
-# PDL Initialization Plan for 0rigin MSFT Project
+# PDL Initialization Plan for 0rigin SMFT Project
 
 **Date**: 2025-12-17
 **Purpose**: Document the PDL structure that should be created to reflect project reality
@@ -16,7 +16,7 @@ Based on comprehensive analysis of the codebase, experimental data, and document
 ### Active Work Evidence
 - Multiple test failures in build system
 - Security vulnerabilities identified
-- MSFTEngine refactoring needed
+- SMFTEngine refactoring needed
 - Dirac methods partially implemented
 
 ## Recommended PDL Structure
@@ -24,8 +24,8 @@ Based on comprehensive analysis of the codebase, experimental data, and document
 ### 1. Roadmap Creation
 ```
 mcp__pdl__roadmap_create(
-  name: "MSFT Experimental Validation",
-  vision: "Validate Mass Synchronization Field Theory via GPU-accelerated simulation of Dirac-Kuramoto dynamics",
+  name: "SMFT Experimental Validation",
+  vision: "Validate Synchronization Mass Field Theory via GPU-accelerated simulation of Dirac-Kuramoto dynamics",
   strategic_objectives: [
     "1) Determine noise tolerance threshold (Path A vs Path B decision)",
     "2) Validate particle generation via Dirac coupling",
@@ -42,7 +42,7 @@ mcp__pdl__roadmap_create(
 mcp__pdl__phase_create(
   roadmap_id: [roadmap_id],
   name: "Theoretical Foundation & GPU Infrastructure",
-  tactical_objectives: "Implement Vulkan compute pipeline, buffer allocation, MSFT formalism",
+  tactical_objectives: "Implement Vulkan compute pipeline, buffer allocation, SMFT formalism",
   deliverables: [
     "Working GPU pipeline with Nova engine integration",
     "Buffer management system (6 storage buffers)",
@@ -109,7 +109,7 @@ mcp__pdl__sprint_create(
   sprint_name: "Quality & Refactoring - Critical Debt Reduction",
   sprint_goals: [
     "1) Fix broken tests and security vulnerabilities",
-    "2) Refactor MSFTEngine God Object (>1500 lines)",
+    "2) Refactor SMFTEngine God Object (>1500 lines)",
     "3) Improve test coverage to 80%",
     "4) Establish CI/CD pipeline"
   ],
@@ -126,7 +126,7 @@ The sprint creation auto-creates 7 steps. Current status should be:
 2. **Definition** (COMPLETE): Requirements clear from analysis
 3. **Design** (COMPLETE): Refactoring plan established
 4. **Development** (IN PROGRESS - 30%):
-   - Notes: "Fixing broken tests, removing security vulnerabilities, beginning MSFTEngine refactoring"
+   - Notes: "Fixing broken tests, removing security vulnerabilities, beginning SMFTEngine refactoring"
    - Blockers: None currently
 5. **Testing** (NOT STARTED): Awaiting development completion
 6. **Launch** (NOT STARTED): CI/CD pipeline deployment pending
@@ -154,7 +154,7 @@ The sprint creation auto-creates 7 steps. Current status should be:
 - ✅ Theoretical foundation documented
 
 ### In Progress
-- 🔄 MSFTEngine refactoring (God object issue)
+- 🔄 SMFTEngine refactoring (God object issue)
 - 🔄 Security vulnerability fixes
 - 🔄 Test coverage improvement
 - 🔄 CI/CD pipeline setup

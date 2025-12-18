@@ -50,7 +50,7 @@ First 10 phases: nan -nan nan -nan nan -nan 0.23973 0.906154 -0.44308 -2.08794
 
 ## What Changed That Could Break GPU Upload?
 
-Looking at git diff of `src/MSFTEngine.cpp`:
+Looking at git diff of `src/SMFTEngine.cpp`:
 
 ### Added to constructor initialization list:
 ```cpp
@@ -67,7 +67,7 @@ _staging_memory(VK_NULL_HANDLE),
 
 ### Added debug output:
 ```cpp
-std::cout << "[DEBUG] MSFTEngine::initialize() START" << std::endl;
+std::cout << "[DEBUG] SMFTEngine::initialize() START" << std::endl;
 std::cout << "[DEBUG] Allocating CPU-side data arrays..." << std::endl;
 ```
 
@@ -151,7 +151,7 @@ Looking at the evidence:
 - Something changed between then and now
 
 **Candidates:**
-1. We modified MSFTEngine.cpp (added debug output, changed initialization)
+1. We modified SMFTEngine.cpp (added debug output, changed initialization)
 2. We modified push constants (added damping field)
 3. We compiled new stochastic shader (incompatible with descriptor sets?)
 

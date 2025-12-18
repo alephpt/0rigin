@@ -300,7 +300,7 @@ The **gravitational 3-body problem** is famous because:
 
 **This took 300 years** to understand (Newton 1687 → Poincaré chaos 1890s → numerical solutions 1970s).
 
-### MSFT 3-Body Problem: Completely Unknown Territory
+### SMFT 3-Body Problem: Completely Unknown Territory
 
 **Why it's different**:
 
@@ -422,7 +422,7 @@ void find_particle_centers(float* psi, vector<Point>& centers) {
 - Mechanism validation
 - **Target**: Physical Review Letters (4 pages, high impact)
 
-**Paper 2**: "Multi-Body Dynamics in MSFT" (longer, 3 months)
+**Paper 2**: "Multi-Body Dynamics in SMFT" (longer, 3 months)
 - Focus: Interactions
 - 2-body force law
 - 3-body chaos/stability

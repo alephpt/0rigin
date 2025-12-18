@@ -12,7 +12,7 @@
 #include <iomanip>
 #include <filesystem>
 #include <chrono>
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 
 namespace fs = std::filesystem;
 
@@ -104,8 +104,8 @@ public:
     void stepKuramoto(float dt) {
         std::vector<float> theta_new = theta;
 
-        // Compute sync field R using MSFTCommon
-        R = MSFT::computeLocalR(theta, N, N);
+        // Compute sync field R using SMFTCommon
+        R = SMFT::computeLocalR(theta, N, N);
 
         // Evolve phases with Kuramoto dynamics + Dirac coupling
         for (int i = 0; i < N_points; i++) {

@@ -5,7 +5,7 @@
 
 ## Overview
 
-Fixed MSFTEngine to use ONLY GPU-safe shaders based on timeout audit findings. Dangerous Dirac shaders that exceed 20 Tflops budget have been disabled to prevent GPU timeouts.
+Fixed SMFTEngine to use ONLY GPU-safe shaders based on timeout audit findings. Dangerous Dirac shaders that exceed 20 Tflops budget have been disabled to prevent GPU timeouts.
 
 ## Changes Made
 
@@ -15,7 +15,7 @@ Fixed MSFTEngine to use ONLY GPU-safe shaders based on timeout audit findings. D
 - **Size**: 5012 bytes
 - **Safety**: 37 transcendentals (well under budget)
 
-### 2. Updated MSFTEngine.cpp
+### 2. Updated SMFTEngine.cpp
 
 #### createPipelines() Method (Lines 716-773)
 **Changes**:
@@ -51,7 +51,7 @@ Fixed MSFTEngine to use ONLY GPU-safe shaders based on timeout audit findings. D
 - Added TODO for CPU-based Dirac implementation
 - Noted that Dirac dispatch section will never execute
 
-### 3. Updated MSFTPipelineFactory.cpp
+### 3. Updated SMFTPipelineFactory.cpp
 
 Added GPU safety documentation to ALL pipeline creation methods:
 
@@ -74,13 +74,13 @@ Added GPU safety documentation to ALL pipeline creation methods:
 #### createDiracPipeline() (Lines 219-238)
 - Added: "❌ DANGEROUS - ~3000 FLOPs per workgroup (10× over budget)"
 - Warned: HIGH timeout risk, 2+ second timeouts observed
-- Status: DISABLED in MSFTEngine::createPipelines()
+- Status: DISABLED in SMFTEngine::createPipelines()
 - Recommendation: CPU implementation or Euler integration
 
 #### createDiracStochasticPipeline() (Lines 240-259)
 - Added: "❌ DANGEROUS - 50-80 transcendentals per workgroup (4× over budget)"
 - Warned: CRITICAL timeout risk
-- Status: DISABLED in MSFTEngine::createPipelines()
+- Status: DISABLED in SMFTEngine::createPipelines()
 - Recommendation: CPU implementation mandatory
 
 ## Build Verification
@@ -152,8 +152,8 @@ All GPU-safe shaders verified present:
 
 ## Files Modified
 
-1. `/home/persist/neotec/0rigin/src/MSFTEngine.cpp`
-2. `/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp`
+1. `/home/persist/neotec/0rigin/src/SMFTEngine.cpp`
+2. `/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp`
 
 ## Files Created
 
@@ -162,7 +162,7 @@ All GPU-safe shaders verified present:
 
 ## Summary
 
-MSFTEngine now uses ONLY GPU-safe shaders:
+SMFTEngine now uses ONLY GPU-safe shaders:
 - ✅ All dangerous Dirac shaders disabled
 - ✅ Using sync_field_simple.comp (safe version)
 - ✅ All shader paths point to verified safe versions

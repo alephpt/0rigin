@@ -1,13 +1,13 @@
 #pragma once
 #include <vulkan/vulkan.h>
-#include "MSFT_buffers.hpp"
-#include "MSFT_params.hpp"
+#include "SMFT_buffers.hpp"
+#include "SMFT_params.hpp"
 
-namespace MSFT {
+namespace SMFT {
 
-class MSFTMemoryBarriers {
+class SMFTMemoryBarriers {
 public:
-    static void recordMSFTPipeline(
+    static void recordSMFTPipeline(
         VkCommandBuffer commandBuffer,
         VkPipeline kuramoto_pipeline,
         VkPipeline sync_pipeline,
@@ -15,8 +15,8 @@ public:
         VkPipeline feedback_pipeline,
         VkPipelineLayout pipeline_layout,
         VkDescriptorSet descriptor_set,
-        const MSFTBuffers& buffers,
-        const MSFTParams& params,
+        const SMFTBuffers& buffers,
+        const SMFTParams& params,
         uint32_t Nx,
         uint32_t Ny
     ) {
@@ -33,7 +33,7 @@ public:
             pipeline_layout,
             VK_SHADER_STAGE_COMPUTE_BIT,
             0,
-            sizeof(MSFTParams),
+            sizeof(SMFTParams),
             &params
         );
 
@@ -72,4 +72,4 @@ public:
     }
 };
 
-} // namespace MSFT
+} // namespace SMFT

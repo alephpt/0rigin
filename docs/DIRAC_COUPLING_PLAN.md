@@ -9,7 +9,7 @@
 - Pipelines created: `_dirac_pipeline`
 
 **Execution**: ❌ Missing
-- No dispatch calls in `MSFTEngine::step()`
+- No dispatch calls in `SMFTEngine::step()`
 - Spinor density always = 0
 - No feedback loop active
 
@@ -17,7 +17,7 @@
 
 ## Required Implementation
 
-### Location: src/MSFTEngine.cpp lines 497-499
+### Location: src/SMFTEngine.cpp lines 497-499
 
 Current code:
 ```cpp
@@ -118,9 +118,9 @@ This closes the loop:
 ## Implementation Tasks
 
 ### Phase 1: Code Integration (1-2 days)
-- [ ] Add DiracPushConstants struct to MSFTEngine.h
+- [ ] Add DiracPushConstants struct to SMFTEngine.h
 - [ ] Declare _spinor_feedback_pipeline and _spinor_feedback_pipeline_layout
-- [ ] Add dispatch calls to MSFTEngine::step()
+- [ ] Add dispatch calls to SMFTEngine::step()
 - [ ] Verify compilation
 
 ### Phase 2: Pipeline Creation (2-3 days)
@@ -250,10 +250,10 @@ This closes the loop:
 
 ## Next Immediate Step
 
-**Start with**: Add pipeline dispatch calls to MSFTEngine::step()
+**Start with**: Add pipeline dispatch calls to SMFTEngine::step()
 - Low risk, high visibility
 - Can test if pipelines are correctly initialized
 - Will immediately show if descriptor sets are bound correctly
 - Foundation for all subsequent work
 
-**File to edit**: `src/MSFTEngine.cpp` lines 497-499
+**File to edit**: `src/SMFTEngine.cpp` lines 497-499

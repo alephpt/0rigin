@@ -27,7 +27,7 @@
 #include <fstream>
 #include <algorithm>
 #include <cstdint>
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 
 // CPU Kuramoto step (matches shader logic)
 void cpu_kuramoto_step(std::vector<float>& theta,
@@ -86,8 +86,8 @@ void cpu_kuramoto_step(std::vector<float>& theta,
 
 // Compute average of local R field (for monitoring)
 float compute_R_avg(const std::vector<float>& theta, uint32_t Nx, uint32_t Ny) {
-    // Use MSFTCommon to compute local R field, then average
-    std::vector<float> R_field = MSFT::computeLocalR(theta, Nx, Ny);
+    // Use SMFTCommon to compute local R field, then average
+    std::vector<float> R_field = SMFT::computeLocalR(theta, Nx, Ny);
 
     float sum = 0.0f;
     for (float r : R_field) {

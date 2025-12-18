@@ -10,7 +10,7 @@
  */
 
 #include "../src/DiracEvolution.h"
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -24,7 +24,7 @@ const uint32_t NX = 128;
 const uint32_t NY = 128;
 const uint32_t N_GRID = NX * NY;
 
-// MSFT parameters
+// SMFT parameters
 const float DELTA = 0.5f;       // Mass gap
 const float DT = 0.01f;          // Time step
 const float K = 1.0f;            // Kuramoto coupling
@@ -56,7 +56,7 @@ int idx(int x, int y) {
     return y * NX + x;
 }
 
-// Use compute_local_R from MSFTCommon instead
+// Use compute_local_R from SMFTCommon instead
 
 /**
  * Compute gradient of mass field at position (x, y)
@@ -101,7 +101,7 @@ float compute_core_density(const std::vector<float>& density, float radius) {
     return rho_core;
 }
 
-// Use step_kuramoto from MSFTCommon instead
+// Use step_kuramoto from SMFTCommon instead
 
 int main() {
     std::cout << "=== Phase 2: Scenario 1 - CRITICAL VALIDATION ===" << std::endl;
@@ -141,10 +141,10 @@ int main() {
     std::cout << "\n[2] Kuramoto warmup (" << KURAMOTO_WARMUP << " steps)..." << std::endl;
 
     for (int step = 0; step < KURAMOTO_WARMUP; step++) {
-        MSFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
+        SMFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
 
         if (step % 200 == 0) {
-            auto R_field = MSFT::compute_local_R(theta, NX, NY);
+            auto R_field = SMFT::compute_local_R(theta, NX, NY);
             float R_avg = 0.0f;
             for (uint32_t i = 0; i < N_GRID; i++) {
                 R_avg += R_field[i];
@@ -155,7 +155,7 @@ int main() {
         }
     }
 
-    auto R_field = MSFT::compute_local_R(theta, NX, NY);
+    auto R_field = SMFT::compute_local_R(theta, NX, NY);
     float R_defect_center = R_field[DEFECT_Y * NX + DEFECT_X];
     float R_background = R_field[10 * NX + 10];
 
@@ -196,9 +196,9 @@ int main() {
     float x_prev = x_init, y_prev = y_init;
 
     for (int step = 0; step < COUPLED_STEPS; step++) {
-        MSFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
+        SMFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
 
-        R_field = MSFT::compute_local_R(theta, NX, NY);
+        R_field = SMFT::compute_local_R(theta, NX, NY);
         std::vector<float> mass_field(N_GRID);
         for (uint32_t i = 0; i < N_GRID; i++) {
             mass_field[i] = DELTA * R_field[i];

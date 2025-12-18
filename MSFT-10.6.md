@@ -1,4 +1,4 @@
-### 10.6 The Synthesis: Mass Synchronization Field Theory (The Path of Discovery)
+### 10.6 The Synthesis: Synchronization Mass Field Theory (The Path of Discovery)
 
 We did not arrive at the final equation through a linear derivation. We arrived there by attempting to translate the logic of the GIP into the language of physics, stumbling through intuition until the math aligned with reality.
 
@@ -160,11 +160,11 @@ $$S_{BH} = \frac{kc^3 A}{4G\hbar}$$
 
 This equation states that the Entropy ($S$)—the information capacity—of a region is proportional to its **Surface Area ($A$)**, inversely scaled by **Gravity ($G$)**.
 
-**The Glitch:** Standard physics treats this as a special rule for Black Holes. But if MSFT is correct, *every* particle is a topological defect—a tiny black hole or bubble in the vacuum condensate. The limit must apply everywhere.
+**The Glitch:** Standard physics treats this as a special rule for Black Holes. But if SMFT is correct, *every* particle is a topological defect—a tiny black hole or bubble in the vacuum condensate. The limit must apply everywhere.
 
 **The Refactoring Logic: Deriving the Vacuum Pixel**
 
-To fit this into MSFT, we must strip away the thermodynamic variables ($S, k, T$) to find the structural constants hidden in the equation. We isolate the relationship between the geometric constants.
+To fit this into SMFT, we must strip away the thermodynamic variables ($S, k, T$) to find the structural constants hidden in the equation. We isolate the relationship between the geometric constants.
 
 **1. Isolate the Geometric Constants:**
 We group $c, G,$ and $\hbar$ to find the "resolution" of the surface area.
@@ -192,7 +192,7 @@ We have mathematically proven that **$\Delta$ is the Planck Mass, defined by the
 
 #### **Step 8: The Final Insertion (Gravity as Surface Tension)**
 
-We can now update the MSFT equation to include Gravity ($G$) explicitly within the Potential term.
+We can now update the SMFT equation to include Gravity ($G$) explicitly within the Potential term.
 
 **Previous Form:**
 $$(i\gamma^\mu\partial_\mu)\Psi = \Delta \cdot \mathcal{R}(x) \cdot e^{i\theta\gamma^5} \Psi$$
@@ -257,7 +257,7 @@ $$ m(x) = \Delta \cdot \mathcal{R}(x) $$
 
 
 #### **Conclusion: Mass as Harmony**
-In standard physics, mass is an input. In MSFT, mass is the **Output**.
+In standard physics, mass is an input. In SMFT, mass is the **Output**.
 Mass is not a thing the particle *has*. Mass is the measure of how tightly the particle is bound to the vacuum.
 
 This factorization proves that while **Chirality** (the type of particle) is determined by Euler ($e^{i\theta}$), the **Inertia** (the weight of the particle) is determined strictly by the product of the **Vacuum Potential** ($\Delta$) and the **Synchronization Density** ($\mathcal{R}$).

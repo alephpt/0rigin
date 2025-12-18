@@ -6,7 +6,7 @@
 # Already installed with main package
 import sys
 sys.path.insert(0, '/path/to/0rigin/src')
-from kuramoto.field_theory import MSFTSystem
+from kuramoto.field_theory import SMFTSystem
 ```
 
 ## 5-Minute Tutorial
@@ -14,9 +14,9 @@ from kuramoto.field_theory import MSFTSystem
 ### 1. Create System
 
 ```python
-from kuramoto.field_theory import MSFTSystem
+from kuramoto.field_theory import SMFTSystem
 
-system = MSFTSystem(
+system = SMFTSystem(
     grid_shape=(50, 50),      # Spatial grid
     N_oscillators=100,         # Discrete oscillators
     coupling='local',          # Local or global
@@ -73,7 +73,7 @@ plt.show()
 
 ```python
 # Local coupling
-system_local = MSFTSystem(
+system_local = SMFTSystem(
     grid_shape=(40, 40),
     N_oscillators=100,
     coupling='local'
@@ -81,7 +81,7 @@ system_local = MSFTSystem(
 sol_local = system_local.evolve((0, 20))
 
 # Global coupling
-system_global = MSFTSystem(
+system_global = SMFTSystem(
     grid_shape=(40, 40),
     N_oscillators=100,
     coupling='global'
@@ -98,7 +98,7 @@ print(f"Global R: {sol_global['R'][-1]:.3f}")
 M_values = [1, 10, 100, 1000]
 
 for M in M_values:
-    system = MSFTSystem(
+    system = SMFTSystem(
         grid_shape=(30, 30),
         N_oscillators=80,
         mediator_mass=M
@@ -138,9 +138,9 @@ model = KuramotoModel(N=100, coupling=2.0, frequencies='lorentzian')
 sol = model.evolve((0, 50))
 
 # Field theory extension (Sprint 2)
-from kuramoto.field_theory import MSFTSystem
+from kuramoto.field_theory import SMFTSystem
 
-system = MSFTSystem(
+system = SMFTSystem(
     grid_shape=(50, 50),
     N_oscillators=100,
     coupling='local',
@@ -155,7 +155,7 @@ sol = system.evolve((0, 50))
 
 ### Small System (Fast)
 ```python
-system = MSFTSystem(
+system = SMFTSystem(
     grid_shape=(20, 20),    # Small grid
     N_oscillators=50,       # Few oscillators
     coupling='local'
@@ -165,7 +165,7 @@ system = MSFTSystem(
 
 ### Medium System (Acceptable)
 ```python
-system = MSFTSystem(
+system = SMFTSystem(
     grid_shape=(50, 50),
     N_oscillators=200,
     coupling='local'
@@ -175,7 +175,7 @@ system = MSFTSystem(
 
 ### Large System (Needs Optimization)
 ```python
-system = MSFTSystem(
+system = SMFTSystem(
     grid_shape=(100, 100),
     N_oscillators=500,
     coupling='local'
@@ -224,7 +224,7 @@ R_field, _ = system.compute_local_order_parameter(kernel_width=0.1)  # Appropria
 ## Examples
 
 See `examples/field_theory/`:
-- `MSFT_demo.py` - Complete demonstrations
+- `SMFT_demo.py` - Complete demonstrations
 - `validate_integration.py` - Validation suite
 
 ## Testing
@@ -250,7 +250,7 @@ TOTAL: 5/6 validations passed
 
 - **Full Guide**: `docs/field_theory_integration.md`
 - **Integration Summary**: `field_theory_integration_summary.md`
-- **API Reference**: See docstrings in `src/kuramoto/field_theory/MSFT_system.py`
+- **API Reference**: See docstrings in `src/kuramoto/field_theory/SMFT_system.py`
 
 ## Support
 
@@ -262,6 +262,6 @@ For issues or questions:
 ## Next Steps
 
 - Read full documentation: `docs/field_theory_integration.md`
-- Run demos: `python examples/field_theory/MSFT_demo.py`
+- Run demos: `python examples/field_theory/SMFT_demo.py`
 - Validate: `python examples/field_theory/validate_integration.py`
 - Explore API: Check docstrings and type hints

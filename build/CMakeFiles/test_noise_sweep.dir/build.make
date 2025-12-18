@@ -86,89 +86,89 @@ CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_noise_sweep.cpp -o CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.s
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
-CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o: /home/persist/neotec/0rigin/src/MSFTEngine.cpp
-CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
+CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o: /home/persist/neotec/0rigin/src/SMFTEngine.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTEngine.cpp > CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.i
+CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTEngine.cpp > CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.i
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTEngine.cpp -o CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.s
+CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTEngine.cpp -o CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.s
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
-CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o: /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp
-CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
+CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o: /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp > CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.i
+CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp > CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.i
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp -o CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.s
+CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp -o CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.s
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
-CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o: /home/persist/neotec/0rigin/src/MSFTCompute.cpp
-CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
+CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o: /home/persist/neotec/0rigin/src/SMFTCompute.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTCompute.cpp > CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.i
+CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCompute.cpp > CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.i
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTCompute.cpp -o CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.s
+CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCompute.cpp -o CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.s
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
-CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o: /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp
-CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
+CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o: /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp > CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.i
+CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp > CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.i
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp -o CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.s
+CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp -o CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.s
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
-CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o: /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp
-CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
+CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o: /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp > CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.i
+CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp > CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.i
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp -o CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.s
+CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp -o CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.s
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
-CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o: /home/persist/neotec/0rigin/src/MSFTCommon.cpp
-CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
+CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o: /home/persist/neotec/0rigin/src/SMFTCommon.cpp
+CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o -MF CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o.d -o CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTCommon.cpp > CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.i
+CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCommon.cpp > CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.i
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTCommon.cpp -o CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.s
+CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCommon.cpp -o CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.s
 
 CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.o: CMakeFiles/test_noise_sweep.dir/flags.make
 CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.o: /home/persist/neotec/0rigin/src/DiracEvolution.cpp
@@ -187,24 +187,24 @@ CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.s: cmake_force
 # Object files for target test_noise_sweep
 test_noise_sweep_OBJECTS = \
 "CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.o" \
-"CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o" \
-"CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o" \
-"CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o" \
-"CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o" \
-"CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o" \
-"CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o" \
+"CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o" \
+"CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o" \
+"CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o" \
+"CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o" \
+"CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o" \
+"CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o" \
 "CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.o"
 
 # External object files for target test_noise_sweep
 test_noise_sweep_EXTERNAL_OBJECTS =
 
 bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.o
-bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o
-bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o
-bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o
-bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o
-bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o
-bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o
+bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o
+bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o
+bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o
+bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o
+bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o
+bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o
 bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.o
 bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/build.make
 bin/test_noise_sweep: CMakeFiles/test_noise_sweep.dir/compiler_depend.ts

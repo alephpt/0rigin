@@ -12,7 +12,7 @@ Successfully replaced Euler/RK4 time integrators with split-operator method for 
 - Implements Strang splitting: K/2 - V - K/2
 
 ### Integration
-- Updated `MSFTEngine` to use `DiracEvolution` class
+- Updated `SMFTEngine` to use `DiracEvolution` class
 - Methods: `initializeDiracField()`, `stepWithDirac()`, `getDiracDensity()`
 - Updated CMakeLists.txt to link FFTW3
 
@@ -52,7 +52,7 @@ Step 50000: Drift = 7.2×10^-3
 - Old RK4: Requires manual normalization, ~10^-4 algorithmic drift ✗
 - Split-operator: Stable for 50k+ steps, 0.7% drift from FFT roundoff ✓
 
-### 4. ✅ Physical MSFT Output (Particle Localization)
+### 4. ✅ Physical SMFT Output (Particle Localization)
 ```
 Initial CoM: (32.00, 32.00)
 Final CoM:   (37.99, 32.00)
@@ -66,7 +66,7 @@ Density conservation: 1.000002 → 0.999793 (error = 2.1×10^-4)
 - Mass field creates potential gradient
 - Dirac evolution couples spinor to local mass
 - Wavepacket center shifts ~6 grid points in direction of increasing m(x)
-- This is the MSFT mechanism: mass field guides particle evolution
+- This is the SMFT mechanism: mass field guides particle evolution
 
 **Visualizations:** `output/dirac_physics_validation.png`, `output/dirac_particle_localization.png`
 
@@ -106,7 +106,7 @@ Verified correct for 4-component spinor (2×2 block applied to both upper/lower 
 ✅ **Rotation invariance (isotropy)** - exact to floating point precision
 ✅ **Error scaling** - O(N) linear (FFT roundoff, not algorithmic)
 ✅ **Long-time stability** - 50k steps without NaN/blow-up
-✅ **Physical MSFT coupling** - particle localization responds to mass field
+✅ **Physical SMFT coupling** - particle localization responds to mass field
 ✅ **Production ready** - superior to Euler/RK4 in all metrics
 
 **Performance vs Previous Methods:**

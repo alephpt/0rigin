@@ -7,11 +7,11 @@
 #include <map>
 #include "observables.hpp"
 
-namespace MSFT {
+namespace SMFT {
 
 /**
  * @file logger.hpp
- * @brief Production logging system for MSFT simulations
+ * @brief Production logging system for SMFT simulations
  *
  * FEATURES:
  * - Multiple output formats: CSV, JSON, Binary
@@ -26,7 +26,7 @@ namespace MSFT {
  */
 struct LogConfig {
     std::string output_dir = "./output";      // Output directory
-    std::string run_name = "MSFT_run";        // Run identifier
+    std::string run_name = "SMFT_run";        // Run identifier
     bool enable_csv = true;                   // Enable CSV output
     bool enable_json = true;                  // Enable JSON output
     bool enable_binary = false;               // Enable binary output
@@ -50,19 +50,19 @@ struct PerformanceMetrics {
 };
 
 /**
- * @brief MSFT simulation logger
+ * @brief SMFT simulation logger
  */
-class MSFTLogger {
+class SMFTLogger {
 public:
     /**
      * @brief Constructor
      */
-    MSFTLogger(const LogConfig& config = LogConfig());
+    SMFTLogger(const LogConfig& config = LogConfig());
 
     /**
      * @brief Destructor - flushes all buffers
      */
-    ~MSFTLogger();
+    ~SMFTLogger();
 
     /**
      * @brief Initialize logger (create directories, open files)
@@ -193,4 +193,4 @@ public:
     );
 };
 
-} // namespace MSFT
+} // namespace SMFT

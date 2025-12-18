@@ -9,7 +9,7 @@
  * when using the proper timesync ratio
  */
 
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include "../lib/Nova/Nova.h"
 #include <iostream>
 #include <fstream>
@@ -57,8 +57,8 @@ void runGPUDiracTest() {
 
     std::cout << "✓ Nova initialized" << std::endl;
 
-    // Initialize MSFT Engine
-    MSFTEngine engine(&nova);
+    // Initialize SMFT Engine
+    SMFTEngine engine(&nova);
     engine.initialize(GRID_SIZE, GRID_SIZE, DELTA, 0.0f);
 
     // Set the timesync ratio

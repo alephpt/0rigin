@@ -7,7 +7,7 @@
  */
 
 #include "../lib/Nova/Nova.h"
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -35,8 +35,8 @@ int main() {
     Nova nova(config);
     nova.initialized = true;
 
-    // Initialize MSFT engine
-    MSFTEngine engine(&nova);
+    // Initialize SMFT engine
+    SMFTEngine engine(&nova);
     engine.initialize(Nx, Ny, 2.5f, 0.0f);
 
     for (int test_id = 1; test_id <= num_tests; test_id++) {

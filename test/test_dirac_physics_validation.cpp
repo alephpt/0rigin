@@ -255,8 +255,8 @@ void testLongTimeStability() {
     }
 }
 
-void testPhysicalMSFT() {
-    std::cout << "\n=== TEST 6: Physical MSFT Output ===" << std::endl;
+void testPhysicalSMFT() {
+    std::cout << "\n=== TEST 6: Physical SMFT Output ===" << std::endl;
     
     const uint32_t Nx = 64;
     const uint32_t Ny = 64;
@@ -351,7 +351,7 @@ int main() {
     testErrorScaling();
     testDoublePrecision();
     testLongTimeStability();
-    testPhysicalMSFT();
+    testPhysicalSMFT();
     
     std::cout << "\n========================================" << std::endl;
     std::cout << " Validation Complete" << std::endl;

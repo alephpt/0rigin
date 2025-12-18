@@ -100,32 +100,32 @@ CMakeFiles/test_ehrenfest_validation.dir/src/DiracEvolution.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_ehrenfest_validation.dir/src/DiracEvolution.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/DiracEvolution.cpp -o CMakeFiles/test_ehrenfest_validation.dir/src/DiracEvolution.cpp.s
 
-CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_ehrenfest_validation.dir/flags.make
-CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o: /home/persist/neotec/0rigin/src/MSFTCommon.cpp
-CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_ehrenfest_validation.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o -MF CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o.d -o CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp
+CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_ehrenfest_validation.dir/flags.make
+CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o: /home/persist/neotec/0rigin/src/SMFTCommon.cpp
+CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_ehrenfest_validation.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o -MF CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o.d -o CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp
 
-CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTCommon.cpp > CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.i
+CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCommon.cpp > CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.i
 
-CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTCommon.cpp -o CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.s
+CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCommon.cpp -o CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.s
 
 # Object files for target test_ehrenfest_validation
 test_ehrenfest_validation_OBJECTS = \
 "CMakeFiles/test_ehrenfest_validation.dir/test/test_ehrenfest_validation.cpp.o" \
 "CMakeFiles/test_ehrenfest_validation.dir/src/DiracEvolution.cpp.o" \
-"CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o"
+"CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o"
 
 # External object files for target test_ehrenfest_validation
 test_ehrenfest_validation_EXTERNAL_OBJECTS =
 
 bin/test_ehrenfest_validation: CMakeFiles/test_ehrenfest_validation.dir/test/test_ehrenfest_validation.cpp.o
 bin/test_ehrenfest_validation: CMakeFiles/test_ehrenfest_validation.dir/src/DiracEvolution.cpp.o
-bin/test_ehrenfest_validation: CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o
+bin/test_ehrenfest_validation: CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o
 bin/test_ehrenfest_validation: CMakeFiles/test_ehrenfest_validation.dir/build.make
 bin/test_ehrenfest_validation: CMakeFiles/test_ehrenfest_validation.dir/compiler_depend.ts
 bin/test_ehrenfest_validation: CMakeFiles/test_ehrenfest_validation.dir/link.txt

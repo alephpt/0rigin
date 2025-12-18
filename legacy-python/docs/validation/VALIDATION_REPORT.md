@@ -8,7 +8,7 @@
 
 The 0rigin Kuramoto synchronization framework has been comprehensively validated across all components:
 - Classical Kuramoto model synchronization verified
-- MSFT field theory extensions validated
+- SMFT field theory extensions validated
 - Hamiltonian dynamics implementation confirmed
 - All example scripts execute successfully
 - 10 validation plots generated
@@ -55,7 +55,7 @@ The 0rigin Kuramoto synchronization framework has been comprehensively validated
 - `phase_distributions.png` - Phase space evolution
 - `distribution_comparison.png` - Frequency distribution effects
 
-### 2. MSFT Field Theory
+### 2. SMFT Field Theory
 
 **✅ Mass Generation Validated**
 - Effective mass: m_eff ∝ R (order parameter coupling)
@@ -80,10 +80,10 @@ The 0rigin Kuramoto synchronization framework has been comprehensively validated
 - M = 100.0: R = 0.0122
 
 **Validation Artifacts**:
-- `MSFT_basic_evolution.png` - Field and oscillator coevolution
-- `MSFT_mass_scaling.png` - Mass parameter effects on synchronization
-- `MSFT_local_vs_global.png` - Coupling topology comparison
-- `MSFT_effective_mass.png` - Spatial mass field structure
+- `SMFT_basic_evolution.png` - Field and oscillator coevolution
+- `SMFT_mass_scaling.png` - Mass parameter effects on synchronization
+- `SMFT_local_vs_global.png` - Coupling topology comparison
+- `SMFT_effective_mass.png` - Spatial mass field structure
 
 ### 3. Hamiltonian Dynamics
 
@@ -124,8 +124,8 @@ The 0rigin Kuramoto synchronization framework has been comprehensively validated
 **Successfully Executed**:
 1. ✅ `examples/demo_synchronization.py` - Visual demonstration (matplotlib)
 2. ✅ `examples/basic_synchronization.py` - Theory and concepts
-3. ✅ `examples/field_theory/MSFT_demo.py` - MSFT system demonstrations
-4. ✅ `examples/field_theory/MSFT_full_demo.py` - Comprehensive field theory
+3. ✅ `examples/field_theory/SMFT_demo.py` - SMFT system demonstrations
+4. ✅ `examples/field_theory/SMFT_full_demo.py` - Comprehensive field theory
 5. ✅ `examples/field_theory/hamiltonian_demo.py` - Hamiltonian validation
 
 **All Examples Produce**:
@@ -157,16 +157,16 @@ The 0rigin Kuramoto synchronization framework has been comprehensively validated
 6. **phase_distributions.png** (175 KB)
    - Phase space evolution over time
 
-7. **MSFT_basic_evolution.png** (147 KB)
+7. **SMFT_basic_evolution.png** (147 KB)
    - Field and oscillator coevolution
 
-8. **MSFT_effective_mass.png** (95 KB)
+8. **SMFT_effective_mass.png** (95 KB)
    - Spatial structure of effective mass field
 
-9. **MSFT_local_vs_global.png** (128 KB)
+9. **SMFT_local_vs_global.png** (128 KB)
    - Local vs global coupling comparison
 
-10. **MSFT_mass_scaling.png** (64 KB)
+10. **SMFT_mass_scaling.png** (64 KB)
     - Mass parameter effects on dynamics
 
 ## Known Limitations
@@ -240,5 +240,5 @@ The 0rigin Kuramoto synchronization framework has been thoroughly validated acro
 
 **Validated by**: Agent data-analyst
 **Framework**: 0rigin (neotec)
-**Physics**: Kuramoto synchronization + MSFT field theory
+**Physics**: Kuramoto synchronization + SMFT field theory
 **Status**: Sprint 2 Complete - System validated for production use

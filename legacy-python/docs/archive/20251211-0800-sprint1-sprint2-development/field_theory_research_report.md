@@ -175,7 +175,7 @@ class ContinuumKuramoto:
 ### Implementation Strategy
 
 ```python
-class RelativisticMSFT:
+class RelativisticSMFT:
     """
     Lorentz-covariant field theory.
 
@@ -319,9 +319,9 @@ src/kuramoto/continuum/
 
 **Deliverables**:
 ```python
-src/MSFT/
+src/SMFT/
 ├── __init__.py
-├── full_model.py          # Complete MSFT
+├── full_model.py          # Complete SMFT
 ├── fermion_coupling.py    # Dirac equation solver
 ├── mass_generation.py     # Synchronization → mass
 └── gpu_kernels.py         # Optional GPU acceleration

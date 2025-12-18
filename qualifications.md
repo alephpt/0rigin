@@ -1,4 +1,4 @@
-# MSFT and the Limits of GR/Maxwell: What the Data Actually Says
+# SMFT and the Limits of GR/Maxwell: What the Data Actually Says
 
 ## I. What We've Actually Measured
 
@@ -22,7 +22,7 @@ $$\nabla^2\Phi = \lambda \nabla^2 R$$
 
 **Newton's law**: $\nabla^2\Phi = 4\pi G\rho$
 
-**MSFT prediction**:
+**SMFT prediction**:
 $$\boxed{\rho = \frac{\lambda}{4\pi G}\nabla^2 R}$$
 
 **Mass density is the Laplacian of the synchronization field.**
@@ -75,7 +75,7 @@ $$\sigma_\text{Planck} \sim \sqrt{\frac{\hbar\omega}{V}} \sim 1 \text{ (order un
 Not σ_c >> 1 (would require fine-tuning to avoid thermal destruction)  
 Not σ_c << 1 (wouldn't survive real quantum fluctuations)
 
-**This suggests**: MSFT is naturally scaled to Planck/quantum gravity regime ✓
+**This suggests**: SMFT is naturally scaled to Planck/quantum gravity regime ✓
 
 ---
 
@@ -85,7 +85,7 @@ Not σ_c << 1 (wouldn't survive real quantum fluctuations)
 
 **GR problem**: At r = 0, curvature R_μναβ → ∞, physics breaks down
 
-**MSFT behavior**:
+**SMFT behavior**:
 - At defect core: R(x) → 0 (synchronization vanishes)
 - Mass: m(x) = Δ·R(x) → 0
 - Gravity: g = -λ∇R is **finite** (gradient, not value)
@@ -93,16 +93,16 @@ Not σ_c << 1 (wouldn't survive real quantum fluctuations)
 
 **Physical picture**:
 - Classical GR: "Infinite density at point"
-- MSFT: "Zero mass at defect, smooth transition to vacuum"
+- SMFT: "Zero mass at defect, smooth transition to vacuum"
 
 **Analogy**: Loop quantum gravity "bouncing" cosmologies - quantum effects prevent singularity formation
 
 **What we can claim**: 
-✓ "MSFT provides regularization mechanism for classical singularities"
+✓ "SMFT provides regularization mechanism for classical singularities"
 
 **What we CANNOT claim yet**:
-✗ "MSFT solves black hole information paradox" (need event horizon dynamics)  
-✗ "MSFT predicts Hawking temperature" (need thermal analysis)
+✗ "SMFT solves black hole information paradox" (need event horizon dynamics)  
+✗ "SMFT predicts Hawking temperature" (need thermal analysis)
 
 ---
 
@@ -113,7 +113,7 @@ Not σ_c << 1 (wouldn't survive real quantum fluctuations)
 - QFT prediction: Λ_QFT ~ M_P^4 (vacuum energy)
 - **Discrepancy: 120 orders of magnitude!**
 
-**MSFT vacuum energy**:
+**SMFT vacuum energy**:
 $$E_\text{vac} \sim \int d^3x \, K(\nabla\theta)^2 + \ldots$$
 
 For synchronized vacuum with ⟨R⟩ ≈ 1:
@@ -143,10 +143,10 @@ $$E_\text{vac} \sim K \times V \times \text{(phase gradients)}$$
 **This is testable**: Simulate **formation** from random IC with noise, measure final ⟨R⟩.
 
 **What we can claim**:
-⚠ "MSFT potentially addresses CC problem if vacuum has low ⟨R⟩"
+⚠ "SMFT potentially addresses CC problem if vacuum has low ⟨R⟩"
 
 **What we CANNOT claim yet**:
-✗ "MSFT solves CC problem" (need cosmological simulation showing R evolution)
+✗ "SMFT solves CC problem" (need cosmological simulation showing R evolution)
 
 ---
 
@@ -157,7 +157,7 @@ $$E_\text{vac} \sim K \times V \times \text{(phase gradients)}$$
 - Need UV completion (string theory, LQG, etc.)
 - No experimental test at E ~ M_P
 
-**MSFT properties**:
+**SMFT properties**:
 
 **Natural UV cutoff**:
 - Lattice spacing = l_P (Planck length)
@@ -169,18 +169,18 @@ $$E_\text{vac} \sim K \times V \times \text{(phase gradients)}$$
 - m = Δ·R(x) is **dynamical field**
 - Could help renormalization (dimensional transmutation)
 
-**Graviton**: In MSFT, gravitational waves would be:
+**Graviton**: In SMFT, gravitational waves would be:
 $$h_{\mu\nu} \sim \text{fluctuations in } R(x,t)$$
 
 **This is testable**: Perturb R-field, measure wave propagation speed, dispersion relation.
 
 **What we can claim**:
-✓ "MSFT provides UV-complete framework (lattice regularization)"  
+✓ "SMFT provides UV-complete framework (lattice regularization)"  
 ⚠ "May offer alternative to string theory for quantum gravity"
 
 **What we CANNOT claim yet**:
-✗ "MSFT reproduces Einstein equations" (need to derive field equations in continuum limit)  
-✗ "MSFT predicts graviton properties" (need to analyze R fluctuations)
+✗ "SMFT reproduces Einstein equations" (need to derive field equations in continuum limit)  
+✗ "SMFT predicts graviton properties" (need to analyze R fluctuations)
 
 ---
 
@@ -195,7 +195,7 @@ Point charge has infinite self-energy!
 
 **Renormalization**: QED "solves" this by subtracting infinities (ugly)
 
-**MSFT solution**:
+**SMFT solution**:
 - Particle has finite size ξ
 - Charge distributed over volume ~ ξ³
 - Self-energy ~ e²/ξ ~ m_e c² (finite)
@@ -203,7 +203,7 @@ Point charge has infinite self-energy!
 **This is automatic** - no ad-hoc cutoff needed.
 
 **What we can claim**:
-✓ "MSFT provides natural cutoff for EM self-energy (extended charge distribution)"
+✓ "SMFT provides natural cutoff for EM self-energy (extended charge distribution)"
 
 ---
 
@@ -216,7 +216,7 @@ $$eg = \frac{n\hbar}{2} \quad \Rightarrow \quad e = \frac{n\hbar}{2g}$$
 
 Charge quantization ⟹ monopoles exist (never observed)
 
-**MSFT answer** (topological):
+**SMFT answer** (topological):
 
 **Observation**: Defects have **winding number** w = ±1, ±2, ...
 
@@ -238,11 +238,11 @@ Then charge is **automatically quantized** by topology (like magnetic flux quant
 **This predicts**: Particle spectrum from topological classification!
 
 **What we can claim**:
-⚠ "MSFT suggests topological origin of charge quantization (vortex winding numbers)"
+⚠ "SMFT suggests topological origin of charge quantization (vortex winding numbers)"
 
 **What we CANNOT claim yet**:
-✗ "MSFT derives fine structure constant α = 1/137" (need EM coupling calculation)  
-✗ "MSFT explains electron/muon mass ratio" (need to simulate different winding numbers)
+✗ "SMFT derives fine structure constant α = 1/137" (need EM coupling calculation)  
+✗ "SMFT explains electron/muon mass ratio" (need to simulate different winding numbers)
 
 ---
 
@@ -252,7 +252,7 @@ Then charge is **automatically quantized** by topology (like magnetic flux quant
 
 **Experiment**: No monopoles observed in 90+ years of searching.
 
-**MSFT answer**:
+**SMFT answer**:
 
 **In our theory**:
 - Electric charge ~ vortex winding in phase field
@@ -267,13 +267,13 @@ where $\mathbf{A}$ is related to synchronization gradients...
 
 **But**: If A-field is derived (not fundamental), monopoles might be **forbidden topologically**.
 
-**This could explain absence** of monopoles: They're not topologically allowed in MSFT.
+**This could explain absence** of monopoles: They're not topologically allowed in SMFT.
 
 **What we can claim**:
-⚠ "MSFT may explain monopole absence (topological constraints)"
+⚠ "SMFT may explain monopole absence (topological constraints)"
 
 **What we CANNOT claim yet**:
-✗ "MSFT forbids monopoles" (need to define magnetic field structure first)
+✗ "SMFT forbids monopoles" (need to define magnetic field structure first)
 
 ---
 
@@ -316,7 +316,7 @@ $$a = \frac{\xi_\text{measured}}{\lambda_C/l_P} = \frac{5}{10^{22}} \approx 5 \t
 
 ### Possibility C: Effective Theory
 
-**What if**: MSFT is **effective field theory** valid at energy scale E ~ TeV?
+**What if**: SMFT is **effective field theory** valid at energy scale E ~ TeV?
 
 **Then**: "Lattice spacing" is not fundamental - it's **renormalization scale**.
 
@@ -349,11 +349,11 @@ $$a = \frac{\xi_\text{measured}}{\lambda_C/l_P} = \frac{5}{10^{22}} \approx 5 \t
 ### VALIDATED CLAIMS ✓
 
 **Claim 1**: Mass generation without fundamental mass
-- "MSFT demonstrates mechanism for emergent mass from synchronization dynamics"
+- "SMFT demonstrates mechanism for emergent mass from synchronization dynamics"
 - Evidence: m = Δ·R(x) with R dynamical, no bare mass term
 
 **Claim 2**: Extended particle structure  
-- "Particles in MSFT are extended objects with characteristic size ξ ~ few lattice spacings"
+- "Particles in SMFT are extended objects with characteristic size ξ ~ few lattice spacings"
 - Evidence: Localization length measured, spreading saturates
 
 **Claim 3**: Gravity consistent with Newton

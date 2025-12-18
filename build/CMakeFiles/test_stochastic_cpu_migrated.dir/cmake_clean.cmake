@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test_stochastic_cpu_migrated.dir/link.d"
-  "CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.o"
-  "CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.o.d"
+  "CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.o"
+  "CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.o.d"
   "CMakeFiles/test_stochastic_cpu_migrated.dir/src/output/OutputManager.cpp.o"
   "CMakeFiles/test_stochastic_cpu_migrated.dir/src/output/OutputManager.cpp.o.d"
   "CMakeFiles/test_stochastic_cpu_migrated.dir/test/test_stochastic_cpu_migrated.cpp.o"

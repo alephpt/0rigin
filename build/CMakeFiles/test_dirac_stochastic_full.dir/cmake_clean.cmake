@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test_dirac_stochastic_full.dir/link.d"
-  "CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o"
-  "CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o.d"
+  "CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o"
+  "CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o.d"
   "CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.o"
   "CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.o.d"
   "bin/test_dirac_stochastic_full"

@@ -199,7 +199,7 @@ Formation under noise is **exponentially harder** than maintaining sync under no
 
 | Claim | Reality |
 |-------|---------|
-| "Can MSFT synchronization survive Planck-scale noise?" | "Can random oscillators synchronize on a lattice with no damping under noise?" |
+| "Can SMFT synchronization survive Planck-scale noise?" | "Can random oscillators synchronize on a lattice with no damping under noise?" |
 | Tests: Stability of synchronized state | Tests: Formation from random IC |
 | Dynamics: Overdamped Kuramoto | Dynamics: Conservative Hamiltonian |
 | Coupling: Mean-field (global) | Coupling: Nearest-neighbor (local) |
@@ -301,7 +301,7 @@ From `immediate.md`:
 
 > **I will:**
 > - Accept the falsification if methodology is sound
-> - Help interpret implications for MSFT
+> - Help interpret implications for SMFT
 > - Assist in writing paper for either outcome
 >
 > **I will not:**

@@ -1,4 +1,4 @@
-# MSFT Field Theory Implementation
+# SMFT Field Theory Implementation
 
 **Status**: Complete and Validated
 **Sprint**: 2, Step 4 (Development)
@@ -6,7 +6,7 @@
 
 ## Overview
 
-Full implementation of Self-consistent Mean Field Theory (MSFT) for the Kuramoto model, bridging discrete oscillator dynamics with continuous field theory. This represents a complete field-theoretic framework enabling local coupling, spatiotemporal patterns, and fermion mass generation via synchronization.
+Full implementation of Self-consistent Mean Field Theory (SMFT) for the Kuramoto model, bridging discrete oscillator dynamics with continuous field theory. This represents a complete field-theoretic framework enabling local coupling, spatiotemporal patterns, and fermion mass generation via synchronization.
 
 ## Components Implemented
 
@@ -99,9 +99,9 @@ Analogous to Higgs mechanism where order parameter R acts like Higgs VEV.
 
 ### 4. System Integration
 
-**Updated**: `src/kuramoto/field_theory/MSFT_system.py`
+**Updated**: `src/kuramoto/field_theory/SMFT_system.py`
 
-**Description**: Integrated system combining all components for complete MSFT simulation.
+**Description**: Integrated system combining all components for complete SMFT simulation.
 
 **Features**:
 - Full oscillator-field coupling
@@ -113,7 +113,7 @@ Analogous to Higgs mechanism where order parameter R acts like Higgs VEV.
 ## Architecture
 
 ```
-MSFTSystem
+SMFTSystem
 ├── SpatialGrid (infrastructure)
 │   ├── Laplacian operator
 │   ├── Gradient operator
@@ -234,7 +234,7 @@ fermion.plot_mass_vs_order_parameter()
    - Symmetry breaking
 
 4. **Integration Tests**:
-   - MSFTSystem compatibility
+   - SMFTSystem compatibility
    - All components together
    - Numerical stability
    - Energy conservation
@@ -255,7 +255,7 @@ FIELD THEORY TESTS
 ✓ Fermion mass demo initialization
 ✓ Mass generation formula
 ✓ Mass generation
-✓ MSFT system integration
+✓ SMFT system integration
 ✓ Full integration
 ============================================================
 Results: 12 passed, 0 failed
@@ -264,7 +264,7 @@ Results: 12 passed, 0 failed
 
 ## Demonstrations
 
-**Demo File**: `examples/field_theory/MSFT_full_demo.py`
+**Demo File**: `examples/field_theory/SMFT_full_demo.py`
 
 ### Demo Components
 
@@ -425,6 +425,6 @@ return self.mediator.c / self.mediator.M
 
 ## Conclusion
 
-The MSFT field theory implementation is **complete and validated**. All components work together to provide a comprehensive framework for studying spatiotemporal synchronization, local coupling, and emergent mass generation in the Kuramoto model.
+The SMFT field theory implementation is **complete and validated**. All components work together to provide a comprehensive framework for studying spatiotemporal synchronization, local coupling, and emergent mass generation in the Kuramoto model.
 
 **Key Achievement**: Successfully bridged discrete oscillator dynamics with continuous field theory, enabling study of locality, causality, and symmetry breaking in synchronization phenomena.

@@ -23,34 +23,34 @@ Successfully implemented full GPU-CPU hybrid system with operator splitting for 
 - **Compiled**: `build/shaders/smft/accumulate.comp.spv`
 
 ### 2. Buffer Management ✅
-**Modified**: `src/MSFTBufferManager.{h,cpp}`
+**Modified**: `src/SMFTBufferManager.{h,cpp}`
 - `createAccumulatorBuffers(size)` - Creates theta_sum, R_sum buffers
 - Auto-initializes to zero
 - Tracked for automatic cleanup
 
-**Modified**: `src/MSFTEngine.cpp::createBuffers()`
+**Modified**: `src/SMFTEngine.cpp::createBuffers()`
 - Added accumulator buffer creation (lines 494-501)
 - Integrated into buffer verification
 - Logged in console output
 
 ### 3. Pipeline Management ✅
-**Modified**: `src/MSFTPipelineFactory.{h,cpp}`
+**Modified**: `src/SMFTPipelineFactory.{h,cpp}`
 - `createAccumulationPipeline()` with full GPU safety docs
 - Matches other pipeline patterns
 
-**Modified**: `src/MSFTEngine.cpp::createPipelines()`
+**Modified**: `src/SMFTEngine.cpp::createPipelines()`
 - Added accumulation pipeline creation (lines 741-787)
 - 4-buffer descriptor set: theta, R, theta_sum, R_sum
 - Push constant: grid_size (uint32_t)
 - Full Vulkan pipeline/layout/descriptors setup
 
 ### 4. Compute Dispatch ✅
-**Modified**: `src/MSFTCompute.{h,cpp}`
+**Modified**: `src/SMFTCompute.{h,cpp}`
 - `dispatchAccumulation()` - Accumulation shader dispatch
 - `fillBuffer()` - vkCmdFillBuffer wrapper for accumulator reset
 
 ### 5. Operator Splitting Logic ✅
-**Modified**: `src/MSFTEngine.cpp::step()`
+**Modified**: `src/SMFTEngine.cpp::step()`
 - Lines 295-308: Conditional accumulation dispatch
 - Lines 319-356: Complete operator splitting algorithm:
   1. Increment substep counter
@@ -63,14 +63,14 @@ Successfully implemented full GPU-CPU hybrid system with operator splitting for 
      - Reset counter
 
 ### 6. Public API ✅
-**Modified**: `src/MSFTEngine.h`
+**Modified**: `src/SMFTEngine.h`
 ```cpp
 void setSubstepRatio(int N);  // Configure timescale separation
 void initializeHybrid(float x0, float y0, float sigma);  // Full setup
 void updateAveragedFields(...);  // Internal averaging
 ```
 
-**Implemented**: `src/MSFTEngine.cpp` (lines 993-1059)
+**Implemented**: `src/SMFTEngine.cpp` (lines 993-1059)
 - Default N=10 (constructor initialization)
 - Configurable via `setSubstepRatio()`
 - `initializeHybrid()` sets up complete GPU-CPU state
@@ -139,10 +139,10 @@ From Feature-Not-Bug.md:
 ### File Compliance
 | File | Lines | Limit | Status |
 |------|-------|-------|--------|
-| MSFTBufferManager.cpp | 166 | 500 | ✅ 33% |
-| MSFTPipelineFactory.cpp | 284 | 500 | ✅ 57% |
-| MSFTCompute.cpp | 171 | 500 | ✅ 34% |
-| MSFTEngine.cpp | 1059 | 500 | ⚠️ 212% (justified complexity) |
+| SMFTBufferManager.cpp | 166 | 500 | ✅ 33% |
+| SMFTPipelineFactory.cpp | 284 | 500 | ✅ 57% |
+| SMFTCompute.cpp | 171 | 500 | ✅ 34% |
+| SMFTEngine.cpp | 1059 | 500 | ⚠️ 212% (justified complexity) |
 
 ### Method Compliance
 All new methods <50 lines:
@@ -185,8 +185,8 @@ All new methods <50 lines:
 ## Usage Example
 
 ```cpp
-// Initialize MSFT engine
-MSFTEngine engine(&nova);
+// Initialize SMFT engine
+SMFTEngine engine(&nova);
 engine.initialize(256, 256, 1.0f, 0.0f);
 
 // Configure operator splitting

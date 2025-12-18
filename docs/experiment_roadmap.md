@@ -1,4 +1,4 @@
-# MSFT Experimental Roadmap
+# SMFT Experimental Roadmap
 
 **Status**: Implementation Phase - Ready for Verification
 **Date**: 2025-12-16
@@ -7,7 +7,7 @@
 
 ## Overview
 
-This document tracks the two major experimental campaigns for validating Mass Synchronization Field Theory (MSFT):
+This document tracks the two major experimental campaigns for validating Synchronization Mass Field Theory (SMFT):
 
 1. **Noise Sweep Experiment** - Path A vs Path B decision
 2. **Dirac Coupling Experiment** - Particle generation validation
@@ -17,7 +17,7 @@ This document tracks the two major experimental campaigns for validating Mass Sy
 ## Experiment 1: Noise Sweep (Path B Validation)
 
 ### Objective
-Determine if MSFT can tolerate thermal noise at the Planck scale, validating the stochastic formalism (Path B) vs deterministic formalism (Path A).
+Determine if SMFT can tolerate thermal noise at the Planck scale, validating the stochastic formalism (Path B) vs deterministic formalism (Path A).
 
 ### Critical Question
 **What is σ_c, the critical noise amplitude where synchronization breaks down?**
@@ -36,10 +36,10 @@ Determine if MSFT can tolerate thermal noise at the Planck scale, validating the
 - [x] Euler-Maruyama stochastic integrator
 - [x] Test driver: `test_noise_sweep.cpp`
 - [x] Documentation: `docs/noise_sweep_experiment.md`
-- [x] Added `stepStochastic()` method signature to MSFTEngine.h
+- [x] Added `stepStochastic()` method signature to SMFTEngine.h
 
 #### ⏳ Pending
-- [ ] Implement `stepStochastic()` in MSFTEngine.cpp
+- [ ] Implement `stepStochastic()` in SMFTEngine.cpp
 - [ ] Compile stochastic shader (kuramoto_stochastic.comp.spv)
 - [ ] Run Verification Test 1: PRNG quality
 - [ ] Run Verification Test 2: Noise scaling
@@ -66,7 +66,7 @@ build/output/noise_sweep/               - Results (to be generated)
 ## Experiment 2: Dirac Coupling (Particle Generation)
 
 ### Objective
-Test if Dirac spinors localize in vacuum defects and produce discrete energy spectrum, validating the core MSFT mechanism for particle mass.
+Test if Dirac spinors localize in vacuum defects and produce discrete energy spectrum, validating the core SMFT mechanism for particle mass.
 
 ### Five Success Criteria
 1. **Localization**: O > 0.7 (Dirac field concentrates at defects)
@@ -87,9 +87,9 @@ Test if Dirac spinors localize in vacuum defects and produce discrete energy spe
 - [x] Defect counting algorithms
 
 #### ⏳ Pending
-- [ ] Implement `initializeDiracField()` in MSFTEngine
-- [ ] Implement `stepWithDirac()` in MSFTEngine
-- [ ] Implement `getDiracDensity()` in MSFTEngine
+- [ ] Implement `initializeDiracField()` in SMFTEngine
+- [ ] Implement `stepWithDirac()` in SMFTEngine
+- [ ] Implement `getDiracDensity()` in SMFTEngine
 - [ ] Connect Dirac pipeline to test driver
 - [ ] Run Phase 1: Vacuum equilibration
 - [ ] Run Phase 2: Dirac initialization
@@ -124,19 +124,19 @@ build/output/dirac_coupling/            - Results (to be generated)
 
 **Software**:
 - Nova engine with compute pipeline
-- MSFTEngine with GPU buffer infrastructure
+- SMFTEngine with GPU buffer infrastructure
 - glslc shader compiler
 - CMake build system
 
 ### Experiment-Specific
 
 **Noise Sweep**:
-- Requires: `MSFTEngine::stepStochastic()` implementation
+- Requires: `SMFTEngine::stepStochastic()` implementation
 - Shader: kuramoto_stochastic.comp compiled
 - ~8 hours compute time (8 σ values × 6000 steps × 256² grid)
 
 **Dirac Coupling**:
-- Requires: Dirac field management in MSFTEngine
+- Requires: Dirac field management in SMFTEngine
 - Methods: `initializeDiracField()`, `stepWithDirac()`, `getDiracDensity()`
 - ~12 hours compute time (3 λ values × 2000 steps × 256² grid × RK4)
 
@@ -246,9 +246,9 @@ build/output/dirac_coupling/
 
 ### Current Test Suite
 ```
-test/test_msft_headless.cpp            - Basic headless test
-test/test_msft_compute_only.cpp        - Compute pipeline validation
-test/test_msft_phase0.cpp              - Deterministic characterization
+test/test_smft_headless.cpp            - Basic headless test
+test/test_smft_compute_only.cpp        - Compute pipeline validation
+test/test_smft_phase0.cpp              - Deterministic characterization
 test/test_defect_detection.cpp         - Vortex detection
 test/test_defect_evolution.cpp         - Defect annihilation
 test/test_mass_quantization.cpp        - Mass distribution analysis
@@ -264,7 +264,7 @@ test/test_dirac_coupling.cpp           - Particle generation ← NEW
 
 ## Next Steps (Priority Order)
 
-1. **Implement MSFTEngine::stepStochastic()** (1-2 hours)
+1. **Implement SMFTEngine::stepStochastic()** (1-2 hours)
    - Load kuramoto_stochastic pipeline
    - Pass sigma parameter via push constants
    - Dispatch compute shader

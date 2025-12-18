@@ -4,7 +4,7 @@
  * This sweep covers the actual transition region
  */
 
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -13,7 +13,7 @@
 #include <iomanip>
 #include <filesystem>
 
-using namespace MSFT;
+using namespace SMFT;
 
 float computeCircularVariance(const std::vector<float>& theta) {
     return 1.0f - computeGlobalR(theta);

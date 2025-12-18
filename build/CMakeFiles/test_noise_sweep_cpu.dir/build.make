@@ -86,30 +86,30 @@ CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_noise_sweep_cpu.cpp -o CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.s
 
-CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_noise_sweep_cpu.dir/flags.make
-CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o: /home/persist/neotec/0rigin/src/MSFTCommon.cpp
-CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_noise_sweep_cpu.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o -MF CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o.d -o CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp
+CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_noise_sweep_cpu.dir/flags.make
+CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o: /home/persist/neotec/0rigin/src/SMFTCommon.cpp
+CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_noise_sweep_cpu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o -MF CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o.d -o CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp
 
-CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTCommon.cpp > CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.i
+CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCommon.cpp > CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.i
 
-CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTCommon.cpp -o CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.s
+CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCommon.cpp -o CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.s
 
 # Object files for target test_noise_sweep_cpu
 test_noise_sweep_cpu_OBJECTS = \
 "CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.o" \
-"CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o"
+"CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o"
 
 # External object files for target test_noise_sweep_cpu
 test_noise_sweep_cpu_EXTERNAL_OBJECTS =
 
 bin/test_noise_sweep_cpu: CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.o
-bin/test_noise_sweep_cpu: CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o
+bin/test_noise_sweep_cpu: CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o
 bin/test_noise_sweep_cpu: CMakeFiles/test_noise_sweep_cpu.dir/build.make
 bin/test_noise_sweep_cpu: CMakeFiles/test_noise_sweep_cpu.dir/compiler_depend.ts
 bin/test_noise_sweep_cpu: /lib/libvulkan.so

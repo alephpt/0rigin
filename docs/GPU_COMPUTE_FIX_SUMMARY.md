@@ -6,7 +6,7 @@ GPU compute shaders were causing AMD GPU timeouts (~5 seconds) leading to system
 ## Root Causes Identified
 
 ### 1. Missing Timeline Semaphore Support
-- **Issue**: Nova used Vulkan 1.0, MSFTEngine called `vkWaitSemaphores()` which didn't exist
+- **Issue**: Nova used Vulkan 1.0, SMFTEngine called `vkWaitSemaphores()` which didn't exist
 - **Fix**: Bumped Nova to Vulkan 1.2, enabled `VK_KHR_timeline_semaphore` extension
 - **Files**: `lib/Nova/Core/core.cpp`, `lib/Nova/Core/modules/atomic/atomic.h`, `lib/Nova/Core/modules/device.cpp`
 
@@ -18,7 +18,7 @@ GPU compute shaders were causing AMD GPU timeouts (~5 seconds) leading to system
 ### 3. Pipeline Barrier Access Mask Mismatch
 - **Issue**: `VK_PIPELINE_STAGE_TRANSFER_BIT` with `VK_ACCESS_SHADER_WRITE_BIT` (invalid)
 - **Fix**: Changed to `VK_ACCESS_TRANSFER_WRITE_BIT` for transfer stage
-- **File**: `src/MSFTEngine.cpp:468`
+- **File**: `src/SMFTEngine.cpp:468`
 
 ### 4. Uninitialized Shared Memory Corners ⭐ PRIMARY BUG
 - **Issue**: `sync_field.comp` used 18×18 shared memory for 16×16 workgroup with 1-pixel border
@@ -54,19 +54,19 @@ GPU compute shaders were causing AMD GPU timeouts (~5 seconds) leading to system
 |--------|--------|-------|
 | `kuramoto_step.comp` | ✓ Working | Standard Kuramoto coupling |
 | `sync_field_fixed.comp` | ✓ Working | Optimized, corner fix applied |
-| `gravity_field.comp` | ✓ Working | MSFT gravity computation |
+| `gravity_field.comp` | ✓ Working | SMFT gravity computation |
 
 ## Test Results
 
 ```
-MSFTEngine Queue Configuration:
+SMFTEngine Queue Configuration:
   Graphics queue family: 0
   Compute queue family: 1
   Using queue family for compute: 1
   Separate queues: YES
 
-MSFTVisualizer: Average R = 0.988679
-MSFT: Physics step complete, Average R = 0.988679
+SMFTVisualizer: Average R = 0.988679
+SMFT: Physics step complete, Average R = 0.988679
 ```
 
 **No GPU timeouts** ✓

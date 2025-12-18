@@ -1,1 +1,1 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_stochastic_cpu.dir/link.d CMakeFiles/test_stochastic_cpu.dir/test/test_stochastic_cpu.cpp.o CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.o -o bin/test_stochastic_cpu  -lpthread -lm
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_stochastic_cpu.dir/link.d CMakeFiles/test_stochastic_cpu.dir/test/test_stochastic_cpu.cpp.o CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.o -o bin/test_stochastic_cpu  -lpthread -lm

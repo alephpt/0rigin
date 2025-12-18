@@ -224,4 +224,4 @@ CMakeFiles/test_operator_splitting_full.dir/test/test_operator_splitting_full.cp
  /usr/include/c++/15.2.1/bits/ranges_algobase.h \
  /usr/include/c++/15.2.1/bits/unicode.h \
  /usr/include/c++/15.2.1/bits/unicode-data.h \
- /home/persist/neotec/0rigin/test/../src/MSFTCommon.h
+ /home/persist/neotec/0rigin/test/../src/SMFTCommon.h

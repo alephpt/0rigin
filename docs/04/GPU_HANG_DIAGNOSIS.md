@@ -10,7 +10,7 @@
 Running ANY test (old or new code) causes:
 ```
 amdgpu: ring comp_1.3.0 timeout
-Process test_msft_gpu
+Process test_smft_gpu
 Ring comp_1.3.0 reset failed
 GPU reset begin!
 VRAM is lost due to GPU reset!

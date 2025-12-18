@@ -127,99 +127,99 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/MSFT.cpp.o -c /home/persist/neotec/0rigin/src/MSFT.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFT.cpp",
-  "output": "CMakeFiles/MSFT.dir/src/MSFT.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFT.cpp.o -c /home/persist/neotec/0rigin/src/SMFT.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFT.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/SMFT.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
   "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
-  "output": "CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o"
+  "output": "CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp",
   "file": "/home/persist/neotec/0rigin/src/output/OutputManager.cpp",
-  "output": "CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o"
+  "output": "CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/MSFT.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
   "file": "/home/persist/neotec/0rigin/main.cpp",
-  "output": "CMakeFiles/MSFT.dir/main.cpp.o"
+  "output": "CMakeFiles/SMFT.dir/main.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/test/test_msft_gpu.cpp.o -c /home/persist/neotec/0rigin/test/test_msft_gpu.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_msft_gpu.cpp",
-  "output": "CMakeFiles/test_msft_gpu.dir/test/test_msft_gpu.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_gpu.dir/test/test_smft_gpu.cpp.o -c /home/persist/neotec/0rigin/test/test_smft_gpu.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_smft_gpu.cpp",
+  "output": "CMakeFiles/test_smft_gpu.dir/test/test_smft_gpu.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_gpu.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_smft_gpu.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/test_msft_gpu.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_gpu.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_smft_gpu.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/test_msft_gpu.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_gpu.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_smft_gpu.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/test_msft_gpu.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_gpu.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_smft_gpu.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/test_msft_gpu.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_gpu.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_smft_gpu.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_msft_gpu.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_gpu.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
   "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
-  "output": "CMakeFiles/test_msft_gpu.dir/src/DiracEvolution.cpp.o"
+  "output": "CMakeFiles/test_smft_gpu.dir/src/DiracEvolution.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -229,33 +229,33 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_descriptor_bindings.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_descriptor_bindings.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_descriptor_bindings.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_descriptor_bindings.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_descriptor_bindings.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_descriptor_bindings.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -271,33 +271,33 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/test_stochastic_particle.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_stochastic_particle.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/test_stochastic_particle.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_stochastic_particle.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/test_stochastic_particle.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_stochastic_particle.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/test_stochastic_particle.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_stochastic_particle.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/test_stochastic_particle.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_particle.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_stochastic_particle.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -313,33 +313,33 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -355,33 +355,33 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -403,33 +403,33 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -451,15 +451,21 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++   -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_operator_splitting_full.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_operator_splitting_full.dir/src/SMFTCommon.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_cpu.dir/test/test_stochastic_cpu.cpp.o -c /home/persist/neotec/0rigin/test/test_stochastic_cpu.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_stochastic_cpu.cpp",
   "output": "CMakeFiles/test_stochastic_cpu.dir/test/test_stochastic_cpu.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -469,9 +475,9 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -487,9 +493,9 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -517,9 +523,9 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_scenario1_defect.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_scenario1_defect.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_scenario1_defect.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_scenario1_defect.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -535,9 +541,9 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -547,39 +553,39 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/test_simple_warmup.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_simple_warmup.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/test_simple_warmup.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_simple_warmup.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/test_simple_warmup.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_simple_warmup.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/test_simple_warmup.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_simple_warmup.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/test_simple_warmup.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_simple_warmup.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_simple_warmup.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_simple_warmup.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_simple_warmup.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -595,39 +601,39 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTEngine.cpp",
-  "output": "CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTBufferManager.cpp",
-  "output": "CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCompute.cpp",
-  "output": "CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTDescriptorManager.cpp",
-  "output": "CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTPipelineFactory.cpp",
-  "output": "CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -643,9 +649,9 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -661,9 +667,9 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -673,9 +679,9 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep_corrected.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_noise_sweep_corrected.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep_corrected.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_noise_sweep_corrected.dir/src/SMFTCommon.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -685,8 +691,8 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "file": "/home/persist/neotec/0rigin/src/MSFTCommon.cpp",
-  "output": "CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCommon.cpp",
+  "output": "CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o"
 }
 ]

@@ -380,7 +380,7 @@ void DiracEvolution::getMomentumDistribution(std::vector<float>& kx_out,
  *   β = diag(1, 1, -1, -1)
  *
  * Note: m_0 (rest mass) is assumed ~0 in this implementation (massless Dirac limit)
- *       The mass term m(x) comes from MSFT coupling, not intrinsic mass.
+ *       The mass term m(x) comes from SMFT coupling, not intrinsic mass.
  */
 float DiracEvolution::getEnergy(const std::vector<float>& mass_field,
                                 float& KE_out, float& PE_out) const {

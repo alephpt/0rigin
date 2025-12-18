@@ -1,4 +1,4 @@
-# MSFTEngine Refactoring Complete
+# SMFTEngine Refactoring Complete
 
 **Date**: 2025-12-17
 **Commits**: a039076 (security fixes) → 120b5fb (refactoring)
@@ -8,14 +8,14 @@
 
 ## Overview
 
-Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized components with clean architecture and separation of concerns.
+Successfully decomposed SMFTEngine God Object (1608 lines) into 4 specialized components with clean architecture and separation of concerns.
 
 ---
 
 ## What Was Accomplished
 
-### Phase 1: MSFTPipelineFactory ✅
-**Created**: `src/MSFTPipelineFactory.{h,cpp}` (136 + 242 = 378 lines)
+### Phase 1: SMFTPipelineFactory ✅
+**Created**: `src/SMFTPipelineFactory.{h,cpp}` (136 + 242 = 378 lines)
 
 **Responsibility**: Vulkan compute pipeline creation and management
 
@@ -35,8 +35,8 @@ Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized co
 
 ---
 
-### Phase 2: MSFTBufferManager ✅
-**Created**: `src/MSFTBufferManager.{h,cpp}` (123 + 165 = 288 lines)
+### Phase 2: SMFTBufferManager ✅
+**Created**: `src/SMFTBufferManager.{h,cpp}` (123 + 165 = 288 lines)
 
 **Responsibility**: Vulkan buffer and memory management
 
@@ -47,7 +47,7 @@ Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized co
 - `destroyBuffer()`, `destroyAllBuffers()` - Resource cleanup
 
 **Benefits**:
-- Extracted buffer management from MSFTEngine
+- Extracted buffer management from SMFTEngine
 - `createBuffers()`: 106 lines → 50 lines (53% reduction)
 - `uploadToGPU()`: Simplified to 41 lines
 - `downloadFromGPU()`: Simplified to 31 lines
@@ -55,8 +55,8 @@ Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized co
 
 ---
 
-### Phase 3: MSFTCompute ✅
-**Created**: `src/MSFTCompute.{h,cpp}` (101 + 249 = 350 lines)
+### Phase 3: SMFTCompute ✅
+**Created**: `src/SMFTCompute.{h,cpp}` (101 + 249 = 350 lines)
 
 **Responsibility**: GPU compute dispatch and command buffer management
 
@@ -76,8 +76,8 @@ Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized co
 
 ---
 
-### Phase 4: MSFTEngine Coordination ✅
-**Result**: `src/MSFTEngine.cpp` (1608 → 1278 lines, **20% reduction**)
+### Phase 4: SMFTEngine Coordination ✅
+**Result**: `src/SMFTEngine.cpp` (1608 → 1278 lines, **20% reduction**)
 
 **Current Responsibility**: High-level orchestration and coordination
 
@@ -89,9 +89,9 @@ Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized co
 - Coordination logic between components
 
 **What Was Extracted**:
-- Pipeline creation → MSFTPipelineFactory
-- Buffer management → MSFTBufferManager
-- Compute dispatch → MSFTCompute
+- Pipeline creation → SMFTPipelineFactory
+- Buffer management → SMFTBufferManager
+- Compute dispatch → SMFTCompute
 
 ---
 
@@ -100,7 +100,7 @@ Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized co
 ### Before Refactoring:
 | Component | Lines | Violations |
 |-----------|-------|------------|
-| MSFTEngine.cpp | 1,608 | 320% over (500 line limit) |
+| SMFTEngine.cpp | 1,608 | 320% over (500 line limit) |
 | createPipelines() | 402 | 804% over (50 line limit) |
 | step() | 192 | 384% over |
 | stepStochastic() | 208 | 416% over |
@@ -109,10 +109,10 @@ Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized co
 ### After Refactoring:
 | Component | Lines | Status |
 |-----------|-------|--------|
-| MSFTEngine.cpp | 1,278 | Still over but 20% reduction |
-| MSFTPipelineFactory | 378 | ✅ Under 500 limit |
-| MSFTBufferManager | 288 | ✅ Under 500 limit |
-| MSFTCompute | 350 | ✅ Under 500 limit |
+| SMFTEngine.cpp | 1,278 | Still over but 20% reduction |
+| SMFTPipelineFactory | 378 | ✅ Under 500 limit |
+| SMFTBufferManager | 288 | ✅ Under 500 limit |
+| SMFTCompute | 350 | ✅ Under 500 limit |
 | **Total** | 2,294 | Distributed across 4 modules |
 
 ### Method Compliance:
@@ -129,7 +129,7 @@ Successfully decomposed MSFTEngine God Object (1608 lines) into 4 specialized co
 
 ### Before (God Object):
 ```
-MSFTEngine (1608 lines)
+SMFTEngine (1608 lines)
 ├─ Pipeline creation (402 lines)
 ├─ Buffer management (300+ lines)
 ├─ Compute dispatch (400+ lines)
@@ -139,10 +139,10 @@ MSFTEngine (1608 lines)
 
 ### After (Clean Architecture):
 ```
-MSFTEngine (1278 lines) - Coordinator
-├─ Uses MSFTPipelineFactory (378 lines) - Pipeline creation
-├─ Uses MSFTBufferManager (288 lines) - Memory management
-├─ Uses MSFTCompute (350 lines) - Compute dispatch
+SMFTEngine (1278 lines) - Coordinator
+├─ Uses SMFTPipelineFactory (378 lines) - Pipeline creation
+├─ Uses SMFTBufferManager (288 lines) - Memory management
+├─ Uses SMFTCompute (350 lines) - Compute dispatch
 └─ Manages descriptor sets + public API
 ```
 
@@ -161,9 +161,9 @@ MSFTEngine (1278 lines) - Coordinator
 
 ```bash
 # All executables built:
-build/bin/MSFT
+build/bin/SMFT
 build/bin/test_descriptor_bindings
-build/bin/test_msft_gpu
+build/bin/test_smft_gpu
 build/bin/test_stochastic_cpu
 build/bin/test_stochastic_particle
 
@@ -193,7 +193,7 @@ build/bin/test_stochastic_particle
 ## Remaining Work
 
 ### Still Over Limits (Justified):
-- **MSFTEngine.cpp**: 1278 lines (still 255% over 500)
+- **SMFTEngine.cpp**: 1278 lines (still 255% over 500)
   - **Reason**: Complex physics engine with extensive Vulkan setup
   - **Justification**: 
     - 354 lines for descriptor management (Vulkan verbosity)
@@ -239,10 +239,10 @@ build/bin/test_stochastic_particle
 - Fixed GPU shader buffer overflow
 
 **Commit 2**: 120b5fb - Refactoring (THIS COMMIT)
-- Extracted MSFTPipelineFactory (pipeline creation)
-- Extracted MSFTBufferManager (memory management)
-- Extracted MSFTCompute (compute dispatch)
-- Reduced MSFTEngine complexity by 20%
+- Extracted SMFTPipelineFactory (pipeline creation)
+- Extracted SMFTBufferManager (memory management)
+- Extracted SMFTCompute (compute dispatch)
+- Reduced SMFTEngine complexity by 20%
 
 ---
 
@@ -266,8 +266,8 @@ build/bin/test_stochastic_particle
 
 **Medium Priority**:
 4. **Extract descriptor management** (optional)
-   - Could further reduce MSFTEngine to ~900 lines
-   - Create MSFTDescriptorManager class
+   - Could further reduce SMFTEngine to ~900 lines
+   - Create SMFTDescriptorManager class
 
 5. **Set up CI/CD** (1 week)
    - GitHub Actions workflow
@@ -288,7 +288,7 @@ build/bin/test_stochastic_particle
 
 ## Conclusion
 
-Successfully decomposed MSFTEngine God Object into 4 specialized components, reducing complexity by 20% and improving architecture significantly. Code is now more maintainable, testable, and extensible.
+Successfully decomposed SMFTEngine God Object into 4 specialized components, reducing complexity by 20% and improving architecture significantly. Code is now more maintainable, testable, and extensible.
 
 **All phases complete. Refactoring successful. Ready for next steps.**
 

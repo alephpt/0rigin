@@ -59,8 +59,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Nova.dir/DependInfo.cmake"
   "CMakeFiles/imgui.dir/DependInfo.cmake"
-  "CMakeFiles/MSFT.dir/DependInfo.cmake"
-  "CMakeFiles/test_msft_gpu.dir/DependInfo.cmake"
+  "CMakeFiles/SMFT.dir/DependInfo.cmake"
+  "CMakeFiles/test_smft_gpu.dir/DependInfo.cmake"
   "CMakeFiles/test_descriptor_bindings.dir/DependInfo.cmake"
   "CMakeFiles/test_stochastic_particle.dir/DependInfo.cmake"
   "CMakeFiles/test_timesync_simple.dir/DependInfo.cmake"

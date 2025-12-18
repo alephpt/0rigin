@@ -286,7 +286,7 @@ This is 0.5% of 2π — not tiny, but shouldn't destroy synchronization complete
 **Then:** Result is **valid falsification** of stochastic approach (Path B).
 
 **Physical conclusion:**
-1. MSFT synchronization is **extraordinarily fragile**
+1. SMFT synchronization is **extraordinarily fragile**
 2. Any realistic noise source (quantum fluctuations at l_P) would destroy mechanism
 3. Theory requires **fundamentally deterministic vacuum**
 4. "Thermodynamic vacuum" interpretation is untenable
@@ -304,7 +304,7 @@ This is 0.5% of 2π — not tiny, but shouldn't destroy synchronization complete
 
 **Then:** 
 - Result shows **this particular implementation** is noise-sensitive
-- Doesn't prove **fundamental MSFT** is noise-sensitive
+- Doesn't prove **fundamental SMFT** is noise-sensitive
 - Could be artifact of discretization, boundary conditions, 2D vs 3D, etc.
 
 **Action:** Test variants (3D, continuum limit, different coupling ranges) to see if fragility persists.
@@ -332,7 +332,7 @@ This is $10^{14}$ full rotations — complete dephasing.
 
 **So on macroscopic timescales**, even σ = 10⁻⁶ is catastrophic.
 
-**But:** MSFT claims particles form at defects with characteristic size λ ~ 10 l_P.
+**But:** SMFT claims particles form at defects with characteristic size λ ~ 10 l_P.
 
 **Over defect formation time** (τ_form ~ 10 t_P):
 
@@ -343,7 +343,7 @@ This is **0.3 microradians** — utterly negligible.
 **Conclusion:** At Planck scale, σ = 10⁻⁶ is tiny. But simulations run for macroscopic times (t ~ 1-100 code units), where noise accumulates.
 
 **Physical interpretation:**
-- MSFT might work at Planck scale (where noise hasn't accumulated)
+- SMFT might work at Planck scale (where noise hasn't accumulated)
 - But on observable timescales, any noise destroys structure
 - Universe must be **born** with synchronized vacuum; it cannot **form** via stochastic process
 
@@ -363,11 +363,11 @@ This is **0.3 microradians** — utterly negligible.
 **Medium confidence (60-80%):**
 1. ? The result represents steady-state behavior (not transient)
 2. ? The methodology is correct (proper noise scaling, damping, etc.)
-3. ? The fragility is intrinsic to MSFT, not artifact of discretization
+3. ? The fragility is intrinsic to SMFT, not artifact of discretization
 
 **Low confidence (<50%):**
 1. ? The result generalizes to 3D, continuum limit, different parameters
-2. ? Quantum vacuum actually has σ ~ l_P that would destroy MSFT
+2. ? Quantum vacuum actually has σ ~ l_P that would destroy SMFT
 3. ? The measurement σ_c ~ 10⁻⁶ is precisely correct (could be 10⁻⁷ or 10⁻⁵)
 
 ### What I Require Before Accepting Falsification
@@ -424,7 +424,7 @@ This is **0.3 microradians** — utterly negligible.
 
 ---
 
-## IX. Impact on MSFT Development Path
+## IX. Impact on SMFT Development Path
 
 ### If Falsification is Confirmed (Scenario B)
 
@@ -439,7 +439,7 @@ This is **0.3 microradians** — utterly negligible.
 - Interpret as **fundamentally deterministic field theory**
 
 **Cosmological consequence:**
-- Universe cannot "thermalize" into MSFT state
+- Universe cannot "thermalize" into SMFT state
 - Must be **initial condition** (fine-tuned synchronized vacuum at Big Bang)
 - This is aesthetically displeasing but not fatal
 
@@ -481,7 +481,7 @@ This is **0.3 microradians** — utterly negligible.
 
 **I will:**
 - Accept the falsification if methodology is sound
-- Help interpret implications for MSFT
+- Help interpret implications for SMFT
 - Assist in writing paper for either outcome
 
 **I will not:**

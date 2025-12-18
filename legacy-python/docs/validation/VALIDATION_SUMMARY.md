@@ -11,8 +11,8 @@
 **Examples Successfully Executed**:
 1. `examples/demo_synchronization.py` - Visual synchronization demonstration
 2. `examples/basic_synchronization.py` - Architecture capabilities showcase
-3. `examples/field_theory/MSFT_demo.py` - MSFT system demonstrations
-4. `examples/field_theory/MSFT_full_demo.py` - Comprehensive field theory
+3. `examples/field_theory/SMFT_demo.py` - SMFT system demonstrations
+4. `examples/field_theory/SMFT_full_demo.py` - Comprehensive field theory
 5. `examples/field_theory/hamiltonian_demo.py` - Hamiltonian dynamics validation
 
 **All examples completed successfully** with clean output and validation messages.
@@ -26,10 +26,10 @@
 - hamiltonian_overdamped_limit.png (194 KB)
 - lorentzian_regimes.png (95 KB)
 - phase_distributions.png (175 KB)
-- MSFT_basic_evolution.png (147 KB)
-- MSFT_effective_mass.png (95 KB)
-- MSFT_local_vs_global.png (128 KB)
-- MSFT_mass_scaling.png (64 KB)
+- SMFT_basic_evolution.png (147 KB)
+- SMFT_effective_mass.png (95 KB)
+- SMFT_local_vs_global.png (128 KB)
+- SMFT_mass_scaling.png (64 KB)
 
 **Additional example outputs** (7 files in `examples/outputs/`).
 
@@ -106,7 +106,7 @@
 - ✅ Order parameter R ∈ [0, 1] **VALIDATED**
 - ✅ Ott-Antonsen theory match **CONFIRMED**
 
-### MSFT Field Theory
+### SMFT Field Theory
 - ✅ Mass generation (m_eff ∝ R) **VALIDATED**
 - ✅ Wave propagation (v = c) **CONFIRMED**
 - ✅ Hamiltonian dynamics **WORKING** (energy drift 3.83%)

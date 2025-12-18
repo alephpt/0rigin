@@ -11,7 +11,7 @@
 Successfully implemented the stochastic Dirac coupling shader based on the MSR formalism design. The implementation includes:
 
 1. **dirac_stochastic.comp** - Stochastic Dirac evolution shader with MSR noise
-2. **MSFTEngine::stepStochastic()** - Orchestration method for stochastic pipeline
+2. **SMFTEngine::stepStochastic()** - Orchestration method for stochastic pipeline
 3. **test_stochastic_particle** - Test program for validation
 
 ---
@@ -37,7 +37,7 @@ for (int i = 0; i < 4; i++) {
 }
 ```
 
-### 2. Engine Integration (`src/MSFTEngine.cpp`)
+### 2. Engine Integration (`src/SMFTEngine.cpp`)
 
 **Pipeline Sequence:**
 1. `kuramoto_stochastic` - Evolve phases with noise σ_θ
@@ -86,8 +86,8 @@ From the MSR formalism analysis:
 - `docs/stochastic_implementation.md` - This documentation
 
 ### Modified:
-- `src/MSFTEngine.h` - Added stepStochastic() method and pipeline members
-- `src/MSFTEngine.cpp` - Implemented stepStochastic() orchestration
+- `src/SMFTEngine.h` - Added stepStochastic() method and pipeline members
+- `src/SMFTEngine.cpp` - Implemented stepStochastic() orchestration
 - `CMakeLists.txt` - Added test_stochastic_particle target
 
 ---

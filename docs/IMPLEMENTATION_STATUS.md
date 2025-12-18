@@ -1,4 +1,4 @@
-# MSFT Experimental Implementation Status
+# SMFT Experimental Implementation Status
 
 **Date**: 2025-12-16 23:40 UTC
 **Status**: Stochastic Pipeline Integrated, Ready for Experiments
@@ -18,7 +18,7 @@
   - **Compiled**: `build/shaders/smft/kuramoto_stochastic.comp.spv` ✓
 
 **Code Implementation**:
-- [x] `MSFTEngine::stepStochastic()` in MSFTEngine.cpp
+- [x] `SMFTEngine::stepStochastic()` in SMFTEngine.cpp
   - Placeholder implementation (falls back to deterministic)
   - Ready for pipeline integration
   - **Compiles**: Yes ✓
@@ -48,9 +48,9 @@
 - [x] `shaders/smft/spinor_feedback.comp` - Feedback mechanism (PRE-EXISTING)
 
 **Code Implementation**:
-- [ ] `MSFTEngine::initializeDiracField()` - NOT YET IMPLEMENTED
-- [ ] `MSFTEngine::stepWithDirac()` - NOT YET IMPLEMENTED
-- [ ] `MSFTEngine::getDiracDensity()` - NOT YET IMPLEMENTED
+- [ ] `SMFTEngine::initializeDiracField()` - NOT YET IMPLEMENTED
+- [ ] `SMFTEngine::stepWithDirac()` - NOT YET IMPLEMENTED
+- [ ] `SMFTEngine::getDiracDensity()` - NOT YET IMPLEMENTED
 
 **Test Drivers**:
 - [x] `test/test_dirac_coupling.cpp` - 5-criteria validation
@@ -108,7 +108,7 @@ build/bin/
 **Status**: RESOLVED (2025-12-16 23:40 UTC)
 
 **What was done**:
-1. ✅ Added `_kuramoto_stochastic_pipeline` member to MSFTEngine.h
+1. ✅ Added `_kuramoto_stochastic_pipeline` member to SMFTEngine.h
 2. ✅ Loaded `kuramoto_stochastic.comp.spv` in `createPipelines()`
 3. ✅ Implemented full `stepStochastic()` with proper GPU dispatch
 4. ✅ Pass sigma + timestep via push constants
@@ -152,7 +152,7 @@ build/bin/
 ### Immediate (1-2 hours)
 
 1. **Integrate stochastic pipeline**
-   - Location: `MSFTEngine::createPipelines()`
+   - Location: `SMFTEngine::createPipelines()`
    - Load `kuramoto_stochastic.comp.spv`
    - Add pipeline handle: `VkPipeline _kuramoto_stochastic_pipeline`
 
@@ -226,7 +226,7 @@ build/bin/
 ### 1. Stochastic Pipeline Integration ✅
 
 **What was implemented**:
-- Added `_kuramoto_stochastic_pipeline` member to MSFTEngine.h
+- Added `_kuramoto_stochastic_pipeline` member to SMFTEngine.h
 - Created full `stepStochastic()` implementation with GPU dispatch
 - Compiled `kuramoto_stochastic.comp` shader (12 KB SPIR-V)
 - Integrated shader loading in `createPipelines()`
@@ -239,8 +239,8 @@ build/bin/
 
 **Key Code Changes**:
 ```cpp
-// MSFTEngine.cpp:675-830
-void MSFTEngine::stepStochastic(float dt, float K, float sigma) {
+// SMFTEngine.cpp:675-830
+void SMFTEngine::stepStochastic(float dt, float K, float sigma) {
     // Full Euler-Maruyama integration
     // Dispatches kuramoto_stochastic pipeline with proper push constants
     // Includes sync_field and gravity_field dispatch
@@ -323,7 +323,7 @@ build/output/
 ### For User
 
 1. **Run existing deterministic tests first**
-   - `./bin/test_msft_compute_only`
+   - `./bin/test_smft_compute_only`
    - Verify baseline GPU compute works
 
 2. **Implement stochastic pipeline integration**

@@ -10,7 +10,7 @@ Fixed 4 command injection vulnerabilities by replacing `system()` calls with `st
 - Added `#include <filesystem>` header
 - Removed `#include <sys/stat.h>` header (no longer needed)
 
-### 2. `test/test_msft_headless.cpp`
+### 2. `test/test_smft_headless.cpp`
 - **Line 343**: Replaced `system("mkdir -p build/output/headless")` with `std::filesystem::create_directories("output")`
 - Added `#include <filesystem>` header
 
@@ -41,7 +41,7 @@ Fixed 4 command injection vulnerabilities by replacing `system()` calls with `st
 ## Verification
 ```bash
 # Verify no system() calls remain
-grep -n "system(" test/test_stochastic_cpu.cpp test/test_msft_headless.cpp \
+grep -n "system(" test/test_stochastic_cpu.cpp test/test_smft_headless.cpp \
                    test/test_noise_sweep_corrected.cpp test/test_output_structure.cpp
 # Should return no results
 

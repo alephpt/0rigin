@@ -1,4 +1,4 @@
-# Phase 2 Scenario 1: Final Report - MSFT-Dirac Coupling Validation
+# Phase 2 Scenario 1: Final Report - SMFT-Dirac Coupling Validation
 
 **Date**: 2025-12-17
 **Status**: ✅ COMPLETE (with corrected interpretation)
@@ -8,9 +8,9 @@
 
 ## Executive Summary
 
-**Goal**: Test MSFT prediction that Dirac particles localize in synchronization defects
+**Goal**: Test SMFT prediction that Dirac particles localize in synchronization defects
 
-**Result**: MSFT-Dirac coupling mechanism validated. Particles interact with defects via mass field m(x,y) = Δ·R(x,y). Observed behavior is **resonant scattering** (E > 0), not true quantum binding (E < 0).
+**Result**: SMFT-Dirac coupling mechanism validated. Particles interact with defects via mass field m(x,y) = Δ·R(x,y). Observed behavior is **resonant scattering** (E > 0), not true quantum binding (E < 0).
 
 **Critical Bug Fixed**: Energy diagnostic was using stale k-space data, causing energy explosion with strong coupling. Fix implemented and verified.
 
@@ -23,7 +23,7 @@
 ### System Configuration
 - **Grid**: 128×128 points, periodic boundary conditions
 - **Kuramoto Parameters**: K=1.0, γ=0.1, ω_defect=1.5 (strong mismatch)
-- **MSFT Coupling**: Δ=0.5, m(x,y) = Δ·R(x,y)
+- **SMFT Coupling**: Δ=0.5, m(x,y) = Δ·R(x,y)
 - **Dirac Initialization**: Gaussian wavepacket σ=5 at (48, 64)
 - **Defect Location**: (64, 64), radius=15 grid points
 - **Evolution**: 50,000 timesteps (500 time units), dt=0.01
@@ -107,7 +107,7 @@ Step 5000: E=0.7051, dE/E=4.14e-02
 
 ## III. Physics Results
 
-### A. MSFT Coupling Validated ✅
+### A. SMFT Coupling Validated ✅
 
 **Evidence**:
 1. Mass field m(x,y) = Δ·R(x,y) correctly computed from Kuramoto order parameter
@@ -116,7 +116,7 @@ Step 5000: E=0.7051, dE/E=4.14e-02
 4. Strong defects (ΔR up to 0.84) successfully created and maintained
 5. Stable long-time evolution (50k steps, <1% norm drift)
 
-**Conclusion**: MSFT-Dirac coupling mechanism works as designed.
+**Conclusion**: SMFT-Dirac coupling mechanism works as designed.
 
 ### B. Resonant Scattering Observed (Not Binding) ⚠️
 
@@ -180,7 +180,7 @@ E > 0 → UNBOUND (scattering regime)
 
 ### ✅ VALIDATED Claims
 
-1. **MSFT-Dirac coupling works**: Mass field m(x,y) = Δ·R(x,y) correctly drives particle evolution
+1. **SMFT-Dirac coupling works**: Mass field m(x,y) = Δ·R(x,y) correctly drives particle evolution
 2. **Particles interact with defects**: Trajectory shows clear response to R field structure
 3. **Strong defects achievable**: ΔR ≥ 0.6 created via natural frequency heterogeneity
 4. **Stable long-time evolution**: 50,000 timesteps with <1% drift, no numerical breakdown
@@ -189,23 +189,23 @@ E > 0 → UNBOUND (scattering regime)
 
 ### ❌ CANNOT Claim (Invalid)
 
-1. ~~"Particles are bound in MSFT defects"~~ → E > 0 proves unbound
+1. ~~"Particles are bound in SMFT defects"~~ → E > 0 proves unbound
 2. ~~"Quantum confinement demonstrated"~~ → Scattering, not confinement
 3. ~~"Particles localize in low-R regions"~~ → Temporary, not permanent
 4. ~~"Binding energy E < 0 observed"~~ → E > 0 measured
 
 ### ✓ CORRECTED Claims
 
-1. **"Particles scatter resonantly from MSFT defects"** → E > 0, long-lived resonance
-2. **"MSFT coupling creates effective potential"** → V = Δ·R(x,y), demonstrated
+1. **"Particles scatter resonantly from SMFT defects"** → E > 0, long-lived resonance
+2. **"SMFT coupling creates effective potential"** → V = Δ·R(x,y), demonstrated
 3. **"Defects modify particle trajectories"** → Clear interaction observed
 4. **"Transient localization occurs"** → Scattering delay produces temporary confinement
 
 ---
 
-## VI. Comparison to MSFT Predictions
+## VI. Comparison to SMFT Predictions
 
-### MSFT Theory Predicts
+### SMFT Theory Predicts
 - Particles experience force F = -<β>·∇m = -<β>·Δ·∇R
 - Particles attracted to regions of low R (defects)
 - Effective potential well created by spatial R variation
@@ -217,7 +217,7 @@ E > 0 → UNBOUND (scattering regime)
 - ⚠️ **Potential well too shallow** for binding (E > 0)
 
 ### Interpretation
-- **MSFT mechanism is correct** (coupling works as predicted)
+- **SMFT mechanism is correct** (coupling works as predicted)
 - **Parameter regime is scattering** (Δ too small or defect too weak for E < 0)
 - **To achieve binding**: Need stronger coupling (larger Δ) or deeper defects (larger ΔR)
 
@@ -252,7 +252,7 @@ E > 0 → UNBOUND (scattering regime)
 1. **Test framework consolidation** (user-identified issue)
 2. **Energy diagnostic optimization** (k-space caching)
 3. **Deterministic defect creation** (eliminate random seed dependency)
-4. **GPU implementation** (MSFTEngine currently requires Nova/Vulkan)
+4. **GPU implementation** (SMFTEngine currently requires Nova/Vulkan)
 
 ---
 
@@ -260,7 +260,7 @@ E > 0 → UNBOUND (scattering regime)
 
 ### Primary Findings
 
-1. **MSFT-Dirac coupling mechanism validated** ✅
+1. **SMFT-Dirac coupling mechanism validated** ✅
    - Spatial mass field m(x,y) = Δ·R(x,y) correctly couples to Dirac evolution
    - Force law F = -<β>·Δ·∇R drives particle motion as predicted
 
@@ -277,17 +277,17 @@ E > 0 → UNBOUND (scattering regime)
 ### Scientific Significance
 
 This work demonstrates:
-- **First implementation** of MSFT-Dirac coupling in 2D quantum field simulation
+- **First implementation** of SMFT-Dirac coupling in 2D quantum field simulation
 - **Proof of principle** for synchronization-mediated particle interactions
 - **Numerical validation** of split-operator method for coupled Kuramoto-Dirac system
-- **Scattering resonance** as emergent phenomenon in MSFT framework
+- **Scattering resonance** as emergent phenomenon in SMFT framework
 
 ### Recommendation
 
 **Proceed to Phase 2 Scenarios 2 & 3**
 
 **Rationale**:
-- Scenario 1 goal achieved: MSFT coupling demonstrated
+- Scenario 1 goal achieved: SMFT coupling demonstrated
 - Scattering is scientifically valid (not a failure)
 - Scenarios 2 & 3 may reveal different physics (traveling waves, defect mergers)
 - Complete Phase 2 with honest, comprehensive results
@@ -343,5 +343,5 @@ This work demonstrates:
 ---
 
 *Document prepared: 2025-12-17*
-*Phase 2 Scenario 1: MSFT-Dirac Coupling Validation*
+*Phase 2 Scenario 1: SMFT-Dirac Coupling Validation*
 *Energy diagnostic bug FIXED - Results reinterpreted correctly*

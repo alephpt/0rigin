@@ -36,7 +36,7 @@ This measures **spatial average of local synchronization**.
 The shader (`sync_field.comp`) correctly computes **LOCAL** R(x,y) at each grid point:
 - R_local(x,y) = |⟨e^(iθ)⟩_neighborhood|
 - Averages over a small neighborhood (radius=1, 9 oscillators)
-- This is correct for MSFT (need spatial structure for defects)
+- This is correct for SMFT (need spatial structure for defects)
 
 But the test computed `mean(R_local)` instead of computing R_global from raw phases!
 
@@ -102,7 +102,7 @@ float compute_global_R(const std::vector<float>& theta_field) {
 ### 2. Updated measurement loop
 Now measures **BOTH**:
 - **R_global:** For Kuramoto falsification test (what we need)
-- **⟨R_local⟩:** For MSFT spatial structure analysis (also useful)
+- **⟨R_local⟩:** For SMFT spatial structure analysis (also useful)
 
 ### 3. Added warmup verification
 After 5000-step warmup, code now prints:
@@ -119,7 +119,7 @@ sigma,R_global_mean,R_global_std,R_local_mean,R_local_std,L_mean,L_std,phase_var
 
 ### 5. Separate timeseries files
 - `R_global_timeseries.dat` - For falsification analysis
-- `R_local_timeseries.dat` - For MSFT defect analysis
+- `R_local_timeseries.dat` - For SMFT defect analysis
 
 ### 6. Added damping to stochastic shader
 **Shader change:**
@@ -271,7 +271,7 @@ From `immediate.md`:
    - Added `damping` to push constants
    - Added `-params.damping * sin(theta_i)` to drift
 
-3. **`src/MSFTEngine.cpp`**
+3. **`src/SMFTEngine.cpp`**
    - Updated `StochasticPushConstants` structure
    - Added `pushConstants.damping = 0.1f`
 

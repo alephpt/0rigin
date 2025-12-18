@@ -4,7 +4,7 @@ bin/test_scenario1_defect: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_scenario1_defect.dir/test/test_scenario1_defect.cpp.o \
   CMakeFiles/test_scenario1_defect.dir/src/DiracEvolution.cpp.o \
-  CMakeFiles/test_scenario1_defect.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_scenario1_defect.dir/src/SMFTCommon.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
@@ -45,7 +45,7 @@ CMakeFiles/test_scenario1_defect.dir/test/test_scenario1_defect.cpp.o:
 
 CMakeFiles/test_scenario1_defect.dir/src/DiracEvolution.cpp.o:
 
-CMakeFiles/test_scenario1_defect.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_scenario1_defect.dir/src/SMFTCommon.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so:
 

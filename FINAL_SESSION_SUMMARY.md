@@ -26,11 +26,11 @@ Executed comprehensive deep analysis, resolved critical security/stability issue
 
 ### Commit 2: 120b5fb - God Object Decomposition (Phase 1)
 **Extracted 3 specialized components**:
-- MSFTPipelineFactory (378 lines) - Pipeline creation
-- MSFTBufferManager (288 lines) - Memory management
-- MSFTCompute (350 lines) - Compute dispatch
+- SMFTPipelineFactory (378 lines) - Pipeline creation
+- SMFTBufferManager (288 lines) - Memory management
+- SMFTCompute (350 lines) - Compute dispatch
 
-**MSFTEngine reduction**: 1608 → 1278 lines (20% reduction)
+**SMFTEngine reduction**: 1608 → 1278 lines (20% reduction)
 
 **Impact**: 
 - createPipelines(): 402→27 lines (93% reduction)
@@ -41,9 +41,9 @@ Executed comprehensive deep analysis, resolved critical security/stability issue
 
 ### Commit 3: d136d46 - God Object Decomposition (Phase 2)
 **Extracted descriptor management**:
-- MSFTDescriptorManager (261 lines) - Vulkan descriptor sets
+- SMFTDescriptorManager (261 lines) - Vulkan descriptor sets
 
-**MSFTEngine reduction**: 1278 → 1077 lines (15.7% reduction)
+**SMFTEngine reduction**: 1278 → 1077 lines (15.7% reduction)
 
 **Total reduction**: 1608 → 1077 lines (33% overall reduction)
 
@@ -91,7 +91,7 @@ Executed comprehensive deep analysis, resolved critical security/stability issue
 
 | Metric | Before | After | Improvement |
 |--------|--------|-------|-------------|
-| MSFTEngine.cpp | 1,608 lines | 1,077 lines | 33% reduction |
+| SMFTEngine.cpp | 1,608 lines | 1,077 lines | 33% reduction |
 | createPipelines() | 402 lines | Removed (factory) | 93% reduction |
 | step() | 192 lines | 109 lines | 43% reduction |
 | stepStochastic() | 208 lines | 148 lines | 29% reduction |
@@ -111,11 +111,11 @@ Executed comprehensive deep analysis, resolved critical security/stability issue
 
 | Component | Responsibility | Lines | Status |
 |-----------|---------------|-------|--------|
-| MSFTPipelineFactory | Pipeline creation | 378 | ✅ <500 |
-| MSFTBufferManager | Memory management | 288 | ✅ <500 |
-| MSFTCompute | Compute dispatch | 350 | ✅ <500 |
-| MSFTDescriptorManager | Descriptor sets | 261 | ✅ <500 |
-| MSFTEngine | Coordination | 1,077 | Still over but much better |
+| SMFTPipelineFactory | Pipeline creation | 378 | ✅ <500 |
+| SMFTBufferManager | Memory management | 288 | ✅ <500 |
+| SMFTCompute | Compute dispatch | 350 | ✅ <500 |
+| SMFTDescriptorManager | Descriptor sets | 261 | ✅ <500 |
+| SMFTEngine | Coordination | 1,077 | Still over but much better |
 
 ---
 
@@ -123,18 +123,18 @@ Executed comprehensive deep analysis, resolved critical security/stability issue
 
 ### Before (God Object):
 ```
-MSFTEngine (1608 lines)
+SMFTEngine (1608 lines)
 ├─ Everything (pipeline, buffer, compute, descriptors)
 └─ Impossible to maintain/test
 ```
 
 ### After (Clean Architecture):
 ```
-MSFTEngine (1077 lines) - Coordinator
-├─ MSFTPipelineFactory (378) - Pipeline creation
-├─ MSFTBufferManager (288) - Memory management  
-├─ MSFTCompute (350) - Compute dispatch
-├─ MSFTDescriptorManager (261) - Descriptor sets
+SMFTEngine (1077 lines) - Coordinator
+├─ SMFTPipelineFactory (378) - Pipeline creation
+├─ SMFTBufferManager (288) - Memory management  
+├─ SMFTCompute (350) - Compute dispatch
+├─ SMFTDescriptorManager (261) - Descriptor sets
 └─ Dirac methods (CPU-only)
 ```
 
@@ -252,7 +252,7 @@ Since GPU shaders exceed timeout budget, implemented CPU-based Dirac evolution:
 
 ### Medium Priority
 4. **Further refactoring** (optional)
-   - MSFTEngine still 1077 lines (215% over)
+   - SMFTEngine still 1077 lines (215% over)
    - Could extract more (but diminishing returns)
 
 5. **Full 4-component Dirac spinor** (research)
@@ -322,8 +322,8 @@ Since GPU shaders exceed timeout budget, implemented CPU-based Dirac evolution:
 ```
 f8b464d feat: Implement Dirac field methods with CPU-only execution
 00066b8 fix: Prevent GPU timeout by using simplified shaders only
-d136d46 refactor: Extract MSFTDescriptorManager to further reduce God Object
-120b5fb refactor: Decompose MSFTEngine God Object into specialized components
+d136d46 refactor: Extract SMFTDescriptorManager to further reduce God Object
+120b5fb refactor: Decompose SMFTEngine God Object into specialized components
 a039076 fix: Critical security and stability improvements
 ```
 

@@ -86,19 +86,19 @@ CMakeFiles/test_energy_fix.dir/test/test_energy_fix.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_energy_fix.dir/test/test_energy_fix.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_energy_fix.cpp -o CMakeFiles/test_energy_fix.dir/test/test_energy_fix.cpp.s
 
-CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_energy_fix.dir/flags.make
-CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o: /home/persist/neotec/0rigin/src/MSFTCommon.cpp
-CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_energy_fix.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o -MF CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o.d -o CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp
+CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_energy_fix.dir/flags.make
+CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o: /home/persist/neotec/0rigin/src/SMFTCommon.cpp
+CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_energy_fix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o -MF CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o.d -o CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp
 
-CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTCommon.cpp > CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.i
+CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCommon.cpp > CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.i
 
-CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTCommon.cpp -o CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.s
+CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCommon.cpp -o CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.s
 
 CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.o: CMakeFiles/test_energy_fix.dir/flags.make
 CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.o: /home/persist/neotec/0rigin/src/DiracEvolution.cpp
@@ -117,14 +117,14 @@ CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.s: cmake_force
 # Object files for target test_energy_fix
 test_energy_fix_OBJECTS = \
 "CMakeFiles/test_energy_fix.dir/test/test_energy_fix.cpp.o" \
-"CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o" \
+"CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o" \
 "CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.o"
 
 # External object files for target test_energy_fix
 test_energy_fix_EXTERNAL_OBJECTS =
 
 bin/test_energy_fix: CMakeFiles/test_energy_fix.dir/test/test_energy_fix.cpp.o
-bin/test_energy_fix: CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o
+bin/test_energy_fix: CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o
 bin/test_energy_fix: CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.o
 bin/test_energy_fix: CMakeFiles/test_energy_fix.dir/build.make
 bin/test_energy_fix: CMakeFiles/test_energy_fix.dir/compiler_depend.ts

@@ -5,7 +5,7 @@
 ### 1. Implementation (src/)
 ✅ Created `DiracEvolution.{h,cpp}` with full 4-component Dirac equation
 ✅ FFTW3-based split-operator method (Strang splitting: K/2 - V - K/2)
-✅ Integrated into `MSFTEngine` class
+✅ Integrated into `SMFTEngine` class
 ✅ Updated all CMakeLists.txt targets
 
 ### 2. Physics Validation (test/)
@@ -22,7 +22,7 @@
 
 ## Physics Results
 
-### MSFT Mechanism Validated
+### SMFT Mechanism Validated
 ```
 Initial wavepacket: (32, 32)
 Final wavepacket:   (38, 32) 
@@ -32,7 +32,7 @@ Mass field: m(x) = 0.5(1 + 0.5sin(x/10))
 Particle follows gradient: ∂m/∂x > 0 at x=32 → moves +x ✓
 ```
 
-**This is the core MSFT physics:**
+**This is the core SMFT physics:**
 - Synchronization field R(x) → Mass field m(x) = Δ·R(x)
 - Dirac particle couples to m(x) via β·m(x) term
 - Particle density |Ψ|² localizes in high-R (high-mass) regions
@@ -51,8 +51,8 @@ Particle follows gradient: ∂m/∂x > 0 at x=32 → moves +x ✓
 ### Core Implementation
 - `src/DiracEvolution.h` (NEW) - 63 lines
 - `src/DiracEvolution.cpp` (NEW) - 278 lines
-- `src/MSFTEngine.h` (MODIFIED) - Added DiracEvolution pointer
-- `src/MSFTEngine.cpp` (MODIFIED) - Replaced Euler with split-operator
+- `src/SMFTEngine.h` (MODIFIED) - Added DiracEvolution pointer
+- `src/SMFTEngine.cpp` (MODIFIED) - Replaced Euler with split-operator
 - `CMakeLists.txt` (MODIFIED) - Added FFTW3 dependency
 
 ### Validation
@@ -99,7 +99,7 @@ The split-operator Dirac evolution is:
 3. GPU acceleration (cuFFT) for larger grids
 
 ### Not Needed:
-- Current implementation handles all MSFT physics requirements
+- Current implementation handles all SMFT physics requirements
 - Single precision sufficient (mesh spacing dominates error)
 - 64×64 to 256×256 grids run efficiently on CPU
 
@@ -113,4 +113,4 @@ The split-operator Dirac evolution is:
 ---
 
 **Task Complete**: Split-operator method successfully replaces Euler/RK4 ✅
-**Status**: Production ready, physics validated, MSFT mechanism confirmed ✅
+**Status**: Production ready, physics validated, SMFT mechanism confirmed ✅

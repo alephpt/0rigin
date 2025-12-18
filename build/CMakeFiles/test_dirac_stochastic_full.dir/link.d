@@ -3,7 +3,7 @@ bin/test_dirac_stochastic_full: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.o \
-  CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++fs.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
@@ -42,7 +42,7 @@ bin/test_dirac_stochastic_full: \
 
 CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.o:
 
-CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a:
 

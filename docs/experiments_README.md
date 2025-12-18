@@ -1,12 +1,12 @@
-# MSFT Experimental Documentation
+# SMFT Experimental Documentation
 
-This directory contains comprehensive documentation for the Mass Synchronization Field Theory (MSFT) experimental validation campaigns.
+This directory contains comprehensive documentation for the Synchronization Mass Field Theory (SMFT) experimental validation campaigns.
 
 ---
 
 ## 📋 Quick Start
 
-**Goal**: Validate MSFT theory through two major experiments:
+**Goal**: Validate SMFT theory through two major experiments:
 1. **Noise Sweep** - Determine if theory is fundamentally deterministic or stochastic
 2. **Dirac Coupling** - Test if particles emerge from vacuum defects
 
@@ -43,10 +43,10 @@ This directory contains comprehensive documentation for the Mass Synchronization
 ### ⏳ NEXT STEPS
 
 **Implementation** (1-3 days):
-- [ ] MSFTEngine::stepStochastic() in MSFTEngine.cpp
-- [ ] MSFTEngine::initializeDiracField()
-- [ ] MSFTEngine::stepWithDirac()
-- [ ] MSFTEngine::getDiracDensity()
+- [ ] SMFTEngine::stepStochastic() in SMFTEngine.cpp
+- [ ] SMFTEngine::initializeDiracField()
+- [ ] SMFTEngine::stepWithDirac()
+- [ ] SMFTEngine::getDiracDensity()
 - [ ] Compile stochastic shader
 
 **Verification** (Week 1):

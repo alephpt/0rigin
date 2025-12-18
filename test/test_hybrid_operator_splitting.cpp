@@ -3,7 +3,7 @@
  * Actually initializes Nova, creates engine, and runs operator splitting
  */
 
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include <iostream>
 #include <cmath>
 #include <random>
@@ -27,8 +27,8 @@ int main() {
 
     std::cout << "\n✓ Nova initialized successfully" << std::endl;
 
-    // Create MSFT engine
-    MSFTEngine engine(&nova);
+    // Create SMFT engine
+    SMFTEngine engine(&nova);
 
     // Initialize with small grid for testing
     uint32_t grid_size = 64;

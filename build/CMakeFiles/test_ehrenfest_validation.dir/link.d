@@ -4,7 +4,7 @@ bin/test_ehrenfest_validation: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_ehrenfest_validation.dir/test/test_ehrenfest_validation.cpp.o \
   CMakeFiles/test_ehrenfest_validation.dir/src/DiracEvolution.cpp.o \
-  CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
@@ -45,7 +45,7 @@ CMakeFiles/test_ehrenfest_validation.dir/test/test_ehrenfest_validation.cpp.o:
 
 CMakeFiles/test_ehrenfest_validation.dir/src/DiracEvolution.cpp.o:
 
-CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so:
 

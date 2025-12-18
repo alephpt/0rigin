@@ -143,30 +143,30 @@ imgui/fast:
 .PHONY : imgui/fast
 
 #=============================================================================
-# Target rules for targets named MSFT
+# Target rules for targets named SMFT
 
 # Build rule for target.
-MSFT: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MSFT
-.PHONY : MSFT
+SMFT: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SMFT
+.PHONY : SMFT
 
 # fast build rule for target.
-MSFT/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/build
-.PHONY : MSFT/fast
+SMFT/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/build
+.PHONY : SMFT/fast
 
 #=============================================================================
-# Target rules for targets named test_msft_gpu
+# Target rules for targets named test_smft_gpu
 
 # Build rule for target.
-test_msft_gpu: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_msft_gpu
-.PHONY : test_msft_gpu
+test_smft_gpu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_smft_gpu
+.PHONY : test_smft_gpu
 
 # fast build rule for target.
-test_msft_gpu/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/build
-.PHONY : test_msft_gpu/fast
+test_smft_gpu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/build
+.PHONY : test_smft_gpu/fast
 
 #=============================================================================
 # Target rules for targets named test_descriptor_bindings
@@ -937,7 +937,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -945,7 +945,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -953,7 +953,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 src/DiracEvolution.o: src/DiracEvolution.cpp.o
@@ -961,8 +961,8 @@ src/DiracEvolution.o: src/DiracEvolution.cpp.o
 
 # target to build an object file
 src/DiracEvolution.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/DiracEvolution.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/DiracEvolution.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/DiracEvolution.cpp.o
@@ -981,8 +981,8 @@ src/DiracEvolution.i: src/DiracEvolution.cpp.i
 
 # target to preprocess a source file
 src/DiracEvolution.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/DiracEvolution.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/DiracEvolution.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/DiracEvolution.cpp.i
@@ -1001,8 +1001,8 @@ src/DiracEvolution.s: src/DiracEvolution.cpp.s
 
 # target to generate assembly for a file
 src/DiracEvolution.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/DiracEvolution.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/DiracEvolution.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/DiracEvolution.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/DiracEvolution.cpp.s
@@ -1016,330 +1016,333 @@ src/DiracEvolution.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.s
 .PHONY : src/DiracEvolution.cpp.s
 
-src/MSFT.o: src/MSFT.cpp.o
-.PHONY : src/MSFT.o
+src/SMFT.o: src/SMFT.cpp.o
+.PHONY : src/SMFT.o
 
 # target to build an object file
-src/MSFT.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFT.cpp.o
-.PHONY : src/MSFT.cpp.o
+src/SMFT.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFT.cpp.o
+.PHONY : src/SMFT.cpp.o
 
-src/MSFT.i: src/MSFT.cpp.i
-.PHONY : src/MSFT.i
+src/SMFT.i: src/SMFT.cpp.i
+.PHONY : src/SMFT.i
 
 # target to preprocess a source file
-src/MSFT.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFT.cpp.i
-.PHONY : src/MSFT.cpp.i
+src/SMFT.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFT.cpp.i
+.PHONY : src/SMFT.cpp.i
 
-src/MSFT.s: src/MSFT.cpp.s
-.PHONY : src/MSFT.s
+src/SMFT.s: src/SMFT.cpp.s
+.PHONY : src/SMFT.s
 
 # target to generate assembly for a file
-src/MSFT.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFT.cpp.s
-.PHONY : src/MSFT.cpp.s
+src/SMFT.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFT.cpp.s
+.PHONY : src/SMFT.cpp.s
 
-src/MSFTBufferManager.o: src/MSFTBufferManager.cpp.o
-.PHONY : src/MSFTBufferManager.o
+src/SMFTBufferManager.o: src/SMFTBufferManager.cpp.o
+.PHONY : src/SMFTBufferManager.o
 
 # target to build an object file
-src/MSFTBufferManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o
-.PHONY : src/MSFTBufferManager.cpp.o
+src/SMFTBufferManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o
+.PHONY : src/SMFTBufferManager.cpp.o
 
-src/MSFTBufferManager.i: src/MSFTBufferManager.cpp.i
-.PHONY : src/MSFTBufferManager.i
+src/SMFTBufferManager.i: src/SMFTBufferManager.cpp.i
+.PHONY : src/SMFTBufferManager.i
 
 # target to preprocess a source file
-src/MSFTBufferManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.i
-.PHONY : src/MSFTBufferManager.cpp.i
+src/SMFTBufferManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.i
+.PHONY : src/SMFTBufferManager.cpp.i
 
-src/MSFTBufferManager.s: src/MSFTBufferManager.cpp.s
-.PHONY : src/MSFTBufferManager.s
+src/SMFTBufferManager.s: src/SMFTBufferManager.cpp.s
+.PHONY : src/SMFTBufferManager.s
 
 # target to generate assembly for a file
-src/MSFTBufferManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.s
-.PHONY : src/MSFTBufferManager.cpp.s
+src/SMFTBufferManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.s
+.PHONY : src/SMFTBufferManager.cpp.s
 
-src/MSFTCommon.o: src/MSFTCommon.cpp.o
-.PHONY : src/MSFTCommon.o
+src/SMFTCommon.o: src/SMFTCommon.cpp.o
+.PHONY : src/SMFTCommon.o
 
 # target to build an object file
-src/MSFTCommon.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu.dir/build.make CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_stochastic_full.dir/build.make CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scenario1_defect.dir/build.make CMakeFiles/test_scenario1_defect.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ehrenfest_validation.dir/build.make CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_find_critical_sigma.dir/build.make CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_corrected.dir/build.make CMakeFiles/test_noise_sweep_corrected.dir/src/MSFTCommon.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_cpu.dir/build.make CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o
-.PHONY : src/MSFTCommon.cpp.o
+src/SMFTCommon.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_full.dir/build.make CMakeFiles/test_operator_splitting_full.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu.dir/build.make CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_stochastic_full.dir/build.make CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scenario1_defect.dir/build.make CMakeFiles/test_scenario1_defect.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ehrenfest_validation.dir/build.make CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_find_critical_sigma.dir/build.make CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_corrected.dir/build.make CMakeFiles/test_noise_sweep_corrected.dir/src/SMFTCommon.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_cpu.dir/build.make CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o
+.PHONY : src/SMFTCommon.cpp.o
 
-src/MSFTCommon.i: src/MSFTCommon.cpp.i
-.PHONY : src/MSFTCommon.i
+src/SMFTCommon.i: src/SMFTCommon.cpp.i
+.PHONY : src/SMFTCommon.i
 
 # target to preprocess a source file
-src/MSFTCommon.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu.dir/build.make CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_stochastic_full.dir/build.make CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scenario1_defect.dir/build.make CMakeFiles/test_scenario1_defect.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ehrenfest_validation.dir/build.make CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_find_critical_sigma.dir/build.make CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_corrected.dir/build.make CMakeFiles/test_noise_sweep_corrected.dir/src/MSFTCommon.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_cpu.dir/build.make CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.i
-.PHONY : src/MSFTCommon.cpp.i
+src/SMFTCommon.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_full.dir/build.make CMakeFiles/test_operator_splitting_full.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu.dir/build.make CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_stochastic_full.dir/build.make CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scenario1_defect.dir/build.make CMakeFiles/test_scenario1_defect.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ehrenfest_validation.dir/build.make CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_find_critical_sigma.dir/build.make CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_corrected.dir/build.make CMakeFiles/test_noise_sweep_corrected.dir/src/SMFTCommon.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_cpu.dir/build.make CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.i
+.PHONY : src/SMFTCommon.cpp.i
 
-src/MSFTCommon.s: src/MSFTCommon.cpp.s
-.PHONY : src/MSFTCommon.s
+src/SMFTCommon.s: src/SMFTCommon.cpp.s
+.PHONY : src/SMFTCommon.s
 
 # target to generate assembly for a file
-src/MSFTCommon.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu.dir/build.make CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_stochastic_full.dir/build.make CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scenario1_defect.dir/build.make CMakeFiles/test_scenario1_defect.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ehrenfest_validation.dir/build.make CMakeFiles/test_ehrenfest_validation.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_find_critical_sigma.dir/build.make CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_corrected.dir/build.make CMakeFiles/test_noise_sweep_corrected.dir/src/MSFTCommon.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_cpu.dir/build.make CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.s
-.PHONY : src/MSFTCommon.cpp.s
+src/SMFTCommon.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_full.dir/build.make CMakeFiles/test_operator_splitting_full.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu.dir/build.make CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_stochastic_full.dir/build.make CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scenario1_defect.dir/build.make CMakeFiles/test_scenario1_defect.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ehrenfest_validation.dir/build.make CMakeFiles/test_ehrenfest_validation.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_find_critical_sigma.dir/build.make CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_corrected.dir/build.make CMakeFiles/test_noise_sweep_corrected.dir/src/SMFTCommon.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_cpu.dir/build.make CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.s
+.PHONY : src/SMFTCommon.cpp.s
 
-src/MSFTCompute.o: src/MSFTCompute.cpp.o
-.PHONY : src/MSFTCompute.o
+src/SMFTCompute.o: src/SMFTCompute.cpp.o
+.PHONY : src/SMFTCompute.o
 
 # target to build an object file
-src/MSFTCompute.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o
-.PHONY : src/MSFTCompute.cpp.o
+src/SMFTCompute.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o
+.PHONY : src/SMFTCompute.cpp.o
 
-src/MSFTCompute.i: src/MSFTCompute.cpp.i
-.PHONY : src/MSFTCompute.i
+src/SMFTCompute.i: src/SMFTCompute.cpp.i
+.PHONY : src/SMFTCompute.i
 
 # target to preprocess a source file
-src/MSFTCompute.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.i
-.PHONY : src/MSFTCompute.cpp.i
+src/SMFTCompute.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.i
+.PHONY : src/SMFTCompute.cpp.i
 
-src/MSFTCompute.s: src/MSFTCompute.cpp.s
-.PHONY : src/MSFTCompute.s
+src/SMFTCompute.s: src/SMFTCompute.cpp.s
+.PHONY : src/SMFTCompute.s
 
 # target to generate assembly for a file
-src/MSFTCompute.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.s
-.PHONY : src/MSFTCompute.cpp.s
+src/SMFTCompute.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.s
+.PHONY : src/SMFTCompute.cpp.s
 
-src/MSFTDescriptorManager.o: src/MSFTDescriptorManager.cpp.o
-.PHONY : src/MSFTDescriptorManager.o
+src/SMFTDescriptorManager.o: src/SMFTDescriptorManager.cpp.o
+.PHONY : src/SMFTDescriptorManager.o
 
 # target to build an object file
-src/MSFTDescriptorManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o
-.PHONY : src/MSFTDescriptorManager.cpp.o
+src/SMFTDescriptorManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o
+.PHONY : src/SMFTDescriptorManager.cpp.o
 
-src/MSFTDescriptorManager.i: src/MSFTDescriptorManager.cpp.i
-.PHONY : src/MSFTDescriptorManager.i
+src/SMFTDescriptorManager.i: src/SMFTDescriptorManager.cpp.i
+.PHONY : src/SMFTDescriptorManager.i
 
 # target to preprocess a source file
-src/MSFTDescriptorManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.i
-.PHONY : src/MSFTDescriptorManager.cpp.i
+src/SMFTDescriptorManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.i
+.PHONY : src/SMFTDescriptorManager.cpp.i
 
-src/MSFTDescriptorManager.s: src/MSFTDescriptorManager.cpp.s
-.PHONY : src/MSFTDescriptorManager.s
+src/SMFTDescriptorManager.s: src/SMFTDescriptorManager.cpp.s
+.PHONY : src/SMFTDescriptorManager.s
 
 # target to generate assembly for a file
-src/MSFTDescriptorManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.s
-.PHONY : src/MSFTDescriptorManager.cpp.s
+src/SMFTDescriptorManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.s
+.PHONY : src/SMFTDescriptorManager.cpp.s
 
-src/MSFTEngine.o: src/MSFTEngine.cpp.o
-.PHONY : src/MSFTEngine.o
+src/SMFTEngine.o: src/SMFTEngine.cpp.o
+.PHONY : src/SMFTEngine.o
 
 # target to build an object file
-src/MSFTEngine.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o
-.PHONY : src/MSFTEngine.cpp.o
+src/SMFTEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o
+.PHONY : src/SMFTEngine.cpp.o
 
-src/MSFTEngine.i: src/MSFTEngine.cpp.i
-.PHONY : src/MSFTEngine.i
+src/SMFTEngine.i: src/SMFTEngine.cpp.i
+.PHONY : src/SMFTEngine.i
 
 # target to preprocess a source file
-src/MSFTEngine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.i
-.PHONY : src/MSFTEngine.cpp.i
+src/SMFTEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.i
+.PHONY : src/SMFTEngine.cpp.i
 
-src/MSFTEngine.s: src/MSFTEngine.cpp.s
-.PHONY : src/MSFTEngine.s
+src/SMFTEngine.s: src/SMFTEngine.cpp.s
+.PHONY : src/SMFTEngine.s
 
 # target to generate assembly for a file
-src/MSFTEngine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.s
-.PHONY : src/MSFTEngine.cpp.s
+src/SMFTEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.s
+.PHONY : src/SMFTEngine.cpp.s
 
-src/MSFTPipelineFactory.o: src/MSFTPipelineFactory.cpp.o
-.PHONY : src/MSFTPipelineFactory.o
+src/SMFTPipelineFactory.o: src/SMFTPipelineFactory.cpp.o
+.PHONY : src/SMFTPipelineFactory.o
 
 # target to build an object file
-src/MSFTPipelineFactory.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o
-.PHONY : src/MSFTPipelineFactory.cpp.o
+src/SMFTPipelineFactory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o
+.PHONY : src/SMFTPipelineFactory.cpp.o
 
-src/MSFTPipelineFactory.i: src/MSFTPipelineFactory.cpp.i
-.PHONY : src/MSFTPipelineFactory.i
+src/SMFTPipelineFactory.i: src/SMFTPipelineFactory.cpp.i
+.PHONY : src/SMFTPipelineFactory.i
 
 # target to preprocess a source file
-src/MSFTPipelineFactory.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.i
-.PHONY : src/MSFTPipelineFactory.cpp.i
+src/SMFTPipelineFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.i
+.PHONY : src/SMFTPipelineFactory.cpp.i
 
-src/MSFTPipelineFactory.s: src/MSFTPipelineFactory.cpp.s
-.PHONY : src/MSFTPipelineFactory.s
+src/SMFTPipelineFactory.s: src/SMFTPipelineFactory.cpp.s
+.PHONY : src/SMFTPipelineFactory.s
 
 # target to generate assembly for a file
-src/MSFTPipelineFactory.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/MSFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/MSFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/MSFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/MSFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.s
-.PHONY : src/MSFTPipelineFactory.cpp.s
+src/SMFTPipelineFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_particle.dir/build.make CMakeFiles/test_stochastic_particle.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_gpu_timesync.dir/build.make CMakeFiles/test_dirac_gpu_timesync.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.s
+.PHONY : src/SMFTPipelineFactory.cpp.s
 
 src/output/OutputManager.o: src/output/OutputManager.cpp.o
 .PHONY : src/output/OutputManager.o
 
 # target to build an object file
 src/output/OutputManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/output/OutputManager.cpp.o
 .PHONY : src/output/OutputManager.cpp.o
 
@@ -1348,7 +1351,7 @@ src/output/OutputManager.i: src/output/OutputManager.cpp.i
 
 # target to preprocess a source file
 src/output/OutputManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/output/OutputManager.cpp.i
 .PHONY : src/output/OutputManager.cpp.i
 
@@ -1357,7 +1360,7 @@ src/output/OutputManager.s: src/output/OutputManager.cpp.s
 
 # target to generate assembly for a file
 src/output/OutputManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/output/OutputManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/output/OutputManager.cpp.s
 .PHONY : src/output/OutputManager.cpp.s
 
@@ -1528,30 +1531,6 @@ test/test_hybrid_operator_splitting.s: test/test_hybrid_operator_splitting.cpp.s
 test/test_hybrid_operator_splitting.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/test/test_hybrid_operator_splitting.cpp.s
 .PHONY : test/test_hybrid_operator_splitting.cpp.s
-
-test/test_msft_gpu.o: test/test_msft_gpu.cpp.o
-.PHONY : test/test_msft_gpu.o
-
-# target to build an object file
-test/test_msft_gpu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test/test_msft_gpu.cpp.o
-.PHONY : test/test_msft_gpu.cpp.o
-
-test/test_msft_gpu.i: test/test_msft_gpu.cpp.i
-.PHONY : test/test_msft_gpu.i
-
-# target to preprocess a source file
-test/test_msft_gpu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test/test_msft_gpu.cpp.i
-.PHONY : test/test_msft_gpu.cpp.i
-
-test/test_msft_gpu.s: test/test_msft_gpu.cpp.s
-.PHONY : test/test_msft_gpu.s
-
-# target to generate assembly for a file
-test/test_msft_gpu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test/test_msft_gpu.cpp.s
-.PHONY : test/test_msft_gpu.cpp.s
 
 test/test_noise_sweep.o: test/test_noise_sweep.cpp.o
 .PHONY : test/test_noise_sweep.o
@@ -1745,6 +1724,30 @@ test/test_simple_warmup.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/test/test_simple_warmup.cpp.s
 .PHONY : test/test_simple_warmup.cpp.s
 
+test/test_smft_gpu.o: test/test_smft_gpu.cpp.o
+.PHONY : test/test_smft_gpu.o
+
+# target to build an object file
+test/test_smft_gpu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/test/test_smft_gpu.cpp.o
+.PHONY : test/test_smft_gpu.cpp.o
+
+test/test_smft_gpu.i: test/test_smft_gpu.cpp.i
+.PHONY : test/test_smft_gpu.i
+
+# target to preprocess a source file
+test/test_smft_gpu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/test/test_smft_gpu.cpp.i
+.PHONY : test/test_smft_gpu.cpp.i
+
+test/test_smft_gpu.s: test/test_smft_gpu.cpp.s
+.PHONY : test/test_smft_gpu.s
+
+# target to generate assembly for a file
+test/test_smft_gpu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_gpu.dir/build.make CMakeFiles/test_smft_gpu.dir/test/test_smft_gpu.cpp.s
+.PHONY : test/test_smft_gpu.cpp.s
+
 test/test_split_operator_validation.o: test/test_split_operator_validation.cpp.o
 .PHONY : test/test_split_operator_validation.o
 
@@ -1873,8 +1876,8 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... MSFT"
 	@echo "... Nova"
+	@echo "... SMFT"
 	@echo "... imgui"
 	@echo "... test_descriptor_bindings"
 	@echo "... test_dirac_gpu_timesync"
@@ -1883,7 +1886,6 @@ help:
 	@echo "... test_energy_fix"
 	@echo "... test_find_critical_sigma"
 	@echo "... test_hybrid_operator_splitting"
-	@echo "... test_msft_gpu"
 	@echo "... test_noise_sweep"
 	@echo "... test_noise_sweep_corrected"
 	@echo "... test_noise_sweep_cpu"
@@ -1892,6 +1894,7 @@ help:
 	@echo "... test_operator_splitting_full"
 	@echo "... test_scenario1_defect"
 	@echo "... test_simple_warmup"
+	@echo "... test_smft_gpu"
 	@echo "... test_split_operator_validation"
 	@echo "... test_stochastic_cpu"
 	@echo "... test_stochastic_cpu_migrated"
@@ -1966,27 +1969,27 @@ help:
 	@echo "... src/DiracEvolution.o"
 	@echo "... src/DiracEvolution.i"
 	@echo "... src/DiracEvolution.s"
-	@echo "... src/MSFT.o"
-	@echo "... src/MSFT.i"
-	@echo "... src/MSFT.s"
-	@echo "... src/MSFTBufferManager.o"
-	@echo "... src/MSFTBufferManager.i"
-	@echo "... src/MSFTBufferManager.s"
-	@echo "... src/MSFTCommon.o"
-	@echo "... src/MSFTCommon.i"
-	@echo "... src/MSFTCommon.s"
-	@echo "... src/MSFTCompute.o"
-	@echo "... src/MSFTCompute.i"
-	@echo "... src/MSFTCompute.s"
-	@echo "... src/MSFTDescriptorManager.o"
-	@echo "... src/MSFTDescriptorManager.i"
-	@echo "... src/MSFTDescriptorManager.s"
-	@echo "... src/MSFTEngine.o"
-	@echo "... src/MSFTEngine.i"
-	@echo "... src/MSFTEngine.s"
-	@echo "... src/MSFTPipelineFactory.o"
-	@echo "... src/MSFTPipelineFactory.i"
-	@echo "... src/MSFTPipelineFactory.s"
+	@echo "... src/SMFT.o"
+	@echo "... src/SMFT.i"
+	@echo "... src/SMFT.s"
+	@echo "... src/SMFTBufferManager.o"
+	@echo "... src/SMFTBufferManager.i"
+	@echo "... src/SMFTBufferManager.s"
+	@echo "... src/SMFTCommon.o"
+	@echo "... src/SMFTCommon.i"
+	@echo "... src/SMFTCommon.s"
+	@echo "... src/SMFTCompute.o"
+	@echo "... src/SMFTCompute.i"
+	@echo "... src/SMFTCompute.s"
+	@echo "... src/SMFTDescriptorManager.o"
+	@echo "... src/SMFTDescriptorManager.i"
+	@echo "... src/SMFTDescriptorManager.s"
+	@echo "... src/SMFTEngine.o"
+	@echo "... src/SMFTEngine.i"
+	@echo "... src/SMFTEngine.s"
+	@echo "... src/SMFTPipelineFactory.o"
+	@echo "... src/SMFTPipelineFactory.i"
+	@echo "... src/SMFTPipelineFactory.s"
 	@echo "... src/output/OutputManager.o"
 	@echo "... src/output/OutputManager.i"
 	@echo "... src/output/OutputManager.s"
@@ -2011,9 +2014,6 @@ help:
 	@echo "... test/test_hybrid_operator_splitting.o"
 	@echo "... test/test_hybrid_operator_splitting.i"
 	@echo "... test/test_hybrid_operator_splitting.s"
-	@echo "... test/test_msft_gpu.o"
-	@echo "... test/test_msft_gpu.i"
-	@echo "... test/test_msft_gpu.s"
 	@echo "... test/test_noise_sweep.o"
 	@echo "... test/test_noise_sweep.i"
 	@echo "... test/test_noise_sweep.s"
@@ -2038,6 +2038,9 @@ help:
 	@echo "... test/test_simple_warmup.o"
 	@echo "... test/test_simple_warmup.i"
 	@echo "... test/test_simple_warmup.s"
+	@echo "... test/test_smft_gpu.o"
+	@echo "... test/test_smft_gpu.i"
+	@echo "... test/test_smft_gpu.s"
 	@echo "... test/test_split_operator_validation.o"
 	@echo "... test/test_split_operator_validation.i"
 	@echo "... test/test_split_operator_validation.s"

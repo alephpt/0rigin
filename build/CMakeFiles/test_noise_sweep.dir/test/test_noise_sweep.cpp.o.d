@@ -387,13 +387,13 @@ CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.o: \
  /usr/include/c++/15.2.1/bits/this_thread_sleep.h /usr/include/sys/time.h \
  /usr/include/semaphore.h /usr/include/bits/semaphore.h \
  /usr/include/c++/15.2.1/bits/atomic_futex.h \
- /home/persist/neotec/0rigin/test/../src/MSFTEngine.h \
- /home/persist/neotec/0rigin/test/../src/MSFTPipelineFactory.h \
- /home/persist/neotec/0rigin/test/../src/MSFTBufferManager.h \
+ /home/persist/neotec/0rigin/test/../src/SMFTEngine.h \
+ /home/persist/neotec/0rigin/test/../src/SMFTPipelineFactory.h \
+ /home/persist/neotec/0rigin/test/../src/SMFTBufferManager.h \
  /usr/include/c++/15.2.1/utility \
  /usr/include/c++/15.2.1/bits/stl_relops.h \
  /usr/include/c++/15.2.1/cstring \
- /home/persist/neotec/0rigin/test/../src/MSFTCompute.h \
+ /home/persist/neotec/0rigin/test/../src/SMFTCompute.h \
  /usr/include/c++/15.2.1/memory \
  /usr/include/c++/15.2.1/bits/stl_tempbuf.h \
  /usr/include/c++/15.2.1/bits/stl_raw_storage_iter.h \
@@ -403,13 +403,13 @@ CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.o: \
  /usr/include/c++/15.2.1/bits/ranges_algobase.h \
  /usr/include/c++/15.2.1/pstl/glue_memory_defs.h \
  /usr/include/c++/15.2.1/pstl/execution_defs.h \
- /home/persist/neotec/0rigin/test/../src/MSFTDescriptorManager.h \
+ /home/persist/neotec/0rigin/test/../src/SMFTDescriptorManager.h \
  /usr/include/c++/15.2.1/complex /usr/include/c++/15.2.1/sstream \
  /usr/include/c++/15.2.1/istream /usr/include/c++/15.2.1/ostream \
  /usr/include/c++/15.2.1/bits/ostream.tcc \
  /usr/include/c++/15.2.1/bits/istream.tcc \
  /usr/include/c++/15.2.1/bits/sstream.tcc \
- /home/persist/neotec/0rigin/test/../src/MSFTCommon.h \
+ /home/persist/neotec/0rigin/test/../src/SMFTCommon.h \
  /usr/include/c++/15.2.1/fstream /usr/include/c++/15.2.1/bits/codecvt.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++io.h \

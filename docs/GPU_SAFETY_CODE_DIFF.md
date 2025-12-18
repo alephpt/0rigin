@@ -1,6 +1,6 @@
 # GPU Safety Fix - Code Changes Detail
 
-## MSFTEngine.cpp - createPipelines() Method
+## SMFTEngine.cpp - createPipelines() Method
 
 ### BEFORE (sync_field path):
 ```cpp
@@ -71,15 +71,15 @@ if (_dirac_pipeline_layout != VK_NULL_HANDLE) {
 
 ---
 
-## MSFTEngine.cpp - step() Method
+## SMFTEngine.cpp - step() Method
 
 ### BEFORE:
 ```cpp
-void MSFTEngine::step(float dt, float K, float damping) {
+void SMFTEngine::step(float dt, float K, float damping) {
     /**
      * Phase 4: GPU Compute Dispatch Implementation
      *
-     * Executes the MSFT simulation step using GPU compute shaders:
+     * Executes the SMFT simulation step using GPU compute shaders:
      * 1. kuramoto_step: Evolve phases θ(t) → θ(t+dt)
      * 2. sync_field: Compute synchronization field R(x)
      * 3. gravity_field: Compute gravitational field g(x) = -Δ·∇R(x)
@@ -88,11 +88,11 @@ void MSFTEngine::step(float dt, float K, float damping) {
 
 ### AFTER:
 ```cpp
-void MSFTEngine::step(float dt, float K, float damping) {
+void SMFTEngine::step(float dt, float K, float damping) {
     /**
      * Phase 4: GPU Compute Dispatch Implementation
      *
-     * Executes the MSFT simulation step using GPU compute shaders:
+     * Executes the SMFT simulation step using GPU compute shaders:
      * 1. kuramoto_step: Evolve phases θ(t) → θ(t+dt) [✅ SAFE: 9 transcendentals]
      * 2. sync_field_simple: Compute synchronization field R(x) [✅ SAFE: 37 transcendentals]
      * 3. gravity_field: Compute gravitational field g(x) = -Δ·∇R(x) [✅ SAFE: pure arithmetic]
@@ -104,11 +104,11 @@ void MSFTEngine::step(float dt, float K, float damping) {
 
 ---
 
-## MSFTPipelineFactory.cpp - Pipeline Creation Methods
+## SMFTPipelineFactory.cpp - Pipeline Creation Methods
 
 ### BEFORE (minimal documentation):
 ```cpp
-VkPipeline MSFTPipelineFactory::createDiracPipeline(const std::string& shaderPath,
+VkPipeline SMFTPipelineFactory::createDiracPipeline(const std::string& shaderPath,
                                                     VkPipelineLayout pipelineLayout) {
     /**
      * Dirac Evolution Pipeline - Quantum spinor field evolution
@@ -124,7 +124,7 @@ VkPipeline MSFTPipelineFactory::createDiracPipeline(const std::string& shaderPat
 
 ### AFTER (GPU safety documentation):
 ```cpp
-VkPipeline MSFTPipelineFactory::createDiracPipeline(const std::string& shaderPath,
+VkPipeline SMFTPipelineFactory::createDiracPipeline(const std::string& shaderPath,
                                                     VkPipelineLayout pipelineLayout) {
     /**
      * Dirac Evolution Pipeline - Quantum spinor field evolution
@@ -133,7 +133,7 @@ VkPipeline MSFTPipelineFactory::createDiracPipeline(const std::string& shaderPat
      * - Expected shader: dirac_rk4.comp
      * - Workload: RK4 integration with 4 stages, complex arithmetic, gamma matrices
      * - Timeout risk: HIGH - consistent 2+ second timeouts on GTX 1650
-     * - STATUS: DISABLED in MSFTEngine::createPipelines()
+     * - STATUS: DISABLED in SMFTEngine::createPipelines()
      *
      * Evolves 4-component Dirac spinors according to:
      * (iγ^μ∂_μ)Ψ = [√(ℏc/G)] · R(x) · e^(iθ(x)γ⁵) Ψ

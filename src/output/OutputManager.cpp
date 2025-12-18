@@ -1,6 +1,6 @@
 /**
  * @file OutputManager.cpp
- * @brief Implementation of systematic output generation for MSFT experiments
+ * @brief Implementation of systematic output generation for SMFT experiments
  */
 
 #include "OutputManager.h"
@@ -9,7 +9,7 @@
 #include <sstream>
 #include <algorithm>
 
-namespace MSFT {
+namespace SMFT {
 
 OutputManager::OutputManager(const std::string& base_path)
     : base_path_(base_path) {
@@ -148,7 +148,7 @@ void OutputManager::writeMetadata(const std::string& filepath,
     }
 
     // Write in simple key=value format (easy to parse)
-    file << "# MSFT Experiment Metadata\n";
+    file << "# SMFT Experiment Metadata\n";
     file << "# Generated: " << getTimestamp() << "\n";
     file << "#\n";
 
@@ -253,7 +253,7 @@ void OutputManager::appendCSV(const std::string& filepath,
 
 void OutputManager::writeMetadataHeader(std::ofstream& stream,
                                        const std::map<std::string, std::string>& metadata) {
-    stream << "# MSFT Experiment Output\n";
+    stream << "# SMFT Experiment Output\n";
     stream << "# Generated: " << getTimestamp() << "\n";
 
     if (!metadata.empty()) {
@@ -283,4 +283,4 @@ bool OutputManager::validateFileWrite(const std::string& filepath) {
     return can_write;
 }
 
-} // namespace MSFT
+} // namespace SMFT

@@ -1,6 +1,6 @@
 /**
  * @file test_stochastic_particle.cpp
- * @brief Test stochastic MSFT evolution with Dirac-Kuramoto coupling
+ * @brief Test stochastic SMFT evolution with Dirac-Kuramoto coupling
  *
  * This test validates the stochastic MSR formalism implementation:
  * 1. Initialize synchronized vacuum (R ≈ 1.0)
@@ -16,7 +16,7 @@
  * - Total spinor norm should be approximately conserved
  */
 
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -58,10 +58,10 @@ std::vector<float> initializeSynchronizedVacuum(uint32_t Nx, uint32_t Ny) {
  *
  * Creates a localized particle-like excitation in the Dirac field
  */
-void addGaussianWavepacket(MSFTEngine& engine, uint32_t Nx, uint32_t Ny,
+void addGaussianWavepacket(SMFTEngine& engine, uint32_t Nx, uint32_t Ny,
                            float cx, float cy, float sigma) {
-    // Note: This would require adding a method to MSFTEngine to set spinor field
-    // For now, we rely on the default initialization in MSFTEngine::initialize
+    // Note: This would require adding a method to SMFTEngine to set spinor field
+    // For now, we rely on the default initialization in SMFTEngine::initialize
 
     std::cout << "Gaussian wavepacket initialized at ("
               << cx << ", " << cy << ") with σ=" << sigma << std::endl;
@@ -136,7 +136,7 @@ void saveEvolutionData(const std::string& filename,
         return;
     }
 
-    file << "# Stochastic MSFT Evolution Data\n";
+    file << "# Stochastic SMFT Evolution Data\n";
     file << "# Parameters: σ_θ=" << SIGMA_THETA << ", σ_Ψ=" << SIGMA_PSI;
     file << ", K=" << K_COUPLING << ", γ=" << DAMPING << ", Δ=" << DELTA << "\n";
     file << "# Time\tR_global\tNorm\tX_pos\tY_pos\n";
@@ -156,7 +156,7 @@ void saveEvolutionData(const std::string& filename,
 
 int main(int argc, char* argv[]) {
     std::cout << "===============================================\n";
-    std::cout << "Stochastic MSFT Particle Evolution Test\n";
+    std::cout << "Stochastic SMFT Particle Evolution Test\n";
     std::cout << "===============================================\n\n";
 
     // Parse command line arguments
@@ -173,7 +173,7 @@ int main(int argc, char* argv[]) {
 
     // 1. Initialize Nova graphics engine (minimal setup)
     NovaConfig config;
-    config.name = "MSFT Stochastic Test";
+    config.name = "SMFT Stochastic Test";
     config.screen = {800, 600};
     config.debug_level = "none";
     config.dimensions = "2D";
@@ -181,8 +181,8 @@ int main(int argc, char* argv[]) {
     config.compute = true;
     Nova nova(config);
 
-    // 2. Create and initialize MSFT engine
-    MSFTEngine engine(&nova);
+    // 2. Create and initialize SMFT engine
+    SMFTEngine engine(&nova);
     engine.initialize(GRID_SIZE, GRID_SIZE, DELTA, 0.0f);  // No chiral angle initially
 
     // 3. Set initial synchronized vacuum

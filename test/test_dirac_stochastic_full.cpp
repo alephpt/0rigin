@@ -15,7 +15,7 @@
  * - Mass coupling: m(x) = Δ·R(x) where R(x) = |⟨e^(iθ)⟩|_local
  */
 
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <vector>
 #include <complex>
@@ -79,7 +79,7 @@ int idx(int x, int y) {
 // KURAMOTO DYNAMICS
 // ============================================================================
 
-// Use compute_local_R and compute_global_R from MSFTCommon instead
+// Use compute_local_R and compute_global_R from SMFTCommon instead
 
 void kuramoto_step(std::vector<float>& theta, const std::vector<float>& omega,
                    float dt, float K, float gamma, float sigma,
@@ -411,7 +411,7 @@ int main() {
         kuramoto_step(theta, omega, DT, K, GAMMA, 0.0f, rng);  // No noise during warmup
         if (step % 200 == 0) std::cout << "." << std::flush;
     }
-    float R_warmup = MSFT::compute_global_R(theta);
+    float R_warmup = SMFT::compute_global_R(theta);
     std::cout << " R = " << R_warmup << std::endl;
 
     // Open timeseries file
@@ -422,14 +422,14 @@ int main() {
     std::vector<float> R_history;
     std::vector<float> norm_history;
     float norm_initial = compute_spinor_norm(psi);
-    float R_initial = MSFT::compute_global_R(theta);
+    float R_initial = SMFT::compute_global_R(theta);
 
     // Initial position
     float x_cm, y_cm;
     compute_particle_position(psi, x_cm, y_cm);
 
     // Write initial snapshot (t=0)
-    std::vector<float> R_field = MSFT::compute_local_R(theta, NX, NY);
+    std::vector<float> R_field = SMFT::compute_local_R(theta, NX, NY);
     std::vector<float> mass_field(N_GRID);
     for (int i = 0; i < N_GRID; i++) {
         mass_field[i] = DELTA * R_field[i];
@@ -452,7 +452,7 @@ int main() {
         kuramoto_step(theta, omega, DT, K, GAMMA, SIGMA_THETA, rng);
 
         // Compute R field and mass field
-        R_field = MSFT::compute_local_R(theta, NX, NY);
+        R_field = SMFT::compute_local_R(theta, NX, NY);
         for (int i = 0; i < N_GRID; i++) {
             mass_field[i] = DELTA * R_field[i];
         }
@@ -461,7 +461,7 @@ int main() {
         dirac_step(psi, R_field, DT, SIGMA_PSI, rng);
 
         // Compute observables
-        float R_global = MSFT::compute_global_R(theta);
+        float R_global = SMFT::compute_global_R(theta);
         float norm = compute_spinor_norm(psi);
         compute_particle_position(psi, x_cm, y_cm);
 

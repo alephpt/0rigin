@@ -92,25 +92,25 @@ target_include_directories(imgui PUBLIC
 )
 
 # ============================================================================
-# MSFT APPLICATION
+# SMFT APPLICATION
 # ============================================================================
 
-# MSFT sources
-set(MSFT_SOURCES
-    src/MSFT.cpp
-    src/MSFTEngine.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
+# SMFT sources
+set(SMFT_SOURCES
+    src/SMFT.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
     src/output/OutputManager.cpp
     main.cpp
 )
 
-add_executable(MSFT ${MSFT_SOURCES})
+add_executable(SMFT ${SMFT_SOURCES})
 
-target_include_directories(MSFT PRIVATE
+target_include_directories(SMFT PRIVATE
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/lib
     ${CMAKE_SOURCE_DIR}/lib/Nova
@@ -118,7 +118,7 @@ target_include_directories(MSFT PRIVATE
     ${SDL2_INCLUDE_DIRS}
 )
 
-target_link_libraries(MSFT PRIVATE
+target_link_libraries(SMFT PRIVATE
     Nova
     imgui
     ${Vulkan_LIBRARIES}
@@ -130,7 +130,7 @@ target_link_libraries(MSFT PRIVATE
 )
 
 # Set output directory
-set_target_properties(MSFT PROPERTIES
+set_target_properties(SMFT PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
@@ -138,17 +138,17 @@ set_target_properties(MSFT PROPERTIES
 # TEST EXECUTABLE FOR GPU PIPELINE
 # ============================================================================
 
-add_executable(test_msft_gpu
-    test/test_msft_gpu.cpp
-    src/MSFTEngine.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
+add_executable(test_smft_gpu
+    test/test_smft_gpu.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
 )
 
-target_include_directories(test_msft_gpu PRIVATE
+target_include_directories(test_smft_gpu PRIVATE
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/lib
     ${CMAKE_SOURCE_DIR}/lib/Nova
@@ -156,7 +156,7 @@ target_include_directories(test_msft_gpu PRIVATE
     ${SDL2_INCLUDE_DIRS}
 )
 
-target_link_libraries(test_msft_gpu PRIVATE
+target_link_libraries(test_smft_gpu PRIVATE
     Nova
     imgui
     ${Vulkan_LIBRARIES}
@@ -167,18 +167,18 @@ target_link_libraries(test_msft_gpu PRIVATE
     m
 )
 
-set_target_properties(test_msft_gpu PROPERTIES
+set_target_properties(test_smft_gpu PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
 # Test executable: Descriptor binding validation
 add_executable(test_descriptor_bindings
     test/test_descriptor_bindings.cpp
-    src/MSFTEngine.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
 )
 
@@ -208,11 +208,11 @@ set_target_properties(test_descriptor_bindings PROPERTIES
 # Test executable: Stochastic particle evolution
 add_executable(test_stochastic_particle
     test/test_stochastic_particle.cpp
-    src/MSFTEngine.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
 )
 
@@ -242,11 +242,11 @@ set_target_properties(test_stochastic_particle PROPERTIES
 # Test executable: Simple timesync verification
 add_executable(test_timesync_simple
     test/test_timesync_simple.cpp
-    src/MSFTEngine.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
 )
 
@@ -276,11 +276,11 @@ set_target_properties(test_timesync_simple PROPERTIES
 # Test executable: Dirac GPU timesync validation
 add_executable(test_dirac_gpu_timesync
     test/test_dirac_gpu_timesync.cpp
-    src/MSFTEngine.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
 )
 
@@ -325,11 +325,11 @@ set_target_properties(test_operator_splitting PROPERTIES
 # Test executable: Hybrid operator splitting integration test
 add_executable(test_hybrid_operator_splitting
     test/test_hybrid_operator_splitting.cpp
-    src/MSFTEngine.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
 )
 
@@ -368,6 +368,7 @@ set_target_properties(test_operator_splitting_cpu PROPERTIES
 # Test executable: Full operator splitting simulation (10k steps)
 add_executable(test_operator_splitting_full
     test/test_operator_splitting_full.cpp
+    src/SMFTCommon.cpp
 )
 
 set_target_properties(test_operator_splitting_full PROPERTIES
@@ -377,7 +378,7 @@ set_target_properties(test_operator_splitting_full PROPERTIES
 # Test executable: CPU-based stochastic validation
 add_executable(test_stochastic_cpu
     test/test_stochastic_cpu.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
 )
 
 target_include_directories(test_stochastic_cpu PRIVATE
@@ -396,7 +397,7 @@ set_target_properties(test_stochastic_cpu PROPERTIES
 # Test executable: CPU-based stochastic validation WITH OutputManager
 add_executable(test_stochastic_cpu_migrated
     test/test_stochastic_cpu_migrated.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
     src/output/OutputManager.cpp
 )
 
@@ -416,7 +417,7 @@ set_target_properties(test_stochastic_cpu_migrated PROPERTIES
 # Comprehensive Dirac-Kuramoto test with full data output
 add_executable(test_dirac_stochastic_full
     test/test_dirac_stochastic_full.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
 )
 
 # Split-operator validation test
@@ -457,7 +458,7 @@ set_target_properties(test_split_operator_validation PROPERTIES
 add_executable(test_scenario1_defect
     test/test_scenario1_defect.cpp
     src/DiracEvolution.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
 )
 
 target_include_directories(test_scenario1_defect PRIVATE
@@ -478,7 +479,7 @@ set_target_properties(test_scenario1_defect PROPERTIES
 add_executable(test_ehrenfest_validation
     test/test_ehrenfest_validation.cpp
     src/DiracEvolution.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
 )
 
 target_include_directories(test_ehrenfest_validation PRIVATE
@@ -498,12 +499,12 @@ set_target_properties(test_ehrenfest_validation PROPERTIES
 # Simple warmup test
 add_executable(test_simple_warmup
     test/test_simple_warmup.cpp
-    src/MSFTEngine.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTCommon.cpp
+    src/SMFTEngine.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTCommon.cpp
     src/DiracEvolution.cpp
 )
 
@@ -530,12 +531,12 @@ set_target_properties(test_simple_warmup PROPERTIES
 # Noise sweep test
 add_executable(test_noise_sweep
     test/test_noise_sweep.cpp
-    src/MSFTEngine.cpp
-    src/MSFTBufferManager.cpp
-    src/MSFTCompute.cpp
-    src/MSFTDescriptorManager.cpp
-    src/MSFTPipelineFactory.cpp
-    src/MSFTCommon.cpp
+    src/SMFTEngine.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTCommon.cpp
     src/DiracEvolution.cpp
 )
 
@@ -562,7 +563,7 @@ set_target_properties(test_noise_sweep PROPERTIES
 # Energy fix test
 add_executable(test_energy_fix
     test/test_energy_fix.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
     src/DiracEvolution.cpp
 )
 
@@ -583,7 +584,7 @@ set_target_properties(test_energy_fix PROPERTIES
 # Test: Find Critical Sigma
 add_executable(test_find_critical_sigma
     test/test_find_critical_sigma.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
 )
 
 target_include_directories(test_find_critical_sigma PRIVATE
@@ -602,7 +603,7 @@ set_target_properties(test_find_critical_sigma PROPERTIES
 # Test: Noise Sweep Corrected
 add_executable(test_noise_sweep_corrected
     test/test_noise_sweep_corrected.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
 )
 
 target_include_directories(test_noise_sweep_corrected PRIVATE
@@ -621,7 +622,7 @@ set_target_properties(test_noise_sweep_corrected PROPERTIES
 # Test: Noise Sweep CPU
 add_executable(test_noise_sweep_cpu
     test/test_noise_sweep_cpu.cpp
-    src/MSFTCommon.cpp
+    src/SMFTCommon.cpp
 )
 
 target_include_directories(test_noise_sweep_cpu PRIVATE
@@ -644,7 +645,7 @@ set_target_properties(test_noise_sweep_cpu PROPERTIES
 # ============================================================================
 
 # Copy shaders to build directory
-add_custom_command(TARGET MSFT POST_BUILD
+add_custom_command(TARGET SMFT POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_SOURCE_DIR}/shaders
     ${CMAKE_BINARY_DIR}/shaders
@@ -656,7 +657,7 @@ add_custom_command(TARGET MSFT POST_BUILD
 
 message(STATUS "")
 message(STATUS "===============================================")
-message(STATUS " 0rigin: MSFT+Dirac GPU Simulation")
+message(STATUS " 0rigin: SMFT+Dirac GPU Simulation")
 message(STATUS "===============================================")
 message(STATUS "")
 message(STATUS "  Vulkan SDK: ${Vulkan_INCLUDE_DIRS}")
@@ -665,6 +666,6 @@ message(STATUS "")
 message(STATUS "  Targets:")
 message(STATUS "    • Nova (static library)")
 message(STATUS "    • imgui (static library)")
-message(STATUS "    • MSFT (executable)")
+message(STATUS "    • SMFT (executable)")
 message(STATUS "")
 message(STATUS "===============================================")

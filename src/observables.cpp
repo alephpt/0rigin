@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <iostream>
 
-namespace MSFT {
+namespace SMFT {
 
 ObservablesEngine::ObservablesEngine(
     VkDevice device,
@@ -36,7 +36,7 @@ void ObservablesEngine::initialize(uint32_t grid_x, uint32_t grid_y, float dx) {
 }
 
 AllObservables ObservablesEngine::compute(
-    const MSFTBuffers& buffers,
+    const SMFTBuffers& buffers,
     float Delta,
     float time,
     uint32_t timestep
@@ -60,4 +60,4 @@ void ObservablesEngine::destroyPipelines(){}
 void ObservablesEngine::destroyBuffers(){}
 VkShaderModule ObservablesEngine::loadShaderModule(const char* filepath) { return VK_NULL_HANDLE; }
 
-} // namespace MSFT
+} // namespace SMFT

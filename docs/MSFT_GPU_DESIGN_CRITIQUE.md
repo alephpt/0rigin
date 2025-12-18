@@ -1,7 +1,7 @@
-# MSFTEngine GPU Compute Design Critique
+# SMFTEngine GPU Compute Design Critique
 
 ## Executive Summary
-The MSFTEngine GPU compute implementation contains multiple critical design flaws that cause GPU timeouts and system crashes. The primary issues stem from improper synchronization between compute and graphics queues, lack of proper resource barriers, and queue family ownership conflicts.
+The SMFTEngine GPU compute implementation contains multiple critical design flaws that cause GPU timeouts and system crashes. The primary issues stem from improper synchronization between compute and graphics queues, lack of proper resource barriers, and queue family ownership conflicts.
 
 ---
 
@@ -16,7 +16,7 @@ Nova (Graphics Engine)
 │   ├── Command Pools (per queue)
 │   └── Semaphores (per frame/image)
 │
-└── MSFTEngine (Physics Compute)
+└── SMFTEngine (Physics Compute)
     ├── Own Command Pool (persistent)
     ├── Own Semaphore (_compute_finished_semaphore)
     ├── GPU Buffers (HOST_VISIBLE | HOST_COHERENT)
@@ -41,7 +41,7 @@ Nova (Graphics Engine)
    - Proper cleanup order maintained
 
 ### Integration Points with Nova
-- `MSFT::materialize()` calls `MSFTEngine::step()` (MSFT.cpp:86)
+- `SMFT::materialize()` calls `SMFTEngine::step()` (SMFT.cpp:86)
 - Called from Nova's render loop via callback (Nova.cpp:147-148)
 - Happens BEFORE `drawFrame()` in same thread (Nova.cpp:150)
 
@@ -50,61 +50,61 @@ Nova (Graphics Engine)
 ## Section 2: Critical Design Flaws
 
 ### **Flaw 1: Missing Queue Family Ownership Transfer**
-- **Evidence**: MSFTEngine.cpp:473-474 - Uses compute or graphics queue without ownership transfer
+- **Evidence**: SMFTEngine.cpp:473-474 - Uses compute or graphics queue without ownership transfer
 - **Code Location**: No `VkBufferMemoryBarrier` with `srcQueueFamilyIndex`/`dstQueueFamilyIndex`
 - **Consequence**: GPU timeout when different queue families access same buffer
 - **Severity**: **CRITICAL**
 
 ### **Flaw 2: Single Shared Semaphore Across All Operations**
-- **Evidence**: MSFTEngine.h:105-107 - Single `_compute_finished_semaphore` returned
-- **Code Location**: MSFTEngine.cpp:258-262 - Only one semaphore created
+- **Evidence**: SMFTEngine.h:105-107 - Single `_compute_finished_semaphore` returned
+- **Code Location**: SMFTEngine.cpp:258-262 - Only one semaphore created
 - **Consequence**: Semaphore reuse conflicts when graphics tries to wait on it
 - **Severity**: **CRITICAL**
 
 ### **Flaw 3: Synchronous Fence Wait Blocks Render Thread**
-- **Evidence**: MSFTEngine.cpp:498 - `vkWaitForFences` with 5s timeout in render thread
-- **Code Location**: Called from `MSFT::materialize()` which runs in render loop
+- **Evidence**: SMFTEngine.cpp:498 - `vkWaitForFences` with 5s timeout in render thread
+- **Code Location**: Called from `SMFT::materialize()` which runs in render loop
 - **Consequence**: Entire render pipeline stalls waiting for compute
 - **Severity**: **HIGH**
 
 ### **Flaw 4: Command Buffer Allocation Per Frame**
-- **Evidence**: MSFTEngine.cpp:359-363 - Allocates new command buffer each `step()`
-- **Code Location**: MSFTEngine.cpp:519 - Frees after each use
+- **Evidence**: SMFTEngine.cpp:359-363 - Allocates new command buffer each `step()`
+- **Code Location**: SMFTEngine.cpp:519 - Frees after each use
 - **Consequence**: Allocation overhead and potential pool exhaustion
 - **Severity**: **MEDIUM**
 
 ### **Flaw 5: Missing Memory Barriers Between Dispatches**
-- **Evidence**: MSFTEngine.cpp:411-420 - Generic memory barrier without specific access masks
+- **Evidence**: SMFTEngine.cpp:411-420 - Generic memory barrier without specific access masks
 - **Code Location**: Barriers use only `VK_ACCESS_SHADER_WRITE_BIT` | `VK_ACCESS_SHADER_READ_BIT`
 - **Consequence**: Race conditions between shader stages
 - **Severity**: **HIGH**
 
 ### **Flaw 6: Buffer Copy Without Proper Synchronization**
-- **Evidence**: MSFTEngine.cpp:424-425 - `vkCmdCopyBuffer` between compute dispatches
+- **Evidence**: SMFTEngine.cpp:424-425 - `vkCmdCopyBuffer` between compute dispatches
 - **Code Location**: Copy happens without transfer-specific barriers
 - **Consequence**: Data corruption if copy overlaps with shader execution
 - **Severity**: **HIGH**
 
 ### **Flaw 7: HOST_VISIBLE Memory for GPU-Only Operations**
-- **Evidence**: MSFTEngine.cpp:744-745 - All buffers use `HOST_VISIBLE | HOST_COHERENT`
+- **Evidence**: SMFTEngine.cpp:744-745 - All buffers use `HOST_VISIBLE | HOST_COHERENT`
 - **Code Location**: `createBuffer` lambda always uses host properties
 - **Consequence**: Suboptimal performance, potential cache coherency issues
 - **Severity**: **MEDIUM**
 
 ### **Flaw 8: No Queue Family Indices in Buffer Creation**
-- **Evidence**: MSFTEngine.cpp:709 - `sharingMode = VK_SHARING_MODE_EXCLUSIVE`
+- **Evidence**: SMFTEngine.cpp:709 - `sharingMode = VK_SHARING_MODE_EXCLUSIVE`
 - **Code Location**: No `queueFamilyIndexCount` or `pQueueFamilyIndices` set
 - **Consequence**: Undefined behavior when multiple queues access buffer
 - **Severity**: **CRITICAL**
 
 ### **Flaw 9: Graphics-Compute Synchronization Missing**
-- **Evidence**: Nova never waits on MSFTEngine's compute semaphore
+- **Evidence**: Nova never waits on SMFTEngine's compute semaphore
 - **Code Location**: drawFrame() (render.cpp:183) doesn't include compute semaphore
 - **Consequence**: Graphics may render while compute still running
 - **Severity**: **CRITICAL**
 
 ### **Flaw 10: uploadToGPU/downloadFromGPU During Active Compute**
-- **Evidence**: MSFTEngine.cpp:344 & 515 - CPU memory access during GPU operations
+- **Evidence**: SMFTEngine.cpp:344 & 515 - CPU memory access during GPU operations
 - **Code Location**: Direct `vkMapMemory` without pipeline barriers
 - **Consequence**: Read-after-write hazards, data races
 - **Severity**: **HIGH**
@@ -117,7 +117,7 @@ Nova (Graphics Engine)
 
 The GPU compute hangs because:
 
-1. **MSFTEngine creates buffers with `VK_SHARING_MODE_EXCLUSIVE`** (line 709) but doesn't specify queue family indices
+1. **SMFTEngine creates buffers with `VK_SHARING_MODE_EXCLUSIVE`** (line 709) but doesn't specify queue family indices
 2. **Different queue families (0 for graphics, 1 for compute) try to access same buffers** without ownership transfer
 3. **The GPU driver detects this violation and hangs** to prevent undefined behavior
 4. **The 5-second fence timeout triggers** (line 498), reporting the hang
@@ -130,8 +130,8 @@ The GPU compute hangs because:
 
 ### Evidence Trail:
 ```
-MSFT::materialize() [render thread]
-  → MSFTEngine::step()
+SMFT::materialize() [render thread]
+  → SMFTEngine::step()
     → vkQueueSubmit() on compute queue (family 1)
     → Accesses buffers created without queue family indices
     → GPU detects ownership violation
@@ -218,7 +218,7 @@ barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
 
 ## Conclusion
 
-The MSFTEngine's GPU timeout is caused by **queue family ownership conflicts** when exclusive buffers are accessed by different queue families without proper ownership transfer. The synchronous execution model and missing graphics-compute synchronization exacerbate the issue.
+The SMFTEngine's GPU timeout is caused by **queue family ownership conflicts** when exclusive buffers are accessed by different queue families without proper ownership transfer. The synchronous execution model and missing graphics-compute synchronization exacerbate the issue.
 
 The fix requires:
 1. Proper queue family specification during buffer creation

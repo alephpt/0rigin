@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test_find_critical_sigma.dir/link.d"
-  "CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o"
-  "CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o.d"
+  "CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o"
+  "CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o.d"
   "CMakeFiles/test_find_critical_sigma.dir/test/test_find_critical_sigma.cpp.o"
   "CMakeFiles/test_find_critical_sigma.dir/test/test_find_critical_sigma.cpp.o.d"
   "bin/test_find_critical_sigma"

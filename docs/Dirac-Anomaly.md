@@ -144,7 +144,7 @@ where $m_n$ are **effective masses** determined by boundary conditions of the we
 - But electron energy levels E_n = -13.6 eV/n² are discrete
 - Quantization from **wavefunction boundary conditions**, not potential discreteness
 
-**Prediction for MSFT with Dirac**: 
+**Prediction for SMFT with Dirac**: 
 - Vacuum provides smooth m(x) = Δ·R(x) landscape
 - Dirac wavefunctions localize at defects (potential minima)
 - Localized states have discrete spectrum E_1, E_2, E_3, ...
@@ -307,7 +307,7 @@ $$\frac{|\Delta m|}{\sqrt{\sigma_+^2 + \sigma_-^2}} = \frac{0.006}{\sqrt{0.217^2
 
 **This rules out**: Mechanisms where particles vs. antiparticles have different masses.
 
-**In MSFT with Dirac**: Particle/antiparticle distinction must come from **Dirac field charge**, not vortex winding.
+**In SMFT with Dirac**: Particle/antiparticle distinction must come from **Dirac field charge**, not vortex winding.
 
 ---
 
@@ -378,7 +378,7 @@ Histogram should show **peaks** at discrete energies E_1, E_2, E_3, ...
 
 **Mechanism**: 
 - Positive/negative vortices couple differently to Dirac chirality
-- Chiral phase factor $e^{i\theta(x)\gamma^5}$ in MSFT equation
+- Chiral phase factor $e^{i\theta(x)\gamma^5}$ in SMFT equation
 - Could preferentially localize spin-up at w=+1, spin-down at w=-1
 
 **Test**: Count particles by Dirac charge
@@ -507,7 +507,7 @@ Check: Does $Q_\Psi$ correlate with vortex winding w?
 
 1. **Clarify defect definition** (provide explicit algorithm used)
 2. **Run minimal grid convergence test**: Compare 128² vs. 256² for final N_defects
-3. **Acknowledge continuous mass limitation**: MSFT predicts continuous m(x), discrete energies E_n must come from Dirac quantization, not vacuum
+3. **Acknowledge continuous mass limitation**: SMFT predicts continuous m(x), discrete energies E_n must come from Dirac quantization, not vacuum
 
 **Timeline**: These should take 2-4 hours maximum.
 
@@ -552,7 +552,7 @@ The "defect-free" claim is either:
 
 **Quantization must emerge from Dirac bound states**, not vacuum field structure.
 
-**You are now positioned to test the core MSFT prediction**: Does coupling to Dirac field produce discrete particle spectrum despite continuous vacuum potential?
+**You are now positioned to test the core SMFT prediction**: Does coupling to Dirac field produce discrete particle spectrum despite continuous vacuum potential?
 
 **This is the decisive experiment.**
 

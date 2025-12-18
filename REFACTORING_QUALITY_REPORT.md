@@ -1,4 +1,4 @@
-# MSFTEngine Refactoring Quality Report
+# SMFTEngine Refactoring Quality Report
 **Date:** 2025-12-17
 **Status:** ✅ APPROVED
 
@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-The MSFTEngine refactoring successfully addresses critical code quality violations by extracting specialized classes following Single Responsibility Principle. Build completes without errors, all modules integrate correctly, and code quality metrics show significant improvement.
+The SMFTEngine refactoring successfully addresses critical code quality violations by extracting specialized classes following Single Responsibility Principle. Build completes without errors, all modules integrate correctly, and code quality metrics show significant improvement.
 
 **Recommendation:** ✅ **APPROVE FOR COMMIT**
 
@@ -15,28 +15,28 @@ The MSFTEngine refactoring successfully addresses critical code quality violatio
 ## 1. File Size Compliance
 
 ### Before Refactoring
-- **MSFTEngine.cpp**: 1,608 lines (320% OVER limit)
+- **SMFTEngine.cpp**: 1,608 lines (320% OVER limit)
 - **Violation**: Single 500-line limit exceeded by 3.2x
 
 ### After Refactoring
 
 | File | Lines | Limit | Status |
 |------|-------|-------|--------|
-| MSFTEngine.cpp | 1,278 | 500 | ⚠️ Still over, but 20% improvement |
-| MSFTEngine.h | 206 | 500 | ✅ Compliant |
-| MSFTPipelineFactory.cpp | 242 | 500 | ✅ Compliant |
-| MSFTPipelineFactory.h | 136 | 500 | ✅ Compliant |
-| MSFTBufferManager.cpp | 165 | 500 | ✅ Compliant |
-| MSFTBufferManager.h | 123 | 500 | ✅ Compliant |
-| MSFTCompute.cpp | 249 | 500 | ✅ Compliant |
-| MSFTCompute.h | 101 | 500 | ✅ Compliant |
+| SMFTEngine.cpp | 1,278 | 500 | ⚠️ Still over, but 20% improvement |
+| SMFTEngine.h | 206 | 500 | ✅ Compliant |
+| SMFTPipelineFactory.cpp | 242 | 500 | ✅ Compliant |
+| SMFTPipelineFactory.h | 136 | 500 | ✅ Compliant |
+| SMFTBufferManager.cpp | 165 | 500 | ✅ Compliant |
+| SMFTBufferManager.h | 123 | 500 | ✅ Compliant |
+| SMFTCompute.cpp | 249 | 500 | ✅ Compliant |
+| SMFTCompute.h | 101 | 500 | ✅ Compliant |
 | **Total:** | 2,500 | — | 8 files (7/8 compliant) |
 
 **Analysis:**
 - Original 1,608 lines split across 8 modular files
-- MSFTEngine.cpp reduced by 330 lines (20% improvement)
+- SMFTEngine.cpp reduced by 330 lines (20% improvement)
 - 7 out of 8 files meet <500 line standard
-- Remaining MSFTEngine.cpp complexity is warranted (core coordination logic)
+- Remaining SMFTEngine.cpp complexity is warranted (core coordination logic)
 
 ---
 
@@ -51,25 +51,25 @@ The MSFTEngine refactoring successfully addresses critical code quality violatio
 | `initialize()` | — | 129 lines | 50 | ⚠️ Complex initialization |
 
 **Factory Methods (All < 50 lines):**
-- `MSFTPipelineFactory::loadShaderFile()` - 31 lines ✅
-- `MSFTPipelineFactory::createShaderModule()` - 17 lines ✅
-- `MSFTPipelineFactory::createComputePipeline()` - 33 lines ✅
-- `MSFTPipelineFactory::createPipelineFromShader()` - 31 lines ✅
+- `SMFTPipelineFactory::loadShaderFile()` - 31 lines ✅
+- `SMFTPipelineFactory::createShaderModule()` - 17 lines ✅
+- `SMFTPipelineFactory::createComputePipeline()` - 33 lines ✅
+- `SMFTPipelineFactory::createPipelineFromShader()` - 31 lines ✅
 
 **Buffer Operations (All < 50 lines):**
-- `MSFTBufferManager::createBuffer()` - 30 lines ✅
-- `MSFTBufferManager::uploadData()` - 8 lines ✅
-- `MSFTBufferManager::downloadData()` - 8 lines ✅
+- `SMFTBufferManager::createBuffer()` - 30 lines ✅
+- `SMFTBufferManager::uploadData()` - 8 lines ✅
+- `SMFTBufferManager::downloadData()` - 8 lines ✅
 
 **Compute Operations (All < 50 lines):**
-- `MSFTCompute::initialize()` - 34 lines ✅
-- `MSFTCompute::beginBatch()` - 15 lines ✅
-- `MSFTCompute::dispatchCompute()` - 22 lines ✅
-- `MSFTCompute::submitBatch()` - 33 lines ✅
+- `SMFTCompute::initialize()` - 34 lines ✅
+- `SMFTCompute::beginBatch()` - 15 lines ✅
+- `SMFTCompute::dispatchCompute()` - 22 lines ✅
+- `SMFTCompute::submitBatch()` - 33 lines ✅
 
 **Analysis:**
 - All new factory/manager/dispatcher functions comply with 50-line limit
-- Core MSFTEngine functions improved significantly but retain complexity
+- Core SMFTEngine functions improved significantly but retain complexity
 - `step()` reduced from 192→109 lines (43% improvement)
 - `createPipelines()` remains large due to Vulkan descriptor setup (inherent complexity)
 
@@ -79,7 +79,7 @@ The MSFTEngine refactoring successfully addresses critical code quality violatio
 
 ### Class Responsibilities
 
-#### MSFTEngine (Coordinator)
+#### SMFTEngine (Coordinator)
 **Role:** High-level simulation orchestration
 **Responsibilities:**
 - Initialize simulation grid and parameters
@@ -89,12 +89,12 @@ The MSFTEngine refactoring successfully addresses critical code quality violatio
 
 **Composition:**
 ```cpp
-std::unique_ptr<MSFTPipelineFactory> _pipelineFactory;
-std::unique_ptr<MSFTCompute> _compute;
-std::unique_ptr<MSFTBufferManager> _bufferManager;
+std::unique_ptr<SMFTPipelineFactory> _pipelineFactory;
+std::unique_ptr<SMFTCompute> _compute;
+std::unique_ptr<SMFTBufferManager> _bufferManager;
 ```
 
-#### MSFTPipelineFactory (Pipeline Creation)
+#### SMFTPipelineFactory (Pipeline Creation)
 **Role:** Vulkan pipeline creation and shader management
 **Responsibilities:**
 - Load SPIR-V shader bytecode
@@ -109,7 +109,7 @@ std::unique_ptr<MSFTBufferManager> _bufferManager;
 - `createDiracPipeline()`
 - `createDiracStochasticPipeline()`
 
-#### MSFTBufferManager (Memory Management)
+#### SMFTBufferManager (Memory Management)
 **Role:** Vulkan buffer allocation and data transfer
 **Responsibilities:**
 - Create and allocate GPU buffers
@@ -122,7 +122,7 @@ std::unique_ptr<MSFTBufferManager> _bufferManager;
 - `uploadData()`, `downloadData()`
 - `mapMemory()`, `unmapMemory()`
 
-#### MSFTCompute (GPU Dispatch)
+#### SMFTCompute (GPU Dispatch)
 **Role:** Command buffer recording and compute dispatch
 **Responsibilities:**
 - Command pool/buffer management
@@ -139,16 +139,16 @@ std::unique_ptr<MSFTBufferManager> _bufferManager;
 
 ### Dependency Flow
 ```
-MSFTEngine
-    ├── MSFTPipelineFactory (creates pipelines)
-    ├── MSFTBufferManager (manages memory)
-    └── MSFTCompute (dispatches compute)
+SMFTEngine
+    ├── SMFTPipelineFactory (creates pipelines)
+    ├── SMFTBufferManager (manages memory)
+    └── SMFTCompute (dispatches compute)
 ```
 
 **Analysis:** ✅ Clean separation achieved
 - No circular dependencies
 - Each class has single, well-defined responsibility
-- MSFTEngine serves as thin coordination layer
+- SMFTEngine serves as thin coordination layer
 - Vulkan complexity properly encapsulated in specialized classes
 
 ---
@@ -165,8 +165,8 @@ make clean && make 2>&1 | grep -E "(error|Error)" | wc -l
 ### Build Targets Successfully Compiled
 - ✅ Nova (static library)
 - ✅ imgui (static library)
-- ✅ MSFT (main executable)
-- ✅ test_msft_gpu
+- ✅ SMFT (main executable)
+- ✅ test_smft_gpu
 - ✅ test_descriptor_bindings
 - ✅ test_stochastic_particle
 - ✅ test_stochastic_cpu
@@ -175,12 +175,12 @@ make clean && make 2>&1 | grep -E "(error|Error)" | wc -l
 ### CMake Integration
 All new modules properly integrated in `CMakeLists.txt`:
 ```cmake
-set(MSFT_SOURCES
-    src/MSFT.cpp
-    src/MSFTEngine.cpp
-    src/MSFTPipelineFactory.cpp  # ✅ Added
-    src/MSFTBufferManager.cpp    # ✅ Added
-    src/MSFTCompute.cpp          # ✅ Added
+set(SMFT_SOURCES
+    src/SMFT.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp  # ✅ Added
+    src/SMFTBufferManager.cpp    # ✅ Added
+    src/SMFTCompute.cpp          # ✅ Added
     main.cpp
 )
 ```
@@ -199,14 +199,14 @@ set(MSFT_SOURCES
 **Result:** 0 unsafe operations found ✅
 
 **Safe operations found:**
-- `memcpy()` in `MSFTBufferManager.cpp` (lines 106, 116) - Safe usage for GPU buffer transfers ✅
+- `memcpy()` in `SMFTBufferManager.cpp` (lines 106, 116) - Safe usage for GPU buffer transfers ✅
 
 ### Code Duplication
 **Check:** Grep for duplicate code patterns
 **Result:** 0 code duplication comments found ✅
 
 ### Total Source Lines
-**Before:** 1,608 lines (MSFTEngine.cpp monolith)
+**Before:** 1,608 lines (SMFTEngine.cpp monolith)
 **After:** 2,500 lines across 8 modular files
 **Analysis:** Code expansion due to proper documentation and separation (expected in refactoring)
 
@@ -214,7 +214,7 @@ set(MSFT_SOURCES
 
 ## 6. Interface Design
 
-### MSFTEngine Public API (Unchanged)
+### SMFTEngine Public API (Unchanged)
 ```cpp
 void initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_angle);
 void setInitialPhases(const std::vector<float>& theta);
@@ -227,14 +227,14 @@ std::vector<float> getPhaseField() const;
 std::vector<float> getGravitationalField() const;
 ```
 
-**Analysis:** ✅ Public API preserved - existing code using MSFTEngine requires no changes
+**Analysis:** ✅ Public API preserved - existing code using SMFTEngine requires no changes
 
 ### Internal Composition (New)
 ```cpp
 // Private members (initialized in initialize())
-std::unique_ptr<MSFTPipelineFactory> _pipelineFactory;
-std::unique_ptr<MSFTCompute> _compute;
-std::unique_ptr<MSFTBufferManager> _bufferManager;
+std::unique_ptr<SMFTPipelineFactory> _pipelineFactory;
+std::unique_ptr<SMFTCompute> _compute;
+std::unique_ptr<SMFTBufferManager> _bufferManager;
 ```
 
 **Analysis:** ✅ Composition pattern properly applied, lazy initialization in `step()`
@@ -244,22 +244,22 @@ std::unique_ptr<MSFTBufferManager> _bufferManager;
 ## 7. Original Violations Resolved
 
 ### Violation #1: God Object Anti-Pattern
-**Before:** MSFTEngine handled pipeline creation, buffer management, compute dispatch, memory transfer, synchronization
+**Before:** SMFTEngine handled pipeline creation, buffer management, compute dispatch, memory transfer, synchronization
 **After:** Responsibilities distributed across 4 specialized classes
 **Status:** ✅ RESOLVED
 
 ### Violation #2: Function Length (createPipelines)
 **Before:** 402 lines (804% over limit)
-**After:** Extracted to MSFTPipelineFactory with 6 focused methods (<50 lines each)
+**After:** Extracted to SMFTPipelineFactory with 6 focused methods (<50 lines each)
 **Status:** ✅ RESOLVED
 
 ### Violation #3: Function Length (step)
 **Before:** 192 lines (384% over limit)
-**After:** 109 lines (uses MSFTCompute for dispatch logic)
+**After:** 109 lines (uses SMFTCompute for dispatch logic)
 **Improvement:** 43% reduction
 **Status:** ⚠️ IMPROVED (still over but acceptable for core simulation loop)
 
-### Violation #4: File Size (MSFTEngine.cpp)
+### Violation #4: File Size (SMFTEngine.cpp)
 **Before:** 1,608 lines (320% over limit)
 **After:** 1,278 lines + 3 new helper classes
 **Improvement:** 20% reduction in main file, responsibilities distributed
@@ -269,9 +269,9 @@ std::unique_ptr<MSFTBufferManager> _bufferManager;
 
 ## 8. Remaining Complexity Analysis
 
-### Why MSFTEngine.cpp is still 1,278 lines:
+### Why SMFTEngine.cpp is still 1,278 lines:
 
-1. **Physics Documentation (Lines 115-183):** 69 lines of critical physics theory documentation explaining MSFT equation, mass emergence, gravity emergence, Bekenstein-Hawking connection
+1. **Physics Documentation (Lines 115-183):** 69 lines of critical physics theory documentation explaining SMFT equation, mass emergence, gravity emergence, Bekenstein-Hawking connection
    - **Justification:** Essential for academic/research codebase
 
 2. **Initialize Function (Lines 115-243):** 129 lines
@@ -357,7 +357,7 @@ std::unique_ptr<MSFTBufferManager> _bufferManager;
 4. **Document Vulkan patterns**: Add design notes for descriptor binding approach
 
 ### Not Recommended
-- ❌ Further decomposition of MSFTEngine.cpp: Current size justified by physics complexity
+- ❌ Further decomposition of SMFTEngine.cpp: Current size justified by physics complexity
 - ❌ Breaking up initialize(): Complexity inherent to GPU simulation setup
 - ❌ Shortening createPipelines(): Vulkan descriptor binding is inherently verbose
 
@@ -390,7 +390,7 @@ std::unique_ptr<MSFTBufferManager> _bufferManager;
 
 **RECOMMENDATION: ✅ APPROVE FOR COMMIT**
 
-The MSFTEngine refactoring successfully addresses the critical God Object anti-pattern by extracting specialized classes for pipeline creation, buffer management, and compute dispatch. While some complexity remains in the core engine (inherent to GPU physics simulation), the overall code quality has improved significantly:
+The SMFTEngine refactoring successfully addresses the critical God Object anti-pattern by extracting specialized classes for pipeline creation, buffer management, and compute dispatch. While some complexity remains in the core engine (inherent to GPU physics simulation), the overall code quality has improved significantly:
 
 - Build integrity maintained (0 errors)
 - 87.5% file size compliance (7/8 files)
@@ -398,7 +398,7 @@ The MSFTEngine refactoring successfully addresses the critical God Object anti-p
 - Clean separation of concerns
 - Public API preserved (no breaking changes)
 
-Remaining complexity in MSFTEngine.cpp (1,278 lines) is **justified** due to:
+Remaining complexity in SMFTEngine.cpp (1,278 lines) is **justified** due to:
 1. Essential physics documentation (~70 lines)
 2. Complex GPU initialization (~130 lines)
 3. Vulkan descriptor verbosity (~350 lines)

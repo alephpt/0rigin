@@ -182,7 +182,7 @@ CMakeFiles/test_ehrenfest_validation.dir/test/test_ehrenfest_validation.cpp.o: \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
  /usr/include/bits/stdint-least.h \
- /home/persist/neotec/0rigin/test/../src/MSFTCommon.h \
+ /home/persist/neotec/0rigin/test/../src/SMFTCommon.h \
  /usr/include/c++/15.2.1/fstream /usr/include/c++/15.2.1/bits/codecvt.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++io.h \

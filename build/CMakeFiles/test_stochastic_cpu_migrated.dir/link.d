@@ -3,7 +3,7 @@ bin/test_stochastic_cpu_migrated: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_stochastic_cpu_migrated.dir/test/test_stochastic_cpu_migrated.cpp.o \
-  CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.o \
   CMakeFiles/test_stochastic_cpu_migrated.dir/src/output/OutputManager.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
@@ -42,7 +42,7 @@ bin/test_stochastic_cpu_migrated: \
 
 CMakeFiles/test_stochastic_cpu_migrated.dir/test/test_stochastic_cpu_migrated.cpp.o:
 
-CMakeFiles/test_stochastic_cpu_migrated.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_stochastic_cpu_migrated.dir/src/SMFTCommon.cpp.o:
 
 CMakeFiles/test_stochastic_cpu_migrated.dir/src/output/OutputManager.cpp.o:
 

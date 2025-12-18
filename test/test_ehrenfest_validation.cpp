@@ -18,7 +18,7 @@
  */
 
 #include "../src/DiracEvolution.h"
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -51,9 +51,9 @@ const int OUTPUT_INTERVAL = 100;   // Good resolution (500 points)
 
 using Complex = std::complex<float>;
 
-// Use functions from MSFTCommon instead of local implementations
-// The snake_case wrappers in MSFTCommon.h provide backward compatibility
-using namespace MSFT;
+// Use functions from SMFTCommon instead of local implementations
+// The snake_case wrappers in SMFTCommon.h provide backward compatibility
+using namespace SMFT;
 
 int main() {
     std::cout << "=== EHRENFEST THEOREM VALIDATION ===" << std::endl;

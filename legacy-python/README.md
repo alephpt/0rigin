@@ -16,12 +16,12 @@ where:
 - `K` is the coupling strength
 - `N` is the number of oscillators
 
-This implementation provides a clean, extensible framework for studying synchronization phenomena, with extensions to statistical mean field theory (MSFT) and Hamiltonian formulations.
+This implementation provides a clean, extensible framework for studying synchronization phenomena, with extensions to statistical mean field theory (SMFT) and Hamiltonian formulations.
 
 ## Features
 
 - **Classical Kuramoto model**: Standard synchronization dynamics
-- **MSFT field theory extensions**: Klein-Gordon mediator fields, Hamiltonian dynamics
+- **SMFT field theory extensions**: Klein-Gordon mediator fields, Hamiltonian dynamics
 - **Multiple frequency distributions**: Lorentzian, Gaussian, Uniform
 - **Flexible coupling schemes**: All-to-all, local field coupling
 - **Advanced solvers**: RK4, RK45 (adaptive), Euler
@@ -162,7 +162,7 @@ PYTHONPATH=src:$PYTHONPATH pytest tests/
 **Validated predictions**:
 - ✅ Synchronization transition at Kc = 2γ for Lorentzian distribution
 - ✅ Order parameter R ∈ [0, 1]
-- ✅ MSFT mass generation: m_eff ∝ R
+- ✅ SMFT mass generation: m_eff ∝ R
 - ✅ Wave propagation at speed c in Klein-Gordon field
 - ✅ Hamiltonian dynamics with energy conservation
 
@@ -179,7 +179,7 @@ python examples/demo_synchronization.py
 
 ### Field Theory
 ```bash
-python examples/field_theory/MSFT_demo.py
+python examples/field_theory/SMFT_demo.py
 python examples/field_theory/hamiltonian_demo.py
 ```
 

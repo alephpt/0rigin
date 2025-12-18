@@ -4,7 +4,7 @@
  */
 
 #include "../lib/Nova/Nova.h"
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -26,7 +26,7 @@ int main() {
     Nova nova(config);
     nova.initialized = true;
 
-    MSFTEngine engine(&nova);
+    SMFTEngine engine(&nova);
     engine.initialize(Nx, Ny, 2.5f, 0.0f);
 
     // Set random initial phases

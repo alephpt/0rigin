@@ -18,7 +18,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <random>
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 
 struct Defect {
     int x, y;
@@ -71,7 +71,7 @@ std::vector<Defect> detect_defects(const std::vector<float>& theta,
     return defects;
 }
 
-// Using MSFTCommon::computeLocalR instead of local implementation
+// Using SMFTCommon::computeLocalR instead of local implementation
 
 void cpu_kuramoto_step(std::vector<float>& theta,
                        const std::vector<float>& omega,
@@ -162,8 +162,8 @@ int main() {
     std::cout << std::fixed << std::setprecision(4);
     
     for (int step = 0; step <= N_steps; step++) {
-        // Compute R field using MSFTCommon
-        std::vector<float> R_field = MSFT::computeLocalR(theta, Nx, Ny);
+        // Compute R field using SMFTCommon
+        std::vector<float> R_field = SMFT::computeLocalR(theta, Nx, Ny);
         
         float R_sum = 0.0f;
         for (float r : R_field) R_sum += r;

@@ -1,6 +1,6 @@
 /**
  * @file queue_diagnostics.hpp
- * @brief GPU queue diagnostics for MSFT pipeline
+ * @brief GPU queue diagnostics for SMFT pipeline
  */
 
 #pragma once

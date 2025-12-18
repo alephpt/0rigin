@@ -1,5 +1,5 @@
 /**
- * Test program to verify descriptor binding fixes for MSFT engine
+ * Test program to verify descriptor binding fixes for SMFT engine
  *
  * This test validates:
  * 1. Separate descriptor sets for each pipeline
@@ -9,20 +9,20 @@
  */
 
 #include "Nova/Nova.h"
-#include "MSFTEngine.h"
+#include "SMFTEngine.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
 #include <random>
 
 int main() {
-    std::cout << "\n=== MSFT Descriptor Binding Validation Test ===" << std::endl;
+    std::cout << "\n=== SMFT Descriptor Binding Validation Test ===" << std::endl;
     std::cout << "Testing critical fixes from QA review:\n" << std::endl;
 
     // 1. Initialize Nova graphics engine
     std::cout << "1. Initializing Nova engine..." << std::endl;
     NovaConfig config;
-    config.name = "MSFT Descriptor Test";
+    config.name = "SMFT Descriptor Test";
     config.screen = {800, 600};
     config.debug_level = "development";
     config.dimensions = "3D";
@@ -36,10 +36,10 @@ int main() {
     }
     std::cout << "   ✓ Nova initialized successfully" << std::endl;
 
-    // 2. Create MSFT physics engine
-    std::cout << "\n2. Creating MSFT physics engine..." << std::endl;
-    MSFTEngine msft(&nova);
-    std::cout << "   ✓ MSFT engine created" << std::endl;
+    // 2. Create SMFT physics engine
+    std::cout << "\n2. Creating SMFT physics engine..." << std::endl;
+    SMFTEngine smft(&nova);
+    std::cout << "   ✓ SMFT engine created" << std::endl;
 
     // 3. Initialize with test parameters
     std::cout << "\n3. Initializing simulation parameters..." << std::endl;
@@ -47,7 +47,7 @@ int main() {
     float Delta = 1.0f;          // Mass gap parameter
     float chiral_angle = 0.1f;   // Small chiral angle
 
-    msft.initialize(Nx, Ny, Delta, chiral_angle);
+    smft.initialize(Nx, Ny, Delta, chiral_angle);
     std::cout << "   ✓ Grid: " << Nx << "x" << Ny << std::endl;
     std::cout << "   ✓ Mass gap Δ = " << Delta << std::endl;
     std::cout << "   ✓ Chiral angle = " << chiral_angle << std::endl;
@@ -69,8 +69,8 @@ int main() {
         omega[i] = freq_dist(gen);
     }
 
-    msft.setInitialPhases(theta);
-    msft.setNaturalFrequencies(omega);
+    smft.setInitialPhases(theta);
+    smft.setNaturalFrequencies(omega);
     std::cout << "   ✓ Initial phases set (random)" << std::endl;
     std::cout << "   ✓ Natural frequencies set (Gaussian)" << std::endl;
 
@@ -88,7 +88,7 @@ int main() {
 
     std::cout << "\n   Executing simulation step..." << std::endl;
     try {
-        msft.step(dt, K, damping);
+        smft.step(dt, K, damping);
         std::cout << "   ✓ Step completed successfully" << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "   ✗ Step failed: " << e.what() << std::endl;
@@ -99,7 +99,7 @@ int main() {
     std::cout << "\n6. Verifying simulation outputs..." << std::endl;
 
     // Get synchronization field
-    auto R_field = msft.getSyncField();
+    auto R_field = smft.getSyncField();
     if (R_field.size() == Nx * Ny) {
         float R_avg = 0;
         for (float R : R_field) {
@@ -113,7 +113,7 @@ int main() {
     }
 
     // Get mass field
-    auto mass_field = msft.getMassField();
+    auto mass_field = smft.getMassField();
     if (mass_field.size() == Nx * Ny) {
         float mass_avg = 0;
         for (float m : mass_field) {
@@ -127,7 +127,7 @@ int main() {
     }
 
     // Get gravitational field
-    auto g_field = msft.getGravitationalField();
+    auto g_field = smft.getGravitationalField();
     if (g_field.size() == 2 * Nx * Ny) {
         float g_magnitude_avg = 0;
         for (uint32_t i = 0; i < Nx * Ny; i++) {
@@ -147,7 +147,7 @@ int main() {
     bool stable = true;
     for (int i = 0; i < 10; i++) {
         try {
-            msft.step(dt, K, damping);
+            smft.step(dt, K, damping);
             std::cout << "   Step " << (i+1) << "/10 ✓" << std::endl;
         } catch (const std::exception& e) {
             std::cerr << "   ✗ Failed at step " << (i+1) << ": " << e.what() << std::endl;

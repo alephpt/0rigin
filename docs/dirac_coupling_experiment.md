@@ -9,7 +9,7 @@
 
 ## I. Theoretical Prediction
 
-### The Core MSFT Hypothesis
+### The Core SMFT Hypothesis
 
 **Vacuum provides continuous mass landscape**:
 $$m(x) = \Delta \cdot R(x)$$
@@ -28,7 +28,7 @@ $$[i\hbar\partial_t - c\alpha \cdot \mathbf{p} - \beta m(x)c^2]\Psi = 0$$
 - **But electron energies** E_n = -13.6 eV/n² are discrete
 - **Quantization from** wavefunction boundary conditions, NOT potential discreteness
 
-### For MSFT
+### For SMFT
 
 - **Vacuum potential** m(x) is continuous (proven in defect evolution tests)
 - **But Dirac bound states** should have discrete energies E₁, E₂, E₃, ...
@@ -131,7 +131,7 @@ $$\alpha_y = \sigma_y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}$$
 
 $$\beta = \sigma_z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$$
 
-### Chiral Coupling (MSFT-Specific)
+### Chiral Coupling (SMFT-Specific)
 
 From R.Christopher papers, the mass couples via:
 $$m_{eff} = \Delta \cdot R(x) \cdot e^{i\theta(x)\gamma^5}$$
@@ -421,7 +421,7 @@ Criterion 5 (Stability): τ > 500?
 │
 └─ YES → SUCCESS ✓✓✓
           ALL 5 CRITERIA MET
-          → MSFT mechanism validated
+          → SMFT mechanism validated
           → Particle generation from vacuum confirmed
           → Publish results
 ```
@@ -434,7 +434,7 @@ Criterion 5 (Stability): τ > 500?
 2. **Directive.md** - Experimental methodology
 3. **Determinism.md** - Theoretical foundation
 4. Dirac, P. A. M. (1928). "The Quantum Theory of the Electron"
-5. Christopher, R. (2023). "Soliton Handoff Mechanism in MSFT"
+5. Christopher, R. (2023). "Soliton Handoff Mechanism in SMFT"
 6. Thaller, B. (1992). "The Dirac Equation" (textbook reference)
 
 ---

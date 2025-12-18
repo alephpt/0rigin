@@ -1,4 +1,4 @@
-# Sprint 2 Recommendations: MSFT Field Theory Implementation
+# Sprint 2 Recommendations: SMFT Field Theory Implementation
 
 **Generated**: 2025-12-10
 **For**: Sprint 2 Planning
@@ -91,9 +91,9 @@ class ContinuumKuramoto:
 
 **Implementation**:
 ```python
-class MSFTModel:
+class SMFTModel:
     """
-    Full Mass Synchronization Field Theory.
+    Full Synchronization Mass Field Theory.
     """
     def __init__(self):
         self.sync_amplitude = R(x,t)

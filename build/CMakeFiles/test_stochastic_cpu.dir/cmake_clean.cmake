@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test_stochastic_cpu.dir/link.d"
-  "CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.o"
-  "CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.o.d"
+  "CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.o"
+  "CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.o.d"
   "CMakeFiles/test_stochastic_cpu.dir/test/test_stochastic_cpu.cpp.o"
   "CMakeFiles/test_stochastic_cpu.dir/test/test_stochastic_cpu.cpp.o.d"
   "bin/test_stochastic_cpu"

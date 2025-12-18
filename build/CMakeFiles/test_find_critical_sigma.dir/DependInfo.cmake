@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/persist/neotec/0rigin/src/MSFTCommon.cpp" "CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o" "gcc" "CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/SMFTCommon.cpp" "CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o" "gcc" "CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_find_critical_sigma.cpp" "CMakeFiles/test_find_critical_sigma.dir/test/test_find_critical_sigma.cpp.o" "gcc" "CMakeFiles/test_find_critical_sigma.dir/test/test_find_critical_sigma.cpp.o.d"
   "" "bin/test_find_critical_sigma" "gcc" "CMakeFiles/test_find_critical_sigma.dir/link.d"
   )

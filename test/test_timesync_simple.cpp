@@ -3,7 +3,7 @@
  * Tests that the substep_ratio is actually being used
  */
 
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include "../lib/Nova/Nova.h"
 #include <iostream>
 #include <vector>
@@ -26,7 +26,7 @@ int main() {
     nova.initialized = true;
 
     // Create engine
-    MSFTEngine engine(&nova);
+    SMFTEngine engine(&nova);
 
     // Initialize with small grid
     const int GRID = 32;
@@ -65,7 +65,7 @@ int main() {
     std::cout << "✅ Timesync implementation confirmed:" << std::endl;
     std::cout << "  - _substep_ratio variable exists (default N=10)" << std::endl;
     std::cout << "  - setSubstepRatio(N) method works" << std::endl;
-    std::cout << "  - Operator splitting logic in place (lines 328-360 of MSFTEngine.cpp)" << std::endl;
+    std::cout << "  - Operator splitting logic in place (lines 328-360 of SMFTEngine.cpp)" << std::endl;
     std::cout << "  - Kuramoto runs N times for every 1 Dirac update" << std::endl;
     std::cout << "  - Born-Oppenheimer approximation implemented as described" << std::endl;
 

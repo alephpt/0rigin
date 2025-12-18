@@ -4,7 +4,7 @@
  * Validates adiabatic approximation with different substep ratios
  */
 
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include <iostream>
 #include <cmath>
 #include <fstream>

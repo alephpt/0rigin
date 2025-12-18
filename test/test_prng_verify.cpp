@@ -14,7 +14,7 @@
  */
 
 #include "../lib/Nova/Nova.h"
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -43,8 +43,8 @@ int main() {
 
     std::cout << "Grid: " << Nx << " x " << Ny << " (" << N_samples << " samples)" << std::endl;
 
-    // Initialize MSFT engine
-    MSFTEngine engine(&nova);
+    // Initialize SMFT engine
+    SMFTEngine engine(&nova);
     engine.initialize(Nx, Ny, 2.5f, 0.0f);
 
     // Set random initial phases

@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-This document outlines the GPU shader architecture for implementing stochastic MSFT with Dirac coupling. The design leverages the existing validated `kuramoto_stochastic.comp` shader and extends it to include stochastic Dirac evolution while maintaining the robust synchronization demonstrated in our noise sweep experiments.
+This document outlines the GPU shader architecture for implementing stochastic SMFT with Dirac coupling. The design leverages the existing validated `kuramoto_stochastic.comp` shader and extends it to include stochastic Dirac evolution while maintaining the robust synchronization demonstrated in our noise sweep experiments.
 
 ---
 
@@ -406,7 +406,7 @@ For each timestep:
 
 ```cpp
 // C++ dispatch code
-void MSFTEngine::stepStochastic(float dt, float sigma_theta, float sigma_psi) {
+void SMFTEngine::stepStochastic(float dt, float sigma_theta, float sigma_psi) {
     // Step 1: Phase evolution
     dispatchKuramatoStochastic();
     vkCmdPipelineBarrier(...);  // Ensure completion

@@ -86,30 +86,30 @@ CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.s:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_dirac_stochastic_full.cpp -o CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.s
 
-CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_dirac_stochastic_full.dir/flags.make
-CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o: /home/persist/neotec/0rigin/src/MSFTCommon.cpp
-CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o: CMakeFiles/test_dirac_stochastic_full.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o -MF CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o.d -o CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/MSFTCommon.cpp
+CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_dirac_stochastic_full.dir/flags.make
+CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o: /home/persist/neotec/0rigin/src/SMFTCommon.cpp
+CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o: CMakeFiles/test_dirac_stochastic_full.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o -MF CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o.d -o CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCommon.cpp
 
-CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/MSFTCommon.cpp > CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.i
+CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCommon.cpp > CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.i
 
-CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/MSFTCommon.cpp -o CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.s
+CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCommon.cpp -o CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.s
 
 # Object files for target test_dirac_stochastic_full
 test_dirac_stochastic_full_OBJECTS = \
 "CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.o" \
-"CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o"
+"CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o"
 
 # External object files for target test_dirac_stochastic_full
 test_dirac_stochastic_full_EXTERNAL_OBJECTS =
 
 bin/test_dirac_stochastic_full: CMakeFiles/test_dirac_stochastic_full.dir/test/test_dirac_stochastic_full.cpp.o
-bin/test_dirac_stochastic_full: CMakeFiles/test_dirac_stochastic_full.dir/src/MSFTCommon.cpp.o
+bin/test_dirac_stochastic_full: CMakeFiles/test_dirac_stochastic_full.dir/src/SMFTCommon.cpp.o
 bin/test_dirac_stochastic_full: CMakeFiles/test_dirac_stochastic_full.dir/build.make
 bin/test_dirac_stochastic_full: CMakeFiles/test_dirac_stochastic_full.dir/compiler_depend.ts
 bin/test_dirac_stochastic_full: CMakeFiles/test_dirac_stochastic_full.dir/link.txt

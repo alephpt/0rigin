@@ -11,14 +11,14 @@ The implementation is mostly correct but has **critical issues** that must be fi
 - **Proper error handling**: Most Vulkan calls check return values
 - **Memory barriers**: Correctly placed between shader stages to prevent race conditions
 - **Resource cleanup**: `destroyResources()` properly cleans up all allocated resources
-- **Theory implementation**: Correctly implements MSFT equations from 0.md
+- **Theory implementation**: Correctly implements SMFT equations from 0.md
 
 ### ❌ Critical Issues Found
 
 #### Issue 1: **Shader Binding Mismatch** (BLOCKER)
 The C++ code creates a single descriptor set with 6 bindings that's shared across all pipelines:
 ```cpp
-// MSFTEngine.cpp lines 757-806
+// SMFTEngine.cpp lines 757-806
 Binding 0: theta_buffer
 Binding 1: theta_out_buffer
 Binding 2: omega_buffer
@@ -64,14 +64,14 @@ No validation for buffer sizes or grid dimensions before GPU dispatch.
 ```bash
 [ 50%] Built target Nova
 [ 76%] Built target imgui
-[ 90%] Built target MSFT
-[100%] Built target test_msft_gpu
+[ 90%] Built target SMFT
+[100%] Built target test_smft_gpu
 ```
 ✅ **Compiles successfully** with no errors or warnings
 
 ## 4. Theory Validation
 
-✅ **Correctly implements MSFT equations**:
+✅ **Correctly implements SMFT equations**:
 - Phase evolution: dθ/dt = ω + K·coupling ✓
 - Sync field: R(x) = |⟨e^(iθ)⟩| ✓
 - Mass: m(x) = Δ·R(x) ✓
@@ -118,7 +118,7 @@ The test executable crashes due to Vulkan initialization issues in the test envi
 ## Recommendations
 
 1. **Immediate Action**: Fix the descriptor set binding mismatch - this will cause GPU crashes or incorrect results
-2. **Testing**: After fixes, run the test_msft_gpu to verify correct execution
+2. **Testing**: After fixes, run the test_smft_gpu to verify correct execution
 3. **Documentation**: Add comments explaining which buffers each shader uses
 
 ## Final Verdict
@@ -136,4 +136,4 @@ The descriptor set binding mismatch is a showstopper that will cause runtime fai
 
 ## Summary
 
-The Phase 3+4 implementation demonstrates good understanding of Vulkan compute pipelines and correctly implements the MSFT theory. However, the descriptor set binding mismatch between C++ and shaders is a critical issue that prevents approval. Once fixed, this will be a solid GPU implementation of the MSFT physics engine.
+The Phase 3+4 implementation demonstrates good understanding of Vulkan compute pipelines and correctly implements the SMFT theory. However, the descriptor set binding mismatch between C++ and shaders is a critical issue that prevents approval. Once fixed, this will be a solid GPU implementation of the SMFT physics engine.

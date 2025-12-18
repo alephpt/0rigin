@@ -24,7 +24,7 @@
 ## Shader-by-Shader Analysis
 
 ### 1. kuramoto_step.comp
-**Purpose**: Kuramoto oscillator evolution with MSFT spinor feedback
+**Purpose**: Kuramoto oscillator evolution with SMFT spinor feedback
 **Status**: ✅ **LOW RISK** (simplified)
 
 **Operations per invocation**:
@@ -408,7 +408,7 @@ Trade-off: Less accuracy, but 4× faster and won't timeout
 
 **Problem**: 4 different versions exist, causing confusion
 
-**Current usage** (from MSFTEngine.cpp line 913):
+**Current usage** (from SMFTEngine.cpp line 913):
 ```cpp
 _sync_pipeline = _pipelineFactory->createSyncFieldPipeline(
     "/home/persist/neotec/0rigin/shaders/smft/sync_field.comp.spv",
@@ -435,7 +435,7 @@ _sync_pipeline = _pipelineFactory->createSyncFieldPipeline(
    - Use deterministic `step()` only
 
 2. **Switch sync_field to sync_field_simple.comp**
-   - Edit `MSFTEngine.cpp` line 913
+   - Edit `SMFTEngine.cpp` line 913
    - Reduces GPU load by ~50%
 
 3. **Reduce grid size for testing**
@@ -487,7 +487,7 @@ To verify these findings, run the following tests:
 ### Test 1: Baseline (Known Working)
 ```bash
 # Use simplified sync field
-./bin/test_msft_gpu  # Should work (32x32 grid)
+./bin/test_smft_gpu  # Should work (32x32 grid)
 ```
 
 ### Test 2: Stress Test (Sync Field)

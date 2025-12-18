@@ -20,7 +20,7 @@
  * BASELINE: σ_θ = σ_Ψ = 0.05 (13× below critical σ_c ≈ 0.65)
  */
 
-#include "../src/MSFTCommon.h"
+#include "../src/SMFTCommon.h"
 #include <iostream>
 #include <vector>
 #include <complex>
@@ -80,7 +80,7 @@ int idx(int x, int y) {
 // KURAMOTO DYNAMICS
 // ============================================================================
 
-// Use compute_local_R and compute_global_R from MSFTCommon instead
+// Use compute_local_R and compute_global_R from SMFTCommon instead
 
 /**
  * @brief Kuramoto step with Euler-Maruyama stochastic integration
@@ -309,7 +309,7 @@ TestResult test_vacuum_stability(float sigma_theta, float sigma_psi) {
         if (step % 100 == 0) std::cout << "." << std::flush;
     }
 
-    float R_warmup = MSFT::compute_global_R(theta);
+    float R_warmup = SMFT::compute_global_R(theta);
     std::cout << " R = " << R_warmup << std::endl;
 
     // Evolution with noise
@@ -319,7 +319,7 @@ TestResult test_vacuum_stability(float sigma_theta, float sigma_psi) {
     for (int step = 0; step < N_STEPS; step++) {
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
-        float R = MSFT::compute_global_R(theta);
+        float R = SMFT::compute_global_R(theta);
         R_history.push_back(R);
 
         if (step % 100 == 0) {
@@ -377,7 +377,7 @@ TestResult test_norm_conservation(float sigma_theta, float sigma_psi) {
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
         // Compute R field
-        std::vector<float> R_field = MSFT::compute_local_R(theta, NX, NY);
+        std::vector<float> R_field = SMFT::compute_local_R(theta, NX, NY);
 
         // Update Dirac
         dirac_step(psi, R_field, DT, sigma_psi, rng);
@@ -442,7 +442,7 @@ TestResult test_particle_localization(float sigma_theta, float sigma_psi) {
         kuramoto_step(theta, omega, DT, K, GAMMA, sigma_theta, rng);
 
         // Compute R field
-        std::vector<float> R_field = MSFT::compute_local_R(theta, NX, NY);
+        std::vector<float> R_field = SMFT::compute_local_R(theta, NX, NY);
 
         // Update Dirac
         dirac_step(psi, R_field, DT, sigma_psi, rng);

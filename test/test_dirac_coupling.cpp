@@ -13,7 +13,7 @@
  */
 
 #include "../lib/Nova/Nova.h"
-#include "../src/MSFTEngine.h"
+#include "../src/SMFTEngine.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -169,7 +169,7 @@ int count_particles(const std::vector<float>& psi_density, int Nx, int Ny) {
 }
 
 int main() {
-    std::cout << "=== MSFT Dirac Coupling Experiment ===" << std::endl;
+    std::cout << "=== SMFT Dirac Coupling Experiment ===" << std::endl;
     std::cout << "Testing 5 Success Criteria from Dirac-Anomaly.md\n" << std::endl;
 
     create_output_dirs();
@@ -194,7 +194,7 @@ int main() {
 
         // Initialize Nova (compute-only mode)
         NovaConfig config = {
-            .name = "MSFT Dirac Coupling",
+            .name = "SMFT Dirac Coupling",
             .screen = {800, 600},
             .debug_level = "info",
             .dimensions = "2D",
@@ -204,8 +204,8 @@ int main() {
         Nova nova(config);
         nova.initialized = true;
 
-        // Initialize MSFT engine
-        MSFTEngine engine(&nova);
+        // Initialize SMFT engine
+        SMFTEngine engine(&nova);
         engine.initialize(Nx, Ny, Delta, 0.0f);
 
         // Phase 1: Vacuum equilibration (500 steps, no Dirac)
@@ -236,7 +236,7 @@ int main() {
         // Phase 2: Initialize Dirac field (Gaussian at defect centers)
         std::cout << "\nPhase 2: Initializing Dirac field..." << std::endl;
 
-        // TODO: Implement initializeDiracField() method in MSFTEngine
+        // TODO: Implement initializeDiracField() method in SMFTEngine
         // For now, this is a placeholder
 
         // Phase 3: Coupled evolution (2000 steps)

@@ -160,7 +160,7 @@ int main() {
     std::ifstream f_theta("output/theta.dat", std::ios::binary);
     if (!f_theta.is_open()) {
         std::cerr << "Error: Could not open output/theta.dat" << std::endl;
-        std::cerr << "Run test_msft_compute_only first to generate data." << std::endl;
+        std::cerr << "Run test_smft_compute_only first to generate data." << std::endl;
         return 1;
     }
     

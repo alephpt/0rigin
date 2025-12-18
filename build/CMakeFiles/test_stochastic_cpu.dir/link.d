@@ -3,7 +3,7 @@ bin/test_stochastic_cpu: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_stochastic_cpu.dir/test/test_stochastic_cpu.cpp.o \
-  CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libm.so \
@@ -41,7 +41,7 @@ bin/test_stochastic_cpu: \
 
 CMakeFiles/test_stochastic_cpu.dir/test/test_stochastic_cpu.cpp.o:
 
-CMakeFiles/test_stochastic_cpu.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_stochastic_cpu.dir/src/SMFTCommon.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a:
 

@@ -1,4 +1,4 @@
-# Mass Synchronization Field Theory (MSFT)
+# Synchronization Mass Field Theory (SMFT)
 ## A Formal Construction and Analysis
 
 ### Document Version 1.0

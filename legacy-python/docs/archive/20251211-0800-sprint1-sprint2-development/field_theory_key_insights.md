@@ -112,7 +112,7 @@ Continuum limit requires dx < ξ_correlation. Near critical point, correlation l
 **Week 1**: Hamiltonian foundation
 **Week 2**: Field coupling + continuum
 **Week 3**: Fermion integration
-**Week 4**: Full MSFT demonstration
+**Week 4**: Full SMFT demonstration
 
 The path from Kuramoto to field theory is now mapped. Implementation can proceed with confidence.
 

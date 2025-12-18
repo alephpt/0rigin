@@ -10,7 +10,7 @@
 **Previous GPU results:** σ_c ≈ 10⁻⁶ (appeared to falsify Path B)
 **New CPU results:** σ_c > 10⁻⁴ (Path B viable!)
 
-**Conclusion:** The GPU implementation had a bug. Proper CPU implementation shows **MSFT synchronization is robust to noise levels well above the falsification threshold.**
+**Conclusion:** The GPU implementation had a bug. Proper CPU implementation shows **SMFT synchronization is robust to noise levels well above the falsification threshold.**
 
 ---
 
@@ -239,14 +239,14 @@ Theory is mean-field (dimension-independent). 2D systems have **stronger correla
 ✅ σ_c > 10⁻⁵ (falsification criterion NOT met)
 
 **Physical conclusion:**
-1. MSFT synchronization is **robust to noise at the 10⁻⁴ level**
+1. SMFT synchronization is **robust to noise at the 10⁻⁴ level**
 2. Noise source comparable to Planck-scale fluctuations would **NOT** destroy mechanism
 3. **Stochastic vacuum (Path B) remains viable**
 4. MSR formalism can be used
 
 ---
 
-## VI. Corrected Impact on MSFT Development
+## VI. Corrected Impact on SMFT Development
 
 ### Previous (Incorrect) Conclusion from GPU Bug
 
@@ -258,7 +258,7 @@ Theory is mean-field (dimension-independent). 2D systems have **stronger correla
 
 - **Path B is viable** (σ_c > 10⁻⁵)
 - **MSR formalism is valid**
-- Universe can **thermalize into MSFT state** via stochastic dynamics
+- Universe can **thermalize into SMFT state** via stochastic dynamics
 - No fine-tuning required
 
 ### Recommended Next Steps
@@ -305,7 +305,7 @@ All requirements from immediate.md Section IV satisfied:
 **Scientific conclusion:**
 - Stochastic vacuum hypothesis is **viable**
 - MSR formalism is **appropriate**
-- MSFT can arise from **thermodynamic vacuum** (T > 0)
+- SMFT can arise from **thermodynamic vacuum** (T > 0)
 
 **Theoretical framework:**
 - Use Langevin dynamics: dθ/dt = ... + σ·ξ(t)
@@ -315,7 +315,7 @@ All requirements from immediate.md Section IV satisfied:
 **Proceed with:**
 - Stochastic Dirac coupling implementation
 - Particle formation in noisy vacuum
-- Publication: "Stochastic Mass Synchronization Field Theory"
+- Publication: "Stochastic Synchronization Mass Field Theory"
 
 ---
 
@@ -329,7 +329,7 @@ All requirements from immediate.md Section IV satisfied:
 
 ### Physics Lessons
 
-1. **MSFT is robust:** System maintains sync even at σ = 10⁻⁴
+1. **SMFT is robust:** System maintains sync even at σ = 10⁻⁴
 2. **Local coupling is stable:** 4-neighbor coupling with damping is surprisingly resilient
 3. **Stochastic vacuum works:** No need for zero-temperature fine-tuning
 

@@ -1,4 +1,4 @@
-# MSR (Martin-Siggia-Rose) Formalism for Stochastic MSFT
+# MSR (Martin-Siggia-Rose) Formalism for Stochastic SMFT
 
 **Date:** 2025-12-17
 **Status:** Theory Framework
@@ -8,24 +8,24 @@
 
 ## Executive Summary
 
-This document formalizes the stochastic MSFT theory using the Martin-Siggia-Rose (MSR) path integral formalism. With the critical noise threshold measured at σ_c ≈ 0.65-0.80 (well above the falsification threshold of 10⁻⁵), we can proceed confidently with a stochastic vacuum interpretation that tolerates realistic quantum and thermal fluctuations.
+This document formalizes the stochastic SMFT theory using the Martin-Siggia-Rose (MSR) path integral formalism. With the critical noise threshold measured at σ_c ≈ 0.65-0.80 (well above the falsification threshold of 10⁻⁵), we can proceed confidently with a stochastic vacuum interpretation that tolerates realistic quantum and thermal fluctuations.
 
 ---
 
-## 1. Deterministic MSFT Action
+## 1. Deterministic SMFT Action
 
 ### 1.1 Starting Point
 
-The deterministic MSFT action couples synchronized phase field θ(x) with Dirac spinor field Ψ(x):
+The deterministic SMFT action couples synchronized phase field θ(x) with Dirac spinor field Ψ(x):
 
 ```
-S[θ, Ψ] = ∫ d⁴x ℒ_MSFT
+S[θ, Ψ] = ∫ d⁴x ℒ_SMFT
 ```
 
 where the Lagrangian density is:
 
 ```
-ℒ_MSFT = ℒ_Dirac + ℒ_Kuramoto + ℒ_interaction
+ℒ_SMFT = ℒ_Dirac + ℒ_Kuramoto + ℒ_interaction
 ```
 
 #### Components:
@@ -68,7 +68,7 @@ i γ^μ ∂_μ Ψ = Δ·R(θ) Ψ
 
 ---
 
-## 2. MSR Formalism for Stochastic MSFT
+## 2. MSR Formalism for Stochastic SMFT
 
 ### 2.1 Field Doubling
 
@@ -81,7 +81,7 @@ The response fields (tilded) are auxiliary fields that enforce the stochastic eq
 
 ### 2.2 MSR Action
 
-The full MSR action for stochastic MSFT:
+The full MSR action for stochastic SMFT:
 
 ```
 S_MSR[θ,θ̃,Ψ,Ψ̃,ξ] = S_det + S_response + S_noise
@@ -89,7 +89,7 @@ S_MSR[θ,θ̃,Ψ,Ψ̃,ξ] = S_det + S_response + S_noise
 
 #### Deterministic Part:
 ```
-S_det = ∫ dt d³x [ℒ_MSFT(θ,Ψ)]
+S_det = ∫ dt d³x [ℒ_SMFT(θ,Ψ)]
 ```
 
 #### Response Part:
@@ -321,7 +321,7 @@ Im[χ_Ψ(ω)] = (ω/2T) G_ΨΨ(ω)
 
 ### 8.2 Analog Systems
 
-The stochastic MSFT could be realized in:
+The stochastic SMFT could be realized in:
 - Cold atom BECs with engineered noise
 - Coupled SQUID arrays with thermal fluctuations
 - Photonic lattices with controlled disorder
@@ -355,7 +355,7 @@ On lattice with spacing a:
 
 ## 10. Summary and Outlook
 
-The MSR formalism provides a rigorous framework for stochastic MSFT that:
+The MSR formalism provides a rigorous framework for stochastic SMFT that:
 
 1. **Incorporates realistic vacuum fluctuations** while maintaining synchronization
 2. **Predicts testable critical behavior** near σ_c ≈ 0.65
