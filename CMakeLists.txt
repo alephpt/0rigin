@@ -491,6 +491,65 @@ set_target_properties(test_energy_fix PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# Test: Find Critical Sigma
+add_executable(test_find_critical_sigma
+    test/test_find_critical_sigma.cpp
+    src/MSFTCommon.cpp
+)
+
+target_include_directories(test_find_critical_sigma PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_find_critical_sigma PRIVATE
+    pthread
+    m
+)
+
+set_target_properties(test_find_critical_sigma PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test: Noise Sweep Corrected
+add_executable(test_noise_sweep_corrected
+    test/test_noise_sweep_corrected.cpp
+    src/MSFTCommon.cpp
+)
+
+target_include_directories(test_noise_sweep_corrected PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_noise_sweep_corrected PRIVATE
+    pthread
+    m
+)
+
+set_target_properties(test_noise_sweep_corrected PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test: Noise Sweep CPU
+add_executable(test_noise_sweep_cpu
+    test/test_noise_sweep_cpu.cpp
+    src/MSFTCommon.cpp
+)
+
+target_include_directories(test_noise_sweep_cpu PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${Vulkan_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_noise_sweep_cpu PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+
+set_target_properties(test_noise_sweep_cpu PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # ============================================================================
 # SHADERS
 # ============================================================================

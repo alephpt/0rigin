@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <string>
 #include <fstream>
+#include <random>
 
 namespace MSFT {
 
@@ -50,6 +51,20 @@ std::vector<float> computeLocalR(const std::vector<float>& theta,
  * Compute global order parameter R_global
  */
 float computeGlobalR(const std::vector<float>& theta);
+
+/**
+ * Kuramoto evolution step with noise (Euler-Maruyama)
+ *
+ * dθ/dt = ω + (K/4)·Σ sin(θ_neighbor - θ) - γ·sin(θ) + σ·dW
+ *
+ * Uses proper Euler-Maruyama: θ(t+dt) = θ(t) + drift·dt + σ·√(dt)·N(0,1)
+ */
+void stepKuramotoWithNoise(std::vector<float>& theta,
+                           const std::vector<float>& omega,
+                           float dt, float K, float damping,
+                           float sigma,
+                           uint32_t Nx, uint32_t Ny,
+                           std::mt19937& rng);
 
 // ============================================================================
 // DEFECT CREATION
@@ -118,6 +133,20 @@ float computeCoreDensity(const std::vector<float>& density,
                          float center_x, float center_y,
                          float radius,
                          uint32_t Nx, uint32_t Ny);
+
+/**
+ * Compute localization metric L = ∫ R⁴ dA
+ * Higher L indicates more localized synchronization patterns
+ */
+float computeLocalization(const std::vector<float>& R_field);
+
+/**
+ * Compute local R field with configurable neighborhood radius
+ * Similar to computeLocalR but with adjustable radius (default=1)
+ */
+std::vector<float> computeLocalRField(const std::vector<float>& theta,
+                                      uint32_t Nx, uint32_t Ny,
+                                      int radius = 1);
 
 // ============================================================================
 // OUTPUT MANAGEMENT
@@ -255,6 +284,34 @@ inline float measure_defect_contrast(const std::vector<float>& R,
                                      uint32_t defect_x, uint32_t defect_y,
                                      uint32_t Nx, uint32_t Ny) {
     return measureDefectContrast(R, defect_x, defect_y, Nx, Ny);
+}
+
+/**
+ * Wrapper for stepKuramotoWithNoise - stochastic evolution step
+ */
+inline void step_kuramoto_with_noise(std::vector<float>& theta,
+                                     const std::vector<float>& omega,
+                                     float dt, float K, float damping,
+                                     float sigma,
+                                     uint32_t Nx, uint32_t Ny,
+                                     std::mt19937& rng) {
+    stepKuramotoWithNoise(theta, omega, dt, K, damping, sigma, Nx, Ny, rng);
+}
+
+/**
+ * Wrapper for computeLocalization - localization metric
+ */
+inline float compute_localization(const std::vector<float>& R_field) {
+    return computeLocalization(R_field);
+}
+
+/**
+ * Wrapper for computeLocalRField - local R field with radius
+ */
+inline std::vector<float> compute_local_R_field(const std::vector<float>& theta,
+                                                uint32_t Nx, uint32_t Ny,
+                                                int radius = 1) {
+    return computeLocalRField(theta, Nx, Ny, radius);
 }
 
 } // namespace MSFT

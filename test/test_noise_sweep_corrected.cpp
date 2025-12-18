@@ -4,6 +4,7 @@
  * This sweep covers the actual transition region
  */
 
+#include "../src/MSFTCommon.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -12,56 +13,7 @@
 #include <iomanip>
 #include <filesystem>
 
-void kuramotoStepWithNoise(std::vector<float>& theta, const std::vector<float>& omega,
-                           uint32_t Nx, uint32_t Ny, float K, float damping,
-                           float dt, float sigma, std::mt19937& rng) {
-    std::vector<float> theta_new(Nx * Ny);
-    std::normal_distribution<float> noise(0.0f, 1.0f);
-
-    for (uint32_t y = 0; y < Ny; y++) {
-        for (uint32_t x = 0; x < Nx; x++) {
-            uint32_t idx = y * Nx + x;
-
-            float coupling = 0.0f;
-            uint32_t neighbors[4][2] = {
-                {(x + 1) % Nx, y},
-                {(x + Nx - 1) % Nx, y},
-                {x, (y + 1) % Ny},
-                {x, (y + Ny - 1) % Ny}
-            };
-
-            for (int n = 0; n < 4; n++) {
-                uint32_t nx = neighbors[n][0];
-                uint32_t ny = neighbors[n][1];
-                uint32_t nidx = ny * Nx + nx;
-                coupling += std::sin(theta[nidx] - theta[idx]);
-            }
-
-            float damping_force = -damping * std::sin(theta[idx]);
-            float drift = omega[idx] + (K / 4.0f) * coupling + damping_force;
-            float noise_term = sigma * std::sqrt(dt) * noise(rng);
-
-            theta_new[idx] = theta[idx] + drift * dt + noise_term;
-        }
-    }
-
-    theta = theta_new;
-}
-
-float computeGlobalR(const std::vector<float>& theta) {
-    double sum_real = 0.0;
-    double sum_imag = 0.0;
-
-    for (float t : theta) {
-        sum_real += std::cos(t);
-        sum_imag += std::sin(t);
-    }
-
-    sum_real /= theta.size();
-    sum_imag /= theta.size();
-
-    return std::sqrt(sum_real * sum_real + sum_imag * sum_imag);
-}
+using namespace MSFT;
 
 float computeCircularVariance(const std::vector<float>& theta) {
     return 1.0f - computeGlobalR(theta);
@@ -118,14 +70,14 @@ int main() {
 
         // Warmup
         for (int step = 0; step < warmup_steps; step++) {
-            kuramotoStepWithNoise(theta, omega, Nx, Ny, K, damping, dt, 0.0f, rng);
+            stepKuramotoWithNoise(theta, omega, dt, K, damping, 0.0f, Nx, Ny, rng);
         }
         float R_warmup = computeGlobalR(theta);
 
         // Measurement with noise
         std::vector<float> R_series(measurement_steps);
         for (int step = 0; step < measurement_steps; step++) {
-            kuramotoStepWithNoise(theta, omega, Nx, Ny, K, damping, dt, sigma, rng);
+            stepKuramotoWithNoise(theta, omega, dt, K, damping, sigma, Nx, Ny, rng);
             R_series[step] = computeGlobalR(theta);
         }
 
