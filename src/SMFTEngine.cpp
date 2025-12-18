@@ -141,6 +141,10 @@ SMFTEngine::SMFTEngine(Nova* nova)
     _compute = std::make_unique<SMFTCompute>(nova->_architect->logical_device,
                                               nova->_architect->queues.compute,
                                               nova->_architect->queues.indices.compute_family.value_or(0));
+    if (!_compute->initialize()) {
+        std::cerr << "[SMFTEngine] Failed to initialize compute dispatcher" << std::endl;
+        return;
+    }
 
     // Initialize buffer manager
     _bufferManager = std::make_unique<SMFTBufferManager>(nova->_architect->logical_device,
@@ -251,10 +255,13 @@ void SMFTEngine::step(float dt, float K, float damping) {
         float K;
         float damping;
         float Delta;
+        float chiral_angle;
         uint32_t Nx;
         uint32_t Ny;
+        uint32_t N_total;
+        uint32_t enable_feedback;
     } kuramoto_push = {
-        dt, K, damping, _Delta, _Nx, _Ny
+        dt, K, damping, _Delta, 0.0f, _Nx, _Ny, _Nx * _Ny, 0
     };
 
     _compute->dispatchKuramoto(_kuramoto_pipeline,
@@ -267,12 +274,27 @@ void SMFTEngine::step(float dt, float K, float damping) {
     _compute->insertMemoryBarrier();
 
     // Step 2: Calculate synchronization field
-    // Push constants for sync shader
+    // Push constants for sync shader (MUST match shader layout exactly)
     struct SyncPush {
+        float dt;
+        float K;
+        float damping;
+        float Delta;
+        float chiral_angle;
         uint32_t Nx;
         uint32_t Ny;
+        uint32_t N_total;
+        uint32_t neighborhood_radius;
     } sync_push = {
-        _Nx, _Ny
+        dt,              // dt
+        K,               // K
+        damping,         // damping
+        _Delta,          // Delta
+        0.0f,            // chiral_angle (unused for now)
+        _Nx,             // Nx
+        _Ny,             // Ny
+        _Nx * _Ny,       // N_total
+        1                // neighborhood_radius (1 = 3x3 Moore neighborhood)
     };
 
     _compute->dispatchSyncField(_sync_pipeline,
@@ -287,11 +309,17 @@ void SMFTEngine::step(float dt, float K, float damping) {
     // Step 3: Calculate gravitational field
     // Push constants for gravity shader
     struct GravityPush {
+        float dt;
+        float K;
+        float damping;
         float Delta;
+        float chiral_angle;
         uint32_t Nx;
         uint32_t Ny;
+        uint32_t N_total;
+        uint32_t neighborhood_radius;
     } gravity_push = {
-        _Delta, _Nx, _Ny
+        dt, K, damping, _Delta, 0.0f, _Nx, _Ny, _Nx * _Ny, 0
     };
 
     _compute->dispatchGravityField(_gravity_pipeline,
@@ -324,44 +352,9 @@ void SMFTEngine::step(float dt, float K, float damping) {
     // Download results from GPU
     downloadFromGPU();
 
-    // Operator splitting: Check if we need to update Dirac (slow subsystem)
-    if (_substep_ratio > 1 && _dirac_initialized) {
-        _substep_count++;
-
-        if (_substep_count >= _substep_ratio) {
-            // Download accumulated sums
-            std::vector<float> theta_sum(_Nx * _Ny);
-            std::vector<float> R_sum(_Nx * _Ny);
-            _bufferManager->downloadData(_theta_sum_memory, theta_sum.data(),
-                                        theta_sum.size() * sizeof(float));
-            _bufferManager->downloadData(_R_sum_memory, R_sum.data(),
-                                        R_sum.size() * sizeof(float));
-
-            // Compute time averages
-            for (size_t i = 0; i < theta_sum.size(); ++i) {
-                _theta_avg[i] = theta_sum[i] / _substep_ratio;
-                _R_avg[i] = R_sum[i] / _substep_ratio;
-            }
-
-            // Evolve Dirac with averaged fields (CPU-side)
-            updateAveragedFields(_theta_avg, _R_avg);
-            stepWithDirac(dt * _substep_ratio, _lambda_coupling);
-
-            // Upload new frozen Dirac density
-            auto psi_density = getDiracDensity();
-            _bufferManager->uploadData(_spinor_density_memory, psi_density.data(),
-                                       psi_density.size() * sizeof(float));
-
-            // Reset accumulators
-            _compute->beginBatch();
-            size_t buffer_size = _Nx * _Ny * sizeof(float);
-            _compute->fillBuffer(_theta_sum_buffer, 0, buffer_size);
-            _compute->fillBuffer(_R_sum_buffer, 0, buffer_size);
-            _compute->submitBatch(true);
-
-            _substep_count = 0;
-        }
-    }
+    // NOTE: Old internal operator splitting logic removed (lines 358-395)
+    // Operator splitting is now handled exclusively by stepWithDirac() external loop
+    // This eliminates the recursion bug and simplifies the codebase
 
     // Swap theta buffers for next iteration
     std::swap(_theta_buffer, _theta_out_buffer);
@@ -609,7 +602,7 @@ void SMFTEngine::createPipelines() {
         VkPushConstantRange pushRange{};
         pushRange.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
         pushRange.offset = 0;
-        pushRange.size = sizeof(float) * 6;
+        pushRange.size = sizeof(float) * 5 + sizeof(uint32_t) * 4;  // 36 bytes: dt,K,damping,Delta,chiral_angle,Nx,Ny,N_total,enable_feedback
 
         VkPipelineLayoutCreateInfo layoutInfo{};
         layoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
@@ -656,7 +649,7 @@ void SMFTEngine::createPipelines() {
         VkPushConstantRange pushRange{};
         pushRange.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
         pushRange.offset = 0;
-        pushRange.size = sizeof(uint32_t) * 2;
+        pushRange.size = sizeof(float) * 5 + sizeof(uint32_t) * 4;  // 36 bytes: dt,K,damping,Delta,chiral_angle,Nx,Ny,N_total,neighborhood_radius
 
         VkPipelineLayoutCreateInfo layoutInfo{};
         layoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
@@ -700,7 +693,7 @@ void SMFTEngine::createPipelines() {
         VkPushConstantRange pushRange{};
         pushRange.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
         pushRange.offset = 0;
-        pushRange.size = sizeof(float) + sizeof(uint32_t) * 2;
+        pushRange.size = sizeof(float) * 5 + sizeof(uint32_t) * 4;  // 36 bytes: dt,K,damping,Delta,chiral_angle,Nx,Ny,N_total,neighborhood_radius
 
         VkPipelineLayoutCreateInfo layoutInfo{};
         layoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
@@ -863,9 +856,10 @@ void SMFTEngine::uploadToGPU() {
     _bufferManager->uploadData(_spinor_memory, _spinor_field.data(),
                               sizeof(std::complex<float>) * _spinor_field.size());
 
-    if (_nova) {
-        std::cout << "[SMFTEngine] Uploaded data to GPU" << std::endl;
-    }
+    // Disabled verbose logging - too noisy during operator splitting
+    // if (_nova) {
+    //     std::cout << "[SMFTEngine] Uploaded data to GPU" << std::endl;
+    // }
 }
 
 void SMFTEngine::downloadFromGPU() {
@@ -885,59 +879,29 @@ void SMFTEngine::downloadFromGPU() {
     _bufferManager->downloadData(_gravity_y_memory, _gravity_y_data.data(),
                                 sizeof(float) * _gravity_y_data.size());
 
-    if (_nova) {
-        std::cout << "[SMFTEngine] Downloaded results from GPU" << std::endl;
-    }
+    // Disabled verbose logging - too noisy during operator splitting
+    // if (_nova) {
+    //     std::cout << "[SMFTEngine] Downloaded results from GPU" << std::endl;
+    // }
 }
 
 void SMFTEngine::destroyResources() {
+    // DOUBLE-FREE FIX: Let component managers handle resource destruction
+    // The unique_ptr members (_pipelineFactory, _bufferManager, _descriptorManager)
+    // already have proper cleanup logic in their destructors. Manual cleanup here
+    // was causing resources to be freed twice, leading to crashes.
+
     if (_nova && _nova->_architect && _nova->_architect->logical_device) {
         vkDeviceWaitIdle(_nova->_architect->logical_device);
 
-        // Destroy pipelines
-        if (_kuramoto_pipeline) vkDestroyPipeline(_nova->_architect->logical_device, _kuramoto_pipeline, nullptr);
-        if (_sync_pipeline) vkDestroyPipeline(_nova->_architect->logical_device, _sync_pipeline, nullptr);
-        if (_gravity_pipeline) vkDestroyPipeline(_nova->_architect->logical_device, _gravity_pipeline, nullptr);
-        if (_dirac_pipeline) vkDestroyPipeline(_nova->_architect->logical_device, _dirac_pipeline, nullptr);
-        if (_kuramoto_stochastic_pipeline) vkDestroyPipeline(_nova->_architect->logical_device, _kuramoto_stochastic_pipeline, nullptr);
-        if (_dirac_stochastic_pipeline) vkDestroyPipeline(_nova->_architect->logical_device, _dirac_stochastic_pipeline, nullptr);
-
-        // Destroy pipeline layouts
-        if (_kuramoto_pipeline_layout) vkDestroyPipelineLayout(_nova->_architect->logical_device, _kuramoto_pipeline_layout, nullptr);
-        if (_sync_pipeline_layout) vkDestroyPipelineLayout(_nova->_architect->logical_device, _sync_pipeline_layout, nullptr);
-        if (_gravity_pipeline_layout) vkDestroyPipelineLayout(_nova->_architect->logical_device, _gravity_pipeline_layout, nullptr);
-        if (_dirac_pipeline_layout) vkDestroyPipelineLayout(_nova->_architect->logical_device, _dirac_pipeline_layout, nullptr);
-
-        // Destroy descriptor set layouts
-        if (_kuramoto_descriptor_layout) vkDestroyDescriptorSetLayout(_nova->_architect->logical_device, _kuramoto_descriptor_layout, nullptr);
-        if (_sync_descriptor_layout) vkDestroyDescriptorSetLayout(_nova->_architect->logical_device, _sync_descriptor_layout, nullptr);
-        if (_gravity_descriptor_layout) vkDestroyDescriptorSetLayout(_nova->_architect->logical_device, _gravity_descriptor_layout, nullptr);
-        if (_dirac_descriptor_layout) vkDestroyDescriptorSetLayout(_nova->_architect->logical_device, _dirac_descriptor_layout, nullptr);
-
-        // Destroy descriptor pool
-        if (_descriptor_pool) vkDestroyDescriptorPool(_nova->_architect->logical_device, _descriptor_pool, nullptr);
-
-        // Destroy buffers and free memory
-        if (_theta_buffer) vkDestroyBuffer(_nova->_architect->logical_device, _theta_buffer, nullptr);
-        if (_theta_memory) vkFreeMemory(_nova->_architect->logical_device, _theta_memory, nullptr);
-        if (_theta_out_buffer) vkDestroyBuffer(_nova->_architect->logical_device, _theta_out_buffer, nullptr);
-        if (_theta_out_memory) vkFreeMemory(_nova->_architect->logical_device, _theta_out_memory, nullptr);
-        if (_omega_buffer) vkDestroyBuffer(_nova->_architect->logical_device, _omega_buffer, nullptr);
-        if (_omega_memory) vkFreeMemory(_nova->_architect->logical_device, _omega_memory, nullptr);
-        if (_R_field_buffer) vkDestroyBuffer(_nova->_architect->logical_device, _R_field_buffer, nullptr);
-        if (_R_field_memory) vkFreeMemory(_nova->_architect->logical_device, _R_field_memory, nullptr);
-        if (_gravity_x_buffer) vkDestroyBuffer(_nova->_architect->logical_device, _gravity_x_buffer, nullptr);
-        if (_gravity_x_memory) vkFreeMemory(_nova->_architect->logical_device, _gravity_x_memory, nullptr);
-        if (_gravity_y_buffer) vkDestroyBuffer(_nova->_architect->logical_device, _gravity_y_buffer, nullptr);
-        if (_gravity_y_memory) vkFreeMemory(_nova->_architect->logical_device, _gravity_y_memory, nullptr);
-        if (_spinor_density_buffer) vkDestroyBuffer(_nova->_architect->logical_device, _spinor_density_buffer, nullptr);
-        if (_spinor_density_memory) vkFreeMemory(_nova->_architect->logical_device, _spinor_density_memory, nullptr);
-        if (_spinor_buffer) vkDestroyBuffer(_nova->_architect->logical_device, _spinor_buffer, nullptr);
-        if (_spinor_memory) vkFreeMemory(_nova->_architect->logical_device, _spinor_memory, nullptr);
+        // Component managers will handle cleanup automatically via their destructors:
+        // - SMFTPipelineFactory destroys pipelines and layouts
+        // - SMFTBufferManager destroys buffers and frees memory
+        // - SMFTDescriptorManager destroys descriptor layouts and pool
     }
 
     if (_nova) {
-        std::cout << "[SMFTEngine] Resources destroyed" << std::endl;
+        std::cout << "[SMFTEngine] Resources cleanup delegated to component managers" << std::endl;
     }
 }
 
@@ -971,7 +935,7 @@ void SMFTEngine::initializeDiracField(float x0, float y0, float sigma, float amp
     }
 }
 
-void SMFTEngine::stepWithDirac(float dt, float lambda_coupling) {
+void SMFTEngine::stepWithDirac(float dt, float lambda_coupling, int substep_ratio, float K, float damping) {
     /**
      * Step coupled Kuramoto-Dirac evolution with mass coupling
      * CPU-only implementation - uses split-operator method for unitary evolution
@@ -980,11 +944,27 @@ void SMFTEngine::stepWithDirac(float dt, float lambda_coupling) {
      * - Dirac evolution: i·dΨ/dt = [-iα·∇ + β·m(x)]Ψ
      * - Mass coupling: m(x,y) = Δ·R(x,y) from synchronization field
      * - Feedback: Ψ density influences phase field via coupling λ
+     * - Operator splitting: N Kuramoto steps per 1 Dirac step (Born-Oppenheimer)
      */
 
     if (!_dirac_initialized || !_dirac_evolution) {
         std::cerr << "[SMFTEngine::stepWithDirac] ERROR: Dirac field not initialized" << std::endl;
         return;
+    }
+
+    // Operator splitting: Execute N Kuramoto steps per Dirac step
+    float substep_dt = dt / static_cast<float>(substep_ratio);
+
+    static int call_count = 0;
+    if (call_count == 0) {
+        std::cout << "[stepWithDirac] First call: substep_ratio=" << substep_ratio
+                  << ", substep_dt=" << substep_dt << std::endl;
+    }
+    call_count++;
+
+    for (int n = 0; n < substep_ratio; ++n) {
+        // Step Kuramoto dynamics (fast timescale)
+        step(substep_dt, K, damping);
     }
 
     // Get current synchronization field for mass coupling
@@ -1027,6 +1007,14 @@ std::vector<float> SMFTEngine::getDiracDensity() const {
     }
 
     return _dirac_evolution->getDensity();
+}
+
+const DiracEvolution* SMFTEngine::getDiracEvolution() const {
+    /**
+     * Get internal DiracEvolution object for observable computation
+     * Returns nullptr if not initialized
+     */
+    return _dirac_evolution;
 }
 
 // ============================================================================

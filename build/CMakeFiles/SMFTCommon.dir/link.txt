@@ -1,0 +1,2 @@
+/usr/bin/ar qc libSMFTCommon.a CMakeFiles/SMFTCommon.dir/src/SMFTCommon.cpp.o CMakeFiles/SMFTCommon.dir/src/ObservableComputer.cpp.o CMakeFiles/SMFTCommon.dir/src/DiracEvolution.cpp.o
+/usr/bin/ranlib libSMFTCommon.a

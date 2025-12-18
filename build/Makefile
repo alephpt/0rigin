@@ -428,6 +428,32 @@ test_noise_sweep_cpu/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep_cpu.dir/build.make CMakeFiles/test_noise_sweep_cpu.dir/build
 .PHONY : test_noise_sweep_cpu/fast
 
+#=============================================================================
+# Target rules for targets named test_operator_splitting_10k
+
+# Build rule for target.
+test_operator_splitting_10k: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_operator_splitting_10k
+.PHONY : test_operator_splitting_10k
+
+# fast build rule for target.
+test_operator_splitting_10k/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/build
+.PHONY : test_operator_splitting_10k/fast
+
+#=============================================================================
+# Target rules for targets named test_vortex_operator_splitting
+
+# Build rule for target.
+test_vortex_operator_splitting: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_vortex_operator_splitting
+.PHONY : test_vortex_operator_splitting
+
+# fast build rule for target.
+test_vortex_operator_splitting/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/build
+.PHONY : test_vortex_operator_splitting/fast
+
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
 
@@ -974,6 +1000,8 @@ src/DiracEvolution.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/DiracEvolution.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/DiracEvolution.cpp.o
 .PHONY : src/DiracEvolution.cpp.o
 
 src/DiracEvolution.i: src/DiracEvolution.cpp.i
@@ -994,6 +1022,8 @@ src/DiracEvolution.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/DiracEvolution.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/DiracEvolution.cpp.i
 .PHONY : src/DiracEvolution.cpp.i
 
 src/DiracEvolution.s: src/DiracEvolution.cpp.s
@@ -1014,31 +1044,9 @@ src/DiracEvolution.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/DiracEvolution.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_energy_fix.dir/build.make CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/DiracEvolution.cpp.s
 .PHONY : src/DiracEvolution.cpp.s
-
-src/SMFT.o: src/SMFT.cpp.o
-.PHONY : src/SMFT.o
-
-# target to build an object file
-src/SMFT.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFT.cpp.o
-.PHONY : src/SMFT.cpp.o
-
-src/SMFT.i: src/SMFT.cpp.i
-.PHONY : src/SMFT.i
-
-# target to preprocess a source file
-src/SMFT.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFT.cpp.i
-.PHONY : src/SMFT.cpp.i
-
-src/SMFT.s: src/SMFT.cpp.s
-.PHONY : src/SMFT.s
-
-# target to generate assembly for a file
-src/SMFT.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFT.cpp.s
-.PHONY : src/SMFT.cpp.s
 
 src/SMFTBufferManager.o: src/SMFTBufferManager.cpp.o
 .PHONY : src/SMFTBufferManager.o
@@ -1054,6 +1062,8 @@ src/SMFTBufferManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTBufferManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTBufferManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTBufferManager.cpp.o
 .PHONY : src/SMFTBufferManager.cpp.o
 
 src/SMFTBufferManager.i: src/SMFTBufferManager.cpp.i
@@ -1070,6 +1080,8 @@ src/SMFTBufferManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTBufferManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTBufferManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTBufferManager.cpp.i
 .PHONY : src/SMFTBufferManager.cpp.i
 
 src/SMFTBufferManager.s: src/SMFTBufferManager.cpp.s
@@ -1086,6 +1098,8 @@ src/SMFTBufferManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTBufferManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTBufferManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTBufferManager.cpp.s
 .PHONY : src/SMFTBufferManager.cpp.s
 
 src/SMFTCommon.o: src/SMFTCommon.cpp.o
@@ -1159,6 +1173,8 @@ src/SMFTCompute.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTCompute.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCompute.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTCompute.cpp.o
 .PHONY : src/SMFTCompute.cpp.o
 
 src/SMFTCompute.i: src/SMFTCompute.cpp.i
@@ -1175,6 +1191,8 @@ src/SMFTCompute.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTCompute.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCompute.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTCompute.cpp.i
 .PHONY : src/SMFTCompute.cpp.i
 
 src/SMFTCompute.s: src/SMFTCompute.cpp.s
@@ -1191,7 +1209,33 @@ src/SMFTCompute.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTCompute.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTCompute.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTCompute.cpp.s
 .PHONY : src/SMFTCompute.cpp.s
+
+src/SMFTCore.o: src/SMFTCore.cpp.o
+.PHONY : src/SMFTCore.o
+
+# target to build an object file
+src/SMFTCore.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o
+.PHONY : src/SMFTCore.cpp.o
+
+src/SMFTCore.i: src/SMFTCore.cpp.i
+.PHONY : src/SMFTCore.i
+
+# target to preprocess a source file
+src/SMFTCore.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.i
+.PHONY : src/SMFTCore.cpp.i
+
+src/SMFTCore.s: src/SMFTCore.cpp.s
+.PHONY : src/SMFTCore.s
+
+# target to generate assembly for a file
+src/SMFTCore.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.s
+.PHONY : src/SMFTCore.cpp.s
 
 src/SMFTDescriptorManager.o: src/SMFTDescriptorManager.cpp.o
 .PHONY : src/SMFTDescriptorManager.o
@@ -1207,6 +1251,8 @@ src/SMFTDescriptorManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTDescriptorManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTDescriptorManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTDescriptorManager.cpp.o
 .PHONY : src/SMFTDescriptorManager.cpp.o
 
 src/SMFTDescriptorManager.i: src/SMFTDescriptorManager.cpp.i
@@ -1223,6 +1269,8 @@ src/SMFTDescriptorManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTDescriptorManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTDescriptorManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTDescriptorManager.cpp.i
 .PHONY : src/SMFTDescriptorManager.cpp.i
 
 src/SMFTDescriptorManager.s: src/SMFTDescriptorManager.cpp.s
@@ -1239,6 +1287,8 @@ src/SMFTDescriptorManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTDescriptorManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTDescriptorManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTDescriptorManager.cpp.s
 .PHONY : src/SMFTDescriptorManager.cpp.s
 
 src/SMFTEngine.o: src/SMFTEngine.cpp.o
@@ -1255,6 +1305,8 @@ src/SMFTEngine.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTEngine.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTEngine.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTEngine.cpp.o
 .PHONY : src/SMFTEngine.cpp.o
 
 src/SMFTEngine.i: src/SMFTEngine.cpp.i
@@ -1271,6 +1323,8 @@ src/SMFTEngine.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTEngine.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTEngine.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTEngine.cpp.i
 .PHONY : src/SMFTEngine.cpp.i
 
 src/SMFTEngine.s: src/SMFTEngine.cpp.s
@@ -1287,6 +1341,8 @@ src/SMFTEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTEngine.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTEngine.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTEngine.cpp.s
 .PHONY : src/SMFTEngine.cpp.s
 
 src/SMFTPipelineFactory.o: src/SMFTPipelineFactory.cpp.o
@@ -1303,6 +1359,8 @@ src/SMFTPipelineFactory.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTPipelineFactory.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTPipelineFactory.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTPipelineFactory.cpp.o
 .PHONY : src/SMFTPipelineFactory.cpp.o
 
 src/SMFTPipelineFactory.i: src/SMFTPipelineFactory.cpp.i
@@ -1319,6 +1377,8 @@ src/SMFTPipelineFactory.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTPipelineFactory.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTPipelineFactory.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTPipelineFactory.cpp.i
 .PHONY : src/SMFTPipelineFactory.cpp.i
 
 src/SMFTPipelineFactory.s: src/SMFTPipelineFactory.cpp.s
@@ -1335,6 +1395,8 @@ src/SMFTPipelineFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hybrid_operator_splitting.dir/build.make CMakeFiles/test_hybrid_operator_splitting.dir/src/SMFTPipelineFactory.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_warmup.dir/build.make CMakeFiles/test_simple_warmup.dir/src/SMFTPipelineFactory.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_noise_sweep.dir/build.make CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/src/SMFTPipelineFactory.cpp.s
 .PHONY : src/SMFTPipelineFactory.cpp.s
 
 src/output/OutputManager.o: src/output/OutputManager.cpp.o
@@ -1363,6 +1425,78 @@ src/output/OutputManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stochastic_cpu_migrated.dir/build.make CMakeFiles/test_stochastic_cpu_migrated.dir/src/output/OutputManager.cpp.s
 .PHONY : src/output/OutputManager.cpp.s
+
+src/simulations/ObservableComputer.o: src/simulations/ObservableComputer.cpp.o
+.PHONY : src/simulations/ObservableComputer.o
+
+# target to build an object file
+src/simulations/ObservableComputer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o
+.PHONY : src/simulations/ObservableComputer.cpp.o
+
+src/simulations/ObservableComputer.i: src/simulations/ObservableComputer.cpp.i
+.PHONY : src/simulations/ObservableComputer.i
+
+# target to preprocess a source file
+src/simulations/ObservableComputer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.i
+.PHONY : src/simulations/ObservableComputer.cpp.i
+
+src/simulations/ObservableComputer.s: src/simulations/ObservableComputer.cpp.s
+.PHONY : src/simulations/ObservableComputer.s
+
+# target to generate assembly for a file
+src/simulations/ObservableComputer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s
+.PHONY : src/simulations/ObservableComputer.cpp.s
+
+src/simulations/SMFTTestRunner.o: src/simulations/SMFTTestRunner.cpp.o
+.PHONY : src/simulations/SMFTTestRunner.o
+
+# target to build an object file
+src/simulations/SMFTTestRunner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o
+.PHONY : src/simulations/SMFTTestRunner.cpp.o
+
+src/simulations/SMFTTestRunner.i: src/simulations/SMFTTestRunner.cpp.i
+.PHONY : src/simulations/SMFTTestRunner.i
+
+# target to preprocess a source file
+src/simulations/SMFTTestRunner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.i
+.PHONY : src/simulations/SMFTTestRunner.cpp.i
+
+src/simulations/SMFTTestRunner.s: src/simulations/SMFTTestRunner.cpp.s
+.PHONY : src/simulations/SMFTTestRunner.s
+
+# target to generate assembly for a file
+src/simulations/SMFTTestRunner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.s
+.PHONY : src/simulations/SMFTTestRunner.cpp.s
+
+src/simulations/TestConfig.o: src/simulations/TestConfig.cpp.o
+.PHONY : src/simulations/TestConfig.o
+
+# target to build an object file
+src/simulations/TestConfig.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o
+.PHONY : src/simulations/TestConfig.cpp.o
+
+src/simulations/TestConfig.i: src/simulations/TestConfig.cpp.i
+.PHONY : src/simulations/TestConfig.i
+
+# target to preprocess a source file
+src/simulations/TestConfig.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.i
+.PHONY : src/simulations/TestConfig.cpp.i
+
+src/simulations/TestConfig.s: src/simulations/TestConfig.cpp.s
+.PHONY : src/simulations/TestConfig.s
+
+# target to generate assembly for a file
+src/simulations/TestConfig.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.s
+.PHONY : src/simulations/TestConfig.cpp.s
 
 test/test_descriptor_bindings.o: test/test_descriptor_bindings.cpp.o
 .PHONY : test/test_descriptor_bindings.o
@@ -1628,6 +1762,30 @@ test/test_operator_splitting.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting.dir/build.make CMakeFiles/test_operator_splitting.dir/test/test_operator_splitting.cpp.s
 .PHONY : test/test_operator_splitting.cpp.s
 
+test/test_operator_splitting_10k.o: test/test_operator_splitting_10k.cpp.o
+.PHONY : test/test_operator_splitting_10k.o
+
+# target to build an object file
+test/test_operator_splitting_10k.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/test/test_operator_splitting_10k.cpp.o
+.PHONY : test/test_operator_splitting_10k.cpp.o
+
+test/test_operator_splitting_10k.i: test/test_operator_splitting_10k.cpp.i
+.PHONY : test/test_operator_splitting_10k.i
+
+# target to preprocess a source file
+test/test_operator_splitting_10k.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/test/test_operator_splitting_10k.cpp.i
+.PHONY : test/test_operator_splitting_10k.cpp.i
+
+test/test_operator_splitting_10k.s: test/test_operator_splitting_10k.cpp.s
+.PHONY : test/test_operator_splitting_10k.s
+
+# target to generate assembly for a file
+test/test_operator_splitting_10k.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_operator_splitting_10k.dir/build.make CMakeFiles/test_operator_splitting_10k.dir/test/test_operator_splitting_10k.cpp.s
+.PHONY : test/test_operator_splitting_10k.cpp.s
+
 test/test_operator_splitting_cpu.o: test/test_operator_splitting_cpu.cpp.o
 .PHONY : test/test_operator_splitting_cpu.o
 
@@ -1868,6 +2026,30 @@ test/test_timesync_simple.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_timesync_simple.dir/build.make CMakeFiles/test_timesync_simple.dir/test/test_timesync_simple.cpp.s
 .PHONY : test/test_timesync_simple.cpp.s
 
+test/test_vortex_operator_splitting.o: test/test_vortex_operator_splitting.cpp.o
+.PHONY : test/test_vortex_operator_splitting.o
+
+# target to build an object file
+test/test_vortex_operator_splitting.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/test/test_vortex_operator_splitting.cpp.o
+.PHONY : test/test_vortex_operator_splitting.cpp.o
+
+test/test_vortex_operator_splitting.i: test/test_vortex_operator_splitting.cpp.i
+.PHONY : test/test_vortex_operator_splitting.i
+
+# target to preprocess a source file
+test/test_vortex_operator_splitting.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/test/test_vortex_operator_splitting.cpp.i
+.PHONY : test/test_vortex_operator_splitting.cpp.i
+
+test/test_vortex_operator_splitting.s: test/test_vortex_operator_splitting.cpp.s
+.PHONY : test/test_vortex_operator_splitting.s
+
+# target to generate assembly for a file
+test/test_vortex_operator_splitting.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vortex_operator_splitting.dir/build.make CMakeFiles/test_vortex_operator_splitting.dir/test/test_vortex_operator_splitting.cpp.s
+.PHONY : test/test_vortex_operator_splitting.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1890,6 +2072,7 @@ help:
 	@echo "... test_noise_sweep_corrected"
 	@echo "... test_noise_sweep_cpu"
 	@echo "... test_operator_splitting"
+	@echo "... test_operator_splitting_10k"
 	@echo "... test_operator_splitting_cpu"
 	@echo "... test_operator_splitting_full"
 	@echo "... test_scenario1_defect"
@@ -1900,6 +2083,7 @@ help:
 	@echo "... test_stochastic_cpu_migrated"
 	@echo "... test_stochastic_particle"
 	@echo "... test_timesync_simple"
+	@echo "... test_vortex_operator_splitting"
 	@echo "... lib/Nova/Core/components/genesis.o"
 	@echo "... lib/Nova/Core/components/genesis.i"
 	@echo "... lib/Nova/Core/components/genesis.s"
@@ -1969,9 +2153,6 @@ help:
 	@echo "... src/DiracEvolution.o"
 	@echo "... src/DiracEvolution.i"
 	@echo "... src/DiracEvolution.s"
-	@echo "... src/SMFT.o"
-	@echo "... src/SMFT.i"
-	@echo "... src/SMFT.s"
 	@echo "... src/SMFTBufferManager.o"
 	@echo "... src/SMFTBufferManager.i"
 	@echo "... src/SMFTBufferManager.s"
@@ -1981,6 +2162,9 @@ help:
 	@echo "... src/SMFTCompute.o"
 	@echo "... src/SMFTCompute.i"
 	@echo "... src/SMFTCompute.s"
+	@echo "... src/SMFTCore.o"
+	@echo "... src/SMFTCore.i"
+	@echo "... src/SMFTCore.s"
 	@echo "... src/SMFTDescriptorManager.o"
 	@echo "... src/SMFTDescriptorManager.i"
 	@echo "... src/SMFTDescriptorManager.s"
@@ -1993,6 +2177,15 @@ help:
 	@echo "... src/output/OutputManager.o"
 	@echo "... src/output/OutputManager.i"
 	@echo "... src/output/OutputManager.s"
+	@echo "... src/simulations/ObservableComputer.o"
+	@echo "... src/simulations/ObservableComputer.i"
+	@echo "... src/simulations/ObservableComputer.s"
+	@echo "... src/simulations/SMFTTestRunner.o"
+	@echo "... src/simulations/SMFTTestRunner.i"
+	@echo "... src/simulations/SMFTTestRunner.s"
+	@echo "... src/simulations/TestConfig.o"
+	@echo "... src/simulations/TestConfig.i"
+	@echo "... src/simulations/TestConfig.s"
 	@echo "... test/test_descriptor_bindings.o"
 	@echo "... test/test_descriptor_bindings.i"
 	@echo "... test/test_descriptor_bindings.s"
@@ -2026,6 +2219,9 @@ help:
 	@echo "... test/test_operator_splitting.o"
 	@echo "... test/test_operator_splitting.i"
 	@echo "... test/test_operator_splitting.s"
+	@echo "... test/test_operator_splitting_10k.o"
+	@echo "... test/test_operator_splitting_10k.i"
+	@echo "... test/test_operator_splitting_10k.s"
 	@echo "... test/test_operator_splitting_cpu.o"
 	@echo "... test/test_operator_splitting_cpu.i"
 	@echo "... test/test_operator_splitting_cpu.s"
@@ -2056,6 +2252,9 @@ help:
 	@echo "... test/test_timesync_simple.o"
 	@echo "... test/test_timesync_simple.i"
 	@echo "... test/test_timesync_simple.s"
+	@echo "... test/test_vortex_operator_splitting.o"
+	@echo "... test/test_vortex_operator_splitting.i"
+	@echo "... test/test_vortex_operator_splitting.s"
 .PHONY : help
 
 

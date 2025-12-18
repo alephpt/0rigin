@@ -1,0 +1,112 @@
+==================================================
+Vortex Operator Splitting Validation
+Testing N=1 vs N=100 with phase defect
+==================================================
+
+=== Running Vortex Test N=1 ===
+Total steps: 10000
+Output: output/vortex_N1
+ [INFO]: Nova - Instantiating ..
+Logger - Debug Level set to info ..Initializing 64x64 grid...
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 2.5 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Setting vortex phase field (winding number = 1 at center)...
+Initializing Dirac field...
+[DiracEvolution] Initialized 64x64 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[SMFTEngine] Hybrid system initialized with N=10 substeps
+[stepWithDirac] First call: substep_ratio=1, substep_dt=0.01
+  Step 0/10000 | R_avg=0.968129 ± 0.11787 | norm=1
+  Step 1000/10000 | R_avg=0.968122 ± 0.117958 | norm=0.999747
+  Step 2000/10000 | R_avg=0.968159 ± 0.117702 | norm=0.999488
+  Step 3000/10000 | R_avg=0.96811 ± 0.117999 | norm=0.99923
+  Step 4000/10000 | R_avg=0.968136 ± 0.11793 | norm=0.998973
+  Step 5000/10000 | R_avg=0.96803 ± 0.118221 | norm=0.998726
+  Step 6000/10000 | R_avg=0.968237 ± 0.117633 | norm=0.998479
+  Step 7000/10000 | R_avg=0.968203 ± 0.117589 | norm=0.998211
+  Step 8000/10000 | R_avg=0.968102 ± 0.117853 | norm=0.997944
+  Step 9000/10000 | R_avg=0.968075 ± 0.118019 | norm=0.99768
+✓ N=1 complete!
+  Timeseries: output/vortex_N1/timeseries.csv
+  R field snapshots: output/vortex_N1/R_field_snapshots.csv
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete
+
+=== Running Vortex Test N=100 ===
+Total steps: 10000
+Output: output/vortex_N100
+Logger - Debug Level set to info ..Initializing 64x64 grid...
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 2.5 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Setting vortex phase field (winding number = 1 at center)...
+Initializing Dirac field...
+[DiracEvolution] Initialized 64x64 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[SMFTEngine] Hybrid system initialized with N=10 substeps
+  Step 0/10000 | R_avg=0.968168 ± 0.117788 | norm=1
+  Step 1000/10000 | R_avg=0.96816 ± 0.117979 | norm=0.999747
+  Step 2000/10000 | R_avg=0.968153 ± 0.117896 | norm=0.999489
+  Step 3000/10000 | R_avg=0.968221 ± 0.117599 | norm=0.999231
+  Step 4000/10000 | R_avg=0.968234 ± 0.117626 | norm=0.998975
+  Step 5000/10000 | R_avg=0.968138 ± 0.117883 | norm=0.998725
+  Step 6000/10000 | R_avg=0.96816 ± 0.117803 | norm=0.998478
+  Step 7000/10000 | R_avg=0.968161 ± 0.117855 | norm=0.998214
+  Step 8000/10000 | R_avg=0.968062 ± 0.117922 | norm=0.997946
+  Step 9000/10000 | R_avg=0.968184 ± 0.117912 | norm=0.997683
+✓ N=100 complete!
+  Timeseries: output/vortex_N100/timeseries.csv
+  R field snapshots: output/vortex_N100/R_field_snapshots.csv
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete
+
+=== ALL TESTS COMPLETE ===
+Results saved to output/vortex_N{1,100}/
+
+Expected behavior:
+- R field should have spatial structure (vortex core low R)
+- N=100 should smooth out R fluctuations vs N=1
+- Particle trajectory should differ if coupling is N-dependent

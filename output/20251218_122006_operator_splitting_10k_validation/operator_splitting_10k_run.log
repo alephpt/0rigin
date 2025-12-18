@@ -1,0 +1,147 @@
+==================================================
+Operator Splitting 10k Timestep Validation
+Testing N=1, N=10, N=100
+==================================================
+
+=== Running N=1 test ===
+Total steps: 10000
+Output: output/N1_10k
+ [INFO]: Nova - Instantiating ..
+Logger - Debug Level set to info ..Initializing 64x64 grid...
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 2.5 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Initializing hybrid GPU-CPU system...
+[DiracEvolution] Initialized 64x64 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[SMFTEngine] Hybrid system initialized with N=10 substeps
+[stepWithDirac] First call: substep_ratio=1, substep_dt=0.01
+  Step 0/10000 | R_avg=0.999879 | norm=1
+  Step 1000/10000 | R_avg=0.999868 | norm=0.999725
+  Step 2000/10000 | R_avg=0.999818 | norm=0.999444
+  Step 3000/10000 | R_avg=0.999866 | norm=0.999163
+  Step 4000/10000 | R_avg=0.99986 | norm=0.998883
+  Step 5000/10000 | R_avg=0.999889 | norm=0.998602
+  Step 6000/10000 | R_avg=0.999856 | norm=0.998322
+  Step 7000/10000 | R_avg=0.999877 | norm=0.998049
+  Step 8000/10000 | R_avg=0.999898 | norm=0.997768
+  Step 9000/10000 | R_avg=0.999867 | norm=0.997492
+✓ N=1 complete!
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete
+
+=== Running N=10 test ===
+Total steps: 10000
+Output: output/N10_10k
+Logger - Debug Level set to info ..Initializing 64x64 grid...
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 2.5 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Initializing hybrid GPU-CPU system...
+[DiracEvolution] Initialized 64x64 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[SMFTEngine] Hybrid system initialized with N=10 substeps
+  Step 0/10000 | R_avg=0.999905 | norm=1
+  Step 1000/10000 | R_avg=0.999847 | norm=0.999747
+  Step 2000/10000 | R_avg=0.999824 | norm=0.999466
+  Step 3000/10000 | R_avg=0.999909 | norm=0.999183
+  Step 4000/10000 | R_avg=0.999864 | norm=0.998902
+  Step 5000/10000 | R_avg=0.999858 | norm=0.998625
+  Step 6000/10000 | R_avg=0.999863 | norm=0.998344
+  Step 7000/10000 | R_avg=0.99984 | norm=0.998074
+  Step 8000/10000 | R_avg=0.999883 | norm=0.997795
+  Step 9000/10000 | R_avg=0.99989 | norm=0.997522
+✓ N=10 complete!
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete
+
+=== Running N=100 test ===
+Total steps: 10000
+Output: output/N100_10k
+Logger - Debug Level set to info ..Initializing 64x64 grid...
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 2.5 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Initializing hybrid GPU-CPU system...
+[DiracEvolution] Initialized 64x64 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[SMFTEngine] Hybrid system initialized with N=10 substeps
+  Step 0/10000 | R_avg=0.999876 | norm=1
+  Step 1000/10000 | R_avg=0.999881 | norm=0.999747
+  Step 2000/10000 | R_avg=0.999899 | norm=0.999466
+  Step 3000/10000 | R_avg=0.999873 | norm=0.999182
+  Step 4000/10000 | R_avg=0.999836 | norm=0.998903
+  Step 5000/10000 | R_avg=0.999772 | norm=0.998625
+  Step 6000/10000 | R_avg=0.99983 | norm=0.998347
+  Step 7000/10000 | R_avg=0.999846 | norm=0.998075
+  Step 8000/10000 | R_avg=0.999685 | norm=0.997797
+  Step 9000/10000 | R_avg=0.999813 | norm=0.99752
+✓ N=100 complete!
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete
+
+=== ALL TESTS COMPLETE ===
+Results saved to output/N{1,10,100}_10k/

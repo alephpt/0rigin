@@ -95,9 +95,9 @@ target_include_directories(imgui PUBLIC
 # SMFT APPLICATION
 # ============================================================================
 
-# SMFT sources
+# SMFT sources - unified executable with interactive and test modes
 set(SMFT_SOURCES
-    src/SMFT.cpp
+    src/SMFTCore.cpp
     src/SMFTEngine.cpp
     src/SMFTPipelineFactory.cpp
     src/SMFTBufferManager.cpp
@@ -105,6 +105,9 @@ set(SMFT_SOURCES
     src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
     src/output/OutputManager.cpp
+    src/simulations/TestConfig.cpp
+    src/simulations/SMFTTestRunner.cpp
+    src/simulations/ObservableComputer.cpp
     main.cpp
 )
 
@@ -124,14 +127,16 @@ target_link_libraries(SMFT PRIVATE
     ${Vulkan_LIBRARIES}
     ${SDL2_LIBRARIES}
     fftw3f
+    yaml-cpp
     pthread
     dl
     m
 )
 
-# Set output directory
+# Set output directory and binary name
 set_target_properties(SMFT PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    OUTPUT_NAME "smft"
 )
 
 # ============================================================================
@@ -637,6 +642,74 @@ target_link_libraries(test_noise_sweep_cpu PRIVATE
 )
 
 set_target_properties(test_noise_sweep_cpu PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test: Complete 10k timestep operator splitting validation (N=1, N=10, N=100)
+add_executable(test_operator_splitting_10k
+    test/test_operator_splitting_10k.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_operator_splitting_10k PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_operator_splitting_10k PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    fftw3f
+    pthread
+    dl
+    m
+)
+
+set_target_properties(test_operator_splitting_10k PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test: Vortex operator splitting validation (N=1 vs N=100 with phase defect)
+add_executable(test_vortex_operator_splitting
+    test/test_vortex_operator_splitting.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_vortex_operator_splitting PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_vortex_operator_splitting PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    fftw3f
+    pthread
+    dl
+    m
+)
+
+set_target_properties(test_vortex_operator_splitting PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 

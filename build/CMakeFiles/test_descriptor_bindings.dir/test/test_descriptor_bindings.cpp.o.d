@@ -386,13 +386,13 @@ CMakeFiles/test_descriptor_bindings.dir/test/test_descriptor_bindings.cpp.o: \
  /usr/include/c++/15.2.1/bits/this_thread_sleep.h /usr/include/sys/time.h \
  /usr/include/semaphore.h /usr/include/bits/semaphore.h \
  /usr/include/c++/15.2.1/bits/atomic_futex.h \
- /home/persist/neotec/0rigin/src/MSFTEngine.h \
- /home/persist/neotec/0rigin/src/MSFTPipelineFactory.h \
- /home/persist/neotec/0rigin/src/MSFTBufferManager.h \
+ /home/persist/neotec/0rigin/src/SMFTEngine.h \
+ /home/persist/neotec/0rigin/src/SMFTPipelineFactory.h \
+ /home/persist/neotec/0rigin/src/SMFTBufferManager.h \
  /usr/include/c++/15.2.1/utility \
  /usr/include/c++/15.2.1/bits/stl_relops.h \
  /usr/include/c++/15.2.1/cstring \
- /home/persist/neotec/0rigin/src/MSFTCompute.h \
+ /home/persist/neotec/0rigin/src/SMFTCompute.h \
  /usr/include/c++/15.2.1/memory \
  /usr/include/c++/15.2.1/bits/stl_tempbuf.h \
  /usr/include/c++/15.2.1/bits/stl_raw_storage_iter.h \
@@ -402,7 +402,7 @@ CMakeFiles/test_descriptor_bindings.dir/test/test_descriptor_bindings.cpp.o: \
  /usr/include/c++/15.2.1/bits/ranges_algobase.h \
  /usr/include/c++/15.2.1/pstl/glue_memory_defs.h \
  /usr/include/c++/15.2.1/pstl/execution_defs.h \
- /home/persist/neotec/0rigin/src/MSFTDescriptorManager.h \
+ /home/persist/neotec/0rigin/src/SMFTDescriptorManager.h \
  /usr/include/c++/15.2.1/complex /usr/include/c++/15.2.1/sstream \
  /usr/include/c++/15.2.1/istream /usr/include/c++/15.2.1/ostream \
  /usr/include/c++/15.2.1/bits/ostream.tcc \

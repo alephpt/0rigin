@@ -3,7 +3,7 @@ bin/test_find_critical_sigma: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_find_critical_sigma.dir/test/test_find_critical_sigma.cpp.o \
-  CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libm.so \
@@ -41,7 +41,7 @@ bin/test_find_critical_sigma: \
 
 CMakeFiles/test_find_critical_sigma.dir/test/test_find_critical_sigma.cpp.o:
 
-CMakeFiles/test_find_critical_sigma.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_find_critical_sigma.dir/src/SMFTCommon.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a:
 

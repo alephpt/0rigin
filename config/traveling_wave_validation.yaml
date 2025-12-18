@@ -10,11 +10,12 @@ grid:
 # Physics parameters
 physics:
   delta: 2.5             # Mass gap parameter
-  coupling: 0.5          # Stronger coupling for wave interaction
-  dt: 0.05               # Larger timestep for wave propagation
-  total_steps: 200       # Long evolution to observe surfing
-  K: 2.0                 # Stronger Kuramoto coupling for wave stability
-  damping: 0.05          # Reduced damping to allow wave propagation
+  coupling: 1.0          # Stronger coupling for wave interaction
+  dt: 0.02               # Smaller timestep for stability
+  total_steps: 500       # Long evolution to observe surfing (T=10)
+  K: 3.0                 # Stronger Kuramoto coupling for wave stability
+  damping: 0.02          # Very low damping to allow wave propagation
+
 
 # Initial conditions
 initial_conditions:

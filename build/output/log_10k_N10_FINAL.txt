@@ -1,0 +1,10 @@
+
+===== SMFT Test Mode =====
+Configuration: config/operator_splitting_10k_N10.yaml
+YAML parsing error: bad file: config/operator_splitting_10k_N10.yaml
+Failed to load configuration from config/operator_splitting_10k_N10.yaml
+
+[1/3] Initializing...
+Configuration not loaded
+
+✗ Initialization failed

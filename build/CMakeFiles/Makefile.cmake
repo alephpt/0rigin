@@ -81,4 +81,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/test_find_critical_sigma.dir/DependInfo.cmake"
   "CMakeFiles/test_noise_sweep_corrected.dir/DependInfo.cmake"
   "CMakeFiles/test_noise_sweep_cpu.dir/DependInfo.cmake"
+  "CMakeFiles/test_operator_splitting_10k.dir/DependInfo.cmake"
+  "CMakeFiles/test_vortex_operator_splitting.dir/DependInfo.cmake"
   )

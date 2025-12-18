@@ -72,19 +72,19 @@ include CMakeFiles/SMFT.dir/flags.make
 CMakeFiles/SMFT.dir/codegen:
 .PHONY : CMakeFiles/SMFT.dir/codegen
 
-CMakeFiles/SMFT.dir/src/SMFT.cpp.o: CMakeFiles/SMFT.dir/flags.make
-CMakeFiles/SMFT.dir/src/SMFT.cpp.o: /home/persist/neotec/0rigin/src/SMFT.cpp
-CMakeFiles/SMFT.dir/src/SMFT.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SMFT.dir/src/SMFT.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/src/SMFT.cpp.o -MF CMakeFiles/SMFT.dir/src/SMFT.cpp.o.d -o CMakeFiles/SMFT.dir/src/SMFT.cpp.o -c /home/persist/neotec/0rigin/src/SMFT.cpp
+CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o: /home/persist/neotec/0rigin/src/SMFTCore.cpp
+CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o -MF CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o.d -o CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCore.cpp
 
-CMakeFiles/SMFT.dir/src/SMFT.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/src/SMFT.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFT.cpp > CMakeFiles/SMFT.dir/src/SMFT.cpp.i
+CMakeFiles/SMFT.dir/src/SMFTCore.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/src/SMFTCore.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCore.cpp > CMakeFiles/SMFT.dir/src/SMFTCore.cpp.i
 
-CMakeFiles/SMFT.dir/src/SMFT.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/src/SMFT.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFT.cpp -o CMakeFiles/SMFT.dir/src/SMFT.cpp.s
+CMakeFiles/SMFT.dir/src/SMFTCore.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/src/SMFTCore.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCore.cpp -o CMakeFiles/SMFT.dir/src/SMFTCore.cpp.s
 
 CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o: CMakeFiles/SMFT.dir/flags.make
 CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o: /home/persist/neotec/0rigin/src/SMFTEngine.cpp
@@ -184,10 +184,52 @@ CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/output/OutputManager.cpp -o CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.s
 
+CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o: /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp
+CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o -MF CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o.d -o CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp
+
+CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp > CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.i
+
+CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp -o CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.s
+
+CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o: /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp
+CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o -MF CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o.d -o CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o -c /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp
+
+CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp > CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.i
+
+CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp -o CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.s
+
+CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o: /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp
+CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o -MF CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o.d -o CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o -c /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp
+
+CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp > CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.i
+
+CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp -o CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s
+
 CMakeFiles/SMFT.dir/main.cpp.o: CMakeFiles/SMFT.dir/flags.make
 CMakeFiles/SMFT.dir/main.cpp.o: /home/persist/neotec/0rigin/main.cpp
 CMakeFiles/SMFT.dir/main.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SMFT.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SMFT.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/main.cpp.o -MF CMakeFiles/SMFT.dir/main.cpp.o.d -o CMakeFiles/SMFT.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp
 
 CMakeFiles/SMFT.dir/main.cpp.i: cmake_force
@@ -200,7 +242,7 @@ CMakeFiles/SMFT.dir/main.cpp.s: cmake_force
 
 # Object files for target SMFT
 SMFT_OBJECTS = \
-"CMakeFiles/SMFT.dir/src/SMFT.cpp.o" \
+"CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o" \
 "CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o" \
 "CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o" \
 "CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o" \
@@ -208,34 +250,40 @@ SMFT_OBJECTS = \
 "CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o" \
 "CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o" \
 "CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o" \
+"CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o" \
+"CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o" \
+"CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o" \
 "CMakeFiles/SMFT.dir/main.cpp.o"
 
 # External object files for target SMFT
 SMFT_EXTERNAL_OBJECTS =
 
-bin/SMFT: CMakeFiles/SMFT.dir/src/SMFT.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/main.cpp.o
-bin/SMFT: CMakeFiles/SMFT.dir/build.make
-bin/SMFT: CMakeFiles/SMFT.dir/compiler_depend.ts
-bin/SMFT: libNova.a
-bin/SMFT: libimgui.a
-bin/SMFT: /lib/libvulkan.so
-bin/SMFT: /usr/lib/libSDL2main.a
-bin/SMFT: /usr/lib/libSDL2-2.0.so.0.3200.60
-bin/SMFT: CMakeFiles/SMFT.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable bin/SMFT"
+bin/smft: CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/main.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/build.make
+bin/smft: CMakeFiles/SMFT.dir/compiler_depend.ts
+bin/smft: libNova.a
+bin/smft: libimgui.a
+bin/smft: /lib/libvulkan.so
+bin/smft: /usr/lib/libSDL2main.a
+bin/smft: /usr/lib/libSDL2-2.0.so.0.3200.60
+bin/smft: CMakeFiles/SMFT.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable bin/smft"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SMFT.dir/link.txt --verbose=$(VERBOSE)
 	/usr/bin/cmake -E copy_directory /home/persist/neotec/0rigin/shaders /home/persist/neotec/0rigin/build/shaders
 
 # Rule to build all files generated by this target.
-CMakeFiles/SMFT.dir/build: bin/SMFT
+CMakeFiles/SMFT.dir/build: bin/smft
 .PHONY : CMakeFiles/SMFT.dir/build
 
 CMakeFiles/SMFT.dir/clean:

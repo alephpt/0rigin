@@ -3,11 +3,11 @@ bin/test_stochastic_particle: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_stochastic_particle.dir/test/test_stochastic_particle.cpp.o \
-  CMakeFiles/test_stochastic_particle.dir/src/MSFTEngine.cpp.o \
-  CMakeFiles/test_stochastic_particle.dir/src/MSFTPipelineFactory.cpp.o \
-  CMakeFiles/test_stochastic_particle.dir/src/MSFTBufferManager.cpp.o \
-  CMakeFiles/test_stochastic_particle.dir/src/MSFTCompute.cpp.o \
-  CMakeFiles/test_stochastic_particle.dir/src/MSFTDescriptorManager.cpp.o \
+  CMakeFiles/test_stochastic_particle.dir/src/SMFTEngine.cpp.o \
+  CMakeFiles/test_stochastic_particle.dir/src/SMFTPipelineFactory.cpp.o \
+  CMakeFiles/test_stochastic_particle.dir/src/SMFTBufferManager.cpp.o \
+  CMakeFiles/test_stochastic_particle.dir/src/SMFTCompute.cpp.o \
+  CMakeFiles/test_stochastic_particle.dir/src/SMFTDescriptorManager.cpp.o \
   CMakeFiles/test_stochastic_particle.dir/src/DiracEvolution.cpp.o \
   libNova.a \
   libimgui.a \
@@ -53,15 +53,15 @@ bin/test_stochastic_particle: \
 
 CMakeFiles/test_stochastic_particle.dir/test/test_stochastic_particle.cpp.o:
 
-CMakeFiles/test_stochastic_particle.dir/src/MSFTEngine.cpp.o:
+CMakeFiles/test_stochastic_particle.dir/src/SMFTEngine.cpp.o:
 
-CMakeFiles/test_stochastic_particle.dir/src/MSFTPipelineFactory.cpp.o:
+CMakeFiles/test_stochastic_particle.dir/src/SMFTPipelineFactory.cpp.o:
 
-CMakeFiles/test_stochastic_particle.dir/src/MSFTBufferManager.cpp.o:
+CMakeFiles/test_stochastic_particle.dir/src/SMFTBufferManager.cpp.o:
 
-CMakeFiles/test_stochastic_particle.dir/src/MSFTCompute.cpp.o:
+CMakeFiles/test_stochastic_particle.dir/src/SMFTCompute.cpp.o:
 
-CMakeFiles/test_stochastic_particle.dir/src/MSFTDescriptorManager.cpp.o:
+CMakeFiles/test_stochastic_particle.dir/src/SMFTDescriptorManager.cpp.o:
 
 CMakeFiles/test_stochastic_particle.dir/src/DiracEvolution.cpp.o:
 

@@ -9,6 +9,9 @@
 #include <complex>
 #include <memory>
 
+// Forward declaration
+class DiracEvolution;
+
 /**
  * SMFTEngine - Synchronization Mass Field Theory Physics Compute Engine
  *
@@ -136,7 +139,7 @@ public:
      * @param dt Time step size
      * @param lambda_coupling Coupling strength for Ψ→θ feedback
      */
-    void stepWithDirac(float dt, float lambda_coupling);
+    void stepWithDirac(float dt, float lambda_coupling, int substep_ratio = 1, float K = 1.0f, float damping = 0.1f);
 
     /**
      * Get Dirac spinor density |Ψ|² for analysis
@@ -145,6 +148,12 @@ public:
      * @return Vector of density values |Ψ|² (size = Nx * Ny)
      */
     std::vector<float> getDiracDensity() const;
+
+    /**
+     * Get internal DiracEvolution object for observable computation
+     * @return Pointer to DiracEvolution (nullptr if not initialized)
+     */
+    const DiracEvolution* getDiracEvolution() const;
 
     /**
      * Set the substep ratio N for operator splitting adiabatic approximation

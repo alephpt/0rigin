@@ -1,0 +1,24 @@
+===== SMFT Test Report =====
+Test: coupled_64x64_N1
+Description: Operator splitting N=1 on 64×64 grid
+
+[Configuration]
+Grid: 64 x 64
+Delta: 2.5
+Coupling: 0.5
+Total steps: 500
+dt: 0.01
+
+[Validation Results]
+
+Convergence Validation: ✗ FAIL
+  Convergence errors: []
+
+N=1: ✗ FAIL
+  Norm: max_error = 1.141e-04 (threshold: 2.000e-02)
+  Energy: max_drift = 2.143e-01 (threshold: 1.000e-01)
+
+[Overall Result]
+✗ SOME TESTS FAILED
+
+===== End of Report =====

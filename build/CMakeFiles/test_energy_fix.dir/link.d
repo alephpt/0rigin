@@ -3,7 +3,7 @@ bin/test_energy_fix: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_energy_fix.dir/test/test_energy_fix.cpp.o \
-  CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o \
   CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so \
@@ -43,7 +43,7 @@ bin/test_energy_fix: \
 
 CMakeFiles/test_energy_fix.dir/test/test_energy_fix.cpp.o:
 
-CMakeFiles/test_energy_fix.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_energy_fix.dir/src/SMFTCommon.cpp.o:
 
 CMakeFiles/test_energy_fix.dir/src/DiracEvolution.cpp.o:
 

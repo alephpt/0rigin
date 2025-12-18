@@ -57,6 +57,10 @@ bool SMFTCompute::beginBatch() {
         return false;
     }
 
+    // CRITICAL: Reset command buffer before re-recording
+    // Required for operator splitting where step() is called multiple times
+    vkResetCommandBuffer(_commandBuffer, 0);
+
     VkCommandBufferBeginInfo beginInfo{};
     beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
     beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;

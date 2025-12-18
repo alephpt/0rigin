@@ -6,54 +6,36 @@
 #include "../include/precision.glsl"
 
 /**
- * @file sync_field.comp
- * @brief Compute local synchronization field R(x,y) from Kuramoto phases
- *
- * Implements: R(x,y) = |⟨e^(iθ)⟩_local| = |Σⱼ e^(iθⱼ)|/N_local
- *
- * MSFT Forward Coupling:
- * - Input: θ(x,y) phase field from Kuramoto oscillators
- * - Output: R(x,y) synchronization order parameter
- * - Physics: R = 0 (incoherent), R = 1 (perfect sync)
- *
- * Spatial Structure:
- * - Local averaging over neighborhood (supports soliton formation)
- * - Preserves spatial structure of synchronization
- *
- * Workgroup: 16×16 threads
- * Grid: Nx × Ny spatial points
+ * Full precision sync_field shader with:
+ * - Kahan summation for numerical stability
+ * - Complex exponential math
+ * - Proper shared memory corner loading (BUG FIX)
  */
 
 layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
 
-// Push constants for simulation parameters
 layout(push_constant) uniform PushConstants {
-    float dt;              // Time step (not used here, but kept for consistency)
-    float K;               // Coupling strength (not used here)
-    float damping;         // Damping (not used here)
-    float Delta;           // MSFT mass gap (not used here)
-    float chiral_angle;    // Chiral angle (not used here)
-    uint Nx;               // Grid width
-    uint Ny;               // Grid height
-    uint N_total;          // Total oscillators
-    uint neighborhood_radius;  // Radius for local averaging (typically 1-3)
+    float dt;
+    float K;
+    float damping;
+    float Delta;
+    float chiral_angle;
+    uint Nx;
+    uint Ny;
+    uint N_total;
+    uint neighborhood_radius;
 } params;
 
-// Storage buffers
 layout(set = 0, binding = 0) readonly buffer ThetaBuffer {
-    float theta[];  // Current phases from kuramoto_step.comp
+    float theta[];
 };
 
 layout(set = 0, binding = 1) buffer RFieldBuffer {
-    float R_field[];  // Output: synchronization field R(x,y)
+    float R_field[];
 };
 
-// Shared memory for local computation
-shared float s_theta[18][18];  // 16+2 border for neighbors
+shared float s_theta[18][18];
 
-/**
- * @brief Load theta values into shared memory with boundary handling
- */
 void load_shared_memory(uvec2 global_id, uvec2 local_id) {
     uint gx = global_id.x;
     uint gy = global_id.y;
@@ -66,71 +48,76 @@ void load_shared_memory(uvec2 global_id, uvec2 local_id) {
         s_theta[ly + 1][lx + 1] = theta[idx];
     }
 
-    // Load borders (with wrapping for periodic boundaries)
-    // Left border
+    // Load borders with periodic wrapping
     if (lx == 0) {
         uint border_x = (gx == 0) ? (params.Nx - 1) : (gx - 1);
         if (gy < params.Ny) {
-            uint idx = gy * params.Nx + border_x;
-            s_theta[ly + 1][0] = theta[idx];
+            s_theta[ly + 1][0] = theta[gy * params.Nx + border_x];
         }
     }
 
-    // Right border
     if (lx == 15) {
         uint border_x = (gx == params.Nx - 1) ? 0 : (gx + 1);
         if (gy < params.Ny) {
-            uint idx = gy * params.Nx + border_x;
-            s_theta[ly + 1][17] = theta[idx];
+            s_theta[ly + 1][17] = theta[gy * params.Nx + border_x];
         }
     }
 
-    // Top border
     if (ly == 0) {
         uint border_y = (gy == 0) ? (params.Ny - 1) : (gy - 1);
         if (gx < params.Nx) {
-            uint idx = border_y * params.Nx + gx;
-            s_theta[0][lx + 1] = theta[idx];
+            s_theta[0][lx + 1] = theta[border_y * params.Nx + gx];
         }
     }
 
-    // Bottom border
     if (ly == 15) {
         uint border_y = (gy == params.Ny - 1) ? 0 : (gy + 1);
         if (gx < params.Nx) {
-            uint idx = border_y * params.Nx + gx;
-            s_theta[17][lx + 1] = theta[idx];
+            s_theta[17][lx + 1] = theta[border_y * params.Nx + gx];
         }
     }
 
-    barrier();  // Wait for all threads to finish loading
+    // CRITICAL FIX: Load corner cells
+    if (lx == 0 && ly == 0) {
+        uint cx = (gx == 0) ? (params.Nx - 1) : (gx - 1);
+        uint cy = (gy == 0) ? (params.Ny - 1) : (gy - 1);
+        s_theta[0][0] = theta[cy * params.Nx + cx];
+    }
+
+    if (lx == 15 && ly == 0) {
+        uint cx = (gx == params.Nx - 1) ? 0 : (gx + 1);
+        uint cy = (gy == 0) ? (params.Ny - 1) : (gy - 1);
+        s_theta[0][17] = theta[cy * params.Nx + cx];
+    }
+
+    if (lx == 0 && ly == 15) {
+        uint cx = (gx == 0) ? (params.Nx - 1) : (gx - 1);
+        uint cy = (gy == params.Ny - 1) ? 0 : (gy + 1);
+        s_theta[17][0] = theta[cy * params.Nx + cx];
+    }
+
+    if (lx == 15 && ly == 15) {
+        uint cx = (gx == params.Nx - 1) ? 0 : (gx + 1);
+        uint cy = (gy == params.Ny - 1) ? 0 : (gy + 1);
+        s_theta[17][17] = theta[cy * params.Nx + cx];
+    }
+
+    barrier();
 }
 
-/**
- * @brief Compute local synchronization order parameter R(x,y)
- *
- * Formula: R·e^(iΦ) = (1/N) Σⱼ e^(iθⱼ)
- *
- * We compute: R = |Σⱼ e^(iθⱼ)|/N
- *
- * Using Kahan summation for precision (Hazard B mitigation)
- */
 float compute_local_R(uint local_x, uint local_y) {
     // Kahan summation for real and imaginary parts
     KahanSum sum_real = kahan_init();
     KahanSum sum_imag = kahan_init();
 
     uint neighbor_count = 0;
-
-    // Sum over neighborhood (Moore neighborhood by default, radius=1)
     int radius = int(params.neighborhood_radius);
 
     for (int dy = -radius; dy <= radius; dy++) {
         for (int dx = -radius; dx <= radius; dx++) {
-            uint nx = local_x + 1 + dx;
-            uint ny = local_y + 1 + dy;
+            uint nx = local_x + 1 + uint(dx);
+            uint ny = local_y + 1 + uint(dy);
 
-            // Get phase from shared memory
             float theta_j = s_theta[ny][nx];
 
             // e^(iθⱼ) = cos(θⱼ) + i·sin(θⱼ)
@@ -153,43 +140,22 @@ float compute_local_R(uint local_x, uint local_y) {
     // R = |⟨e^(iθ)⟩|
     float R = cabs(avg_phase);
 
-    return R;
-}
-
-/**
- * @brief Compute global synchronization order parameter (alternative)
- *
- * For comparison/debugging: R_global = |Σⱼ e^(iθⱼ)|/N_total
- *
- * This is NOT used in MSFT (we use local R), but useful for diagnostics
- */
-float compute_global_R_contribution(float theta_i) {
-    // This would require a reduction across all threads
-    // For now, we return the local contribution
-    // Actual global R would need atomic operations or a separate reduction pass
-    return 1.0;  // Placeholder
+    return clamp(R, 0.0, 1.0);
 }
 
 void main() {
     uvec2 global_id = gl_GlobalInvocationID.xy;
     uvec2 local_id = gl_LocalInvocationID.xy;
 
-    // Bounds check
     if (global_id.x >= params.Nx || global_id.y >= params.Ny) {
         return;
     }
 
     uint idx = global_id.y * params.Nx + global_id.x;
 
-    // Load theta values into shared memory
     load_shared_memory(global_id, local_id);
 
-    // Compute local synchronization order parameter
     float R_local = compute_local_R(local_id.x, local_id.y);
 
-    // Clamp to physical range [0, 1]
-    R_local = clamp(R_local, 0.0, 1.0);
-
-    // Write output
     R_field[idx] = R_local;
 }

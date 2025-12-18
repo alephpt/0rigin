@@ -1,0 +1,24 @@
+===== SMFT Test Report =====
+Test: traveling_wave_surfing
+Description: Phase 2.2: Validate particle surfing on traveling synchronization wave
+
+[Configuration]
+Grid: 128 x 64
+Delta: 2.5
+Coupling: 1
+Total steps: 500
+dt: 0.02
+
+[Validation Results]
+
+Convergence Validation: ✗ FAIL
+  Convergence errors: []
+
+N=10: ✓ PASS
+  Norm: max_error = 1.077e-04 (threshold: 1.000e-03)
+  Energy: max_drift = 2.035e-02 (threshold: 5.000e-02)
+
+[Overall Result]
+✗ SOME TESTS FAILED
+
+===== End of Report =====

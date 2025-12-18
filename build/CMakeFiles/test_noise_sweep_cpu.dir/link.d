@@ -3,7 +3,7 @@ bin/test_noise_sweep_cpu: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.o \
-  CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o \
   /lib/libvulkan.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
@@ -42,7 +42,7 @@ bin/test_noise_sweep_cpu: \
 
 CMakeFiles/test_noise_sweep_cpu.dir/test/test_noise_sweep_cpu.cpp.o:
 
-CMakeFiles/test_noise_sweep_cpu.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_noise_sweep_cpu.dir/src/SMFTCommon.cpp.o:
 
 /lib/libvulkan.so:
 

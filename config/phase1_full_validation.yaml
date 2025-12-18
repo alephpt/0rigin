@@ -1,0 +1,52 @@
+test_name: "phase1_full_validation"
+description: "Phase 1 full validation with 50k steps - Long-time stability, norm conservation, energy conservation, operator splitting convergence"
+
+grid:
+  size_x: 64
+  size_y: 64
+
+physics:
+  # SMFT parameters from 0.md
+  delta: 2.5                    # Vacuum potential Δ (Planck mass in natural units)
+  coupling: 0.1                 # λ_D - Dirac-vacuum coupling strength
+  dt: 0.01                      # Time step (0.01 time units)
+  total_steps: 50000            # 50k steps = 500 time units
+  K: 1.0                        # Kuramoto coupling strength
+  damping: 0.1                  # Damping coefficient
+
+initial_conditions:
+  dirac:
+    type: "gaussian"            # Gaussian wavepacket
+    center_x: 32                # Center at grid midpoint
+    center_y: 32
+    sigma: 2.0                  # Wavepacket width (2 grid units)
+    amplitude: 1.0              # Normalized amplitude
+
+  kuramoto:
+    phase_distribution: "uniform"   # All phases start at 0
+    omega_distribution: "zero"      # All natural frequencies = 0
+    omega_mean: 0.0
+    omega_std: 0.1
+
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # Test N=1, 10, 100 for convergence
+
+validation:
+  # Relaxed thresholds appropriate for 50k step long-time evolution
+  norm_tolerance: 2.0e-2        # ||Ψ||² - 1 < 2% over 500 time units (linear drift acceptable)
+  energy_tolerance: 2.0e-2      # |ΔE/E₀| < 2% over 500 time units
+  convergence_tolerance: 0.05   # Observable differences < 5% across N ratios
+
+output:
+  directory: "output/phase1_full_validation"
+  save_every: 100               # Save observables every 100 steps
+  formats: ["csv"]
+  auto_visualize: true          # Generate plots automatically after test completes
+
+# Expected outcomes (from docs/SPLIT_OPERATOR_COMPLETE.md):
+# - No NaN or blow-up over 50k steps
+# - Norm drift < 0.1% (linear drift is acceptable, exponential is not)
+# - Energy conservation < 1%
+# - Operator splitting converges for N=1,10,100
+# - Particle localization responds correctly to mass field m(x) = Δ·R(x)

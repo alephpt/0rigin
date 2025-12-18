@@ -3,11 +3,11 @@ bin/test_descriptor_bindings: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_descriptor_bindings.dir/test/test_descriptor_bindings.cpp.o \
-  CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o \
-  CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o \
-  CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o \
-  CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o \
-  CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/SMFTEngine.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/SMFTPipelineFactory.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/SMFTBufferManager.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/SMFTCompute.cpp.o \
+  CMakeFiles/test_descriptor_bindings.dir/src/SMFTDescriptorManager.cpp.o \
   CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.o \
   libNova.a \
   libimgui.a \
@@ -53,15 +53,15 @@ bin/test_descriptor_bindings: \
 
 CMakeFiles/test_descriptor_bindings.dir/test/test_descriptor_bindings.cpp.o:
 
-CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o:
+CMakeFiles/test_descriptor_bindings.dir/src/SMFTEngine.cpp.o:
 
-CMakeFiles/test_descriptor_bindings.dir/src/MSFTPipelineFactory.cpp.o:
+CMakeFiles/test_descriptor_bindings.dir/src/SMFTPipelineFactory.cpp.o:
 
-CMakeFiles/test_descriptor_bindings.dir/src/MSFTBufferManager.cpp.o:
+CMakeFiles/test_descriptor_bindings.dir/src/SMFTBufferManager.cpp.o:
 
-CMakeFiles/test_descriptor_bindings.dir/src/MSFTCompute.cpp.o:
+CMakeFiles/test_descriptor_bindings.dir/src/SMFTCompute.cpp.o:
 
-CMakeFiles/test_descriptor_bindings.dir/src/MSFTDescriptorManager.cpp.o:
+CMakeFiles/test_descriptor_bindings.dir/src/SMFTDescriptorManager.cpp.o:
 
 CMakeFiles/test_descriptor_bindings.dir/src/DiracEvolution.cpp.o:
 

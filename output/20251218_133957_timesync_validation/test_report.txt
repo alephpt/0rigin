@@ -1,0 +1,32 @@
+===== SMFT Test Report =====
+Test: timesync_validation
+Description: Validate operator splitting with N=1, 10, 100 timesync ratios
+
+[Configuration]
+Grid: 64 x 64
+Delta: 2.5
+Coupling: 0.1
+Total steps: 100
+dt: 0.01
+
+[Validation Results]
+
+Convergence Validation: ✓ PASS
+  Convergence errors: [4.510e-06, 1.912e-07, 2.837e-07]
+
+N=1: ✓ PASS
+  Norm: max_error = 2.361e-05 (threshold: 1.000e-04)
+  Energy: max_drift = 5.971e-03 (threshold: 1.000e-02)
+
+N=10: ✓ PASS
+  Norm: max_error = 2.374e-05 (threshold: 1.000e-04)
+  Energy: max_drift = 2.680e-03 (threshold: 1.000e-02)
+
+N=100: ✓ PASS
+  Norm: max_error = 2.341e-05 (threshold: 1.000e-04)
+  Energy: max_drift = 2.570e-03 (threshold: 1.000e-02)
+
+[Overall Result]
+✓ ALL TESTS PASSED
+
+===== End of Report =====

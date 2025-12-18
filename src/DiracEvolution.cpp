@@ -280,6 +280,20 @@ const std::vector<std::complex<float>>& DiracEvolution::getComponent(int c) cons
     return _psi[c];
 }
 
+std::vector<std::complex<double>> DiracEvolution::getSpinorField() const {
+    // Return spinor field as flat array [4 * Nx * Ny]
+    // Layout: [psi0[0], psi1[0], psi2[0], psi3[0], psi0[1], psi1[1], ...]
+    std::vector<std::complex<double>> spinor_flat(_N_points * 4);
+
+    for (uint32_t i = 0; i < _N_points; i++) {
+        for (int alpha = 0; alpha < 4; alpha++) {
+            spinor_flat[i * 4 + alpha] = std::complex<double>(_psi[alpha][i].real(), _psi[alpha][i].imag());
+        }
+    }
+
+    return spinor_flat;
+}
+
 float DiracEvolution::getNorm() const {
     float norm = 0.0f;
     for (int c = 0; c < 4; c++) {

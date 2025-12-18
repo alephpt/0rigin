@@ -3,12 +3,12 @@ bin/test_noise_sweep: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.o \
-  CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o \
-  CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o \
-  CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o \
-  CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o \
-  CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o \
-  CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o \
+  CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o \
+  CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o \
+  CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o \
+  CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o \
+  CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o \
+  CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o \
   CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.o \
   libNova.a \
   libimgui.a \
@@ -55,17 +55,17 @@ bin/test_noise_sweep: \
 
 CMakeFiles/test_noise_sweep.dir/test/test_noise_sweep.cpp.o:
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTEngine.cpp.o:
+CMakeFiles/test_noise_sweep.dir/src/SMFTEngine.cpp.o:
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTBufferManager.cpp.o:
+CMakeFiles/test_noise_sweep.dir/src/SMFTBufferManager.cpp.o:
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTCompute.cpp.o:
+CMakeFiles/test_noise_sweep.dir/src/SMFTCompute.cpp.o:
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTDescriptorManager.cpp.o:
+CMakeFiles/test_noise_sweep.dir/src/SMFTDescriptorManager.cpp.o:
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTPipelineFactory.cpp.o:
+CMakeFiles/test_noise_sweep.dir/src/SMFTPipelineFactory.cpp.o:
 
-CMakeFiles/test_noise_sweep.dir/src/MSFTCommon.cpp.o:
+CMakeFiles/test_noise_sweep.dir/src/SMFTCommon.cpp.o:
 
 CMakeFiles/test_noise_sweep.dir/src/DiracEvolution.cpp.o:
 

@@ -28,6 +28,15 @@ public:
     // Get individual spinor components (for analysis)
     const std::vector<std::complex<float>>& getComponent(int c) const;
 
+    // Get full spinor field as flat array [4 * Nx * Ny]
+    // Element [i*4 + alpha] = spinor component alpha at grid point i
+    std::vector<std::complex<double>> getSpinorField() const;
+
+    // Get grid parameters
+    int getNx() const { return _Nx; }
+    int getNy() const { return _Ny; }
+    double getDx() const { return 1.0; } // Unit grid spacing
+
     // Norm check (should always be 1.0 to machine precision)
     float getNorm() const;
 

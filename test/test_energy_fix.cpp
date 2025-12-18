@@ -64,7 +64,7 @@ int main() {
 
     std::cout << "\n[1] Kuramoto warmup..." << std::endl;
     for (int step = 0; step < KURAMOTO_WARMUP; step++) {
-        SMFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
+        SMFT::stepKuramoto(theta, omega, DT, K, DAMPING, NX, NY);
     }
 
     auto R_field = SMFT::compute_local_R(theta, NX, NY);
@@ -89,7 +89,7 @@ int main() {
     float E_initial = 0.0f;
     for (int step = 0; step <= COUPLED_STEPS; step++) {
         if (step > 0) {
-            SMFT::step_kuramoto(theta, omega, DT, K, DAMPING, NX, NY);
+            SMFT::stepKuramoto(theta, omega, DT, K, DAMPING, NX, NY);
             R_field = SMFT::compute_local_R(theta, NX, NY);
             std::vector<float> mass_field(N_GRID);
             for (uint32_t i = 0; i < N_GRID; i++) {

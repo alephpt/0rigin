@@ -1,7 +1,7 @@
 CMakeFiles/test_noise_sweep_corrected.dir/test/test_noise_sweep_corrected.cpp.o: \
  /home/persist/neotec/0rigin/test/test_noise_sweep_corrected.cpp \
  /usr/include/stdc-predef.h \
- /home/persist/neotec/0rigin/test/../src/MSFTCommon.h \
+ /home/persist/neotec/0rigin/test/../src/SMFTCommon.h \
  /usr/include/c++/15.2.1/vector \
  /usr/include/c++/15.2.1/bits/requires_hosted.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h \

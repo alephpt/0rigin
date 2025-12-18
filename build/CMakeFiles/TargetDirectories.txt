@@ -22,5 +22,7 @@
 /home/persist/neotec/0rigin/build/CMakeFiles/test_find_critical_sigma.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_noise_sweep_corrected.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_noise_sweep_cpu.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_operator_splitting_10k.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_vortex_operator_splitting.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/edit_cache.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/rebuild_cache.dir

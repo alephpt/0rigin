@@ -1,17 +1,17 @@
-#include "SMFT.h"
+#include "SMFTCore.h"
 #include "SMFTEngine.h" // Assuming this will be created
 #include <imgui.h>
 
-SMFT* _essence = nullptr;
+SMFTCore* _essence = nullptr;
 
-SMFT::SMFT() {
+SMFTCore::SMFTCore() {
     //report(LOGGER::INFO, "SMFT - Constructing Nova ..");
     assert(_essence == nullptr);
     _actuality = nullptr;
     _smftEngine = nullptr;
 }
 
-SMFT::~SMFT() {
+SMFTCore::~SMFTCore() {
     //report(LOGGER::INFO, "SMFT - The End is Nigh ..");
     if (_essence != nullptr) {
         delete _smftEngine;
@@ -20,16 +20,16 @@ SMFT::~SMFT() {
     }
 }
 
-SMFT* SMFT::manifest() {
+SMFTCore* SMFTCore::manifest() {
     //report(LOGGER::INFO, "SMFT - Manifesting ..");
     if (_essence == nullptr) {
-        SMFT* essence = new SMFT();
+        SMFTCore* essence = new SMFTCore();
         _essence = essence->realize();
     }
     return _essence;
 }
 
-SMFT* SMFT::realize() {
+SMFTCore* SMFTCore::realize() {
     _config = {
         .name = "SMFT Nova Demo",
         .screen = {1920, 1080},
@@ -71,7 +71,7 @@ SMFT* SMFT::realize() {
     return this;
 }
 
-void SMFT::materialize() {
+void SMFTCore::materialize() {
     //report(LOGGER::VERBOSE, "SMFT - Materializing ..");
 
     _essence->_smftEngine->step(_essence->dt, _essence->K, 0.1f);
@@ -93,7 +93,7 @@ void SMFT::materialize() {
     ImGui::End();
 }
 
-void SMFT::actualize() {
+void SMFTCore::actualize() {
     //report(LOGGER::INFO, "SMFT - Actualizing ..");
 
     // The materialize function will be called inside the main loop

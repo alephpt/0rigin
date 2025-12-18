@@ -1,0 +1,52 @@
+test_name: "coupled_dynamics_validation"
+description: "Validate operator splitting with NON-UNIFORM Kuramoto field (spatial R gradient) to test true Dirac-Kuramoto coupling"
+
+grid:
+  size_x: 64
+  size_y: 64
+
+physics:
+  delta: 2.5                    # Vacuum potential (Planck mass)
+  coupling: 0.5                 # STRONG Ψ→θ coupling (enhanced to see effects)
+  dt: 0.01                      # Time step
+  total_steps: 500              # 500 steps = 5 time units (faster test)
+  K: 2.0                        # STRONG Kuramoto coupling (enable sync dynamics)
+  damping: 0.05                 # Low damping (allow R to evolve)
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    center_x: 32                # Start at grid center
+    center_y: 32
+    sigma: 3.0                  # Slightly wider wavepacket
+    amplitude: 1.0
+
+  kuramoto:
+    # CRITICAL: Create spatial phase defect to generate ∇R ≠ 0
+    phase_distribution: "vortex"  # Topological defect: θ = arctan2(y-y0, x-x0)
+    omega_distribution: "gaussian"  # Non-zero frequencies to drive dynamics
+    omega_mean: 0.0
+    omega_std: 0.2              # Moderate frequency spread
+
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # Test convergence: coarse → medium → fine
+
+validation:
+  norm_tolerance: 2.0e-2        # 2% norm drift acceptable for 5 time units
+  energy_tolerance: 5.0e-2      # 5% energy drift (coupling extracts energy)
+  convergence_tolerance: 0.10   # 10% convergence threshold (expect differences!)
+
+output:
+  directory: "output/coupled_dynamics_validation"
+  save_every: 5                 # Save every 5 steps (100 snapshots)
+  formats: ["csv"]
+  auto_visualize: true          # Generate plots automatically
+
+# Expected behavior:
+# - R-field has spatial gradient due to vortex defect
+# - Dirac wavepacket experiences position-dependent mass m(x) = Δ·R(x)
+# - N=1: Dirac sees high-frequency R oscillations (noisy force)
+# - N=100: Dirac sees time-averaged R (smooth force)
+# - Convergence: |⟨x⟩(N=100) - ⟨x⟩(N=1)| ~ O(0.1-1.0) grid points (NOT zero!)
+# - Timing: t(N=10)/t(N=1) ≈ 10, t(N=100)/t(N=1) ≈ 100

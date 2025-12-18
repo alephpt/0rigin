@@ -1,0 +1,40 @@
+# Test operator splitting with N=2 (minimal case to test recursion fix)
+test_name: "coupled_64x64_N2"
+description: "Operator splitting N=2 on 64×64 grid (recursion fix test)"
+
+grid:
+  size: 64
+
+physics:
+  delta: 2.5
+  coupling: 0.5
+  dt: 0.01
+  total_steps: 10  # Short test just to verify no crash
+  K: 2.0
+  damping: 0.05
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    center: [32, 32]
+    sigma: 3.0
+    amplitude: 1.0
+  kuramoto:
+    phase_distribution: "vortex"
+    omega_distribution: "gaussian"
+    omega_mean: 0.0
+    omega_std: 0.2
+
+operator_splitting:
+  enabled: true
+  substep_ratios: [2]  # N=2 minimal operator splitting
+
+validation:
+  norm_tolerance: 0.02
+  energy_tolerance: 0.1
+  convergence_tolerance: 0.1
+
+output:
+  directory: "output/test_N2_recursion_fix"
+  save_every: 5
+  formats: ["csv"]

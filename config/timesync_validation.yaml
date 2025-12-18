@@ -1,0 +1,47 @@
+---
+test_name: "timesync_validation"
+description: "Validate operator splitting with N=1, 10, 100 timesync ratios"
+
+# Grid configuration
+grid:
+  size_x: 64
+  size_y: 64
+
+# Physics parameters
+physics:
+  delta: 2.5            # Mass gap parameter
+  coupling: 0.1         # Kuramoto-Dirac coupling strength
+  dt: 0.01              # Timestep size
+  total_steps: 100      # Number of evolution steps
+  K: 1.0                # Kuramoto coupling strength
+  damping: 0.1          # Phase damping coefficient
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0: 32.0            # Center x-coordinate
+    y0: 32.0            # Center y-coordinate
+    sigma: 3.0          # Gaussian width
+    amplitude: 1.0      # Initial amplitude
+
+  kuramoto:
+    phase_distribution: "uniform"   # Uniform zero phases
+    omega_distribution: "zero"      # Zero natural frequencies
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # Test N=1 (no separation), N=10 (modest), N=100 (strong)
+
+# Validation tolerances
+validation:
+  norm_tolerance: 1.0e-4        # ||Ψ||² - 1 < 10⁻⁴
+  energy_tolerance: 1.0e-2      # |ΔE/E₀| < 1%
+  convergence_tolerance: 0.05   # 5% convergence between N values
+
+# Output configuration
+output:
+  directory: "output/timesync_validation"
+  save_every: 10                  # Save observables every 10 steps
+  formats: ["csv"]                # Output formats

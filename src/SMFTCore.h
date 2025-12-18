@@ -4,12 +4,12 @@
 // Forward declaration of SMFTEngine
 class SMFTEngine;
 
-class SMFT {
+class SMFTCore {
 public:
-    SMFT();
-    ~SMFT();
+    SMFTCore();
+    ~SMFTCore();
 
-    static SMFT* manifest();   // Singleton
+    static SMFTCore* manifest();   // Singleton
 
     static void materialize();      // Draw UI and simulation
     void actualize();               // Run the application
@@ -25,5 +25,5 @@ private:
     float chiral_angle = 0.0f;
     float R_avg = 0.0f;
 
-    SMFT* realize();            // Init
+    SMFTCore* realize();            // Init
 };

@@ -3,11 +3,11 @@ bin/test_timesync_simple: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/test_timesync_simple.dir/test/test_timesync_simple.cpp.o \
-  CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.o \
-  CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.o \
-  CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.o \
-  CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.o \
-  CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.o \
+  CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.o \
+  CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.o \
+  CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.o \
+  CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.o \
+  CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.o \
   CMakeFiles/test_timesync_simple.dir/src/DiracEvolution.cpp.o \
   libNova.a \
   libimgui.a \
@@ -53,15 +53,15 @@ bin/test_timesync_simple: \
 
 CMakeFiles/test_timesync_simple.dir/test/test_timesync_simple.cpp.o:
 
-CMakeFiles/test_timesync_simple.dir/src/MSFTEngine.cpp.o:
+CMakeFiles/test_timesync_simple.dir/src/SMFTEngine.cpp.o:
 
-CMakeFiles/test_timesync_simple.dir/src/MSFTPipelineFactory.cpp.o:
+CMakeFiles/test_timesync_simple.dir/src/SMFTPipelineFactory.cpp.o:
 
-CMakeFiles/test_timesync_simple.dir/src/MSFTBufferManager.cpp.o:
+CMakeFiles/test_timesync_simple.dir/src/SMFTBufferManager.cpp.o:
 
-CMakeFiles/test_timesync_simple.dir/src/MSFTCompute.cpp.o:
+CMakeFiles/test_timesync_simple.dir/src/SMFTCompute.cpp.o:
 
-CMakeFiles/test_timesync_simple.dir/src/MSFTDescriptorManager.cpp.o:
+CMakeFiles/test_timesync_simple.dir/src/SMFTDescriptorManager.cpp.o:
 
 CMakeFiles/test_timesync_simple.dir/src/DiracEvolution.cpp.o:
 
