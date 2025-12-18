@@ -103,6 +103,7 @@ set(MSFT_SOURCES
     src/MSFTBufferManager.cpp
     src/MSFTCompute.cpp
     src/MSFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
     main.cpp
 )
 
@@ -121,6 +122,7 @@ target_link_libraries(MSFT PRIVATE
     imgui
     ${Vulkan_LIBRARIES}
     ${SDL2_LIBRARIES}
+    fftw3f
     pthread
     dl
     m
@@ -142,6 +144,7 @@ add_executable(test_msft_gpu
     src/MSFTBufferManager.cpp
     src/MSFTCompute.cpp
     src/MSFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
 )
 
 target_include_directories(test_msft_gpu PRIVATE
@@ -157,6 +160,7 @@ target_link_libraries(test_msft_gpu PRIVATE
     imgui
     ${Vulkan_LIBRARIES}
     ${SDL2_LIBRARIES}
+    fftw3f
     pthread
     dl
     m
@@ -174,6 +178,7 @@ add_executable(test_descriptor_bindings
     src/MSFTBufferManager.cpp
     src/MSFTCompute.cpp
     src/MSFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
 )
 
 target_include_directories(test_descriptor_bindings PRIVATE
@@ -189,6 +194,7 @@ target_link_libraries(test_descriptor_bindings PRIVATE
     imgui
     ${Vulkan_LIBRARIES}
     ${SDL2_LIBRARIES}
+    fftw3f
     pthread
     dl
     m
@@ -206,6 +212,7 @@ add_executable(test_stochastic_particle
     src/MSFTBufferManager.cpp
     src/MSFTCompute.cpp
     src/MSFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
 )
 
 target_include_directories(test_stochastic_particle PRIVATE
@@ -221,12 +228,80 @@ target_link_libraries(test_stochastic_particle PRIVATE
     imgui
     ${Vulkan_LIBRARIES}
     ${SDL2_LIBRARIES}
+    fftw3f
     pthread
     dl
     m
 )
 
 set_target_properties(test_stochastic_particle PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test executable: Operator splitting validation (infrastructure only)
+add_executable(test_operator_splitting
+    test/test_operator_splitting.cpp
+)
+
+target_include_directories(test_operator_splitting PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+)
+
+set_target_properties(test_operator_splitting PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test executable: Hybrid operator splitting integration test
+add_executable(test_hybrid_operator_splitting
+    test/test_hybrid_operator_splitting.cpp
+    src/MSFTEngine.cpp
+    src/MSFTPipelineFactory.cpp
+    src/MSFTBufferManager.cpp
+    src/MSFTCompute.cpp
+    src/MSFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_hybrid_operator_splitting PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_hybrid_operator_splitting PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    fftw3f
+    pthread
+    dl
+    m
+)
+
+set_target_properties(test_hybrid_operator_splitting PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test executable: CPU-based operator splitting logic test
+add_executable(test_operator_splitting_cpu
+    test/test_operator_splitting_cpu.cpp
+)
+
+set_target_properties(test_operator_splitting_cpu PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test executable: Full operator splitting simulation (10k steps)
+add_executable(test_operator_splitting_full
+    test/test_operator_splitting_full.cpp
+)
+
+set_target_properties(test_operator_splitting_full PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
@@ -253,6 +328,12 @@ add_executable(test_dirac_stochastic_full
     test/test_dirac_stochastic_full.cpp
 )
 
+# Split-operator validation test
+add_executable(test_split_operator_validation
+    test/test_split_operator_validation.cpp
+    src/DiracEvolution.cpp
+)
+
 target_include_directories(test_dirac_stochastic_full PRIVATE
     ${CMAKE_SOURCE_DIR}/src
 )
@@ -264,6 +345,61 @@ target_link_libraries(test_dirac_stochastic_full PRIVATE
 )
 
 set_target_properties(test_dirac_stochastic_full PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+target_include_directories(test_split_operator_validation PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_split_operator_validation PRIVATE
+    fftw3f
+    pthread
+    m
+)
+
+set_target_properties(test_split_operator_validation PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Phase 2 - Scenario 1: Static Defect Localization (CPU-only)
+add_executable(test_scenario1_defect
+    test/test_scenario1_defect.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_scenario1_defect PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_scenario1_defect PRIVATE
+    fftw3f
+    pthread
+    m
+)
+
+set_target_properties(test_scenario1_defect PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Ehrenfest theorem validation (critical diagnostic)
+add_executable(test_ehrenfest_validation
+    test/test_ehrenfest_validation.cpp
+    src/DiracEvolution.cpp
+    src/MSFTCommon.cpp
+)
+
+target_include_directories(test_ehrenfest_validation PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_ehrenfest_validation PRIVATE
+    fftw3f
+    pthread
+    m
+)
+
+set_target_properties(test_ehrenfest_validation PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
