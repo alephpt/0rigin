@@ -158,6 +158,14 @@ private:
     bool runForGridSize(int grid_size);
 
     /**
+     * Run all tests for a specific grid size and velocity (Scenario 2.3)
+     * @param grid_size Grid size to test
+     * @param velocity Boost velocity (in units of c)
+     * @return true if all tests passed
+     */
+    bool runForGridSizeAndVelocity(int grid_size, float velocity);
+
+    /**
      * Run single test with given substep ratio
      * @param N Substep ratio
      * @return true if successful

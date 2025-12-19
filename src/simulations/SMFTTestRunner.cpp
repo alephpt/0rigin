@@ -1,5 +1,6 @@
 #include "simulations/SMFTTestRunner.h"
 #include "output/OutputManager.h"
+#include "SMFTCommon.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -120,6 +121,9 @@ bool SMFTTestRunner::run() {
 
     std::cout << "\n===== Running Tests =====" << std::endl;
 
+    // Check if velocity sweep testing is enabled (Scenario 2.3)
+    bool has_velocity_sweep = !_config.dirac_initial.boost_velocities.empty();
+
     // Check if grid convergence testing is enabled
     if (!_config.grid.grid_sizes.empty()) {
         std::cout << "\n===== Grid Convergence Testing =====" << std::endl;
@@ -130,24 +134,57 @@ bool SMFTTestRunner::run() {
         }
         std::cout << std::endl;
 
-        bool all_grids_passed = true;
-        for (int grid_size : _config.grid.grid_sizes) {
-            std::cout << "\n========================================" << std::endl;
-            std::cout << "Grid Size: " << grid_size << "×" << grid_size << std::endl;
-            std::cout << "========================================" << std::endl;
+        bool all_tests_passed = true;
 
-            if (!runForGridSize(grid_size)) {
-                std::cerr << "Tests failed for grid size " << grid_size << std::endl;
-                all_grids_passed = false;
+        for (int grid_size : _config.grid.grid_sizes) {
+            if (has_velocity_sweep) {
+                // Velocity sweep for each grid size
+                std::cout << "\n===== Velocity Sweep for " << grid_size << "×" << grid_size << " =====" << std::endl;
+                for (float velocity : _config.dirac_initial.boost_velocities) {
+                    std::cout << "\n========================================" << std::endl;
+                    std::cout << "Grid: " << grid_size << "×" << grid_size << " | Velocity: v=" << velocity << "c" << std::endl;
+                    std::cout << "========================================" << std::endl;
+
+                    if (!runForGridSizeAndVelocity(grid_size, velocity)) {
+                        std::cerr << "Tests failed for grid " << grid_size << ", velocity " << velocity << std::endl;
+                        all_tests_passed = false;
+                    }
+                }
+            } else {
+                // Standard grid convergence (no velocity sweep)
+                std::cout << "\n========================================" << std::endl;
+                std::cout << "Grid Size: " << grid_size << "×" << grid_size << std::endl;
+                std::cout << "========================================" << std::endl;
+
+                if (!runForGridSize(grid_size)) {
+                    std::cerr << "Tests failed for grid size " << grid_size << std::endl;
+                    all_tests_passed = false;
+                }
             }
         }
 
-        std::cout << "\n===== Grid Convergence Tests Complete =====" << std::endl;
-        return all_grids_passed;
+        std::cout << "\n===== Tests Complete =====" << std::endl;
+        return all_tests_passed;
     }
 
     // Single grid size (original behavior)
-    return runForGridSize(_config.grid.size_x);
+    if (has_velocity_sweep) {
+        // Velocity sweep for default grid size
+        bool all_velocities_passed = true;
+        for (float velocity : _config.dirac_initial.boost_velocities) {
+            std::cout << "\n========================================" << std::endl;
+            std::cout << "Velocity: v=" << velocity << "c" << std::endl;
+            std::cout << "========================================" << std::endl;
+
+            if (!runForGridSizeAndVelocity(_config.grid.size_x, velocity)) {
+                std::cerr << "Tests failed for velocity " << velocity << std::endl;
+                all_velocities_passed = false;
+            }
+        }
+        return all_velocities_passed;
+    } else {
+        return runForGridSize(_config.grid.size_x);
+    }
 }
 
 bool SMFTTestRunner::runForGridSize(int grid_size) {
@@ -226,6 +263,88 @@ bool SMFTTestRunner::runForGridSize(int grid_size) {
     return result;
 }
 
+bool SMFTTestRunner::runForGridSizeAndVelocity(int grid_size, float velocity) {
+    // Re-initialize engine with new grid size
+    std::cout << "\nInitializing engine for " << grid_size << "×" << grid_size << " grid, velocity v=" << velocity << "c..." << std::endl;
+
+    // Clean up previous engine
+    if (_engine) {
+        delete _engine;
+        _engine = nullptr;
+    }
+
+    // Create and initialize new engine with specified grid size
+    _engine = new SMFTEngine(_nova);
+    _engine->initialize(grid_size, grid_size, _config.physics.delta, 0.0f);
+
+    // Update grid size tracking for output paths
+    _current_grid_size = grid_size;
+
+    // Temporarily update config grid size and velocity for initialization functions
+    int original_size_x = _config.grid.size_x;
+    int original_size_y = _config.grid.size_y;
+    float original_boost_vx = _config.dirac_initial.boost_vx;
+    float original_boost_vy = _config.dirac_initial.boost_vy;
+
+    _config.grid.size_x = grid_size;
+    _config.grid.size_y = grid_size;
+    _config.dirac_initial.boost_vx = velocity;
+    _config.dirac_initial.boost_vy = 0.0f; // Boost in x-direction only
+
+    // Create output directories for this grid size and velocity
+    createOutputDirectories();
+
+    // Restart console logging for this configuration
+    stopConsoleLogging();
+    if (!_timestamped_output_dir.empty()) {
+        std::string console_log_path = _timestamped_output_dir + "/console.log";
+        startConsoleLogging(console_log_path);
+        std::cout << "[Logging] Console output for " << grid_size << "x" << grid_size
+                  << " v=" << velocity << "c writing to: " << console_log_path << std::endl;
+    }
+
+    bool result = false;
+
+    if (_config.operator_splitting.enabled) {
+        // Run test for each substep ratio
+        bool all_passed = true;
+        for (int N : _config.operator_splitting.substep_ratios) {
+            std::cout << "\n--- Testing with N=" << N << " ---" << std::endl;
+            if (!runSingleTest(N)) {
+                std::cerr << "Test failed for N=" << N << std::endl;
+                all_passed = false;
+            }
+        }
+
+        // Validate convergence between different N
+        std::cout << "\n--- Validating Convergence ---" << std::endl;
+        ValidationResult conv_result = validateConvergence();
+        _validation_results[-1] = conv_result;
+
+        if (conv_result.passed()) {
+            std::cout << "✓ Convergence validation PASSED" << std::endl;
+        } else {
+            std::cout << "✗ Convergence validation FAILED" << std::endl;
+        }
+
+        result = all_passed;
+    } else {
+        // Single test without operator splitting (N=1)
+        result = runSingleTest(1);
+        if (!result) {
+            std::cerr << "Test failed" << std::endl;
+        }
+    }
+
+    // Restore original config
+    _config.grid.size_x = original_size_x;
+    _config.grid.size_y = original_size_y;
+    _config.dirac_initial.boost_vx = original_boost_vx;
+    _config.dirac_initial.boost_vy = original_boost_vy;
+
+    return result;
+}
+
 bool SMFTTestRunner::runSingleTest(int N) {
     // Set substep ratio
     _engine->setSubstepRatio(N);
@@ -265,14 +384,46 @@ bool SMFTTestRunner::runSingleTest(int N) {
         std::cout << "    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)\n";
     }
 
-    _engine->initializeDiracField(x0_grid, y0_grid, sigma_grid, _config.dirac_initial.amplitude);
+    // Check if boosted initialization is requested
+    bool use_boosted_init = (_config.dirac_initial.boost_vx != 0.0f || _config.dirac_initial.boost_vy != 0.0f);
+
+    if (use_boosted_init) {
+        // Use boosted Gaussian initialization (Scenario 2.3)
+        // Get background R value for mass calculation
+        auto R_field_initial = _engine->getSyncField();
+        float R_bg = 0.0f;
+        for (float R : R_field_initial) R_bg += R;
+        R_bg /= R_field_initial.size();
+
+        std::cout << "  Using boosted Gaussian initialization\n";
+        std::cout << "    Background R: " << R_bg << "\n";
+
+        _engine->initializeBoostedDiracField(x0_grid, y0_grid, sigma_grid,
+                                            _config.dirac_initial.boost_vx,
+                                            _config.dirac_initial.boost_vy,
+                                            R_bg);
+    } else {
+        // Standard Gaussian initialization
+        _engine->initializeDiracField(x0_grid, y0_grid, sigma_grid, _config.dirac_initial.amplitude);
+    }
 
     // Prepare results storage
     std::vector<ObservableComputer::Observables> observables;
 
     // Get initial energy
     DiracEvolution dirac_temp(_config.grid.size_x, _config.grid.size_y);
-    dirac_temp.initialize(x0_grid, y0_grid, sigma_grid);
+    if (use_boosted_init) {
+        auto R_field_initial = _engine->getSyncField();
+        float R_bg = 0.0f;
+        for (float R : R_field_initial) R_bg += R;
+        R_bg /= R_field_initial.size();
+        SMFT::initializeBoostedGaussian(dirac_temp, x0_grid, y0_grid, sigma_grid,
+                                       _config.dirac_initial.boost_vx,
+                                       _config.dirac_initial.boost_vy,
+                                       _config.physics.delta, R_bg);
+    } else {
+        dirac_temp.initialize(x0_grid, y0_grid, sigma_grid);
+    }
     auto R_field_initial = _engine->getSyncField();
     std::vector<double> R_field_double(R_field_initial.begin(), R_field_initial.end());
 
@@ -626,6 +777,16 @@ void SMFTTestRunner::createOutputDirectories() {
     // Append grid size to experiment name if doing grid convergence
     if (_current_grid_size > 0) {
         experiment_name += "_" + std::to_string(_current_grid_size) + "x" + std::to_string(_current_grid_size);
+    }
+
+    // Append velocity to experiment name if doing velocity sweep
+    if (_config.dirac_initial.boost_vx != 0.0f || _config.dirac_initial.boost_vy != 0.0f) {
+        std::ostringstream vss;
+        vss << std::fixed << std::setprecision(1);
+        float v_mag = std::sqrt(_config.dirac_initial.boost_vx * _config.dirac_initial.boost_vx +
+                               _config.dirac_initial.boost_vy * _config.dirac_initial.boost_vy);
+        vss << "_v" << v_mag;
+        experiment_name += vss.str();
     }
 
     // Create timestamped directory via OutputManager (cast to actual type)

@@ -152,17 +152,35 @@ bool TestConfig::validate() const {
     }
 
     // Check Dirac initial condition
-    if (dirac_initial.x0 < 0 || dirac_initial.x0 >= grid.size_x) {
-        std::cerr << "Dirac x0 out of bounds" << std::endl;
-        return false;
-    }
-    if (dirac_initial.y0 < 0 || dirac_initial.y0 >= grid.size_y) {
-        std::cerr << "Dirac y0 out of bounds" << std::endl;
-        return false;
-    }
-    if (dirac_initial.sigma <= 0.0f) {
-        std::cerr << "Invalid Dirac sigma" << std::endl;
-        return false;
+    // Skip grid-based validation if using physical coordinates
+    if (dirac_initial.x0_physical < 0) {
+        // Using deprecated grid coordinates - validate against grid size
+        if (dirac_initial.x0 < 0 || dirac_initial.x0 >= grid.size_x) {
+            std::cerr << "Dirac x0 out of bounds" << std::endl;
+            return false;
+        }
+        if (dirac_initial.y0 < 0 || dirac_initial.y0 >= grid.size_y) {
+            std::cerr << "Dirac y0 out of bounds" << std::endl;
+            return false;
+        }
+        if (dirac_initial.sigma <= 0.0f) {
+            std::cerr << "Invalid Dirac sigma" << std::endl;
+            return false;
+        }
+    } else {
+        // Using physical coordinates - validate against domain size
+        if (dirac_initial.x0_physical < 0 || dirac_initial.x0_physical > grid.L_domain) {
+            std::cerr << "Dirac x0_physical out of domain bounds" << std::endl;
+            return false;
+        }
+        if (dirac_initial.y0_physical < 0 || dirac_initial.y0_physical > grid.L_domain) {
+            std::cerr << "Dirac y0_physical out of domain bounds" << std::endl;
+            return false;
+        }
+        if (dirac_initial.sigma_physical <= 0.0f) {
+            std::cerr << "Invalid Dirac sigma_physical" << std::endl;
+            return false;
+        }
     }
 
     // Check operator splitting

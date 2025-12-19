@@ -1,5 +1,6 @@
 #include "SMFTEngine.h"
 #include "DiracEvolution.h"
+#include "SMFTCommon.h"
 #include <cstring>
 #include <algorithm>
 #include <cmath>
@@ -932,6 +933,38 @@ void SMFTEngine::initializeDiracField(float x0, float y0, float sigma, float amp
                   << "center=(" << x0 << "," << y0 << "), "
                   << "sigma=" << sigma << ", "
                   << "norm=" << norm << std::endl;
+    }
+}
+
+void SMFTEngine::initializeBoostedDiracField(float x0, float y0, float sigma,
+                                             float vx, float vy, float R_bg) {
+    /**
+     * Initialize Dirac spinor field with boosted Gaussian wavepacket
+     * Uses SMFT::initializeBoostedGaussian helper function
+     */
+
+    // Create DiracEvolution instance if not exists
+    if (!_dirac_evolution) {
+        _dirac_evolution = new DiracEvolution(_Nx, _Ny);
+    }
+
+    // Initialize with boosted Gaussian wavepacket using SMFT helper
+    SMFT::initializeBoostedGaussian(*_dirac_evolution, x0, y0, sigma,
+                                   vx, vy, _Delta, R_bg);
+
+    _dirac_initialized = true;
+
+    // Log initialization
+    if (_nova) {
+        float norm = _dirac_evolution->getNorm();
+        float x_mean, y_mean;
+        _dirac_evolution->getCenterOfMass(x_mean, y_mean);
+        std::cout << "[SMFTEngine] Boosted Dirac field initialized: "
+                  << "center=(" << x0 << "," << y0 << "), "
+                  << "sigma=" << sigma << ", "
+                  << "boost=(" << vx << "," << vy << ")c, "
+                  << "norm=" << norm << ", "
+                  << "<r>=(" << x_mean << "," << y_mean << ")" << std::endl;
     }
 }
 

@@ -128,6 +128,21 @@ public:
     void initializeDiracField(float x0, float y0, float sigma, float amplitude);
 
     /**
+     * Initialize Dirac spinor field with boosted Gaussian wavepacket (Scenario 2.3)
+     * CPU-only implementation - GPU shaders exceed timeout budget
+     *
+     * Creates a Gaussian with relativistic momentum boost p = γ·m·v
+     * @param x0 Center x coordinate (grid units)
+     * @param y0 Center y coordinate (grid units)
+     * @param sigma Gaussian width parameter (grid units)
+     * @param vx Boost velocity in x direction (c = 1 in Planck units)
+     * @param vy Boost velocity in y direction (c = 1 in Planck units)
+     * @param R_bg Background synchronization parameter R for mass calculation
+     */
+    void initializeBoostedDiracField(float x0, float y0, float sigma,
+                                    float vx, float vy, float R_bg);
+
+    /**
      * Step coupled Kuramoto-Dirac evolution with mass coupling
      * CPU-only implementation - GPU shaders exceed timeout budget
      *

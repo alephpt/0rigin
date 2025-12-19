@@ -104,6 +104,7 @@ set(SMFT_SOURCES
     src/SMFTCompute.cpp
     src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
+    src/SMFTCommon.cpp
     src/output/OutputManager.cpp
     src/simulations/TestConfig.cpp
     src/simulations/SMFTTestRunner.cpp
