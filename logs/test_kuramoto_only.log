@@ -1,0 +1,445 @@
+
+===== SMFT Test Mode =====
+Configuration: config/kuramoto_only_vortex.yaml
+
+[1/3] Initializing...
+
+===== Test Configuration: kuramoto_only_vortex =====
+Description: Control Test: Kuramoto vortex evolution WITHOUT Dirac coupling
+
+[Grid]
+  size: 128 x 128
+
+[Physics]
+  delta: 2.5
+  coupling: 0
+  dt: 0.01
+  total_steps: 10000
+  K (Kuramoto): 1
+  damping: 0.1
+
+[Initial Conditions - Dirac]
+  type: gaussian
+  center: (74, 64)
+  sigma: 3
+  amplitude: 1
+
+[Initial Conditions - Kuramoto]
+  phase_distribution: vortex
+  omega_distribution: zero
+  omega_mean: 0
+  omega_std: 0.1
+
+[Operator Splitting]
+  enabled: yes
+  substep_ratios: [1, 10, 100]
+
+[Validation]
+  norm_tolerance: 0.0001
+  energy_tolerance: 0.01
+  convergence_tolerance: 0.05
+
+[Output]
+  directory: output/kuramoto_only_vortex
+  save_every: 10 steps
+  formats: [csv]
+========================================
+
+ [INFO]: Nova - Instantiating ..
+Logger - Debug Level set to error ..
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 2.5 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 128 x 128 oscillators
+
+[SMFTEngine] Created GPU buffers for 128x128 grid
+  Phase buffers: 65536 bytes each
+  Spinor buffer: 524288 bytes
+  Accumulator buffers: 65536 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251219_002121_kuramoto_only_vortex
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251219_002121_kuramoto_only_vortex
+✓ SMFTTestRunner initialized successfully
+
+[2/3] Running tests...
+
+===== Running Tests =====
+
+--- Testing with N=1 ---
+[DiracEvolution] Initialized 128x128 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (74, 64) with σ=3
+[SMFTEngine] Dirac field initialized: center=(74,64), sigma=3, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (74, 64) with σ=3
+  Initial energy E0 = 0.105161
+  Initial norm = 1
+[stepWithDirac] First call: substep_ratio=1, substep_dt=0.01
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/10000 | R_avg = 0.983737 | norm = 1
+  Step 100/10000 | R_avg = 0.983645 | norm = 0.999973
+  Step 200/10000 | R_avg = 0.983646 | norm = 0.999944
+  Step 300/10000 | R_avg = 0.983691 | norm = 0.999913
+  Step 400/10000 | R_avg = 0.98367 | norm = 0.999882
+  Step 500/10000 | R_avg = 0.983668 | norm = 0.999851
+  Step 600/10000 | R_avg = 0.983653 | norm = 0.999819
+  Step 700/10000 | R_avg = 0.983268 | norm = 0.999788
+  Step 800/10000 | R_avg = 0.983625 | norm = 0.999756
+  Step 900/10000 | R_avg = 0.983647 | norm = 0.999724
+  Step 1000/10000 | R_avg = 0.983672 | norm = 0.999692
+  Step 1100/10000 | R_avg = 0.983606 | norm = 0.99966
+  Step 1200/10000 | R_avg = 0.983686 | norm = 0.999628
+  Step 1300/10000 | R_avg = 0.983681 | norm = 0.999595
+  Step 1400/10000 | R_avg = 0.98365 | norm = 0.999563
+  Step 1500/10000 | R_avg = 0.983635 | norm = 0.999532
+  Step 1600/10000 | R_avg = 0.983655 | norm = 0.999501
+  Step 1700/10000 | R_avg = 0.983668 | norm = 0.99947
+  Step 1800/10000 | R_avg = 0.983637 | norm = 0.999438
+  Step 1900/10000 | R_avg = 0.983646 | norm = 0.999407
+  Step 2000/10000 | R_avg = 0.983713 | norm = 0.999376
+  Step 2100/10000 | R_avg = 0.983675 | norm = 0.999346
+  Step 2200/10000 | R_avg = 0.983687 | norm = 0.999316
+  Step 2300/10000 | R_avg = 0.983671 | norm = 0.999286
+  Step 2400/10000 | R_avg = 0.983619 | norm = 0.999255
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/10000 | R_avg = 0.98367 | norm = 0.999225
+  Step 2600/10000 | R_avg = 0.98368 | norm = 0.999194
+  Step 2700/10000 | R_avg = 0.983666 | norm = 0.999164
+  Step 2800/10000 | R_avg = 0.983652 | norm = 0.999134
+  Step 2900/10000 | R_avg = 0.98367 | norm = 0.999104
+  Step 3000/10000 | R_avg = 0.98367 | norm = 0.999074
+  Step 3100/10000 | R_avg = 0.983685 | norm = 0.999044
+  Step 3200/10000 | R_avg = 0.983666 | norm = 0.999014
+  Step 3300/10000 | R_avg = 0.983652 | norm = 0.998983
+  Step 3400/10000 | R_avg = 0.983645 | norm = 0.998952
+  Step 3500/10000 | R_avg = 0.983668 | norm = 0.99892
+  Step 3600/10000 | R_avg = 0.983667 | norm = 0.99889
+  Step 3700/10000 | R_avg = 0.98365 | norm = 0.998859
+  Step 3800/10000 | R_avg = 0.983682 | norm = 0.998829
+  Step 3900/10000 | R_avg = 0.983678 | norm = 0.998798
+  Step 4000/10000 | R_avg = 0.983678 | norm = 0.998768
+  Step 4100/10000 | R_avg = 0.983689 | norm = 0.998738
+  Step 4200/10000 | R_avg = 0.98366 | norm = 0.998709
+  Step 4300/10000 | R_avg = 0.983679 | norm = 0.99868
+  Step 4400/10000 | R_avg = 0.983645 | norm = 0.99865
+  Step 4500/10000 | R_avg = 0.983666 | norm = 0.99862
+  Step 4600/10000 | R_avg = 0.983645 | norm = 0.99859
+  Step 4700/10000 | R_avg = 0.983666 | norm = 0.998558
+  Step 4800/10000 | R_avg = 0.983674 | norm = 0.998527
+  Step 4900/10000 | R_avg = 0.983677 | norm = 0.998496
+  Saved spatial snapshot at t = 50 (step 5000)
+  Step 5000/10000 | R_avg = 0.983686 | norm = 0.998464
+  Step 5100/10000 | R_avg = 0.983685 | norm = 0.998432
+  Step 5200/10000 | R_avg = 0.983648 | norm = 0.998401
+  Step 5300/10000 | R_avg = 0.983573 | norm = 0.998369
+  Step 5400/10000 | R_avg = 0.98367 | norm = 0.998338
+  Step 5500/10000 | R_avg = 0.983655 | norm = 0.998305
+  Step 5600/10000 | R_avg = 0.983678 | norm = 0.998272
+  Step 5700/10000 | R_avg = 0.983703 | norm = 0.998238
+  Step 5800/10000 | R_avg = 0.983693 | norm = 0.998204
+  Step 5900/10000 | R_avg = 0.983681 | norm = 0.998171
+  Step 6000/10000 | R_avg = 0.983649 | norm = 0.998138
+  Step 6100/10000 | R_avg = 0.983654 | norm = 0.998107
+  Step 6200/10000 | R_avg = 0.983682 | norm = 0.998075
+  Step 6300/10000 | R_avg = 0.983671 | norm = 0.998045
+  Step 6400/10000 | R_avg = 0.98365 | norm = 0.998014
+  Step 6500/10000 | R_avg = 0.983698 | norm = 0.997984
+  Step 6600/10000 | R_avg = 0.983665 | norm = 0.997953
+  Step 6700/10000 | R_avg = 0.983668 | norm = 0.997922
+  Step 6800/10000 | R_avg = 0.98368 | norm = 0.997892
+  Step 6900/10000 | R_avg = 0.983662 | norm = 0.997861
+  Step 7000/10000 | R_avg = 0.983191 | norm = 0.99783
+  Step 7100/10000 | R_avg = 0.983652 | norm = 0.997799
+  Step 7200/10000 | R_avg = 0.983668 | norm = 0.997769
+  Step 7300/10000 | R_avg = 0.983665 | norm = 0.997738
+  Step 7400/10000 | R_avg = 0.983635 | norm = 0.997708
+  Saved spatial snapshot at t = 75 (step 7500)
+  Step 7500/10000 | R_avg = 0.983689 | norm = 0.997678
+  Step 7600/10000 | R_avg = 0.983664 | norm = 0.997647
+  Step 7700/10000 | R_avg = 0.983697 | norm = 0.997617
+  Step 7800/10000 | R_avg = 0.983696 | norm = 0.997587
+  Step 7900/10000 | R_avg = 0.98369 | norm = 0.997556
+  Step 8000/10000 | R_avg = 0.983659 | norm = 0.997526
+  Step 8100/10000 | R_avg = 0.983666 | norm = 0.997496
+  Step 8200/10000 | R_avg = 0.983613 | norm = 0.997465
+  Step 8300/10000 | R_avg = 0.983679 | norm = 0.997435
+  Step 8400/10000 | R_avg = 0.983634 | norm = 0.997405
+  Step 8500/10000 | R_avg = 0.983668 | norm = 0.997376
+  Step 8600/10000 | R_avg = 0.98366 | norm = 0.997347
+  Step 8700/10000 | R_avg = 0.983685 | norm = 0.997317
+  Step 8800/10000 | R_avg = 0.983681 | norm = 0.997288
+  Step 8900/10000 | R_avg = 0.983642 | norm = 0.997258
+  Step 9000/10000 | R_avg = 0.983675 | norm = 0.997229
+  Step 9100/10000 | R_avg = 0.98364 | norm = 0.9972
+  Step 9200/10000 | R_avg = 0.983643 | norm = 0.99717
+  Step 9300/10000 | R_avg = 0.98367 | norm = 0.997141
+  Step 9400/10000 | R_avg = 0.98365 | norm = 0.997111
+  Step 9500/10000 | R_avg = 0.983656 | norm = 0.997081
+  Step 9600/10000 | R_avg = 0.983636 | norm = 0.997052
+  Step 9700/10000 | R_avg = 0.983656 | norm = 0.997022
+  Step 9800/10000 | R_avg = 0.983635 | norm = 0.996993
+  Step 9900/10000 | R_avg = 0.983664 | norm = 0.996963
+  Norm validation: max_error = 0.00306669 ✗ FAIL
+  Energy validation: max_drift = 0.0175782 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251219_002121_kuramoto_only_vortex/N_1/observables.csv
+Test failed for N=1
+
+--- Testing with N=10 ---
+[DiracEvolution] Initialized Gaussian wavepacket at (74, 64) with σ=3
+[SMFTEngine] Dirac field initialized: center=(74,64), sigma=3, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (74, 64) with σ=3
+  Initial energy E0 = 2.59563
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/10000 | R_avg = 0.983682 | norm = 1
+  Step 100/10000 | R_avg = 0.983688 | norm = 0.999973
+  Step 200/10000 | R_avg = 0.983678 | norm = 0.999944
+  Step 300/10000 | R_avg = 0.983692 | norm = 0.999913
+  Step 400/10000 | R_avg = 0.983718 | norm = 0.999881
+  Step 500/10000 | R_avg = 0.983703 | norm = 0.99985
+  Step 600/10000 | R_avg = 0.983682 | norm = 0.999819
+  Step 700/10000 | R_avg = 0.983636 | norm = 0.999787
+  Step 800/10000 | R_avg = 0.983682 | norm = 0.999755
+  Step 900/10000 | R_avg = 0.983681 | norm = 0.999723
+  Step 1000/10000 | R_avg = 0.983657 | norm = 0.999691
+  Step 1100/10000 | R_avg = 0.983711 | norm = 0.999659
+  Step 1200/10000 | R_avg = 0.983716 | norm = 0.999627
+  Step 1300/10000 | R_avg = 0.98372 | norm = 0.999595
+  Step 1400/10000 | R_avg = 0.983682 | norm = 0.999563
+  Step 1500/10000 | R_avg = 0.983699 | norm = 0.999532
+  Step 1600/10000 | R_avg = 0.983658 | norm = 0.999501
+  Step 1700/10000 | R_avg = 0.983698 | norm = 0.99947
+  Step 1800/10000 | R_avg = 0.983629 | norm = 0.999438
+  Step 1900/10000 | R_avg = 0.983661 | norm = 0.999407
+  Step 2000/10000 | R_avg = 0.983691 | norm = 0.999376
+  Step 2100/10000 | R_avg = 0.983648 | norm = 0.999346
+  Step 2200/10000 | R_avg = 0.983701 | norm = 0.999316
+  Step 2300/10000 | R_avg = 0.983689 | norm = 0.999286
+  Step 2400/10000 | R_avg = 0.983705 | norm = 0.999255
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/10000 | R_avg = 0.98366 | norm = 0.999224
+  Step 2600/10000 | R_avg = 0.983655 | norm = 0.999194
+  Step 2700/10000 | R_avg = 0.983692 | norm = 0.999163
+  Step 2800/10000 | R_avg = 0.983665 | norm = 0.999133
+  Step 2900/10000 | R_avg = 0.983702 | norm = 0.999104
+  Step 3000/10000 | R_avg = 0.983642 | norm = 0.999074
+  Step 3100/10000 | R_avg = 0.983686 | norm = 0.999044
+  Step 3200/10000 | R_avg = 0.983683 | norm = 0.999014
+  Step 3300/10000 | R_avg = 0.983727 | norm = 0.998983
+  Step 3400/10000 | R_avg = 0.983685 | norm = 0.998952
+  Step 3500/10000 | R_avg = 0.983693 | norm = 0.998921
+  Step 3600/10000 | R_avg = 0.983661 | norm = 0.99889
+  Step 3700/10000 | R_avg = 0.983679 | norm = 0.998859
+  Step 3800/10000 | R_avg = 0.983733 | norm = 0.998829
+  Step 3900/10000 | R_avg = 0.983647 | norm = 0.998799
+  Step 4000/10000 | R_avg = 0.983669 | norm = 0.998769
+  Step 4100/10000 | R_avg = 0.983728 | norm = 0.998739
+  Step 4200/10000 | R_avg = 0.983668 | norm = 0.998709
+  Step 4300/10000 | R_avg = 0.983677 | norm = 0.99868
+  Step 4400/10000 | R_avg = 0.983661 | norm = 0.99865
+  Step 4500/10000 | R_avg = 0.983593 | norm = 0.998621
+  Step 4600/10000 | R_avg = 0.983666 | norm = 0.99859
+  Step 4700/10000 | R_avg = 0.98362 | norm = 0.998559
+  Step 4800/10000 | R_avg = 0.983644 | norm = 0.998527
+  Step 4900/10000 | R_avg = 0.983676 | norm = 0.998495
+  Saved spatial snapshot at t = 50 (step 5000)
+  Step 5000/10000 | R_avg = 0.983675 | norm = 0.998464
+  Step 5100/10000 | R_avg = 0.983673 | norm = 0.998432
+  Step 5200/10000 | R_avg = 0.983702 | norm = 0.998401
+  Step 5300/10000 | R_avg = 0.983654 | norm = 0.998369
+  Step 5400/10000 | R_avg = 0.983686 | norm = 0.998337
+  Step 5500/10000 | R_avg = 0.983693 | norm = 0.998304
+  Step 5600/10000 | R_avg = 0.983665 | norm = 0.998271
+  Step 5700/10000 | R_avg = 0.983675 | norm = 0.998237
+  Step 5800/10000 | R_avg = 0.983691 | norm = 0.998203
+  Step 5900/10000 | R_avg = 0.983642 | norm = 0.99817
+  Step 6000/10000 | R_avg = 0.983651 | norm = 0.998137
+  Step 6100/10000 | R_avg = 0.983669 | norm = 0.998106
+  Step 6200/10000 | R_avg = 0.983683 | norm = 0.998075
+  Step 6300/10000 | R_avg = 0.983629 | norm = 0.998044
+  Step 6400/10000 | R_avg = 0.983686 | norm = 0.998013
+  Step 6500/10000 | R_avg = 0.983654 | norm = 0.997983
+  Step 6600/10000 | R_avg = 0.983673 | norm = 0.997952
+  Step 6700/10000 | R_avg = 0.983673 | norm = 0.997921
+  Step 6800/10000 | R_avg = 0.983644 | norm = 0.99789
+  Step 6900/10000 | R_avg = 0.983716 | norm = 0.997859
+  Step 7000/10000 | R_avg = 0.98368 | norm = 0.997828
+  Step 7100/10000 | R_avg = 0.983628 | norm = 0.997798
+  Step 7200/10000 | R_avg = 0.983636 | norm = 0.997767
+  Step 7300/10000 | R_avg = 0.983694 | norm = 0.997737
+  Step 7400/10000 | R_avg = 0.983703 | norm = 0.997706
+  Saved spatial snapshot at t = 75 (step 7500)
+  Step 7500/10000 | R_avg = 0.983643 | norm = 0.997676
+  Step 7600/10000 | R_avg = 0.983644 | norm = 0.997646
+  Step 7700/10000 | R_avg = 0.98363 | norm = 0.997615
+  Step 7800/10000 | R_avg = 0.983714 | norm = 0.997585
+  Step 7900/10000 | R_avg = 0.983638 | norm = 0.997555
+  Step 8000/10000 | R_avg = 0.983671 | norm = 0.997525
+  Step 8100/10000 | R_avg = 0.983645 | norm = 0.997494
+  Step 8200/10000 | R_avg = 0.983654 | norm = 0.997464
+  Step 8300/10000 | R_avg = 0.983683 | norm = 0.997434
+  Step 8400/10000 | R_avg = 0.983644 | norm = 0.997404
+  Step 8500/10000 | R_avg = 0.983641 | norm = 0.997374
+  Step 8600/10000 | R_avg = 0.983715 | norm = 0.997345
+  Step 8700/10000 | R_avg = 0.983668 | norm = 0.997315
+  Step 8800/10000 | R_avg = 0.983676 | norm = 0.997286
+  Step 8900/10000 | R_avg = 0.983726 | norm = 0.997257
+  Step 9000/10000 | R_avg = 0.983699 | norm = 0.997228
+  Step 9100/10000 | R_avg = 0.983658 | norm = 0.997198
+  Step 9200/10000 | R_avg = 0.983674 | norm = 0.997169
+  Step 9300/10000 | R_avg = 0.983703 | norm = 0.997139
+  Step 9400/10000 | R_avg = 0.983666 | norm = 0.99711
+  Step 9500/10000 | R_avg = 0.98362 | norm = 0.99708
+  Step 9600/10000 | R_avg = 0.983666 | norm = 0.99705
+  Step 9700/10000 | R_avg = 0.98372 | norm = 0.997021
+  Step 9800/10000 | R_avg = 0.983645 | norm = 0.996991
+  Step 9900/10000 | R_avg = 0.983674 | norm = 0.996962
+  Norm validation: max_error = 0.00306792 ✗ FAIL
+  Energy validation: max_drift = 0.0176868 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251219_002121_kuramoto_only_vortex/N_10/observables.csv
+Test failed for N=10
+
+--- Testing with N=100 ---
+[DiracEvolution] Initialized Gaussian wavepacket at (74, 64) with σ=3
+[SMFTEngine] Dirac field initialized: center=(74,64), sigma=3, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (74, 64) with σ=3
+  Initial energy E0 = 2.59566
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/10000 | R_avg = 0.983688 | norm = 1
+  Step 100/10000 | R_avg = 0.983703 | norm = 0.999973
+  Step 200/10000 | R_avg = 0.983673 | norm = 0.999944
+  Step 300/10000 | R_avg = 0.983601 | norm = 0.999913
+  Step 400/10000 | R_avg = 0.983668 | norm = 0.999882
+  Step 500/10000 | R_avg = 0.98367 | norm = 0.99985
+  Step 600/10000 | R_avg = 0.983658 | norm = 0.999819
+  Step 700/10000 | R_avg = 0.983651 | norm = 0.999787
+  Step 800/10000 | R_avg = 0.983611 | norm = 0.999756
+  Step 900/10000 | R_avg = 0.983708 | norm = 0.999724
+  Step 1000/10000 | R_avg = 0.983638 | norm = 0.999692
+  Step 1100/10000 | R_avg = 0.983673 | norm = 0.99966
+  Step 1200/10000 | R_avg = 0.98366 | norm = 0.999628
+  Step 1300/10000 | R_avg = 0.983681 | norm = 0.999596
+  Step 1400/10000 | R_avg = 0.983677 | norm = 0.999564
+  Step 1500/10000 | R_avg = 0.983693 | norm = 0.999532
+  Step 1600/10000 | R_avg = 0.983638 | norm = 0.999501
+  Step 1700/10000 | R_avg = 0.98368 | norm = 0.99947
+  Step 1800/10000 | R_avg = 0.983663 | norm = 0.999439
+  Step 1900/10000 | R_avg = 0.983649 | norm = 0.999407
+  Step 2000/10000 | R_avg = 0.983671 | norm = 0.999377
+  Step 2100/10000 | R_avg = 0.983716 | norm = 0.999346
+  Step 2200/10000 | R_avg = 0.983669 | norm = 0.999317
+  Step 2300/10000 | R_avg = 0.983667 | norm = 0.999287
+  Step 2400/10000 | R_avg = 0.98368 | norm = 0.999256
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/10000 | R_avg = 0.983618 | norm = 0.999225
+  Step 2600/10000 | R_avg = 0.983729 | norm = 0.999195
+  Step 2700/10000 | R_avg = 0.983682 | norm = 0.999164
+  Step 2800/10000 | R_avg = 0.983679 | norm = 0.999135
+  Step 2900/10000 | R_avg = 0.983702 | norm = 0.999105
+  Step 3000/10000 | R_avg = 0.983614 | norm = 0.999075
+  Step 3100/10000 | R_avg = 0.983659 | norm = 0.999045
+  Step 3200/10000 | R_avg = 0.983615 | norm = 0.999014
+  Step 3300/10000 | R_avg = 0.983704 | norm = 0.998984
+  Step 3400/10000 | R_avg = 0.983636 | norm = 0.998952
+  Step 3500/10000 | R_avg = 0.983689 | norm = 0.998921
+  Step 3600/10000 | R_avg = 0.98366 | norm = 0.99889
+  Step 3700/10000 | R_avg = 0.983648 | norm = 0.99886
+  Step 3800/10000 | R_avg = 0.983607 | norm = 0.99883
+  Step 3900/10000 | R_avg = 0.983706 | norm = 0.998799
+  Step 4000/10000 | R_avg = 0.983244 | norm = 0.998769
+  Step 4100/10000 | R_avg = 0.983678 | norm = 0.998739
+  Step 4200/10000 | R_avg = 0.983674 | norm = 0.99871
+  Step 4300/10000 | R_avg = 0.983654 | norm = 0.99868
+  Step 4400/10000 | R_avg = 0.983668 | norm = 0.998651
+  Step 4500/10000 | R_avg = 0.983634 | norm = 0.998621
+  Step 4600/10000 | R_avg = 0.983687 | norm = 0.998591
+  Step 4700/10000 | R_avg = 0.983639 | norm = 0.99856
+  Step 4800/10000 | R_avg = 0.983578 | norm = 0.998529
+  Step 4900/10000 | R_avg = 0.98366 | norm = 0.998497
+  Saved spatial snapshot at t = 50 (step 5000)
+  Step 5000/10000 | R_avg = 0.983675 | norm = 0.998465
+  Step 5100/10000 | R_avg = 0.983707 | norm = 0.998433
+  Step 5200/10000 | R_avg = 0.983609 | norm = 0.998402
+  Step 5300/10000 | R_avg = 0.983701 | norm = 0.99837
+  Step 5400/10000 | R_avg = 0.983679 | norm = 0.998338
+  Step 5500/10000 | R_avg = 0.983683 | norm = 0.998306
+  Step 5600/10000 | R_avg = 0.983669 | norm = 0.998272
+  Step 5700/10000 | R_avg = 0.983726 | norm = 0.998239
+  Step 5800/10000 | R_avg = 0.983638 | norm = 0.998205
+  Step 5900/10000 | R_avg = 0.983715 | norm = 0.998172
+  Step 6000/10000 | R_avg = 0.983659 | norm = 0.998139
+  Step 6100/10000 | R_avg = 0.983638 | norm = 0.998107
+  Step 6200/10000 | R_avg = 0.983666 | norm = 0.998076
+  Step 6300/10000 | R_avg = 0.98371 | norm = 0.998045
+  Step 6400/10000 | R_avg = 0.983709 | norm = 0.998015
+  Step 6500/10000 | R_avg = 0.9837 | norm = 0.997984
+  Step 6600/10000 | R_avg = 0.983629 | norm = 0.997953
+  Step 6700/10000 | R_avg = 0.983662 | norm = 0.997923
+  Step 6800/10000 | R_avg = 0.983677 | norm = 0.997892
+  Step 6900/10000 | R_avg = 0.983637 | norm = 0.997861
+  Step 7000/10000 | R_avg = 0.983709 | norm = 0.99783
+  Step 7100/10000 | R_avg = 0.983656 | norm = 0.997799
+  Step 7200/10000 | R_avg = 0.983635 | norm = 0.997769
+  Step 7300/10000 | R_avg = 0.983634 | norm = 0.997738
+  Step 7400/10000 | R_avg = 0.983635 | norm = 0.997708
+  Saved spatial snapshot at t = 75 (step 7500)
+  Step 7500/10000 | R_avg = 0.983679 | norm = 0.997678
+  Step 7600/10000 | R_avg = 0.983696 | norm = 0.997647
+  Step 7700/10000 | R_avg = 0.983693 | norm = 0.997617
+  Step 7800/10000 | R_avg = 0.983619 | norm = 0.997587
+  Step 7900/10000 | R_avg = 0.983688 | norm = 0.997556
+  Step 8000/10000 | R_avg = 0.983676 | norm = 0.997526
+  Step 8100/10000 | R_avg = 0.983671 | norm = 0.997496
+  Step 8200/10000 | R_avg = 0.983641 | norm = 0.997465
+  Step 8300/10000 | R_avg = 0.983636 | norm = 0.997436
+  Step 8400/10000 | R_avg = 0.98368 | norm = 0.997405
+  Step 8500/10000 | R_avg = 0.983657 | norm = 0.997376
+  Step 8600/10000 | R_avg = 0.983652 | norm = 0.997347
+  Step 8700/10000 | R_avg = 0.983639 | norm = 0.997317
+  Step 8800/10000 | R_avg = 0.983672 | norm = 0.997288
+  Step 8900/10000 | R_avg = 0.983639 | norm = 0.997259
+  Step 9000/10000 | R_avg = 0.983646 | norm = 0.997229
+  Step 9100/10000 | R_avg = 0.983636 | norm = 0.9972
+  Step 9200/10000 | R_avg = 0.983697 | norm = 0.99717
+  Step 9300/10000 | R_avg = 0.983716 | norm = 0.997141
+  Step 9400/10000 | R_avg = 0.983622 | norm = 0.997111
+  Step 9500/10000 | R_avg = 0.983615 | norm = 0.997082
+  Step 9600/10000 | R_avg = 0.983706 | norm = 0.997052
+  Step 9700/10000 | R_avg = 0.98369 | norm = 0.997023
+  Step 9800/10000 | R_avg = 0.983738 | norm = 0.996993
+  Step 9900/10000 | R_avg = 0.983702 | norm = 0.996963
+  Norm validation: max_error = 0.00306604 ✗ FAIL
+  Energy validation: max_drift = 0.017594 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251219_002121_kuramoto_only_vortex/N_100/observables.csv
+Test failed for N=100
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+
+===== Tests Complete =====
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251219_002121_kuramoto_only_vortex/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete

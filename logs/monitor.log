@@ -1,0 +1,43 @@
+[21:22:54] N= Progress: 2600/10000
+[21:23:24] N= Progress: 3000/10000
+[21:23:54] N= Progress: 3300/10000
+[21:24:24] N= Progress: 3700/10000
+[21:24:54] N= Progress: 4100/10000
+[21:25:24] N= Progress: 4400/10000
+[21:25:54] N= Progress: 4800/10000
+[21:26:24] N= Progress: 5100/10000
+[21:26:54] N= Progress: 5500/10000
+[21:27:24] N= Progress: 5900/10000
+[21:27:54] N= Progress: 6200/10000
+[21:28:24] N= Progress: 6600/10000
+[21:28:54] N= Progress: 6900/10000
+[21:29:24] N= Progress: 7300/10000
+[21:29:54] N= Progress: 7700/10000
+[21:30:24] N= Progress: 8000/10000
+[21:30:54] N= Progress: 8400/10000
+[21:31:24] N= Progress: 8800/10000
+[21:31:54] N= Progress: 9100/10000
+[21:32:24] N= Progress: 9500/10000
+[21:32:54] N= Progress: 9800/10000
+=== TEST COMPLETE ===
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete
+-rw-r--r-- 1 persist persist 220K Dec 18 20:36 output/20251218_203453_defect_localization/N_10/observables.csv
+-rw-r--r-- 1 persist persist 221K Dec 18 20:35 output/20251218_203453_defect_localization/N_1/observables.csv
+-rw-r--r-- 1 persist persist 221K Dec 18 21:33 output/20251218_211659_defect_localization/N_100/observables.csv
+-rw-r--r-- 1 persist persist 221K Dec 18 21:19 output/20251218_211659_defect_localization/N_10/observables.csv
+-rw-r--r-- 1 persist persist 221K Dec 18 21:17 output/20251218_211659_defect_localization/N_1/observables.csv
+-rw-r--r-- 1 persist persist  23K Dec 18 10:32 output/coupled_64x64_N1/N_1/observables.csv
+-rw-r--r-- 1 persist persist  23K Dec 18 04:39 output/coupled_dynamics_validation/N_1/observables.csv
+-rw-r--r-- 1 persist persist  82K Dec 18 03:38 output/phase1_full_validation/N_100/observables.csv
+-rw-r--r-- 1 persist persist  82K Dec 18 03:38 output/phase1_full_validation/N_10/observables.csv
+-rw-r--r-- 1 persist persist  82K Dec 18 03:37 output/phase1_full_validation/N_1/observables.csv
