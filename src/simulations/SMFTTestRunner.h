@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <fstream>
 
 // Forward declarations
 class DiracEvolution;
@@ -127,8 +128,34 @@ private:
     // Output management
     SMFT::OutputManager* _output_manager;
     std::string _timestamped_output_dir;
+    int _current_grid_size = 0;  // Track current grid size for output paths
+
+    // Console logging to file
+    std::ofstream _console_log;
+    std::streambuf* _cout_backup;
+    std::streambuf* _cerr_backup;
+    class TeeStreambuf* _tee_cout;
+    class TeeStreambuf* _tee_cerr;
 
     // Helper methods
+
+    /**
+     * Start logging console output to file
+     * @param log_path Path to console log file
+     */
+    void startConsoleLogging(const std::string& log_path);
+
+    /**
+     * Stop logging console output and restore stdout/stderr
+     */
+    void stopConsoleLogging();
+
+    /**
+     * Run all tests for a specific grid size
+     * @param grid_size Grid size to test
+     * @return true if all tests passed
+     */
+    bool runForGridSize(int grid_size);
 
     /**
      * Run single test with given substep ratio
@@ -193,6 +220,13 @@ private:
      * @return Full path to output directory
      */
     std::string getOutputDirectory(int N) const;
+
+    /**
+     * Save spatial field snapshots (theta and R fields)
+     * @param N Substep ratio
+     * @param step Current timestep
+     */
+    void saveSpatialFieldSnapshot(int N, int step) const;
 };
 
 #endif // SMFT_TEST_RUNNER_H

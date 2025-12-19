@@ -240,6 +240,15 @@ void TestConfig::print() const {
 void TestConfig::parseGrid(const YAML::Node& node) {
     if (node["size_x"]) grid.size_x = node["size_x"].as<int>();
     if (node["size_y"]) grid.size_y = node["size_y"].as<int>();
+    if (node["L_domain"]) grid.L_domain = node["L_domain"].as<float>();
+
+    // Parse grid_sizes array for convergence testing
+    if (node["grid_sizes"]) {
+        grid.grid_sizes.clear();
+        for (const auto& size : node["grid_sizes"]) {
+            grid.grid_sizes.push_back(size.as<int>());
+        }
+    }
 }
 
 void TestConfig::parsePhysics(const YAML::Node& node) {
@@ -257,6 +266,21 @@ void TestConfig::parseDiracInitial(const YAML::Node& node) {
     if (node["y0"]) dirac_initial.y0 = node["y0"].as<float>();
     if (node["sigma"]) dirac_initial.sigma = node["sigma"].as<float>();
     if (node["amplitude"]) dirac_initial.amplitude = node["amplitude"].as<float>();
+
+    // Grid-independent physical parameters
+    if (node["x0_physical"]) dirac_initial.x0_physical = node["x0_physical"].as<float>();
+    if (node["y0_physical"]) dirac_initial.y0_physical = node["y0_physical"].as<float>();
+    if (node["sigma_physical"]) dirac_initial.sigma_physical = node["sigma_physical"].as<float>();
+
+    // Relativistic boost parameters (Scenario 2.3)
+    if (node["boost_velocities"]) {
+        dirac_initial.boost_velocities.clear();
+        for (const auto& v : node["boost_velocities"]) {
+            dirac_initial.boost_velocities.push_back(v.as<float>());
+        }
+    }
+    if (node["boost_vx"]) dirac_initial.boost_vx = node["boost_vx"].as<float>();
+    if (node["boost_vy"]) dirac_initial.boost_vy = node["boost_vy"].as<float>();
 }
 
 void TestConfig::parseKuramotoInitial(const YAML::Node& node) {
@@ -270,6 +294,12 @@ void TestConfig::parseKuramotoInitial(const YAML::Node& node) {
     if (node["omega_std"]) kuramoto_initial.omega_std = node["omega_std"].as<float>();
     if (node["wave_vector_x"]) kuramoto_initial.wave_vector_x = node["wave_vector_x"].as<float>();
     if (node["wave_vector_y"]) kuramoto_initial.wave_vector_y = node["wave_vector_y"].as<float>();
+
+    // Vortex configuration (grid-independent)
+    if (node["winding_number"]) kuramoto_initial.winding_number = node["winding_number"].as<int>();
+    if (node["vortex_core_radius"]) kuramoto_initial.vortex_core_radius = node["vortex_core_radius"].as<float>();
+    if (node["vortex_center_x"]) kuramoto_initial.vortex_center_x = node["vortex_center_x"].as<float>();
+    if (node["vortex_center_y"]) kuramoto_initial.vortex_center_y = node["vortex_center_y"].as<float>();
 }
 
 void TestConfig::parseOperatorSplitting(const YAML::Node& node) {
@@ -292,4 +322,6 @@ void TestConfig::parseOutput(const YAML::Node& node) {
     if (node["save_every"]) output.save_every = node["save_every"].as<int>();
     if (node["formats"]) output.formats = node["formats"].as<std::vector<std::string>>();
     if (node["auto_visualize"]) output.auto_visualize = node["auto_visualize"].as<bool>();
+    if (node["save_spatial_snapshots"]) output.save_spatial_snapshots = node["save_spatial_snapshots"].as<bool>();
+    if (node["snapshot_steps"]) output.snapshot_steps = node["snapshot_steps"].as<std::vector<int>>();
 }

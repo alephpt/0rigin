@@ -11,9 +11,36 @@
 
 namespace fs = std::filesystem;
 
+// Custom stream buffer that writes to both console and file (like "tee")
+class TeeStreambuf : public std::streambuf {
+public:
+    TeeStreambuf(std::streambuf* sb1, std::streambuf* sb2) : _sb1(sb1), _sb2(sb2) {}
+
+protected:
+    virtual int overflow(int c) override {
+        if (c == EOF) {
+            return !EOF;
+        }
+        int const r1 = _sb1->sputc(c);
+        int const r2 = _sb2->sputc(c);
+        return (r1 == EOF || r2 == EOF) ? EOF : c;
+    }
+
+    virtual int sync() override {
+        int const r1 = _sb1->pubsync();
+        int const r2 = _sb2->pubsync();
+        return (r1 == 0 && r2 == 0) ? 0 : -1;
+    }
+
+private:
+    std::streambuf* _sb1;
+    std::streambuf* _sb2;
+};
+
 SMFTTestRunner::SMFTTestRunner(const std::string& config_path)
     : _config_loaded(false), _nova(nullptr), _nova_initialized(false),
-      _engine(nullptr), _engine_initialized(false), _output_manager(nullptr) {
+      _engine(nullptr), _engine_initialized(false), _output_manager(nullptr),
+      _cout_backup(nullptr), _cerr_backup(nullptr), _tee_cout(nullptr), _tee_cerr(nullptr) {
 
     _output_manager = new SMFT::OutputManager();
     _config_loaded = _config.loadFromYAML(config_path);
@@ -24,11 +51,15 @@ SMFTTestRunner::SMFTTestRunner(const std::string& config_path)
 
 SMFTTestRunner::SMFTTestRunner(const TestConfig& config)
     : _config(config), _config_loaded(true), _nova(nullptr), _nova_initialized(false),
-      _engine(nullptr), _engine_initialized(false), _output_manager(nullptr) {
+      _engine(nullptr), _engine_initialized(false), _output_manager(nullptr),
+      _cout_backup(nullptr), _cerr_backup(nullptr), _tee_cout(nullptr), _tee_cerr(nullptr) {
     _output_manager = new SMFT::OutputManager();
 }
 
 SMFTTestRunner::~SMFTTestRunner() {
+    // Ensure console logging is stopped and restored
+    stopConsoleLogging();
+
     if (_engine) {
         delete _engine;
     }
@@ -74,7 +105,7 @@ bool SMFTTestRunner::initialize() {
                        _config.physics.delta, 0.0f);
     _engine_initialized = true;
 
-    // Create output directories
+    // Create output directories (logging will be started in run/runForGridSize)
     createOutputDirectories();
 
     std::cout << "✓ SMFTTestRunner initialized successfully" << std::endl;
@@ -88,6 +119,73 @@ bool SMFTTestRunner::run() {
     }
 
     std::cout << "\n===== Running Tests =====" << std::endl;
+
+    // Check if grid convergence testing is enabled
+    if (!_config.grid.grid_sizes.empty()) {
+        std::cout << "\n===== Grid Convergence Testing =====" << std::endl;
+        std::cout << "Testing grid sizes: ";
+        for (size_t i = 0; i < _config.grid.grid_sizes.size(); ++i) {
+            std::cout << _config.grid.grid_sizes[i];
+            if (i < _config.grid.grid_sizes.size() - 1) std::cout << ", ";
+        }
+        std::cout << std::endl;
+
+        bool all_grids_passed = true;
+        for (int grid_size : _config.grid.grid_sizes) {
+            std::cout << "\n========================================" << std::endl;
+            std::cout << "Grid Size: " << grid_size << "×" << grid_size << std::endl;
+            std::cout << "========================================" << std::endl;
+
+            if (!runForGridSize(grid_size)) {
+                std::cerr << "Tests failed for grid size " << grid_size << std::endl;
+                all_grids_passed = false;
+            }
+        }
+
+        std::cout << "\n===== Grid Convergence Tests Complete =====" << std::endl;
+        return all_grids_passed;
+    }
+
+    // Single grid size (original behavior)
+    return runForGridSize(_config.grid.size_x);
+}
+
+bool SMFTTestRunner::runForGridSize(int grid_size) {
+    // Re-initialize engine with new grid size
+    std::cout << "\nInitializing engine for " << grid_size << "×" << grid_size << " grid..." << std::endl;
+
+    // Clean up previous engine
+    if (_engine) {
+        delete _engine;
+        _engine = nullptr;
+    }
+
+    // Create and initialize new engine with specified grid size
+    _engine = new SMFTEngine(_nova);
+    _engine->initialize(grid_size, grid_size, _config.physics.delta, 0.0f);
+
+    // Update grid size tracking for output paths
+    _current_grid_size = grid_size;
+
+    // Temporarily update config grid size for initialization functions
+    int original_size_x = _config.grid.size_x;
+    int original_size_y = _config.grid.size_y;
+    _config.grid.size_x = grid_size;
+    _config.grid.size_y = grid_size;
+
+    // Create output directories for this grid size
+    createOutputDirectories();
+
+    // Restart console logging for this grid size
+    stopConsoleLogging();
+    if (!_timestamped_output_dir.empty()) {
+        std::string console_log_path = _timestamped_output_dir + "/console.log";
+        startConsoleLogging(console_log_path);
+        std::cout << "[Logging] Console output for " << grid_size << "x" << grid_size
+                  << " writing to: " << console_log_path << std::endl;
+    }
+
+    bool result = false;
 
     if (_config.operator_splitting.enabled) {
         // Run test for each substep ratio
@@ -112,16 +210,20 @@ bool SMFTTestRunner::run() {
             std::cout << "✗ Convergence validation FAILED" << std::endl;
         }
 
+        result = all_passed;
     } else {
         // Single test without operator splitting (N=1)
-        if (!runSingleTest(1)) {
+        result = runSingleTest(1);
+        if (!result) {
             std::cerr << "Test failed" << std::endl;
-            return false;
         }
     }
 
-    std::cout << "\n===== Tests Complete =====" << std::endl;
-    return allTestsPassed();
+    // Restore original config
+    _config.grid.size_x = original_size_x;
+    _config.grid.size_y = original_size_y;
+
+    return result;
 }
 
 bool SMFTTestRunner::runSingleTest(int N) {
@@ -134,21 +236,43 @@ bool SMFTTestRunner::runSingleTest(int N) {
     _engine->setInitialPhases(phases);
     _engine->setNaturalFrequencies(omegas);
 
-    // Initialize Dirac field
-    _engine->initializeDiracField(
-        _config.dirac_initial.x0,
-        _config.dirac_initial.y0,
-        _config.dirac_initial.sigma,
-        _config.dirac_initial.amplitude
-    );
+    // Initialize Dirac field with grid-independent physical coordinates
+    const float a = _config.grid.L_domain / _config.grid.size_x; // Lattice spacing [ℓ_P]
+
+    // Convert physical coordinates to grid coordinates (if specified)
+    float x0_grid, y0_grid, sigma_grid;
+
+    if (_config.dirac_initial.x0_physical > 0) {
+        // Use physical coordinates
+        x0_grid = _config.dirac_initial.x0_physical / a;
+        y0_grid = _config.dirac_initial.y0_physical / a;
+        sigma_grid = _config.dirac_initial.sigma_physical / a;
+
+        std::cout << "  Dirac initialization (grid-independent):\n";
+        std::cout << "    Position: (" << _config.dirac_initial.x0_physical << ", "
+                  << _config.dirac_initial.y0_physical << ") ℓ_P\n";
+        std::cout << "    Width: " << _config.dirac_initial.sigma_physical << " ℓ_P\n";
+        std::cout << "    Grid coordinates: (" << x0_grid << ", " << y0_grid << ") grid units\n";
+        std::cout << "    Grid width: " << sigma_grid << " grid units\n";
+    } else {
+        // Backward compatibility: use grid coordinates directly
+        x0_grid = _config.dirac_initial.x0;
+        y0_grid = _config.dirac_initial.y0;
+        sigma_grid = _config.dirac_initial.sigma;
+
+        std::cout << "  Dirac initialization (DEPRECATED grid units):\n";
+        std::cout << "    Position: (" << x0_grid << ", " << y0_grid << ") grid units\n";
+        std::cout << "    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)\n";
+    }
+
+    _engine->initializeDiracField(x0_grid, y0_grid, sigma_grid, _config.dirac_initial.amplitude);
 
     // Prepare results storage
     std::vector<ObservableComputer::Observables> observables;
 
     // Get initial energy
     DiracEvolution dirac_temp(_config.grid.size_x, _config.grid.size_y);
-    dirac_temp.initialize(_config.dirac_initial.x0, _config.dirac_initial.y0,
-                         _config.dirac_initial.sigma);
+    dirac_temp.initialize(x0_grid, y0_grid, sigma_grid);
     auto R_field_initial = _engine->getSyncField();
     std::vector<double> R_field_double(R_field_initial.begin(), R_field_initial.end());
 
@@ -165,10 +289,35 @@ bool SMFTTestRunner::runSingleTest(int N) {
     const int total_steps = _config.physics.total_steps;
     const int save_every = _config.output.save_every;
 
+    // Determine spatial snapshot steps (if enabled)
+    std::vector<int> snapshot_steps;
+    if (_config.output.save_spatial_snapshots) {
+        if (_config.output.snapshot_steps.empty()) {
+            // Auto-generate snapshot steps at t = 0, 25, 50, 75, 100 time units
+            for (double t : {0.0, 25.0, 50.0, 75.0, 100.0}) {
+                int step = static_cast<int>(t / _config.physics.dt);
+                if (step < total_steps) {
+                    snapshot_steps.push_back(step);
+                }
+            }
+        } else {
+            snapshot_steps = _config.output.snapshot_steps;
+        }
+    }
+
     for (int step = 0; step < total_steps; ++step) {
         // Evolve system with operator splitting ratio N
         _engine->stepWithDirac(_config.physics.dt, _config.physics.coupling, N,
                                _config.physics.K, _config.physics.damping);
+
+        // Save spatial field snapshots if at snapshot timestep
+        if (_config.output.save_spatial_snapshots) {
+            if (std::find(snapshot_steps.begin(), snapshot_steps.end(), step) != snapshot_steps.end()) {
+                saveSpatialFieldSnapshot(N, step);
+                double time = step * _config.physics.dt;
+                std::cout << "  Saved spatial snapshot at t = " << time << " (step " << step << ")" << std::endl;
+            }
+        }
 
         // Compute observables at save points
         if (step % save_every == 0 || step == total_steps - 1) {
@@ -266,14 +415,45 @@ std::vector<float> SMFTTestRunner::initializePhases() const {
             p = dist(gen);
         }
     } else if (_config.kuramoto_initial.phase_distribution == "vortex") {
-        // Create vortex pattern at center
-        float cx = _config.grid.size_x / 2.0f;
-        float cy = _config.grid.size_y / 2.0f;
+        // GRID-INDEPENDENT vortex initialization using physical length scales
+        // In Planck units: ℏ = c = G = 1, Δ = m_Planck = 1
+
+        const float L_domain = _config.grid.L_domain;  // Domain size in Planck lengths
+        const float a = L_domain / _config.grid.size_x; // Lattice spacing [ℓ_P]
+
+        // Vortex parameters in physical units
+        const float r_core = _config.kuramoto_initial.vortex_core_radius;  // Core radius [ℓ_P]
+        const float cx_phys = _config.kuramoto_initial.vortex_center_x;    // Center x [ℓ_P]
+        const float cy_phys = _config.kuramoto_initial.vortex_center_y;    // Center y [ℓ_P]
+        const int W = _config.kuramoto_initial.winding_number;             // Topological charge
+
+        // Convert physical center to grid coordinates
+        const float cx_grid = cx_phys / a;
+        const float cy_grid = cy_phys / a;
+
+        std::cout << "  Vortex initialization (grid-independent):\n";
+        std::cout << "    Domain size: " << L_domain << " ℓ_P\n";
+        std::cout << "    Grid spacing: " << a << " ℓ_P\n";
+        std::cout << "    Core radius: " << r_core << " ℓ_P (" << r_core/a << " grid points)\n";
+        std::cout << "    Center: (" << cx_phys << ", " << cy_phys << ") ℓ_P\n";
+        std::cout << "    Winding number: W = " << W << "\n";
+
         for (int iy = 0; iy < _config.grid.size_y; ++iy) {
             for (int ix = 0; ix < _config.grid.size_x; ++ix) {
-                float dx = ix - cx;
-                float dy = iy - cy;
-                phases[iy * _config.grid.size_x + ix] = std::atan2(dy, dx);
+                // Distance from vortex center in grid coordinates
+                float dx_grid = ix - cx_grid;
+                float dy_grid = iy - cy_grid;
+                float r_grid = std::sqrt(dx_grid*dx_grid + dy_grid*dy_grid);
+
+                // Convert to physical distance
+                float r_phys = r_grid * a;
+
+                // Regularized vortex profile: θ(r) = W * atan2(y,x) * tanh(r/r_core)
+                // This smoothly interpolates from θ=0 at r=0 to full winding at r >> r_core
+                float profile = std::tanh(r_phys / r_core);
+                float theta_vortex = W * std::atan2(dy_grid, dx_grid);
+
+                phases[iy * _config.grid.size_x + ix] = theta_vortex * profile;
             }
         }
     } else if (_config.kuramoto_initial.phase_distribution == "phase_gradient") {
@@ -441,6 +621,11 @@ void SMFTTestRunner::createOutputDirectories() {
         // Fallback: use basename of configured output directory
         fs::path output_path(_config.output.directory);
         experiment_name = output_path.filename().string();
+    }
+
+    // Append grid size to experiment name if doing grid convergence
+    if (_current_grid_size > 0) {
+        experiment_name += "_" + std::to_string(_current_grid_size) + "x" + std::to_string(_current_grid_size);
     }
 
     // Create timestamped directory via OutputManager (cast to actual type)
@@ -612,4 +797,126 @@ bool SMFTTestRunner::allTestsPassed() const {
         }
     }
     return !_validation_results.empty();
+}
+
+void SMFTTestRunner::saveSpatialFieldSnapshot(int N, int step) const {
+    if (!_engine || !_engine_initialized) {
+        std::cerr << "Warning: Cannot save spatial snapshot - engine not initialized" << std::endl;
+        return;
+    }
+
+    // Get spatial fields from engine
+    std::vector<float> theta_field = _engine->getPhaseField();
+    std::vector<float> R_field = _engine->getSyncField();
+
+    int Nx = _config.grid.size_x;
+    int Ny = _config.grid.size_y;
+
+    if (theta_field.size() != static_cast<size_t>(Nx * Ny) ||
+        R_field.size() != static_cast<size_t>(Nx * Ny)) {
+        std::cerr << "Warning: Spatial field size mismatch" << std::endl;
+        return;
+    }
+
+    std::string output_dir = getOutputDirectory(N);
+    double time = step * _config.physics.dt;
+
+    // Save theta field
+    {
+        std::ostringstream filename;
+        filename << output_dir << "/theta_field_t" << std::fixed << std::setprecision(2) << time << ".csv";
+        std::ofstream file(filename.str());
+
+        if (file.is_open()) {
+            // Header: x,y,theta
+            file << "x,y,theta\n";
+
+            // Write data row by row
+            for (int iy = 0; iy < Ny; ++iy) {
+                for (int ix = 0; ix < Nx; ++ix) {
+                    int idx = iy * Nx + ix;
+                    file << ix << "," << iy << "," << std::setprecision(6) << theta_field[idx] << "\n";
+                }
+            }
+            file.close();
+        } else {
+            std::cerr << "Warning: Could not open " << filename.str() << std::endl;
+        }
+    }
+
+    // Save R field
+    {
+        std::ostringstream filename;
+        filename << output_dir << "/R_field_t" << std::fixed << std::setprecision(2) << time << ".csv";
+        std::ofstream file(filename.str());
+
+        if (file.is_open()) {
+            // Header: x,y,R
+            file << "x,y,R\n";
+
+            // Write data row by row
+            for (int iy = 0; iy < Ny; ++iy) {
+                for (int ix = 0; ix < Nx; ++ix) {
+                    int idx = iy * Nx + ix;
+                    file << ix << "," << iy << "," << std::setprecision(6) << R_field[idx] << "\n";
+                }
+            }
+            file.close();
+        } else {
+            std::cerr << "Warning: Could not open " << filename.str() << std::endl;
+        }
+    }
+}
+
+void SMFTTestRunner::startConsoleLogging(const std::string& log_path) {
+    // Only start if not already logging
+    if (_console_log.is_open()) {
+        return;
+    }
+
+    // Open log file
+    _console_log.open(log_path);
+    if (!_console_log.is_open()) {
+        std::cerr << "Warning: Failed to open console log file: " << log_path << std::endl;
+        return;
+    }
+
+    // Save original stream buffers
+    _cout_backup = std::cout.rdbuf();
+    _cerr_backup = std::cerr.rdbuf();
+
+    // Create tee stream buffers that write to both console and file
+    _tee_cout = new TeeStreambuf(_cout_backup, _console_log.rdbuf());
+    _tee_cerr = new TeeStreambuf(_cerr_backup, _console_log.rdbuf());
+
+    // Redirect cout and cerr to tee buffers
+    std::cout.rdbuf(_tee_cout);
+    std::cerr.rdbuf(_tee_cerr);
+}
+
+void SMFTTestRunner::stopConsoleLogging() {
+    // Restore original stream buffers if they were saved
+    if (_cout_backup) {
+        std::cout.rdbuf(_cout_backup);
+        _cout_backup = nullptr;
+    }
+    if (_cerr_backup) {
+        std::cerr.rdbuf(_cerr_backup);
+        _cerr_backup = nullptr;
+    }
+
+    // Clean up tee buffers
+    if (_tee_cout) {
+        delete _tee_cout;
+        _tee_cout = nullptr;
+    }
+    if (_tee_cerr) {
+        delete _tee_cerr;
+        _tee_cerr = nullptr;
+    }
+
+    // Close log file
+    if (_console_log.is_open()) {
+        _console_log.close();
+    }
 }

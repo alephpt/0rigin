@@ -56,6 +56,11 @@ public:
     struct GridConfig {
         int size_x = 64;
         int size_y = 64;
+        // Physical length scales (Planck units: ℏ = c = G = 1, Δ = m_Planck = 1)
+        float L_domain = 100.0f;  // Domain size in Planck lengths (default: 100 ℓ_P)
+
+        // Grid convergence testing: array of grid sizes to test
+        std::vector<int> grid_sizes;  // e.g., [64, 128, 256] - tests all if non-empty
     };
 
     // Physics parameters
@@ -70,11 +75,21 @@ public:
 
     // Dirac initial condition
     struct DiracInitialCondition {
-        std::string type = "gaussian"; // Type: "gaussian", "plane_wave", etc.
-        float x0 = 32.0f;              // Center x
-        float y0 = 32.0f;              // Center y
-        float sigma = 3.0f;            // Width parameter
+        std::string type = "gaussian"; // Type: "gaussian", "boosted_gaussian", "plane_wave", etc.
+        float x0 = 32.0f;              // Center x (DEPRECATED: use x0_physical)
+        float y0 = 32.0f;              // Center y (DEPRECATED: use y0_physical)
+        float sigma = 3.0f;            // Width parameter (DEPRECATED: use sigma_physical)
         float amplitude = 1.0f;        // Initial amplitude
+
+        // Grid-independent physical parameters (Planck lengths)
+        float x0_physical = -1.0f;     // Center x in physical units (-1 = use x0 grid units for backward compatibility)
+        float y0_physical = -1.0f;     // Center y in physical units (-1 = use y0 grid units for backward compatibility)
+        float sigma_physical = -1.0f;  // Width in physical units (-1 = use sigma grid units for backward compatibility)
+
+        // Relativistic boost parameters (Scenario 2.3)
+        std::vector<float> boost_velocities;  // Array of velocities to test (c = 1 in Planck units)
+        float boost_vx = 0.0f;                // Single velocity boost in x-direction
+        float boost_vy = 0.0f;                // Single velocity boost in y-direction
     };
 
     // Kuramoto initial condition
@@ -86,6 +101,12 @@ public:
         // Wave vector for phase_gradient initialization
         float wave_vector_x = 0.0f;
         float wave_vector_y = 0.0f;
+
+        // Vortex configuration (grid-independent physical parameters)
+        int winding_number = 1;              // Topological charge
+        float vortex_core_radius = 3.0f;     // Core radius in Planck lengths (grid-independent)
+        float vortex_center_x = 50.0f;       // Center x in physical units (default: domain center)
+        float vortex_center_y = 50.0f;       // Center y in physical units (default: domain center)
     };
 
     // Operator splitting configuration
@@ -107,6 +128,8 @@ public:
         int save_every = 10;                      // Save observables every N steps
         std::vector<std::string> formats = {"csv"}; // Output formats
         bool auto_visualize = false;               // Auto-generate plots after test
+        bool save_spatial_snapshots = false;       // Save full spatial fields (theta, R) at snapshots
+        std::vector<int> snapshot_steps = {};      // Timesteps at which to save spatial snapshots (empty = auto)
     };
 
     // Full test configuration
