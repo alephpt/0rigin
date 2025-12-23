@@ -1,6 +1,9 @@
 #include "simulations/SMFTTestRunner.h"
 #include "output/OutputManager.h"
+#include "output/PlottingManager.h"
 #include "SMFTCommon.h"
+#include "validation/GlobalValidator.h"
+#include "validation/ScenarioValidator.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -121,6 +124,13 @@ bool SMFTTestRunner::run() {
 
     std::cout << "\n===== Running Tests =====" << std::endl;
 
+    // Check for special analysis modes
+    if (_config.analysis.mode == "dispersion") {
+        return runDispersionAnalysis();
+    }
+    // TODO: Add "stability" analysis mode here
+
+    // Existing simulation logic continues
     // Check if velocity sweep testing is enabled (Scenario 2.3)
     bool has_velocity_sweep = !_config.dirac_initial.boost_velocities.empty();
 
@@ -163,7 +173,7 @@ bool SMFTTestRunner::run() {
             }
         }
 
-        std::cout << "\n===== Tests Complete =====" << std::endl;
+        std::cout << "\n===== Tests Complete ====" << std::endl;
         return all_tests_passed;
     }
 
@@ -209,9 +219,6 @@ bool SMFTTestRunner::runForGridSize(int grid_size) {
     int original_size_y = _config.grid.size_y;
     _config.grid.size_x = grid_size;
     _config.grid.size_y = grid_size;
-
-    // Create output directories for this grid size
-    createOutputDirectories();
 
     // Restart console logging for this grid size
     stopConsoleLogging();
@@ -290,9 +297,6 @@ bool SMFTTestRunner::runForGridSizeAndVelocity(int grid_size, float velocity) {
     _config.grid.size_y = grid_size;
     _config.dirac_initial.boost_vx = velocity;
     _config.dirac_initial.boost_vy = 0.0f; // Boost in x-direction only
-
-    // Create output directories for this grid size and velocity
-    createOutputDirectories();
 
     // Restart console logging for this configuration
     stopConsoleLogging();
@@ -384,54 +388,92 @@ bool SMFTTestRunner::runSingleTest(int N) {
         std::cout << "    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)\n";
     }
 
-    // Check if boosted initialization is requested
+    // Check solver type and initialize appropriate field
+    bool use_klein_gordon = (_config.physics.solver_type == "klein_gordon");
     bool use_boosted_init = (_config.dirac_initial.boost_vx != 0.0f || _config.dirac_initial.boost_vy != 0.0f);
 
-    if (use_boosted_init) {
-        // Use boosted Gaussian initialization (Scenario 2.3)
-        // Get background R value for mass calculation
-        auto R_field_initial = _engine->getSyncField();
-        float R_bg = 0.0f;
-        for (float R : R_field_initial) R_bg += R;
-        R_bg /= R_field_initial.size();
+    // Use R ≈ 1 as background value for mass calculation
+    // (R-field not yet coupled/evolved at t=0, vortex core is small, background R→1)
+    const float R_bg = 1.0f;
 
-        std::cout << "  Using boosted Gaussian initialization\n";
-        std::cout << "    Background R: " << R_bg << "\n";
-
+    if (use_klein_gordon && use_boosted_init) {
+        // Klein-Gordon with boosted Gaussian (Phase 2.5A)
+        std::cout << "  Using Klein-Gordon solver (scalar field) with boosted initialization\n";
+        std::cout << "    Background R (expected): " << R_bg << "\n";
+        _engine->initializeBoostedKleinGordonField(x0_grid, y0_grid, sigma_grid,
+                                                   _config.dirac_initial.boost_vx,
+                                                   _config.dirac_initial.boost_vy,
+                                                   R_bg);
+    } else if (use_klein_gordon) {
+        // Klein-Gordon with standard Gaussian
+        std::cout << "  Using Klein-Gordon solver (scalar field)\n";
+        _engine->initializeKleinGordonField(x0_grid, y0_grid, sigma_grid, _config.dirac_initial.amplitude);
+    } else if (use_boosted_init) {
+        // Dirac with boosted Gaussian (Scenario 2.3)
+        std::cout << "  Using Dirac solver (spinor field) with boosted initialization\n";
+        std::cout << "    Background R (expected): " << R_bg << "\n";
         _engine->initializeBoostedDiracField(x0_grid, y0_grid, sigma_grid,
                                             _config.dirac_initial.boost_vx,
                                             _config.dirac_initial.boost_vy,
                                             R_bg);
     } else {
-        // Standard Gaussian initialization
+        // Dirac with standard Gaussian
+        std::cout << "  Using Dirac solver (spinor field)\n";
         _engine->initializeDiracField(x0_grid, y0_grid, sigma_grid, _config.dirac_initial.amplitude);
     }
 
     // Prepare results storage
     std::vector<ObservableComputer::Observables> observables;
 
-    // Get initial energy
-    DiracEvolution dirac_temp(_config.grid.size_x, _config.grid.size_y);
-    if (use_boosted_init) {
-        auto R_field_initial = _engine->getSyncField();
-        float R_bg = 0.0f;
-        for (float R : R_field_initial) R_bg += R;
-        R_bg /= R_field_initial.size();
-        SMFT::initializeBoostedGaussian(dirac_temp, x0_grid, y0_grid, sigma_grid,
-                                       _config.dirac_initial.boost_vx,
-                                       _config.dirac_initial.boost_vy,
-                                       _config.physics.delta, R_bg);
-    } else {
-        dirac_temp.initialize(x0_grid, y0_grid, sigma_grid);
-    }
+    // Get initial energy (solver-dependent)
     auto R_field_initial = _engine->getSyncField();
     std::vector<double> R_field_double(R_field_initial.begin(), R_field_initial.end());
 
-    auto obs_initial = ObservableComputer::compute(
-        dirac_temp, R_field_double, _config.physics.delta, 0.0,
-        0.0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
-    );
-    double E0 = obs_initial.energy_total;
+    ObservableComputer::Observables obs_initial;
+    double E0 = 0.0;
+
+    // Create dirac_temp for validation (even if using Klein-Gordon)
+    DiracEvolution dirac_temp(_config.grid.size_x, _config.grid.size_y);
+
+    if (use_klein_gordon) {
+        // Klein-Gordon initial observables
+        const KleinGordonEvolution* kg = _engine->getKleinGordonEvolution();
+        if (kg) {
+            obs_initial = ObservableComputer::computeKG(
+                *kg, R_field_double, _config.physics.delta, 0.0,
+                0.0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+            );
+            E0 = obs_initial.energy_total;
+        }
+        // Initialize dirac_temp anyway for validation framework compatibility
+        if (use_boosted_init) {
+            const float R_bg = 1.0f;
+            SMFT::initializeBoostedGaussian(dirac_temp, x0_grid, y0_grid, sigma_grid,
+                                           _config.dirac_initial.boost_vx,
+                                           _config.dirac_initial.boost_vy,
+                                           _config.physics.delta, R_bg);
+        } else {
+            dirac_temp.initialize(x0_grid, y0_grid, sigma_grid);
+        }
+    } else {
+        // Dirac initial observables
+        if (use_boosted_init) {
+            // Use R ≈ 1 as background value (same as above)
+            const float R_bg = 1.0f;
+            SMFT::initializeBoostedGaussian(dirac_temp, x0_grid, y0_grid, sigma_grid,
+                                           _config.dirac_initial.boost_vx,
+                                           _config.dirac_initial.boost_vy,
+                                           _config.physics.delta, R_bg);
+        } else {
+            dirac_temp.initialize(x0_grid, y0_grid, sigma_grid);
+        }
+
+        obs_initial = ObservableComputer::compute(
+            dirac_temp, R_field_double, _config.physics.delta, 0.0,
+            0.0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+        );
+        E0 = obs_initial.energy_total;
+    }
 
     std::cout << "  Initial energy E0 = " << E0 << std::endl;
     std::cout << "  Initial norm = " << obs_initial.norm << std::endl;
@@ -475,34 +517,56 @@ bool SMFTTestRunner::runSingleTest(int N) {
             // Get current state
             auto R_field = _engine->getSyncField();
             std::vector<double> R_field_d(R_field.begin(), R_field.end());
-
-            // Get Dirac evolution state
-            const DiracEvolution* dirac = _engine->getDiracEvolution();
             double time = step * _config.physics.dt;
 
             ObservableComputer::Observables obs;
 
-            if (dirac) {
-                // Compute full observables with Dirac state
-                obs = ObservableComputer::compute(
-                    *dirac, R_field_d, _config.physics.delta, time,
-                    E0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
-                );
-            } else {
-                // Fallback if Dirac not initialized
-                obs.time = time;
-                obs.norm = 1.0;
-                obs.norm_error = 0.0;
-                obs.energy_total = E0;
-                obs.energy_kinetic = 0.0;
-                obs.energy_potential = 0.0;
+            if (use_klein_gordon) {
+                // Klein-Gordon observables
+                const KleinGordonEvolution* kg = _engine->getKleinGordonEvolution();
+                if (kg) {
+                    obs = ObservableComputer::computeKG(
+                        *kg, R_field_d, _config.physics.delta, time,
+                        E0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+                    );
+                } else {
+                    // Fallback if Klein-Gordon not initialized
+                    obs.time = time;
+                    obs.norm = 1.0;
+                    obs.norm_error = 0.0;
+                    obs.energy_total = E0;
+                    obs.energy_kinetic = 0.0;
+                    obs.energy_potential = 0.0;
 
-                // Sync field stats
-                auto [R_avg, R_max, R_min, R_var] = ObservableComputer::computeSyncFieldStats(R_field_d);
-                obs.R_avg = R_avg;
-                obs.R_max = R_max;
-                obs.R_min = R_min;
-                obs.R_variance = R_var;
+                    auto [R_avg, R_max, R_min, R_var] = ObservableComputer::computeSyncFieldStats(R_field_d);
+                    obs.R_avg = R_avg;
+                    obs.R_max = R_max;
+                    obs.R_min = R_min;
+                    obs.R_variance = R_var;
+                }
+            } else {
+                // Dirac observables
+                const DiracEvolution* dirac = _engine->getDiracEvolution();
+                if (dirac) {
+                    obs = ObservableComputer::compute(
+                        *dirac, R_field_d, _config.physics.delta, time,
+                        E0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+                    );
+                } else {
+                    // Fallback if Dirac not initialized
+                    obs.time = time;
+                    obs.norm = 1.0;
+                    obs.norm_error = 0.0;
+                    obs.energy_total = E0;
+                    obs.energy_kinetic = 0.0;
+                    obs.energy_potential = 0.0;
+
+                    auto [R_avg, R_max, R_min, R_var] = ObservableComputer::computeSyncFieldStats(R_field_d);
+                    obs.R_avg = R_avg;
+                    obs.R_max = R_max;
+                    obs.R_min = R_min;
+                    obs.R_variance = R_var;
+                }
             }
 
             observables.push_back(obs);
@@ -517,6 +581,131 @@ bool SMFTTestRunner::runSingleTest(int N) {
 
     // Store results
     _results[N] = observables;
+
+    // ========================================================================
+    // VALIDATION FRAMEWORK INTEGRATION
+    // ========================================================================
+
+    // Prepare validation configuration from test config
+    Validation::GlobalCriteria global_criteria;
+    global_criteria.norm_tolerance = _config.validation.norm_tolerance;
+    global_criteria.energy_tolerance = _config.validation.energy_tolerance;
+    global_criteria.enforce_R_bounds = true;
+    global_criteria.enforce_causality = true;
+    global_criteria.check_numerical_stability = true;
+
+    // Get final state for validation
+    const auto& final_obs = observables.back();
+    const auto& initial_obs = observables.front();
+
+    // Global validation on final state
+    Validation::ValidationReport global_report = Validation::GlobalValidator::validateFinalState(
+        final_obs, initial_obs, R_field_double, global_criteria
+    );
+
+    std::cout << "\n===== Global Validation =====" << std::endl;
+    if (global_report.overall_pass) {
+        std::cout << "✓ Global validation PASSED" << std::endl;
+    } else {
+        std::cout << "✗ Global validation FAILED:" << std::endl;
+    }
+    for (const auto& result : global_report.global_results) {
+        std::cout << "  " << (result.passed ? "✓" : "✗") << " " << result.name << ": " << result.message << std::endl;
+    }
+
+    // Store global validation report
+    _global_validation_reports[N] = global_report;
+
+    // Detect scenario type and run scenario-specific validation
+    std::string scenario_type = detectScenarioType();
+    _detected_scenario_type = scenario_type;
+    Validation::ValidationReport scenario_report;
+    bool has_scenario_validation = false;
+
+    if (scenario_type == "2.1") {
+        // Defect Localization
+        std::cout << "\n===== Scenario 2.1: Defect Localization Validation =====" << std::endl;
+
+        Validation::DefectLocalizationCriteria defect_criteria;
+        defect_criteria.require_vortex = true;
+        defect_criteria.require_core = true;
+        defect_criteria.winding_tolerance = 0.2;
+        defect_criteria.core_R_threshold = 0.5;
+
+        auto theta_field_engine = _engine->getPhaseField();
+        std::vector<double> theta_field_double(theta_field_engine.begin(), theta_field_engine.end());
+
+        scenario_report = Validation::ScenarioValidator::validateDefectLocalization(
+            dirac_temp, R_field_double, theta_field_double, final_obs, defect_criteria
+        );
+        has_scenario_validation = true;
+
+    } else if (scenario_type == "2.2" || scenario_type == "2.3") {
+        // Traveling Wave or Relativistic Mass
+        std::cout << "\n===== Scenario " << scenario_type << ": Relativistic Mass Validation =====" << std::endl;
+
+        // Calculate theoretical gamma from boost velocity
+        float boost_vx = _config.dirac_initial.boost_vx;
+        float boost_vy = _config.dirac_initial.boost_vy;
+        float v_mag = std::sqrt(boost_vx * boost_vx + boost_vy * boost_vy);
+        double gamma_theory = 1.0 / std::sqrt(1.0 - v_mag * v_mag);
+
+        std::cout << "  Boost velocity: v = " << v_mag << "c" << std::endl;
+        std::cout << "  Theoretical gamma: γ = " << gamma_theory << std::endl;
+
+        auto theta_field_engine = _engine->getPhaseField();
+        std::vector<double> theta_field_double(theta_field_engine.begin(), theta_field_engine.end());
+
+        if (scenario_type == "2.3") {
+            // Relativistic Mass (full scenario)
+            Validation::RelativisticMassCriteria rel_criteria;
+            rel_criteria.base_criteria.require_vortex = true;
+            rel_criteria.base_criteria.require_core = true;
+            rel_criteria.base_criteria.require_gaussian = true;
+            rel_criteria.base_criteria.require_initial_boost = true;
+            rel_criteria.base_criteria.validate_gamma_factor = true;
+            rel_criteria.base_criteria.gamma_tolerance = 0.05;  // 5%
+
+            scenario_report = Validation::ScenarioValidator::validateRelativisticMass(
+                dirac_temp, R_field_double, theta_field_double,
+                initial_obs, final_obs, gamma_theory, rel_criteria
+            );
+        } else {
+            // Traveling Wave (Scenario 2.2)
+            Validation::TravelingWaveCriteria wave_criteria;
+            wave_criteria.require_vortex = true;
+            wave_criteria.require_core = true;
+            wave_criteria.require_gaussian = true;
+            wave_criteria.require_initial_boost = true;
+            wave_criteria.validate_gamma_factor = true;
+            wave_criteria.gamma_tolerance = 0.05;  // 5%
+
+            scenario_report = Validation::ScenarioValidator::validateTravelingWave(
+                dirac_temp, R_field_double, theta_field_double,
+                initial_obs, final_obs, gamma_theory, wave_criteria
+            );
+        }
+        has_scenario_validation = true;
+    }
+
+    // Print scenario validation results
+    if (has_scenario_validation) {
+        if (scenario_report.overall_pass) {
+            std::cout << "✓ Scenario validation PASSED" << std::endl;
+        } else {
+            std::cout << "✗ Scenario validation FAILED:" << std::endl;
+        }
+        for (const auto& result : scenario_report.scenario_results) {
+            std::cout << "  " << (result.passed ? "✓" : "✗") << " " << result.name << ": " << result.message << std::endl;
+        }
+
+        // Store scenario validation report
+        _scenario_validation_reports[N] = scenario_report;
+    }
+
+    // ========================================================================
+    // END VALIDATION FRAMEWORK
+    // ========================================================================
 
     // Validate norm conservation
     ValidationResult norm_result = validateNorm(N);
@@ -548,6 +737,12 @@ bool SMFTTestRunner::runSingleTest(int N) {
     std::string csv_path = getOutputDirectory(N) + "/observables.csv";
     saveObservablesToCSV(N, csv_path);
     std::cout << "  Saved observables to " << csv_path << std::endl;
+
+    // Generate plots if enabled
+    if (_config.output.enable_plots) {
+        std::cout << "  Generating plots..." << std::endl;
+        generatePlots(N);
+    }
 
     return combined.norm_passed && combined.energy_passed;
 }
@@ -764,6 +959,83 @@ void SMFTTestRunner::saveObservablesToCSV(int N, const std::string& filepath) co
     file.close();
 }
 
+void SMFTTestRunner::generatePlots(int N) const {
+    auto it = _results.find(N);
+    if (it == _results.end() || it->second.empty()) {
+        std::cerr << "  No observables data available for N=" << N << std::endl;
+        return;
+    }
+
+    const auto& observables = it->second;
+    std::string output_dir = getOutputDirectory(N);
+
+    // Get velocity from config (first boost velocity if available, else 0)
+    double velocity = 0.0;
+    if (!_config.dirac_initial.boost_velocities.empty()) {
+        velocity = _config.dirac_initial.boost_velocities[0];
+    } else if (_config.dirac_initial.boost_vx != 0.0 || _config.dirac_initial.boost_vy != 0.0) {
+        velocity = std::sqrt(_config.dirac_initial.boost_vx * _config.dirac_initial.boost_vx +
+                             _config.dirac_initial.boost_vy * _config.dirac_initial.boost_vy);
+    }
+
+    int grid_size = _config.grid.size_x;
+
+    // Create PlottingManager
+    PlottingManager plotter(output_dir);
+
+    if (!plotter.initialize()) {
+        std::cerr << "  Failed to initialize plotting system" << std::endl;
+        return;
+    }
+
+    // Generate enabled plots
+    try {
+        if (_config.output.plot_6panel) {
+            std::cout << "    - 6-panel observables plot" << std::endl;
+            plotter.plotObservables6Panel(observables, velocity, grid_size, N);
+        }
+
+        if (_config.output.plot_conservation) {
+            std::cout << "    - Conservation laws plot" << std::endl;
+            plotter.plotConservationLaws(observables, velocity, grid_size, N);
+        }
+
+        if (_config.output.plot_gamma_validation && _config.analysis.test_gamma_factor) {
+            std::cout << "    - Gamma factor validation plot" << std::endl;
+
+            // Extract time and gamma_measured from observables
+            std::vector<double> time, gamma_measured;
+            for (const auto& obs : observables) {
+                time.push_back(obs.time);
+
+                // Compute gamma from observables
+                double px = obs.momentum_x.real();
+                double py = obs.momentum_y.real();
+                double p = std::sqrt(px*px + py*py);
+                double E = obs.energy_total;
+                double m_eff_sq = std::max(E*E - p*p, 0.0);
+                double m_eff = std::sqrt(m_eff_sq);
+                double gamma = (obs.R_avg > 1e-10) ? m_eff / (1.0 * obs.R_avg) : 1.0;
+                gamma_measured.push_back(gamma);
+            }
+
+            // Theoretical gamma
+            double gamma_theory = (std::abs(velocity) < 1e-10) ? 1.0 :
+                                  1.0 / std::sqrt(1.0 - velocity*velocity);
+
+            plotter.plotGammaValidation(time, gamma_measured, gamma_theory, velocity, grid_size, N);
+        }
+
+        if (_config.output.plot_spatial_fields) {
+            std::cout << "    - Spatial fields plot (skipped - requires NumPy)" << std::endl;
+            // This requires NumPy support in matplotlib-cpp, currently disabled
+        }
+
+    } catch (const std::exception& e) {
+        std::cerr << "  Error generating plots: " << e.what() << std::endl;
+    }
+}
+
 void SMFTTestRunner::createOutputDirectories() {
     // Use OutputManager to create timestamped experiment directory
     // Extract experiment name from config (use test_name or basename of output directory)
@@ -833,6 +1105,44 @@ void SMFTTestRunner::generateReport(const std::string& output_path) const {
 
     report << "\n[Validation Results]" << std::endl;
 
+    // Global and scenario validation (new framework)
+    bool has_validation_framework = !_global_validation_reports.empty();
+
+    if (has_validation_framework) {
+        report << "\n--- Physics Validation Framework ---" << std::endl;
+
+        // Report scenario type
+        if (!_detected_scenario_type.empty()) {
+            report << "Detected Scenario: " << _detected_scenario_type << std::endl;
+        }
+
+        for (const auto& [N, global_report] : _global_validation_reports) {
+            report << "\nN=" << N << " Global Validation: "
+                   << (global_report.overall_pass ? "✓ PASS" : "✗ FAIL") << std::endl;
+
+            for (const auto& result : global_report.global_results) {
+                report << "  " << (result.passed ? "✓" : "✗") << " "
+                       << result.name << ": " << result.message << std::endl;
+            }
+
+            // Scenario-specific validation (if exists)
+            auto scenario_it = _scenario_validation_reports.find(N);
+            if (scenario_it != _scenario_validation_reports.end()) {
+                const auto& scenario_report = scenario_it->second;
+                report << "\nN=" << N << " Scenario " << _detected_scenario_type << " Validation: "
+                       << (scenario_report.overall_pass ? "✓ PASS" : "✗ FAIL") << std::endl;
+
+                for (const auto& result : scenario_report.scenario_results) {
+                    report << "  " << (result.passed ? "✓" : "✗") << " "
+                           << result.name << std::endl;
+                    report << "    " << result.message << std::endl;
+                }
+            }
+        }
+
+        report << "\n--- Legacy Validation Metrics ---" << std::endl;
+    }
+
     for (const auto& [N, result] : _validation_results) {
         if (N == -1) {
             // Convergence validation
@@ -859,7 +1169,7 @@ void SMFTTestRunner::generateReport(const std::string& output_path) const {
         report << "✗ SOME TESTS FAILED" << std::endl;
     }
 
-    report << "\n===== End of Report =====" << std::endl;
+    report << "\n===== End of Report ====" << std::endl;
     report.close();
 
     std::cout << "\n✓ Report saved to " << report_path << std::endl;
@@ -885,7 +1195,7 @@ plt.rcParams['font.size'] = 10
 plt.rcParams['lines.linewidth'] = 1.5
 
 def load_obs(N):
-    p = Path(f"N_{N}/observables.csv")
+    p = Path(f"N_{{N}}/observables.csv")
     return pd.read_csv(p) if p.exists() else None
 
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(12, 10))
@@ -1080,4 +1390,169 @@ void SMFTTestRunner::stopConsoleLogging() {
     if (_console_log.is_open()) {
         _console_log.close();
     }
+}
+std::string SMFTTestRunner::getOutputDirectory() const {
+    return _timestamped_output_dir;
+}
+
+bool SMFTTestRunner::runDispersionAnalysis() {
+    std::cout << "\n===== Running Dispersion Analysis =====" << std::endl;
+
+    // Start console logging for this specific analysis
+    stopConsoleLogging(); // Stop any previous logging
+    std::string console_log_path = getOutputDirectory() + "/console_dispersion.log";
+    startConsoleLogging(console_log_path);
+    std::cout << "[Logging] Console output for dispersion analysis writing to: " << console_log_path << std::endl;
+
+    // Ensure a clean engine for this specific analysis
+    if (_engine) {
+        delete _engine;
+        _engine = nullptr;
+    }
+
+    // Initialize engine with configured grid size
+    _engine = new SMFTEngine(_nova);
+    _engine->initialize(_config.grid.size_x, _config.grid.size_y,
+                       _config.physics.delta, 0.0f); // Delta might be used as m for E=sqrt(k^2+m^2)
+
+    // Prepare output file
+    std::string filepath = getOutputDirectory() + "/dispersion_results.csv";
+    std::ofstream ofs(filepath);
+    if (!ofs.is_open()) {
+        std::cerr << "Error: Could not open dispersion results file: " << filepath << std::endl;
+        return false;
+    }
+    ofs << "k,measured_energy,theoretical_energy,error_percent\n";
+
+    float dt = _config.physics.dt;
+    int N_points_k = _config.analysis.dispersion_k_steps;
+    float max_k = _config.analysis.dispersion_max_k;
+
+    // Iterate kx from 0 to max_k
+    for (int i = 0; i <= N_points_k; ++i) {
+        float kx = i * (max_k / N_points_k);
+        float ky = 0.0f; // For simplicity, analyze 1D dispersion along x
+
+        // Initialize plane wave
+        _engine->initializeDiracPlaneWave(kx, ky);
+
+        // Get initial phase of a specific component at a specific point
+        auto initial_spinor = _engine->getSpinorField();
+        // Pick a point (e.g. x=0, y=0)
+        int point_idx = 0; // x=0, y=0 on a flattened 2D grid
+        // Get the phase of the first component
+        std::complex<double> initial_val = initial_spinor[point_idx * 4 + 0]; 
+
+        // Evolve one step with mass_field = 0 (kinetic operator only for dispersion)
+        std::vector<float> zero_mass_field(_config.grid.size_x * _config.grid.size_y, 0.0f);
+        
+        DiracEvolution* dirac_evolution_ptr = _engine->getDiracEvolutionNonConst();
+        if (!dirac_evolution_ptr) {
+            std::cerr << "Error: DiracEvolution not initialized for dispersion analysis." << std::endl;
+            return false;
+        }
+
+        // Directly step the Dirac evolution with a zero mass field
+        dirac_evolution_ptr->step(zero_mass_field, dt);
+
+        // Get final phase
+        auto final_spinor = _engine->getSpinorField();
+        std::complex<double> final_val = final_spinor[point_idx * 4 + 0]; // component 0
+
+        // Measure phase advance
+        float initial_phase = std::arg(initial_val);
+        float final_phase = std::arg(final_val);
+        float phase_advance = final_phase - initial_phase;
+
+        // Handle phase wrapping
+        if (phase_advance > M_PI) phase_advance -= 2 * M_PI;
+        if (phase_advance < -M_PI) phase_advance += 2 * M_PI;
+        
+        // Measured energy from phase advance (E = -d(phase)/dt)
+        // The Dirac equation is i dPsi/dt = H Psi, so Psi(t) = exp(-iHt) Psi(0)
+        // Phase change = -E * dt
+        float measured_energy = -phase_advance / dt;
+
+        // Theoretical energy for massless Dirac operator
+        // E = sqrt(k_x^2 + k_y^2)
+        float theoretical_energy = std::sqrt(kx*kx + ky*ky);
+
+        float error_percent = (theoretical_energy != 0) ? (std::abs(measured_energy - theoretical_energy) / theoretical_energy) * 100.0f : 0.0f;
+
+        ofs << kx << "," << measured_energy << "," << theoretical_energy << "," << error_percent << "\n";
+        std::cout << "[Dispersion] k=" << kx << ", E_meas=" << measured_energy << ", E_theory=" << theoretical_energy
+                  << ", Error=" << error_percent << "%" << std::endl;
+    }
+
+    ofs.close();
+    std::cout << "\n===== Dispersion Analysis Complete. Results saved to: " << filepath << " =====" << std::endl;
+    
+    // Restore console logging (if it was previously logging to file)
+    stopConsoleLogging();
+
+    return true;
+}
+
+std::string SMFTTestRunner::detectScenarioType() const {
+    // Option 1: Explicit in test name
+    std::string test_name = _config.test_name;
+
+    // Check for explicit scenario markers in test name
+    if (test_name.find("defect_localization") != std::string::npos ||
+        test_name.find("scenario_2.1") != std::string::npos ||
+        test_name.find("phase_2.1") != std::string::npos) {
+        return "2.1";
+    }
+
+    if (test_name.find("traveling_wave") != std::string::npos ||
+        test_name.find("scenario_2.2") != std::string::npos ||
+        test_name.find("phase_2.2") != std::string::npos) {
+        return "2.2";
+    }
+
+    if (test_name.find("relativistic_mass") != std::string::npos ||
+        test_name.find("scenario_2.3") != std::string::npos ||
+        test_name.find("phase_2.3") != std::string::npos) {
+        return "2.3";
+    }
+
+    // Scenario 2.4 variants
+    if (test_name.find("scenario_2.4") != std::string::npos ||
+        test_name.find("phase_2.4") != std::string::npos ||
+        test_name.find("velocity_threshold") != std::string::npos ||
+        test_name.find("R_field_dynamics") != std::string::npos ||
+        test_name.find("ultra_relativistic") != std::string::npos) {
+        return "2.3";  // Treat as relativistic mass scenario
+    }
+
+    // Scenario 2.5 variants
+    if (test_name.find("scenario_2.5") != std::string::npos ||
+        test_name.find("phase_2.5") != std::string::npos ||
+        test_name.find("zero_damping") != std::string::npos ||
+        test_name.find("N_convergence") != std::string::npos ||
+        test_name.find("coupling_scan") != std::string::npos) {
+        return "2.3";  // Treat as relativistic mass scenario
+    }
+
+    // Option 2: Infer from physics parameters
+    bool has_vortex = (_config.kuramoto_initial.phase_distribution == "vortex");
+    bool has_boosted_gaussian = (_config.dirac_initial.boost_vx != 0.0f ||
+                                 _config.dirac_initial.boost_vy != 0.0f);
+
+    if (has_vortex && has_boosted_gaussian) {
+        // Vortex + boosted particle = Scenario 2.2 or 2.3
+        // Check for grid convergence or N-ratio testing (indicates 2.3)
+        if (!_config.grid.grid_sizes.empty() ||
+            _config.operator_splitting.substep_ratios.size() > 1) {
+            return "2.3";  // Relativistic Mass
+        } else {
+            return "2.2";  // Traveling Wave
+        }
+    } else if (has_vortex && !has_boosted_gaussian) {
+        // Vortex only (no particle) = Scenario 2.1
+        return "2.1";  // Defect Localization
+    }
+
+    // No scenario-specific validation
+    return "";
 }

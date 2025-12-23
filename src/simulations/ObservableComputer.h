@@ -2,6 +2,7 @@
 #define OBSERVABLE_COMPUTER_H
 
 #include "DiracEvolution.h"
+#include "KleinGordonEvolution.h"
 #include <complex>
 #include <vector>
 #include <map>
@@ -118,12 +119,100 @@ public:
         const DiracEvolution& dirac,
         int component);
 
+    // ========== Klein-Gordon Observable Methods ==========
+
+    /**
+     * Compute all observables for Klein-Gordon scalar field
+     *
+     * @param kg Klein-Gordon evolution state
+     * @param R_field Kuramoto sync field (size Nx*Ny)
+     * @param delta Vacuum potential Δ
+     * @param time Current simulation time
+     * @param E0 Initial energy (for relative energy conservation check)
+     * @param norm_tolerance Tolerance for ||φ||² ≈ 1 (default 1e-4)
+     * @param energy_tolerance Tolerance for ΔE/E₀ (default 1e-2)
+     * @return Observables struct with all computed values
+     */
+    static Observables computeKG(
+        const KleinGordonEvolution& kg,
+        const std::vector<double>& R_field,
+        double delta,
+        double time,
+        double E0 = 0.0,
+        double norm_tolerance = 1e-4,
+        double energy_tolerance = 1e-2);
+
+    /**
+     * Compute norm ||φ||² = ∫|φ|² dA for Klein-Gordon scalar field
+     */
+    static double computeNormKG(const KleinGordonEvolution& kg);
+
+    /**
+     * Compute total energy for Klein-Gordon field
+     * E = ∫[|∂_tφ|² + |∇φ|² + m²|φ|²] dx
+     */
+    static double computeEnergyKG(
+        const KleinGordonEvolution& kg,
+        const std::vector<double>& R_field,
+        double delta);
+
+    /**
+     * Compute kinetic energy for Klein-Gordon field
+     * T = ∫|∂_tφ|² dx
+     */
+    static double computeKineticEnergyKG(const KleinGordonEvolution& kg);
+
+    /**
+     * Compute potential energy for Klein-Gordon field
+     * V = ∫[|∇φ|² + m²|φ|²] dx
+     */
+    static double computePotentialEnergyKG(
+        const KleinGordonEvolution& kg,
+        const std::vector<double>& R_field,
+        double delta);
+
+    /**
+     * Compute position expectation value <x> or <y> for Klein-Gordon field
+     * <x> = ∫ x|φ|² dx / ∫|φ|² dx
+     * component: 0 for x, 1 for y
+     */
+    static std::complex<double> computePositionExpectationKG(
+        const KleinGordonEvolution& kg,
+        int component);
+
+    /**
+     * Compute momentum expectation value <p_x> or <p_y> for Klein-Gordon field
+     * <p> = -i ∫ φ*(∇φ) dx
+     * component: 0 for p_x, 1 for p_y
+     */
+    static std::complex<double> computeMomentumExpectationKG(
+        const KleinGordonEvolution& kg,
+        int component);
+
     /**
      * Compute sync field statistics
      * Returns {R_avg, R_max, R_min, R_variance}
      */
     static std::tuple<double, double, double, double> computeSyncFieldStats(
         const std::vector<double>& R_field);
+
+    /**
+     * Compute R-field gradient at particle center of mass
+     * Returns (∇R_x, ∇R_y) using centered finite differences
+     */
+    static std::pair<double, double> computeRFieldGradient(
+        const std::vector<double>& R_field,
+        int Nx, int Ny,
+        double pos_x, double pos_y,
+        double dx = 1.0);
+
+    /**
+     * Compute Pearson correlation coefficient between two time series
+     * Returns ρ ∈ [-1, 1]
+     */
+    static double computeCorrelation(
+        const std::vector<double>& series1,
+        const std::vector<double>& series2);
 
     /**
      * Write observables to CSV line

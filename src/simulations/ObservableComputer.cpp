@@ -246,6 +246,70 @@ std::tuple<double, double, double, double> ObservableComputer::computeSyncFieldS
     return {R_avg, R_max, R_min, R_variance};
 }
 
+std::pair<double, double> ObservableComputer::computeRFieldGradient(
+    const std::vector<double>& R_field,
+    int Nx, int Ny,
+    double pos_x, double pos_y,
+    double dx) {
+
+    // Convert position to grid indices
+    int ix = static_cast<int>(std::round(pos_x / dx));
+    int iy = static_cast<int>(std::round(pos_y / dx));
+
+    // Periodic boundaries
+    ix = (ix % Nx + Nx) % Nx;
+    iy = (iy % Ny + Ny) % Ny;
+
+    int idx = iy * Nx + ix;
+
+    // Centered finite differences
+    int idx_xp = iy * Nx + ((ix + 1) % Nx);
+    int idx_xm = iy * Nx + ((ix - 1 + Nx) % Nx);
+    int idx_yp = ((iy + 1) % Ny) * Nx + ix;
+    int idx_ym = ((iy - 1 + Ny) % Ny) * Nx + ix;
+
+    double dR_dx = (R_field[idx_xp] - R_field[idx_xm]) / (2.0 * dx);
+    double dR_dy = (R_field[idx_yp] - R_field[idx_ym]) / (2.0 * dx);
+
+    return {dR_dx, dR_dy};
+}
+
+double ObservableComputer::computeCorrelation(
+    const std::vector<double>& series1,
+    const std::vector<double>& series2) {
+
+    if (series1.size() != series2.size() || series1.empty()) {
+        return 0.0;
+    }
+
+    size_t n = series1.size();
+
+    // Compute means
+    double mean1 = std::accumulate(series1.begin(), series1.end(), 0.0) / n;
+    double mean2 = std::accumulate(series2.begin(), series2.end(), 0.0) / n;
+
+    // Compute covariance and variances
+    double cov = 0.0;
+    double var1 = 0.0;
+    double var2 = 0.0;
+
+    for (size_t i = 0; i < n; ++i) {
+        double d1 = series1[i] - mean1;
+        double d2 = series2[i] - mean2;
+        cov += d1 * d2;
+        var1 += d1 * d1;
+        var2 += d2 * d2;
+    }
+
+    // Pearson correlation coefficient
+    double denom = std::sqrt(var1 * var2);
+    if (denom < 1e-10) {
+        return 0.0;  // Avoid division by zero
+    }
+
+    return cov / denom;
+}
+
 std::string ObservableComputer::toCSVLine(const Observables& obs) {
     std::ostringstream oss;
     oss << std::setprecision(10);
@@ -280,4 +344,225 @@ std::string ObservableComputer::getCSVHeader() {
            "mom_x_re,mom_x_im,mom_y_re,mom_y_im,"
            "R_avg,R_max,R_min,R_var,"
            "norm_valid,energy_valid";
+}
+
+// ========== Klein-Gordon Observable Implementations ==========
+
+ObservableComputer::Observables ObservableComputer::computeKG(
+    const KleinGordonEvolution& kg,
+    const std::vector<double>& R_field,
+    double delta,
+    double time,
+    double E0,
+    double norm_tolerance,
+    double energy_tolerance) {
+
+    Observables obs;
+    obs.time = time;
+
+    // Klein-Gordon observables
+    obs.norm = computeNormKG(kg);
+    obs.norm_error = obs.norm - 1.0;
+    obs.energy_kinetic = computeKineticEnergyKG(kg);
+    obs.energy_potential = computePotentialEnergyKG(kg, R_field, delta);
+    obs.energy_total = obs.energy_kinetic + obs.energy_potential;
+
+    obs.position_x = computePositionExpectationKG(kg, 0);
+    obs.position_y = computePositionExpectationKG(kg, 1);
+    obs.momentum_x = computeMomentumExpectationKG(kg, 0);
+    obs.momentum_y = computeMomentumExpectationKG(kg, 1);
+
+    // Sync field observables
+    auto [R_avg, R_max, R_min, R_var] = computeSyncFieldStats(R_field);
+    obs.R_avg = R_avg;
+    obs.R_max = R_max;
+    obs.R_min = R_min;
+    obs.R_variance = R_var;
+
+    // Validation
+    obs.norm_valid = std::abs(obs.norm_error) < norm_tolerance;
+
+    if (E0 != 0.0) {
+        double energy_drift = std::abs(obs.energy_total - E0) / std::abs(E0);
+        obs.energy_valid = energy_drift < energy_tolerance;
+    } else {
+        obs.energy_valid = true; // Can't validate without E0
+    }
+
+    return obs;
+}
+
+double ObservableComputer::computeNormKG(const KleinGordonEvolution& kg) {
+    const auto& phi = kg.getField();
+    int Nx = kg.getNx();
+    int Ny = kg.getNy();
+    double dx = kg.getDx();
+
+    double norm = 0.0;
+    for (int i = 0; i < Nx * Ny; ++i) {
+        // Klein-Gordon: |φ|² = φ*φ
+        norm += std::norm(phi[i]);
+    }
+
+    // Integrate: ||φ||² = ∫|φ|² dA = Σ |φ|² · dx²
+    norm *= dx * dx;
+
+    return norm;
+}
+
+double ObservableComputer::computeEnergyKG(
+    const KleinGordonEvolution& kg,
+    const std::vector<double>& R_field,
+    double delta) {
+
+    double T = computeKineticEnergyKG(kg);
+    double V = computePotentialEnergyKG(kg, R_field, delta);
+
+    return T + V;
+}
+
+double ObservableComputer::computeKineticEnergyKG(const KleinGordonEvolution& kg) {
+    const auto& phi_dot = kg.getFieldDot();
+    int Nx = kg.getNx();
+    int Ny = kg.getNy();
+    double dx = kg.getDx();
+
+    double T = 0.0;
+
+    // T = ∫|∂_tφ|² dx
+    for (int i = 0; i < Nx * Ny; ++i) {
+        T += std::norm(phi_dot[i]);
+    }
+
+    T *= dx * dx;  // Spatial integration
+    return T;
+}
+
+double ObservableComputer::computePotentialEnergyKG(
+    const KleinGordonEvolution& kg,
+    const std::vector<double>& R_field,
+    double delta) {
+
+    const auto& phi = kg.getField();
+    int Nx = kg.getNx();
+    int Ny = kg.getNy();
+    double dx = kg.getDx();
+
+    double V = 0.0;
+
+    // V = ∫[|∇φ|² + m²|φ|²] dx
+    // where m(x,y) = Δ·R(x,y)
+    for (int iy = 0; iy < Ny; ++iy) {
+        for (int ix = 0; ix < Nx; ++ix) {
+            int idx = iy * Nx + ix;
+
+            // Periodic boundaries
+            int idx_xp = iy * Nx + ((ix + 1) % Nx);
+            int idx_xm = iy * Nx + ((ix - 1 + Nx) % Nx);
+            int idx_yp = ((iy + 1) % Ny) * Nx + ix;
+            int idx_ym = ((iy - 1 + Ny) % Ny) * Nx + ix;
+
+            std::complex<float> phi_center = phi[idx];
+
+            // Gradient energy: |∇φ|²
+            std::complex<float> phi_xp = phi[idx_xp];
+            std::complex<float> phi_xm = phi[idx_xm];
+            std::complex<float> dphi_dx = (phi_xp - phi_xm) / (2.0f * static_cast<float>(dx));
+
+            std::complex<float> phi_yp = phi[idx_yp];
+            std::complex<float> phi_ym = phi[idx_ym];
+            std::complex<float> dphi_dy = (phi_yp - phi_ym) / (2.0f * static_cast<float>(dx));
+
+            double grad_energy = std::norm(dphi_dx) + std::norm(dphi_dy);
+
+            // Mass energy: m²|φ|²
+            double mass = delta * R_field[idx];
+            double mass_energy = mass * mass * std::norm(phi_center);
+
+            V += grad_energy + mass_energy;
+        }
+    }
+
+    V *= dx * dx;  // Spatial integration
+    return V;
+}
+
+std::complex<double> ObservableComputer::computePositionExpectationKG(
+    const KleinGordonEvolution& kg,
+    int component) {
+
+    const auto& phi = kg.getField();
+    int Nx = kg.getNx();
+    int Ny = kg.getNy();
+    double dx = kg.getDx();
+
+    std::complex<double> expectation(0.0, 0.0);
+    double norm = 0.0;
+
+    // <x> = ∫ x|φ|² dx / ∫|φ|² dx
+    for (int iy = 0; iy < Ny; ++iy) {
+        for (int ix = 0; ix < Nx; ++ix) {
+            int idx = iy * Nx + ix;
+
+            double position = (component == 0) ? (ix * dx) : (iy * dx);
+            double density = std::norm(phi[idx]);
+
+            expectation += position * density;
+            norm += density;
+        }
+    }
+
+    expectation *= dx * dx;  // Spatial integration
+    norm *= dx * dx;
+
+    // Normalize by total norm
+    if (norm > 1e-10) {
+        expectation /= norm;
+    }
+
+    return expectation;
+}
+
+std::complex<double> ObservableComputer::computeMomentumExpectationKG(
+    const KleinGordonEvolution& kg,
+    int component) {
+
+    const auto& phi = kg.getField();
+    int Nx = kg.getNx();
+    int Ny = kg.getNy();
+    double dx = kg.getDx();
+
+    std::complex<double> expectation(0.0, 0.0);
+    std::complex<double> i_unit(0.0, 1.0);
+
+    // <p> = -i ∫ φ*(∇φ) dx
+    for (int iy = 0; iy < Ny; ++iy) {
+        for (int ix = 0; ix < Nx; ++ix) {
+            int idx = iy * Nx + ix;
+
+            // Periodic boundaries
+            int idx_p, idx_m;
+            if (component == 0) {  // x-direction
+                idx_p = iy * Nx + ((ix + 1) % Nx);
+                idx_m = iy * Nx + ((ix - 1 + Nx) % Nx);
+            } else {  // y-direction
+                idx_p = ((iy + 1) % Ny) * Nx + ix;
+                idx_m = ((iy - 1 + Ny) % Ny) * Nx + ix;
+            }
+
+            std::complex<float> phi_center = phi[idx];
+            std::complex<float> phi_p = phi[idx_p];
+            std::complex<float> phi_m = phi[idx_m];
+
+            // ∇φ ≈ (φ(+) - φ(-)) / (2dx)
+            std::complex<double> dphi =
+                (std::complex<double>(phi_p) - std::complex<double>(phi_m)) / (2.0 * dx);
+
+            // -i·φ*·∇φ
+            expectation += std::conj(std::complex<double>(phi_center)) * (-i_unit) * dphi;
+        }
+    }
+
+    expectation *= dx * dx;  // Spatial integration
+    return expectation;
 }
