@@ -17,6 +17,11 @@ class DiracEvolution;
 // Forward declare OutputManager in SMFT namespace (no longer conflicts since class renamed to SMFTCore)
 namespace SMFT { class OutputManager; }
 
+// Forward declare Validation namespace and types
+namespace Validation {
+    struct ValidationReport;
+}
+
 /**
  * SMFTTestRunner - Unified test execution framework for SMFT
  *
@@ -125,6 +130,11 @@ private:
 
     std::map<int, ValidationResult> _validation_results;
 
+    // Validation framework reports (stored for report generation)
+    std::map<int, Validation::ValidationReport> _global_validation_reports;
+    std::map<int, Validation::ValidationReport> _scenario_validation_reports;
+    std::string _detected_scenario_type;
+
     // Output management
     SMFT::OutputManager* _output_manager;
     std::string _timestamped_output_dir;
@@ -213,6 +223,12 @@ private:
     void saveObservablesToCSV(int N, const std::string& filepath) const;
 
     /**
+     * Generate plots from observables using PlottingManager
+     * @param N Substep ratio for this test run
+     */
+    void generatePlots(int N) const;
+
+    /**
      * Create output directory structure
      */
     void createOutputDirectories();
@@ -230,11 +246,71 @@ private:
     std::string getOutputDirectory(int N) const;
 
     /**
+     * Get the base output directory for the current test run.
+     * @return Full path to the timestamped output directory.
+     */
+    std::string getOutputDirectory() const;
+
+    /**
+     * Run the dispersion relation analysis.
+     * @return true if successful
+     */
+    bool runDispersionAnalysis();
+
+    /**
      * Save spatial field snapshots (theta and R fields)
      * @param N Substep ratio
      * @param step Current timestep
      */
     void saveSpatialFieldSnapshot(int N, int step) const;
+
+    /**
+     * Detect scenario type from test configuration
+     * @return Scenario identifier ("2.1", "2.2", "2.3", etc.) or empty string
+     */
+    std::string detectScenarioType() const;
+
+    /**
+     * Analyze velocity sweep results and find critical velocity
+     * @param velocities Vector of tested velocities
+     * @param grid_size Grid size used for the tests
+     */
+    void analyzeVelocitySweep(const std::vector<float>& velocities, int grid_size) const;
+
+    /**
+     * Find critical velocity where error exceeds threshold
+     * @param velocities Vector of velocities tested
+     * @param errors Vector of corresponding errors
+     * @param threshold Error threshold (default 5%)
+     * @return Interpolated critical velocity
+     */
+    float findCriticalVelocity(const std::vector<float>& velocities,
+                              const std::vector<double>& errors,
+                              double threshold = 5.0) const;
+
+    /**
+     * Save velocity sweep report with aggregate analysis
+     * @param velocities Vector of velocities tested
+     * @param errors Vector of corresponding errors
+     * @param v_critical Critical velocity found
+     * @param grid_size Grid size used for tests
+     */
+    void saveVelocitySweepReport(const std::vector<float>& velocities,
+                                const std::vector<double>& errors,
+                                float v_critical,
+                                int grid_size) const;
+
+    /**
+     * Read observables from CSV file for analysis
+     * @param filepath Path to observables.csv file
+     * @return Vector of observables (empty if file not found)
+     */
+    std::vector<ObservableComputer::Observables> readObservablesFromFile(
+        const std::string& filepath) const;
+
+    // Store velocity sweep results for aggregate analysis
+    mutable std::map<float, ValidationResult> _velocity_results;
+    mutable std::map<float, std::string> _velocity_output_dirs;
 };
 
 #endif // SMFT_TEST_RUNNER_H
