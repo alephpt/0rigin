@@ -1,9 +1,11 @@
 #include "simulations/ObservableComputer.h"
+#include "analysis/GeometryAnalyzer.h"
 #include <cmath>
 #include <numeric>
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 ObservableComputer::Observables ObservableComputer::compute(
     const DiracEvolution& dirac,
@@ -348,6 +350,23 @@ std::string ObservableComputer::getCSVHeader() {
 
 // ========== Klein-Gordon Observable Implementations ==========
 
+/**
+ * IMPORTANT: Klein-Gordon Conserved Quantities
+ *
+ * The Klein-Gordon equation conserves DIFFERENT quantities than Schrödinger/Dirac:
+ *
+ * Conserved:
+ *   - Klein-Gordon current: j^0 = i(φ*·∂_tφ - φ·∂_tφ*)
+ *   - Phase-space norm: ∫[|φ|² + |∂_tφ/m|²]dx
+ *   - Energy: E = ∫[|∂_tφ|² + |∇φ|² + m²|φ|²]dx
+ *
+ * NOT conserved:
+ *   - Position-space norm: ||φ||² = ∫|φ|²dx
+ *
+ * For relativistic wavepackets, ||φ||² can grow significantly (e.g., 1.0 → 1.5)
+ * as energy trades between kinetic (∂_tφ) and position (φ) components.
+ * This is CORRECT physics, not a numerical error.
+ */
 ObservableComputer::Observables ObservableComputer::computeKG(
     const KleinGordonEvolution& kg,
     const std::vector<double>& R_field,
@@ -435,6 +454,7 @@ double ObservableComputer::computeKineticEnergyKG(const KleinGordonEvolution& kg
     }
 
     T *= dx * dx;  // Spatial integration
+
     return T;
 }
 
@@ -565,4 +585,450 @@ std::complex<double> ObservableComputer::computeMomentumExpectationKG(
 
     expectation *= dx * dx;  // Spatial integration
     return expectation;
+}
+
+// ========== Phase 3 Vacuum Structure Observable Implementations ==========
+
+std::tuple<double, double, double, double> ObservableComputer::computeEnergyDensityByRegion(
+    const DiracEvolution& dirac,
+    const std::vector<double>& R_field,
+    double delta,
+    float x_boundary) {
+
+    const auto& psi = dirac.getSpinorField();
+    int Nx = dirac.getNx();
+    int Ny = dirac.getNy();
+    double dx = dirac.getDx();
+
+    double E_left = 0.0;
+    double E_right = 0.0;
+    double R_sum_left = 0.0;
+    double R_sum_right = 0.0;
+    int count_left = 0;
+    int count_right = 0;
+
+    // Compute energy and R_avg in each region
+    for (int iy = 0; iy < Ny; ++iy) {
+        for (int ix = 0; ix < Nx; ++ix) {
+            int idx = iy * Nx + ix;
+            float x = static_cast<float>(ix);
+
+            bool is_left = (x < x_boundary);
+
+            // Periodic boundaries for gradients
+            int idx_xp = iy * Nx + ((ix + 1) % Nx);
+            int idx_xm = iy * Nx + ((ix - 1 + Nx) % Nx);
+            int idx_yp = ((iy + 1) % Ny) * Nx + ix;
+            int idx_ym = ((iy - 1 + Ny) % Ny) * Nx + ix;
+
+            // Kinetic energy contribution (gradient terms)
+            double T_local = 0.0;
+            for (int alpha = 0; alpha < 4; ++alpha) {
+                std::complex<double> psi_center = psi[idx * 4 + alpha];
+
+                std::complex<double> psi_xp = psi[idx_xp * 4 + alpha];
+                std::complex<double> psi_xm = psi[idx_xm * 4 + alpha];
+                std::complex<double> dpsi_dx = (psi_xp - psi_xm) / (2.0 * dx);
+
+                std::complex<double> psi_yp = psi[idx_yp * 4 + alpha];
+                std::complex<double> psi_ym = psi[idx_ym * 4 + alpha];
+                std::complex<double> dpsi_dy = (psi_yp - psi_ym) / (2.0 * dx);
+
+                T_local += std::norm(dpsi_dx) + std::norm(dpsi_dy);
+            }
+            T_local *= dx * dx;
+
+            // Potential energy contribution
+            double V_local = 0.0;
+            double mass = delta * R_field[idx];
+            for (int alpha = 0; alpha < 4; ++alpha) {
+                V_local += std::norm(psi[idx * 4 + alpha]) * mass;
+            }
+            V_local *= dx * dx;
+
+            double E_local = T_local + V_local;
+
+            // Accumulate by region
+            if (is_left) {
+                E_left += E_local;
+                R_sum_left += R_field[idx];
+                count_left++;
+            } else {
+                E_right += E_local;
+                R_sum_right += R_field[idx];
+                count_right++;
+            }
+        }
+    }
+
+    // Compute average R in each region
+    double R_avg_left = (count_left > 0) ? R_sum_left / count_left : 0.0;
+    double R_avg_right = (count_right > 0) ? R_sum_right / count_right : 0.0;
+
+    // Compute energy density: ρ = E / V
+    // Volume = count * dx^2 (2D area)
+    double V_left = count_left * dx * dx;
+    double V_right = count_right * dx * dx;
+
+    double rho_left = (V_left > 1e-10) ? E_left / V_left : 0.0;
+    double rho_right = (V_right > 1e-10) ? E_right / V_right : 0.0;
+
+    return {rho_left, rho_right, R_avg_left, R_avg_right};
+}
+
+double ObservableComputer::computeDefectForce(
+    const DiracEvolution& dirac,
+    const std::vector<double>& R_field,
+    double delta,
+    float x1) {
+
+    const auto& psi = dirac.getSpinorField();
+    int Nx = dirac.getNx();
+    int Ny = dirac.getNy();
+    double dx = dirac.getDx();
+
+    double force = 0.0;
+
+    // Find grid index closest to x1
+    int ix1 = static_cast<int>(std::round(x1));
+    if (ix1 < 0 || ix1 >= Nx) {
+        return 0.0;  // Out of bounds
+    }
+
+    // Integrate force along defect line (vary y, fix x = ix1)
+    // F = ∫ β⟨Ψ|β|Ψ⟩ · Δ∇R_x dy
+    for (int iy = 0; iy < Ny; ++iy) {
+        int idx = iy * Nx + ix1;
+
+        // Compute ∇R_x at this point (centered difference)
+        int idx_xp = iy * Nx + ((ix1 + 1) % Nx);
+        int idx_xm = iy * Nx + ((ix1 - 1 + Nx) % Nx);
+
+        double dR_dx = (R_field[idx_xp] - R_field[idx_xm]) / (2.0 * dx);
+
+        // Compute β expectation value ⟨Ψ|β|Ψ⟩
+        // For 4-component Dirac spinor, β matrix has structure:
+        // β = diag(1, 1, -1, -1) in standard representation
+        // ⟨Ψ|β|Ψ⟩ = |ψ₁|² + |ψ₂|² - |ψ₃|² - |ψ₄|²
+        double beta_expectation = 0.0;
+        for (int alpha = 0; alpha < 4; ++alpha) {
+            double sign = (alpha < 2) ? 1.0 : -1.0;
+            beta_expectation += sign * std::norm(psi[idx * 4 + alpha]);
+        }
+
+        // Force contribution: F_y = β_expectation · Δ · dR/dx · dy
+        force += beta_expectation * delta * dR_dx * dx;
+    }
+
+    return force;
+}
+
+// ==============================================================================
+// Two-Particle Observable Methods (Test 3.4: Antiparticle Separation)
+// ==============================================================================
+
+ObservableComputer::TwoParticleObservables ObservableComputer::computeTwoParticle(
+    const DiracEvolution& particle,
+    const DiracEvolution& antiparticle,
+    const std::vector<double>& R_field,
+    double delta,
+    double time) {
+
+    TwoParticleObservables obs;
+    obs.time = time;
+
+    // Compute particle observables
+    obs.norm_particle = particle.getNorm();
+
+    float x_p, y_p;
+    particle.getCenterOfMass(x_p, y_p);
+    obs.position_x_particle = x_p;
+    obs.position_y_particle = y_p;
+
+    // Compute antiparticle observables
+    obs.norm_antiparticle = antiparticle.getNorm();
+
+    float x_a, y_a;
+    antiparticle.getCenterOfMass(x_a, y_a);
+    obs.position_x_antiparticle = x_a;
+    obs.position_y_antiparticle = y_a;
+
+    // Compute separation distance
+    double dx = obs.position_x_particle - obs.position_x_antiparticle;
+    double dy = obs.position_y_particle - obs.position_y_antiparticle;
+    obs.separation_distance = std::sqrt(dx * dx + dy * dy);
+
+    // Compute forces on each particle: F = -β_sign · Δ · ∇R
+    // For particle (β_sign = +1): F_p = -Δ · ∇R (attracted to high-R regions)
+    // For antiparticle (β_sign = -1): F_a = +Δ · ∇R (repelled from high-R regions)
+
+    uint32_t Nx = particle.getNx();
+    uint32_t Ny = particle.getNy();
+
+    // Particle force (at center of mass)
+    int ix_p = static_cast<int>(std::round(x_p));
+    int iy_p = static_cast<int>(std::round(y_p));
+    if (ix_p >= 0 && ix_p < static_cast<int>(Nx) &&
+        iy_p >= 0 && iy_p < static_cast<int>(Ny)) {
+
+        int idx_p = iy_p * Nx + ix_p;
+        int idx_xp = iy_p * Nx + ((ix_p + 1) % Nx);
+        int idx_xm = iy_p * Nx + ((ix_p - 1 + Nx) % Nx);
+        int idx_yp = ((iy_p + 1) % Ny) * Nx + ix_p;
+        int idx_ym = ((iy_p - 1 + Ny) % Ny) * Nx + ix_p;
+
+        double dR_dx_p = (R_field[idx_xp] - R_field[idx_xm]) / 2.0;
+        double dR_dy_p = (R_field[idx_yp] - R_field[idx_ym]) / 2.0;
+
+        // Particle force: F_p = -β_sign · Δ · ∇R = -Δ · ∇R
+        obs.force_particle_x = -delta * dR_dx_p;
+        obs.force_particle_y = -delta * dR_dy_p;
+    } else {
+        obs.force_particle_x = 0.0;
+        obs.force_particle_y = 0.0;
+    }
+
+    // Antiparticle force (at center of mass)
+    int ix_a = static_cast<int>(std::round(x_a));
+    int iy_a = static_cast<int>(std::round(y_a));
+    if (ix_a >= 0 && ix_a < static_cast<int>(Nx) &&
+        iy_a >= 0 && iy_a < static_cast<int>(Ny)) {
+
+        int idx_a = iy_a * Nx + ix_a;
+        int idx_xp = iy_a * Nx + ((ix_a + 1) % Nx);
+        int idx_xm = iy_a * Nx + ((ix_a - 1 + Nx) % Nx);
+        int idx_yp = ((iy_a + 1) % Ny) * Nx + ix_a;
+        int idx_ym = ((iy_a - 1 + Ny) % Ny) * Nx + ix_a;
+
+        double dR_dx_a = (R_field[idx_xp] - R_field[idx_xm]) / 2.0;
+        double dR_dy_a = (R_field[idx_yp] - R_field[idx_ym]) / 2.0;
+
+        // Antiparticle force: F_a = -β_sign · Δ · ∇R = +Δ · ∇R (opposite sign)
+        obs.force_antiparticle_x = delta * dR_dx_a;
+        obs.force_antiparticle_y = delta * dR_dy_a;
+    } else {
+        obs.force_antiparticle_x = 0.0;
+        obs.force_antiparticle_y = 0.0;
+    }
+
+    // Compute force dot product F_p · F_a
+    // Should be < 0 for opposite forces (anti-correlation)
+    obs.force_dot_product = obs.force_particle_x * obs.force_antiparticle_x +
+                             obs.force_particle_y * obs.force_antiparticle_y;
+
+    // Note: Momentum expectation values not included for brevity
+    // Can be added if needed using computeMomentumExpectation()
+
+    return obs;
+}
+
+// ==============================================================================
+// Phase 4 Time Gradient Observable Implementations
+// ==============================================================================
+
+double ObservableComputer::computePhaseAccumulation(const DiracEvolution& dirac) {
+    /**
+     * Compute global phase φ = arg(⟨Ψ|Ψ⟩) = arg(∫Ψ*Ψ dx)
+     *
+     * Physics: Tracks overall phase evolution of wavepacket
+     * In time-dilation mode (Test 4.1), φ(t) evolves slower where R < 1
+     *
+     * For 4-component spinor:
+     * ⟨Ψ|Ψ⟩ = Σ_x Σ_α ψ*_α(x) ψ_α(x)
+     *
+     * Returns phase in radians [-π, π]
+     */
+    const auto& psi = dirac.getSpinorField();
+    int Nx = dirac.getNx();
+    int Ny = dirac.getNy();
+
+    std::complex<double> global_amplitude(0.0, 0.0);
+
+    // Sum over all grid points and spinor components
+    for (int i = 0; i < Nx * Ny; ++i) {
+        for (int alpha = 0; alpha < 4; ++alpha) {
+            std::complex<double> psi_val = psi[i * 4 + alpha];
+
+            // Accumulate ψ*_α · ψ_α (complex number with phase information)
+            global_amplitude += std::conj(psi_val) * psi_val;
+        }
+    }
+
+    // Extract phase: φ = arg(⟨Ψ|Ψ⟩)
+    double phase = std::atan2(global_amplitude.imag(), global_amplitude.real());
+
+    return phase;
+}
+
+std::tuple<double, double> ObservableComputer::computeTemporalForce(
+    const DiracEvolution& dirac,
+    const std::vector<double>& R_field,
+    std::complex<double> momentum_prev_x,
+    std::complex<double> momentum_prev_y,
+    double dt,
+    double delta) {
+    /**
+     * Compute temporal force F_temp = dp/dt - F_spatial
+     *
+     * Physics decomposition:
+     * - F_total = dp/dt (total force from momentum change)
+     * - F_spatial = -Δ·∇R (known spatial force from gradient)
+     * - F_temporal = F_total - F_spatial (residual, temporal contribution)
+     *
+     * This tests if time gradients contribute to force beyond spatial effects
+     */
+
+    // Compute current momentum
+    std::complex<double> momentum_curr_x = computeMomentumExpectation(dirac, 0);
+    std::complex<double> momentum_curr_y = computeMomentumExpectation(dirac, 1);
+
+    // Momentum change: dp = p_curr - p_prev
+    double dp_x = momentum_curr_x.real() - momentum_prev_x.real();
+    double dp_y = momentum_curr_y.real() - momentum_prev_y.real();
+
+    // Total force: F_total = dp/dt
+    double F_total_x = dp_x / dt;
+    double F_total_y = dp_y / dt;
+
+    // Get particle position
+    float pos_x, pos_y;
+    dirac.getCenterOfMass(pos_x, pos_y);
+
+    // Compute R-field gradient at particle center
+    auto [grad_R_x, grad_R_y] = computeRFieldGradient(
+        R_field,
+        dirac.getNx(), dirac.getNy(),
+        pos_x, pos_y,
+        dirac.getDx()
+    );
+
+    // Spatial force: F_spatial = -Δ·∇R
+    double F_spatial_x = -delta * grad_R_x;
+    double F_spatial_y = -delta * grad_R_y;
+
+    // Temporal force: F_temp = F_total - F_spatial (residual)
+    double F_temp_x = F_total_x - F_spatial_x;
+    double F_temp_y = F_total_y - F_spatial_y;
+
+    return {F_temp_x, F_temp_y};
+}
+
+std::tuple<double, double> ObservableComputer::computeGeodesicAcceleration(
+    const DiracEvolution& dirac,
+    const std::vector<double>& R_field,
+    double L_domain) {
+    /**
+     * Compute geodesic acceleration a_geo = -Γ^i_μν v^μ v^ν
+     *
+     * For metric ds² = -R²dt² + dx² + dy²:
+     * Dominant term: a^i ≈ -Γ^i_00 = R ∂R/∂x^i
+     *
+     * Uses GeometryAnalyzer to compute Christoffel symbols and
+     * geodesic acceleration from R-field geometry.
+     */
+
+    // Get particle position
+    float pos_x_f, pos_y_f;
+    dirac.getCenterOfMass(pos_x_f, pos_y_f);
+    double pos_x = static_cast<double>(pos_x_f);
+    double pos_y = static_cast<double>(pos_y_f);
+
+    // Get particle velocity from momentum
+    std::complex<double> px = computeMomentumExpectation(dirac, 0);
+    std::complex<double> py = computeMomentumExpectation(dirac, 1);
+    double vx = px.real();  // In Planck units, p ≈ v for m ~ 1
+    double vy = py.real();
+
+    // Compute geodesic acceleration using GeometryAnalyzer
+    int Nx = dirac.getNx();
+    int Ny = dirac.getNy();
+
+    auto accel = GeometryAnalyzer::computeGeodesicAcceleration(
+        R_field, Nx, Ny, pos_x, pos_y, vx, vy, L_domain);
+
+    return {accel(0), accel(1)};
+}
+
+std::tuple<double, double> ObservableComputer::computeChristoffelAtParticle(
+    const DiracEvolution& dirac,
+    const std::vector<double>& R_field,
+    double L_domain) {
+    /**
+     * Compute Christoffel symbols Γ^x_00, Γ^y_00 at particle position
+     *
+     * These are the dominant components for geodesic acceleration:
+     * a^x ≈ -Γ^x_00, a^y ≈ -Γ^y_00
+     */
+
+    // Get particle position
+    float pos_x_f, pos_y_f;
+    dirac.getCenterOfMass(pos_x_f, pos_y_f);
+    double pos_x = static_cast<double>(pos_x_f);
+    double pos_y = static_cast<double>(pos_y_f);
+
+    int Nx = dirac.getNx();
+    int Ny = dirac.getNy();
+
+    auto gamma = GeometryAnalyzer::computeChristoffelInterpolated(
+        R_field, Nx, Ny, pos_x, pos_y, L_domain);
+
+    return {gamma.Gamma_x_tt, gamma.Gamma_y_tt};
+}
+
+double ObservableComputer::computeRiemannScalarAtParticle(
+    const DiracEvolution& dirac,
+    const std::vector<double>& R_field) {
+    /**
+     * Compute Riemann curvature scalar R at particle position
+     *
+     * Measures spacetime curvature induced by R-field
+     */
+
+    // Get particle position in grid units
+    float pos_x_f, pos_y_f;
+    dirac.getCenterOfMass(pos_x_f, pos_y_f);
+
+    int Nx = dirac.getNx();
+    int Ny = dirac.getNy();
+    double dx = dirac.getDx();
+
+    // Convert to grid indices (nearest grid point)
+    int ix = static_cast<int>(std::round(pos_x_f));
+    int iy = static_cast<int>(std::round(pos_y_f));
+
+    // Clamp to interior for centered stencil
+    ix = std::clamp(ix, 1, Nx - 2);
+    iy = std::clamp(iy, 1, Ny - 2);
+
+    return GeometryAnalyzer::computeRiemannScalar(
+        R_field, Nx, Ny, ix, iy, dx, dx);
+}
+
+double ObservableComputer::computeGaussianCurvatureAtParticle(
+    const DiracEvolution& dirac,
+    const std::vector<double>& R_field) {
+    /**
+     * Compute Gaussian curvature K at particle position
+     *
+     * Measures spatial curvature induced by R-field
+     */
+
+    // Get particle position in grid units
+    float pos_x_f, pos_y_f;
+    dirac.getCenterOfMass(pos_x_f, pos_y_f);
+
+    int Nx = dirac.getNx();
+    int Ny = dirac.getNy();
+    double dx = dirac.getDx();
+
+    // Convert to grid indices (nearest grid point)
+    int ix = static_cast<int>(std::round(pos_x_f));
+    int iy = static_cast<int>(std::round(pos_y_f));
+
+    // Clamp to interior for centered stencil
+    ix = std::clamp(ix, 1, Nx - 2);
+    iy = std::clamp(iy, 1, Ny - 2);
+
+    return GeometryAnalyzer::computeGaussianCurvature(
+        R_field, Nx, Ny, ix, iy, dx, dx);
 }

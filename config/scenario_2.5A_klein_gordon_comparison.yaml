@@ -1,0 +1,61 @@
+test_name: "scenario_2.5A_klein_gordon_comparison"
+description: "Klein-Gordon vs Dirac comparison at high velocities (Phase 2.5A)"
+
+physics:
+  solver_type: "klein_gordon"  # Use Klein-Gordon solver (scalar field)
+  delta: 1.0                     # Mass gap parameter
+  coupling: 0.1                  # Kuramoto-field coupling
+  dt: 0.01                       # Time step
+  total_steps: 5000              # Total evolution steps (t_max = 50)
+  K: 1.0                         # Kuramoto coupling strength
+  damping: 0.1                   # Phase damping
+
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0                # Domain size in Planck lengths
+
+initial_conditions:
+  dirac:  # Note: also used for Klein-Gordon initialization
+    type: "boosted_gaussian"
+    x0_physical: 50.0            # Position in Planck lengths (grid-independent)
+    y0_physical: 50.0
+    sigma_physical: 3.0          # Width in Planck lengths
+    boost_vx: 0.7                # v = 0.7c (critical velocity from Phase 2.3)
+    boost_vy: 0.0
+    amplitude: 1.0
+
+  kuramoto:
+    phase_distribution: "uniform"    # Uniform background (no defects)
+    omega_distribution: "zero"       # Zero natural frequencies
+    uniform_phase: 0.0               # Constant phase = 0
+    R_background: 0.8                # Moderate synchronization
+
+operator_splitting:
+  enabled: true
+  substep_ratios: [10]           # N = 10 substeps
+
+validation:
+  scenario: "relativistic_mass"
+  # Note: Klein-Gordon conserves phase-space norm, not ||φ||²
+  # Expect ||φ||² to vary during evolution - this is correct physics
+  norm_tolerance: 0.50            # Not applicable for Klein-Gordon (different conserved quantity)
+  energy_tolerance: 1.0e-2        # 1% tolerance - energy should be well-conserved
+  gamma_tolerance: 0.05           # 5% error in gamma factor measurement
+  validate_initial_state: true
+  validate_final_state: true
+  verbose: true
+
+output:
+  directory: "output/scenario_2.5A_klein_gordon"
+  save_every: 50                 # Save observables every 50 steps
+  formats: ["csv"]
+  save_spatial_snapshots: true
+  snapshot_steps: [0, 1000, 2500, 5000]  # Save spatial fields at these steps
+
+analysis:
+  mode: "simulation"
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  compute_energy: true

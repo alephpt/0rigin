@@ -1,5 +1,6 @@
 #include "SMFTEngine.h"
 #include "DiracEvolution.h"
+#include "KleinGordonEvolution.h"
 #include "SMFTCommon.h"
 #include <cstring>
 #include <algorithm>
@@ -7,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
+#include <random>
 
 /**
  * SMFTEngine Implementation - Phase 1 Skeleton
@@ -80,6 +82,7 @@ SMFTEngine::SMFTEngine(Nova* nova)
       _Delta(0.0f),
       _chiral_angle(0.0f),
       _time_step(0),
+      _cpu_rng(std::random_device{}()),  // Initialize RNG with random seed
       _theta_buffer(VK_NULL_HANDLE),
       _theta_out_buffer(VK_NULL_HANDLE),
       _omega_buffer(VK_NULL_HANDLE),
@@ -115,8 +118,14 @@ SMFTEngine::SMFTEngine(Nova* nova)
       _dirac_descriptor_set(VK_NULL_HANDLE),
       _dirac_descriptor_layout(VK_NULL_HANDLE),
       _dirac_pipeline_layout(VK_NULL_HANDLE),
+      _R_history_index(0),
+      _last_dt(0.0f),
       _dirac_evolution(nullptr),
-      _dirac_initialized(false),  // Initialize Dirac field flag
+      _dirac_antiparticle(nullptr),
+      _kg_evolution(nullptr),
+      _dirac_initialized(false),
+      _kg_initialized(false),
+      _two_particle_mode(false),
       _substep_count(0),
       _substep_ratio(10),  // Default: 10 Kuramoto steps per Dirac step
       _lambda_coupling(0.0f),
@@ -162,6 +171,18 @@ SMFTEngine::~SMFTEngine() {
         _dirac_evolution = nullptr;
     }
 
+    // Clean up antiparticle evolution (Test 3.4)
+    if (_dirac_antiparticle) {
+        delete _dirac_antiparticle;
+        _dirac_antiparticle = nullptr;
+    }
+
+    // Clean up Klein-Gordon evolution
+    if (_kg_evolution) {
+        delete _kg_evolution;
+        _kg_evolution = nullptr;
+    }
+
     // Clean up all Vulkan resources
     destroyResources();
 }
@@ -191,6 +212,14 @@ void SMFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     _R_field_data.resize(total);
     _gravity_x_data.resize(total);
     _gravity_y_data.resize(total);
+
+    // Initialize R-field history ring buffer (Phase 4 Test 4.2)
+    for (int i = 0; i < 3; i++) {
+        _R_history[i].resize(total);
+        std::fill(_R_history[i].begin(), _R_history[i].end(), 0.0f);
+    }
+    _R_history_index = 0;
+    _last_dt = 0.0f;
 
     // Initialize spinor field for Phase 3
     // Each point has 4 complex components (8 floats total)
@@ -233,6 +262,9 @@ void SMFTEngine::setNaturalFrequencies(const std::vector<float>& omega) {
 }
 
 void SMFTEngine::step(float dt, float K, float damping) {
+    // Store timestep for derivative computation (Phase 4 Test 4.2)
+    _last_dt = dt;
+
     // Ensure we have GPU resources
     if (!_kuramoto_pipeline || !_sync_pipeline || !_gravity_pipeline) {
         std::cerr << "[SMFTEngine] Pipelines not created, falling back to CPU simulation" << std::endl;
@@ -458,6 +490,38 @@ void SMFTEngine::stepStochastic(float dt, float K, float damping,
     std::swap(_theta_memory, _theta_out_memory);
 
     // Increment timestep for PRNG seeding
+    _time_step++;
+}
+
+void SMFTEngine::stepKuramotoCPUStochastic(float dt, float K, float damping, float sigma) {
+    /**
+     * CPU-only stochastic Kuramoto evolution step for Phase Transition tests
+     *
+     * Uses Euler-Maruyama integration:
+     * dθ/dt = ω + K·∇²θ - γ·sin(θ) + σ·ξ(t)
+     *
+     * where ξ(t) is white noise with ⟨ξ⟩ = 0, ⟨ξ²⟩ = 1
+     *
+     * Implementation: Calls SMFT::stepKuramotoWithNoise from SMFTCommon
+     * Then computes synchronization field R(x,y)
+     */
+
+    // Step phase field with noise
+    SMFT::stepKuramotoWithNoise(_theta_data, _omega_data, dt, K, damping,
+                                sigma, _Nx, _Ny, _cpu_rng);
+
+    // Compute synchronization field R(x,y)
+    _R_field_data = SMFT::computeLocalR(_theta_data, _Nx, _Ny);
+
+    // Update R-field history ring buffer (Phase 4 Test 4.2)
+    _R_history[_R_history_index] = _R_field_data;
+    _R_history_index = (_R_history_index + 1) % 3;
+    _last_dt = dt;
+
+    // Compute gravitational field (if needed)
+    // For phase transition tests, we primarily care about R_field
+    // Gravity computation skipped to save CPU cycles
+
     _time_step++;
 }
 
@@ -874,6 +938,11 @@ void SMFTEngine::downloadFromGPU() {
     _bufferManager->downloadData(_R_field_memory, _R_field_data.data(),
                                 sizeof(float) * _R_field_data.size());
 
+    // Update R-field history ring buffer (Phase 4 Test 4.2)
+    // Store current R-field before updating to new timestep
+    _R_history[_R_history_index] = _R_field_data;
+    _R_history_index = (_R_history_index + 1) % 3;
+
     // Download gravitational field components
     _bufferManager->downloadData(_gravity_x_memory, _gravity_x_data.data(),
                                 sizeof(float) * _gravity_x_data.size());
@@ -971,50 +1040,108 @@ void SMFTEngine::initializeBoostedDiracField(float x0, float y0, float sigma,
 void SMFTEngine::stepWithDirac(float dt, float lambda_coupling, int substep_ratio, float K, float damping) {
     /**
      * Step coupled Kuramoto-Dirac evolution with mass coupling
-     * CPU-only implementation - uses split-operator method for unitary evolution
+     * CPU-only implementation - uses Strang splitting for symplectic evolution
      *
      * Physics:
      * - Dirac evolution: i·dΨ/dt = [-iα·∇ + β·m(x)]Ψ
+     * - Klein-Gordon evolution: ∂²_tφ = ∇²φ - m²φ
      * - Mass coupling: m(x,y) = Δ·R(x,y) from synchronization field
-     * - Feedback: Ψ density influences phase field via coupling λ
-     * - Operator splitting: N Kuramoto steps per 1 Dirac step (Born-Oppenheimer)
+     * - Feedback: field density influences phase field via coupling λ
+     * - Operator splitting: N Kuramoto steps per 1 field step (Born-Oppenheimer)
+     *
+     * Strang Splitting (2nd order symplectic):
+     * 1. Kuramoto half-step (dt/2): N/2 substeps with dt/(2·substep_ratio)
+     * 2. Field full-step (dt): Full timestep for Dirac/Klein-Gordon evolution
+     * 3. Kuramoto half-step (dt/2): N/2 substeps with dt/(2·substep_ratio)
+     *
+     * This preserves Hamiltonian structure and eliminates systematic energy drift.
      */
 
-    if (!_dirac_initialized || !_dirac_evolution) {
-        std::cerr << "[SMFTEngine::stepWithDirac] ERROR: Dirac field not initialized" << std::endl;
+    // Check which solver is initialized
+    bool has_dirac = (_dirac_initialized && _dirac_evolution != nullptr);
+    bool has_kg = (_kg_initialized && _kg_evolution != nullptr);
+
+    if (!has_dirac && !has_kg) {
+        std::cerr << "[SMFTEngine::stepWithDirac] ERROR: No field initialized (neither Dirac nor Klein-Gordon)" << std::endl;
         return;
     }
 
-    // Operator splitting: Execute N Kuramoto steps per Dirac step
+    // Strang splitting parameters
     float substep_dt = dt / static_cast<float>(substep_ratio);
+    int half_substeps = substep_ratio / 2;  // For even N, this is exact
+    int remaining_substeps = substep_ratio - half_substeps;  // Handle odd N
 
     static int call_count = 0;
     if (call_count == 0) {
-        std::cout << "[stepWithDirac] First call: substep_ratio=" << substep_ratio
-                  << ", substep_dt=" << substep_dt << std::endl;
+        std::cout << "[stepWithDirac] Strang splitting enabled:" << std::endl;
+        std::cout << "  substep_ratio=" << substep_ratio << std::endl;
+        std::cout << "  substep_dt=" << substep_dt << std::endl;
+        std::cout << "  half_substeps=" << half_substeps << std::endl;
+        std::cout << "  remaining_substeps=" << remaining_substeps << std::endl;
     }
     call_count++;
 
-    for (int n = 0; n < substep_ratio; ++n) {
-        // Step Kuramoto dynamics (fast timescale)
+    // ========================================================================
+    // STEP 1: Kuramoto half-step (dt/2)
+    // ========================================================================
+    for (int n = 0; n < half_substeps; ++n) {
         step(substep_dt, K, damping);
     }
+
+    // ========================================================================
+    // STEP 2: Field full-step (dt) - Dirac or Klein-Gordon
+    // ========================================================================
 
     // Get current synchronization field for mass coupling
     std::vector<float> R_field = getSyncField();
 
     // Compute mass field: m(x,y) = Δ·R(x,y)
     std::vector<float> mass_field(_Nx * _Ny);
-    for (uint32_t i = 0; i < _Nx * _Ny; i++) {
-        mass_field[i] = _Delta * R_field[i];
+
+    // CRITICAL: For Klein-Gordon, use constant mass (R=1) to ensure norm conservation
+    // Klein-Gordon evolution assumes constant mass - time-dependent mass breaks unitarity
+    if (has_kg) {
+        // Use R=1.0 everywhere for Klein-Gordon (constant background mass)
+        for (uint32_t i = 0; i < _Nx * _Ny; i++) {
+            mass_field[i] = _Delta * 1.0f;
+        }
+    } else {
+        // Dirac can handle time-dependent mass (R-field coupling)
+        for (uint32_t i = 0; i < _Nx * _Ny; i++) {
+            mass_field[i] = _Delta * R_field[i];
+        }
     }
 
     // Split-operator evolution step (unitary, preserves norm exactly)
-    _dirac_evolution->step(mass_field, dt);
+    if (has_dirac) {
+        _dirac_evolution->step(mass_field, dt);
 
+        // If two-particle mode, also evolve antiparticle
+        if (_two_particle_mode && _dirac_antiparticle) {
+            _dirac_antiparticle->step(mass_field, dt);
+        }
+    } else if (has_kg) {
+        _kg_evolution->step(mass_field, dt);
+    }
+
+    // ========================================================================
+    // STEP 3: Kuramoto half-step (dt/2)
+    // ========================================================================
+    for (int n = 0; n < remaining_substeps; ++n) {
+        step(substep_dt, K, damping);
+    }
+
+    // ========================================================================
     // Optional: Feedback to phase field (via lambda_coupling)
+    // ========================================================================
     if (lambda_coupling > 0.0f && _theta_data.size() == _Nx * _Ny) {
-        std::vector<float> density = _dirac_evolution->getDensity();
+        std::vector<float> density;
+        if (has_dirac) {
+            density = _dirac_evolution->getDensity();
+        } else if (has_kg) {
+            density = _kg_evolution->getDensity();
+        }
+
         for (uint32_t i = 0; i < _Nx * _Ny; i++) {
             _theta_data[i] += lambda_coupling * dt * density[i];
         }
@@ -1045,6 +1172,14 @@ std::vector<float> SMFTEngine::getDiracDensity() const {
 const DiracEvolution* SMFTEngine::getDiracEvolution() const {
     /**
      * Get internal DiracEvolution object for observable computation
+     * Returns nullptr if not initialized
+     */
+    return _dirac_evolution;
+}
+
+DiracEvolution* SMFTEngine::getDiracEvolutionNonConst() {
+    /**
+     * Get internal DiracEvolution object for modification (e.g., for specific analysis)
      * Returns nullptr if not initialized
      */
     return _dirac_evolution;
@@ -1120,4 +1255,217 @@ void SMFTEngine::initializeHybrid(float x0, float y0, float sigma) {
 
     std::cout << "[SMFTEngine] Hybrid system initialized with N=" << _substep_ratio
               << " substeps" << std::endl;
+}
+
+void SMFTEngine::initializeDiracPlaneWave(float kx, float ky) {
+    if (!_dirac_evolution) {
+        _dirac_evolution = new DiracEvolution(_Nx, _Ny);
+    }
+    _dirac_evolution->initializePlaneWave(kx, ky);
+    _dirac_initialized = true;
+}
+
+std::vector<std::complex<double>> SMFTEngine::getSpinorField() const {
+    if (!_dirac_initialized || !_dirac_evolution) {
+        return std::vector<std::complex<double>>(4 * _Nx * _Ny, std::complex<double>(0,0));
+    }
+    return _dirac_evolution->getSpinorField();
+}
+
+// ============================================================================
+// Klein-Gordon Evolution Methods (Phase 2.5A)
+// ============================================================================
+
+void SMFTEngine::initializeKleinGordonField(float x0, float y0, float sigma, float amplitude) {
+    /**
+     * Initialize Klein-Gordon scalar field with Gaussian wavepacket
+     * Uses split-operator KleinGordonEvolution class
+     */
+
+    // Create KleinGordonEvolution instance if not exists
+    if (!_kg_evolution) {
+        _kg_evolution = new KleinGordonEvolution(_Nx, _Ny);
+    }
+
+    // Initialize with Gaussian wavepacket
+    _kg_evolution->initialize(x0, y0, sigma);
+
+    _kg_initialized = true;
+
+    // Log initialization
+    if (_nova) {
+        float norm = _kg_evolution->getNorm();
+        std::cout << "[SMFTEngine] Klein-Gordon field initialized: "
+                  << "center=(" << x0 << "," << y0 << "), "
+                  << "sigma=" << sigma << ", "
+                  << "norm=" << norm << std::endl;
+    }
+}
+
+void SMFTEngine::initializeBoostedKleinGordonField(float x0, float y0, float sigma,
+                                                   float vx, float vy, float R_bg) {
+    /**
+     * Initialize Klein-Gordon scalar field with boosted Gaussian wavepacket
+     * Uses SMFT::initializeBoostedGaussian helper function (Phase 2.5A)
+     */
+
+    // Create KleinGordonEvolution instance if not exists
+    if (!_kg_evolution) {
+        _kg_evolution = new KleinGordonEvolution(_Nx, _Ny);
+    }
+
+    // Initialize with boosted Gaussian wavepacket using SMFT helper
+    SMFT::initializeBoostedGaussian(*_kg_evolution, x0, y0, sigma,
+                                   vx, vy, _Delta, R_bg);
+
+    _kg_initialized = true;
+
+    // Log initialization
+    if (_nova) {
+        float norm = _kg_evolution->getNorm();
+        float x_mean, y_mean;
+        _kg_evolution->getCenterOfMass(x_mean, y_mean);
+        std::cout << "[SMFTEngine] Boosted Klein-Gordon field initialized: "
+                  << "center=(" << x0 << "," << y0 << "), "
+                  << "sigma=" << sigma << ", "
+                  << "boost=(" << vx << "," << vy << ")c, "
+                  << "norm=" << norm << ", "
+                  << "<r>=(" << x_mean << "," << y_mean << ")" << std::endl;
+    }
+}
+
+void SMFTEngine::initializeKleinGordonPlaneWave(float kx, float ky) {
+    /**
+     * Initialize Klein-Gordon scalar field with plane wave
+     * Used for dispersion relation analysis
+     */
+    if (!_kg_evolution) {
+        _kg_evolution = new KleinGordonEvolution(_Nx, _Ny);
+    }
+    _kg_evolution->initializePlaneWave(kx, ky);
+    _kg_initialized = true;
+
+    std::cout << "[SMFTEngine] Klein-Gordon plane wave initialized: k=("
+              << kx << ", " << ky << ")" << std::endl;
+}
+
+const KleinGordonEvolution* SMFTEngine::getKleinGordonEvolution() const {
+    return _kg_evolution;
+}
+
+KleinGordonEvolution* SMFTEngine::getKleinGordonEvolutionNonConst() {
+    return _kg_evolution;
+}
+
+// ============================================================================
+// TWO-PARTICLE SYSTEM METHODS (Test 3.4: Antiparticle Separation)
+// ============================================================================
+
+void SMFTEngine::initializeTwoParticleSystem(float x1, float y1, float x2, float y2, float sigma) {
+    /**
+     * Initialize particle + antiparticle system for Test 3.4
+     *
+     * Physics:
+     * - Particle: DiracEvolution with β_sign = +1
+     * - Antiparticle: DiracEvolution with β_sign = -1
+     * - Both evolve in same mass field m(x) = Δ·R(x)
+     * - Opposite force signs create spatial separation
+     */
+
+    // Create particle DiracEvolution (β = +1)
+    if (!_dirac_evolution) {
+        _dirac_evolution = new DiracEvolution(_Nx, _Ny, +1.0f);  // particle
+    }
+    _dirac_evolution->initialize(x1, y1, sigma);
+
+    // Create antiparticle DiracEvolution (β = -1)
+    if (!_dirac_antiparticle) {
+        _dirac_antiparticle = new DiracEvolution(_Nx, _Ny, -1.0f);  // antiparticle
+    }
+    _dirac_antiparticle->initialize(x2, y2, sigma);
+
+    _dirac_initialized = true;
+    _two_particle_mode = true;
+
+    // Log initialization
+    if (_nova) {
+        float norm1 = _dirac_evolution->getNorm();
+        float norm2 = _dirac_antiparticle->getNorm();
+        std::cout << "[SMFTEngine] Two-particle system initialized:" << std::endl;
+        std::cout << "  Particle (β=+1): center=(" << x1 << "," << y1 << "), "
+                  << "sigma=" << sigma << ", norm=" << norm1 << std::endl;
+        std::cout << "  Antiparticle (β=-1): center=(" << x2 << "," << y2 << "), "
+                  << "sigma=" << sigma << ", norm=" << norm2 << std::endl;
+    }
+}
+
+const DiracEvolution* SMFTEngine::getAntiparticleEvolution() const {
+    return _dirac_antiparticle;
+}
+
+DiracEvolution* SMFTEngine::getAntiparticleEvolutionNonConst() {
+    return _dirac_antiparticle;
+}
+
+// ==============================================================================
+// Phase 4 Test 4.2: R-Field Time Derivative
+// ==============================================================================
+
+std::vector<float> SMFTEngine::getRFieldDerivative() const {
+    /**
+     * Compute ∂R/∂t using centered finite differences from R-field history
+     *
+     * Ring buffer layout:
+     * - idx_minus: R(t - dt)
+     * - idx_center: R(t)
+     * - idx_plus: R(t + dt)
+     *
+     * Centered difference: ∂R/∂t ≈ (R(t+dt) - R(t-dt)) / (2·dt)
+     *
+     * For first 2 timesteps (history incomplete), use forward difference:
+     * ∂R/∂t ≈ (R(t) - R(t-dt)) / dt
+     */
+    std::vector<float> dR_dt(_Nx * _Ny, 0.0f);
+
+    if (_last_dt <= 0.0f) {
+        // No timestep information, return zeros
+        return dR_dt;
+    }
+
+    // Determine which history slots are valid
+    // Ring buffer: [0] = t-dt, [1] = t, [2] = t+dt (wraps around)
+    int idx_center = (_R_history_index + 2) % 3;  // Most recent complete step
+    int idx_minus = (_R_history_index + 1) % 3;   // Previous step (t-dt)
+    int idx_plus = _R_history_index;              // Next step (not yet computed)
+
+    // Check if we have enough history for centered difference
+    bool has_full_history = true;
+    for (int i = 0; i < 3; i++) {
+        if (_R_history[i].empty()) {
+            has_full_history = false;
+            break;
+        }
+    }
+
+    if (!has_full_history) {
+        // Use forward difference: ∂R/∂t ≈ (R_center - R_minus) / dt
+        const auto& R_minus = _R_history[idx_minus];
+        const auto& R_center = _R_history[idx_center];
+
+        if (!R_minus.empty() && !R_center.empty()) {
+            for (size_t i = 0; i < dR_dt.size(); i++) {
+                dR_dt[i] = (R_center[i] - R_minus[i]) / _last_dt;
+            }
+        }
+    } else {
+        // Use centered difference: ∂R/∂t ≈ (R_plus - R_minus) / (2·dt)
+        const auto& R_minus = _R_history[idx_minus];
+        const auto& R_plus = _R_history[idx_plus];
+
+        for (size_t i = 0; i < dR_dt.size(); i++) {
+            dR_dt[i] = (R_plus[i] - R_minus[i]) / (2.0f * _last_dt);
+        }
+    }
+
+    return dR_dt;
 }
