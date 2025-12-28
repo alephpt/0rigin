@@ -1,7 +1,16 @@
 /**
  * EMFieldComputer.h
  *
- * Electromagnetic field extraction from Kuramoto phase field
+ * LOW-LEVEL ELECTROMAGNETIC FIELD EXTRACTION FROM KURAMOTO PHASE
+ *
+ * ARCHITECTURE NOTE:
+ *   This class provides ONLY low-level field computation from phase gradients.
+ *   For higher-level validation, observables, and Maxwell equation checking,
+ *   use EMObservables.h which builds on top of this class.
+ *
+ *   Layered Design:
+ *     EMFieldComputer (low-level)  → Field extraction from phase
+ *     EMObservables (high-level)   → Validation & analysis using EMFieldComputer
  *
  * Physics Foundation:
  *   Hypothesis: Kuramoto phase θ(x,y,t) encodes electromagnetic potential
@@ -38,9 +47,8 @@
  *   - Extract gauge potential A_μ from phase gradients
  *   - Compute field strengths E, B for minimal coupling
  *   - Measure field energy density ∫(E² + B²) dV
- *   - Validate Maxwell equations on discrete grid
- *   - Test if EM coupling explains particle dynamics
- *   - Extract effective fine structure constant α_eff = q²/(ħc)
+ *   - Compute Poynting vector (energy flux)
+ *   - Compute Lorentz force at grid points
  *
  * Usage Pattern:
  *   1. computeFromPhase() → computes potentials and fields in one call
@@ -48,7 +56,7 @@
  *   3. computeFieldEnergy() for energy analysis
  *   4. computeDiagnostics() for max/avg field statistics
  *   5. computePoyntingVector() for energy flux analysis
- *   6. computeChargeCurrent() for source term computation
+ *   6. computeLorentzForce() for force at grid point
  *
  * Example:
  *   ```cpp
@@ -67,11 +75,7 @@
  *   // Check Poynting vector (energy flux)
  *   auto poynting = EMFieldComputer::computePoyntingVector(fields, dx, dy);
  *
- *   // Validate Maxwell equations (with charge/current sources)
- *   Eigen::MatrixXd rho = ...; // charge density
- *   Eigen::MatrixXd J_x = ..., J_y = ...;
- *   bool is_valid = EMFieldComputer::validateMaxwellEquations(
- *       fields, rho, J_x, J_y, dx, dy);
+ *   // For validation & observables, use EMObservables.h
  *   ```
  */
 
@@ -187,37 +191,6 @@ public:
             S_x.setZero();
             S_y.setZero();
         }
-    };
-
-    /**
-     * Maxwell equation validation summary
-     *
-     * Contains residuals for each Maxwell equation showing how well
-     * the computed fields satisfy fundamental electromagnetic laws.
-     */
-    struct MaxwellValidation {
-        // RMS residuals (should be O(10^-2) for well-resolved fields)
-        double gauss_law_rms;       // |∇·E - 4πρ|_rms
-        double ampere_law_rms;      // |∇×B - (4π/c)J - (1/c)∂_t E|_rms
-        double faraday_law_rms;     // |∇×E + (1/c)∂_t B|_rms
-        double no_monopole_rms;     // |∇·B|_rms (should be ~ 0)
-        double coulomb_gauge_rms;   // |∇·A|_rms (constraint in Coulomb gauge)
-
-        // Peak residuals
-        double gauss_law_max;
-        double ampere_law_max;
-        double faraday_law_max;
-
-        // Overall quality metrics
-        bool all_equations_satisfied; // true if all RMS residuals < threshold
-        double overall_error;         // Weighted sum of residuals
-
-        MaxwellValidation()
-            : gauss_law_rms(0.0), ampere_law_rms(0.0), faraday_law_rms(0.0),
-              no_monopole_rms(0.0), coulomb_gauge_rms(0.0),
-              gauss_law_max(0.0), ampere_law_max(0.0), faraday_law_max(0.0),
-              all_equations_satisfied(false), overall_error(0.0)
-        {}
     };
 
     // ========================================================================
@@ -409,6 +382,10 @@ public:
      *   - Validation: Does EM coupling explain observed dynamics?
      *   - Discovery: Extract effective coupling strength α_eff
      *
+     * Note: For charge/current density computation from spinor fields,
+     *       use EMObservables::computeChargeDensity() and
+     *       EMObservables::computeCurrentDensity()
+     *
      * @param[in] fields           EMFields struct with E, B
      *
      * @param[in] charge_density   Charge density ρ at point (scalar)
@@ -429,56 +406,8 @@ public:
         const Eigen::Vector2d& current_density,
         int ix, int iy);
 
-    /**
-     * Compute charge density from matter field
-     *
-     * Physics:
-     *   For spinor field Ψ(r) = (ψ_1, ψ_2, ψ_3, ψ_4):
-     *   ρ(r) = Ψ†(r)Ψ(r) = Σ_{α=1}^4 |ψ_α(r)|²
-     *
-     * @param[in] spinor_field     4-component spinor [4 × N_points]
-     *                              Interleaved: [ψ_1, ψ_2, ψ_3, ψ_4, ...]
-     *
-     * @param[in] Nx, Ny           Grid dimensions
-     *
-     * @return Charge density ρ [Nx × Ny]
-     *
-     * Complexity: O(Nx × Ny)
-     */
-    static Eigen::MatrixXd computeChargeDensity(
-        const std::vector<std::complex<double>>& spinor_field,
-        int Nx, int Ny);
-
-    /**
-     * Compute current density from matter field
-     *
-     * Physics (Dirac equation):
-     *   J^μ = Ψ†γ^μ Ψ  (probability current / vector current)
-     *
-     * For 2D spatial part (α_x, α_y Pauli matrices):
-     *   J_x(r) = Re[Ψ†(r) α_x Ψ(r)]
-     *   J_y(r) = Re[Ψ†(r) α_y Ψ(r)]
-     *
-     * where α_x = [[0,1],[1,0]], α_y = [[0,-i],[i,0]] (Pauli matrices)
-     *
-     * @param[in] spinor_field     4-component spinor
-     *
-     * @param[in] Nx, Ny           Grid dimensions
-     *
-     * @param[out] J_x             Current density x-component [Nx × Ny]
-     *
-     * @param[out] J_y             Current density y-component [Nx × Ny]
-     *
-     * Complexity: O(Nx × Ny)
-     */
-    static void computeCurrentDensity(
-        const std::vector<std::complex<double>>& spinor_field,
-        int Nx, int Ny,
-        Eigen::MatrixXd& J_x,
-        Eigen::MatrixXd& J_y);
-
     // ========================================================================
-    // PUBLIC METHODS: VALIDATION & DIAGNOSTICS
+    // PUBLIC METHODS: DIAGNOSTICS
     // ========================================================================
 
     /**
@@ -494,138 +423,14 @@ public:
      *   - Detect vortex creation/annihilation
      *   - Quantify noise in potential extraction
      *
+     * Note: For Maxwell equation validation, energy conservation checks,
+     *       and fine structure constant extraction, use EMObservables class.
+     *
      * @param[in,out] fields       EMFields struct to update diagnostics
      *
      * Complexity: O(Nx × Ny) - single pass over all points
      */
     static void computeDiagnostics(EMFields& fields);
-
-    /**
-     * Validate Maxwell equations on discrete grid
-     *
-     * Physics:
-     *   ∇·E = 4πρ           (Gauss's law)
-     *   ∇·B = 0             (No monopoles - automatic in 2D)
-     *   ∇×E = -(1/c)∂_t B   (Faraday's law)
-     *   ∇×B = (4π/c)J + (1/c)∂_t E   (Ampere-Maxwell law)
-     *   ∇·A = 0             (Coulomb gauge constraint)
-     *
-     * Returns residuals showing how well computed fields satisfy laws.
-     * Small residuals (RMS < 0.01) indicate well-resolved physics.
-     *
-     * @param[in] fields           Current EM fields
-     *
-     * @param[in] fields_prev      Previous EM fields (for time derivatives)
-     *
-     * @param[in] charge_density   Charge density ρ [Nx × Ny]
-     *                              From spinor: ρ = Ψ†Ψ
-     *
-     * @param[in] current_x, current_y  Current density J [Nx × Ny]
-     *                              From spinor: J = Ψ†α Ψ
-     *
-     * @param[in] dx, dy           Grid spacing
-     *
-     * @param[in] dt               Timestep (for time derivatives)
-     *
-     * @return MaxwellValidation struct with residuals and quality metrics
-     *
-     * Complexity: O(Nx × Ny) - multiple passes (5 differential operators)
-     *
-     * Interpretation:
-     *   - gauss_law_rms ~ 10^-3: Good agreement with source term
-     *   - ampere_law_rms ~ 10^-2: Acceptable Ampere's law
-     *   - faraday_law_rms ~ 10^-2: Acceptable Faraday's law
-     *   - couloumb_gauge_rms ~ 0: Should be near zero (constraint)
-     *
-     * If residuals are large:
-     *     - Check grid resolution (dx too large?)
-     *     - Check timestep (dt too large?)
-     *     - Look for unresolved vortex cores
-     *     - May indicate numerical instability
-     */
-    static MaxwellValidation validateMaxwellEquations(
-        const EMFields& fields,
-        const EMFields& fields_prev,
-        const Eigen::MatrixXd& charge_density,
-        const Eigen::MatrixXd& current_x,
-        const Eigen::MatrixXd& current_y,
-        double dx, double dy, double dt);
-
-    /**
-     * Compute energy conservation check
-     *
-     * Physics (Poynting's theorem):
-     *   ∂u/∂t + ∇·S = -J·E
-     *
-     * where:
-     *   u = (E² + B²)/(8π) is field energy density
-     *   S = (1/(4π)) E×B is Poynting vector (energy flux)
-     *   J·E is power dissipation/work by charges
-     *
-     * LHS: Rate of field energy change + outward flux
-     * RHS: Work done by electromagnetic force on charges
-     *
-     * @param[in] fields_curr      EM fields at time t
-     *
-     * @param[in] fields_prev      EM fields at time t-dt
-     *
-     * @param[in] current_x, current_y  Current density J
-     *
-     * @param[in] E_prev_x, E_prev_y    Previous electric field
-     *
-     * @param[in] dt, dx, dy       Time and space steps
-     *
-     * @return RMS residual of Poynting's theorem
-     *         Should be small if energy conservation holds
-     *
-     * Complexity: O(Nx × Ny)
-     */
-    static double validateEnergyConservation(
-        const EMFields& fields_curr,
-        const EMFields& fields_prev,
-        const Eigen::MatrixXd& current_x,
-        const Eigen::MatrixXd& current_y,
-        const Eigen::MatrixXd& E_prev_x,
-        const Eigen::MatrixXd& E_prev_y,
-        double dt, double dx, double dy);
-
-    // ========================================================================
-    // PUBLIC METHODS: FINE STRUCTURE CONSTANT EXTRACTION
-    // ========================================================================
-
-    /**
-     * Extract effective fine structure constant from field coupling
-     *
-     * Physics:
-     *   Fine structure constant: α = e²/(ħc) in SI units
-     *   In natural units (ħ = c = 1): α = e²
-     *   Measured value: α ≈ 1/137
-     *
-     * Hypothesis:
-     *   EM coupling strength in SMFT encodes α_eff = effective fine structure
-     *   Can be measured from ratio of EM force to kinetic energy
-     *   Or from coupling strength in Dirac equation: ∂_t Ψ = (-iγ^μ A_μ) Ψ + ...
-     *
-     * Method:
-     *   α_eff ≈ |F_EM|² / (kinetic energy)  (order-of-magnitude estimate)
-     *   or: α_eff ≈ |E·B| / (particle energy)²
-     *
-     * @param[in] fields           EM fields with E, B computed
-     *
-     * @param[in] kinetic_energy   Average kinetic energy of matter field
-     *                              From Dirac: KE ~ p²/m for free particles
-     *
-     * @return Effective fine structure constant α_eff
-     *
-     * Notes:
-     *   - Purely experimental/exploratory at this stage
-     *   - Will be refined based on simulation results
-     *   - Look for consistency: α_eff should be ~constant across runs
-     *   - If α_eff ≈ 1/137: potential deep physics discovered!
-     */
-    static double computeEffectiveAlpha(
-        const EMFields& fields,
-        double kinetic_energy);
 
     // ========================================================================
     // PRIVATE METHODS: NUMERICAL UTILITIES
@@ -682,81 +487,5 @@ private:
         const Eigen::MatrixXd& field,
         double dx_or_dy,
         int direction);
-
-    /**
-     * Compute divergence of vector field with periodic boundaries
-     *
-     * Physics:
-     *   ∇·F = ∂_x F_x + ∂_y F_y
-     *
-     * Uses centered finite differences on both components.
-     *
-     * @param[in] F_x, F_y        Vector field components [Nx × Ny]
-     *
-     * @param[in] dx, dy          Grid spacing
-     *
-     * @return Divergence field ∇·F [Nx × Ny]
-     *
-     * Complexity: O(Nx × Ny)
-     */
-    static Eigen::MatrixXd computeDivergence(
-        const Eigen::MatrixXd& F_x,
-        const Eigen::MatrixXd& F_y,
-        double dx, double dy);
-
-    /**
-     * Compute curl z-component (2D only)
-     *
-     * Physics:
-     *   (∇×F)_z = ∂_x F_y - ∂_y F_x
-     *
-     * In 2D, only z-component survives; x,y components are zero.
-     *
-     * @param[in] F_x, F_y        Vector field components [Nx × Ny]
-     *
-     * @param[in] dx, dy          Grid spacing
-     *
-     * @return Curl z-component (∇×F)_z [Nx × Ny]
-     *
-     * Complexity: O(Nx × Ny)
-     */
-    static Eigen::MatrixXd computeCurl(
-        const Eigen::MatrixXd& F_x,
-        const Eigen::MatrixXd& F_y,
-        double dx, double dy);
-
-    /**
-     * Compute RMS (root-mean-square) of field
-     *
-     * RMS(f) = √(<f²>) = √(Σ_i |f_i|² / N)
-     *
-     * Used for error metrics (residuals of Maxwell equations).
-     *
-     * @param[in] field            Field values [Nx × Ny]
-     *
-     * @return RMS = sqrt(<field²>)
-     *
-     * Complexity: O(Nx × Ny)
-     */
-    static double computeRMS(const Eigen::MatrixXd& field);
-
-    /**
-     * Compute Pearson correlation coefficient
-     *
-     * Physics:
-     *   ρ(A,B) = <(A - <A>)(B - <B>)> / (σ_A σ_B)
-     *   Range: [-1, +1]
-     *
-     * Used for comparing predicted vs observed forces.
-     *
-     * @param[in] field_A, field_B  Fields to correlate [Nx × Ny]
-     *
-     * @return Correlation ρ ∈ [-1, 1]
-     *
-     * Complexity: O(Nx × Ny)
-     */
-    static double computeCorrelation(
-        const Eigen::MatrixXd& field_A,
-        const Eigen::MatrixXd& field_B);
 
 }; // class EMFieldComputer
