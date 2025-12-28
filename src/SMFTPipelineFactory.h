@@ -97,6 +97,36 @@ public:
                                           VkPipelineLayout pipelineLayout);
 
     /**
+     * Create EM potentials pipeline (Phase 5 - Sprint 3)
+     * Computes A_μ = ∂_μ θ from Kuramoto phase field
+     * @param shaderPath Path to computeEMPotentials.comp.spv shader
+     * @param pipelineLayout Pre-created pipeline layout
+     * @return Created pipeline or VK_NULL_HANDLE on failure
+     */
+    VkPipeline createEMPotentialsPipeline(const std::string& shaderPath,
+                                         VkPipelineLayout pipelineLayout);
+
+    /**
+     * Create EM field strengths pipeline (Phase 5 - Sprint 3)
+     * Computes E, B from potentials A_μ
+     * @param shaderPath Path to computeFieldStrengths.comp.spv shader
+     * @param pipelineLayout Pre-created pipeline layout
+     * @return Created pipeline or VK_NULL_HANDLE on failure
+     */
+    VkPipeline createEMFieldStrengthsPipeline(const std::string& shaderPath,
+                                              VkPipelineLayout pipelineLayout);
+
+    /**
+     * Create EM reduce energy pipeline (Phase 5 - Sprint 3)
+     * Reduces E, B fields to scalar energy E_field = ∫(E² + B²)/2 dA
+     * @param shaderPath Path to reduceFieldEnergy.comp.spv shader
+     * @param pipelineLayout Pre-created pipeline layout
+     * @return Created pipeline or VK_NULL_HANDLE on failure
+     */
+    VkPipeline createEMReduceEnergyPipeline(const std::string& shaderPath,
+                                           VkPipelineLayout pipelineLayout);
+
+    /**
      * Destroy a specific pipeline
      * @param pipeline Pipeline to destroy
      */

@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 #include <random>
+#include <chrono>
 
 /**
  * SMFTEngine Implementation - Phase 1 Skeleton
@@ -239,6 +240,12 @@ void SMFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     // Create GPU resources
     createBuffers();
     createPipelines();
+
+    // Initialize EM field GPU resources if EM coupling is enabled
+    if (_em_coupling_enabled && _nova && _nova->initialized) {
+        initEMBuffers();
+        createEMPipelines();
+    }
 
     // Upload initial data to GPU
     uploadToGPU();
@@ -967,6 +974,9 @@ void SMFTEngine::destroyResources() {
     if (_nova && _nova->_architect && _nova->_architect->logical_device) {
         vkDeviceWaitIdle(_nova->_architect->logical_device);
 
+        // Clean up EM-specific resources before component managers
+        cleanupEMResources();
+
         // Component managers will handle cleanup automatically via their destructors:
         // - SMFTPipelineFactory destroys pipelines and layouts
         // - SMFTBufferManager destroys buffers and frees memory
@@ -1127,34 +1137,77 @@ void SMFTEngine::stepWithDirac(float dt, float lambda_coupling, int substep_rati
             _theta_previous = _theta_data;
         }
 
-        // Compute EM fields from phase: A_μ = ∂_μ θ, F_μν from A_μ
-        double dx = 1.0;  // Unit grid spacing in natural units
-        double dy = 1.0;
-        auto em_fields = EMFieldComputer::computeFromPhase(
-            _theta_data,
-            _theta_previous,
-            static_cast<int>(_Nx),
-            static_cast<int>(_Ny),
-            dx, dy, static_cast<double>(dt)
-        );
+        // Try GPU path first, fallback to CPU if GPU unavailable
+        bool gpu_em_success = false;
 
-        // Extract fields and convert to std::vector<float>
-        _phi_data.resize(_Nx * _Ny);
-        _A_x_data.resize(_Nx * _Ny);
-        _A_y_data.resize(_Nx * _Ny);
-        _E_x_data.resize(_Nx * _Ny);
-        _E_y_data.resize(_Nx * _Ny);
-        _B_z_data.resize(_Nx * _Ny);
+        if (_em_potentials_pipeline != VK_NULL_HANDLE && _bufferManager && _compute) {
+            // GPU PATH: Upload theta data and compute EM fields on GPU
+            try {
+                // Upload current theta to GPU
+                _bufferManager->uploadData(_theta_memory, _theta_data.data(),
+                                          _theta_data.size() * sizeof(float));
 
-        for (uint32_t i = 0; i < _Nx; i++) {
-            for (uint32_t j = 0; j < _Ny; j++) {
-                int idx = j * _Nx + i;  // Row-major indexing
-                _phi_data[idx] = static_cast<float>(em_fields.phi(i, j));
-                _A_x_data[idx] = static_cast<float>(em_fields.A_x(i, j));
-                _A_y_data[idx] = static_cast<float>(em_fields.A_y(i, j));
-                _E_x_data[idx] = static_cast<float>(em_fields.E_x(i, j));
-                _E_y_data[idx] = static_cast<float>(em_fields.E_y(i, j));
-                _B_z_data[idx] = static_cast<float>(em_fields.B_z(i, j));
+                // Upload previous theta for time derivatives
+                _bufferManager->uploadData(_theta_previous_memory, _theta_previous.data(),
+                                          _theta_previous.size() * sizeof(float));
+
+                // Execute GPU EM computation
+                computeEMFieldsGPU();
+
+                // Download results from GPU
+                _phi_data.resize(_Nx * _Ny);
+                _A_x_data.resize(_Nx * _Ny);
+                _A_y_data.resize(_Nx * _Ny);
+                _E_x_data.resize(_Nx * _Ny);
+                _E_y_data.resize(_Nx * _Ny);
+                _B_z_data.resize(_Nx * _Ny);
+
+                _bufferManager->downloadData(_phi_memory, _phi_data.data(), _phi_data.size() * sizeof(float));
+                _bufferManager->downloadData(_A_x_memory, _A_x_data.data(), _A_x_data.size() * sizeof(float));
+                _bufferManager->downloadData(_A_y_memory, _A_y_data.data(), _A_y_data.size() * sizeof(float));
+                _bufferManager->downloadData(_E_x_memory, _E_x_data.data(), _E_x_data.size() * sizeof(float));
+                _bufferManager->downloadData(_E_y_memory, _E_y_data.data(), _E_y_data.size() * sizeof(float));
+                _bufferManager->downloadData(_B_z_memory, _B_z_data.data(), _B_z_data.size() * sizeof(float));
+
+                gpu_em_success = true;
+
+            } catch (const std::exception& e) {
+                std::cerr << "[SMFTEngine::stepWithDirac] GPU EM computation failed: " << e.what() << std::endl;
+                std::cerr << "  Falling back to CPU EM computation" << std::endl;
+                gpu_em_success = false;
+            }
+        }
+
+        // CPU FALLBACK: Compute EM fields on CPU if GPU unavailable or failed
+        if (!gpu_em_success) {
+            double dx = 1.0;  // Unit grid spacing in natural units
+            double dy = 1.0;
+            auto em_fields = EMFieldComputer::computeFromPhase(
+                _theta_data,
+                _theta_previous,
+                static_cast<int>(_Nx),
+                static_cast<int>(_Ny),
+                dx, dy, static_cast<double>(dt)
+            );
+
+            // Extract fields and convert to std::vector<float>
+            _phi_data.resize(_Nx * _Ny);
+            _A_x_data.resize(_Nx * _Ny);
+            _A_y_data.resize(_Nx * _Ny);
+            _E_x_data.resize(_Nx * _Ny);
+            _E_y_data.resize(_Nx * _Ny);
+            _B_z_data.resize(_Nx * _Ny);
+
+            for (uint32_t i = 0; i < _Nx; i++) {
+                for (uint32_t j = 0; j < _Ny; j++) {
+                    int idx = j * _Nx + i;  // Row-major indexing
+                    _phi_data[idx] = static_cast<float>(em_fields.phi(i, j));
+                    _A_x_data[idx] = static_cast<float>(em_fields.A_x(i, j));
+                    _A_y_data[idx] = static_cast<float>(em_fields.A_y(i, j));
+                    _E_x_data[idx] = static_cast<float>(em_fields.E_x(i, j));
+                    _E_y_data[idx] = static_cast<float>(em_fields.E_y(i, j));
+                    _B_z_data[idx] = static_cast<float>(em_fields.B_z(i, j));
+                }
             }
         }
 
@@ -1529,4 +1582,444 @@ std::vector<float> SMFTEngine::getRFieldDerivative() const {
     }
 
     return dR_dt;
+}
+
+// ============================================================================
+// EM FIELD GPU COMPUTATION (Phase 5 - Sprint 3 Step 4)
+// ============================================================================
+
+void SMFTEngine::initEMBuffers() {
+    /**
+     * Initialize GPU buffers for EM field computation
+     * Allocates device-local storage for field data and host-visible buffers for readback
+     */
+    if (!_nova || !_bufferManager) {
+        std::cerr << "[SMFTEngine::initEMBuffers] ERROR: Nova or BufferManager not initialized" << std::endl;
+        return;
+    }
+
+    size_t field_size = _Nx * _Ny * sizeof(float);
+
+    try {
+        // Allocate field buffers (DEVICE_LOCAL for GPU computation)
+        auto phi_pair = _bufferManager->createStorageBuffer(field_size);
+        _phi_buffer = phi_pair.first;
+        _phi_memory = phi_pair.second;
+
+        auto A_x_pair = _bufferManager->createStorageBuffer(field_size);
+        _A_x_buffer = A_x_pair.first;
+        _A_x_memory = A_x_pair.second;
+
+        auto A_y_pair = _bufferManager->createStorageBuffer(field_size);
+        _A_y_buffer = A_y_pair.first;
+        _A_y_memory = A_y_pair.second;
+
+        auto E_x_pair = _bufferManager->createStorageBuffer(field_size);
+        _E_x_buffer = E_x_pair.first;
+        _E_x_memory = E_x_pair.second;
+
+        auto E_y_pair = _bufferManager->createStorageBuffer(field_size);
+        _E_y_buffer = E_y_pair.first;
+        _E_y_memory = E_y_pair.second;
+
+        auto B_z_pair = _bufferManager->createStorageBuffer(field_size);
+        _B_z_buffer = B_z_pair.first;
+        _B_z_memory = B_z_pair.second;
+
+        // Allocate theta_previous buffer for time derivatives
+        auto theta_prev_pair = _bufferManager->createStorageBuffer(field_size);
+        _theta_previous_buffer = theta_prev_pair.first;
+        _theta_previous_memory = theta_prev_pair.second;
+
+        // Allocate energy buffer (single float, HOST_VISIBLE for readback)
+        // Note: createStorageBuffer creates DEVICE_LOCAL by default
+        // For readback, we'll use downloadData which handles staging
+        auto energy_pair = _bufferManager->createStorageBuffer(sizeof(float));
+        _em_energy_buffer = energy_pair.first;
+        _em_energy_memory = energy_pair.second;
+
+        // Initialize energy buffer to 0
+        float zero = 0.0f;
+        _bufferManager->uploadData(_em_energy_memory, &zero, sizeof(float));
+
+        // Allocate params buffer (64 bytes uniform, HOST_VISIBLE for updates)
+        auto params_pair = _bufferManager->createStorageBuffer(64);
+        _em_params_buffer = params_pair.first;
+        _em_params_memory = params_pair.second;
+
+        std::cout << "[SMFTEngine] EM field GPU buffers initialized ("
+                  << (field_size / 1024) << " KB per field)" << std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "[SMFTEngine::initEMBuffers] Failed to create EM buffers: " << e.what() << std::endl;
+        std::cerr << "  Falling back to CPU EM computation" << std::endl;
+        // Mark EM GPU as unavailable (field computation will use CPU fallback)
+        _em_potentials_pipeline = VK_NULL_HANDLE;
+    }
+}
+
+void SMFTEngine::createEMPipelines() {
+    /**
+     * Create GPU compute pipelines for EM field computation
+     * Pipelines: 1) computeEMPotentials, 2) computeFieldStrengths, 3) reduceFieldEnergy
+     */
+    if (!_nova || !_nova->initialized) {
+        std::cerr << "[SMFTEngine::createEMPipelines] ERROR: Nova not initialized" << std::endl;
+        return;
+    }
+
+    if (_phi_buffer == VK_NULL_HANDLE || _theta_buffer == VK_NULL_HANDLE) {
+        std::cerr << "[SMFTEngine::createEMPipelines] ERROR: EM buffers not initialized, skipping pipeline creation" << std::endl;
+        return;
+    }
+
+    try {
+        VkDevice device = _nova->_architect->logical_device;
+
+        // ========================================================================
+        // Pipeline 1: computeEMPotentials (θ → A_μ)
+        // ========================================================================
+        {
+            // Create descriptor set layout
+            std::vector<VkDescriptorSetLayoutBinding> bindings(6);
+            bindings[0] = {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // theta_current
+            bindings[1] = {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // theta_previous
+            bindings[2] = {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // phi
+            bindings[3] = {3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // A_x
+            bindings[4] = {4, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // A_y
+            bindings[5] = {5, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // params
+
+            _em_potentials_desc_layout = _descriptorManager->createDescriptorSetLayout(bindings);
+
+            // Create pipeline layout
+            VkPipelineLayoutCreateInfo layoutInfo{};
+            layoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+            layoutInfo.setLayoutCount = 1;
+            layoutInfo.pSetLayouts = &_em_potentials_desc_layout;
+            layoutInfo.pushConstantRangeCount = 0;
+
+            if (vkCreatePipelineLayout(device, &layoutInfo, nullptr, &_em_potentials_layout) != VK_SUCCESS) {
+                throw std::runtime_error("Failed to create EM potentials pipeline layout");
+            }
+
+            // Load shader and create pipeline
+            _em_potentials_pipeline = _pipelineFactory->createEMPotentialsPipeline(
+                "shaders/smft/computeEMPotentials.comp.spv",
+                _em_potentials_layout
+            );
+
+            if (_em_potentials_pipeline == VK_NULL_HANDLE) {
+                throw std::runtime_error("Failed to create EM potentials compute pipeline");
+            }
+
+            // Allocate and update descriptor set
+            _em_potentials_desc_set = _descriptorManager->allocateDescriptorSet(_descriptor_pool, _em_potentials_desc_layout);
+
+            VkDescriptorBufferInfo bufferInfos[6] = {
+                {_theta_buffer, 0, VK_WHOLE_SIZE},
+                {_theta_previous_buffer, 0, VK_WHOLE_SIZE},
+                {_phi_buffer, 0, VK_WHOLE_SIZE},
+                {_A_x_buffer, 0, VK_WHOLE_SIZE},
+                {_A_y_buffer, 0, VK_WHOLE_SIZE},
+                {_em_params_buffer, 0, VK_WHOLE_SIZE}
+            };
+
+            std::vector<VkWriteDescriptorSet> writes(6);
+            for (int i = 0; i < 6; i++) {
+                writes[i].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+                writes[i].dstSet = _em_potentials_desc_set;
+                writes[i].dstBinding = i;
+                writes[i].dstArrayElement = 0;
+                writes[i].descriptorCount = 1;
+                writes[i].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+                writes[i].pBufferInfo = &bufferInfos[i];
+            }
+
+            vkUpdateDescriptorSets(device, writes.size(), writes.data(), 0, nullptr);
+        }
+
+        // ========================================================================
+        // Pipeline 2: computeFieldStrengths (A_μ → E, B)
+        // ========================================================================
+        {
+            std::vector<VkDescriptorSetLayoutBinding> bindings(6);
+            bindings[0] = {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // phi
+            bindings[1] = {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // A_x
+            bindings[2] = {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // A_y
+            bindings[3] = {3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // E_x
+            bindings[4] = {4, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // E_y
+            bindings[5] = {5, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // B_z
+
+            _em_field_strengths_desc_layout = _descriptorManager->createDescriptorSetLayout(bindings);
+
+            VkPipelineLayoutCreateInfo layoutInfo{};
+            layoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+            layoutInfo.setLayoutCount = 1;
+            layoutInfo.pSetLayouts = &_em_field_strengths_desc_layout;
+
+            if (vkCreatePipelineLayout(device, &layoutInfo, nullptr, &_em_field_strengths_layout) != VK_SUCCESS) {
+                throw std::runtime_error("Failed to create field strengths pipeline layout");
+            }
+
+            _em_field_strengths_pipeline = _pipelineFactory->createEMFieldStrengthsPipeline(
+                "shaders/smft/computeFieldStrengths.comp.spv",
+                _em_field_strengths_layout
+            );
+
+            if (_em_field_strengths_pipeline == VK_NULL_HANDLE) {
+                throw std::runtime_error("Failed to create field strengths pipeline");
+            }
+
+            _em_field_strengths_desc_set = _descriptorManager->allocateDescriptorSet(_descriptor_pool, _em_field_strengths_desc_layout);
+
+            VkDescriptorBufferInfo bufferInfos[6] = {
+                {_phi_buffer, 0, VK_WHOLE_SIZE},
+                {_A_x_buffer, 0, VK_WHOLE_SIZE},
+                {_A_y_buffer, 0, VK_WHOLE_SIZE},
+                {_E_x_buffer, 0, VK_WHOLE_SIZE},
+                {_E_y_buffer, 0, VK_WHOLE_SIZE},
+                {_B_z_buffer, 0, VK_WHOLE_SIZE}
+            };
+
+            std::vector<VkWriteDescriptorSet> writes(6);
+            for (int i = 0; i < 6; i++) {
+                writes[i].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+                writes[i].dstSet = _em_field_strengths_desc_set;
+                writes[i].dstBinding = i;
+                writes[i].dstArrayElement = 0;
+                writes[i].descriptorCount = 1;
+                writes[i].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+                writes[i].pBufferInfo = &bufferInfos[i];
+            }
+
+            vkUpdateDescriptorSets(device, writes.size(), writes.data(), 0, nullptr);
+        }
+
+        // ========================================================================
+        // Pipeline 3: reduceFieldEnergy (E, B → scalar energy)
+        // ========================================================================
+        {
+            std::vector<VkDescriptorSetLayoutBinding> bindings(4);
+            bindings[0] = {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // E_x
+            bindings[1] = {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // E_y
+            bindings[2] = {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // B_z
+            bindings[3] = {3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // energy_out
+
+            _em_reduce_energy_desc_layout = _descriptorManager->createDescriptorSetLayout(bindings);
+
+            VkPipelineLayoutCreateInfo layoutInfo{};
+            layoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+            layoutInfo.setLayoutCount = 1;
+            layoutInfo.pSetLayouts = &_em_reduce_energy_desc_layout;
+
+            if (vkCreatePipelineLayout(device, &layoutInfo, nullptr, &_em_reduce_energy_layout) != VK_SUCCESS) {
+                throw std::runtime_error("Failed to create reduce energy pipeline layout");
+            }
+
+            _em_reduce_energy_pipeline = _pipelineFactory->createEMReduceEnergyPipeline(
+                "shaders/smft/reduceFieldEnergy.comp.spv",
+                _em_reduce_energy_layout
+            );
+
+            if (_em_reduce_energy_pipeline == VK_NULL_HANDLE) {
+                throw std::runtime_error("Failed to create reduce energy pipeline");
+            }
+
+            _em_reduce_energy_desc_set = _descriptorManager->allocateDescriptorSet(_descriptor_pool, _em_reduce_energy_desc_layout);
+
+            VkDescriptorBufferInfo bufferInfos[4] = {
+                {_E_x_buffer, 0, VK_WHOLE_SIZE},
+                {_E_y_buffer, 0, VK_WHOLE_SIZE},
+                {_B_z_buffer, 0, VK_WHOLE_SIZE},
+                {_em_energy_buffer, 0, VK_WHOLE_SIZE}
+            };
+
+            std::vector<VkWriteDescriptorSet> writes(4);
+            for (int i = 0; i < 4; i++) {
+                writes[i].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+                writes[i].dstSet = _em_reduce_energy_desc_set;
+                writes[i].dstBinding = i;
+                writes[i].dstArrayElement = 0;
+                writes[i].descriptorCount = 1;
+                writes[i].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+                writes[i].pBufferInfo = &bufferInfos[i];
+            }
+
+            vkUpdateDescriptorSets(device, writes.size(), writes.data(), 0, nullptr);
+        }
+
+        std::cout << "[SMFTEngine] EM field GPU pipelines created successfully" << std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "[SMFTEngine::createEMPipelines] Failed to create EM pipelines: " << e.what() << std::endl;
+        std::cerr << "  Falling back to CPU EM computation" << std::endl;
+        _em_potentials_pipeline = VK_NULL_HANDLE;
+    }
+}
+
+void SMFTEngine::computeEMFieldsGPU() {
+    /**
+     * Execute GPU EM field computation pipeline
+     * Dispatch sequence: potentials → field strengths → energy reduction
+     */
+    if (_em_potentials_pipeline == VK_NULL_HANDLE || !_compute) {
+        return;  // GPU EM not available, caller will use CPU fallback
+    }
+
+    // Performance timing (Step 5 Test 2)
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    // Update uniform params (Nx, Ny, dx, dy, dt)
+    struct EMParams {
+        uint32_t Nx, Ny;
+        float dx, dy, dt;
+        float padding[11];  // Pad to 64 bytes for alignment
+    } params;
+
+    params.Nx = _Nx;
+    params.Ny = _Ny;
+    params.dx = 1.0f;  // Grid spacing in natural units
+    params.dy = 1.0f;
+    params.dt = 0.01f;  // Will be overwritten by actual dt during stepWithDirac
+    std::memset(params.padding, 0, sizeof(params.padding));
+
+    _bufferManager->uploadData(_em_params_memory, &params, sizeof(EMParams));
+
+    // Reset energy buffer to 0 before accumulation
+    float zero = 0.0f;
+    _bufferManager->uploadData(_em_energy_memory, &zero, sizeof(float));
+
+    // Calculate workgroup counts (16x16 local size)
+    uint32_t num_groups_x = (_Nx + 15) / 16;
+    uint32_t num_groups_y = (_Ny + 15) / 16;
+
+    // Begin compute batch
+    if (!_compute->beginBatch()) {
+        std::cerr << "[SMFTEngine::computeEMFieldsGPU] Failed to begin compute batch" << std::endl;
+        return;
+    }
+
+    // Kernel 1: Compute A_μ = ∂_μ θ (potentials from phase gradients)
+    _compute->dispatchEMPotentials(
+        _em_potentials_pipeline,
+        _em_potentials_layout,
+        _em_potentials_desc_set,
+        nullptr, 0,  // No push constants
+        num_groups_x, num_groups_y
+    );
+
+    _compute->insertMemoryBarrier();
+
+    // Kernel 2: Compute E, B from A_μ (field strengths from potentials)
+    _compute->dispatchEMFieldStrengths(
+        _em_field_strengths_pipeline,
+        _em_field_strengths_layout,
+        _em_field_strengths_desc_set,
+        nullptr, 0,
+        num_groups_x, num_groups_y
+    );
+
+    _compute->insertMemoryBarrier();
+
+    // Kernel 3: Reduce to energy scalar E_field = ∫(E² + B²)/2 dA
+    uint32_t total_elements = _Nx * _Ny;
+    uint32_t num_groups_1d = (total_elements + 255) / 256;
+
+    _compute->dispatchEMReduceEnergy(
+        _em_reduce_energy_pipeline,
+        _em_reduce_energy_layout,
+        _em_reduce_energy_desc_set,
+        nullptr, 0,
+        num_groups_1d, 1
+    );
+
+    // Submit and wait for completion
+    if (!_compute->submitBatch(true)) {
+        std::cerr << "[SMFTEngine::computeEMFieldsGPU] Failed to submit compute batch" << std::endl;
+    }
+
+    // Performance timing report (Step 5 Test 2)
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration_us = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+    static int call_count = 0;
+    static long total_us = 0;
+    call_count++;
+    total_us += duration_us;
+    if (call_count == 1 || call_count % 50 == 0) {
+        std::cout << "[GPU EM Compute] " << call_count << " calls | Last: " << duration_us << " μs | Avg: "
+                  << (total_us / call_count) << " μs | Grid: " << _Nx << "×" << _Ny << std::endl;
+    }
+}
+
+float SMFTEngine::downloadEMEnergy() {
+    /**
+     * Download EM field energy from GPU
+     * Returns total field energy: E_field = ∫(E² + B²)/2 dA
+     */
+    if (_em_energy_buffer == VK_NULL_HANDLE || !_bufferManager) {
+        return 0.0f;
+    }
+
+    float energy = 0.0f;
+    _bufferManager->downloadData(_em_energy_memory, &energy, sizeof(float));
+    return energy;
+}
+
+void SMFTEngine::cleanupEMResources() {
+    /**
+     * Cleanup EM-specific Vulkan resources
+     * Called by destroyResources()
+     */
+    if (!_nova || !_nova->_architect) {
+        return;
+    }
+
+    VkDevice device = _nova->_architect->logical_device;
+    if (device == VK_NULL_HANDLE) {
+        return;
+    }
+
+    // Destroy pipelines
+    if (_em_potentials_pipeline != VK_NULL_HANDLE) {
+        vkDestroyPipeline(device, _em_potentials_pipeline, nullptr);
+        _em_potentials_pipeline = VK_NULL_HANDLE;
+    }
+    if (_em_field_strengths_pipeline != VK_NULL_HANDLE) {
+        vkDestroyPipeline(device, _em_field_strengths_pipeline, nullptr);
+        _em_field_strengths_pipeline = VK_NULL_HANDLE;
+    }
+    if (_em_reduce_energy_pipeline != VK_NULL_HANDLE) {
+        vkDestroyPipeline(device, _em_reduce_energy_pipeline, nullptr);
+        _em_reduce_energy_pipeline = VK_NULL_HANDLE;
+    }
+
+    // Destroy pipeline layouts
+    if (_em_potentials_layout != VK_NULL_HANDLE) {
+        vkDestroyPipelineLayout(device, _em_potentials_layout, nullptr);
+        _em_potentials_layout = VK_NULL_HANDLE;
+    }
+    if (_em_field_strengths_layout != VK_NULL_HANDLE) {
+        vkDestroyPipelineLayout(device, _em_field_strengths_layout, nullptr);
+        _em_field_strengths_layout = VK_NULL_HANDLE;
+    }
+    if (_em_reduce_energy_layout != VK_NULL_HANDLE) {
+        vkDestroyPipelineLayout(device, _em_reduce_energy_layout, nullptr);
+        _em_reduce_energy_layout = VK_NULL_HANDLE;
+    }
+
+    // Destroy descriptor set layouts
+    if (_em_potentials_desc_layout != VK_NULL_HANDLE) {
+        vkDestroyDescriptorSetLayout(device, _em_potentials_desc_layout, nullptr);
+        _em_potentials_desc_layout = VK_NULL_HANDLE;
+    }
+    if (_em_field_strengths_desc_layout != VK_NULL_HANDLE) {
+        vkDestroyDescriptorSetLayout(device, _em_field_strengths_desc_layout, nullptr);
+        _em_field_strengths_desc_layout = VK_NULL_HANDLE;
+    }
+    if (_em_reduce_energy_desc_layout != VK_NULL_HANDLE) {
+        vkDestroyDescriptorSetLayout(device, _em_reduce_energy_desc_layout, nullptr);
+        _em_reduce_energy_desc_layout = VK_NULL_HANDLE;
+    }
+
+    // Buffers and memory cleaned up by _bufferManager automatically
 }

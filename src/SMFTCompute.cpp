@@ -158,6 +158,40 @@ void SMFTCompute::dispatchAccumulation(VkPipeline pipeline,
                    pushConstants, pushSize, groupCountX, groupCountY);
 }
 
+// EM Field compute dispatches (Phase 5 - Sprint 3)
+void SMFTCompute::dispatchEMPotentials(VkPipeline pipeline,
+                                      VkPipelineLayout layout,
+                                      VkDescriptorSet descriptorSet,
+                                      const void* pushConstants,
+                                      size_t pushSize,
+                                      uint32_t groupCountX,
+                                      uint32_t groupCountY) {
+    dispatchCompute(pipeline, layout, descriptorSet,
+                   pushConstants, pushSize, groupCountX, groupCountY);
+}
+
+void SMFTCompute::dispatchEMFieldStrengths(VkPipeline pipeline,
+                                          VkPipelineLayout layout,
+                                          VkDescriptorSet descriptorSet,
+                                          const void* pushConstants,
+                                          size_t pushSize,
+                                          uint32_t groupCountX,
+                                          uint32_t groupCountY) {
+    dispatchCompute(pipeline, layout, descriptorSet,
+                   pushConstants, pushSize, groupCountX, groupCountY);
+}
+
+void SMFTCompute::dispatchEMReduceEnergy(VkPipeline pipeline,
+                                        VkPipelineLayout layout,
+                                        VkDescriptorSet descriptorSet,
+                                        const void* pushConstants,
+                                        size_t pushSize,
+                                        uint32_t groupCountX,
+                                        uint32_t groupCountY) {
+    dispatchCompute(pipeline, layout, descriptorSet,
+                   pushConstants, pushSize, groupCountX, groupCountY);
+}
+
 void SMFTCompute::copyBuffer(VkBuffer src, VkBuffer dst, VkDeviceSize size) {
     if (!_isRecording) return;
 

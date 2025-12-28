@@ -108,8 +108,15 @@ bool SMFTTestRunner::initialize() {
 
     // Initialize SMFT engine
     _engine = new SMFTEngine(_nova);
+
+    // Enable EM coupling BEFORE initialize() so GPU resources are created (Phase 5 - Sprint 3 Step 5)
+    if (_config.physics.em_coupling_enabled) {
+        _engine->setEMCoupling(true, _config.physics.em_coupling_strength);
+    }
+
     _engine->initialize(_config.grid.size_x, _config.grid.size_y,
                        _config.physics.delta, 0.0f);
+
     _engine_initialized = true;
 
     // Create output directories (logging will be started in run/runForGridSize)
@@ -248,6 +255,12 @@ bool SMFTTestRunner::runForGridSize(int grid_size) {
 
     // Create and initialize new engine with specified grid size
     _engine = new SMFTEngine(_nova);
+
+    // Enable EM coupling BEFORE initialize() so GPU resources are created (Phase 5 - Sprint 3 Step 5)
+    if (_config.physics.em_coupling_enabled) {
+        _engine->setEMCoupling(true, _config.physics.em_coupling_strength);
+    }
+
     _engine->initialize(grid_size, grid_size, _config.physics.delta, 0.0f);
 
     // Update grid size tracking for output paths
@@ -321,6 +334,12 @@ bool SMFTTestRunner::runForGridSizeAndVelocity(int grid_size, float velocity) {
 
     // Create and initialize new engine with specified grid size
     _engine = new SMFTEngine(_nova);
+
+    // Enable EM coupling BEFORE initialize() so GPU resources are created (Phase 5 - Sprint 3 Step 5)
+    if (_config.physics.em_coupling_enabled) {
+        _engine->setEMCoupling(true, _config.physics.em_coupling_strength);
+    }
+
     _engine->initialize(grid_size, grid_size, _config.physics.delta, 0.0f);
 
     // Update grid size tracking for output paths

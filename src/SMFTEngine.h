@@ -488,6 +488,46 @@ private:
     VkDescriptorSetLayout _dirac_descriptor_layout; // Layout for Dirac descriptors
     VkPipelineLayout _dirac_pipeline_layout;   // Pipeline layout for Dirac
 
+    // ========================================================================
+    // EM Field GPU Resources (Phase 5 - Sprint 3 Step 4)
+    // ========================================================================
+
+    // EM Field GPU Buffers
+    VkBuffer _phi_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _phi_memory = VK_NULL_HANDLE;
+    VkBuffer _A_x_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _A_x_memory = VK_NULL_HANDLE;
+    VkBuffer _A_y_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _A_y_memory = VK_NULL_HANDLE;
+    VkBuffer _E_x_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _E_x_memory = VK_NULL_HANDLE;
+    VkBuffer _E_y_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _E_y_memory = VK_NULL_HANDLE;
+    VkBuffer _B_z_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _B_z_memory = VK_NULL_HANDLE;
+    VkBuffer _em_energy_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _em_energy_memory = VK_NULL_HANDLE;
+    VkBuffer _em_params_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _em_params_memory = VK_NULL_HANDLE;
+    VkBuffer _theta_previous_buffer = VK_NULL_HANDLE;
+    VkDeviceMemory _theta_previous_memory = VK_NULL_HANDLE;
+
+    // EM Field GPU Pipelines
+    VkPipeline _em_potentials_pipeline = VK_NULL_HANDLE;
+    VkPipelineLayout _em_potentials_layout = VK_NULL_HANDLE;
+    VkDescriptorSetLayout _em_potentials_desc_layout = VK_NULL_HANDLE;
+    VkDescriptorSet _em_potentials_desc_set = VK_NULL_HANDLE;
+
+    VkPipeline _em_field_strengths_pipeline = VK_NULL_HANDLE;
+    VkPipelineLayout _em_field_strengths_layout = VK_NULL_HANDLE;
+    VkDescriptorSetLayout _em_field_strengths_desc_layout = VK_NULL_HANDLE;
+    VkDescriptorSet _em_field_strengths_desc_set = VK_NULL_HANDLE;
+
+    VkPipeline _em_reduce_energy_pipeline = VK_NULL_HANDLE;
+    VkPipelineLayout _em_reduce_energy_layout = VK_NULL_HANDLE;
+    VkDescriptorSetLayout _em_reduce_energy_desc_layout = VK_NULL_HANDLE;
+    VkDescriptorSet _em_reduce_energy_desc_set = VK_NULL_HANDLE;
+
     // Helper to access spinor component at grid point (x,y)
     // component: 0-3 for the 4 Dirac components
     std::complex<float> getSpinorComponent(uint32_t x, uint32_t y, uint32_t component) const;
@@ -498,6 +538,13 @@ private:
     void uploadToGPU();         // Upload CPU data to GPU buffers
     void downloadFromGPU();     // Download GPU results to CPU arrays
     void destroyResources();    // Cleanup all Vulkan resources
+
+    // EM Field GPU Methods (Phase 5 - Sprint 3 Step 4)
+    void initEMBuffers();           // Initialize GPU buffers for EM fields
+    void createEMPipelines();       // Create GPU pipelines for EM computation
+    void computeEMFieldsGPU();      // Execute GPU EM field computation
+    float downloadEMEnergy();       // Download EM field energy from GPU
+    void cleanupEMResources();      // Cleanup EM-specific Vulkan resources
 
     // Pipeline factory for managing shader compilation
     std::unique_ptr<SMFTPipelineFactory> _pipelineFactory;

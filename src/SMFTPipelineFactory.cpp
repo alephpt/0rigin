@@ -281,6 +281,73 @@ VkPipeline SMFTPipelineFactory::createAccumulationPipeline(const std::string& sh
     return createPipelineFromShader(shaderPath, pipelineLayout, "Accumulation");
 }
 
+// ============================================================================
+// EM FIELD PIPELINES (Phase 5 - Sprint 3)
+// ============================================================================
+
+VkPipeline SMFTPipelineFactory::createEMPotentialsPipeline(const std::string& shaderPath,
+                                                          VkPipelineLayout pipelineLayout) {
+    /**
+     * EM Potentials Pipeline - Compute A_μ = ∂_μ θ from Kuramoto phase
+     *
+     * GPU SAFETY: ✅ SAFE - Spatial/temporal derivatives only
+     * - Expected shader: computeEMPotentials.comp
+     * - Workload: Finite differences (6 memory reads, 3 writes)
+     * - Transcendentals: 0
+     * - Timeout risk: None
+     *
+     * Computes 4-potential from phase field:
+     * - φ = ∂_t θ (scalar potential)
+     * - A_x = ∂_x θ (vector potential x)
+     * - A_y = ∂_y θ (vector potential y)
+     *
+     * Uses centered finite differences for spatial gradients and
+     * backward difference for time derivative.
+     */
+    return createPipelineFromShader(shaderPath, pipelineLayout, "EM Potentials");
+}
+
+VkPipeline SMFTPipelineFactory::createEMFieldStrengthsPipeline(const std::string& shaderPath,
+                                                              VkPipelineLayout pipelineLayout) {
+    /**
+     * EM Field Strengths Pipeline - Compute E, B from A_μ
+     *
+     * GPU SAFETY: ✅ SAFE - Field tensor computation
+     * - Expected shader: computeFieldStrengths.comp
+     * - Workload: Spatial derivatives of potentials (8 reads, 3 writes)
+     * - Transcendentals: 0
+     * - Timeout risk: None
+     *
+     * Computes field strengths from 4-potential:
+     * - E_x = -∂_x φ - ∂_t A_x
+     * - E_y = -∂_y φ - ∂_t A_y
+     * - B_z = ∂_x A_y - ∂_y A_x (curl in 2D)
+     *
+     * Uses centered finite differences for all derivatives.
+     */
+    return createPipelineFromShader(shaderPath, pipelineLayout, "EM Field Strengths");
+}
+
+VkPipeline SMFTPipelineFactory::createEMReduceEnergyPipeline(const std::string& shaderPath,
+                                                            VkPipelineLayout pipelineLayout) {
+    /**
+     * EM Reduce Energy Pipeline - Compute E_field = ∫(E² + B²)/2 dA
+     *
+     * GPU SAFETY: ✅ SAFE - Parallel reduction
+     * - Expected shader: reduceFieldEnergy.comp
+     * - Workload: Per-thread energy sum with atomic reduction
+     * - Transcendentals: 0 (only squares and additions)
+     * - Timeout risk: None
+     *
+     * Reduces field energy density to scalar total energy:
+     * E_field = (1/2) ∑_i (E_x² + E_y² + B_z²) Δx Δy
+     *
+     * Uses parallel reduction with shared memory in workgroups
+     * and atomic accumulation to single output scalar.
+     */
+    return createPipelineFromShader(shaderPath, pipelineLayout, "EM Reduce Energy");
+}
+
 void SMFTPipelineFactory::destroyPipeline(VkPipeline pipeline) {
     if (pipeline != VK_NULL_HANDLE) {
         vkDestroyPipeline(_device, pipeline, nullptr);

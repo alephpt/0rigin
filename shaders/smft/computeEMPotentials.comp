@@ -1,0 +1,106 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+#extension GL_GOOGLE_include_directive : enable
+
+#include "../include/precision.glsl"
+
+/**
+ * @file computeEMPotentials.comp
+ * @brief Extract electromagnetic gauge potentials A_μ from Kuramoto phase field
+ *
+ * Physics:
+ * --------
+ * A_μ = ∂_μ θ (gauge potentials from phase gradient)
+ *
+ * φ(x,y) = ∂_t θ = (θ_current - θ_previous) / dt  (scalar potential)
+ * A_x(x,y) = ∂_x θ                                 (vector potential x-component)
+ * A_y(x,y) = ∂_y θ                                 (vector potential y-component)
+ *
+ * Numerical Method:
+ * -----------------
+ * - Temporal derivative: First-order finite difference
+ * - Spatial derivatives: Centered finite difference (2nd order accurate)
+ * - Boundary conditions: Periodic
+ *
+ * Workgroup: 16×16 threads (matching kuramoto_step.comp)
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+// Descriptor set 0: EM potentials computation
+layout(set = 0, binding = 0) readonly buffer ThetaCurrent {
+    float theta_current[];  // θ(t)
+};
+
+layout(set = 0, binding = 1) readonly buffer ThetaPrevious {
+    float theta_previous[];  // θ(t-dt)
+};
+
+layout(set = 0, binding = 2) writeonly buffer Phi {
+    float phi[];  // φ = ∂_t θ (scalar potential)
+};
+
+layout(set = 0, binding = 3) writeonly buffer A_x {
+    float A_x_out[];  // A_x = ∂_x θ
+};
+
+layout(set = 0, binding = 4) writeonly buffer A_y {
+    float A_y_out[];  // A_y = ∂_y θ
+};
+
+layout(set = 0, binding = 5) uniform Params {
+    uint Nx;       // Grid width
+    uint Ny;       // Grid height
+    float dx;      // Spatial step size
+    float dy;      // Spatial step size
+    float dt;      // Time step
+} params;
+
+void main() {
+    uint i = gl_GlobalInvocationID.x;
+    uint j = gl_GlobalInvocationID.y;
+
+    // Bounds check
+    if (i >= params.Nx || j >= params.Ny) {
+        return;
+    }
+
+    uint idx = j * params.Nx + i;
+
+    // ========================================================================
+    // TEMPORAL DERIVATIVE: φ = ∂_t θ
+    // ========================================================================
+    // First-order finite difference: φ = (θ_current - θ_previous) / dt
+    float phi_val = (theta_current[idx] - theta_previous[idx]) / params.dt;
+
+    // ========================================================================
+    // SPATIAL DERIVATIVE: A_x = ∂_x θ
+    // ========================================================================
+    // Centered finite difference: ∂_x θ ≈ (θ[i+1,j] - θ[i-1,j]) / (2dx)
+    // Periodic boundary conditions
+    uint i_left = (i == 0) ? (params.Nx - 1) : (i - 1);
+    uint i_right = (i == params.Nx - 1) ? 0 : (i + 1);
+    uint idx_left = j * params.Nx + i_left;
+    uint idx_right = j * params.Nx + i_right;
+
+    float A_x_val = (theta_current[idx_right] - theta_current[idx_left]) / (2.0 * params.dx);
+
+    // ========================================================================
+    // SPATIAL DERIVATIVE: A_y = ∂_y θ
+    // ========================================================================
+    // Centered finite difference: ∂_y θ ≈ (θ[i,j+1] - θ[i,j-1]) / (2dy)
+    // Periodic boundary conditions
+    uint j_down = (j == 0) ? (params.Ny - 1) : (j - 1);
+    uint j_up = (j == params.Ny - 1) ? 0 : (j + 1);
+    uint idx_down = j_down * params.Nx + i;
+    uint idx_up = j_up * params.Nx + i;
+
+    float A_y_val = (theta_current[idx_up] - theta_current[idx_down]) / (2.0 * params.dy);
+
+    // ========================================================================
+    // OUTPUT
+    // ========================================================================
+    phi[idx] = phi_val;
+    A_x_out[idx] = A_x_val;
+    A_y_out[idx] = A_y_val;
+}
