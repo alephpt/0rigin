@@ -1,4 +1,6 @@
 #include "simulations/ObservableComputer.h"
+#include "simulations/EMObservables.h"
+#include "physics/EMFieldComputer.h"
 #include "analysis/GeometryAnalyzer.h"
 #include <cmath>
 #include <numeric>
@@ -1031,4 +1033,142 @@ double ObservableComputer::computeGaussianCurvatureAtParticle(
 
     return GeometryAnalyzer::computeGaussianCurvature(
         R_field, Nx, Ny, ix, iy, dx, dx);
+}
+
+// ==============================================================================
+// Phase 5 EM Field Observable Implementations
+// ==============================================================================
+
+ObservableComputer::EMObservables ObservableComputer::computeEMObservables(
+    const std::vector<float>& theta_current,
+    const std::vector<float>& theta_previous,
+    const std::vector<std::complex<double>>& psi,
+    int Nx, int Ny,
+    double dx, double dy, double dt)
+{
+    /**
+     * Extract EM fields from Kuramoto phase and validate against particle dynamics
+     *
+     * Implementation:
+     *   1. Convert theta vectors to Eigen matrices
+     *   2. Extract EM fields using EMFieldComputer
+     *   3. Compute charge/current densities from spinor
+     *   4. Validate Maxwell equations using EMObservables
+     *   5. Compute Lorentz force and correlations
+     */
+
+    EMObservables obs;
+
+    // Step 1: Convert std::vector<float> to Eigen::MatrixXd for EMFieldComputer
+    Eigen::MatrixXd theta_curr_eigen(Nx, Ny);
+    Eigen::MatrixXd theta_prev_eigen(Nx, Ny);
+
+    for (int iy = 0; iy < Ny; iy++) {
+        for (int ix = 0; ix < Nx; ix++) {
+            int idx = iy * Nx + ix;
+            theta_curr_eigen(ix, iy) = static_cast<double>(theta_current[idx]);
+            theta_prev_eigen(ix, iy) = static_cast<double>(theta_previous[idx]);
+        }
+    }
+
+    // Step 2: Extract EM fields from phase using EMFieldComputer
+    auto em_fields = EMFieldComputer::computeFromPhase(
+        theta_curr_eigen, theta_prev_eigen, dx, dy, dt);
+
+    // Step 3: Compute field energy
+    obs.field_energy = EMFieldComputer::computeFieldEnergy(em_fields, dx, dy);
+
+    // Step 4: Get field diagnostics (updates em_fields in-place)
+    EMFieldComputer::computeDiagnostics(em_fields);
+    obs.max_E_magnitude = em_fields.max_E;
+    obs.max_B_magnitude = em_fields.max_B;
+
+    // Step 5: Compute Poynting vector (energy flux)
+    auto poynting = EMFieldComputer::computePoyntingVector(em_fields, dx, dy);
+    obs.total_flux = poynting.total_flux;
+
+    // Step 6: Compute charge and current density from spinor field
+    Eigen::MatrixXd charge_density = ::EMObservables::computeChargeDensity(psi, Nx, Ny);
+
+    Eigen::MatrixXd current_x(Nx, Ny);
+    Eigen::MatrixXd current_y(Nx, Ny);
+    ::EMObservables::computeCurrentDensity(psi, Nx, Ny, current_x, current_y);
+
+    // Step 7: Compute RMS of charge and current densities
+    obs.charge_density_rms = 0.0;
+    obs.current_density_rms = 0.0;
+
+    double charge_sq_sum = 0.0;
+    double current_sq_sum = 0.0;
+    int N_points = Nx * Ny;
+
+    for (int i = 0; i < Nx; i++) {
+        for (int j = 0; j < Ny; j++) {
+            charge_sq_sum += charge_density(i, j) * charge_density(i, j);
+            current_sq_sum += current_x(i, j) * current_x(i, j) +
+                             current_y(i, j) * current_y(i, j);
+        }
+    }
+
+    obs.charge_density_rms = std::sqrt(charge_sq_sum / N_points);
+    obs.current_density_rms = std::sqrt(current_sq_sum / N_points);
+
+    // Step 8: Validate Maxwell equations (need previous fields for time derivatives)
+    // For first timestep, create zero previous fields
+    EMFieldComputer::EMFields em_fields_prev(Nx, Ny);
+    if (!em_fields.has_previous) {
+        em_fields_prev = em_fields;  // Use current as "previous" for first step
+    }
+
+    auto maxwell_metrics = ::EMObservables::validateMaxwellEquations(
+        em_fields, em_fields_prev,
+        charge_density, current_x, current_y,
+        dx, dy, dt);
+
+    obs.maxwell_violation = maxwell_metrics.gauss_law_error +
+                           maxwell_metrics.faraday_law_error;
+
+    // Step 9: Compute average Lorentz force on wavepacket
+    // F_L = ρE + J×B (averaged over probability distribution |ψ|²)
+    double total_force = 0.0;
+    double total_prob = 0.0;
+
+    for (int iy = 0; iy < Ny; iy++) {
+        for (int ix = 0; ix < Nx; ix++) {
+            // Compute probability density |ψ|² at this point
+            int idx = iy * Nx + ix;
+            double prob_density = 0.0;
+            for (int alpha = 0; alpha < 4; alpha++) {
+                prob_density += std::norm(psi[idx * 4 + alpha]);
+            }
+
+            // Get EM fields at this point
+            double E_x = em_fields.E_x(ix, iy);
+            double E_y = em_fields.E_y(ix, iy);
+            double B_z = em_fields.B_z(ix, iy);
+
+            // Get charge and current at this point
+            double rho = charge_density(ix, iy);
+            double J_x = current_x(ix, iy);
+            double J_y = current_y(ix, iy);
+
+            // Compute Lorentz force: F = ρE + J×B
+            // In 2D: J×B = (J_y B_z, -J_x B_z, 0)
+            double F_x = rho * E_x + J_y * B_z;
+            double F_y = rho * E_y - J_x * B_z;
+            double F_mag = std::sqrt(F_x * F_x + F_y * F_y);
+
+            // Weight by probability density
+            total_force += prob_density * F_mag;
+            total_prob += prob_density;
+        }
+    }
+
+    if (total_prob > 1e-12) {
+        obs.avg_lorentz_force = total_force / total_prob;
+    } else {
+        obs.avg_lorentz_force = 0.0;
+    }
+
+    return obs;
 }

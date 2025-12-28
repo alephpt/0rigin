@@ -1,0 +1,88 @@
+---
+test_name: "em_coupling_weak_field"
+description: "Phase 6.1: Weak field limit - verify that EM coupling behavior approaches first-order perturbation theory in the weak-field limit (small coupling_strength). Tests convergence toward perturbative predictions."
+
+# Grid configuration with physical domain size
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Domain size: 100 Planck lengths
+  grid_sizes: [64, 128]  # Test grid convergence in weak field limit
+
+# Physics parameters (Planck units: ℏ = c = 1, Δ = 1)
+physics:
+  delta: 1.0                # Mass gap = Planck mass
+  coupling: 0.05            # Weak Kuramoto coupling
+  dt: 0.005                 # Smaller timestep for accuracy in perturbative regime
+  total_steps: 4000         # 20 time units
+  K: 1.0                    # Kuramoto coupling strength
+  damping: 0.1              # Phase damping coefficient
+
+# GRID-INDEPENDENT initial conditions (all in Planck lengths)
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 60.0       # Offset from vortex center (50, 50)
+    y0_physical: 50.0
+    sigma_physical: 3.0     # Width: 3 Planck lengths
+    amplitude: 1.0
+    # Small momentum for perturbative limit
+    boost_velocities: [0.2]
+
+  kuramoto:
+    phase_distribution: "vortex"    # Vortex creates A field
+    omega_distribution: "zero"      # Zero natural frequencies
+    winding_number: 1               # Topological charge +1
+    vortex_core_radius: 3.0         # Core radius: 3 Planck lengths
+    vortex_center_x: 50.0           # Center at domain center
+    vortex_center_y: 50.0
+    R_background: 0.8               # Partial order parameter
+
+# Electromagnetic field configuration - WEAK FIELD REGIME
+em_coupling:
+  enabled: true
+  coupling_strength: 0.01   # WEAK charge q (perturbative limit)
+  field_type: "vortex"      # A field from vortex phase gradient
+  # In weak field limit, A field magnitude: |A| ~ q·∇θ ~ 0.01·1 = 0.01
+
+  # Perturbation theory parameters
+  max_field_strength: 0.05  # Enforce weak field condition |A| < 0.05
+  check_perturbative_limit: true
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # Test N-dependence
+
+# Validation tolerances - RELAXED for perturbative comparison
+validation:
+  norm_tolerance: 0.005         # ||Ψ||² - 1 < 0.5%
+  energy_tolerance: 0.02        # |ΔE/E₀| < 2% (relaxed for perturbation theory)
+  convergence_tolerance: 0.05   # 5% convergence between N values
+
+  # Perturbation theory validation
+  check_perturbative_limit: true
+  perturbative_tolerance: 0.15   # Allow 15% deviation from first-order theory
+
+# Output configuration
+output:
+  directory: "output/em_coupling_weak_field"
+  save_every: 10                  # Save observables every 10 steps
+  formats: ["csv"]
+  save_spatial_snapshots: true
+  spatial_interval: 200           # Save spatial fields less frequently
+
+# Analysis configuration
+analysis:
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  compute_energy: true
+
+  # Weak field / perturbation theory analysis
+  compute_perturbative_correction: true     # Estimate first-order correction
+  compare_to_perturbation_theory: true      # Compare trajectory to O(q) prediction
+  measure_field_strength: true              # Track |A(x,y,t)| to verify weakness
+  analyze_trajectory_curvature: true        # Small curvature ⟺ weak force
+  measure_lorentz_force: true               # F = q(E + v×B)
+  track_em_energy: true                     # Track ∫(E² + B²) dV

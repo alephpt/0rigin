@@ -1,0 +1,93 @@
+---
+test_name: "em_coupling_gauge_invariance"
+description: "Phase 6.1: Gauge invariance test - verify that physics remains invariant under gauge transformation U(1) of phase field. Tests ψ → e^(iχ)ψ, A → A + ∇χ. Observables should be identical in both gauges."
+
+# Grid configuration with physical domain size
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0  # Domain size: 100 Planck lengths
+  grid_sizes: []   # Single grid test
+
+# Physics parameters (Planck units: ℏ = c = 1, Δ = 1)
+physics:
+  delta: 1.0                # Mass gap = Planck mass
+  coupling: 0.1             # Kuramoto-Dirac coupling strength
+  dt: 0.01                  # Timestep size
+  total_steps: 1000         # 10 time units
+  K: 1.0                    # Kuramoto coupling strength
+  damping: 0.1              # Phase damping coefficient
+
+# GRID-INDEPENDENT initial conditions (all in Planck lengths)
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 50.0       # Start at domain center
+    y0_physical: 50.0
+    sigma_physical: 3.0     # Width: 3 Planck lengths
+    amplitude: 1.0
+    # Initial momentum
+    boost_velocities: [0.3] # Single velocity for simplicity
+
+  kuramoto:
+    phase_distribution: "vortex"    # Vortex phase defect (topological content)
+    omega_distribution: "zero"      # Zero natural frequencies
+    winding_number: 1               # Topological charge +1
+    vortex_core_radius: 5.0         # Core radius: 5 Planck lengths
+    vortex_center_x: 50.0           # Center at domain center
+    vortex_center_y: 50.0
+
+# Electromagnetic field configuration with gauge transformation
+em_coupling:
+  enabled: true
+  coupling_strength: 0.1    # Effective charge q
+  field_type: "gauge_test"  # Special test mode (two simulations: original + transformed)
+
+  # Gauge transformation: χ(x,y) = k_x*x + k_y*y
+  # Under gauge transformation: ψ → e^(iχ)ψ, A → A + ∇χ
+  gauge_transformation_enabled: true
+  gauge_function: "linear"  # χ = k_x*x + k_y*y
+  k_x: 0.1                  # Wave vector x-component (Planck units)
+  k_y: 0.05                 # Wave vector y-component (Planck units)
+  # ∇χ = (k_x, k_y) = constant spatial gradient
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # Test N-dependence
+
+# Validation tolerances
+validation:
+  norm_tolerance: 0.005         # ||Ψ||² - 1 < 0.5%
+  energy_tolerance: 0.01        # |ΔE/E₀| < 1%
+  convergence_tolerance: 0.05   # 5% convergence between N values
+
+  # Gauge invariance validation - CRITICAL
+  check_gauge_invariance: true       # Run both gauges and compare observables
+  gauge_invariance_tolerance: 0.005  # Observables must match to 0.5%
+
+  # Check that topological content is preserved
+  check_winding_number: true
+  winding_tolerance: 0.1
+
+# Output configuration
+output:
+  directory: "output/em_coupling_gauge_invariance"
+  save_every: 10                  # Save observables every 10 steps
+  formats: ["csv"]
+  save_spatial_snapshots: true
+  save_both_gauges: true          # Save both gauge configurations separately
+
+# Analysis configuration
+analysis:
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  compute_energy: true
+
+  # Gauge invariance analysis
+  compare_observables_between_gauges: true  # Key test
+  measure_observable_difference: true       # |O_gauge1 - O_gauge2| / |O_gauge1|
+  verify_topological_invariance: true       # Winding number, charge should be identical
+  analyze_phase_structure: true             # Check phase field structure
+  measure_vortex_stability: true            # Verify vortex core remains stable

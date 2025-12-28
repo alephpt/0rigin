@@ -1,0 +1,88 @@
+---
+test_name: "em_coupling_uniform_field"
+description: "Phase 6.1: Uniform EM field - verify minimal coupling with constant magnetic field produces expected Larmor radius and cyclotron frequency"
+
+# Grid configuration with physical domain size
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0  # Domain size: 100 Planck lengths
+  grid_sizes: []   # Single grid test (no convergence study)
+
+# Physics parameters (Planck units: ℏ = c = 1, Δ = 1)
+physics:
+  delta: 1.0                # Mass gap = Planck mass
+  coupling: 0.1             # Kuramoto-Dirac coupling strength
+  dt: 0.01                  # Timestep size
+  total_steps: 2000         # 20 time units
+  K: 1.0                    # Kuramoto coupling strength
+  damping: 0.1              # Phase damping coefficient
+
+# GRID-INDEPENDENT initial conditions (all in Planck lengths)
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 50.0       # Start at domain center
+    y0_physical: 50.0
+    sigma_physical: 3.0     # Width: 3 Planck lengths
+    amplitude: 1.0          # Initial amplitude
+    # Momentum boost perpendicular to B field
+    boost_velocities: [0.3, 0.5]  # Test v = 0.3c, 0.5c
+    # Expected Larmor radius: r_L = p/(qB) = γmv/(qB)
+    # For B_z = 0.5, q = 0.1, v = 0.3: r_L ≈ 0.63
+    # For B_z = 0.5, q = 0.1, v = 0.5: r_L ≈ 1.16
+
+  kuramoto:
+    phase_distribution: "uniform"    # Uniform background
+    omega_distribution: "zero"       # Zero natural frequencies
+    uniform_phase: 0.0               # Constant phase
+    R_background: 0.8                # Moderate synchronization
+
+# Electromagnetic field configuration
+em_coupling:
+  enabled: true
+  coupling_strength: 0.1    # Effective charge q
+  field_type: "uniform"     # Uniform magnetic field
+  B_z: 0.5                  # Magnetic field in z-direction (Planck units)
+  # Corresponding vector potential: A_x = -B_z*y/2, A_y = B_z*x/2
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # Test N-dependence
+
+# Validation tolerances
+validation:
+  norm_tolerance: 0.005         # ||Ψ||² - 1 < 0.5%
+  energy_tolerance: 0.01        # |ΔE/E₀| < 1%
+  convergence_tolerance: 0.05   # 5% convergence between N values
+
+  # EM-specific validation
+  check_larmor_radius: true     # Verify r_L = p/(qB)
+  larmor_tolerance: 0.1         # 10% error allowed
+  check_cyclotron_frequency: true  # Verify ω_c = qB/m
+  cyclotron_tolerance: 0.1      # 10% error allowed
+  check_circular_motion: true   # Verify circular trajectory in x-y plane
+
+# Output configuration
+output:
+  directory: "output/em_coupling_uniform_field"
+  save_every: 10                  # Save observables every 10 steps
+  formats: ["csv"]
+  save_spatial_snapshots: true
+  # snapshot_steps: []            # Auto-generate snapshots
+
+# Analysis configuration
+analysis:
+  track_trajectory: true          # Track center-of-mass position over time
+  measure_velocity: true          # Measure <v> from trajectory
+  compute_effective_mass: true    # Extract m_eff = Δ·R
+  compute_energy: true            # E² = (mc²)² + (pc)²
+  lorentz_invariants: true        # Check E² - p² = m₀²
+
+  # Phase 6.1 specific - EM coupling analysis
+  measure_cyclotron_frequency: true  # Extract ω_c from velocity autocorrelation
+  measure_larmor_radius: true        # Extract r_L from trajectory radius
+  analyze_circular_motion: true      # Check circularity of trajectory (x-y plane)
+  measure_em_force: true             # Lorentz force F = q(E + v×B)
+  check_gyroradius_conservation: true # Verify r_L constant throughout evolution

@@ -106,6 +106,12 @@ private:
     // Test results: substep_ratio -> vector of observables
     std::map<int, std::vector<ObservableComputer::Observables>> _results;
 
+    // EM field observables (Phase 5): substep_ratio -> vector of EM observables
+    std::map<int, std::vector<ObservableComputer::EMObservables>> _em_results;
+
+    // Previous theta field for temporal derivatives (needed for EM field computation)
+    std::vector<float> _theta_previous;
+
     // Validation results
     struct ValidationResult {
         bool norm_passed = false;
@@ -223,6 +229,12 @@ private:
     void saveObservablesToCSV(int N, const std::string& filepath) const;
 
     /**
+     * Save EM field observables to CSV file
+     * Format: timestep,field_energy,max_E,max_B,total_flux,avg_lorentz_force,charge_rms,current_rms,maxwell_violation
+     */
+    void saveEMObservablesToCSV(int N, const std::string& filepath) const;
+
+    /**
      * Generate plots from observables using PlottingManager
      * @param N Substep ratio for this test run
      */
@@ -308,9 +320,44 @@ private:
     std::vector<ObservableComputer::Observables> readObservablesFromFile(
         const std::string& filepath) const;
 
+    /**
+     * Phase 3 Analysis: Casimir Force (Test 3.1)
+     * Analyze force vs separation data and fit power law
+     */
+    void analyzeCasimirForce() const;
+
+    /**
+     * Phase 3 Analysis: Vacuum Energy (Test 3.2)
+     * Analyze energy density vs order parameter and fit power law
+     */
+    void analyzeVacuumEnergy() const;
+
+    /**
+     * Phase 3 Analysis: Phase Transition (Test 3.3)
+     * Find critical noise and fit critical exponent
+     */
+    void analyzePhaseTransition() const;
+
     // Store velocity sweep results for aggregate analysis
     mutable std::map<float, ValidationResult> _velocity_results;
     mutable std::map<float, std::string> _velocity_output_dirs;
+
+    // Store Phase 3 analysis data
+    struct CasimirRun {
+        double defect_separation;
+        double average_force;
+    };
+    struct VacuumEnergyRun {
+        double R_average;
+        double energy_density;
+    };
+    struct PhaseTransitionRun {
+        double noise_sigma;
+        double R_equilibrium;
+    };
+    mutable std::vector<CasimirRun> _casimir_runs;
+    mutable std::vector<VacuumEnergyRun> _vacuum_energy_runs;
+    mutable std::vector<PhaseTransitionRun> _phase_transition_runs;
 };
 
 #endif // SMFT_TEST_RUNNER_H

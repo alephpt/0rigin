@@ -638,6 +638,9 @@ bool SMFTTestRunner::runSingleTest(int N) {
             std::vector<double> R_field_d(R_field.begin(), R_field.end());
             double time = step * _config.physics.dt;
 
+            // Get theta field (needed for EM observables)
+            auto theta_current = _engine->getPhaseField();
+
             ObservableComputer::Observables obs;
 
             if (use_klein_gordon) {
@@ -689,6 +692,36 @@ bool SMFTTestRunner::runSingleTest(int N) {
             }
 
             observables.push_back(obs);
+
+            // Compute EM observables if EM coupling is enabled (Phase 5)
+            if (_config.physics.em_coupling_enabled && !use_klein_gordon) {
+                const DiracEvolution* dirac = _engine->getDiracEvolution();
+                if (dirac && !_theta_previous.empty()) {
+                    // Get spinor field
+                    const auto& psi = dirac->getSpinorField();
+
+                    // Compute EM observables
+                    auto em_obs = ObservableComputer::computeEMObservables(
+                        theta_current, _theta_previous,
+                        psi,
+                        dirac->getNx(), dirac->getNy(),
+                        dirac->getDx(), dirac->getDx(),  // dx, dy
+                        _config.physics.dt
+                    );
+
+                    // Store EM observables
+                    if (_em_results.find(N) == _em_results.end()) {
+                        _em_results[N] = std::vector<ObservableComputer::EMObservables>();
+                    }
+                    _em_results[N].push_back(em_obs);
+                }
+
+                // Update previous theta for next iteration
+                _theta_previous = theta_current;
+            } else if (_config.physics.em_coupling_enabled && _theta_previous.empty()) {
+                // Initialize theta_previous on first iteration
+                _theta_previous = theta_current;
+            }
 
             if (step % (save_every * 10) == 0) {
                 std::cout << "  Step " << step << "/" << total_steps
@@ -914,6 +947,13 @@ bool SMFTTestRunner::runSingleTest(int N) {
     saveObservablesToCSV(N, csv_path);
     std::cout << "  Saved observables to " << csv_path << std::endl;
 
+    // Save EM observables to CSV (if EM coupling enabled)
+    if (_config.physics.em_coupling_enabled) {
+        std::string em_csv_path = getOutputDirectory(N) + "/em_observables.csv";
+        saveEMObservablesToCSV(N, em_csv_path);
+        std::cout << "  Saved EM observables to " << em_csv_path << std::endl;
+    }
+
     // Generate plots if enabled
     if (_config.output.enable_plots) {
         std::cout << "  Generating plots..." << std::endl;
@@ -1130,6 +1170,41 @@ void SMFTTestRunner::saveObservablesToCSV(int N, const std::string& filepath) co
     // Write data
     for (const auto& obs : it->second) {
         file << ObservableComputer::toCSVLine(obs) << "\n";
+    }
+
+    file.close();
+}
+
+void SMFTTestRunner::saveEMObservablesToCSV(int N, const std::string& filepath) const {
+    auto it = _em_results.find(N);
+    if (it == _em_results.end() || it->second.empty()) {
+        return;  // No EM data to save
+    }
+
+    std::ofstream file(filepath);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open " << filepath << " for writing" << std::endl;
+        return;
+    }
+
+    // Write header
+    file << "timestep,field_energy,max_E,max_B,total_flux,avg_lorentz_force,"
+         << "charge_rms,current_rms,maxwell_violation\n";
+
+    // Write data
+    int timestep = 0;
+    for (const auto& obs : it->second) {
+        file << timestep << ","
+             << std::setprecision(10)
+             << obs.field_energy << ","
+             << obs.max_E_magnitude << ","
+             << obs.max_B_magnitude << ","
+             << obs.total_flux << ","
+             << obs.avg_lorentz_force << ","
+             << obs.charge_density_rms << ","
+             << obs.current_density_rms << ","
+             << obs.maxwell_violation << "\n";
+        timestep++;
     }
 
     file.close();
