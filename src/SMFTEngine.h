@@ -8,9 +8,11 @@
 #include <vector>
 #include <complex>
 #include <memory>
+#include <random>
 
-// Forward declaration
+// Forward declarations
 class DiracEvolution;
+class KleinGordonEvolution;
 
 /**
  * SMFTEngine - Synchronization Mass Field Theory Physics Compute Engine
@@ -69,7 +71,7 @@ public:
     void step(float dt, float K, float damping);
 
     /**
-     * Execute stochastic time step with MSR noise formalism
+     * Execute stochastic time step with MSR noise formalism (GPU)
      * @param dt Time step size (0.01 baseline)
      * @param K Kuramoto coupling strength (1.0 baseline)
      * @param damping Phase damping coefficient (0.1 baseline)
@@ -80,10 +82,27 @@ public:
                        float sigma_theta, float sigma_psi);
 
     /**
+     * Execute CPU-only stochastic Kuramoto step (for Phase Transition tests)
+     * Uses Langevin noise: dθ/dt = ω + K·∇²θ + σ·ξ(t) where ξ ~ N(0,1)
+     * @param dt Time step size
+     * @param K Kuramoto coupling strength
+     * @param damping Phase damping coefficient
+     * @param sigma Noise amplitude (σ)
+     */
+    void stepKuramotoCPUStochastic(float dt, float K, float damping, float sigma);
+
+    /**
      * Get the current synchronization field R(x,y)
      * @return Vector of R values (size = Nx * Ny)
      */
     std::vector<float> getSyncField() const;
+
+    /**
+     * Get R-field time derivative ∂R/∂t (Phase 4 Test 4.2)
+     * Computed via centered finite differences from R-field history
+     * @return Vector of ∂R/∂t values (size = Nx * Ny)
+     */
+    std::vector<float> getRFieldDerivative() const;
 
     /**
      * Get the current mass field m(x,y) = Δ · R(x,y)
@@ -128,6 +147,45 @@ public:
     void initializeDiracField(float x0, float y0, float sigma, float amplitude);
 
     /**
+     * Initialize Dirac spinor field with plane wave for dispersion analysis
+     * @param kx Momentum x component
+     * @param ky Momentum y component
+     */
+    void initializeDiracPlaneWave(float kx, float ky);
+
+    /**
+     * Initialize Klein-Gordon scalar field with Gaussian wavepacket
+     * CPU-only implementation for Phase 2.5A comparison
+     *
+     * @param x0 Center x-coordinate of Gaussian
+     * @param y0 Center y-coordinate of Gaussian
+     * @param sigma Gaussian width parameter
+     * @param amplitude Initial amplitude (normalized automatically)
+     */
+    void initializeKleinGordonField(float x0, float y0, float sigma, float amplitude);
+
+    /**
+     * Initialize Klein-Gordon scalar field with boosted Gaussian wavepacket (Phase 2.5A)
+     * CPU-only implementation with relativistic momentum boost
+     *
+     * @param x0 Center x-coordinate
+     * @param y0 Center y-coordinate
+     * @param sigma Gaussian width
+     * @param vx Boost velocity x (c=1 in Planck units)
+     * @param vy Boost velocity y
+     * @param R_bg Background synchronization parameter for mass calculation
+     */
+    void initializeBoostedKleinGordonField(float x0, float y0, float sigma,
+                                           float vx, float vy, float R_bg);
+
+    /**
+     * Initialize Klein-Gordon scalar field with plane wave for dispersion analysis
+     * @param kx Momentum x component
+     * @param ky Momentum y component
+     */
+    void initializeKleinGordonPlaneWave(float kx, float ky);
+
+    /**
      * Initialize Dirac spinor field with boosted Gaussian wavepacket (Scenario 2.3)
      * CPU-only implementation - GPU shaders exceed timeout budget
      *
@@ -157,18 +215,64 @@ public:
     void stepWithDirac(float dt, float lambda_coupling, int substep_ratio = 1, float K = 1.0f, float damping = 0.1f);
 
     /**
-     * Get Dirac spinor density |Ψ|² for analysis
-     * CPU-only implementation - GPU shaders exceed timeout budget
-     *
-     * @return Vector of density values |Ψ|² (size = Nx * Ny)
+     * Get the current spinor density |Ψ|²(x,y)
+     * @return Vector of density values (size = Nx * Ny)
      */
     std::vector<float> getDiracDensity() const;
+
+    /**
+     * Get the full spinor field data
+     * @return Vector of complex values (size = 4 * Nx * Ny)
+     */
+    std::vector<std::complex<double>> getSpinorField() const;
 
     /**
      * Get internal DiracEvolution object for observable computation
      * @return Pointer to DiracEvolution (nullptr if not initialized)
      */
     const DiracEvolution* getDiracEvolution() const;
+
+    /**
+     * Get internal DiracEvolution object for modification (e.g., for specific analysis)
+     * @return Non-const pointer to DiracEvolution (nullptr if not initialized)
+     */
+    DiracEvolution* getDiracEvolutionNonConst();
+
+    /**
+     * Initialize two-particle system (particle + antiparticle) for Test 3.4
+     * Creates two DiracEvolution instances with opposite beta signs
+     *
+     * @param x1 Particle center x
+     * @param y1 Particle center y
+     * @param x2 Antiparticle center x
+     * @param y2 Antiparticle center y
+     * @param sigma Gaussian width for both
+     */
+    void initializeTwoParticleSystem(float x1, float y1, float x2, float y2, float sigma);
+
+    /**
+     * Get antiparticle DiracEvolution object (Test 3.4)
+     * @return Pointer to antiparticle field (nullptr if not initialized)
+     */
+    const DiracEvolution* getAntiparticleEvolution() const;
+
+    /**
+     * Get antiparticle DiracEvolution object for modification (Test 3.4)
+     * @return Non-const pointer to antiparticle field (nullptr if not initialized)
+     */
+    DiracEvolution* getAntiparticleEvolutionNonConst();
+
+    /**
+     * Get internal KleinGordonEvolution object for observable computation
+     * @return Pointer to KleinGordonEvolution (nullptr if not initialized)
+     */
+    const KleinGordonEvolution* getKleinGordonEvolution() const;
+
+    /**
+     * Get internal KleinGordonEvolution object for modification
+     * @return Non-const pointer to KleinGordonEvolution (nullptr if not initialized)
+     */
+    KleinGordonEvolution* getKleinGordonEvolutionNonConst();
 
     /**
      * Set the substep ratio N for operator splitting adiabatic approximation
@@ -178,6 +282,62 @@ public:
      * @param N Number of Kuramoto substeps per Dirac step
      */
     void setSubstepRatio(int N);
+
+    // ========================================================================
+    // Electromagnetic Field Access (Phase 5 - EM Coupling)
+    // ========================================================================
+
+    /**
+     * Get vector potential x-component A_x = ∂_x θ
+     * @return Vector of A_x values [Nx × Ny]
+     */
+    const std::vector<float>& getVectorPotentialX() const { return _A_x_data; }
+
+    /**
+     * Get vector potential y-component A_y = ∂_y θ
+     * @return Vector of A_y values [Nx × Ny]
+     */
+    const std::vector<float>& getVectorPotentialY() const { return _A_y_data; }
+
+    /**
+     * Get scalar potential φ = ∂_t θ
+     * @return Vector of φ values [Nx × Ny]
+     */
+    const std::vector<float>& getScalarPotential() const { return _phi_data; }
+
+    /**
+     * Get electric field x-component E_x
+     * @return Vector of E_x values [Nx × Ny]
+     */
+    const std::vector<float>& getElectricFieldX() const { return _E_x_data; }
+
+    /**
+     * Get electric field y-component E_y
+     * @return Vector of E_y values [Nx × Ny]
+     */
+    const std::vector<float>& getElectricFieldY() const { return _E_y_data; }
+
+    /**
+     * Get magnetic field z-component B_z (2D only)
+     * @return Vector of B_z values [Nx × Ny]
+     */
+    const std::vector<float>& getMagneticFieldZ() const { return _B_z_data; }
+
+    /**
+     * Enable/disable electromagnetic coupling
+     * @param enable True to enable EM field computation from phase gradients
+     * @param coupling_strength EM coupling strength parameter (default: 1.0)
+     */
+    void setEMCoupling(bool enable, float coupling_strength = 1.0f) {
+        _em_coupling_enabled = enable;
+        _em_coupling_strength = coupling_strength;
+    }
+
+    /**
+     * Check if EM coupling is enabled
+     * @return True if EM coupling is active
+     */
+    bool getEMCouplingEnabled() const { return _em_coupling_enabled; }
 
     /**
      * Initialize hybrid GPU-CPU system with operator splitting
@@ -208,6 +368,9 @@ private:
     float _Delta;        // Mass gap parameter
     float _chiral_angle; // Chiral mass angle
     uint32_t _time_step; // Current timestep (for PRNG seeding)
+
+    // CPU stochastic evolution state
+    std::mt19937 _cpu_rng;  // Random number generator for CPU stochastic evolution
 
     // Vulkan GPU resources (to be implemented in Phase 2)
     VkBuffer _theta_buffer;        // Current phase field θ(x,y)
@@ -254,13 +417,43 @@ private:
     std::vector<float> _gravity_x_data; // Host mirror of gravity field x-component
     std::vector<float> _gravity_y_data; // Host mirror of gravity field y-component
 
+    // R-field history for temporal derivative computation (Phase 4 Test 4.2)
+    // Ring buffer: [0] = t-dt, [1] = t, [2] = t+dt
+    std::vector<float> _R_history[3];
+    int _R_history_index;               // Current position in ring buffer
+    float _last_dt;                     // Last timestep size for derivative computation
+
+    // ========================================================================
+    // Electromagnetic Field Storage (Phase 5 - EM Coupling)
+    // ========================================================================
+    // Fields computed from Kuramoto phase gradients: A_μ = ∂_μ θ
+    // Used for minimal coupling in Dirac evolution
+
+    std::vector<float> _A_x_data;       // Vector potential A_x = ∂_x θ [Nx × Ny]
+    std::vector<float> _A_y_data;       // Vector potential A_y = ∂_y θ [Nx × Ny]
+    std::vector<float> _phi_data;       // Scalar potential φ = ∂_t θ [Nx × Ny]
+    std::vector<float> _E_x_data;       // Electric field E_x [Nx × Ny]
+    std::vector<float> _E_y_data;       // Electric field E_y [Nx × Ny]
+    std::vector<float> _B_z_data;       // Magnetic field B_z (2D only) [Nx × Ny]
+
+    // EM field history for temporal derivatives
+    std::vector<float> _theta_previous; // Previous timestep phase for ∂_t computation
+
+    // EM coupling configuration
+    bool _em_coupling_enabled;          // Flag to enable/disable EM field computation
+    float _em_coupling_strength;        // Coupling strength parameter α
+
     // Spinor field data (4-component complex Dirac spinor)
     // Each point (x,y) has 4 complex components for the Dirac spinor
     std::vector<std::complex<float>> _spinor_field;  // 4 * Nx * Ny components
 
-    // Dirac field state (CPU-side, avoiding GPU timeouts)
-    class DiracEvolution* _dirac_evolution;  // Split-operator Dirac evolution
+    // Relativistic field state (CPU-side, avoiding GPU timeouts)
+    class DiracEvolution* _dirac_evolution;           // Split-operator Dirac evolution (spinor) - particle
+    class DiracEvolution* _dirac_antiparticle;        // Second Dirac field for antiparticle (Test 3.4)
+    class KleinGordonEvolution* _kg_evolution;        // Split-operator Klein-Gordon evolution (scalar)
     bool _dirac_initialized;
+    bool _kg_initialized;
+    bool _two_particle_mode;                          // True if simulating particle + antiparticle
 
     // Operator splitting state for GPU-CPU hybrid
     int _substep_count;              // Current substep counter

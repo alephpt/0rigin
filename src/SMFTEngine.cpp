@@ -2,6 +2,7 @@
 #include "DiracEvolution.h"
 #include "KleinGordonEvolution.h"
 #include "SMFTCommon.h"
+#include "physics/EMFieldComputer.h"
 #include <cstring>
 #include <algorithm>
 #include <cmath>
@@ -136,7 +137,9 @@ SMFTEngine::SMFTEngine(Nova* nova)
       _accumulation_pipeline(VK_NULL_HANDLE),
       _accumulation_descriptor_set(VK_NULL_HANDLE),
       _accumulation_descriptor_layout(VK_NULL_HANDLE),
-      _accumulation_pipeline_layout(VK_NULL_HANDLE)
+      _accumulation_pipeline_layout(VK_NULL_HANDLE),
+      _em_coupling_enabled(false),
+      _em_coupling_strength(1.0f)
 {
     // Ensure Nova is initialized before creating managers
     if (!nova || !nova->initialized) {
@@ -1110,6 +1113,64 @@ void SMFTEngine::stepWithDirac(float dt, float lambda_coupling, int substep_rati
         for (uint32_t i = 0; i < _Nx * _Ny; i++) {
             mass_field[i] = _Delta * R_field[i];
         }
+    }
+
+    // ========================================================================
+    // ELECTROMAGNETIC COUPLING (Phase 5 - Scenario 2.6B)
+    // ========================================================================
+    // Compute EM fields from Kuramoto phase gradients: A_μ = ∂_μ θ
+    // Apply minimal coupling to Dirac evolution if enabled
+
+    if (_em_coupling_enabled && has_dirac && _dirac_evolution) {
+        // Initialize theta_previous on first call
+        if (_theta_previous.empty()) {
+            _theta_previous = _theta_data;
+        }
+
+        // Compute EM fields from phase: A_μ = ∂_μ θ, F_μν from A_μ
+        double dx = 1.0;  // Unit grid spacing in natural units
+        double dy = 1.0;
+        auto em_fields = EMFieldComputer::computeFromPhase(
+            _theta_data,
+            _theta_previous,
+            static_cast<int>(_Nx),
+            static_cast<int>(_Ny),
+            dx, dy, static_cast<double>(dt)
+        );
+
+        // Extract fields and convert to std::vector<float>
+        _phi_data.resize(_Nx * _Ny);
+        _A_x_data.resize(_Nx * _Ny);
+        _A_y_data.resize(_Nx * _Ny);
+        _E_x_data.resize(_Nx * _Ny);
+        _E_y_data.resize(_Nx * _Ny);
+        _B_z_data.resize(_Nx * _Ny);
+
+        for (uint32_t i = 0; i < _Nx; i++) {
+            for (uint32_t j = 0; j < _Ny; j++) {
+                int idx = j * _Nx + i;  // Row-major indexing
+                _phi_data[idx] = static_cast<float>(em_fields.phi(i, j));
+                _A_x_data[idx] = static_cast<float>(em_fields.A_x(i, j));
+                _A_y_data[idx] = static_cast<float>(em_fields.A_y(i, j));
+                _E_x_data[idx] = static_cast<float>(em_fields.E_x(i, j));
+                _E_y_data[idx] = static_cast<float>(em_fields.E_y(i, j));
+                _B_z_data[idx] = static_cast<float>(em_fields.B_z(i, j));
+            }
+        }
+
+        // Apply EM coupling to Dirac evolution
+        // Physics: Minimal coupling ∇ → ∇ - iqA and scalar potential φ
+        _dirac_evolution->applyEMPotentialStep(_phi_data, dt);
+        _dirac_evolution->applyMinimalCoupling(_A_x_data, _A_y_data);
+
+        // Apply to antiparticle if in two-particle mode
+        if (_two_particle_mode && _dirac_antiparticle) {
+            _dirac_antiparticle->applyEMPotentialStep(_phi_data, dt);
+            _dirac_antiparticle->applyMinimalCoupling(_A_x_data, _A_y_data);
+        }
+
+        // Update theta history for next timestep
+        _theta_previous = _theta_data;
     }
 
     // Split-operator evolution step (unitary, preserves norm exactly)

@@ -39,6 +39,31 @@ EMFieldComputer::EMFields EMFieldComputer::computeFromPhase(
     return fields;
 }
 
+EMFieldComputer::EMFields EMFieldComputer::computeFromPhase(
+    const std::vector<float>& theta_current,
+    const std::vector<float>& theta_previous,
+    int Nx, int Ny,
+    double dx, double dy, double dt)
+{
+    // Convert std::vector<float> to Eigen::MatrixXd (row-major layout)
+    // std::vector layout: theta[j*Nx + i] = value at grid point (i,j)
+    // Eigen::MatrixXd layout: mat(i,j) = value at grid point (i,j)
+
+    Eigen::MatrixXd theta_curr_mat(Nx, Ny);
+    Eigen::MatrixXd theta_prev_mat(Nx, Ny);
+
+    for (int i = 0; i < Nx; i++) {
+        for (int j = 0; j < Ny; j++) {
+            int idx = j * Nx + i;  // Row-major indexing
+            theta_curr_mat(i, j) = static_cast<double>(theta_current[idx]);
+            theta_prev_mat(i, j) = static_cast<double>(theta_previous[idx]);
+        }
+    }
+
+    // Call Eigen version
+    return computeFromPhase(theta_curr_mat, theta_prev_mat, dx, dy, dt);
+}
+
 void EMFieldComputer::computeFieldStrengths(
     EMFields& fields,
     double dx, double dy)

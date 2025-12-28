@@ -13,14 +13,20 @@
 
 class DiracEvolution {
 public:
-    DiracEvolution(uint32_t Nx, uint32_t Ny);
+    DiracEvolution(uint32_t Nx, uint32_t Ny, float beta_sign = +1.0f);
     ~DiracEvolution();
 
     // Initialize 4-component spinor field
     void initialize(float x0, float y0, float sigma);
 
+    // Initialize as plane wave with momentum (kx, ky)
+    // Used for dispersion relation analysis
+    void initializePlaneWave(float kx, float ky);
+
     // Split-operator evolution step
-    void step(const std::vector<float>& mass_field, float dt);
+    // If time_dilation_mode enabled and R_field provided, uses dt_eff = R_center·dt
+    void step(const std::vector<float>& mass_field, float dt,
+              const std::vector<float>* R_field = nullptr);
 
     // Get spinor density |Ψ|² at each point
     std::vector<float> getDensity() const;
@@ -37,8 +43,33 @@ public:
     int getNy() const { return _Ny; }
     double getDx() const { return 1.0; } // Unit grid spacing
 
+    // Get beta sign (particle/antiparticle charge)
+    float getBetaSign() const { return _beta_sign; }
+
     // Norm check (should always be 1.0 to machine precision)
     float getNorm() const;
+
+    // === Time Dilation Mode (Phase 4 Test 4.1) ===
+
+    // Enable/disable time dilation: dτ = R(x)·dt
+    // When enabled, effective timestep becomes dt_eff = R_local·dt
+    void setTimeDilationMode(bool enable) { _time_dilation_mode = enable; }
+    bool getTimeDilationMode() const { return _time_dilation_mode; }
+
+    // === Electromagnetic Coupling Mode (Phase 5 Test 5.1) ===
+
+    // Enable/disable EM coupling: Minimal coupling ∇ → ∇ - iqA
+    // When enabled, gauge potential A from Kuramoto phase affects evolution
+    void setEMCouplingMode(bool enable, float coupling_strength = 1.0f) {
+        _em_coupling_enabled = enable;
+        _em_coupling_strength = coupling_strength;
+    }
+    bool getEMCouplingMode() const { return _em_coupling_enabled; }
+    float getEMCouplingStrength() const { return _em_coupling_strength; }
+
+    // Get R-field value at wavepacket center via bilinear interpolation
+    // Used for time-dilation evolution: dt_eff = R_center·dt
+    float getRFieldAtPosition(const std::vector<float>& R_field, float x, float y) const;
 
     // === Physics Analysis Methods ===
 
@@ -48,6 +79,38 @@ public:
 
     // Get center of mass of wavepacket
     void getCenterOfMass(float& x_mean, float& y_mean) const;
+
+    // === Electromagnetic Coupling Evolution ===
+
+    /**
+     * Apply electromagnetic potential step
+     *
+     * Physics: U_EM = exp(-i q φ dt)
+     * Where φ = ∂_t θ is scalar potential from Kuramoto phase
+     *
+     * This is a diagonal operator in position space
+     *
+     * @param phi_field: Scalar potential φ(x,y) [Nx × Ny as flat vector]
+     * @param dt: Timestep
+     */
+    void applyEMPotentialStep(const std::vector<float>& phi_field, float dt);
+
+    /**
+     * Apply minimal coupling to kinetic step
+     *
+     * Physics: Replace ∇ → ∇ - iq A in momentum operator
+     * Modified Hamiltonian: H = α·(p - qA) + βm
+     *
+     * Implementation: Peierls substitution in real space
+     * ∂_x ψ → (ψ[i+1] - ψ[i-1])/(2dx) - iq A_x ψ
+     *
+     * Note: This must be called BEFORE the kinetic half-step
+     *
+     * @param A_x_field: Vector potential x-component [Nx × Ny as flat vector]
+     * @param A_y_field: Vector potential y-component [Nx × Ny as flat vector]
+     */
+    void applyMinimalCoupling(const std::vector<float>& A_x_field,
+                              const std::vector<float>& A_y_field);
 
     // Get momentum space density |Ψ̃(k)|² for dispersion analysis
     // Returns kx, ky grids and momentum-space density
@@ -70,6 +133,18 @@ public:
 private:
     uint32_t _Nx, _Ny;
     uint32_t _N_points;
+    float _beta_sign;  // +1 for particle, -1 for antiparticle
+
+    // Time dilation mode flag (Phase 4)
+    bool _time_dilation_mode;
+
+    // Electromagnetic coupling mode flags (Phase 5)
+    bool _em_coupling_enabled;
+    float _em_coupling_strength;  // Effective charge q
+
+    // Vector potential storage (for Peierls substitution)
+    std::vector<float> _A_x_field;
+    std::vector<float> _A_y_field;
 
     // 4-component spinor: psi[0..3][y*Nx + x]
     std::vector<std::complex<float>> _psi[4];

@@ -247,6 +247,28 @@ public:
         const Eigen::MatrixXd& theta_previous,
         double dx, double dy, double dt);
 
+    /**
+     * Convenience wrapper: Extract EM fields from std::vector<float> phase data
+     *
+     * Same physics as Eigen version, but accepts CPU vectors (row-major layout).
+     * Useful for integration with SMFTEngine which uses std::vector<float> internally.
+     *
+     * @param[in] theta_current    Current phase field [Nx*Ny flat vector]
+     * @param[in] theta_previous   Previous phase field [Nx*Ny flat vector]
+     * @param[in] Nx               Grid width
+     * @param[in] Ny               Grid height
+     * @param[in] dx               Grid spacing x
+     * @param[in] dy               Grid spacing y
+     * @param[in] dt               Timestep
+     *
+     * @return EMFields            Potentials and fields (stored as Eigen matrices)
+     */
+    static EMFields computeFromPhase(
+        const std::vector<float>& theta_current,
+        const std::vector<float>& theta_previous,
+        int Nx, int Ny,
+        double dx, double dy, double dt);
+
     // ========================================================================
     // PUBLIC METHODS: FIELD STRENGTH COMPUTATION
     // ========================================================================
