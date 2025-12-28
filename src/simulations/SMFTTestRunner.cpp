@@ -566,7 +566,8 @@ bool SMFTTestRunner::runSingleTest(int N) {
         if (kg) {
             obs_initial = ObservableComputer::computeKG(
                 *kg, R_field_double, _config.physics.delta, 0.0,
-                0.0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+                0.0, 0.0,  // E0=0.0, em_field_energy=0.0 at t=0
+                _config.validation.norm_tolerance, _config.validation.energy_tolerance
             );
             E0 = obs_initial.energy_total;
         } else {
@@ -589,7 +590,8 @@ bool SMFTTestRunner::runSingleTest(int N) {
 
         obs_initial = ObservableComputer::compute(
             dirac_temp, R_field_double, _config.physics.delta, 0.0,
-            0.0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+            0.0, 0.0,  // E0=0.0, em_field_energy=0.0 at t=0
+            _config.validation.norm_tolerance, _config.validation.energy_tolerance
         );
         E0 = obs_initial.energy_total;
     }
@@ -615,6 +617,12 @@ bool SMFTTestRunner::runSingleTest(int N) {
         } else {
             snapshot_steps = _config.output.snapshot_steps;
         }
+    }
+
+    // Initialize theta_previous for EM field energy computation
+    // This ensures E0 includes EM field energy from the start
+    if (_config.physics.em_coupling_enabled && !use_klein_gordon) {
+        _theta_previous = _engine->getPhaseField();
     }
 
     for (int step = 0; step < total_steps; ++step) {
@@ -649,7 +657,8 @@ bool SMFTTestRunner::runSingleTest(int N) {
                 if (kg) {
                     obs = ObservableComputer::computeKG(
                         *kg, R_field_d, _config.physics.delta, time,
-                        E0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+                        E0, 0.0,  // em_field_energy=0.0 (EM not used with Klein-Gordon)
+                        _config.validation.norm_tolerance, _config.validation.energy_tolerance
                     );
                 } else {
                     // Fallback if Klein-Gordon not initialized
@@ -670,9 +679,24 @@ bool SMFTTestRunner::runSingleTest(int N) {
                 // Dirac observables
                 const DiracEvolution* dirac = _engine->getDiracEvolution();
                 if (dirac) {
+                    // Compute EM field energy if EM coupling is enabled
+                    double em_field_energy = 0.0;
+                    if (_config.physics.em_coupling_enabled && !_theta_previous.empty()) {
+                        // Compute EM observables to get field energy
+                        auto em_obs = ObservableComputer::computeEMObservables(
+                            theta_current, _theta_previous,
+                            dirac->getSpinorField(),
+                            dirac->getNx(), dirac->getNy(),
+                            dirac->getDx(), dirac->getDx(),
+                            _config.physics.dt
+                        );
+                        em_field_energy = em_obs.field_energy;
+                    }
+
                     obs = ObservableComputer::compute(
                         *dirac, R_field_d, _config.physics.delta, time,
-                        E0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+                        E0, em_field_energy,
+                        _config.validation.norm_tolerance, _config.validation.energy_tolerance
                     );
                 } else {
                     // Fallback if Dirac not initialized
@@ -689,6 +713,13 @@ bool SMFTTestRunner::runSingleTest(int N) {
                     obs.R_min = R_min;
                     obs.R_variance = R_var;
                 }
+            }
+
+            // Set E0 from first actual observation (including EM field energy)
+            // This ensures E0 matches what we actually observe at t=0
+            if (step == 0) {
+                E0 = obs.energy_total;
+                std::cout << "  Actual initial energy E0 = " << E0 << " (from first observation including EM)" << std::endl;
             }
 
             observables.push_back(obs);

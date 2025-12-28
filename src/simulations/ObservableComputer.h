@@ -103,6 +103,7 @@ public:
      * @param delta Vacuum potential Δ
      * @param time Current simulation time
      * @param E0 Initial energy (for relative energy conservation check)
+     * @param em_field_energy EM field energy contribution (default 0.0)
      * @param norm_tolerance Tolerance for ||Ψ||² ≈ 1 (default 1e-4)
      * @param energy_tolerance Tolerance for ΔE/E₀ (default 1e-2)
      * @return Observables struct with all computed values
@@ -113,6 +114,7 @@ public:
         double delta,
         double time,
         double E0 = 0.0,
+        double em_field_energy = 0.0,
         double norm_tolerance = 1e-4,
         double energy_tolerance = 1e-2);
 
@@ -193,6 +195,7 @@ public:
      * @param delta Vacuum potential Δ
      * @param time Current simulation time
      * @param E0 Initial energy (for relative energy conservation check)
+     * @param em_field_energy EM field energy contribution (default 0.0)
      * @param norm_tolerance Tolerance for ||φ||² ≈ 1 (default 1e-4)
      * @param energy_tolerance Tolerance for ΔE/E₀ (default 1e-2)
      * @return Observables struct with all computed values
@@ -203,6 +206,7 @@ public:
         double delta,
         double time,
         double E0 = 0.0,
+        double em_field_energy = 0.0,
         double norm_tolerance = 1e-4,
         double energy_tolerance = 1e-2);
 

@@ -65,17 +65,27 @@ public:
 
     // Physics parameters
     struct PhysicsConfig {
+        std::string solver_type = "dirac";  // Solver: "dirac" or "klein_gordon"
         float delta = 2.5f;           // Mass gap parameter
         float coupling = 0.1f;         // Kuramoto-Dirac coupling
         float dt = 0.01f;              // Timestep
         int total_steps = 100;         // Number of steps to run
         float K = 1.0f;                // Kuramoto coupling strength
         float damping = 0.1f;          // Phase damping
+        float noise_strength = 0.0f;   // Langevin noise amplitude (σ, 0 = deterministic)
+
+        // Phase transition scan parameters (Test 3.3)
+        std::vector<float> noise_scan;  // Array of noise values to scan (e.g., [0.0, 0.05, 0.1, ...])
+
+        // Electromagnetic coupling parameters (Phase 5)
+        bool em_coupling_enabled = false;     // Enable EM coupling from Kuramoto phase
+        float em_coupling_strength = 1.0f;    // Effective charge q
+        std::string em_coupling_type = "perturbative";  // "perturbative" or "full_gauge"
     };
 
     // Dirac initial condition
     struct DiracInitialCondition {
-        std::string type = "gaussian"; // Type: "gaussian", "boosted_gaussian", "plane_wave", etc.
+        std::string type = "gaussian"; // Type: "gaussian", "boosted_gaussian", "plane_wave", "linear_defects", "domain_split", "two_particle"
         float x0 = 32.0f;              // Center x (DEPRECATED: use x0_physical)
         float y0 = 32.0f;              // Center y (DEPRECATED: use y0_physical)
         float sigma = 3.0f;            // Width parameter (DEPRECATED: use sigma_physical)
@@ -90,6 +100,29 @@ public:
         std::vector<float> boost_velocities;  // Array of velocities to test (c = 1 in Planck units)
         float boost_vx = 0.0f;                // Single velocity boost in x-direction
         float boost_vy = 0.0f;                // Single velocity boost in y-direction
+
+        // Phase 3 IC parameters (Test 3.1: Casimir Force)
+        float defect_separation = 10.0f;      // Distance between linear defects [ℓ_P]
+        float defect_width = 1.0f;            // Transition width of defect [ℓ_P]
+        int winding_number = 1;               // Winding orientation for defects
+
+        // Phase 3 IC parameters (Test 3.2: Vacuum Energy)
+        float split_x = 50.0f;                // x-coordinate of domain boundary [ℓ_P]
+        float R_left = 1.0f;                  // Order parameter left side
+        float R_right = 0.0f;                 // Order parameter right side
+        float transition_width = 1.0f;        // Width of domain boundary transition [ℓ_P]
+
+        // Phase 3 IC parameters (Test 3.4: Two-particle mode)
+        bool two_particle_mode = false;       // Enable dual particle evolution
+        struct ParticleConfig {
+            float x0 = 40.0f;
+            float y0 = 50.0f;
+            float sigma = 3.0f;
+            float boost_vx = 0.0f;
+            float boost_vy = 0.0f;
+        };
+        ParticleConfig particle_1;            // First particle config
+        ParticleConfig particle_2;            // Second particle config
     };
 
     // Kuramoto initial condition
@@ -117,9 +150,34 @@ public:
 
     // Validation tolerances
     struct ValidationConfig {
-        float norm_tolerance = 1.0e-4f;      // ||Ψ||² - 1 tolerance
-        float energy_tolerance = 1.0e-2f;    // |ΔE/E₀| tolerance
+        // Global validation (always enforced)
+        float norm_tolerance = 5.0e-3f;      // ||Ψ||² - 1 tolerance (0.5%)
+        float energy_tolerance = 1.0e-2f;    // |ΔE/E₀| tolerance (1%)
         float convergence_tolerance = 0.05f; // Convergence check (5%)
+        bool enforce_R_bounds = true;        // Check 0 ≤ R ≤ 1
+        bool enforce_causality = true;       // Check v ≤ c
+        bool check_numerical_stability = true; // Check for NaN/Inf
+
+        // Scenario-specific validation
+        std::string scenario = "none";       // "none", "defect_localization", "traveling_wave", "relativistic_mass"
+
+        // Scenario: traveling_wave and relativistic_mass
+        bool require_vortex = false;         // Require W = ±1
+        float winding_tolerance = 0.2f;      // |W - 1| < tolerance
+        bool require_core = false;           // Require R_min < 0.5
+        float core_R_threshold = 0.5f;       // R_min threshold
+        bool require_boost = false;          // Require initial momentum
+        float initial_momentum_tolerance = 0.05f; // 5%
+        bool validate_gamma_factor = false;  // Validate γ_measured vs theory
+        float gamma_tolerance = 0.05f;       // 5%
+
+        // Validation timing
+        bool validate_initial_state = true;
+        bool validate_during_evolution = false;
+        int validation_interval = 100;       // Steps between runtime checks
+        bool validate_final_state = true;
+        bool fail_on_critical = true;        // Abort simulation on critical failure
+        bool verbose = true;                 // Print detailed validation output
     };
 
     // Output configuration
@@ -130,6 +188,36 @@ public:
         bool auto_visualize = false;               // Auto-generate plots after test
         bool save_spatial_snapshots = false;       // Save full spatial fields (theta, R) at snapshots
         std::vector<int> snapshot_steps = {};      // Timesteps at which to save spatial snapshots (empty = auto)
+
+        // Plotting configuration (NEW)
+        bool enable_plots = false;                 // Enable C++ plotting via matplotlib-cpp
+        int plot_dpi = 300;                        // DPI for saved figures
+        std::vector<std::string> plot_formats = {"png"}; // Plot output formats (png, pdf, svg)
+        bool plot_6panel = true;                   // Generate 6-panel observable plot
+        bool plot_conservation = true;             // Generate conservation law plots
+        bool plot_spatial_fields = true;           // Generate spatial field plots
+        bool plot_gamma_validation = false;        // Generate gamma factor validation plot (Scenario 2.3)
+    };
+
+    // Analysis configuration
+    struct AnalysisConfig {
+        std::string mode = "simulation"; // "simulation", "dispersion", "stability"
+        bool track_trajectory = false;
+        bool measure_velocity = false;
+        bool compute_effective_mass = false;
+        bool test_gamma_factor = false;
+        bool compute_energy = false;
+        bool lorentz_invariants = false;
+
+        // Boosted frame analysis (Phase 2.5B)
+        bool perform_lorentz_transform = false;       // Transform to boosted frame
+        bool measure_R_in_boosted_frame = false;      // Measure R'(x',t') in particle rest frame
+        bool test_lorentz_covariance = false;         // Test if m' = m in all frames
+        bool compute_frame_invariants = false;        // Verify E'² - p'² = E² - p²
+
+        // Dispersion analysis parameters
+        int dispersion_k_steps = 50;  // Number of k points to scan
+        float dispersion_max_k = 3.14159f; // Max k (pi/dx)
     };
 
     // Full test configuration
@@ -143,6 +231,7 @@ public:
     OperatorSplittingConfig operator_splitting;
     ValidationConfig validation;
     OutputConfig output;
+    AnalysisConfig analysis;
 
     /**
      * Load configuration from YAML file
@@ -185,6 +274,8 @@ private:
     void parseOperatorSplitting(const YAML::Node& node);
     void parseValidation(const YAML::Node& node);
     void parseOutput(const YAML::Node& node);
+    void parseAnalysis(const YAML::Node& node);
+    void parseEMCoupling(const YAML::Node& node);  // Parse em_coupling section (Phase 5/6)
 };
 
 #endif // TEST_CONFIG_H

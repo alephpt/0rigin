@@ -15,6 +15,7 @@ ObservableComputer::Observables ObservableComputer::compute(
     double delta,
     double time,
     double E0,
+    double em_field_energy,
     double norm_tolerance,
     double energy_tolerance) {
 
@@ -26,7 +27,7 @@ ObservableComputer::Observables ObservableComputer::compute(
     obs.norm_error = obs.norm - 1.0;
     obs.energy_kinetic = computeKineticEnergy(dirac);
     obs.energy_potential = computePotentialEnergy(dirac, R_field, delta);
-    obs.energy_total = obs.energy_kinetic + obs.energy_potential;
+    obs.energy_total = obs.energy_kinetic + obs.energy_potential + em_field_energy;
 
     obs.position_x = computePositionExpectation(dirac, 0);
     obs.position_y = computePositionExpectation(dirac, 1);
@@ -375,6 +376,7 @@ ObservableComputer::Observables ObservableComputer::computeKG(
     double delta,
     double time,
     double E0,
+    double em_field_energy,
     double norm_tolerance,
     double energy_tolerance) {
 
@@ -386,7 +388,7 @@ ObservableComputer::Observables ObservableComputer::computeKG(
     obs.norm_error = obs.norm - 1.0;
     obs.energy_kinetic = computeKineticEnergyKG(kg);
     obs.energy_potential = computePotentialEnergyKG(kg, R_field, delta);
-    obs.energy_total = obs.energy_kinetic + obs.energy_potential;
+    obs.energy_total = obs.energy_kinetic + obs.energy_potential + em_field_energy;
 
     obs.position_x = computePositionExpectationKG(kg, 0);
     obs.position_y = computePositionExpectationKG(kg, 1);
