@@ -271,6 +271,35 @@ void SMFTEngine::setNaturalFrequencies(const std::vector<float>& omega) {
     uploadToGPU();
 }
 
+void SMFTEngine::setInitialRField(const std::vector<float>& R_field) {
+    if (R_field.size() != _Nx * _Ny) {
+        std::cerr << "[SMFTEngine] Error: Invalid R_field array size ("
+                  << R_field.size() << " != " << (_Nx * _Ny) << ")" << std::endl;
+        return;
+    }
+
+    // Validate R values are in [0,1]
+    for (size_t i = 0; i < R_field.size(); ++i) {
+        if (R_field[i] < 0.0f || R_field[i] > 1.0f) {
+            std::cerr << "[SMFTEngine] Warning: R_field[" << i << "] = " << R_field[i]
+                      << " out of bounds [0,1], clamping" << std::endl;
+        }
+    }
+
+    // Update host mirror
+    _R_field_data = R_field;
+
+    // Upload to GPU if buffers exist
+    if (_bufferManager && _R_field_memory) {
+        _bufferManager->uploadData(_R_field_memory, _R_field_data.data(),
+                                   _R_field_data.size() * sizeof(float));
+    }
+
+    std::cout << "[SMFTEngine] R-field initialized with custom values" << std::endl;
+    std::cout << "  R_min = " << *std::min_element(_R_field_data.begin(), _R_field_data.end()) << std::endl;
+    std::cout << "  R_max = " << *std::max_element(_R_field_data.begin(), _R_field_data.end()) << std::endl;
+}
+
 void SMFTEngine::step(float dt, float K, float damping) {
     // Store timestep for derivative computation (Phase 4 Test 4.2)
     _last_dt = dt;

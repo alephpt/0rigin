@@ -63,6 +63,13 @@ public:
     void setNaturalFrequencies(const std::vector<float>& omega);
 
     /**
+     * Set initial R-field (synchronization order parameter)
+     * Used for specialized initialization (vortex cores, defects, domain splits)
+     * @param R_field Vector of R values (size = Nx * Ny, values in [0,1])
+     */
+    void setInitialRField(const std::vector<float>& R_field);
+
+    /**
      * Execute one time step of the simulation
      * @param dt Time step size
      * @param K Kuramoto coupling strength

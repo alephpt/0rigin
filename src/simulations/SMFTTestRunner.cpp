@@ -420,6 +420,34 @@ bool SMFTTestRunner::runSingleTest(int N) {
     _engine->setInitialPhases(phases);
     _engine->setNaturalFrequencies(omegas);
 
+    // Vortex R-field initialization (Sprint 1.1 fix)
+    if (_config.kuramoto_initial.phase_distribution == "vortex") {
+        const int Nx = _config.grid.size_x;
+        const int Ny = _config.grid.size_y;
+        const float L_domain = _config.grid.L_domain;
+        const float a = L_domain / Nx; // Lattice spacing [ℓ_P]
+
+        // Convert physical coordinates to grid units
+        float center_x_grid = _config.kuramoto_initial.vortex_center_x / a;
+        float center_y_grid = _config.kuramoto_initial.vortex_center_y / a;
+        float core_radius_grid = _config.kuramoto_initial.vortex_core_radius / a;
+
+        // Generate R-field with vortex core depression
+        auto R_field = InitialConditions::vortexCore(
+            Nx, Ny,
+            center_x_grid, center_y_grid,
+            core_radius_grid,
+            0.0f,  // R_min at vortex core (incoherent)
+            1.0f   // R_max background (synchronized)
+        );
+
+        _engine->setInitialRField(R_field);
+        std::cout << "  Vortex R-field initialized: R(r) = tanh(r/ξ) profile\n";
+        std::cout << "    Core center: (" << _config.kuramoto_initial.vortex_center_x
+                  << ", " << _config.kuramoto_initial.vortex_center_y << ") ℓ_P\n";
+        std::cout << "    Core radius: " << _config.kuramoto_initial.vortex_core_radius << " ℓ_P\n";
+    }
+
     // Handle Phase 3 special IC types that override R-field initialization
     const std::string ic_type = _config.dirac_initial.type;
     const int Nx = _config.grid.size_x;
@@ -566,12 +594,11 @@ bool SMFTTestRunner::runSingleTest(int N) {
     // Prepare results storage
     std::vector<ObservableComputer::Observables> observables;
 
-    // CRITICAL: At t=0, R-field hasn't been computed yet (still zero from engine->initialize())
-    // Klein-Gordon initialization uses R_bg=1.0 for mass calculation
-    // So for initial energy, we must use R=1.0 everywhere to match initialization
-    // R-field will be computed during first step() call
+    // Get actual R-field for initial energy calculation (Sprint 1.1 fix)
+    // For vortex configurations, R-field has been explicitly initialized with core depression
+    // For other configs, R-field is computed from theta during first step() call
     auto R_field_initial = _engine->getSyncField();
-    std::vector<double> R_field_double(R_field_initial.size(), 1.0);  // Use R=1.0 for initial energy
+    std::vector<double> R_field_double(R_field_initial.begin(), R_field_initial.end());
 
     ObservableComputer::Observables obs_initial;
     double E0 = 0.0;
