@@ -65,7 +65,7 @@ public:
 
     // Physics parameters
     struct PhysicsConfig {
-        std::string solver_type = "dirac";  // Solver: "dirac" or "klein_gordon"
+        std::string solver_type = "gpu";  // Solver: "gpu" (default), "dirac" (CPU), or "klein_gordon"
         float delta = 2.5f;           // Mass gap parameter
         float coupling = 0.1f;         // Kuramoto-Dirac coupling
         float dt = 0.01f;              // Timestep
@@ -127,7 +127,7 @@ public:
 
     // Kuramoto initial condition
     struct KuramotoInitialCondition {
-        std::string phase_distribution = "uniform";  // "uniform", "random", "vortex", "phase_gradient"
+        std::string phase_distribution = "uniform";  // "uniform", "random", "vortex", "phase_gradient", "multi_vortex"
         std::string omega_distribution = "zero";     // "zero", "gaussian", "random"
         float omega_mean = 0.0f;
         float omega_std = 0.1f;
@@ -135,11 +135,23 @@ public:
         float wave_vector_x = 0.0f;
         float wave_vector_y = 0.0f;
 
-        // Vortex configuration (grid-independent physical parameters)
+        // Single vortex configuration (grid-independent physical parameters)
         int winding_number = 1;              // Topological charge
         float vortex_core_radius = 3.0f;     // Core radius in Planck lengths (grid-independent)
         float vortex_center_x = 50.0f;       // Center x in physical units (default: domain center)
         float vortex_center_y = 50.0f;       // Center y in physical units (default: domain center)
+
+        // Vortex pair configuration (Sprint 2: Multi-Defect Interactions)
+        float vortex_separation = 10.0f;     // Separation between vortex pair in Planck lengths
+
+        // Multi-vortex configuration (Phase 5/6: EM tests)
+        struct VortexConfig {
+            float center_x = 50.0f;          // Center x in Planck lengths
+            float center_y = 50.0f;          // Center y in Planck lengths
+            int winding = 1;                 // Topological charge (+1, -1, etc.)
+            float core_radius = 3.0f;        // Core radius in Planck lengths
+        };
+        std::vector<VortexConfig> vortices;  // Array of vortices for multi_vortex type
     };
 
     // Operator splitting configuration

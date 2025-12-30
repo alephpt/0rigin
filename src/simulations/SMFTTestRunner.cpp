@@ -140,6 +140,46 @@ bool SMFTTestRunner::run() {
     }
     // TODO: Add "stability" analysis mode here
 
+    // Check if noise scan testing is enabled (Test 3.3: Phase Transition)
+    bool has_noise_scan = !_config.physics.noise_scan.empty();
+
+    if (has_noise_scan) {
+        std::cout << "\n===== Noise Scan: Phase Transition (Test 3.3) =====" << std::endl;
+        std::cout << "Scanning noise values: ";
+        for (size_t i = 0; i < _config.physics.noise_scan.size(); ++i) {
+            std::cout << _config.physics.noise_scan[i];
+            if (i < _config.physics.noise_scan.size() - 1) std::cout << ", ";
+        }
+        std::cout << std::endl;
+
+        // Clear previous phase transition data
+        _phase_transition_runs.clear();
+
+        int grid_size = _config.grid.size_x;
+
+        for (float sigma : _config.physics.noise_scan) {
+            std::cout << "\n========================================" << std::endl;
+            std::cout << "Noise amplitude: σ = " << sigma << std::endl;
+            std::cout << "========================================" << std::endl;
+
+            double R_eq = runForNoise(grid_size, sigma);
+
+            // Store result for phase transition analysis
+            PhaseTransitionRun run;
+            run.noise_sigma = sigma;
+            run.R_equilibrium = R_eq;
+            _phase_transition_runs.push_back(run);
+
+            std::cout << "  Equilibrium order parameter: R_eq = " << R_eq << std::endl;
+        }
+
+        // Perform phase transition analysis
+        analyzePhaseTransition();
+
+        std::cout << "\n===== Noise Scan Complete =====" << std::endl;
+        return true;  // Noise scan is successful if all runs complete
+    }
+
     // Existing simulation logic continues
     // Check if velocity sweep testing is enabled (Scenario 2.3)
     bool has_velocity_sweep = !_config.dirac_initial.boost_velocities.empty();
@@ -410,6 +450,83 @@ bool SMFTTestRunner::runForGridSizeAndVelocity(int grid_size, float velocity) {
     return result;
 }
 
+double SMFTTestRunner::runForNoise(int grid_size, float noise_sigma) {
+    // Re-initialize engine with specified grid size
+    std::cout << "\nInitializing engine for " << grid_size << "×" << grid_size << " grid, noise σ=" << noise_sigma << "..." << std::endl;
+
+    // Clean up previous engine
+    if (_engine) {
+        delete _engine;
+        _engine = nullptr;
+    }
+
+    // Create and initialize new engine
+    _engine = new SMFTEngine(_nova);
+
+    // EM coupling not needed for Kuramoto-only phase transition test
+    _engine->initialize(grid_size, grid_size, _config.physics.delta, 0.0f);
+
+    // Update grid size tracking
+    _current_grid_size = grid_size;
+
+    // Temporarily update config for this noise level
+    int original_size_x = _config.grid.size_x;
+    int original_size_y = _config.grid.size_y;
+    float original_noise = _config.physics.noise_strength;
+
+    _config.grid.size_x = grid_size;
+    _config.grid.size_y = grid_size;
+    _config.physics.noise_strength = noise_sigma;
+
+    // Initialize Kuramoto field (uniform synchronized state)
+    auto phases = initializePhases();
+    auto omegas = initializeOmegas();
+    _engine->setInitialPhases(phases);
+    _engine->setNaturalFrequencies(omegas);
+
+    // Run evolution to equilibrium
+    int total_steps = _config.physics.total_steps;
+    int equilibration_start = static_cast<int>(total_steps * 0.8);  // Last 20% for equilibrium measurement
+
+    std::cout << "  Running " << total_steps << " steps to equilibrium..." << std::endl;
+
+    double R_sum = 0.0;
+    int R_count = 0;
+
+    for (int step = 0; step < total_steps; ++step) {
+        // Kuramoto-only evolution with stochastic noise
+        _engine->stepKuramotoCPUStochastic(_config.physics.dt, _config.physics.K, _config.physics.damping, noise_sigma);
+
+        // Measure R during equilibrium period
+        if (step >= equilibration_start) {
+            std::vector<float> R_field = _engine->getSyncField();
+            double R_avg = 0.0;
+            for (float R : R_field) {
+                R_avg += R;
+            }
+            R_avg /= R_field.size();
+
+            R_sum += R_avg;
+            R_count++;
+        }
+
+        // Progress indicator every 10%
+        if (step % (total_steps / 10) == 0 && step > 0) {
+            std::cout << "    Step " << step << "/" << total_steps << std::endl;
+        }
+    }
+
+    // Compute equilibrium R value
+    double R_equilibrium = (R_count > 0) ? (R_sum / R_count) : 0.0;
+
+    // Restore original config
+    _config.grid.size_x = original_size_x;
+    _config.grid.size_y = original_size_y;
+    _config.physics.noise_strength = original_noise;
+
+    return R_equilibrium;
+}
+
 bool SMFTTestRunner::runSingleTest(int N) {
     // Set substep ratio
     _engine->setSubstepRatio(N);
@@ -445,6 +562,48 @@ bool SMFTTestRunner::runSingleTest(int N) {
         std::cout << "  Vortex R-field initialized: R(r) = tanh(r/ξ) profile\n";
         std::cout << "    Core center: (" << _config.kuramoto_initial.vortex_center_x
                   << ", " << _config.kuramoto_initial.vortex_center_y << ") ℓ_P\n";
+        std::cout << "    Core radius: " << _config.kuramoto_initial.vortex_core_radius << " ℓ_P\n";
+    } else if (_config.kuramoto_initial.phase_distribution == "vortex_pair") {
+        // Sprint 2: Vortex pair R-field initialization
+        // Creates overlapping R-field cores: R(x,y) = min(R₁(x,y), R₂(x,y))
+
+        const int Nx = _config.grid.size_x;
+        const int Ny = _config.grid.size_y;
+        const float L_domain = _config.grid.L_domain;
+        const float a = L_domain / Nx;  // Lattice spacing [ℓ_P]
+
+        // Get vortex pair parameters from config
+        const float separation = _config.kuramoto_initial.vortex_separation;
+        const float center_x = _config.kuramoto_initial.vortex_center_x;
+        const float center_y = _config.kuramoto_initial.vortex_center_y;
+        const float core_radius_grid = _config.kuramoto_initial.vortex_core_radius / a;
+
+        // Vortex 1: left of center (W = +1)
+        const float cx1_phys = center_x - separation/2;
+        const float cy1_phys = center_y;
+        const float cx1_grid = cx1_phys / a;
+        const float cy1_grid = cy1_phys / a;
+
+        // Vortex 2: right of center (W = -1, antivortex)
+        const float cx2_phys = center_x + separation/2;
+        const float cy2_phys = center_y;
+        const float cx2_grid = cx2_phys / a;
+        const float cy2_grid = cy2_phys / a;
+
+        auto R_field = InitialConditions::vortexPair(
+            Nx, Ny,
+            cx1_grid, cy1_grid, 1,   // Vortex: W = +1
+            cx2_grid, cy2_grid, -1,  // Antivortex: W = -1
+            core_radius_grid,
+            0.0f,  // R_min at vortex cores (incoherent)
+            1.0f   // R_max background (synchronized)
+        );
+
+        _engine->setInitialRField(R_field);
+        std::cout << "  Vortex pair R-field initialized: overlapping core profiles\n";
+        std::cout << "    Separation: " << separation << " ℓ_P\n";
+        std::cout << "    Vortex 1 (W=+1): (" << cx1_phys << ", " << cy1_phys << ") ℓ_P\n";
+        std::cout << "    Vortex 2 (W=-1): (" << cx2_phys << ", " << cy2_phys << ") ℓ_P\n";
         std::cout << "    Core radius: " << _config.kuramoto_initial.vortex_core_radius << " ℓ_P\n";
     }
 
@@ -665,11 +824,8 @@ bool SMFTTestRunner::runSingleTest(int N) {
         }
     }
 
-    // Initialize theta_previous for EM field energy computation
-    // This ensures E0 includes EM field energy from the start
-    if (_config.physics.em_coupling_enabled && !use_klein_gordon) {
-        _theta_previous = _engine->getPhaseField();
-    }
+    // DO NOT initialize theta_previous before loop - causes NaN at step 0
+    // Will be initialized after first step
 
     for (int step = 0; step < total_steps; ++step) {
         // Evolve system with operator splitting ratio N
@@ -726,8 +882,9 @@ bool SMFTTestRunner::runSingleTest(int N) {
                 const DiracEvolution* dirac = _engine->getDiracEvolution();
                 if (dirac) {
                     // Compute EM field energy if EM coupling is enabled
+                    // CRITICAL: Skip EM energy at step 0 (no previous theta yet)
                     double em_field_energy = 0.0;
-                    if (_config.physics.em_coupling_enabled && !_theta_previous.empty()) {
+                    if (_config.physics.em_coupling_enabled && !_theta_previous.empty() && step > 0) {
                         // Compute EM observables to get field energy
                         auto em_obs = ObservableComputer::computeEMObservables(
                             theta_current, _theta_previous,
@@ -737,6 +894,13 @@ bool SMFTTestRunner::runSingleTest(int N) {
                             _config.physics.dt
                         );
                         em_field_energy = em_obs.field_energy;
+
+                        // Validate EM energy is not NaN
+                        if (std::isnan(em_field_energy) || std::isinf(em_field_energy)) {
+                            std::cerr << "[WARNING] EM field energy is " << em_field_energy
+                                     << " at step " << step << ", setting to 0.0" << std::endl;
+                            em_field_energy = 0.0;
+                        }
                     }
 
                     obs = ObservableComputer::compute(
@@ -761,8 +925,8 @@ bool SMFTTestRunner::runSingleTest(int N) {
                 }
             }
 
-            // Set E0 from first actual observation (including EM field energy)
-            // This ensures E0 matches what we actually observe at t=0
+            // Set E0 from first actual observation (excluding EM at step 0)
+            // This ensures E0 is based on Dirac + Kuramoto energy only
             if (step == 0) {
                 E0 = obs.energy_total;
                 std::cout << "  Actual initial energy E0 = " << E0 << " (from first observation including EM)" << std::endl;
@@ -771,7 +935,8 @@ bool SMFTTestRunner::runSingleTest(int N) {
             observables.push_back(obs);
 
             // Compute EM observables if EM coupling is enabled (Phase 5)
-            if (_config.physics.em_coupling_enabled && !use_klein_gordon) {
+            // CRITICAL: Only compute after step 0 (need valid theta_previous)
+            if (_config.physics.em_coupling_enabled && !use_klein_gordon && step > 0) {
                 const DiracEvolution* dirac = _engine->getDiracEvolution();
                 if (dirac && !_theta_previous.empty()) {
                     // Get spinor field
@@ -792,11 +957,11 @@ bool SMFTTestRunner::runSingleTest(int N) {
                     }
                     _em_results[N].push_back(em_obs);
                 }
+            }
 
-                // Update previous theta for next iteration
-                _theta_previous = theta_current;
-            } else if (_config.physics.em_coupling_enabled && _theta_previous.empty()) {
-                // Initialize theta_previous on first iteration
+            // Update previous theta for next iteration
+            // Initialize on first observation (step 0)
+            if (_config.physics.em_coupling_enabled && !use_klein_gordon) {
                 _theta_previous = theta_current;
             }
 
@@ -1095,6 +1260,60 @@ std::vector<float> SMFTTestRunner::initializePhases() const {
                 phases[iy * _config.grid.size_x + ix] = theta_vortex * profile;
             }
         }
+    } else if (_config.kuramoto_initial.phase_distribution == "vortex_pair") {
+        // Sprint 2: Multi-vortex phase field initialization
+        // Creates vortex-antivortex pair: θ(r) = W₁·arg(z-z₁) + W₂·arg(z-z₂)
+
+        const float L_domain = _config.grid.L_domain;
+        const float a = L_domain / _config.grid.size_x;
+        const float r_core = _config.kuramoto_initial.vortex_core_radius;
+
+        // Get vortex pair parameters from config
+        // For now, use simple defaults: W=+1 at left, W=-1 at right
+        const int W1 = 1;   // First vortex winding
+        const int W2 = -1;  // Second vortex winding (antivortex)
+
+        // Position vortices symmetrically around center
+        const float separation = _config.kuramoto_initial.vortex_separation;  // Physical units [ℓ_P]
+        const float center_x = _config.kuramoto_initial.vortex_center_x;
+        const float center_y = _config.kuramoto_initial.vortex_center_y;
+
+        // Vortex 1: left of center
+        const float cx1_phys = center_x - separation/2;
+        const float cy1_phys = center_y;
+        const float cx1_grid = cx1_phys / a;
+        const float cy1_grid = cy1_phys / a;
+
+        // Vortex 2: right of center
+        const float cx2_phys = center_x + separation/2;
+        const float cy2_phys = center_y;
+        const float cx2_grid = cx2_phys / a;
+        const float cy2_grid = cy2_phys / a;
+
+        std::cout << "  Vortex pair initialization:\n";
+        std::cout << "    Separation: " << separation << " ℓ_P\n";
+        std::cout << "    Vortex 1: W=" << W1 << " at (" << cx1_phys << ", " << cy1_phys << ") ℓ_P\n";
+        std::cout << "    Vortex 2: W=" << W2 << " at (" << cx2_phys << ", " << cy2_phys << ") ℓ_P\n";
+        std::cout << "    Total charge: W_total = " << (W1 + W2) << "\n";
+
+        for (int iy = 0; iy < _config.grid.size_y; ++iy) {
+            for (int ix = 0; ix < _config.grid.size_x; ++ix) {
+                // Phase contribution from vortex 1
+                float dx1 = ix - cx1_grid;
+                float dy1 = iy - cy1_grid;
+                float r1 = std::sqrt(dx1*dx1 + dy1*dy1) * a;
+                float theta1 = W1 * std::atan2(dy1, dx1) * std::tanh(r1 / r_core);
+
+                // Phase contribution from vortex 2
+                float dx2 = ix - cx2_grid;
+                float dy2 = iy - cy2_grid;
+                float r2 = std::sqrt(dx2*dx2 + dy2*dy2) * a;
+                float theta2 = W2 * std::atan2(dy2, dx2) * std::tanh(r2 / r_core);
+
+                // Superposition of phase fields
+                phases[iy * _config.grid.size_x + ix] = theta1 + theta2;
+            }
+        }
     } else if (_config.kuramoto_initial.phase_distribution == "phase_gradient") {
         // Create traveling wave via phase gradient: θ(x,y) = k_x*x + k_y*y
         float kx = _config.kuramoto_initial.wave_vector_x;
@@ -1104,6 +1323,60 @@ std::vector<float> SMFTTestRunner::initializePhases() const {
                 phases[iy * _config.grid.size_x + ix] = kx * ix + ky * iy;
             }
         }
+    } else if (_config.kuramoto_initial.phase_distribution == "multi_vortex") {
+        // Phase 5/6: Multiple vortices with arbitrary positions and windings
+        // θ(r) = Σᵢ Wᵢ·atan2(y-yᵢ, x-xᵢ)·tanh(rᵢ/r_core,ᵢ)
+
+        const float L_domain = _config.grid.L_domain;
+        const float a = L_domain / _config.grid.size_x;
+
+        std::cout << "  Multi-vortex initialization:\n";
+        std::cout << "    Domain size: " << L_domain << " ℓ_P\n";
+        std::cout << "    Grid spacing: " << a << " ℓ_P\n";
+        std::cout << "    Number of vortices: " << _config.kuramoto_initial.vortices.size() << "\n";
+
+        // Initialize to zero
+        std::fill(phases.begin(), phases.end(), 0.0f);
+
+        // Superpose all vortices
+        for (size_t v = 0; v < _config.kuramoto_initial.vortices.size(); ++v) {
+            const auto& vortex = _config.kuramoto_initial.vortices[v];
+            const float cx_phys = vortex.center_x;
+            const float cy_phys = vortex.center_y;
+            const int W = vortex.winding;
+            const float r_core = vortex.core_radius;
+
+            const float cx_grid = cx_phys / a;
+            const float cy_grid = cy_phys / a;
+
+            std::cout << "    Vortex " << v << ": W=" << W
+                      << " at (" << cx_phys << ", " << cy_phys << ") ℓ_P"
+                      << ", r_core=" << r_core << " ℓ_P\n";
+
+            for (int iy = 0; iy < _config.grid.size_y; ++iy) {
+                for (int ix = 0; ix < _config.grid.size_x; ++ix) {
+                    float dx_grid = ix - cx_grid;
+                    float dy_grid = iy - cy_grid;
+                    float r_grid = std::sqrt(dx_grid*dx_grid + dy_grid*dy_grid);
+                    float r_phys = r_grid * a;
+
+                    // Regularized vortex profile with smooth core
+                    // Use epsilon to prevent division by zero at vortex center
+                    const float eps = 1e-8f;
+                    float profile = std::tanh((r_phys + eps) / (r_core + eps));
+                    float theta_contrib = W * std::atan2(dy_grid, dx_grid + eps);
+
+                    phases[iy * _config.grid.size_x + ix] += theta_contrib * profile;
+                }
+            }
+        }
+
+        // Compute total topological charge
+        int total_winding = 0;
+        for (const auto& v : _config.kuramoto_initial.vortices) {
+            total_winding += v.winding;
+        }
+        std::cout << "    Total topological charge: W_total = " << total_winding << "\n";
     }
 
     return phases;

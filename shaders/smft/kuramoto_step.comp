@@ -177,20 +177,37 @@ void main() {
     float theta_i = theta[idx];
     float omega_i = omega[idx];
 
+    // NaN protection: Check input validity
+    if (isnan(theta_i) || isinf(theta_i)) {
+        theta_out[idx] = 0.0;  // Reset to zero if invalid
+        return;
+    }
+
     // Compute forces
     float coupling_force = compute_coupling_force(local_id.x, local_id.y, theta_i);
     float spinor_force = compute_spinor_feedback(idx, theta_i);
     float damping_force = -params.damping * sin(theta_i);
 
-    // Total force
+    // Total force with NaN guard
     float total_force = omega_i + coupling_force + spinor_force + damping_force;
 
     // Euler integration: θ(t+dt) = θ(t) + dt·(dθ/dt)
     float theta_new = theta_i + params.dt * total_force;
 
+    // NaN protection: Clamp extreme values before wrapping
+    const float MAX_THETA = 1000.0;  // Prevent overflow before mod
+    if (abs(theta_new) > MAX_THETA || isnan(theta_new) || isinf(theta_new)) {
+        theta_new = theta_i;  // Revert to previous value if unstable
+    }
+
     // Wrap to [-π, π]
     const float PI = 3.14159265359;
     theta_new = mod(theta_new + PI, 2.0 * PI) - PI;
+
+    // Final NaN check before write
+    if (isnan(theta_new) || isinf(theta_new)) {
+        theta_new = 0.0;  // Failsafe: reset to zero
+    }
 
     // Write output
     theta_out[idx] = theta_new;

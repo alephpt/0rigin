@@ -380,6 +380,9 @@ void TestConfig::parseDiracInitial(const YAML::Node& node) {
 }
 
 void TestConfig::parseKuramotoInitial(const YAML::Node& node) {
+    if (node["type"]) {
+        kuramoto_initial.phase_distribution = node["type"].as<std::string>();
+    }
     if (node["phase_distribution"]) {
         kuramoto_initial.phase_distribution = node["phase_distribution"].as<std::string>();
     }
@@ -391,11 +394,27 @@ void TestConfig::parseKuramotoInitial(const YAML::Node& node) {
     if (node["wave_vector_x"]) kuramoto_initial.wave_vector_x = node["wave_vector_x"].as<float>();
     if (node["wave_vector_y"]) kuramoto_initial.wave_vector_y = node["wave_vector_y"].as<float>();
 
-    // Vortex configuration (grid-independent)
+    // Single vortex configuration (grid-independent)
     if (node["winding_number"]) kuramoto_initial.winding_number = node["winding_number"].as<int>();
     if (node["vortex_core_radius"]) kuramoto_initial.vortex_core_radius = node["vortex_core_radius"].as<float>();
     if (node["vortex_center_x"]) kuramoto_initial.vortex_center_x = node["vortex_center_x"].as<float>();
     if (node["vortex_center_y"]) kuramoto_initial.vortex_center_y = node["vortex_center_y"].as<float>();
+
+    // Vortex pair configuration (Sprint 2: Multi-Defect Interactions)
+    if (node["vortex_separation"]) kuramoto_initial.vortex_separation = node["vortex_separation"].as<float>();
+
+    // Multi-vortex configuration (Phase 5/6: EM tests)
+    if (node["vortices"]) {
+        kuramoto_initial.vortices.clear();
+        for (const auto& v : node["vortices"]) {
+            KuramotoInitialCondition::VortexConfig vortex;
+            if (v["center_x"]) vortex.center_x = v["center_x"].as<float>();
+            if (v["center_y"]) vortex.center_y = v["center_y"].as<float>();
+            if (v["winding"]) vortex.winding = v["winding"].as<int>();
+            if (v["core_radius"]) vortex.core_radius = v["core_radius"].as<float>();
+            kuramoto_initial.vortices.push_back(vortex);
+        }
+    }
 }
 
 void TestConfig::parseOperatorSplitting(const YAML::Node& node) {
