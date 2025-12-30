@@ -7,6 +7,7 @@
 #include "validation/ScenarioValidator.h"
 #include "analysis/PowerLawFitter.h"
 #include "validation/PhaseTransitionAnalyzer.h"
+#include "validation/EnergyBudget.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -881,9 +882,11 @@ bool SMFTTestRunner::runSingleTest(int N) {
                 // Dirac observables
                 const DiracEvolution* dirac = _engine->getDiracEvolution();
                 if (dirac) {
-                    // Compute EM field energy if EM coupling is enabled
+                    // Compute EM and Kuramoto field energies if EM coupling is enabled
                     // CRITICAL: Skip EM energy at step 0 (no previous theta yet)
                     double em_field_energy = 0.0;
+                    double kuramoto_field_energy = 0.0;
+
                     if (_config.physics.em_coupling_enabled && !_theta_previous.empty() && step > 0) {
                         // Compute EM observables to get field energy
                         auto em_obs = ObservableComputer::computeEMObservables(
@@ -901,12 +904,18 @@ bool SMFTTestRunner::runSingleTest(int N) {
                                      << " at step " << step << ", setting to 0.0" << std::endl;
                             em_field_energy = 0.0;
                         }
+
+                        // TODO: Compute Kuramoto field energy properly
+                        // For now, disable Kuramoto energy as it needs proper phase-wrapped gradients
+                        // The main issue was EM field energy from unwrapped phase differences
+                        kuramoto_field_energy = 0.0;
                     }
 
                     obs = ObservableComputer::compute(
                         *dirac, R_field_d, _config.physics.delta, time,
                         E0, em_field_energy,
-                        _config.validation.norm_tolerance, _config.validation.energy_tolerance
+                        _config.validation.norm_tolerance, _config.validation.energy_tolerance,
+                        kuramoto_field_energy
                     );
                 } else {
                     // Fallback if Dirac not initialized

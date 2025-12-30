@@ -116,7 +116,8 @@ public:
         double E0 = 0.0,
         double em_field_energy = 0.0,
         double norm_tolerance = 1e-4,
-        double energy_tolerance = 1e-2);
+        double energy_tolerance = 1e-2,
+        double kuramoto_field_energy = 0.0);
 
     /**
      * Compute norm ||Ψ||² = ∫|Ψ|² dA
@@ -166,6 +167,15 @@ public:
         const DiracEvolution& dirac,
         int component);
 
+    /**
+     * Compute Kuramoto field energy
+     * E_K = ∫[(1/2)|∇θ|² - K cos(θ_i - θ_j)] dA
+     * This includes gradient energy and synchronization energy
+     */
+    static double computeKuramotoFieldEnergy(
+        const DiracEvolution& dirac,
+        const std::vector<double>& R_field);
+
     // ========== Two-Particle Observable Methods (Test 3.4) ==========
 
     /**
@@ -208,7 +218,8 @@ public:
         double E0 = 0.0,
         double em_field_energy = 0.0,
         double norm_tolerance = 1e-4,
-        double energy_tolerance = 1e-2);
+        double energy_tolerance = 1e-2,
+        double kuramoto_field_energy = 0.0);
 
     /**
      * Compute norm ||φ||² = ∫|φ|² dA for Klein-Gordon scalar field

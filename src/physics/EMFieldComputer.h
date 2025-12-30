@@ -508,6 +508,7 @@ private:
     static Eigen::MatrixXd computeSpatialDerivative(
         const Eigen::MatrixXd& field,
         double dx_or_dy,
-        int direction);
+        int direction,
+        bool is_phase_field = false);
 
 }; // class EMFieldComputer

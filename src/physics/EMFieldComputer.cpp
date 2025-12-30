@@ -20,12 +20,24 @@ EMFieldComputer::EMFields EMFieldComputer::computeFromPhase(
 
     // Compute temporal derivative: φ = ∂_t θ
     // Use backward difference: ∂_t θ ≈ (θ_current - θ_previous) / dt
-    fields.phi = (theta_current - theta_previous) / dt;
+    // CRITICAL FIX: Wrap phase difference to [-π, π] to handle branch cuts
+    Eigen::MatrixXd phase_diff = theta_current - theta_previous;
+    for (int i = 0; i < Nx; i++) {
+        for (int j = 0; j < Ny; j++) {
+            double diff = phase_diff(i, j);
+            // Wrap to [-π, π]
+            while (diff > M_PI) diff -= 2.0 * M_PI;
+            while (diff < -M_PI) diff += 2.0 * M_PI;
+            phase_diff(i, j) = diff;
+        }
+    }
+    fields.phi = phase_diff / dt;
 
     // Compute spatial derivatives: A = ∇θ
     // A_x = ∂_x θ, A_y = ∂_y θ
-    fields.A_x = computeSpatialDerivative(theta_current, dx, 0);
-    fields.A_y = computeSpatialDerivative(theta_current, dy, 1);
+    // Pass is_phase_field=true to enable phase wrapping
+    fields.A_x = computeSpatialDerivative(theta_current, dx, 0, true);
+    fields.A_y = computeSpatialDerivative(theta_current, dy, 1, true);
 
     // Compute field strengths E, B
     computeFieldStrengths(fields, dx, dy);
@@ -123,9 +135,20 @@ double EMFieldComputer::computeFieldEnergy(
 
     for (int i = 0; i < Nx; i++) {
         for (int j = 0; j < Ny; j++) {
-            double E2 = fields.E_x(i, j) * fields.E_x(i, j) +
-                       fields.E_y(i, j) * fields.E_y(i, j);
-            double B2 = fields.B_z(i, j) * fields.B_z(i, j);
+            double E_x = fields.E_x(i, j);
+            double E_y = fields.E_y(i, j);
+            double B_z = fields.B_z(i, j);
+
+            // Check for NaN/Inf in fields
+            if (std::isnan(E_x) || std::isnan(E_y) || std::isnan(B_z) ||
+                std::isinf(E_x) || std::isinf(E_y) || std::isinf(B_z)) {
+                std::cerr << "[ERROR] Invalid EM field at (" << i << "," << j << "): "
+                         << "E=(" << E_x << "," << E_y << "), B=" << B_z << std::endl;
+                return std::numeric_limits<double>::quiet_NaN();
+            }
+
+            double E2 = E_x * E_x + E_y * E_y;
+            double B2 = B_z * B_z;
 
             total_energy += (E2 + B2) * inv_8pi;
         }
@@ -133,6 +156,11 @@ double EMFieldComputer::computeFieldEnergy(
 
     // Multiply by cell volume
     total_energy *= dx * dy;
+
+    // Final validation
+    if (std::isnan(total_energy) || std::isinf(total_energy)) {
+        std::cerr << "[ERROR] EM field energy is " << total_energy << std::endl;
+    }
 
     return total_energy;
 }
@@ -248,7 +276,8 @@ double EMFieldComputer::getPeriodicValue(
 Eigen::MatrixXd EMFieldComputer::computeSpatialDerivative(
     const Eigen::MatrixXd& field,
     double dx_or_dy,
-    int direction)
+    int direction,
+    bool is_phase_field)
 {
     const int Nx = field.rows();
     const int Ny = field.cols();
@@ -261,7 +290,17 @@ Eigen::MatrixXd EMFieldComputer::computeSpatialDerivative(
             for (int j = 0; j < Ny; j++) {
                 double f_plus = getPeriodicValue(field, i, j, 1, 0);
                 double f_minus = getPeriodicValue(field, i, j, -1, 0);
-                derivative(i, j) = (f_plus - f_minus) / (2.0 * dx_or_dy);
+                double diff = f_plus - f_minus;
+
+                // CRITICAL FIX: For phase fields, wrap difference to [-π, π]
+                // This handles branch cuts in vortex configurations
+                if (is_phase_field) {
+                    // Wrap the difference to [-π, π]
+                    while (diff > M_PI) diff -= 2.0 * M_PI;
+                    while (diff < -M_PI) diff += 2.0 * M_PI;
+                }
+
+                derivative(i, j) = diff / (2.0 * dx_or_dy);
             }
         }
     } else {
@@ -270,7 +309,16 @@ Eigen::MatrixXd EMFieldComputer::computeSpatialDerivative(
             for (int j = 0; j < Ny; j++) {
                 double f_plus = getPeriodicValue(field, i, j, 0, 1);
                 double f_minus = getPeriodicValue(field, i, j, 0, -1);
-                derivative(i, j) = (f_plus - f_minus) / (2.0 * dx_or_dy);
+                double diff = f_plus - f_minus;
+
+                // CRITICAL FIX: For phase fields, wrap difference to [-π, π]
+                if (is_phase_field) {
+                    // Wrap the difference to [-π, π]
+                    while (diff > M_PI) diff -= 2.0 * M_PI;
+                    while (diff < -M_PI) diff += 2.0 * M_PI;
+                }
+
+                derivative(i, j) = diff / (2.0 * dx_or_dy);
             }
         }
     }

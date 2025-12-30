@@ -60,7 +60,7 @@ EnergyBudget::EnergyComponents EnergyBudget::computeComponents(
             *dirac_evolution, R_field_double, _delta);
 
         // Get Dirac spinor for coupling energy
-        auto psi = dirac_evolution->getSpinor();
+        auto psi = dirac_evolution->getSpinorField();
         components.E_coupling = computeCouplingEnergy(psi, R_field, _coupling, _dx, _dy);
     }
 

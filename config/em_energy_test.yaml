@@ -1,0 +1,51 @@
+# Test configuration for EM energy conservation validation
+test_name: "em_energy_test"
+description: "Test energy conservation with EM coupling enabled"
+
+physics:
+  dt: 0.001
+  total_time: 10.0
+  coupling: 0.1
+  delta: 0.3
+  K: 1.0
+  damping: 0.01
+  em_coupling_enabled: true
+  klein_gordon_mode: false
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 5.0
+    momentum_x: 0.0
+    momentum_y: 0.0
+    beta: 1  # particle
+
+  kuramoto:
+    type: "vortex"
+    vortex_core_radius: 5.0
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    winding_number: 1
+
+# Operator splitting
+operator_splitting:
+  enable_strang: true
+  strang_substeps: [1]
+  temporal_coupling: 0.0
+
+output:
+  save_frequency: 100
+  save_spatial_snapshots: false
+
+validation:
+  norm_tolerance: 0.005
+  energy_tolerance: 0.001
+  order_parameter_tolerance: 0.001
+  em_gauge_tolerance: 0.01

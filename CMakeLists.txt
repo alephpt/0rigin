@@ -36,6 +36,15 @@ if(NOT SDL2_FOUND)
     message(FATAL_ERROR "SDL2 not found")
 endif()
 
+# Python3 for matplotlib-cpp
+find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
+if(NOT Python3_FOUND)
+    message(FATAL_ERROR "Python3 with NumPy not found")
+endif()
+message(STATUS "Python3: ${Python3_VERSION}")
+message(STATUS "Python3 Include: ${Python3_INCLUDE_DIRS}")
+message(STATUS "Python3 Libraries: ${Python3_LIBRARIES}")
+
 # ============================================================================
 # NOVA LIBRARY
 # ============================================================================
@@ -104,11 +113,27 @@ set(SMFT_SOURCES
     src/SMFTCompute.cpp
     src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
+    src/KleinGordonEvolution.cpp
     src/SMFTCommon.cpp
     src/output/OutputManager.cpp
+    src/output/PlottingManager.cpp
     src/simulations/TestConfig.cpp
     src/simulations/SMFTTestRunner.cpp
     src/simulations/ObservableComputer.cpp
+    src/simulations/EMObservables.cpp
+    src/simulations/InitialConditions.cpp
+    src/validation/ValidationCriteria.cpp
+    src/validation/GlobalValidator.cpp
+    src/validation/ScenarioValidator.cpp
+    src/validation/PhaseTransitionAnalyzer.cpp
+    src/validation/EnergyBudget.cpp
+    src/physics/LorentzTransform.cpp
+    src/physics/EMFieldComputer.cpp
+    src/analysis/PowerLawFitter.cpp
+    src/analysis/GeometryAnalyzer.cpp
+    src/analysis/TrajectoryComparator.cpp
+    src/analysis/DualSimulationComparator.cpp
+    src/analysis/ForceDecomposer.cpp
     main.cpp
 )
 
@@ -118,8 +143,11 @@ target_include_directories(SMFT PRIVATE
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/lib
     ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${CMAKE_SOURCE_DIR}/lib/matplotlib-cpp
     ${Vulkan_INCLUDE_DIRS}
     ${SDL2_INCLUDE_DIRS}
+    ${Python3_INCLUDE_DIRS}
+    ${Python3_NumPy_INCLUDE_DIRS}
 )
 
 target_link_libraries(SMFT PRIVATE
@@ -127,6 +155,7 @@ target_link_libraries(SMFT PRIVATE
     imgui
     ${Vulkan_LIBRARIES}
     ${SDL2_LIBRARIES}
+    ${Python3_LIBRARIES}
     fftw3f
     yaml-cpp
     pthread
