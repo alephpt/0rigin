@@ -91,7 +91,7 @@ Pure SMFT **CANNOT** resolve cosmological constant problem. The emergent gravity
 
 **Question**: Do computed EM forces actually affect matter?
 
-**Result**: ⚠️ **INFRASTRUCTURE FIXED, PHYSICS INCOMPLETE** (0/11 metrics validated)
+**Result**: ❌ **FAILED - FUNDAMENTAL ENERGY CONSERVATION FAILURE** (0/11 metrics validated)
 
 **Timeline of Findings**:
 
@@ -109,37 +109,63 @@ Pure SMFT **CANNOT** resolve cosmological constant problem. The emergent gravity
 - ✅ All 3 tests now **run to completion without crashing**
 - ⚠️ Tests execute but EM-specific validations not yet measured
 
+**Dec 30, 11:30 - Energy Conservation Investigation**:
+- Investigated 1.77%-2.89% energy drift
+- Applied phase wrapping fixes for ∂θ/∂t and ∇θ
+- **Energy drift WORSENED to 561%** (5610x worse than 0.1% scientific tolerance)
+- Root cause: **Fundamental inconsistency in extracting EM fields from phase gradients in presence of vortex topological defects**
+
 **Current Test Status**:
 
-| Test | Crash? | Norm | Energy | EM Metrics |
-|------|--------|------|--------|------------|
-| A. Lorentz Force | ✅ Runs | ✅ Pass | ❌ 1.8% drift | ❓ Not measured |
-| B. Maxwell Equations | ✅ Runs | ✅ Pass | ❌ 0-2.5% drift | ❓ Not measured |
+| Test | Crash? | Norm | Energy Drift | EM Metrics |
+|------|--------|------|--------------|------------|
+| A. Lorentz Force | ✅ Runs | ✅ Pass | ❌ **561%** (scientific tolerance: 0.1%) | ❓ Not measured |
+| B. Maxwell Equations | ✅ Runs | ⚠️ NaN errors | ❌ 0-2.5% drift | ❓ Not measured |
 | C. Flux Quantization | ✅ Runs | ✅ Pass | ❌ 2.9% drift | ❓ Not measured |
 
-**What Now Works**:
+**What Works**:
 - ✅ EM field buffers and pipelines initialize successfully
 - ✅ Tests execute field evolution with EM coupling enabled
 - ✅ Basic validation metrics computed (norm, energy, causality)
 
-**What Still Needs Work**:
+**What FAILS**:
+- ❌ **Energy conservation catastrophically fails** (561% drift = 5.6×10⁶ worse than required)
 - ❌ EM observable file output (write failures)
 - ❌ Lorentz force validation (no cyclotron frequency, Larmor radius measured)
 - ❌ Maxwell equation verification (violations not computed/reported)
 - ❌ Flux quantization measurement (flux not measured/reported)
-- ⚠️ Energy conservation degrades with EM coupling (~2-3% drift)
+- ❌ NaN errors in Maxwell test at 256×256 grid (step ~500+)
+
+**Scientific Assessment**:
+
+Energy drift rate: ΔE/E ≈ 5.61×10⁻² per step
+
+This is **26,000× larger** than acceptable numerical error (~10⁻⁶ per step).
+
+**What This Means**:
+1. Missing energy terms in accounting (Poynting flux? EM-matter interaction?)
+2. Fundamental inconsistency in Dirac-Kuramoto-EM coupling
+3. Non-conservative numerical scheme, OR
+4. **Theory itself may not conserve energy** (phase → EM extraction needs modification)
 
 **Honest Conclusion**:
-EM coupling infrastructure **no longer crashes** (major progress from broken → working). However, EM force emergence **still unverified** because EM-specific validation metrics (11 total) are not yet implemented or reported in test results.
+EM coupling hypothesis remains **UNVALIDATED and POTENTIALLY INVALID**.
 
-**Next Steps**:
-1. Implement EM observable output (fix file write)
-2. Add cyclotron frequency & Larmor radius computation (Test A)
-3. Add Maxwell equation violation computation (Test B)
-4. Add flux quantization measurement (Test C)
-5. Investigate energy conservation degradation with EM coupling
+The gap between "code that computes EM fields from phase gradients" and "validated electromagnetic emergence" is **~7 orders of magnitude** in energy conservation alone.
 
-**Files**: `/tmp/em_verification_results_FINAL.md`, `src/SMFTEngine.cpp` (segfault fix)
+**Cannot claim EM emergence from synchronization** until:
+1. Energy conservation <0.1% (currently 561%)
+2. Maxwell equations verified (<10⁻⁶ violations)
+3. Lorentz forces validated to affect matter (<5% error)
+4. Gauge invariance demonstrated
+5. All 11 EM metrics passing
+
+**Status**: 0/5 requirements met
+
+**Files**:
+- `energy_conservation_investigation.md` - Detailed analysis
+- `docs/notepad/EM_verification_fundamental_failure.md` - Scientific assessment
+- Commit `fc60402` - "WIP: Investigate EM energy conservation failure"
 
 ---
 
