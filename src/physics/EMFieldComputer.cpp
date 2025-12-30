@@ -11,7 +11,9 @@
 EMFieldComputer::EMFields EMFieldComputer::computeFromPhase(
     const Eigen::MatrixXd& theta_current,
     const Eigen::MatrixXd& theta_previous,
-    double dx, double dy, double dt)
+    const Eigen::MatrixXd& R_field,
+    double dx, double dy, double dt,
+    RegularizationType reg_type)
 {
     const int Nx = theta_current.rows();
     const int Ny = theta_current.cols();
@@ -33,11 +35,11 @@ EMFieldComputer::EMFields EMFieldComputer::computeFromPhase(
     }
     fields.phi = phase_diff / dt;
 
-    // Compute spatial derivatives: A = ∇θ
+    // Compute spatial derivatives: A = ∇θ (with regularization)
+    // Use conjugate product method for numerical stability at vortex cores
     // A_x = ∂_x θ, A_y = ∂_y θ
-    // Pass is_phase_field=true to enable phase wrapping
-    fields.A_x = computeSpatialDerivative(theta_current, dx, 0, true);
-    fields.A_y = computeSpatialDerivative(theta_current, dy, 1, true);
+    fields.A_x = computePhaseGradientConjugateProduct(R_field, theta_current, dx, 0, reg_type);
+    fields.A_y = computePhaseGradientConjugateProduct(R_field, theta_current, dy, 1, reg_type);
 
     // Compute field strengths E, B
     computeFieldStrengths(fields, dx, dy);
@@ -54,8 +56,10 @@ EMFieldComputer::EMFields EMFieldComputer::computeFromPhase(
 EMFieldComputer::EMFields EMFieldComputer::computeFromPhase(
     const std::vector<float>& theta_current,
     const std::vector<float>& theta_previous,
+    const std::vector<float>& R_current,
     int Nx, int Ny,
-    double dx, double dy, double dt)
+    double dx, double dy, double dt,
+    RegularizationType reg_type)
 {
     // Convert std::vector<float> to Eigen::MatrixXd (row-major layout)
     // std::vector layout: theta[j*Nx + i] = value at grid point (i,j)
@@ -63,17 +67,19 @@ EMFieldComputer::EMFields EMFieldComputer::computeFromPhase(
 
     Eigen::MatrixXd theta_curr_mat(Nx, Ny);
     Eigen::MatrixXd theta_prev_mat(Nx, Ny);
+    Eigen::MatrixXd R_curr_mat(Nx, Ny);
 
     for (int i = 0; i < Nx; i++) {
         for (int j = 0; j < Ny; j++) {
             int idx = j * Nx + i;  // Row-major indexing
             theta_curr_mat(i, j) = static_cast<double>(theta_current[idx]);
             theta_prev_mat(i, j) = static_cast<double>(theta_previous[idx]);
+            R_curr_mat(i, j) = static_cast<double>(R_current[idx]);
         }
     }
 
-    // Call Eigen version
-    return computeFromPhase(theta_curr_mat, theta_prev_mat, dx, dy, dt);
+    // Call Eigen version with regularization
+    return computeFromPhase(theta_curr_mat, theta_prev_mat, R_curr_mat, dx, dy, dt, reg_type);
 }
 
 void EMFieldComputer::computeFieldStrengths(
@@ -324,4 +330,163 @@ Eigen::MatrixXd EMFieldComputer::computeSpatialDerivative(
     }
 
     return derivative;
+}
+
+Eigen::MatrixXd EMFieldComputer::computePhaseGradientConjugateProduct(
+    const Eigen::MatrixXd& R_field,
+    const Eigen::MatrixXd& theta_field,
+    double dx_or_dy,
+    int direction,
+    RegularizationType reg_type)
+{
+    /**
+     * Conjugate Product Method for Phase Gradients with Regularization
+     *
+     * Physics:
+     *   Z = R·exp(iθ)  (complex Kuramoto field)
+     *   ∇Z = (∇R + i·R·∇θ)·exp(iθ)
+     *   Z*·∇Z = R·exp(-iθ)·(∇R + i·R·∇θ)·exp(iθ)
+     *         = R·(∇R + i·R·∇θ)
+     *   Im(Z*·∇Z) = R²·∇θ
+     *
+     * Regularization prescriptions:
+     *   NONE:      A = Im(Z*·∇Z) / R²  = ∇θ       (unregularized)
+     *   R_FACTOR:  A = Im(Z*·∇Z) / R   = R·∇θ     (R regularization)
+     *   R2_FACTOR: A = Im(Z*·∇Z)       = R²·∇θ    (R² regularization)
+     *
+     * Numerical Advantage:
+     *   At vortex cores where R → 0:
+     *     - Numerator Im(Z*·∇Z) = R²·∇θ → 0
+     *     - Denominator depends on prescription
+     *     - All prescriptions remain finite via L'Hôpital
+     *     - No spurious gradients from 2π branch cuts
+     *
+     * Implementation:
+     *   1. Construct Z = R·cos(θ) + i·R·sin(θ) at center and neighbors
+     *   2. Compute ∇Z via centered differences on real and imaginary parts
+     *   3. Compute Im(Z*·∇Z) = Z_real·(∇Z)_imag - Z_imag·(∇Z)_real
+     *   4. Normalize by prescription-dependent denominator
+     */
+
+    const int Nx = R_field.rows();
+    const int Ny = R_field.cols();
+    const double epsilon = 1e-10;  // Regularization to prevent division by zero
+
+    Eigen::MatrixXd phase_gradient(Nx, Ny);
+
+    if (direction == 0) {
+        // x-derivative
+        for (int i = 0; i < Nx; i++) {
+            for (int j = 0; j < Ny; j++) {
+                // Get R and θ at center point
+                double R_center = R_field(i, j);
+                double theta_center = theta_field(i, j);
+
+                // Construct complex field Z at center
+                double Z_real = R_center * std::cos(theta_center);
+                double Z_imag = R_center * std::sin(theta_center);
+
+                // Get R and θ at neighbors (with periodic BC)
+                double R_plus = getPeriodicValue(R_field, i, j, 1, 0);
+                double theta_plus = getPeriodicValue(theta_field, i, j, 1, 0);
+                double R_minus = getPeriodicValue(R_field, i, j, -1, 0);
+                double theta_minus = getPeriodicValue(theta_field, i, j, -1, 0);
+
+                // Construct complex field Z at neighbors
+                double Z_plus_real = R_plus * std::cos(theta_plus);
+                double Z_plus_imag = R_plus * std::sin(theta_plus);
+                double Z_minus_real = R_minus * std::cos(theta_minus);
+                double Z_minus_imag = R_minus * std::sin(theta_minus);
+
+                // Compute gradient of complex field (centered difference)
+                double dZ_dx_real = (Z_plus_real - Z_minus_real) / (2.0 * dx_or_dy);
+                double dZ_dx_imag = (Z_plus_imag - Z_minus_imag) / (2.0 * dx_or_dy);
+
+                // Compute Im(Z*·∇Z) = Z_real·(∇Z)_imag - Z_imag·(∇Z)_real
+                // This gives: Im(Z*·∇Z) = R²·∇θ
+                double Im_Z_conj_dZ = Z_real * dZ_dx_imag - Z_imag * dZ_dx_real;
+
+                // Apply regularization prescription
+                double R_squared = R_center * R_center;
+                double denominator;
+
+                switch (reg_type) {
+                    case RegularizationType::NONE:
+                        // A = Im(Z*·∇Z) / R² = ∇θ (unregularized)
+                        denominator = std::max(R_squared, epsilon);
+                        phase_gradient(i, j) = Im_Z_conj_dZ / denominator;
+                        break;
+
+                    case RegularizationType::R_FACTOR:
+                        // A = Im(Z*·∇Z) / R = R·∇θ (R regularization)
+                        denominator = std::max(R_center, epsilon);
+                        phase_gradient(i, j) = Im_Z_conj_dZ / denominator;
+                        break;
+
+                    case RegularizationType::R2_FACTOR:
+                        // A = Im(Z*·∇Z) = R²·∇θ (R² regularization - no normalization)
+                        phase_gradient(i, j) = Im_Z_conj_dZ;
+                        break;
+                }
+            }
+        }
+    } else {
+        // y-derivative
+        for (int i = 0; i < Nx; i++) {
+            for (int j = 0; j < Ny; j++) {
+                // Get R and θ at center point
+                double R_center = R_field(i, j);
+                double theta_center = theta_field(i, j);
+
+                // Construct complex field Z at center
+                double Z_real = R_center * std::cos(theta_center);
+                double Z_imag = R_center * std::sin(theta_center);
+
+                // Get R and θ at neighbors (with periodic BC)
+                double R_plus = getPeriodicValue(R_field, i, j, 0, 1);
+                double theta_plus = getPeriodicValue(theta_field, i, j, 0, 1);
+                double R_minus = getPeriodicValue(R_field, i, j, 0, -1);
+                double theta_minus = getPeriodicValue(theta_field, i, j, 0, -1);
+
+                // Construct complex field Z at neighbors
+                double Z_plus_real = R_plus * std::cos(theta_plus);
+                double Z_plus_imag = R_plus * std::sin(theta_plus);
+                double Z_minus_real = R_minus * std::cos(theta_minus);
+                double Z_minus_imag = R_minus * std::sin(theta_minus);
+
+                // Compute gradient of complex field (centered difference)
+                double dZ_dy_real = (Z_plus_real - Z_minus_real) / (2.0 * dx_or_dy);
+                double dZ_dy_imag = (Z_plus_imag - Z_minus_imag) / (2.0 * dx_or_dy);
+
+                // Compute Im(Z*·∇Z) = Z_real·(∇Z)_imag - Z_imag·(∇Z)_real
+                // This gives: Im(Z*·∇Z) = R²·∇θ
+                double Im_Z_conj_dZ = Z_real * dZ_dy_imag - Z_imag * dZ_dy_real;
+
+                // Apply regularization prescription
+                double R_squared = R_center * R_center;
+                double denominator;
+
+                switch (reg_type) {
+                    case RegularizationType::NONE:
+                        // A = Im(Z*·∇Z) / R² = ∇θ (unregularized)
+                        denominator = std::max(R_squared, epsilon);
+                        phase_gradient(i, j) = Im_Z_conj_dZ / denominator;
+                        break;
+
+                    case RegularizationType::R_FACTOR:
+                        // A = Im(Z*·∇Z) / R = R·∇θ (R regularization)
+                        denominator = std::max(R_center, epsilon);
+                        phase_gradient(i, j) = Im_Z_conj_dZ / denominator;
+                        break;
+
+                    case RegularizationType::R2_FACTOR:
+                        // A = Im(Z*·∇Z) = R²·∇θ (R² regularization - no normalization)
+                        phase_gradient(i, j) = Im_Z_conj_dZ;
+                        break;
+                }
+            }
+        }
+    }
+
+    return phase_gradient;
 }

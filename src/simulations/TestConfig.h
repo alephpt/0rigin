@@ -81,6 +81,7 @@ public:
         bool em_coupling_enabled = false;     // Enable EM coupling from Kuramoto phase
         float em_coupling_strength = 1.0f;    // Effective charge q
         std::string em_coupling_type = "perturbative";  // "perturbative" or "full_gauge"
+        std::string em_regularization = "none";  // "none", "R", "R2" - regularization for A = ∇θ prescription
     };
 
     // Dirac initial condition

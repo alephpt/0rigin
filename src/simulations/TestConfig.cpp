@@ -324,6 +324,7 @@ void TestConfig::parsePhysics(const YAML::Node& node) {
     if (node["em_coupling_enabled"]) physics.em_coupling_enabled = node["em_coupling_enabled"].as<bool>();
     if (node["em_coupling_strength"]) physics.em_coupling_strength = node["em_coupling_strength"].as<float>();
     if (node["em_coupling_type"]) physics.em_coupling_type = node["em_coupling_type"].as<std::string>();
+    if (node["em_regularization"]) physics.em_regularization = node["em_regularization"].as<std::string>();
 }
 
 void TestConfig::parseDiracInitial(const YAML::Node& node) {
@@ -505,6 +506,10 @@ void TestConfig::parseEMCoupling(const YAML::Node& node) {
 
     if (node["field_type"]) {
         physics.em_coupling_type = node["field_type"].as<std::string>();
+    }
+
+    if (node["regularization"]) {
+        physics.em_regularization = node["regularization"].as<std::string>();
     }
 
     // Optional: Parse field-specific parameters for future use

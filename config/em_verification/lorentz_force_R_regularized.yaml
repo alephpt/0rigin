@@ -1,9 +1,9 @@
-# Lorentz Force Test Configuration
-# Tests: Charged particle motion in vortex-generated EM fields
-# Expected: Cyclotron motion with ω_c = qB/m, Larmor radius r_L = mv/(qB)
+# Lorentz Force Test Configuration - R Regularization
+# Tests: Charged particle motion in vortex-generated EM fields with A = R·∇θ prescription
+# Expected: Reduced energy drift compared to unregularized A = ∇θ
 
-test_name: "lorentz_force_validation"
-test_description: "Validate Lorentz force F = q(E + v×B) on test particle near vortex"
+test_name: "lorentz_force_R_regularized"
+test_description: "Validate EM energy conservation with R regularization (A = R·∇θ)"
 
 # Grid parameters
 grid:
@@ -32,12 +32,12 @@ physics:
   dt: 0.001           # Timestep (must be in physics section for TestConfig)
   total_steps: 10000  # Total evolution steps (must be in physics section)
 
-# Electromagnetic coupling (ESSENTIAL FOR LORENTZ FORCE TEST)
+# Electromagnetic coupling with R regularization
 em_coupling:
   enabled: true
   coupling_strength: 1.0    # Effective charge q
-  field_type: "from_phase"  # Extract EM field from Kuramoto phase ∇θ
-  # E = -∇φ - ∂A/∂t, B = ∇×A, where A ~ ∇θ
+  field_type: "from_phase"  # Extract EM field from Kuramoto phase
+  regularization: "R"       # R regularization: A = R·∇θ (reduces core divergence)
 
 # Initial conditions for fields
 initial_conditions:

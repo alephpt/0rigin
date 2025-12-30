@@ -11,11 +11,11 @@ grid:
   size_y: 128
   L_domain: 100.0          # Domain size in Planck lengths
 
-# Time evolution (minimal - flux should be time-independent)
+# Time evolution (extended for validation over time)
 time:
   dt: 0.001                # Timestep
-  n_steps: 100             # Just enough to establish fields
-  output_interval: 10
+  n_steps: 5000            # Extended to validate stability over time
+  output_interval: 100
 
 # Physical parameters
 physics:
@@ -27,6 +27,8 @@ physics:
   kappa: 0.1
   delta: 0.3
   effective_charge: 1.0    # q for flux quantum h/q
+  dt: 0.001                # Timestep (must be in physics section for TestConfig)
+  total_steps: 5000        # Total evolution steps (must be in physics section)
 
 # Electromagnetic coupling (ESSENTIAL FOR FLUX QUANTIZATION TEST)
 em_coupling:

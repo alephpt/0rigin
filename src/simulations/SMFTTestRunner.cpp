@@ -888,13 +888,23 @@ bool SMFTTestRunner::runSingleTest(int N) {
                     double kuramoto_field_energy = 0.0;
 
                     if (_config.physics.em_coupling_enabled && !_theta_previous.empty() && step > 0) {
-                        // Compute EM observables to get field energy
+                        // Parse regularization type from config
+                        EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE;
+                        if (_config.physics.em_regularization == "R") {
+                            reg_type = EMFieldComputer::RegularizationType::R_FACTOR;
+                        } else if (_config.physics.em_regularization == "R2") {
+                            reg_type = EMFieldComputer::RegularizationType::R2_FACTOR;
+                        }
+
+                        // Compute EM observables to get field energy (with regularization)
                         auto em_obs = ObservableComputer::computeEMObservables(
                             theta_current, _theta_previous,
+                            R_field,  // Pass R_field for conjugate product method
                             dirac->getSpinorField(),
                             dirac->getNx(), dirac->getNy(),
                             dirac->getDx(), dirac->getDx(),
-                            _config.physics.dt
+                            _config.physics.dt,
+                            reg_type
                         );
                         em_field_energy = em_obs.field_energy;
 
@@ -951,13 +961,23 @@ bool SMFTTestRunner::runSingleTest(int N) {
                     // Get spinor field
                     const auto& psi = dirac->getSpinorField();
 
-                    // Compute EM observables
+                    // Parse regularization type from config
+                    EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE;
+                    if (_config.physics.em_regularization == "R") {
+                        reg_type = EMFieldComputer::RegularizationType::R_FACTOR;
+                    } else if (_config.physics.em_regularization == "R2") {
+                        reg_type = EMFieldComputer::RegularizationType::R2_FACTOR;
+                    }
+
+                    // Compute EM observables (with regularization)
                     auto em_obs = ObservableComputer::computeEMObservables(
                         theta_current, _theta_previous,
+                        R_field,  // Pass R_field for conjugate product method
                         psi,
                         dirac->getNx(), dirac->getNy(),
                         dirac->getDx(), dirac->getDx(),  // dx, dy
-                        _config.physics.dt
+                        _config.physics.dt,
+                        reg_type
                     );
 
                     // Store EM observables

@@ -89,6 +89,36 @@
 class EMFieldComputer {
 public:
     // ========================================================================
+    // REGULARIZATION TYPES
+    // ========================================================================
+
+    /**
+     * Regularization type for EM field extraction
+     *
+     * Determines the prescription for vector potential A from phase gradient:
+     *
+     * NONE:      A = ∇θ                  (unregularized - diverges at vortex cores)
+     * R_FACTOR:  A = R·∇θ                (R regularization - reduces divergence)
+     * R2_FACTOR: A = R²·∇θ               (R² regularization - eliminates divergence)
+     *
+     * Physics motivation:
+     *   Unregularized prescription A = ∇θ causes logarithmic energy divergence:
+     *     u_EM ~ 1/r² → E_EM ~ ∫₀^ξ (1/r²)·r dr ~ ln(ξ/a) → ∞
+     *
+     *   R² regularization ensures finite energy at vortex cores:
+     *     A ~ R²/r, B ~ constant → u_EM ~ constant → E_EM < ∞
+     *
+     * Numerical stability:
+     *   All prescriptions use conjugate product method: Im(Z*·∇Z)
+     *   Regularization changes normalization denominator only
+     */
+    enum class RegularizationType {
+        NONE,      // A = Im(Z*·∇Z) / |Z|²  = ∇θ         (current - 427% drift)
+        R_FACTOR,  // A = Im(Z*·∇Z) / |Z|   = R·∇θ       (predicted: 10-50% drift)
+        R2_FACTOR  // A = Im(Z*·∇Z)         = R²·∇θ      (predicted: <1% drift)
+    };
+
+    // ========================================================================
     // DATA STRUCTURES
     // ========================================================================
 
@@ -210,9 +240,14 @@ public:
      *   4. U = ∫(E²+B²)/(8π) dV  (field energy)
      *
      * Implementation:
-     *   - Spatial derivatives: Centered differences with periodic BC
-     *   - Temporal derivative: Backward difference
+     *   - Spatial derivatives: Conjugate product method (stable at vortex cores)
+     *   - Temporal derivative: Backward difference with phase wrapping
      *   - Automatic diagnostics computation
+     *
+     * Conjugate Product Method:
+     *   For complex field Z = R·exp(iθ):
+     *     ∇θ = Im(Z*·∇Z) / |Z|²
+     *   This avoids spurious gradients at vortex cores where θ has branch cuts.
      *
      * @param[in] theta_current    Current phase field θ(t) [Nx × Ny]
      *                              Range: [0, 2π) (radians)
@@ -221,6 +256,10 @@ public:
      * @param[in] theta_previous   Previous phase field θ(t - dt) [Nx × Ny]
      *                              Required for accurate temporal derivatives
      *                              If unavailable, use backward-only estimate
+     *
+     * @param[in] R_field          Kuramoto order parameter field R(x,y) [Nx × Ny]
+     *                              Range: [0, 1] (amplitude of complex field Z=R·exp(iθ))
+     *                              Required for conjugate product method
      *
      * @param[in] dx               Grid spacing in x-direction [Planck lengths]
      *                              Typical: 0.1 to 1.0 ℓ_P
@@ -241,11 +280,14 @@ public:
      *   - First timestep may have large temporal derivative error
      *   - For vortex detection, look for peaks in E and B
      *   - For smooth background: E ≈ B ≈ 0 (should be ~10^-3)
+     *   - Conjugate product is stable even at vortex singularities (R→0)
      */
     static EMFields computeFromPhase(
         const Eigen::MatrixXd& theta_current,
         const Eigen::MatrixXd& theta_previous,
-        double dx, double dy, double dt);
+        const Eigen::MatrixXd& R_field,
+        double dx, double dy, double dt,
+        RegularizationType reg_type = RegularizationType::NONE);
 
     /**
      * Convenience wrapper: Extract EM fields from std::vector<float> phase data
@@ -255,6 +297,7 @@ public:
      *
      * @param[in] theta_current    Current phase field [Nx*Ny flat vector]
      * @param[in] theta_previous   Previous phase field [Nx*Ny flat vector]
+     * @param[in] R_current        Current R field (order parameter) [Nx*Ny flat vector]
      * @param[in] Nx               Grid width
      * @param[in] Ny               Grid height
      * @param[in] dx               Grid spacing x
@@ -266,8 +309,10 @@ public:
     static EMFields computeFromPhase(
         const std::vector<float>& theta_current,
         const std::vector<float>& theta_previous,
+        const std::vector<float>& R_current,
         int Nx, int Ny,
-        double dx, double dy, double dt);
+        double dx, double dy, double dt,
+        RegularizationType reg_type = RegularizationType::NONE);
 
     // ========================================================================
     // PUBLIC METHODS: FIELD STRENGTH COMPUTATION
@@ -510,5 +555,43 @@ private:
         double dx_or_dy,
         int direction,
         bool is_phase_field = false);
+
+    /**
+     * Compute phase gradient using conjugate product method
+     *
+     * Physics:
+     *   For complex field Z = R·exp(iθ):
+     *     ∇Z = ∇R·exp(iθ) + i·R·∇θ·exp(iθ)
+     *     Z*·∇Z = R²·∇θ·i  (real parts cancel)
+     *     Im(Z*·∇Z) = R²·∇θ
+     *     ∇θ = Im(Z*·∇Z) / R²
+     *
+     *   Advantages:
+     *     - Numerically stable at vortex cores (both numerator and denominator → 0)
+     *     - Avoids spurious gradients from 2π branch cuts
+     *     - Limit is well-defined: lim(R→0) Im(Z*·∇Z)/R² is finite
+     *
+     * Implementation:
+     *   1. Construct complex field Z = R·exp(iθ) at each point
+     *   2. Compute ∇Z using centered differences on real/imag parts
+     *   3. Compute Im(Z*·∇Z) = Re(Z)·Im(∇Z) - Im(Z)·Re(∇Z)
+     *   4. Normalize by max(R², ε) where ε = 1e-10 prevents division by zero
+     *
+     * @param[in] R_field          Order parameter field R(x,y) [Nx × Ny]
+     * @param[in] theta_field      Phase field θ(x,y) [Nx × Ny]
+     * @param[in] dx_or_dy         Grid spacing (dx for x-deriv, dy for y-deriv)
+     * @param[in] direction        0 for x-derivative, 1 for y-derivative
+     *
+     * @return Phase gradient ∂θ/∂(x or y) [Nx × Ny]
+     *
+     * Complexity: O(Nx × Ny)
+     * Accuracy: O(h²) spatial, stable at singularities
+     */
+    static Eigen::MatrixXd computePhaseGradientConjugateProduct(
+        const Eigen::MatrixXd& R_field,
+        const Eigen::MatrixXd& theta_field,
+        double dx_or_dy,
+        int direction,
+        RegularizationType reg_type = RegularizationType::NONE);
 
 }; // class EMFieldComputer

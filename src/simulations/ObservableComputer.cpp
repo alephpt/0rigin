@@ -1122,9 +1122,11 @@ double ObservableComputer::computeGaussianCurvatureAtParticle(
 ObservableComputer::EMObservables ObservableComputer::computeEMObservables(
     const std::vector<float>& theta_current,
     const std::vector<float>& theta_previous,
+    const std::vector<float>& R_current,
     const std::vector<std::complex<double>>& psi,
     int Nx, int Ny,
-    double dx, double dy, double dt)
+    double dx, double dy, double dt,
+    EMFieldComputer::RegularizationType reg_type)
 {
     /**
      * Extract EM fields from Kuramoto phase and validate against particle dynamics
@@ -1165,18 +1167,20 @@ ObservableComputer::EMObservables ObservableComputer::computeEMObservables(
     // Step 1: Convert std::vector<float> to Eigen::MatrixXd for EMFieldComputer
     Eigen::MatrixXd theta_curr_eigen(Nx, Ny);
     Eigen::MatrixXd theta_prev_eigen(Nx, Ny);
+    Eigen::MatrixXd R_field_eigen(Nx, Ny);
 
     for (int iy = 0; iy < Ny; iy++) {
         for (int ix = 0; ix < Nx; ix++) {
             int idx = iy * Nx + ix;
             theta_curr_eigen(ix, iy) = static_cast<double>(theta_current[idx]);
             theta_prev_eigen(ix, iy) = static_cast<double>(theta_previous[idx]);
+            R_field_eigen(ix, iy) = static_cast<double>(R_current[idx]);
         }
     }
 
-    // Step 2: Extract EM fields from phase using EMFieldComputer
+    // Step 2: Extract EM fields from phase using EMFieldComputer (with conjugate product method + regularization)
     auto em_fields = EMFieldComputer::computeFromPhase(
-        theta_curr_eigen, theta_prev_eigen, dx, dy, dt);
+        theta_curr_eigen, theta_prev_eigen, R_field_eigen, dx, dy, dt, reg_type);
 
     // Step 3: Compute field energy
     obs.field_energy = EMFieldComputer::computeFieldEnergy(em_fields, dx, dy);

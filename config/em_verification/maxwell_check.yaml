@@ -15,7 +15,7 @@ grid:
 # Time evolution
 time:
   dt: 0.001              # Timestep
-  n_steps: 1000          # Evolution steps
+  n_steps: 5000          # Evolution steps (increased for extended validation)
   output_interval: 100   # Check Maxwell every N steps
 
 # Physical parameters
@@ -28,6 +28,8 @@ physics:
   kappa: 0.1             # Kuramoto coupling
   delta: 0.3             # Amplitude coupling
   charge_coupling: 1.0   # Effective charge for EM extraction
+  dt: 0.001              # Timestep (must be in physics section for TestConfig)
+  total_steps: 5000      # Total evolution steps (must be in physics section)
 
 # Electromagnetic coupling (ESSENTIAL FOR MAXWELL VALIDATION)
 em_coupling:

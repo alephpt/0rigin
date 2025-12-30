@@ -3,6 +3,7 @@
 
 #include "DiracEvolution.h"
 #include "KleinGordonEvolution.h"
+#include "../physics/EMFieldComputer.h"
 #include <complex>
 #include <vector>
 #include <map>
@@ -418,11 +419,13 @@ public:
      *   - E = -∇φ - ∂_t A (electric field)
      *   - B = ∇×A (magnetic field)
      *   - F_L = ρE + J×B (Lorentz force)
+     *   - Uses conjugate product method for stable gradients at vortex cores
      *
      * Used for Phase 5 (Scenario 2.6B): Electromagnetic Coupling Validation
      *
      * @param theta_current Current Kuramoto phase field θ(t) [Nx*Ny]
      * @param theta_previous Previous phase field θ(t-dt) [Nx*Ny]
+     * @param R_current Current Kuramoto sync field R(x,y) [Nx*Ny] (order parameter)
      * @param psi Dirac spinor field (4-component) [4*Nx*Ny]
      * @param Nx Grid width
      * @param Ny Grid height
@@ -434,9 +437,11 @@ public:
     static EMObservables computeEMObservables(
         const std::vector<float>& theta_current,
         const std::vector<float>& theta_previous,
+        const std::vector<float>& R_current,
         const std::vector<std::complex<double>>& psi,
         int Nx, int Ny,
-        double dx, double dy, double dt);
+        double dx, double dy, double dt,
+        EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE);
 
     // ========== Phase 3 Vacuum Structure Observables ==========
 
