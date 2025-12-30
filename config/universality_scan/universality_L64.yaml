@@ -1,0 +1,55 @@
+# Universality scan configuration for L=64
+# Part of comprehensive FSS analysis for critical exponent extraction
+
+test_name: "universality_L64"
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0  # Physical domain size in Planck lengths
+
+time_evolution:
+  dt: 0.01
+  t_max: 150.0      # 5000 equilibration + 10000 measurement steps
+  equilibration_time: 50.0
+  integration_method: "strang_splitting"
+
+# Comprehensive noise scan around expected critical point
+noise_scan:
+  enabled: true
+  sigma_values: [
+    0.00, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45,
+    0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95,
+    1.00, 1.05, 1.10, 1.15, 1.20, 1.25, 1.30, 1.35, 1.40, 1.45,
+    1.50, 1.55, 1.60, 1.65, 1.70, 1.75, 1.80, 1.85, 1.90, 1.95, 2.00
+  ]
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 5.0
+  kuramoto:
+    type: "random"
+    seed: 42
+
+physical_parameters:
+  m0c2: 0.511           # Electron rest energy (MeV)
+  sigma_noise: 0.0      # Will be overridden by noise_scan
+  c0_kuramoto: 1.0      # Kuramoto speed
+  d_kuramoto: 0.05      # Kuramoto coupling
+
+observables:
+  compute_order_parameter: true
+  compute_susceptibility: true
+  compute_binder_cumulant: true
+  compute_correlation_function: true
+  correlation_max_r: 16   # L/4
+
+output:
+  base_dir: "output/universality_scan"
+  save_fields: false     # Don't save full fields to save space
+  save_observables: true
+  save_analysis: true
+  verbosity: 1

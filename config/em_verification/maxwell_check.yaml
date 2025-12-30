@@ -1,0 +1,158 @@
+# Maxwell Equations Verification Configuration
+# Tests: Numerical validation of Maxwell equations from phase-extracted fields
+# Expected: ∇·E = 4πρ, ∇×B = 4πJ + ∂E/∂t, ∇×E = -∂B/∂t, ∇·B = 0
+
+test_name: "maxwell_equations_validation"
+test_description: "Verify EM fields from phase satisfy Maxwell equations numerically"
+
+# Grid parameters (test multiple resolutions for convergence)
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0        # Domain size in Planck lengths
+  grid_sizes: [32, 64, 128, 256]  # Test convergence
+
+# Time evolution
+time:
+  dt: 0.001              # Timestep
+  n_steps: 1000          # Evolution steps
+  output_interval: 100   # Check Maxwell every N steps
+
+# Physical parameters
+physics:
+  hbar: 1.0
+  c: 1.0
+  G: 1.0
+  m_pl: 1.0
+  sigma: 0.5             # SMFT coupling
+  kappa: 0.1             # Kuramoto coupling
+  delta: 0.3             # Amplitude coupling
+  charge_coupling: 1.0   # Effective charge for EM extraction
+
+# Initial conditions
+initial_conditions:
+  # Dirac spinor (source of charge/current)
+  dirac:
+    type: "two_gaussian"
+    # First Gaussian (moving right)
+    x0_physical_1: 40.0
+    y0_physical_1: 50.0
+    sigma_physical_1: 3.0
+    momentum_x_1: 0.2
+    momentum_y_1: 0.0
+
+    # Second Gaussian (moving left)
+    x0_physical_2: 60.0
+    y0_physical_2: 50.0
+    sigma_physical_2: 3.0
+    momentum_x_2: -0.2
+    momentum_y_2: 0.0
+
+  # Kuramoto phase (multiple vortices for rich EM structure)
+  kuramoto:
+    type: "multi_vortex"
+    vortices:
+      - center_x: 30.0
+        center_y: 30.0
+        winding: 1
+        core_radius: 3.0
+
+      - center_x: 70.0
+        center_y: 30.0
+        winding: -1
+        core_radius: 3.0
+
+      - center_x: 50.0
+        center_y: 70.0
+        winding: 1
+        core_radius: 3.0
+
+  # R field
+  R_field:
+    type: "gaussian_modulated"
+    background: 1.0
+    modulation_centers:
+      - x: 30.0
+        y: 30.0
+        amplitude: 0.2
+        width: 5.0
+
+      - x: 70.0
+        y: 70.0
+        amplitude: -0.2
+        width: 5.0
+
+# Maxwell validation parameters
+maxwell_validation:
+  # Tolerance levels
+  gauss_law_tolerance: 0.01      # |∇·E - 4πρ| < tol
+  ampere_law_tolerance: 0.01     # |∇×B - 4πJ - ∂E/∂t| < tol
+  faraday_law_tolerance: 0.001   # |∇×E + ∂B/∂t| < tol
+  monopole_tolerance: 1e-6       # |∇·B| < tol (should be ~0)
+
+  # Spatial analysis
+  check_violation_maps: true      # Create spatial maps of violations
+  violation_threshold: 0.01       # Threshold for counting violations
+
+  # Convergence analysis
+  test_grid_convergence: true     # Test error vs grid spacing
+  expected_convergence_order: 2   # Should be O(h²)
+
+  # Time derivative accuracy
+  use_centered_time_deriv: false  # Use backward difference (more stable)
+
+  # Field regions
+  analyze_smooth_regions: true    # Check violations in smooth areas
+  analyze_vortex_cores: true      # Check violations at singularities
+
+# Energy conservation check
+energy_conservation:
+  check_poynting_theorem: true    # dU/dt + ∇·S = -J·E
+  energy_tolerance: 0.01          # Relative error tolerance
+
+# Gauge invariance check
+gauge_invariance:
+  test_gauge_transform: true      # Test θ → θ + const
+  phase_shift: 1.0                 # Constant to add to phase
+  field_difference_tolerance: 1e-10  # E,B should be unchanged
+
+# Output configuration
+output:
+  base_dir: "output"
+
+  # Violation maps
+  save_violation_maps: true
+  maps_format: "csv"              # csv or binary
+
+  # Time series
+  save_maxwell_residuals: true
+  residuals_file: "maxwell_residuals.csv"
+
+  # Convergence data
+  save_convergence_data: true
+  convergence_file: "grid_convergence.csv"
+
+  # Validation report
+  create_report: true
+  report_file: "maxwell_validation_report.txt"
+
+  # Field snapshots
+  save_field_snapshots: true
+  snapshot_steps: [0, 100, 500, 1000]
+
+# Analysis options
+analysis:
+  # Numerical methods
+  derivative_order: 2             # 2nd order centered differences
+
+  # Statistical analysis
+  compute_rms_violations: true
+  compute_max_violations: true
+  compute_violation_histograms: true
+
+  # Correlation analysis
+  correlate_violations_with_fields: true
+  correlation_threshold: 0.5
+
+  # Fourier analysis
+  analyze_violation_spectrum: true  # FFT of violation patterns

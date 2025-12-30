@@ -1,0 +1,214 @@
+# Flux Quantization Test Configuration
+# Tests: Magnetic flux through loops around vortices
+# Expected: Φ = ∮A·dl = (h/q)·W where W is winding number
+
+test_name: "flux_quantization_validation"
+test_description: "Verify magnetic flux quantization around topological vortices"
+
+# Grid parameters
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0          # Domain size in Planck lengths
+
+# Time evolution (minimal - flux should be time-independent)
+time:
+  dt: 0.001                # Timestep
+  n_steps: 100             # Just enough to establish fields
+  output_interval: 10
+
+# Physical parameters
+physics:
+  hbar: 1.0                # ℏ = 1 in natural units
+  c: 1.0
+  G: 1.0
+  m_pl: 1.0
+  sigma: 0.5
+  kappa: 0.1
+  delta: 0.3
+  effective_charge: 1.0    # q for flux quantum h/q
+
+# Initial conditions - various vortex configurations
+initial_conditions:
+  # Dirac field (background)
+  dirac:
+    type: "uniform"
+    amplitude: 0.1
+    phase: 0.0
+
+  # Test different vortex configurations
+  kuramoto:
+    type: "test_configurations"
+
+    # Configuration 1: Single vortex
+    config_1:
+      name: "single_vortex"
+      type: "vortex"
+      center_x: 50.0       # [Planck lengths]
+      center_y: 50.0
+      winding: 1           # W = +1
+      core_radius: 3.0
+
+    # Configuration 2: Anti-vortex
+    config_2:
+      name: "anti_vortex"
+      type: "vortex"
+      center_x: 50.0
+      center_y: 50.0
+      winding: -1          # W = -1
+      core_radius: 3.0
+
+    # Configuration 3: Double vortex
+    config_3:
+      name: "double_vortex"
+      type: "vortex"
+      center_x: 50.0
+      center_y: 50.0
+      winding: 2           # W = +2
+      core_radius: 3.0
+
+    # Configuration 4: Vortex-antivortex pair
+    config_4:
+      name: "vortex_pair"
+      type: "multi_vortex"
+      vortices:
+        - center_x: 40.0
+          center_y: 50.0
+          winding: 1
+          core_radius: 3.0
+
+        - center_x: 60.0
+          center_y: 50.0
+          winding: -1
+          core_radius: 3.0
+
+    # Configuration 5: Multiple vortices
+    config_5:
+      name: "triple_vortex"
+      type: "multi_vortex"
+      vortices:
+        - center_x: 40.0
+          center_y: 40.0
+          winding: 1
+          core_radius: 3.0
+
+        - center_x: 60.0
+          center_y: 40.0
+          winding: 1
+          core_radius: 3.0
+
+        - center_x: 50.0
+          center_y: 60.0
+          winding: 1
+          core_radius: 3.0
+
+  # R field
+  R_field:
+    type: "uniform"
+    value: 1.0
+
+# Flux measurement parameters
+flux_measurement:
+  # Contour parameters
+  contour_type: "circular"       # circular or square
+  n_contour_points: 100          # Points on integration contour
+
+  # Radius scan (test quantization vs radius)
+  radius_scan:
+    enable: true
+    r_min: 5.0                   # Minimum radius [Planck lengths]
+    r_max: 30.0                  # Maximum radius
+    n_radii: 20                  # Number of radii to test
+
+  # Expected flux quantum
+  flux_quantum: 6.283185307      # 2π in natural units (h=2π, q=1)
+
+  # Quantization tolerance
+  quantization_tolerance: 0.1    # 10% tolerance for flux quantization
+
+  # Test different contour shapes
+  test_contour_shapes:
+    circular: true
+    square: true
+    elliptical: true
+
+  # Elliptical contour parameters
+  ellipse_aspect_ratio: 2.0      # Major/minor axis ratio
+
+# Validation criteria
+validation:
+  # Flux quantization
+  flux_tolerance: 0.1            # Relative tolerance for Φ = (h/q)W
+
+  # Winding number extraction
+  winding_tolerance: 0.05        # Must extract integer W within ±0.05
+
+  # Radius independence
+  radius_independence_tol: 0.05  # Flux variation with radius
+
+  # Additivity test
+  test_flux_additivity: true     # Φ(W₁+W₂) = Φ(W₁) + Φ(W₂)
+  additivity_tolerance: 0.01
+
+  # Topological protection
+  test_contour_deformation: true # Flux invariant under deformation
+
+# Analysis options
+analysis:
+  # Vortex detection
+  auto_detect_vortices: true     # Find vortices from B field
+  vortex_threshold: 0.1           # B field threshold
+
+  # Flux vs radius analysis
+  plot_flux_vs_radius: true
+  find_plateau_region: true       # Find r where flux plateaus
+
+  # Winding number calculation
+  extract_winding_from_phase: true  # Direct phase winding calculation
+  compare_with_flux_winding: true   # Compare two methods
+
+  # Statistical analysis
+  compute_flux_statistics: true     # Mean, std over contours
+
+# Output configuration
+output:
+  base_dir: "output"
+
+  # Flux measurements
+  save_flux_data: true
+  flux_data_file: "flux_measurements.csv"
+
+  # Flux vs radius curves
+  save_radius_scan: true
+  radius_scan_file: "flux_vs_radius.csv"
+
+  # Vortex positions
+  save_vortex_positions: true
+  vortex_file: "detected_vortices.csv"
+
+  # Validation report
+  create_report: true
+  report_file: "flux_quantization_report.txt"
+
+  # Field visualizations
+  save_field_plots: true
+  plot_B_field: true
+  plot_A_field: true
+  plot_contours: true
+
+  # Phase winding visualization
+  save_phase_plots: true
+  unwrap_phase: true              # Show unwrapped phase
+
+# Multiple test runs
+test_suite:
+  run_all_configs: true           # Test all vortex configurations
+
+  # Parameter sweep
+  sweep_parameters:
+    charge_values: [0.5, 1.0, 2.0]  # Test different effective charges
+    core_radii: [2.0, 3.0, 5.0]     # Test different core sizes
+
+  # Convergence test
+  test_grid_convergence: true
+  grid_sizes: [64, 128, 256]      # Test flux vs resolution

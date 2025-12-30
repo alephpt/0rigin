@@ -1,0 +1,130 @@
+# Lorentz Force Test Configuration
+# Tests: Charged particle motion in vortex-generated EM fields
+# Expected: Cyclotron motion with ω_c = qB/m, Larmor radius r_L = mv/(qB)
+
+test_name: "lorentz_force_validation"
+test_description: "Validate Lorentz force F = q(E + v×B) on test particle near vortex"
+
+# Grid parameters
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0     # Domain size in Planck lengths
+  dx: 0.78125         # L_domain / size_x
+  dy: 0.78125         # L_domain / size_y
+
+# Time evolution
+time:
+  dt: 0.001           # Timestep [Planck time]
+  n_steps: 10000      # Number of evolution steps
+  warmup_steps: 100   # Steps before particle injection
+  output_interval: 10 # Output every N steps
+
+# Physical parameters
+physics:
+  hbar: 1.0
+  c: 1.0
+  G: 1.0
+  m_pl: 1.0
+  sigma: 0.5          # SMFT coupling strength
+  kappa: 0.1          # Kuramoto coupling
+  delta: 0.3          # Amplitude coupling
+
+# Initial conditions for fields
+initial_conditions:
+  # Dirac field (creates background for EM extraction)
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0        # Center x [Planck lengths]
+    y0_physical: 50.0        # Center y
+    sigma_physical: 5.0      # Width
+    momentum_x: 0.0
+    momentum_y: 0.0
+
+  # Kuramoto phase (vortex generates magnetic field)
+  kuramoto:
+    type: "vortex"
+    vortex_center_x: 50.0    # Vortex center [Planck lengths]
+    vortex_center_y: 50.0
+    vortex_core_radius: 5.0  # Core radius [Planck lengths]
+    vortex_winding: 1        # Topological charge
+    background_phase: 0.0
+
+  # R field (order parameter)
+  R_field:
+    type: "uniform"
+    value: 1.0
+    perturbation: 0.0
+
+# Test particle parameters
+test_particle:
+  charge: 1.0               # Particle charge [natural units]
+  mass: 1.0                 # Particle mass [natural units]
+
+  # Initial position (near vortex, outside core)
+  x0: 60.0                  # Initial x [Planck lengths]
+  y0: 50.0                  # Initial y
+
+  # Initial velocity (perpendicular to radial direction for circular motion)
+  vx0: 0.0                  # Initial v_x [c = 1]
+  vy0: 0.3                  # Initial v_y
+
+  # Injection time
+  injection_step: 100       # Step to inject particle
+
+# Validation criteria
+validation:
+  # Cyclotron motion parameters
+  expected_frequency: 0.1    # Expected ω_c = qB/m [rad/Planck time]
+  frequency_tolerance: 0.01  # Relative tolerance
+
+  expected_radius: 10.0      # Expected r_L = mv/(qB) [Planck lengths]
+  radius_tolerance: 0.05     # Relative tolerance
+
+  # Energy conservation
+  energy_tolerance: 0.001    # Max relative energy change
+
+  # Orbit stability
+  max_orbital_radius: 30.0   # Maximum allowed radius before drift
+  min_periods: 10            # Minimum complete periods required
+
+  # Force validation
+  force_correlation: 0.9     # Min correlation between F and theory
+
+# Output configuration
+output:
+  base_dir: "output"
+
+  # Trajectory output
+  save_trajectory: true
+  trajectory_file: "particle_trajectory.csv"
+
+  # Field snapshots
+  save_field_snapshots: true
+  snapshot_interval: 100
+
+  # Validation report
+  create_report: true
+  report_file: "lorentz_validation_report.txt"
+
+  # Visualizations
+  create_plots: true
+  plot_trajectory: true
+  plot_fields: true
+  plot_energy: true
+
+# Analysis options
+analysis:
+  # Orbital analysis
+  analyze_orbit: true
+  orbit_analysis_start: 1000  # Start after transients
+
+  # Frequency extraction
+  use_fft: true               # Use FFT for frequency extraction
+
+  # Field interpolation
+  interpolation_order: 2      # 1=linear, 2=cubic
+
+  # Error metrics
+  compute_rms_error: true
+  compute_max_error: true

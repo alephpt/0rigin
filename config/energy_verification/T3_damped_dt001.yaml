@@ -1,0 +1,57 @@
+---
+test_name: "T3_damped_dt001"
+description: "Test T3: Energy dissipation with γ=0.1 and dt=0.001. Expected: Exponential decay E(t) ≈ E₀·exp(-γt) with measured γ ≈ 0.1."
+
+# Grid configuration - use validated 128×128 grid
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Domain size: 100 Planck lengths
+  grid_sizes: []   # Single grid test
+
+# Physics parameters (Planck units: ℏ = c = 1, Δ = 1)
+physics:
+  solver_type: "gpu"         # Use GPU solver (with Strang splitting)
+  delta: 1.0                  # Mass gap = Planck mass
+  coupling: 0.1               # Kuramoto-Dirac coupling strength
+  dt: 0.001                   # Small timestep
+  total_steps: 10000          # 10 time units total
+  K: 1.0                      # Kuramoto coupling strength
+  damping: 0.1                # *** Physical damping to verify dissipation tracking ***
+  noise_strength: 0.0         # No stochastic noise
+
+# GRID-INDEPENDENT initial conditions
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0          # Start at domain center
+    y0_physical: 50.0
+    sigma_physical: 3.0        # Width: 3 Planck lengths
+    amplitude: 1.0
+
+  kuramoto:
+    phase_distribution: "vortex"
+    winding_number: 1
+    vortex_core_radius: 3.0    # Radius in Planck lengths
+    vortex_center_x: 50.0       # Center in Planck lengths
+    vortex_center_y: 50.0
+    omega_distribution: "zero"  # No frequency distribution
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [10]         # N=10 substeps
+
+# Validation configuration
+validation:
+  norm_tolerance: 0.001        # Normal norm conservation
+  energy_tolerance: 0.2         # Allow for dissipation (20% energy loss expected)
+  convergence_tolerance: 0.05
+  enforce_R_bounds: true
+
+# Output configuration
+output:
+  save_every: 100              # Save every 0.1 time units
+  save_fields: true
+  save_observables: true
+  formats: ["csv"]

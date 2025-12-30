@@ -1,0 +1,70 @@
+---
+# Finite-Size Scaling Analysis: L = 128
+# Dense noise scan for critical exponent extraction
+
+test_name: "fss_analysis_L128"
+description: "Finite-size scaling analysis - L=128 system for phase transition universality"
+
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Keep physical domain size constant
+
+physics:
+  solver_type: "none"  # Kuramoto-only (no fermion evolution)
+  delta: 1.0           # Mass gap (not used, Kuramoto-only)
+  coupling: 0.0        # No Kuramoto-Dirac coupling
+  dt: 0.05             # Timestep
+  total_steps: 10000   # Longer for larger system
+  K: 1.0               # Kuramoto coupling strength
+  damping: 0.1         # Phase damping
+  noise_strength: 0.0  # Will be set from noise_scan array
+
+  # Dense scan around critical region σ ∈ [0.0, 2.0] with 41 points
+  noise_scan: [
+    0.00, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45,
+    0.50, 0.55, 0.60, 0.65, 0.70, 0.72, 0.74, 0.76, 0.78, 0.80,
+    0.82, 0.84, 0.86, 0.88, 0.90, 0.92, 0.94, 0.96, 0.98, 1.00,
+    1.05, 1.10, 1.15, 1.20, 1.25, 1.30, 1.40, 1.50, 1.60, 1.80, 2.00
+  ]
+
+initial_conditions:
+  dirac:
+    type: "none"  # No Dirac field for Kuramoto-only test
+
+  kuramoto:
+    phase_distribution: "uniform"  # Start from uniform synchronized state
+    omega_distribution: "zero"     # No natural frequency heterogeneity
+
+operator_splitting:
+  enabled: false
+
+validation:
+  norm_tolerance: 1.0e-2
+  energy_tolerance: 1.0e-2
+  convergence_tolerance: 0.05
+  scenario: "fss_analysis"
+  enforce_R_bounds: true
+  enforce_causality: false  # Not applicable for Kuramoto-only
+  check_numerical_stability: true
+  validate_initial_state: true
+  validate_during_evolution: false
+  validate_final_state: true
+  fail_on_critical: false  # Continue even if equilibrium not reached
+  verbose: true
+
+output:
+  directory: "output/fss_analysis"
+  save_every: 400  # Save less frequently for FSS
+  formats: ["csv"]
+  auto_visualize: false
+  save_spatial_snapshots: true  # Save R field for Binder cumulant
+  enable_plots: false
+
+analysis:
+  mode: "simulation"
+  track_trajectory: false
+  measure_velocity: false
+  compute_effective_mass: false
+  compute_energy: false
+  compute_fss_observables: true  # Enable FSS-specific measurements
