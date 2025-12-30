@@ -28,6 +28,13 @@ physics:
   delta: 0.3
   effective_charge: 1.0    # q for flux quantum h/q
 
+# Electromagnetic coupling (ESSENTIAL FOR FLUX QUANTIZATION TEST)
+em_coupling:
+  enabled: true
+  coupling_strength: 1.0    # Effective charge q for Φ = (h/q)W
+  field_type: "from_phase"  # Extract EM field from Kuramoto phase ∇θ
+  # Magnetic flux: Φ = ∮A·dl with A ~ ∇θ
+
 # Initial conditions - various vortex configurations
 initial_conditions:
   # Dirac field (background)

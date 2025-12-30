@@ -29,6 +29,13 @@ physics:
   delta: 0.3             # Amplitude coupling
   charge_coupling: 1.0   # Effective charge for EM extraction
 
+# Electromagnetic coupling (ESSENTIAL FOR MAXWELL VALIDATION)
+em_coupling:
+  enabled: true
+  coupling_strength: 1.0    # Effective charge q
+  field_type: "from_phase"  # Extract EM field from Kuramoto phase ∇θ
+  # E = -∇φ - ∂A/∂t, B = ∇×A, where A ~ ∇θ
+
 # Initial conditions
 initial_conditions:
   # Dirac spinor (source of charge/current)

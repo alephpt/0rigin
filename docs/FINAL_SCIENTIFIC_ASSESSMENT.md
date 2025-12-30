@@ -18,7 +18,7 @@ After rigorous analysis addressing critical scientific review, here is the **bru
 
 ### What SMFT is NOT:
 ❌ **Complete theory of emergent gravity** (metric derivation fails, cosmological constant off by 10³⁰)
-❌ **Validated at making EM forces** (tests didn't run properly)
+⚠️ **Validated at making EM forces** (infrastructure fixed, physics metrics incomplete)
 ❌ **Proven to unify QM and GR** (gaps in mathematical rigor)
 
 ---
@@ -91,26 +91,55 @@ Pure SMFT **CANNOT** resolve cosmological constant problem. The emergent gravity
 
 **Question**: Do computed EM forces actually affect matter?
 
-**Result**: ❌ **TESTS INVALID** (0/11 metrics validated)
+**Result**: ⚠️ **INFRASTRUCTURE FIXED, PHYSICS INCOMPLETE** (0/11 metrics validated)
 
-**What Happened**:
-All 3 EM verification tests ran with `em_coupling_enabled: false` in configs:
-- ❌ No EM field extraction from ∇θ
-- ❌ No Lorentz force F = q(E + v×B) computed
-- ❌ No Maxwell equations validated
-- ❌ No flux quantization measured
+**Timeline of Findings**:
 
-**What Actually Ran**:
-- ✓ Basic field evolution (norm, energy conservation)
-- ✓ Grid convergence
-- ❌ **ZERO electromagnetic phenomena tested**
+**Dec 29, 00:00 - Initial Assessment**:
+- All 3 EM verification tests ran with `em_coupling_enabled: false`
+- Zero electromagnetic phenomena tested
+
+**Dec 29, 23:15 - After Enabling EM Coupling**:
+- Fixed configs to enable EM coupling (`em_coupling: enabled: true`)
+- **All 3 tests crashed with segmentation fault**
+- Root cause: Double-free error in Vulkan pipeline cleanup
+
+**Dec 29, 23:46 - After Segfault Fix**:
+- ✅ **Segfault fixed** (removed manual pipeline destruction)
+- ✅ All 3 tests now **run to completion without crashing**
+- ⚠️ Tests execute but EM-specific validations not yet measured
+
+**Current Test Status**:
+
+| Test | Crash? | Norm | Energy | EM Metrics |
+|------|--------|------|--------|------------|
+| A. Lorentz Force | ✅ Runs | ✅ Pass | ❌ 1.8% drift | ❓ Not measured |
+| B. Maxwell Equations | ✅ Runs | ✅ Pass | ❌ 0-2.5% drift | ❓ Not measured |
+| C. Flux Quantization | ✅ Runs | ✅ Pass | ❌ 2.9% drift | ❓ Not measured |
+
+**What Now Works**:
+- ✅ EM field buffers and pipelines initialize successfully
+- ✅ Tests execute field evolution with EM coupling enabled
+- ✅ Basic validation metrics computed (norm, energy, causality)
+
+**What Still Needs Work**:
+- ❌ EM observable file output (write failures)
+- ❌ Lorentz force validation (no cyclotron frequency, Larmor radius measured)
+- ❌ Maxwell equation verification (violations not computed/reported)
+- ❌ Flux quantization measurement (flux not measured/reported)
+- ⚠️ Energy conservation degrades with EM coupling (~2-3% drift)
 
 **Honest Conclusion**:
-The EM emergence hypothesis **REMAINS UNVERIFIED**. We cannot claim "EM forces demonstrably emerge from ∇θ" because the validation tests failed to execute their intended purpose.
+EM coupling infrastructure **no longer crashes** (major progress from broken → working). However, EM force emergence **still unverified** because EM-specific validation metrics (11 total) are not yet implemented or reported in test results.
 
-**Action Required**: Fix configs (`em_coupling: true`), re-run tests properly.
+**Next Steps**:
+1. Implement EM observable output (fix file write)
+2. Add cyclotron frequency & Larmor radius computation (Test A)
+3. Add Maxwell equation violation computation (Test B)
+4. Add flux quantization measurement (Test C)
+5. Investigate energy conservation degradation with EM coupling
 
-**Files**: `/tmp/em_verification_results.md`
+**Files**: `/tmp/em_verification_results_FINAL.md`, `src/SMFTEngine.cpp` (segfault fix)
 
 ---
 

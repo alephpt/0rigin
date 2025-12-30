@@ -30,6 +30,13 @@ physics:
   kappa: 0.1          # Kuramoto coupling
   delta: 0.3          # Amplitude coupling
 
+# Electromagnetic coupling (ESSENTIAL FOR LORENTZ FORCE TEST)
+em_coupling:
+  enabled: true
+  coupling_strength: 1.0    # Effective charge q
+  field_type: "from_phase"  # Extract EM field from Kuramoto phase ∇θ
+  # E = -∇φ - ∂A/∂t, B = ∇×A, where A ~ ∇θ
+
 # Initial conditions for fields
 initial_conditions:
   # Dirac field (creates background for EM extraction)

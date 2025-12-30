@@ -1998,6 +1998,13 @@ void SMFTEngine::cleanupEMResources() {
     /**
      * Cleanup EM-specific Vulkan resources
      * Called by destroyResources()
+     *
+     * NOTE: Component managers handle cleanup of resources they track:
+     * - Pipelines: Cleaned up by _pipelineFactory
+     * - Buffers/Memory: Cleaned up by _bufferManager
+     * - Descriptor layouts: Cleaned up by _descriptorManager (if created through it)
+     *
+     * We only clean up resources created directly through Vulkan API
      */
     if (!_nova || !_nova->_architect) {
         return;
@@ -2008,21 +2015,12 @@ void SMFTEngine::cleanupEMResources() {
         return;
     }
 
-    // Destroy pipelines
-    if (_em_potentials_pipeline != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device, _em_potentials_pipeline, nullptr);
-        _em_potentials_pipeline = VK_NULL_HANDLE;
-    }
-    if (_em_field_strengths_pipeline != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device, _em_field_strengths_pipeline, nullptr);
-        _em_field_strengths_pipeline = VK_NULL_HANDLE;
-    }
-    if (_em_reduce_energy_pipeline != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device, _em_reduce_energy_pipeline, nullptr);
-        _em_reduce_energy_pipeline = VK_NULL_HANDLE;
-    }
+    // Reset pipeline handles (pipelines are managed by _pipelineFactory)
+    _em_potentials_pipeline = VK_NULL_HANDLE;
+    _em_field_strengths_pipeline = VK_NULL_HANDLE;
+    _em_reduce_energy_pipeline = VK_NULL_HANDLE;
 
-    // Destroy pipeline layouts
+    // Destroy pipeline layouts (created directly, not through a manager)
     if (_em_potentials_layout != VK_NULL_HANDLE) {
         vkDestroyPipelineLayout(device, _em_potentials_layout, nullptr);
         _em_potentials_layout = VK_NULL_HANDLE;
@@ -2036,19 +2034,30 @@ void SMFTEngine::cleanupEMResources() {
         _em_reduce_energy_layout = VK_NULL_HANDLE;
     }
 
-    // Destroy descriptor set layouts
-    if (_em_potentials_desc_layout != VK_NULL_HANDLE) {
-        vkDestroyDescriptorSetLayout(device, _em_potentials_desc_layout, nullptr);
-        _em_potentials_desc_layout = VK_NULL_HANDLE;
-    }
-    if (_em_field_strengths_desc_layout != VK_NULL_HANDLE) {
-        vkDestroyDescriptorSetLayout(device, _em_field_strengths_desc_layout, nullptr);
-        _em_field_strengths_desc_layout = VK_NULL_HANDLE;
-    }
-    if (_em_reduce_energy_desc_layout != VK_NULL_HANDLE) {
-        vkDestroyDescriptorSetLayout(device, _em_reduce_energy_desc_layout, nullptr);
-        _em_reduce_energy_desc_layout = VK_NULL_HANDLE;
-    }
+    // Reset descriptor layout handles (layouts are managed by _descriptorManager)
+    _em_potentials_desc_layout = VK_NULL_HANDLE;
+    _em_field_strengths_desc_layout = VK_NULL_HANDLE;
+    _em_reduce_energy_desc_layout = VK_NULL_HANDLE;
 
-    // Buffers and memory cleaned up by _bufferManager automatically
+    // Reset buffer handles (buffers are managed by _bufferManager)
+    _phi_buffer = VK_NULL_HANDLE;
+    _A_x_buffer = VK_NULL_HANDLE;
+    _A_y_buffer = VK_NULL_HANDLE;
+    _E_x_buffer = VK_NULL_HANDLE;
+    _E_y_buffer = VK_NULL_HANDLE;
+    _B_z_buffer = VK_NULL_HANDLE;
+    _em_energy_buffer = VK_NULL_HANDLE;
+    _em_params_buffer = VK_NULL_HANDLE;
+    _theta_previous_buffer = VK_NULL_HANDLE;
+
+    // Reset memory handles
+    _phi_memory = VK_NULL_HANDLE;
+    _A_x_memory = VK_NULL_HANDLE;
+    _A_y_memory = VK_NULL_HANDLE;
+    _E_x_memory = VK_NULL_HANDLE;
+    _E_y_memory = VK_NULL_HANDLE;
+    _B_z_memory = VK_NULL_HANDLE;
+    _em_energy_memory = VK_NULL_HANDLE;
+    _em_params_memory = VK_NULL_HANDLE;
+    _theta_previous_memory = VK_NULL_HANDLE;
 }
