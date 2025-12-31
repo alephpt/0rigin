@@ -1,0 +1,80 @@
+# Test 2.8: Vortex-Antivortex Annihilation Dynamics
+# Sprint 2: Multi-Defect Interactions
+#
+# Purpose: Track vortex merger process and topology change
+# Physics: W_total = 0 → smooth phase field after annihilation
+# Expected: Vortices spiral toward each other, cores overlap, R → 1
+
+test:
+  name: "Test 2.8: Annihilation Dynamics"
+  description: "Track vortex-antivortex merger and energy release"
+  scenarios:
+    - { N_values: [1, 10, 100], separation: 15.0, label: "Annihilation d=15ℓ_P" }
+
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Domain size [ℓ_P]
+
+time:
+  dt: 0.01         # Time step [t_P]
+  t_max: 200.0     # Long enough for complete merger
+  save_interval: 1.0
+
+initial_conditions:
+  kuramoto:
+    phase_distribution: "vortex_pair"
+    vortex_center_x: 50.0      # Domain center [ℓ_P]
+    vortex_center_y: 50.0
+    vortex_separation: 15.0    # Close enough to annihilate
+    vortex_core_radius: 3.0    # Core radius ξ [ℓ_P]
+    K: 1.0                     # Coupling strength drives merger
+    sigma: 0.0                 # No noise for clean tracking
+
+  dirac:
+    type: "none"               # No Dirac field for pure vortex annihilation test
+
+physics:
+  m0: 0.0                      # Massless limit
+  Delta: 1.0                   # Energy scale [E_P]
+  lambda: 0.1                  # Self-interaction
+  gamma: 0.01                  # Damping
+  enable_stochastic: false
+  enable_backreaction: true
+  enable_em_coupling: true     # Essential for EM energy release
+
+validation:
+  tolerances:
+    norm_conservation: 0.05    # 5% tolerance
+    energy_conservation: 0.10  # 10% tolerance (energy released during annihilation)
+
+  criteria:
+    # Criterion 1: Topological charge conservation throughout
+    - name: "W_total Conservation During Merger"
+      type: "winding_number_conservation"
+      W_total_initial: 0
+      tolerance: 0.1
+
+    # Criterion 2: Vortex separation decreases monotonically
+    - name: "Merger Progress"
+      type: "vortex_separation_decrease"
+      expected_behavior: "monotonic_decrease"
+      tolerance: 0.15
+
+    # Criterion 3: R-field smoothing after annihilation
+    - name: "Core Healing"
+      type: "R_field_restoration"
+      final_R_min: 0.9          # R → 1 after merger
+      tolerance: 0.1
+
+    # Criterion 4: EM energy release
+    - name: "EM Energy Conservation"
+      type: "em_energy_tracking"
+      expected_behavior: "energy_release"  # ΔE_EM < 0 during annihilation
+      tolerance: 0.2
+
+output:
+  base_dir: "output"
+  save_spatial_snapshots: true
+  snapshot_times: [0.0, 25.0, 50.0, 75.0, 100.0, 150.0, 200.0]
+  fields_to_save: ["theta", "R", "E_field", "B_field"]

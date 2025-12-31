@@ -140,6 +140,7 @@ private:
     std::map<int, Validation::ValidationReport> _global_validation_reports;
     std::map<int, Validation::ValidationReport> _scenario_validation_reports;
     std::string _detected_scenario_type;
+    std::string _test_name;  // Current test name for conditional execution
 
     // Output management
     SMFT::OutputManager* _output_manager;
@@ -180,6 +181,14 @@ private:
      * @return true if all tests passed
      */
     bool runForGridSizeAndVelocity(int grid_size, float velocity);
+
+    /**
+     * Run test for a specific noise level (Test 3.3: Phase Transition)
+     * @param grid_size Grid size to test
+     * @param noise_sigma Noise amplitude
+     * @return Equilibrium order parameter R value
+     */
+    double runForNoise(int grid_size, float noise_sigma);
 
     /**
      * Run single test with given substep ratio

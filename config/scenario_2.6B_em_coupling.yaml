@@ -1,0 +1,100 @@
+---
+test_name: "scenario_2.6B_em_coupling"
+description: "Phase 5: Electromagnetic Coupling - Test if Kuramoto phase gradients couple as EM potential"
+
+# Grid configuration (grid-independent physics)
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Domain size in Planck lengths
+  grid_sizes: []   # Single grid (can add [64, 128, 256] for convergence)
+
+# Physics parameters
+physics:
+  solver_type: "dirac"
+  delta: 2.5           # Mass gap Δ (Planck mass units)
+  coupling: 0.1        # Kuramoto-Dirac coupling g
+  dt: 0.01             # Timestep (Planck time)
+  total_steps: 2000    # Total evolution steps
+  K: 1.0               # Kuramoto coupling strength
+  damping: 0.1         # Phase damping γ
+  noise_strength: 0.0  # Deterministic evolution
+
+  # Phase 5: Electromagnetic coupling
+  em_coupling_enabled: true
+  em_coupling_strength: 1.0    # Effective charge q (test values: 0.5, 1.0, 2.0)
+  em_coupling_type: "perturbative"
+
+# Initial conditions - Dirac particle
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 40.0        # Initial position x (Planck lengths)
+    y0_physical: 50.0        # Initial position y (Planck lengths)
+    sigma_physical: 3.0      # Wavepacket width (Planck lengths)
+    boost_vx: 0.3            # Initial velocity v_x (c = 1)
+    boost_vy: 0.0            # Initial velocity v_y
+
+  # Kuramoto phase field - vortex configuration
+  kuramoto:
+    phase_distribution: "vortex"
+    omega_distribution: "zero"
+    winding_number: 1              # Topological charge W = +1
+    vortex_core_radius: 5.0        # Core radius (Planck lengths)
+    vortex_center_x: 60.0          # Vortex center x (Planck lengths)
+    vortex_center_y: 50.0          # Vortex center y (Planck lengths)
+
+# Validation criteria
+validation:
+  # Global validation
+  norm_tolerance: 5.0e-3           # 0.5% norm conservation
+  energy_tolerance: 1.0e-2         # 1% energy conservation
+  enforce_R_bounds: true           # 0 ≤ R ≤ 1
+  enforce_causality: true          # v ≤ c
+  check_numerical_stability: true  # No NaN/Inf
+
+  # Scenario-specific: EM coupling
+  scenario: "em_coupling"
+  require_vortex: true             # Require topological defect
+  winding_tolerance: 0.2           # |W - 1| < 0.2
+  require_core: true               # Require vortex core (R_min < 0.5)
+  core_R_threshold: 0.5
+
+  # Validation timing
+  validate_initial_state: true
+  validate_during_evolution: true
+  validation_interval: 100
+  validate_final_state: true
+  fail_on_critical: false          # Continue even if validation fails (for analysis)
+  verbose: true
+
+# Output configuration
+output:
+  directory: "output/scenario_2.6B_em_coupling"
+  save_every: 10                   # Save observables every 10 steps
+  formats: ["csv"]
+  save_spatial_snapshots: true     # Save full EM fields
+  snapshot_steps: [0, 500, 1000, 1500, 2000]  # Timesteps for spatial snapshots
+
+  # Plotting (optional)
+  enable_plots: true
+  plot_dpi: 300
+  plot_formats: ["png"]
+  plot_6panel: true
+  plot_conservation: true
+  plot_spatial_fields: true
+
+# Analysis configuration
+analysis:
+  mode: "simulation"
+  track_trajectory: true           # Track particle center of mass
+  measure_velocity: true           # Measure velocity from trajectory
+  compute_effective_mass: true     # Compute m_eff = Δ·R
+  compute_energy: true             # Compute total energy
+  lorentz_invariants: false        # Not needed for EM test
+
+  # Phase 5 specific
+  validate_maxwell_equations: true      # Check ∇·E = ρ, etc.
+  validate_lorentz_force: true          # Check F_EM vs dp/dt
+  compute_effective_alpha: true         # Measure α_eff
+  measure_field_energy: true            # Track ∫(E² + B²) dV

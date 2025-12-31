@@ -1,0 +1,91 @@
+---
+test_name: "geodesic_deviation"
+description: "Phase 4 Test 4.3: Geodesic Deviation Analysis - Validate particle motion follows geodesics in (t,x,y,R) spacetime"
+
+# Grid configuration with physical domain size
+grid:
+  size_x: 128  # High resolution for accurate gradient computation
+  size_y: 128
+  L_domain: 100.0  # Domain size: 100 Planck lengths
+  grid_sizes: [64, 128, 256]  # Grid convergence test
+
+# Physics parameters (Planck units: ℏ = c = 1, Δ = 1)
+physics:
+  delta: 1.0                # Mass gap = Planck mass
+  coupling: 0.2             # Strong Kuramoto-Dirac coupling for large R gradients
+  dt: 0.005                 # Small timestep for accurate trajectory derivatives
+  total_steps: 30000        # 150 time units for statistical significance
+  K: 2.0                    # Strong Kuramoto coupling for sharp defects
+  damping: 0.05             # Low damping to maintain R-field structure
+
+# GRID-INDEPENDENT initial conditions (all in Planck lengths)
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    # Physical parameters (grid-independent)
+    x0_physical: 30.0          # Start away from vortex center
+    y0_physical: 50.0
+    sigma_physical: 2.5        # Narrow wavepacket for localized trajectory
+    amplitude: 1.0
+    # Moderate boost velocity (non-relativistic regime for geodesic analysis)
+    boost_velocities: [0.3]    # v = 0.3c (γ ≈ 1.048, weakly relativistic)
+    boost_direction_x: 1.0     # Boost toward vortex (crosses R gradient)
+    boost_direction_y: 0.0
+
+  kuramoto:
+    phase_distribution: "vortex"    # Single vortex defect at center
+    vortex_charge: 1                # Topological charge +1
+    vortex_center_x: 50.0           # Domain center (Planck lengths)
+    vortex_center_y: 50.0
+    vortex_core_radius: 5.0         # Core radius: 5 Planck lengths
+    omega_distribution: "zero"      # No natural frequency disorder
+    R_background: 0.9               # High background R (strong field)
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # Test N-dependence
+
+# Validation tolerances
+validation:
+  norm_tolerance: 0.01          # ||Ψ||² - 1 < 1% (relaxed for 30k step evolution)
+  energy_tolerance: 0.02        # |ΔE/E₀| < 2%
+  convergence_tolerance: 0.05   # 5% convergence between N values
+  # Geodesic deviation validation
+  geodesic_error_threshold: 0.10  # 10% mean acceleration error
+
+# Output configuration
+output:
+  directory: "output/geodesic_deviation"
+  save_every: 5                   # Save every 5 steps for high temporal resolution
+  formats: ["csv"]
+  save_spatial_snapshots: true
+  snapshot_steps: [0, 3000, 6000, 9000, 12000, 15000, 18000, 21000, 24000, 27000, 30000]  # Track R-field evolution
+
+# Test 4.3 specific analysis
+analysis:
+  track_trajectory: true           # Track center-of-mass position over time
+  measure_velocity: true           # Measure v = d<r>/dt
+  measure_acceleration: true       # Measure a = dv/dt (observed acceleration)
+  compute_geodesic_acceleration: true  # Compute a_geo from Christoffel symbols
+  compute_christoffel_symbols: true    # Track Γ^i_μν along trajectory
+  compute_metric_tensor: true      # Track g_μν at particle position
+  compute_riemann_scalar: true     # Measure spacetime curvature R
+  compute_gaussian_curvature: true # Measure spatial curvature K
+  save_geometry_diagnostics: true  # Save full geometry data to CSV
+  geodesic_comparison: true        # Compare observed vs geodesic trajectories
+
+# Expected physics:
+# ------------------
+# Effective metric: ds² = -R²dt² + dx² + dy²
+# Christoffel symbols: Γ^x_00 = -R ∂R/∂x, Γ^y_00 = -R ∂R/∂y
+# Geodesic acceleration: a^i ≈ -Γ^i_00 = R ∂R/∂x^i
+#
+# Hypothesis: Particle follows geodesic in (t,x,y,R) spacetime
+# Prediction: |a_obs - a_geo| / |a_geo| < 10% (mean error over trajectory)
+#
+# Test trajectory:
+# - Particle starts at (30, 50), boosted toward vortex center (50, 50)
+# - Crosses strong R gradient near vortex core (r ~ 5 ℓ_P)
+# - Geodesic acceleration deflects particle due to spacetime curvature
+# - Observed trajectory should match geodesic prediction

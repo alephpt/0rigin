@@ -1,6 +1,7 @@
 #include "SMFTCompute.h"
 #include <stdexcept>
 #include <cstring>
+#include <iostream>
 
 SMFTCompute::SMFTCompute(VkDevice device, VkQueue queue, uint32_t queueFamilyIndex)
     : _device(device)
@@ -13,7 +14,9 @@ SMFTCompute::SMFTCompute(VkDevice device, VkQueue queue, uint32_t queueFamilyInd
 }
 
 SMFTCompute::~SMFTCompute() {
+    std::cout << "[DEBUG] SMFTCompute destructor called" << std::endl;
     cleanup();
+    std::cout << "[DEBUG] SMFTCompute destructor completed" << std::endl;
 }
 
 bool SMFTCompute::initialize() {
@@ -288,20 +291,28 @@ void SMFTCompute::calculateWorkgroups(uint32_t width, uint32_t height,
 }
 
 void SMFTCompute::cleanup() {
-    if (_device == VK_NULL_HANDLE) return;
+    std::cout << "[DEBUG] SMFTCompute::cleanup() called" << std::endl;
+    if (_device == VK_NULL_HANDLE) {
+        std::cout << "[DEBUG] SMFTCompute::cleanup() early return - no device" << std::endl;
+        return;
+    }
 
     if (_fence != VK_NULL_HANDLE) {
+        std::cout << "[DEBUG] Destroying fence" << std::endl;
         vkDestroyFence(_device, _fence, nullptr);
         _fence = VK_NULL_HANDLE;
     }
 
     if (_commandBuffer != VK_NULL_HANDLE && _commandPool != VK_NULL_HANDLE) {
+        std::cout << "[DEBUG] Freeing command buffer" << std::endl;
         vkFreeCommandBuffers(_device, _commandPool, 1, &_commandBuffer);
         _commandBuffer = VK_NULL_HANDLE;
     }
 
     if (_commandPool != VK_NULL_HANDLE) {
+        std::cout << "[DEBUG] Destroying command pool" << std::endl;
         vkDestroyCommandPool(_device, _commandPool, nullptr);
         _commandPool = VK_NULL_HANDLE;
     }
+    std::cout << "[DEBUG] SMFTCompute::cleanup() completed" << std::endl;
 }

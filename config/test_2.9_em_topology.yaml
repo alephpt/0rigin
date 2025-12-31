@@ -1,0 +1,97 @@
+# Test 2.9: EM Field Topology During Annihilation
+# Sprint 2: Multi-Defect Interactions
+#
+# Purpose: Measure EM fields during topology change W_total = 0
+# Physics: Flux quantization, gauge continuity, energy release
+# Expected: Magnetic flux cancellation, E-field peaks during merger
+
+test:
+  name: "Test 2.9: EM Field Topology"
+  description: "Track electromagnetic fields during vortex annihilation"
+  scenarios:
+    - { N_values: [100], separation: 15.0, label: "Pre-annihilation" }
+    - { N_values: [100], separation: 10.0, label: "During merger" }
+    - { N_values: [100], separation: 5.0, label: "Near annihilation" }
+
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Domain size [ℓ_P]
+
+time:
+  dt: 0.01         # Time step [t_P]
+  t_max: 100.0     # Evolution time
+  save_interval: 0.5  # Frequent saves for EM field tracking
+
+initial_conditions:
+  kuramoto:
+    phase_distribution: "vortex_pair"
+    vortex_center_x: 50.0      # Domain center [ℓ_P]
+    vortex_center_y: 50.0
+    vortex_separation: 15.0    # Overridden by scenarios
+    vortex_core_radius: 3.0    # Core radius ξ [ℓ_P]
+    K: 1.0                     # Coupling strength
+    sigma: 0.0                 # No noise for clean EM measurement
+
+  dirac:
+    type: "none"               # No Dirac field for pure EM topology test
+
+physics:
+  m0: 0.0                      # Massless limit
+  Delta: 1.0                   # Energy scale [E_P]
+  lambda: 0.1                  # Self-interaction
+  gamma: 0.01                  # Damping
+  enable_stochastic: false
+  enable_backreaction: true
+  enable_em_coupling: true     # ESSENTIAL: EM field extraction from phase
+
+validation:
+  tolerances:
+    norm_conservation: 0.05    # 5% tolerance
+    energy_conservation: 0.10  # 10% tolerance (EM energy release)
+
+  criteria:
+    # Criterion 1: Magnetic flux quantization
+    - name: "Flux Quantization"
+      type: "magnetic_flux_conservation"
+      expected_flux_per_vortex: 1.0  # Φ = 2π in natural units
+      tolerance: 0.15
+
+    # Criterion 2: Gauge field continuity
+    - name: "Gauge Continuity"
+      type: "gauge_field_smoothness"
+      max_gradient_discontinuity: 0.2
+      tolerance: 0.1
+
+    # Criterion 3: Electric field peaks during annihilation
+    - name: "E-field Dynamics"
+      type: "electric_field_peak_tracking"
+      expected_behavior: "peak_during_merger"
+      min_peak_enhancement: 2.0  # E_peak > 2 * E_background
+      tolerance: 0.3
+
+    # Criterion 4: Magnetic field cancellation
+    - name: "B-field Cancellation"
+      type: "magnetic_field_reduction"
+      expected_behavior: "flux_cancellation"  # |B| → 0 after annihilation
+      final_B_max: 0.1
+      tolerance: 0.2
+
+    # Criterion 5: EM energy conservation
+    - name: "EM Energy Tracking"
+      type: "em_energy_balance"
+      components: ["E_field", "B_field", "Poynting_flux"]
+      tolerance: 0.15
+
+output:
+  base_dir: "output"
+  save_spatial_snapshots: true
+  snapshot_times: [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 75.0, 100.0]
+  fields_to_save: ["theta", "R", "E_field", "B_field", "gauge_potential"]
+
+  # High-frequency EM field monitoring
+  em_field_output:
+    enabled: true
+    save_interval: 1.0
+    compute_poynting_vector: true
+    compute_energy_density: true

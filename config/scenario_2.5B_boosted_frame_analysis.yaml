@@ -1,0 +1,76 @@
+---
+test_name: "scenario_2.5B_boosted_frame_analysis"
+description: "Phase 2 Scenario 2.5B: Measure R-field in boosted reference frame via Lorentz coordinate transform. Tests if m(v)=γ·Δ·R holds in moving frame. Validates Lorentz covariance of SMFT mass formula."
+
+# Grid configuration
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0
+  grid_sizes: [128, 256, 512]  # Grid convergence study
+
+# Physics parameters
+physics:
+  delta: 1.0
+  coupling: 0.1
+  dt: 0.01
+  total_steps: 10000
+  K: 1.0
+  damping: 0.1
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    amplitude: 1.0
+    # Test multiple frames
+    boost_velocities: [0.3, 0.5, 0.7]
+
+  kuramoto:
+    phase_distribution: "uniform"
+    omega_distribution: "zero"
+    uniform_phase: 0.0
+    R_background: 0.8
+
+# Operator splitting
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # N-convergence study
+
+# Validation
+validation:
+  norm_tolerance: 0.005
+  energy_tolerance: 0.01
+  convergence_tolerance: 0.05
+  gamma_tolerance: 0.05
+
+# Output
+output:
+  directory: "output/scenario_2.5B_boosted_frame"
+  save_every: 10
+  formats: ["csv"]
+  save_spatial_snapshots: true
+  snapshot_steps: [0, 2500, 5000, 7500, 9999]
+
+# Analysis
+analysis:
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  test_gamma_factor: true
+  compute_energy: true
+  lorentz_invariants: true
+
+  # Boosted frame analysis (NEW)
+  perform_lorentz_transform: true       # Transform coordinates: (x',t') = Λ(x,t)
+  measure_R_in_boosted_frame: true      # R'(x',t') in particle rest frame
+  test_lorentz_covariance: true         # Does m' = m (same mass in all frames)?
+  compute_frame_invariants: true        # E'² - p'² should equal E² - p²
+
+  # Expected: In boosted frame (particle at rest), should see:
+  # - v' = 0 → γ' = 1
+  # - m' = Δ·R' should equal m_rest
+  # - Tests if formula is frame-independent

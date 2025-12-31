@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <filesystem>
 
 TestParticle::TestParticle(double charge, double mass,
                            int Nx, int Ny,
@@ -102,52 +103,76 @@ void TestParticle::evolveLorentzForce(const EMFieldComputer::EMFields& fields,
         recordTrajectory(fields);
     }
 
-    // SYMPLECTIC VELOCITY VERLET INTEGRATION
-    // This preserves phase space volume → energy conserved to machine precision
-    // Structure: KICK (half-step velocity) → DRIFT (full-step position) →
-    //           KICK (half-step velocity at new position)
+    // BORIS ALGORITHM - Standard for charged particle dynamics
+    // Reference: Boris, J.P. (1970) "Relativistic plasma simulation-optimization of a hybrid code"
+    // Properties:
+    //   - Exact energy conservation for pure magnetic field (E=0)
+    //   - Exact circular orbits (no breathing modes)
+    //   - Symplectic structure preserved
+    //   - Second-order accurate in dt
 
-    // Step 1: Compute Lorentz force at current position
-    Eigen::Vector2d F = computeLorentzForce(fields);
-    double ax = F(0) / mass_;
-    double ay = F(1) / mass_;
+    // Interpolate fields at current position
+    double E_x = interpolateField(fields.E_x, state_.x, state_.y);
+    double E_y = interpolateField(fields.E_y, state_.x, state_.y);
+    double B_z = interpolateField(fields.B_z, state_.x, state_.y);
 
-    // Step 2: KICK - Half-step velocity update
-    state_.vx += 0.5 * ax * dt;
-    state_.vy += 0.5 * ay * dt;
+    // Compute q/m and q*B/(2m) for Boris rotation
+    double q_over_m = charge_ / mass_;
+    double half_qB_over_m = 0.5 * q_over_m * B_z;
 
-    // Step 3: DRIFT - Full-step position update
+    // Step 1: Half electric impulse (v^- = v^n + (qE/m) * dt/2)
+    double v_minus_x = state_.vx + 0.5 * q_over_m * E_x * dt;
+    double v_minus_y = state_.vy + 0.5 * q_over_m * E_y * dt;
+
+    // Step 2: Magnetic rotation
+    // t = (qB/2m) * dt (rotation vector)
+    double t_x = 0.0;
+    double t_y = 0.0;
+    double t_z = half_qB_over_m * dt;
+    double t_mag_sq = t_z * t_z;
+
+    // s = 2t / (1 + |t|²) (scaled rotation vector)
+    double s_factor = 2.0 / (1.0 + t_mag_sq);
+    double s_x = 0.0;
+    double s_y = 0.0;
+    double s_z = s_factor * t_z;
+
+    // v' = v^- + v^- × t (first rotation)
+    // In 2D: v×(0,0,t_z) = (v_y*t_z, -v_x*t_z, 0)
+    double v_prime_x = v_minus_x + v_minus_y * t_z;
+    double v_prime_y = v_minus_y - v_minus_x * t_z;
+
+    // v^+ = v^- + v' × s (second rotation)
+    double v_plus_x = v_minus_x + v_prime_y * s_z;
+    double v_plus_y = v_minus_y - v_prime_x * s_z;
+
+    // Step 3: Half electric impulse (v^{n+1} = v^+ + (qE/m) * dt/2)
+    state_.vx = v_plus_x + 0.5 * q_over_m * E_x * dt;
+    state_.vy = v_plus_y + 0.5 * q_over_m * E_y * dt;
+
+    // Step 4: Position update (x^{n+1} = x^n + v^{n+1} * dt)
     state_.x += state_.vx * dt;
     state_.y += state_.vy * dt;
     state_.t += dt;
 
-    // Step 4: Apply periodic boundary conditions
+    // Step 5: Apply periodic boundary conditions
     applyPeriodicBC();
 
-    // Step 5: Re-compute force at new position
-    F = computeLorentzForce(fields);
-    ax = F(0) / mass_;
-    ay = F(1) / mass_;
-
-    // Step 6: KICK - Second half-step velocity update
-    state_.vx += 0.5 * ax * dt;
-    state_.vy += 0.5 * ay * dt;
-
-    // Step 7: Energy conservation check (CRITICAL for validation)
-    // For pure magnetic field, speed should be conserved
+    // Step 6: Energy conservation check (CRITICAL for validation)
+    // For pure magnetic field, speed should be conserved exactly
     double v_current = std::sqrt(state_.vx * state_.vx + state_.vy * state_.vy);
     if (initial_speed_ > 1e-10) {
         double speed_error = std::abs(v_current - initial_speed_) / initial_speed_;
-        if (speed_error > 0.01) {
+        if (speed_error > 1e-6) {  // Tightened threshold for Boris algorithm
             std::cerr << "WARNING: Particle speed changed by "
                       << speed_error * 100.0 << "% "
-                      << "(|v| should be conserved, but is changing)\n"
+                      << "(Boris algorithm should conserve speed exactly)\n"
                       << "  Initial speed: " << initial_speed_ << "\n"
                       << "  Current speed: " << v_current << "\n";
         }
     }
 
-    // Step 8: Record new state if requested
+    // Step 7: Record new state if requested
     if (record) {
         recordTrajectory(fields);
     }
@@ -180,9 +205,25 @@ void TestParticle::recordTrajectory(const EMFieldComputer::EMFields& fields) {
 }
 
 void TestParticle::writeTrajectory(const std::string& output_file) const {
+    // Ensure parent directory exists
+    std::filesystem::path file_path(output_file);
+    std::filesystem::path dir_path = file_path.parent_path();
+
+    if (!dir_path.empty() && !std::filesystem::exists(dir_path)) {
+        std::filesystem::create_directories(dir_path);
+    }
+
+    // Check if trajectory has data
+    if (trajectory_.empty()) {
+        std::cerr << "Warning: Trajectory is empty (no points recorded)\n";
+        return;
+    }
+
     std::ofstream file(output_file);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open " << output_file << " for writing\n";
+        std::cerr << "  Directory exists: " << std::filesystem::exists(dir_path) << "\n";
+        std::cerr << "  Trajectory size: " << trajectory_.size() << "\n";
         return;
     }
 
@@ -208,7 +249,7 @@ void TestParticle::writeTrajectory(const std::string& output_file) const {
     }
 
     file.close();
-    std::cout << "Trajectory written to " << output_file
+    std::cout << "  Trajectory written to " << output_file
               << " (" << trajectory_.size() << " points)\n";
 }
 
@@ -306,29 +347,35 @@ std::tuple<double, double, double> TestParticle::analyzeOrbit(int n_periods) con
     }
     r_avg /= trajectory_.size();
 
-    // Estimate period from velocity crossings
-    std::vector<double> crossing_times;
-    for (size_t i = 1; i < trajectory_.size(); ++i) {
-        if (trajectory_[i-1].vx * trajectory_[i].vx < 0 && trajectory_[i].vx > 0) {
-            // Interpolate crossing time
-            double t_cross = trajectory_[i-1].t +
-                (trajectory_[i].t - trajectory_[i-1].t) *
-                std::abs(trajectory_[i-1].vx) /
-                (std::abs(trajectory_[i-1].vx) + std::abs(trajectory_[i].vx));
-            crossing_times.push_back(t_cross);
-        }
+    // Compute orbital frequency from angular velocity
+    // Method: Track angle θ = atan2(y-cy, x-cx) and measure dθ/dt
+    std::vector<double> angles;
+    for (const auto& point : trajectory_) {
+        double dx = point.x - cx;
+        double dy = point.y - cy;
+        angles.push_back(std::atan2(dy, dx));
     }
 
-    double period = 0;
-    if (crossing_times.size() >= 2) {
-        for (size_t i = 1; i < crossing_times.size() && i <= n_periods; ++i) {
-            period += crossing_times[i] - crossing_times[i-1];
-        }
-        period /= std::min(static_cast<int>(crossing_times.size()-1), n_periods);
-        period *= 2.0;  // Full period is 2 crossings
+    // Unwrap angles to handle 2π discontinuity
+    std::vector<double> unwrapped_angles;
+    unwrapped_angles.push_back(angles[0]);
+    for (size_t i = 1; i < angles.size(); ++i) {
+        double delta = angles[i] - angles[i-1];
+        // Wrap delta to [-π, π]
+        while (delta > M_PI) delta -= 2.0 * M_PI;
+        while (delta < -M_PI) delta += 2.0 * M_PI;
+        unwrapped_angles.push_back(unwrapped_angles[i-1] + delta);
     }
 
-    double frequency = (period > 0) ? 2.0 * M_PI / period : 0.0;
+    // Total angular displacement
+    double total_angle = unwrapped_angles.back() - unwrapped_angles.front();
+    double total_time = trajectory_.back().t - trajectory_.front().t;
+
+    // Average angular velocity (frequency in rad/s)
+    double frequency = std::abs(total_angle / total_time);
+
+    // Period
+    double period = (frequency > 1e-10) ? 2.0 * M_PI / frequency : 0.0;
 
     return std::make_tuple(period, r_avg, frequency);
 }

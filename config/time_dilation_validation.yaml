@@ -1,0 +1,78 @@
+# Phase 4 Test 4.1: Time Dilation Measurement
+#
+# Physics Hypothesis:
+# R-field modulates local time flow: dτ/dt = R(x,t)
+# Particles in desynchronized regions (R < 1) experience slower proper time
+#
+# Test Method:
+# - Run dual simulations: standard (dτ=dt) vs time-dilation (dτ=R·dt)
+# - Measure phase accumulation difference: Δφ(t) = φ_std - φ_td
+#
+# Prediction:
+# - Δφ(t) grows linearly where R < 1 (time runs slower)
+# - Correlation: dΔφ/dt ∝ (1 - R_center)
+
+simulation:
+  name: "time_dilation_validation"
+  type: "dual_dirac"  # Special dual-simulation mode
+  duration: 100.0     # Total time (Planck units)
+  dt: 0.01           # Timestep
+  output_interval: 1.0  # Save every 1.0 time units
+
+grid:
+  size_x: 64          # Grid resolution
+  size_y: 64
+  L_domain: 100.0     # Domain size in Planck lengths
+  grid_sizes: [64]    # Single resolution for now
+
+physics:
+  Delta: 1.0          # Vacuum potential (Planck mass)
+  chiral_angle: 0.0   # Standard chiral coupling
+  K_kuramoto: 1.0     # Kuramoto coupling strength
+  damping: 0.1        # Phase damping coefficient
+  lambda_coupling: 0.1  # Dirac-Kuramoto feedback strength
+
+initial_conditions:
+  kuramoto:
+    type: "single_vortex"
+    vortex_core_radius: 5.0  # Defect radius in Planck lengths
+    vortex_center_x: 50.0    # Center of domain
+    vortex_center_y: 50.0
+    R_core: 0.3              # Strong desynchronization (R ≈ 0.3 at core)
+    R_background: 1.0        # Full synchronization outside
+
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0        # Particle at vortex center
+    y0_physical: 50.0        # Maximize time dilation effect
+    sigma_physical: 3.0      # Wavepacket width
+    amplitude: 1.0           # Normalized automatically
+
+validation:
+  # Phase accumulation difference should grow linearly
+  delta_phase_growth_rate_min: 0.001  # Minimum dΔφ/dt (rad/time)
+  delta_phase_growth_rate_max: 0.1    # Maximum dΔφ/dt (rad/time)
+
+  # Correlation between dΔφ/dt and (1 - R_center)
+  correlation_threshold: 0.8  # ρ(dΔφ/dt, 1-R) > 0.8
+
+  # Norm conservation for both simulations
+  norm_tolerance: 1.0e-4
+
+  # Energy drift tolerance
+  energy_drift_tolerance: 0.05  # 5% over full simulation
+
+output:
+  save_fields: true
+  field_interval: 10.0  # Save spatial snapshots every 10 time units
+  observables:
+    - time
+    - norm_standard
+    - norm_timedilation
+    - phase_standard
+    - phase_tiledilation
+    - delta_phase
+    - R_center_standard
+    - R_center_timedilation
+    - energy_standard
+    - energy_timedilation

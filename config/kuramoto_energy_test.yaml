@@ -1,0 +1,50 @@
+# Kuramoto Field Energy Test
+# Tests energy conservation with Kuramoto field gradient energy included
+# Expected: Energy drift should be minimal (<1%) without EM coupling
+
+test_name: "kuramoto_energy_test"
+test_description: "Test Kuramoto field gradient energy conservation"
+
+# Grid parameters
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0
+
+# Physical parameters
+physics:
+  solver_type: "gpu"
+  delta: 0.3
+  coupling: 0.1
+  dt: 0.001
+  total_steps: 5000
+  K: 1.0              # Kuramoto coupling strength
+  damping: 0.1
+  noise_strength: 0.0
+  em_coupling_enabled: false  # Disable EM to isolate Kuramoto energy
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 5.0
+    amplitude: 1.0
+  kuramoto:
+    type: "vortex"
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    vortex_core_radius: 5.0
+
+# Validation
+validation:
+  norm_tolerance: 0.005
+  energy_tolerance: 0.01  # 1% tolerance
+  convergence_tolerance: 0.05
+
+# Output
+output:
+  directory: "output/kuramoto_energy_test"
+  save_every: 100
+  formats: ["csv"]

@@ -11,8 +11,10 @@ SMFTPipelineFactory::SMFTPipelineFactory(VkDevice device)
 }
 
 SMFTPipelineFactory::~SMFTPipelineFactory() {
+    std::cout << "[DEBUG] SMFTPipelineFactory destructor called" << std::endl;
     // Clean up any remaining pipelines
     destroyAllPipelines();
+    std::cout << "[DEBUG] SMFTPipelineFactory destructor completed" << std::endl;
 }
 
 std::vector<uint32_t> SMFTPipelineFactory::loadShaderFile(const std::string& path) {
@@ -361,10 +363,14 @@ void SMFTPipelineFactory::destroyPipeline(VkPipeline pipeline) {
 }
 
 void SMFTPipelineFactory::destroyAllPipelines() {
+    std::cout << "[DEBUG] destroyAllPipelines: " << _createdPipelines.size() << " pipelines to destroy" << std::endl;
+    int count = 0;
     for (VkPipeline pipeline : _createdPipelines) {
         if (pipeline != VK_NULL_HANDLE) {
+            std::cout << "[DEBUG] Destroying pipeline " << ++count << "/" << _createdPipelines.size() << std::endl;
             vkDestroyPipeline(_device, pipeline, nullptr);
         }
     }
     _createdPipelines.clear();
+    std::cout << "[DEBUG] destroyAllPipelines completed" << std::endl;
 }

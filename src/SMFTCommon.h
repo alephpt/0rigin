@@ -317,15 +317,16 @@ inline std::vector<float> compute_local_R_field(const std::vector<float>& theta,
 } // namespace SMFT
 
 // ============================================================================
-// DIRAC FIELD INITIALIZATION (Forward declaration for DiracEvolution)
+// FIELD INITIALIZATION (Forward declarations)
 // ============================================================================
 
 class DiracEvolution;
+class KleinGordonEvolution;
 
 namespace SMFT {
 
 /**
- * Initialize boosted Gaussian spinor field
+ * Initialize boosted Gaussian spinor field (Dirac)
  *
  * Creates a Gaussian wavepacket with relativistic momentum boost.
  * Physics: Ψ(r) = N·exp(-(r-r0)²/(2σ²))·exp(i·p·r)·χ
@@ -341,6 +342,30 @@ namespace SMFT {
  * @param R_bg Background synchronization parameter R
  */
 void initializeBoostedGaussian(DiracEvolution& dirac,
+                              float x0, float y0, float sigma,
+                              float vx, float vy,
+                              float delta, float R_bg);
+
+/**
+ * Initialize boosted Gaussian scalar field (Klein-Gordon)
+ *
+ * Creates a Gaussian wavepacket with relativistic momentum boost.
+ * Physics: φ(r) = N·exp(-(r-r0)²/(2σ²))·exp(i·p·r)
+ * where p = γ·m·v with γ = 1/√(1-v²/c²)
+ *
+ * Klein-Gordon is second-order in time, so also initializes:
+ * φ_dot = -iω·φ where ω = √(p² + m²) (relativistic energy)
+ *
+ * @param klein_gordon KleinGordonEvolution object to initialize
+ * @param x0 Center x position (grid units)
+ * @param y0 Center y position (grid units)
+ * @param sigma Gaussian width (grid units)
+ * @param vx Boost velocity in x direction (c = 1 in Planck units)
+ * @param vy Boost velocity in y direction (c = 1 in Planck units)
+ * @param delta Mass gap parameter Δ (rest mass = Δ·R_bg in SMFT)
+ * @param R_bg Background synchronization parameter R
+ */
+void initializeBoostedGaussian(::KleinGordonEvolution& klein_gordon,
                               float x0, float y0, float sigma,
                               float vx, float vy,
                               float delta, float R_bg);

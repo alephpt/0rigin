@@ -1,0 +1,54 @@
+# GPU vs CPU Performance Benchmark - Sprint 3.1
+# Compare GPU and CPU performance with identical physics
+
+test:
+  name: "GPU vs CPU Performance Benchmark"
+  description: "Benchmark GPU vs CPU performance with EM coupling enabled"
+  scenarios:
+    - { N_values: [100], grid_sizes: [128], label: "128x128_GPU" }
+
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0
+  grid_sizes: [128]
+
+time:
+  dt: 0.01
+  t_max: 50.0        # Longer run for meaningful benchmark
+  save_interval: 5.0
+
+physics:
+  solver_type: gpu   # GPU mode
+  Delta: 1.0
+  c_light: 1.0
+  gauge_coupling: 0.1
+
+em_coupling:
+  enabled: true
+  coupling_strength: 0.1
+  field_type: "gauge_invariant"
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 60.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    kx0: 0.3
+    ky0: 0.0
+    m0: 1.0
+
+  kuramoto:
+    phase_distribution: "vortex"
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    vortex_core_radius: 3.0
+    K: 1.0
+    sigma: 0.0
+
+validation:
+  norm_conservation_tolerance: 0.01
+  energy_conservation_tolerance: 0.01
+  R_bounds_check: true
+  numerical_stability_check: true

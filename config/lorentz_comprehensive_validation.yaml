@@ -1,0 +1,80 @@
+test_name: "lorentz_comprehensive_validation"
+
+# COMPREHENSIVE LORENTZ FORCE VERIFICATION
+# Goals:
+#   1. Verify energy conservation in PURE magnetic field <10^-10
+#   2. Measure Larmor radius: r = mv/(qB) within 1%
+#   3. Verify cyclotron frequency: ω = qB/m
+#   4. Extended evolution: 100,000 steps
+#   5. Energy budget audit to machine precision
+
+simulation:
+  use_gpu: false
+  total_steps: 100000  # Extended evolution
+  dt: 0.0001           # Small timestep for accuracy
+  N_values: [1]        # Single N value for detailed analysis
+
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 200.0      # Large domain to avoid boundaries
+  boundary_conditions: "periodic"
+
+physics:
+  hbar: 1.0
+  mass: 0.1
+  coupling_strength: 0.0  # NO Kuramoto coupling - pure test particle
+  damping: 0.0
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 100.0   # Domain center
+    y0_physical: 100.0
+    sigma_physical: 5.0
+    k_physical: 0.0
+    k_y_physical: 0.0
+    amplitude: 0.0       # NO Dirac field - pure test particle
+
+  kuramoto:
+    phase_distribution: "uniform"
+    uniform_phase: 0.0
+    R_background: 0.0    # NO Kuramoto field
+
+em_coupling:
+  enabled: true
+  regularization: "NONE"  # Pure B field, no vortex singularities
+
+# TEST PARTICLE IN PURE MAGNETIC FIELD
+test_particle:
+  enabled: true
+  x0: 100.0              # Start at domain center
+  y0: 100.0
+  vx0: 0.0               # NO x-velocity
+  vy0: 0.01              # 1% speed of light
+  charge: -1.0           # Electron charge
+  mass: 0.1              # Particle mass
+  record_every: 10       # Record every 10 steps for detailed trajectory
+
+  # PURE UNIFORM MAGNETIC FIELD (no E-field)
+  use_uniform_B: true
+  uniform_B_z: 0.1       # Uniform B field strength
+
+validation:
+  norm_tolerance: 1.0e-10      # Strict for pure particle
+  energy_tolerance: 1.0e-10    # Should be EXACTLY conserved
+
+  validate_maxwell_equations: false  # No fields to validate
+  validate_flux_quantization: false
+  validate_gauge_invariance: false
+
+output:
+  save_every: 100              # Observables every 100 steps
+  save_spatial_snapshots: false
+  formats: ["csv"]
+
+# EXPECTED THEORETICAL VALUES:
+# Larmor radius: r = mv/(qB) = 0.1 * 0.01 / (1.0 * 0.1) = 0.01 Planck lengths
+# Cyclotron frequency: ω = qB/m = 1.0 * 0.1 / 0.1 = 1.0 rad/t_P
+# Period: T = 2π/ω = 6.283 t_P
+# Expected orbits in 100k steps: 100000 * 0.0001 / 6.283 ≈ 1.59 orbits

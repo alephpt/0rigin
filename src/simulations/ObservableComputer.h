@@ -169,13 +169,28 @@ public:
         int component);
 
     /**
-     * Compute Kuramoto field energy
-     * E_K = ∫[(1/2)|∇θ|² - K cos(θ_i - θ_j)] dA
-     * This includes gradient energy and synchronization energy
+     * Compute Kuramoto field energy including gradient and potential terms
+     * E_K = ∫[(∇R)²/2] dV - κ∫R² dV
+     *
+     * This computes:
+     * 1. Gradient energy of R field: ∫(∇R)² dV
+     * 2. Potential energy from synchronization: -κ·R²
+     *
+     * @param R_field Order parameter field [Nx*Ny]
+     * @param theta_field Phase field [Nx*Ny]
+     * @param Nx Grid width
+     * @param Ny Grid height
+     * @param dx Grid spacing x
+     * @param dy Grid spacing y
+     * @param coupling_strength Kuramoto coupling strength κ
+     * @return Total Kuramoto field energy
      */
     static double computeKuramotoFieldEnergy(
-        const DiracEvolution& dirac,
-        const std::vector<double>& R_field);
+        const std::vector<double>& R_field,
+        const std::vector<float>& theta_field,
+        int Nx, int Ny,
+        double dx, double dy,
+        double coupling_strength);
 
     // ========== Two-Particle Observable Methods (Test 3.4) ==========
 

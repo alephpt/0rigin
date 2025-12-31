@@ -1,0 +1,55 @@
+---
+test_name: "test_validation_integration"
+description: "Test validation framework integration - Scenario 2.3 (Relativistic Mass)"
+
+# Grid configuration
+grid:
+  size_x: 32
+  size_y: 32
+  L_domain: 100.0  # Domain size: 100 Planck lengths
+  grid_sizes: []    # Single grid for quick test
+
+# Physics parameters
+physics:
+  delta: 1.0
+  coupling: 0.1
+  dt: 0.01
+  total_steps: 100
+  K: 1.0
+  damping: 0.1
+
+# Initial conditions with vortex + boosted particle (Scenario 2.3)
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 60.0    # Offset from vortex center
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    amplitude: 1.0
+    boost_velocities: [0.3]  # v=0.3c
+
+  kuramoto:
+    phase_distribution: "vortex"     # Vortex structure
+    omega_distribution: "zero"
+    vortex_core_radius: 3.0          # 3 Planck lengths
+    vortex_center_x: 50.0            # Domain center
+    vortex_center_y: 50.0
+    winding_number: 1                # W = +1
+
+# Operator splitting
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10]
+
+# Validation
+validation:
+  norm_tolerance: 1.0e-4
+  energy_tolerance: 1.0e-2
+  convergence_tolerance: 0.05
+
+# Output
+output:
+  directory: "output/test_validation_integration"
+  save_every: 10
+  formats: ["csv"]
+  save_spatial_snapshots: false

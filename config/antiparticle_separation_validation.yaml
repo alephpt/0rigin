@@ -1,0 +1,83 @@
+---
+# Test 3.4: Particle-Antiparticle Separation
+# Physics: Opposite β signs create opposite forces in same defect field
+# Expected: Particles separate spatially due to opposite force directions
+
+test_name: "antiparticle_separation_validation"
+description: "Test 3.4 - Particle and antiparticle separation in vortex defect field"
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0  # Domain size in Planck lengths
+
+physics:
+  solver_type: "dirac"  # Dirac spinor evolution (two particles)
+  delta: 2.5            # Mass gap parameter
+  coupling: 0.0         # No feedback to Kuramoto
+  dt: 0.01              # Timestep
+  total_steps: 10000    # Long enough to observe separation
+  K: 1.0                # Kuramoto coupling strength
+  damping: 0.1          # Phase damping
+  noise_strength: 0.0   # Deterministic
+
+initial_conditions:
+  dirac:
+    type: "two_particle"  # Special two-particle initialization
+    # Particle position (left of vortex core)
+    x0_physical: 40.0     # Grid-independent: 40 Planck lengths
+    y0_physical: 50.0
+    sigma_physical: 3.0
+
+    # Antiparticle position (right of vortex core)
+    # Additional parameters for two-particle mode (parsed by test code)
+    # x1: particle, x2: antiparticle
+    # x1 = x0_physical, y1 = y0_physical
+    # x2 = 60.0, y2 = 50.0 (defined in test implementation)
+
+  kuramoto:
+    phase_distribution: "vortex"  # Single vortex defect
+    omega_distribution: "zero"    # Uniform frequencies
+    winding_number: 1             # Topological charge W = +1
+    vortex_core_radius: 3.0       # Core radius in Planck lengths (grid-independent)
+    vortex_center_x: 50.0         # Center x in physical units
+    vortex_center_y: 50.0         # Center y in physical units
+
+operator_splitting:
+  enabled: true
+  substep_ratios: [10]  # Born-Oppenheimer approximation
+
+validation:
+  norm_tolerance: 1.0e-3
+  energy_tolerance: 1.0e-2
+  convergence_tolerance: 0.05
+  scenario: "antiparticle_separation"
+  enforce_R_bounds: true
+  enforce_causality: true
+  check_numerical_stability: true
+  require_vortex: true        # Validate vortex defect
+  winding_tolerance: 0.2      # |W - 1| < 0.2
+  require_core: true          # Require R_min < 0.5
+  core_R_threshold: 0.5
+  validate_initial_state: true
+  validate_during_evolution: false
+  validate_final_state: true
+  fail_on_critical: true
+  verbose: true
+
+output:
+  directory: "output/antiparticle_separation"
+  save_every: 50  # Save every 50 steps
+  formats: ["csv"]
+  auto_visualize: false
+  save_spatial_snapshots: true
+  snapshot_steps: [0, 2500, 5000, 7500, 10000]  # Snapshots at 25%, 50%, 75%, 100%
+  enable_plots: false
+
+analysis:
+  mode: "simulation"
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: false
+  compute_energy: true
+  lorentz_invariants: false

@@ -1,0 +1,66 @@
+test_name: "em_full_validation"
+
+simulation:
+  use_gpu: false
+  total_steps: 1000
+  dt: 0.001
+  N_values: [100]
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+  boundary_conditions: "periodic"
+
+physics:
+  hbar: 1.0
+  mass: 0.1
+  coupling_strength: 1.0
+  damping: 0.0
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 60.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    k_physical: 0.0
+    k_y_physical: 0.0
+    amplitude: 1.0
+
+  kuramoto:
+    phase_distribution: "vortex"
+    vortex_winding: 1
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    vortex_core_radius: 5.0
+    R_background: 0.8
+
+em_coupling:
+  enabled: true
+  regularization: "R2_FACTOR"
+
+# EM VALIDATION TESTS
+validation:
+  # Basic validation
+  norm_tolerance: 0.01
+  energy_tolerance: 0.01
+
+  # Maxwell equations validation
+  validate_maxwell_equations: true
+  maxwell_tolerance: 1.0e-6
+
+  # Flux quantization validation (∮A·dl = 2πW)
+  validate_flux_quantization: true
+  flux_quantization_tolerance: 0.1
+  expected_winding_number: 1
+
+  # Gauge invariance validation (θ → θ + α)
+  validate_gauge_invariance: true
+  gauge_shift_angle: 0.785398  # π/4 radians
+  gauge_invariance_tolerance: 1.0e-10
+
+output:
+  save_every: 100
+  save_spatial_snapshots: true
+  formats: ["csv"]

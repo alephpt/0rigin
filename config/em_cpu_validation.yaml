@@ -1,0 +1,38 @@
+test_name: "em_cpu_validation"
+description: "CPU-only EM validation - Maxwell equations + flux quantization"
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+
+physics:
+  delta: 0.3
+  coupling_strength: 0.1
+  hbar: 1.0
+  c: 1.0
+
+simulation:
+  total_steps: 1000
+  dt: 0.001
+  use_gpu: false  # CPU ONLY
+  snapshot_interval: 100
+
+initial_conditions:
+  kuramoto:
+    type: "single_vortex"
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    vortex_core_radius: 3.0
+    winding_number: 1
+
+  dirac:
+    type: "vacuum"  # No particle for Maxwell-only test
+
+em_coupling:
+  enabled: true
+  regularization: "R2_FACTOR"  # Best from energy tests
+
+output:
+  save_fields: true
+  save_observables: true

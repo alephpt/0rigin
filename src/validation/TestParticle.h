@@ -179,6 +179,7 @@ public:
      */
     double getCharge() const { return charge_; }
     double getMass() const { return mass_; }
+    double getSpeed() const { return std::sqrt(state_.vx * state_.vx + state_.vy * state_.vy); }
 
     /**
      * Analyze orbital motion parameters

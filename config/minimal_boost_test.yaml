@@ -1,0 +1,52 @@
+test:
+  name: "Minimal Boosted Gaussian Test"
+  description: "Verify boosted Gaussian initialization with v=0.3c, N=100"
+
+# Grid (minimal for fast testing)
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Physical domain size in Planck lengths
+
+# Physics
+physics:
+  delta: 1.0
+  coupling: 0.1
+  dt: 0.01
+  total_steps: 1000
+  K: 1.0
+  damping: 0.1
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    boost_velocities: [0.3]  # Single velocity for minimal test
+    sigma_physical: 5.0      # Physical width
+    x0_physical: 60.0        # Offset from vortex center
+    y0_physical: 50.0
+  kuramoto:
+    phase_distribution: "vortex"
+    winding_number: 1
+    vortex_core_radius: 3.0
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+
+# Operator splitting
+operator_splitting:
+  enabled: true
+  substep_ratios: [100]  # N=100 only for minimal test
+
+# Output
+output:
+  directory: "output/minimal_boost_test"
+  save_every: 100
+  save_spatial_snapshots: true
+  snapshot_steps: [0, 500, 999]  # Save t=0, mid, and final
+  auto_visualize: false
+
+# Validation (basic checks)
+validation:
+  norm_tolerance: 0.005        # 0.5%
+  energy_tolerance: 0.02       # 2% (relaxed for short test)
+  convergence_tolerance: 0.05

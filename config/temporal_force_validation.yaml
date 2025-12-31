@@ -1,0 +1,87 @@
+# Phase 4 Test 4.2: Temporal Force Measurement
+#
+# Physics Hypothesis:
+# Time gradient creates force: F_temp ∝ -∇(∂R/∂t)
+# Momentum has spatial AND temporal contributions
+#
+# Test Method:
+# - Create time-varying R-field (moving vortex defect)
+# - Measure total momentum change: F_total = dp/dt
+# - Decompose: F_temp = F_total - F_spatial where F_spatial = -Δ·∇R
+#
+# Prediction:
+# - |F_temp| ≠ 0 in time-varying R-fields
+# - Correlation: ρ(F_temp, ∂R/∂t) > 0.5
+
+simulation:
+  name: "temporal_force_validation"
+  type: "dirac"          # Standard Dirac evolution
+  duration: 100.0        # Total time (Planck units)
+  dt: 0.01              # Timestep
+  output_interval: 0.5   # Save every 0.5 time units (high resolution for force tracking)
+
+grid:
+  size_x: 64            # Grid resolution
+  size_y: 64
+  L_domain: 100.0       # Domain size in Planck lengths
+  grid_sizes: [64]      # Single resolution for now
+
+physics:
+  Delta: 1.0            # Vacuum potential (Planck mass)
+  chiral_angle: 0.0     # Standard chiral coupling
+  K_kuramoto: 1.0       # Kuramoto coupling strength
+  damping: 0.1          # Phase damping coefficient
+  lambda_coupling: 0.1  # Dirac-Kuramoto feedback strength
+
+initial_conditions:
+  kuramoto:
+    type: "traveling_wave_vortex"  # Moving vortex → large ∂R/∂t
+    vortex_core_radius: 5.0        # Defect radius in Planck lengths
+    vortex_center_x: 30.0          # Start left of center
+    vortex_center_y: 50.0
+    vortex_velocity_x: 0.2         # Move right (creates ∂R/∂t ≠ 0)
+    vortex_velocity_y: 0.0
+    R_core: 0.3                    # Strong desynchronization
+    R_background: 1.0              # Full synchronization outside
+
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0              # Particle right of vortex
+    y0_physical: 50.0              # Same y-coordinate
+    sigma_physical: 3.0            # Wavepacket width
+    amplitude: 1.0                 # Normalized automatically
+
+validation:
+  # Temporal force should be non-zero
+  temporal_force_magnitude_min: 0.001  # |F_temp| > threshold
+
+  # Correlation between F_temp and ∂R/∂t
+  correlation_threshold: 0.5  # ρ(|F_temp|, |∂R/∂t|) > 0.5
+
+  # Spatial force should dominate (F_spatial > F_temp in most cases)
+  # But temporal force should be detectable
+  force_ratio_max: 0.5    # |F_temp| / |F_spatial| < 0.5 (temporal is smaller but measurable)
+
+  # Norm conservation
+  norm_tolerance: 1.0e-4
+
+  # Energy drift tolerance
+  energy_drift_tolerance: 0.05  # 5% over full simulation
+
+output:
+  save_fields: true
+  field_interval: 10.0  # Save spatial snapshots every 10 time units
+  observables:
+    - time
+    - norm
+    - energy_total
+    - position_x
+    - position_y
+    - momentum_x
+    - momentum_y
+    - F_spatial_x
+    - F_spatial_y
+    - F_temporal_x
+    - F_temporal_y
+    - dR_dt_center  # ∂R/∂t at particle center
+    - R_center      # R at particle center

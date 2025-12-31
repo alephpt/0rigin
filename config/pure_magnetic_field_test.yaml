@@ -1,0 +1,57 @@
+test_name: "pure_magnetic_field"
+description: "Pure magnetic field test - particle speed should be conserved exactly"
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+
+physics:
+  delta: 0.3
+  coupling_strength: 0.0      # NO coupling - prevents electric field
+  K_kuramoto: 0.0             # NO Kuramoto dynamics
+  damping: 0.0                # NO damping
+  hbar: 1.0
+  c: 1.0
+  dt: 0.001
+  total_steps: 5000           # Shorter for faster test
+  use_gpu: false
+  em_coupling_enabled: false  # No EM coupling - just uniform B field
+
+simulation:
+  snapshot_interval: 50
+  save_observables: true
+  save_fields: false
+
+initial_conditions:
+  kuramoto:
+    type: "gaussian"           # Smooth background, no vortex
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 10.0
+    amplitude: 0.1             # Weak field to minimize E component
+
+  dirac:
+    type: "vacuum"
+
+  # Test particle: cyclotron motion in uniform B field
+  test_particle:
+    enabled: true
+    x0: 50.0
+    y0: 50.0
+    vx0: 0.01                  # Perpendicular velocity
+    vy0: 0.0
+    charge: -1.0
+    mass: 0.1
+
+validation:
+  perform_validation: true
+  norm_tolerance: 0.01
+  energy_tolerance: 0.05
+  cyclotron_tolerance: 0.15
+
+output:
+  save_fields: true
+  save_observables: true
+  save_particle_trajectory: true
+  save_every: 50

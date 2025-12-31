@@ -103,6 +103,36 @@ public:
         float R_max = 1.0f);
 
     /**
+     * Vortex Pair Initialization (Sprint 2: Multi-Defect Interactions)
+     *
+     * Creates vortex-antivortex pair with opposite winding numbers:
+     * - R-field: Overlapping tanh profiles at each core
+     * - Phase field: θ(r) = W₁·arg(z-z₁) + W₂·arg(z-z₂)
+     *
+     * Physics: Tests defect interaction, annihilation dynamics, EM topology
+     *
+     * @param Nx Grid size in x-direction
+     * @param Ny Grid size in y-direction
+     * @param x1 First vortex center x (grid units)
+     * @param y1 First vortex center y (grid units)
+     * @param W1 First vortex winding number (typically +1)
+     * @param x2 Second vortex center x (grid units)
+     * @param y2 Second vortex center y (grid units)
+     * @param W2 Second vortex winding number (typically -1)
+     * @param core_radius Vortex core radius (grid units)
+     * @param R_min Order parameter at vortex centers (typically 0.0)
+     * @param R_max Order parameter far from cores (typically 1.0)
+     * @return R-field vector with overlapping vortex cores
+     */
+    static std::vector<float> vortexPair(
+        int Nx, int Ny,
+        float x1, float y1, int W1,
+        float x2, float y2, int W2,
+        float core_radius,
+        float R_min = 0.0f,
+        float R_max = 1.0f);
+
+    /**
      * Helper: Convert physical coordinates to grid coordinates
      *
      * @param physical_coord Coordinate in Planck lengths

@@ -102,6 +102,45 @@ float InitialConditions::smoothStep(float x, float center, float width) {
     return 0.5f * (std::tanh(arg) + 1.0f);
 }
 
+std::vector<float> InitialConditions::vortexPair(
+    int Nx, int Ny,
+    float x1, float y1, int W1,
+    float x2, float y2, int W2,
+    float core_radius,
+    float R_min,
+    float R_max) {
+
+    std::vector<float> R_field(Nx * Ny);
+
+    for (int iy = 0; iy < Ny; ++iy) {
+        for (int ix = 0; ix < Nx; ++ix) {
+            int idx = iy * Nx + ix;
+
+            // Distance from each vortex center
+            float dx1 = static_cast<float>(ix) - x1;
+            float dy1 = static_cast<float>(iy) - y1;
+            float r1 = std::sqrt(dx1 * dx1 + dy1 * dy1);
+
+            float dx2 = static_cast<float>(ix) - x2;
+            float dy2 = static_cast<float>(iy) - y2;
+            float r2 = std::sqrt(dx2 * dx2 + dy2 * dy2);
+
+            // Vortex core profiles: R_i(r) = R_min + (R_max - R_min) * tanh(r / r_core)
+            float profile1 = std::tanh(r1 / core_radius);
+            float profile2 = std::tanh(r2 / core_radius);
+
+            // Overlapping R-field: Use minimum (most suppressed) value
+            // This creates proper core depression where vortices overlap
+            float R1 = R_min + (R_max - R_min) * profile1;
+            float R2 = R_min + (R_max - R_min) * profile2;
+
+            R_field[idx] = std::min(R1, R2);
+        }
+    }
+
+    return R_field;
+}
+
 float InitialConditions::physicalToGrid(float physical_coord, float L_domain, int N_grid) {
     // Lattice spacing: a = L_domain / N_grid
     float a = L_domain / static_cast<float>(N_grid);

@@ -1,0 +1,55 @@
+---
+test_name: "kuramoto_only_vortex"
+description: "Control Test: Kuramoto vortex evolution WITHOUT Dirac coupling - GRID-INDEPENDENT"
+
+# Grid configuration with physical domain size
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Domain size: 100 Planck lengths
+
+# Physics parameters - NO DIRAC COUPLING
+physics:
+  delta: 1.0                # Mass gap = Planck mass (unused since coupling=0)
+  coupling: 0.0             # *** ZERO COUPLING - Kuramoto only ***
+  dt: 0.01
+  total_steps: 10000        # 100 time units
+  K: 1.0
+  damping: 0.1
+
+# GRID-INDEPENDENT initial conditions (all in Planck lengths)
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    # Dirac field initialized but not coupled (for comparison)
+    x0_physical: 60.0       # 10 ℓ_P from vortex center (50, 50)
+    y0_physical: 50.0
+    sigma_physical: 3.0     # Width: 3 Planck lengths
+    amplitude: 1.0
+
+  kuramoto:
+    phase_distribution: "vortex"
+    omega_distribution: "zero"
+    # Vortex configuration (grid-independent) - IDENTICAL to coupled test
+    winding_number: 1
+    vortex_core_radius: 3.0    # Core radius: 3 Planck lengths
+    vortex_center_x: 50.0      # Center at domain center
+    vortex_center_y: 50.0
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # Test N-dependence even without coupling
+
+# Validation tolerances
+validation:
+  norm_tolerance: 1.0e-4
+  energy_tolerance: 1.0e-2
+  convergence_tolerance: 0.05
+
+# Output configuration
+output:
+  directory: "output/kuramoto_only_vortex"
+  save_every: 10
+  formats: ["csv"]
+  save_spatial_snapshots: true

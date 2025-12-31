@@ -1,0 +1,75 @@
+---
+test_name: "scenario_2.6A_energy_momentum_relation"
+description: "Phase 2 Scenario 2.6A: Comprehensive validation of energy-momentum relation E²=(mc²)²+(pc)². Tests all velocity regimes [0, 0.3, 0.5, 0.7, 0.9]c to verify Einstein's E²-p² invariant. Validates SMFT as relativistic theory."
+
+# Grid configuration
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0
+  grid_sizes: [128, 256, 512]  # Grid convergence study
+
+# Physics parameters
+physics:
+  delta: 1.0
+  coupling: 0.1
+  dt: 0.01
+  total_steps: 10000
+  K: 1.0
+  damping: 0.1
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    amplitude: 1.0
+    # Full velocity range
+    boost_velocities: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+  kuramoto:
+    phase_distribution: "uniform"
+    omega_distribution: "zero"
+    uniform_phase: 0.0
+    R_background: 0.8
+
+# Operator splitting
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # N-convergence study
+
+# Validation
+validation:
+  norm_tolerance: 0.005
+  energy_tolerance: 0.01
+  convergence_tolerance: 0.05
+  gamma_tolerance: 0.05
+
+# Output
+output:
+  directory: "output/scenario_2.6A_energy_momentum_relation"
+  save_every: 10
+  formats: ["csv"]
+  save_spatial_snapshots: false  # Focus on E-p measurements
+
+# Analysis
+analysis:
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  test_gamma_factor: true
+  compute_energy: true
+  lorentz_invariants: true
+
+  # Energy-momentum relation tests (NEW)
+  test_E_squared_minus_p_squared: true  # E² - p² = m₀²c⁴ invariant?
+  measure_rest_mass_from_Ep: true       # m₀ = √(E²-p²)/c²
+  validate_einstein_relation: true      # E² = (mc²)² + (pc)²
+  compute_kinetic_energy: true          # T = E - mc² = (γ-1)mc²
+  test_low_v_limit: true                # T ≈ ½mv² for v<<c?
+  test_high_v_limit: true               # E ≈ pc for v→c?
+
+  # Comprehensive E-p map across all velocities
+  # Should produce E(p) curve: E = √(p² + m₀²)

@@ -25,6 +25,9 @@ bool TestConfig::loadFromYAML(const std::string& yaml_path) {
             if (config["initial_conditions"]["kuramoto"]) {
                 parseKuramotoInitial(config["initial_conditions"]["kuramoto"]);
             }
+            if (config["initial_conditions"]["test_particle"]) {
+                parseTestParticle(config["initial_conditions"]["test_particle"]);
+            }
         }
         if (config["operator_splitting"]) parseOperatorSplitting(config["operator_splitting"]);
         if (config["validation"]) parseValidation(config["validation"]);
@@ -445,6 +448,16 @@ void TestConfig::parseValidation(const YAML::Node& node) {
     if (node["validate_gamma_factor"]) validation.validate_gamma_factor = node["validate_gamma_factor"].as<bool>();
     if (node["gamma_tolerance"]) validation.gamma_tolerance = node["gamma_tolerance"].as<float>();
 
+    // EM validation
+    if (node["validate_maxwell_equations"]) validation.validate_maxwell_equations = node["validate_maxwell_equations"].as<bool>();
+    if (node["maxwell_tolerance"]) validation.maxwell_tolerance = node["maxwell_tolerance"].as<float>();
+    if (node["validate_flux_quantization"]) validation.validate_flux_quantization = node["validate_flux_quantization"].as<bool>();
+    if (node["flux_quantization_tolerance"]) validation.flux_quantization_tolerance = node["flux_quantization_tolerance"].as<float>();
+    if (node["expected_winding_number"]) validation.expected_winding_number = node["expected_winding_number"].as<int>();
+    if (node["validate_gauge_invariance"]) validation.validate_gauge_invariance = node["validate_gauge_invariance"].as<bool>();
+    if (node["gauge_shift_angle"]) validation.gauge_shift_angle = node["gauge_shift_angle"].as<float>();
+    if (node["gauge_invariance_tolerance"]) validation.gauge_invariance_tolerance = node["gauge_invariance_tolerance"].as<float>();
+
     // Validation timing
     if (node["validate_initial_state"]) validation.validate_initial_state = node["validate_initial_state"].as<bool>();
     if (node["validate_during_evolution"]) validation.validate_during_evolution = node["validate_during_evolution"].as<bool>();
@@ -530,4 +543,17 @@ void TestConfig::parseEMCoupling(const YAML::Node& node) {
     if (node["B_z"]) {
         // For Test 1/4: External magnetic field
     }
+}
+
+void TestConfig::parseTestParticle(const YAML::Node& node) {
+    if (node["enabled"]) test_particle.enabled = node["enabled"].as<bool>();
+    if (node["x0"]) test_particle.x0 = node["x0"].as<double>();
+    if (node["y0"]) test_particle.y0 = node["y0"].as<double>();
+    if (node["vx0"]) test_particle.vx0 = node["vx0"].as<double>();
+    if (node["vy0"]) test_particle.vy0 = node["vy0"].as<double>();
+    if (node["charge"]) test_particle.charge = node["charge"].as<double>();
+    if (node["mass"]) test_particle.mass = node["mass"].as<double>();
+    if (node["record_every"]) test_particle.record_every = node["record_every"].as<int>();
+    if (node["use_uniform_B"]) test_particle.use_uniform_B = node["use_uniform_B"].as<bool>();
+    if (node["uniform_B_z"]) test_particle.uniform_B_z = node["uniform_B_z"].as<double>();
 }

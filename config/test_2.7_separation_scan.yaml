@@ -1,0 +1,78 @@
+# Test 2.7: Vortex Pair Separation Scan
+# Sprint 2: Multi-Defect Interactions
+#
+# Purpose: Validate interaction force vs separation distance
+# Physics: F ∝ W₁·W₂/d² for vortex-antivortex pairs
+# Expected: Attractive force increases as d decreases
+
+test:
+  name: "Test 2.7: Vortex Pair Separation Scan"
+  description: "Measure interaction force and binding energy vs separation"
+  scenarios:
+    - { N_values: [100], separation: 5.0, label: "d=5ℓ_P" }
+    - { N_values: [100], separation: 10.0, label: "d=10ℓ_P" }
+    - { N_values: [100], separation: 20.0, label: "d=20ℓ_P" }
+    - { N_values: [100], separation: 40.0, label: "d=40ℓ_P" }
+
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Domain size [ℓ_P]
+
+time:
+  dt: 0.01         # Time step [t_P]
+  t_max: 50.0      # Total evolution time
+  save_interval: 1.0
+
+initial_conditions:
+  kuramoto:
+    phase_distribution: "vortex_pair"
+    vortex_center_x: 50.0      # Domain center [ℓ_P]
+    vortex_center_y: 50.0
+    vortex_separation: 10.0    # Overridden by scenarios
+    vortex_core_radius: 3.0    # Core radius ξ [ℓ_P]
+    K: 1.0                     # Coupling strength
+    sigma: 0.0                 # No noise for clean force measurement
+
+  dirac:
+    type: "none"               # No Dirac field for pure vortex interaction test
+
+physics:
+  m0: 0.0                      # Massless limit to test pure topological interaction
+  Delta: 1.0                   # Energy scale [E_P]
+  lambda: 0.1                  # Self-interaction
+  gamma: 0.01                  # Damping
+  enable_stochastic: false
+  enable_backreaction: true
+  enable_em_coupling: true     # Essential for EM field topology
+
+validation:
+  tolerances:
+    norm_conservation: 0.05    # 5% tolerance (relaxed for dynamic vortices)
+    energy_conservation: 0.05
+
+  criteria:
+    # Criterion 1: Total winding number conservation
+    - name: "Topological Charge Conservation"
+      type: "winding_number_conservation"
+      W_total_initial: 0       # W₁ + W₂ = +1 + (-1) = 0
+      tolerance: 0.1
+
+    # Criterion 2: Binding energy scaling
+    - name: "Binding Energy vs Separation"
+      type: "binding_energy_scaling"
+      expected_scaling: "logarithmic"  # E_int ~ -log(d/a)
+      tolerance: 0.2
+
+    # Criterion 3: Interaction force law
+    - name: "Force Law Validation"
+      type: "force_distance_relation"
+      expected_scaling: "inverse_square"  # F ∝ 1/d²
+      tolerance: 0.3
+      min_correlation: 0.9     # R² > 0.9 for power law fit
+
+output:
+  base_dir: "output"
+  save_spatial_snapshots: true
+  snapshot_times: [0.0, 10.0, 25.0, 50.0]
+  fields_to_save: ["theta", "R", "E_field", "B_field"]

@@ -1,0 +1,66 @@
+test_name: "lorentz_force_pure_magnetic"
+
+# CRITICAL TEST: Separate conservative (B) from non-conservative (E) forces
+# Two scenarios:
+#   A. Pure uniform B-field → |v| MUST be conserved to machine precision
+#   B. Vortex EM (E+B) → |v| can change (E does work)
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+  boundary_conditions: "periodic"
+
+physics:
+  hbar: 1.0
+  mass: 0.1
+  coupling_strength: 0.0
+  damping: 0.0
+  total_steps: 20000
+  dt: 0.0005
+  em_coupling_enabled: true
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    k_physical: 0.0
+    k_y_physical: 0.0
+    amplitude: 0.01   # Minimal coupling
+
+  kuramoto:
+    phase_distribution: "uniform"
+    uniform_phase: 0.0
+    R_background: 0.0
+
+  test_particle:
+    enabled: true
+    x0: 55.0
+    y0: 50.0
+    vx0: 0.0
+    vy0: 0.01      # 1% speed of light
+    charge: -1.0
+    mass: 0.1
+    record_every: 1  # Record every step
+    use_uniform_B: true
+    uniform_B_z: 0.1
+
+em_coupling:
+  enabled: true
+  regularization: "NONE"
+
+validation:
+  norm_tolerance: 0.01
+  energy_tolerance: 0.01
+
+output:
+  save_every: 1  # Record particle every step
+  save_spatial_snapshots: false
+  formats: ["csv"]
+
+# EXPECTED: In pure B-field, |v| should be conserved to <10^-10
+# Larmor radius: r = mv/(qB) = 0.1 * 0.01 / (1.0 * 0.1) = 0.01 ℓ_P
+# Period: T = 2πm/(qB) = 6.283 t_P
+# Orbits: 20000 * 0.0005 / 6.283 = 1.59 orbits

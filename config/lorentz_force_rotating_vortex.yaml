@@ -1,0 +1,62 @@
+test_name: "lorentz_force_rotating_vortex"
+description: "Lorentz force validation with rotating vortex generating strong EM fields"
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 50.0     # Smaller domain for stronger fields
+
+physics:
+  delta: 0.3
+  coupling_strength: 1.0    # Strong coupling for significant EM fields
+  K_kuramoto: 10.0           # Strong synchronization
+  damping: 0.001             # Low damping
+  hbar: 1.0
+  c: 1.0
+  dt: 0.0001                 # Smaller timestep for accuracy
+  total_steps: 10000         # More steps for full orbits
+  use_gpu: false
+  em_coupling_enabled: true
+  em_regularization: "R2"
+
+simulation:
+  snapshot_interval: 100
+  save_observables: true
+  save_fields: true
+
+initial_conditions:
+  kuramoto:
+    type: "rotating_vortex"       # Time-dependent vortex
+    vortex_center_x: 25.0         # Center of domain
+    vortex_center_y: 25.0
+    vortex_core_radius: 5.0       # Larger core
+    winding_number: 1
+    rotation_frequency: 0.1       # Rotation freq for time-dependent B field
+
+  dirac:
+    type: "gaussian"              # Start with some Dirac field
+    x0_physical: 25.0
+    y0_physical: 25.0
+    sigma_physical: 5.0
+    amplitude: 1.0
+
+  test_particle:
+    enabled: true
+    x0: 30.0          # Start 5 ℓ_P from center
+    y0: 25.0
+    vx0: 0.0          # Start at rest
+    vy0: 0.0
+    charge: -1.0      # Electron
+    mass: 1.0
+
+validation:
+  perform_validation: true
+  norm_tolerance: 0.01
+  energy_tolerance: 0.1      # Looser for dynamic system
+  cyclotron_tolerance: 0.2   # 20% tolerance
+
+output:
+  save_fields: true
+  save_observables: true
+  save_particle_trajectory: true
+  save_every: 100

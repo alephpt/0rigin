@@ -1214,6 +1214,7 @@ void SMFTEngine::stepWithDirac(float dt, float lambda_coupling, int substep_rati
             auto em_fields = EMFieldComputer::computeFromPhase(
                 _theta_data,
                 _theta_previous,
+                _R_field_data,  // Pass R_field for conjugate product method
                 static_cast<int>(_Nx),
                 static_cast<int>(_Ny),
                 dx, dy, static_cast<double>(dt)
@@ -1706,17 +1707,18 @@ void SMFTEngine::createEMPipelines() {
         VkDevice device = _nova->_architect->logical_device;
 
         // ========================================================================
-        // Pipeline 1: computeEMPotentials (θ → A_μ)
+        // Pipeline 1: computeEMPotentials (θ → A_μ) with conjugate product method
         // ========================================================================
         {
             // Create descriptor set layout
-            std::vector<VkDescriptorSetLayoutBinding> bindings(6);
+            std::vector<VkDescriptorSetLayoutBinding> bindings(7);  // Updated from 6 to 7 for R_field
             bindings[0] = {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // theta_current
             bindings[1] = {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // theta_previous
-            bindings[2] = {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // phi
-            bindings[3] = {3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // A_x
-            bindings[4] = {4, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // A_y
-            bindings[5] = {5, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // params
+            bindings[2] = {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // R_field (NEW)
+            bindings[3] = {3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // phi
+            bindings[4] = {4, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // A_x
+            bindings[5] = {5, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // A_y
+            bindings[6] = {6, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT, nullptr};  // params
 
             _em_potentials_desc_layout = _descriptorManager->createDescriptorSetLayout(bindings);
 
@@ -1744,17 +1746,18 @@ void SMFTEngine::createEMPipelines() {
             // Allocate and update descriptor set
             _em_potentials_desc_set = _descriptorManager->allocateDescriptorSet(_descriptor_pool, _em_potentials_desc_layout);
 
-            VkDescriptorBufferInfo bufferInfos[6] = {
+            VkDescriptorBufferInfo bufferInfos[7] = {  // Updated from 6 to 7
                 {_theta_buffer, 0, VK_WHOLE_SIZE},
                 {_theta_previous_buffer, 0, VK_WHOLE_SIZE},
+                {_R_field_buffer, 0, VK_WHOLE_SIZE},  // NEW: R_field for conjugate product method
                 {_phi_buffer, 0, VK_WHOLE_SIZE},
                 {_A_x_buffer, 0, VK_WHOLE_SIZE},
                 {_A_y_buffer, 0, VK_WHOLE_SIZE},
                 {_em_params_buffer, 0, VK_WHOLE_SIZE}
             };
 
-            std::vector<VkWriteDescriptorSet> writes(6);
-            for (int i = 0; i < 6; i++) {
+            std::vector<VkWriteDescriptorSet> writes(7);  // Updated from 6 to 7
+            for (int i = 0; i < 7; i++) {
                 writes[i].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
                 writes[i].dstSet = _em_potentials_desc_set;
                 writes[i].dstBinding = i;

@@ -1,0 +1,58 @@
+test_name: "lorentz_force_cpu"
+description: "CPU Lorentz force validation - charged particle in vortex EM field"
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+
+physics:
+  delta: 0.3
+  coupling_strength: 0.1
+  K_kuramoto: 10.0     # Stronger coupling for more pronounced vortex
+  damping: 0.001       # Less damping to preserve dynamics
+  hbar: 1.0
+  c: 1.0
+  dt: 0.001
+  total_steps: 10000  # 10 τ_P - enough for ~1.5 orbits
+  use_gpu: false      # CPU only
+  em_coupling_enabled: true
+  em_regularization: "R2"  # Better stability for vortex fields
+
+simulation:
+  snapshot_interval: 50
+  save_observables: true
+  save_fields: true
+
+initial_conditions:
+  kuramoto:
+    type: "single_vortex"
+    vortex_center_x: 50.0    # Center of domain
+    vortex_center_y: 50.0
+    vortex_core_radius: 3.0  # In Planck lengths
+    winding_number: 1
+
+  dirac:
+    type: "vacuum"           # No Dirac field initially
+
+  # Test particle configuration
+  test_particle:
+    enabled: true
+    x0: 55.0          # Start 5 ℓ_P from vortex center (closer for stronger field)
+    y0: 50.0
+    vx0: 0.0          # Initial velocity perpendicular to radius
+    vy0: 0.01         # 1% speed of light (slower for tighter orbits)
+    charge: -1.0      # Electron charge (natural units)
+    mass: 0.1         # Lighter mass for stronger response to field
+
+validation:
+  perform_validation: true
+  norm_tolerance: 0.01
+  energy_tolerance: 0.05     # Looser for EM coupling
+  cyclotron_tolerance: 0.1    # 10% tolerance for cyclotron parameters
+
+output:
+  save_fields: true
+  save_observables: true
+  save_particle_trajectory: true
+  save_every: 50

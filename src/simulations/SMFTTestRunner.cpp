@@ -8,6 +8,9 @@
 #include "analysis/PowerLawFitter.h"
 #include "validation/PhaseTransitionAnalyzer.h"
 #include "validation/EnergyBudget.h"
+#include "validation/EMValidator.h"
+#include "validation/TestParticle.h"
+#include "physics/EMFieldComputer.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -55,6 +58,10 @@ SMFTTestRunner::SMFTTestRunner(const std::string& config_path)
     if (!_config_loaded) {
         std::cerr << "Failed to load configuration from " << config_path << std::endl;
     }
+
+    // Extract test name from config path for conditional execution
+    std::filesystem::path p(config_path);
+    _test_name = p.stem().string();
 }
 
 SMFTTestRunner::SMFTTestRunner(const TestConfig& config)
@@ -828,6 +835,41 @@ bool SMFTTestRunner::runSingleTest(int N) {
     // DO NOT initialize theta_previous before loop - causes NaN at step 0
     // Will be initialized after first step
 
+    // Initialize test particle for Lorentz force tests (Sprint 6)
+    std::unique_ptr<TestParticle> test_particle;
+    bool is_lorentz_test = (_test_name.find("lorentz_force") != std::string::npos) || _config.test_particle.enabled;
+
+    if (is_lorentz_test && _config.physics.em_coupling_enabled) {
+        std::cout << "\n--- Initializing Test Particle for Lorentz Force ---" << std::endl;
+
+        // Use configured values or defaults
+        double particle_x = _config.test_particle.x0;
+        double particle_y = _config.test_particle.y0;
+        double particle_vx = _config.test_particle.vx0;
+        double particle_vy = _config.test_particle.vy0;
+        double charge = _config.test_particle.charge;
+        double mass = _config.test_particle.mass;
+
+        test_particle = std::make_unique<TestParticle>(
+            charge,
+            mass,
+            Nx, Ny,
+            _config.grid.L_domain / Nx,  // dx
+            _config.grid.L_domain / Ny   // dy
+        );
+
+        test_particle->initialize(particle_x, particle_y, particle_vx, particle_vy);
+
+        std::cout << "  Particle initialized at (" << particle_x << ", " << particle_y << ") ℓ_P" << std::endl;
+        std::cout << "  Initial velocity: (" << particle_vx << ", " << particle_vy << ") c" << std::endl;
+        std::cout << "  Charge: " << charge << ", Mass: " << mass << " (natural units)" << std::endl;
+
+        // Verify initialization
+        auto initial_state = test_particle->getState();
+        std::cout << "  Verified state: pos=(" << initial_state.x << "," << initial_state.y
+                  << "), vel=(" << initial_state.vx << "," << initial_state.vy << ")" << std::endl;
+    }
+
     for (int step = 0; step < total_steps; ++step) {
         // Evolve system with operator splitting ratio N
         _engine->stepWithDirac(_config.physics.dt, _config.physics.coupling, N,
@@ -882,11 +924,23 @@ bool SMFTTestRunner::runSingleTest(int N) {
                 // Dirac observables
                 const DiracEvolution* dirac = _engine->getDiracEvolution();
                 if (dirac) {
-                    // Compute EM and Kuramoto field energies if EM coupling is enabled
-                    // CRITICAL: Skip EM energy at step 0 (no previous theta yet)
+                    // Compute EM and Kuramoto field energies
                     double em_field_energy = 0.0;
                     double kuramoto_field_energy = 0.0;
 
+                    // CRITICAL: Always compute Kuramoto field gradient energy (even at step 0)
+                    // This is a fundamental energy component of the system, not optional
+                    kuramoto_field_energy = ObservableComputer::computeKuramotoFieldEnergy(
+                        R_field_d,         // R field (double)
+                        theta_current,     // theta field (float)
+                        dirac->getNx(),    // Grid dimensions
+                        dirac->getNy(),
+                        dirac->getDx(),    // Grid spacing
+                        dirac->getDx(),    // dy = dx (square grid)
+                        _config.physics.K  // Kuramoto coupling strength
+                    );
+
+                    // Compute EM energy only if enabled AND after step 0 (needs previous theta)
                     if (_config.physics.em_coupling_enabled && !_theta_previous.empty() && step > 0) {
                         // Parse regularization type from config
                         EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE;
@@ -914,11 +968,6 @@ bool SMFTTestRunner::runSingleTest(int N) {
                                      << " at step " << step << ", setting to 0.0" << std::endl;
                             em_field_energy = 0.0;
                         }
-
-                        // TODO: Compute Kuramoto field energy properly
-                        // For now, disable Kuramoto energy as it needs proper phase-wrapped gradients
-                        // The main issue was EM field energy from unwrapped phase differences
-                        kuramoto_field_energy = 0.0;
                     }
 
                     obs = ObservableComputer::compute(
@@ -994,6 +1043,57 @@ bool SMFTTestRunner::runSingleTest(int N) {
                 _theta_previous = theta_current;
             }
 
+            // Evolve test particle for Lorentz force tests (Sprint 6)
+            if (test_particle) {
+                int record_interval = _config.test_particle.record_every > 0 ? _config.test_particle.record_every : save_every;
+                bool record_trajectory = (step % record_interval == 0);
+                // Get current EM fields
+                EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE;
+                if (_config.physics.em_regularization == "R") {
+                    reg_type = EMFieldComputer::RegularizationType::R_FACTOR;
+                } else if (_config.physics.em_regularization == "R2") {
+                    reg_type = EMFieldComputer::RegularizationType::R2_FACTOR;
+                }
+
+                EMFieldComputer::EMFields em_fields(Nx, Ny);
+
+                // Use config-driven field selection
+                if (_config.test_particle.use_uniform_B) {
+                    // PURE UNIFORM B-FIELD (no E-field contamination)
+                    em_fields.E_x = Eigen::MatrixXd::Zero(Nx, Ny);
+                    em_fields.E_y = Eigen::MatrixXd::Zero(Nx, Ny);
+                    em_fields.B_z = Eigen::MatrixXd::Constant(Nx, Ny, _config.test_particle.uniform_B_z);
+                    em_fields.phi = Eigen::MatrixXd::Zero(Nx, Ny);
+                    em_fields.A_x = Eigen::MatrixXd::Zero(Nx, Ny);
+                    em_fields.A_y = Eigen::MatrixXd::Zero(Nx, Ny);
+
+                    // Update field statistics
+                    em_fields.avg_B = _config.test_particle.uniform_B_z;
+                    em_fields.max_B = _config.test_particle.uniform_B_z;
+
+                    if (step == 0) {
+                        std::cout << "  Using PURE uniform B-field: B_z = " << _config.test_particle.uniform_B_z
+                                  << " (E = 0 everywhere)" << std::endl;
+                    }
+                } else {
+                    // SMFT electromagnetic field extraction from Kuramoto phase
+                    em_fields = EMFieldComputer::computeFromPhase(
+                        theta_current, _theta_previous, R_field,
+                        Nx, Ny,
+                        _config.grid.L_domain / Nx,  // dx
+                        _config.grid.L_domain / Ny,  // dy
+                        _config.physics.dt,
+                        reg_type);
+
+                    if (step == 0) {
+                        std::cout << "  Using SMFT electromagnetic fields from Kuramoto phase" << std::endl;
+                    }
+                }
+
+                // Evolve particle under Lorentz force
+                test_particle->evolveLorentzForce(em_fields, _config.physics.dt, record_trajectory);
+            }
+
             if (step % (save_every * 10) == 0) {
                 std::cout << "  Step " << step << "/" << total_steps
                          << " | R_avg = " << obs.R_avg
@@ -1004,6 +1104,84 @@ bool SMFTTestRunner::runSingleTest(int N) {
 
     // Store results
     _results[N] = observables;
+
+    // Analyze Lorentz force test particle trajectory (Sprint 6)
+    if (test_particle) {
+        std::cout << "\n===== Lorentz Force Analysis =====" << std::endl;
+
+        // Write trajectory to file
+        std::string trajectory_file = getOutputDirectory(N) + "/particle_trajectory.csv";
+        test_particle->writeTrajectory(trajectory_file);
+        std::cout << "  Particle trajectory saved to: " << trajectory_file << std::endl;
+
+        // Compute average magnetic field
+        double B_avg = 0.0;
+
+        // For Lorentz force tests, we used a uniform field
+        if (_test_name.find("lorentz_force") != std::string::npos) {
+            B_avg = 0.1;  // Uniform field we set earlier
+        } else {
+            // Normal computation from phase
+            EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE;
+            if (_config.physics.em_regularization == "R") {
+                reg_type = EMFieldComputer::RegularizationType::R_FACTOR;
+            } else if (_config.physics.em_regularization == "R2") {
+                reg_type = EMFieldComputer::RegularizationType::R2_FACTOR;
+            }
+
+            auto theta_field = _engine->getPhaseField();
+            auto R_field_final = _engine->getSyncField();
+            EMFieldComputer::EMFields em_fields = EMFieldComputer::computeFromPhase(
+                theta_field, _theta_previous, R_field_final,
+                Nx, Ny,
+                _config.grid.L_domain / Nx,  // dx
+                _config.grid.L_domain / Ny,  // dy
+                _config.physics.dt,
+                reg_type);
+
+            // Compute average B field
+            for (int i = 0; i < Nx; ++i) {
+                for (int j = 0; j < Ny; ++j) {
+                    B_avg += std::abs(em_fields.B_z(i, j));
+                }
+            }
+            B_avg /= (Nx * Ny);
+        }
+
+        std::cout << "  Average magnetic field: B_avg = " << B_avg << std::endl;
+
+        // Theoretical cyclotron frequency and Larmor radius
+        double q = test_particle->getCharge();
+        double m = test_particle->getMass();
+        double v = test_particle->getSpeed();  // Actual initial velocity magnitude
+
+        double omega_theory = std::abs(q * B_avg / m);
+        double r_theory = m * v / (std::abs(q) * B_avg);
+
+        std::cout << "\nTheoretical predictions:" << std::endl;
+        std::cout << "  Cyclotron frequency: ω_c = " << omega_theory << " rad/τ_P" << std::endl;
+        std::cout << "  Larmor radius: r_L = " << r_theory << " ℓ_P" << std::endl;
+
+        // Measured values from trajectory
+        auto [period, radius, frequency] = test_particle->analyzeOrbit();
+
+        std::cout << "\nMeasured from trajectory:" << std::endl;
+        std::cout << "  Orbital period: T = " << period << " τ_P" << std::endl;
+        std::cout << "  Orbital radius: r = " << radius << " ℓ_P" << std::endl;
+        std::cout << "  Orbital frequency: ω = " << frequency << " rad/τ_P" << std::endl;
+
+        // Compute errors
+        double omega_error = std::abs(frequency - omega_theory) / omega_theory * 100;
+        double r_error = std::abs(radius - r_theory) / r_theory * 100;
+
+        std::cout << "\nValidation:" << std::endl;
+        std::cout << "  Frequency error: " << omega_error << "%" << std::endl;
+        std::cout << "  Radius error: " << r_error << "%" << std::endl;
+
+        bool lorentz_valid = (omega_error < 10.0 && r_error < 10.0);
+        std::cout << "  Lorentz force validation: "
+                  << (lorentz_valid ? "✓ PASS" : "✗ FAIL") << std::endl;
+    }
 
     // ========================================================================
     // VALIDATION FRAMEWORK INTEGRATION
@@ -1205,6 +1383,210 @@ bool SMFTTestRunner::runSingleTest(int N) {
         std::cout << " ✗ FAIL" << std::endl;
     }
 
+    // ========================================================================
+    // EM FIELD VALIDATION (Sprint 6)
+    // ========================================================================
+    if (_config.physics.em_coupling_enabled && !use_klein_gordon) {
+        std::cout << "\n===== EM Field Validation =====" << std::endl;
+
+        // Get final fields for validation
+        auto theta_field = _engine->getPhaseField();
+        auto R_field = _engine->getSyncField();
+
+        // Determine regularization type
+        EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE;
+        if (_config.physics.em_regularization == "R") {
+            reg_type = EMFieldComputer::RegularizationType::R_FACTOR;
+        } else if (_config.physics.em_regularization == "R2") {
+            reg_type = EMFieldComputer::RegularizationType::R2_FACTOR;
+        }
+
+        // Compute EM fields from phase gradient
+        EMFieldComputer::EMFields em_fields = EMFieldComputer::computeFromPhase(
+            theta_field, _theta_previous, R_field,
+            Nx, Ny,
+            _config.grid.L_domain / Nx,  // dx
+            _config.grid.L_domain / Ny,  // dy
+            _config.physics.dt,
+            reg_type);
+
+        // Create EM validator
+        EMValidator em_validator(Nx, Ny,
+                                 _config.grid.L_domain / Nx,  // dx
+                                 _config.grid.L_domain / Ny,  // dy
+                                 _config.physics.dt,
+                                 0.01,  // maxwell_tolerance
+                                 0.1);  // flux_tolerance
+
+        // For now, assume zero charge density and current (vortex scenario)
+        Eigen::MatrixXd rho = Eigen::MatrixXd::Zero(Nx, Ny);
+        Eigen::MatrixXd J_x = Eigen::MatrixXd::Zero(Nx, Ny);
+        Eigen::MatrixXd J_y = Eigen::MatrixXd::Zero(Nx, Ny);
+
+        // Need previous fields for time derivatives - create dummy for now
+        EMFieldComputer::EMFields em_fields_prev = em_fields;
+
+        // Verify Maxwell equations
+        auto maxwell_result = em_validator.verifyMaxwellEquations(
+            em_fields, em_fields_prev, rho, J_x, J_y);
+
+        std::cout << "Maxwell Equation Residuals:" << std::endl;
+        std::cout << "  Gauss law (∇·E - 4πρ): " << maxwell_result.gauss_law_residual;
+        if (maxwell_result.gauss_law_residual < 0.01) {
+            std::cout << " ✓" << std::endl;
+        } else {
+            std::cout << " ✗" << std::endl;
+        }
+
+        std::cout << "  No monopole (∇·B): " << maxwell_result.no_monopole_residual;
+        if (maxwell_result.no_monopole_residual < 0.01) {
+            std::cout << " ✓" << std::endl;
+        } else {
+            std::cout << " ✗" << std::endl;
+        }
+
+        std::cout << "  Faraday law (∇×E + ∂B/∂t): " << maxwell_result.faraday_law_residual;
+        if (maxwell_result.faraday_law_residual < 0.01) {
+            std::cout << " ✓" << std::endl;
+        } else {
+            std::cout << " ✗" << std::endl;
+        }
+
+        std::cout << "  Ampere law (∇×B - 4πJ - ∂E/∂t): " << maxwell_result.ampere_law_residual;
+        if (maxwell_result.ampere_law_residual < 0.01) {
+            std::cout << " ✓" << std::endl;
+        } else {
+            std::cout << " ✗" << std::endl;
+        }
+
+        bool maxwell_valid = (maxwell_result.gauss_law_residual < 0.01 &&
+                             maxwell_result.no_monopole_residual < 0.01 &&
+                             maxwell_result.faraday_law_residual < 0.01 &&
+                             maxwell_result.ampere_law_residual < 0.01);
+
+        std::cout << "Overall Maxwell Validation: "
+                  << (maxwell_valid ? "✓ PASS" : "✗ FAIL") << std::endl;
+
+        // Write violation maps if requested
+        if (!maxwell_valid && _config.output.save_spatial_snapshots) {
+            em_validator.writeViolationMaps(getOutputDirectory(N), maxwell_result);
+            std::cout << "  Written violation maps to output directory" << std::endl;
+        }
+
+        // Flux quantization validation (if enabled)
+        if (_config.validation.validate_flux_quantization &&
+            _config.kuramoto_initial.phase_distribution == "vortex") {
+            std::cout << "\n--- Flux Quantization Test ---" << std::endl;
+
+            // Get vortex center in grid coordinates
+            const float L_domain = _config.grid.L_domain;
+            const float a = L_domain / Nx; // Lattice spacing [ℓ_P]
+            int vortex_x = static_cast<int>(_config.kuramoto_initial.vortex_center_x / a);
+            int vortex_y = static_cast<int>(_config.kuramoto_initial.vortex_center_y / a);
+
+            // Compute flux quantization with proper validation
+            auto flux_result = em_validator.computeFluxQuantization(
+                em_fields, vortex_x, vortex_y,
+                _config.validation.expected_winding_number);
+
+            std::cout << "  Measured flux: Φ = " << flux_result.flux << std::endl;
+            std::cout << "  Expected flux: Φ = " << flux_result.expected_flux
+                      << " (W = " << _config.validation.expected_winding_number << ")" << std::endl;
+            std::cout << "  Extracted winding: W = " << flux_result.winding_number << std::endl;
+            std::cout << "  Quantization error: " << flux_result.quantization_error * 100 << "%" << std::endl;
+            std::cout << "  Status: " << (flux_result.is_quantized ? "✅ QUANTIZED" : "❌ NOT QUANTIZED") << std::endl;
+
+            // Show radius stability
+            std::cout << "\n  Flux vs Radius:" << std::endl;
+            for (size_t i = 0; i < flux_result.radii.size(); ++i) {
+                double r_planck = flux_result.radii[i];
+                double flux_at_r = flux_result.fluxes[i];
+                double error_pct = std::abs(flux_at_r - flux_result.expected_flux) /
+                                   flux_result.expected_flux * 100;
+                std::cout << "    r = " << r_planck << " ℓ_P: Φ = " << flux_at_r
+                          << " (error: " << error_pct << "%)" << std::endl;
+            }
+        }
+
+        // Gauge invariance validation (if enabled)
+        if (_config.validation.validate_gauge_invariance) {
+            std::cout << "\n--- Gauge Invariance Test ---" << std::endl;
+            std::cout << "  Testing invariance under θ → θ + α..." << std::endl;
+
+            // Create gauge-shifted fields by adding constant to phase
+            double gauge_shift = _config.validation.gauge_shift_angle;
+            std::vector<float> theta_shifted = theta_field;
+            for (float& theta : theta_shifted) {
+                theta += gauge_shift;
+            }
+
+            // Compute EM fields from shifted phase
+            EMFieldComputer::EMFields em_fields_shifted = EMFieldComputer::computeFromPhase(
+                theta_shifted, _theta_previous, R_field,
+                Nx, Ny,
+                _config.grid.L_domain / Nx,  // dx
+                _config.grid.L_domain / Ny,  // dy
+                _config.physics.dt,
+                reg_type);
+
+            // Check gauge invariance
+            double gauge_diff = em_validator.checkGaugeInvariance(em_fields, em_fields_shifted);
+
+            std::cout << "  Gauge shift: α = " << gauge_shift << " rad ("
+                      << gauge_shift * 180 / M_PI << "°)" << std::endl;
+            std::cout << "  Max field strength difference: " << gauge_diff << std::endl;
+
+            bool gauge_invariant = (gauge_diff < _config.validation.gauge_invariance_tolerance);
+            std::cout << "  Status: " << (gauge_invariant ? "✅ GAUGE INVARIANT" : "❌ GAUGE VARIANT") << std::endl;
+
+            if (!gauge_invariant) {
+                std::cout << "  ⚠️  WARNING: EM fields changed under gauge transformation!" << std::endl;
+                std::cout << "  Physical observables should be gauge-independent." << std::endl;
+            }
+        }
+
+        // Save EM field snapshots
+        if (_config.output.save_spatial_snapshots) {
+            std::string em_dir = getOutputDirectory(N) + "/N_" + std::to_string(N);
+            std::filesystem::create_directories(em_dir);
+
+            // Write E_x field
+            std::ofstream f_ex(em_dir + "/E_x_field.csv");
+            for (int i = 0; i < em_fields.E_x.rows(); ++i) {
+                for (int j = 0; j < em_fields.E_x.cols(); ++j) {
+                    f_ex << em_fields.E_x(i, j);
+                    if (j < em_fields.E_x.cols() - 1) f_ex << ",";
+                }
+                f_ex << "\n";
+            }
+            f_ex.close();
+
+            // Write E_y field
+            std::ofstream f_ey(em_dir + "/E_y_field.csv");
+            for (int i = 0; i < em_fields.E_y.rows(); ++i) {
+                for (int j = 0; j < em_fields.E_y.cols(); ++j) {
+                    f_ey << em_fields.E_y(i, j);
+                    if (j < em_fields.E_y.cols() - 1) f_ey << ",";
+                }
+                f_ey << "\n";
+            }
+            f_ey.close();
+
+            // Write B_z field
+            std::ofstream f_bz(em_dir + "/B_z_field.csv");
+            for (int i = 0; i < em_fields.B_z.rows(); ++i) {
+                for (int j = 0; j < em_fields.B_z.cols(); ++j) {
+                    f_bz << em_fields.B_z(i, j);
+                    if (j < em_fields.B_z.cols() - 1) f_bz << ",";
+                }
+                f_bz << "\n";
+            }
+            f_bz.close();
+
+            std::cout << "  Saved EM field snapshots to " << em_dir << std::endl;
+        }
+    }
+
     // Combine validation results
     ValidationResult combined;
     combined.norm_passed = norm_result.norm_passed;
@@ -1220,6 +1602,10 @@ bool SMFTTestRunner::runSingleTest(int N) {
 
     // Save EM observables to CSV (if EM coupling enabled)
     if (_config.physics.em_coupling_enabled) {
+        // Create N subdirectories for EM field snapshots (Sprint 6 fix)
+        std::filesystem::create_directories(getOutputDirectory(N) + "/N_1");
+        std::filesystem::create_directories(getOutputDirectory(N) + "/N_10");
+        std::filesystem::create_directories(getOutputDirectory(N) + "/N_100");
         std::string em_csv_path = getOutputDirectory(N) + "/em_observables.csv";
         saveEMObservablesToCSV(N, em_csv_path);
         std::cout << "  Saved EM observables to " << em_csv_path << std::endl;

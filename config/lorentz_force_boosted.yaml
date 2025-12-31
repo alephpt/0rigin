@@ -1,0 +1,62 @@
+test_name: "lorentz_force_boosted"
+description: "Lorentz force validation with boosted Dirac field generating EM fields"
+
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0
+
+physics:
+  delta: 0.3
+  coupling_strength: 1.0     # Strong Dirac-Kuramoto coupling
+  K_kuramoto: 5.0            # Medium synchronization
+  damping: 0.01
+  hbar: 1.0
+  c: 1.0
+  dt: 0.001
+  total_steps: 5000
+  use_gpu: false
+  em_coupling_enabled: true
+  em_regularization: "R2"
+
+simulation:
+  snapshot_interval: 50
+  save_observables: true
+  save_fields: true
+
+initial_conditions:
+  kuramoto:
+    type: "single_vortex"
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    vortex_core_radius: 5.0
+    winding_number: 1
+
+  dirac:
+    type: "boosted_gaussian"       # Moving Dirac field creates EM
+    x0_physical: 30.0               # Start offset from vortex
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    amplitude: 1.0
+    boost_velocity: 0.3             # 30% speed of light
+
+  test_particle:
+    enabled: true
+    x0: 70.0          # Place particle on opposite side
+    y0: 50.0
+    vx0: -0.1         # Initial velocity toward center
+    vy0: 0.0
+    charge: -1.0
+    mass: 1.0
+
+validation:
+  perform_validation: true
+  norm_tolerance: 0.01
+  energy_tolerance: 0.1
+  cyclotron_tolerance: 0.2
+
+output:
+  save_fields: true
+  save_observables: true
+  save_particle_trajectory: true
+  save_every: 50

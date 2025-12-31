@@ -1,0 +1,54 @@
+# GPU Compatibility Test - Sprint 3.1
+# Tests GL_EXT_shader_atomic_float support and energy conservation on GPU
+
+test:
+  name: "GPU Compatibility Test"
+  description: "Validate atomic float operations and GPU vs CPU equivalence"
+  scenarios:
+    - { N_values: [10, 100], grid_sizes: [64], label: "GPU atomic test" }
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+  grid_sizes: [64]
+
+time:
+  dt: 0.01
+  t_max: 10.0        # Short test for quick validation
+  save_interval: 1.0
+
+physics:
+  solver_type: gpu   # Force GPU mode
+  Delta: 1.0
+  c_light: 1.0
+  gauge_coupling: 0.1
+
+em_coupling:
+  enabled: true            # Requires atomic operations in reduceFieldEnergy.comp
+  coupling_strength: 0.1
+  field_type: "gauge_invariant"
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 60.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    kx0: 0.3
+    ky0: 0.0
+    m0: 1.0
+
+  kuramoto:
+    phase_distribution: "vortex"
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    vortex_core_radius: 3.0
+    K: 1.0
+    sigma: 0.0
+
+validation:
+  norm_conservation_tolerance: 0.01
+  energy_conservation_tolerance: 0.01
+  R_bounds_check: true
+  numerical_stability_check: true

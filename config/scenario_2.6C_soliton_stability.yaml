@@ -1,0 +1,80 @@
+---
+test_name: "scenario_2.6C_soliton_stability"
+description: "Phase 2 Scenario 2.6C: Study soliton stability at high boost. Tests if localized wavepacket (soliton) remains bound or disperses at v→c. Validates R-field self-trapping mechanism under relativistic motion. Long-term evolution (50,000 steps)."
+
+# Grid configuration
+grid:
+  size_x: 256
+  size_y: 256
+  L_domain: 200.0  # Larger domain for long evolution
+  grid_sizes: [128, 256, 512]  # Grid convergence study
+
+# Physics parameters
+physics:
+  delta: 1.0
+  coupling: 0.1
+  dt: 0.01
+  total_steps: 50000  # 500 time units - long evolution!
+  K: 1.0
+  damping: 0.1
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 100.0  # Centered in larger domain
+    y0_physical: 100.0
+    sigma_physical: 5.0  # Larger initial soliton
+    amplitude: 1.0
+    # Test soliton stability across velocity range
+    boost_velocities: [0.0, 0.3, 0.5, 0.7, 0.9]
+
+  kuramoto:
+    phase_distribution: "uniform"
+    omega_distribution: "zero"
+    uniform_phase: 0.0
+    R_background: 0.9  # Higher R for stronger self-trapping
+
+# Operator splitting
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # N-convergence study
+
+# Validation - relaxed for long evolution
+validation:
+  norm_tolerance: 0.01
+  energy_tolerance: 0.02
+  convergence_tolerance: 0.05
+  gamma_tolerance: 0.10
+
+# Output
+output:
+  directory: "output/scenario_2.6C_soliton_stability"
+  save_every: 50  # Every 50 steps (500 observables total)
+  formats: ["csv"]
+  save_spatial_snapshots: true
+  snapshot_steps: [0, 5000, 10000, 20000, 30000, 40000, 49999]  # 7 snapshots
+
+# Analysis
+analysis:
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  test_gamma_factor: true
+  compute_energy: true
+  lorentz_invariants: true
+
+  # Soliton stability analysis (NEW)
+  measure_wavepacket_width: true        # σ(t) - does it grow (dispersion)?
+  compute_localization_metric: true     # L = ∫|Ψ|⁴ / (∫|Ψ|²)² (Participation ratio)
+  test_self_trapping: true              # Does R-well maintain soliton?
+  measure_dispersion_length: true       # L_disp ~ σ²/Δt dispersion scale
+  compute_binding_energy: true          # E_bind = ∫Ψ†(Δ·R)Ψ (soliton bound state)
+
+  # Stability criteria:
+  # - STABLE: σ(t) ≈ constant, L ≈ constant
+  # - DISPERSING: σ(t) ∝ √t, L decreases
+  # - COLLAPSE: σ(t) → 0 (unlikely, but possible)
+
+  # Key question: Does high velocity destroy self-trapping?
+  # Hypothesis: At v→c, particle outruns R-field response → dispersion

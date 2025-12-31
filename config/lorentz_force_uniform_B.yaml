@@ -1,0 +1,57 @@
+test_name: "lorentz_force_uniform_B"
+description: "Lorentz force validation with uniform external B field"
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+
+physics:
+  delta: 0.3
+  coupling_strength: 0.1
+  K_kuramoto: 1.0
+  damping: 0.01
+  hbar: 1.0
+  c: 1.0
+  dt: 0.001
+  total_steps: 10000  # Long enough for multiple orbits
+  use_gpu: false
+  em_coupling_enabled: true
+  em_regularization: "NONE"  # No regularization for test field
+
+  # External uniform magnetic field
+  external_B_field: 0.1  # Uniform B = 0.1 (natural units)
+
+simulation:
+  snapshot_interval: 100
+  save_observables: true
+  save_fields: true
+
+initial_conditions:
+  kuramoto:
+    type: "uniform"        # Uniform phase for clean B field
+    phase_value: 0.0
+
+  dirac:
+    type: "vacuum"
+
+  test_particle:
+    enabled: true
+    x0: 60.0          # Start off-center
+    y0: 50.0          # Center y
+    vx0: 0.0          # Initial velocity perpendicular to radius
+    vy0: 0.1          # 10% speed of light
+    charge: -1.0      # Electron charge
+    mass: 1.0         # Electron mass
+
+validation:
+  perform_validation: true
+  norm_tolerance: 0.01
+  energy_tolerance: 0.05
+  cyclotron_tolerance: 0.1    # 10% tolerance
+
+output:
+  save_fields: true
+  save_observables: true
+  save_particle_trajectory: true
+  save_every: 100

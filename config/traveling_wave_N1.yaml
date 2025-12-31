@@ -1,0 +1,59 @@
+---
+test_name: "traveling_wave_N1"
+description: "Phase 2.2: Traveling wave validation with N=1 (no time-averaging)"
+
+# Grid configuration
+grid:
+  size_x: 128
+  size_y: 64
+
+# Physics parameters
+physics:
+  delta: 2.5             # Mass gap parameter
+  coupling: 1.5          # Stronger coupling for better locking
+  dt: 0.02               # Timestep
+  total_steps: 2500      # T=50 for extended observation
+  K: 4.0                 # Stronger Kuramoto coupling
+  damping: 0.02          # Very low damping
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0: 32.0
+    y0: 32.0
+    sigma: 4.0
+    amplitude: 1.0
+
+  kuramoto:
+    phase_distribution: "phase_gradient"
+    wave_vector_x: 0.3   # k_x = 0.3
+    wave_vector_y: 0.0   # Propagates in +x direction
+    omega_distribution: "zero"
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [1]    # N=1 baseline
+
+# Validation tolerances
+validation:
+  norm_tolerance: 1.0e-3
+  energy_tolerance: 5.0e-2
+  velocity_lock_tolerance: 0.10
+  correlation_threshold: 0.7
+  lock_duration: 25.0             # >50% of T=50
+
+# Output configuration
+output:
+  directory: "output/traveling_wave_comparison"
+  save_every: 1
+  formats: ["csv"]
+  auto_visualize: false
+
+# Diagnostics
+diagnostics:
+  track_wave_velocity: true
+  track_particle_velocity: true
+  track_correlation: true
+  track_energy_transfer: true

@@ -1,0 +1,79 @@
+---
+test_name: "scenario_2.5C_ultra_relativistic_limit"
+description: "Phase 2 Scenario 2.5C: Push to v=[0.90, 0.95, 0.99]c to test c→1 limit. Validates energy-momentum relation E²=(pc)²+(mc²)² at ultra-relativistic regime where E≈pc. Tests SMFT breakdown vs fundamental v→c physics."
+
+# Grid configuration - need ultra-fine for v→c
+grid:
+  size_x: 256
+  size_y: 256
+  L_domain: 100.0
+  grid_sizes: [128, 256, 512]  # Grid convergence study
+
+# Physics parameters
+physics:
+  delta: 1.0
+  coupling: 0.1
+  dt: 0.005                 # Reduced for CFL stability at v→c
+  total_steps: 10000        # 50 time units (dt/2)
+  K: 1.0
+  damping: 0.1
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    amplitude: 1.0
+    # Ultra-relativistic regime
+    boost_velocities: [0.90, 0.95, 0.99]
+    # Expected γ factors:
+    # v = 0.90c → γ = 2.294 (+129% mass)
+    # v = 0.95c → γ = 3.203 (+220% mass)
+    # v = 0.99c → γ = 7.089 (+609% mass!) - extreme test
+
+  kuramoto:
+    phase_distribution: "uniform"
+    omega_distribution: "zero"
+    uniform_phase: 0.0
+    R_background: 0.8
+
+# Operator splitting
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100]  # N-convergence study
+
+# Validation - VERY relaxed for exploration
+validation:
+  norm_tolerance: 0.02          # 2% (expect larger errors at v→c)
+  energy_tolerance: 0.05        # 5%
+  convergence_tolerance: 0.10   # 10%
+  gamma_tolerance: 0.20         # 20% (exploration mode)
+
+# Output
+output:
+  directory: "output/scenario_2.5C_ultra_relativistic_limit"
+  save_every: 20
+  formats: ["csv"]
+  save_spatial_snapshots: true
+  snapshot_steps: [0, 2500, 5000, 7500, 9999]
+
+# Analysis
+analysis:
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  test_gamma_factor: true
+  compute_energy: true
+  lorentz_invariants: true
+
+  # Ultra-relativistic specific tests
+  test_E_equals_pc_limit: true          # At v→c, E≈pc (mass negligible)
+  measure_time_dilation_extreme: true   # Does evolution slow as 1/γ?
+  compute_lorentz_contraction: true     # σ_∥ = σ/γ → σ/7 at v=0.99c!
+  test_causality_limit: true            # Does physics respect v<c?
+  measure_quantum_effects: true         # Wavepacket dispersion extreme?
+
+  # Critical question: Does SMFT completely fail at v→c,
+  # or does it gracefully approach the massless limit E=pc?

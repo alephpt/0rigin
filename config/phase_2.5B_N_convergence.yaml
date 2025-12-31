@@ -1,0 +1,85 @@
+---
+test_name: "phase_2.5B_N_convergence"
+description: "Phase 2.5B: Test N-convergence hypothesis. Run v=0.3c and v=0.5c with N=[1,10,100,1000] to distinguish adiabatic regime vs saturation state."
+
+# Grid configuration - use validated 128×128 grid
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0
+  grid_sizes: []
+
+# Physics parameters
+physics:
+  delta: 1.0
+  coupling: 0.1
+  dt: 0.01
+  total_steps: 10000        # 100 time units
+  K: 1.0
+  damping: 0.1
+
+# Initial conditions
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    amplitude: 1.0
+    # Test v=0.3c (validated) and v=0.5c (failed) with varying N
+    boost_velocities: [0.3, 0.5]
+
+  kuramoto:
+    phase_distribution: "vortex"
+    winding_number: 1
+    vortex_core_radius: 3.0
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    omega_distribution: "zero"
+
+# Operator splitting configuration - TEST N-CONVERGENCE
+operator_splitting:
+  enabled: true
+  substep_ratios: [1, 10, 100, 1000]  # *** CRITICAL: Test N=1, 10, 100, 1000 ***
+
+# Validation configuration
+validation:
+  norm_tolerance: 0.005
+  energy_tolerance: 0.01
+  convergence_tolerance: 0.05
+  enforce_R_bounds: true
+  enforce_causality: true
+  check_numerical_stability: true
+
+  scenario: "relativistic_mass"
+
+  # 6-Criteria Validation
+  require_vortex: true
+  winding_tolerance: 0.2
+  require_core: true
+  core_R_threshold: 0.5
+  require_boost: true
+  initial_momentum_tolerance: 0.05
+  validate_gamma_factor: true
+  gamma_tolerance: 0.05
+
+  validate_initial_state: true
+  validate_final_state: true
+  fail_on_critical: false
+  verbose: true
+
+# Output configuration
+output:
+  directory: "output/phase_2.5B_N_convergence"
+  save_every: 10
+  formats: ["csv"]
+  save_spatial_snapshots: true
+
+# Analysis
+analysis:
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  test_gamma_factor: true
+  compute_energy: true
+  lorentz_invariants: true

@@ -1,0 +1,66 @@
+---
+# Test 3.3: Noise-Driven Phase Transition
+# Physics: Order parameter ⟨R⟩ undergoes phase transition at critical noise σ_c
+# Expected: ⟨R⟩ ∝ (σ_c - σ)^β with β ≈ 0.125 (2D Ising universality class)
+
+test_name: "phase_transition_validation"
+description: "Test 3.3 - Noise-driven phase transition in Kuramoto synchronization"
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0  # Domain size in Planck lengths
+
+physics:
+  solver_type: "none"  # Kuramoto-only (no fermion evolution)
+  delta: 1.0           # Mass gap (not used, Kuramoto-only)
+  coupling: 0.0        # No Kuramoto-Dirac coupling
+  dt: 0.05             # Timestep (larger for equilibration)
+  total_steps: 4000    # Long enough to reach equilibrium
+  K: 1.0               # Kuramoto coupling strength
+  damping: 0.1         # Phase damping
+  noise_strength: 0.0  # Will be set from noise_scan array
+
+  # Phase transition scan: σ ∈ [0.0, 1.0] with 20 points
+  noise_scan: [0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45,
+               0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.0]
+
+initial_conditions:
+  dirac:
+    type: "none"  # No Dirac field for Kuramoto-only test
+
+  kuramoto:
+    phase_distribution: "uniform"  # Start from uniform synchronized state
+    omega_distribution: "zero"     # No natural frequency heterogeneity
+
+operator_splitting:
+  enabled: false
+
+validation:
+  norm_tolerance: 1.0e-2
+  energy_tolerance: 1.0e-2
+  convergence_tolerance: 0.05
+  scenario: "phase_transition"
+  enforce_R_bounds: true
+  enforce_causality: false  # Not applicable for Kuramoto-only
+  check_numerical_stability: true
+  validate_initial_state: true
+  validate_during_evolution: false
+  validate_final_state: true
+  fail_on_critical: false  # Continue even if equilibrium not reached
+  verbose: true
+
+output:
+  directory: "output/phase_transition"
+  save_every: 100  # Save every 100 steps
+  formats: ["csv"]
+  auto_visualize: false
+  save_spatial_snapshots: false
+  enable_plots: false
+
+analysis:
+  mode: "simulation"
+  track_trajectory: false
+  measure_velocity: false
+  compute_effective_mass: false
+  compute_energy: false

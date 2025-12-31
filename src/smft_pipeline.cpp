@@ -167,7 +167,8 @@ void SMFTPipeline::createBuffers() {
 void SMFTPipeline::createShaderModules() {
     kuramoto_shader_ = loadShaderModule("shaders/SMFT/kuramoto_step.comp.spv");
     sync_shader_ = loadShaderModule("shaders/SMFT/sync_field.comp.spv");
-    dirac_shader_ = loadShaderModule("shaders/SMFT/dirac_rk4.comp.spv");
+    // dirac_shader_ = loadShaderModule("shaders/SMFT/dirac_rk4.comp.spv"); // DANGEROUS - use CPU Dirac evolution
+
     feedback_shader_ = loadShaderModule("shaders/SMFT/spinor_feedback.comp.spv");
 
     std::cout << "[SMFT] Loaded shader modules" << std::endl;

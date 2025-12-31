@@ -1,0 +1,75 @@
+---
+test_name: "test_plotting"
+description: "Test C++ plotting system with matplotlib-cpp"
+
+grid:
+  size_x: 32
+  size_y: 32
+  L_domain: 100.0
+
+physics:
+  delta: 1.0
+  coupling: 0.1
+  dt: 0.1
+  total_steps: 100
+  K: 1.0
+  damping: 0.1
+
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 5.0
+    amplitude: 1.0
+    boost_velocities: [0.3]  # Test single velocity
+
+  kuramoto:
+    phase_distribution: "uniform"
+    omega_distribution: "zero"
+
+operator_splitting:
+  enabled: true
+  substep_ratios: [1]
+
+validation:
+  norm_tolerance: 5.0e-3
+  energy_tolerance: 1.0e-2
+  convergence_tolerance: 0.05
+  enforce_R_bounds: true
+  enforce_causality: true
+  check_numerical_stability: true
+  scenario: "relativistic_mass"
+  require_boost: true
+  initial_momentum_tolerance: 0.1
+  validate_gamma_factor: true
+  gamma_tolerance: 0.1
+  validate_initial_state: true
+  validate_during_evolution: false
+  validate_final_state: true
+  fail_on_critical: false
+  verbose: true
+
+output:
+  directory: "output/test_plotting"
+  save_every: 10
+  formats: ["csv"]
+  save_spatial_snapshots: false
+
+  # NEW: Enable C++ plotting
+  enable_plots: true
+  plot_dpi: 300
+  plot_formats: ["png"]
+  plot_6panel: true
+  plot_conservation: true
+  plot_spatial_fields: false  # Disabled - requires NumPy
+  plot_gamma_validation: true
+
+analysis:
+  mode: "simulation"
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  test_gamma_factor: true
+  compute_energy: true
+  lorentz_invariants: false

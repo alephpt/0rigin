@@ -1,0 +1,85 @@
+---
+test_name: "phase_2.5A_zero_damping"
+description: "Phase 2.5A: Test if Kuramoto damping causes momentum dissipation. Run v=0.3c (validated) and v=0.5c (failed) with damping=0.0 vs damping=0.1 to identify energy sink."
+
+# Grid configuration - use validated 128×128 grid
+grid:
+  size_x: 128
+  size_y: 128
+  L_domain: 100.0  # Domain size: 100 Planck lengths
+  grid_sizes: []    # Single 128×128 grid
+
+# Physics parameters (Planck units: ℏ = c = 1, Δ = 1)
+physics:
+  delta: 1.0                # Mass gap = Planck mass
+  coupling: 0.1             # Kuramoto-Dirac coupling strength
+  dt: 0.01                  # Timestep size
+  total_steps: 10000        # 100 time units
+  K: 1.0                    # Kuramoto coupling strength
+  damping: 0.0              # *** CRITICAL: Zero damping to test dissipation hypothesis ***
+
+# GRID-INDEPENDENT initial conditions
+initial_conditions:
+  dirac:
+    type: "boosted_gaussian"
+    x0_physical: 50.0          # Start at domain center
+    y0_physical: 50.0
+    sigma_physical: 3.0        # Width: 3 Planck lengths
+    amplitude: 1.0
+    # Test v=0.3c (validated) and v=0.5c (failed)
+    boost_velocities: [0.3, 0.5]
+
+  kuramoto:
+    phase_distribution: "vortex"
+    winding_number: 1
+    vortex_core_radius: 3.0
+    vortex_center_x: 50.0
+    vortex_center_y: 50.0
+    omega_distribution: "zero"
+
+# Operator splitting configuration
+operator_splitting:
+  enabled: true
+  substep_ratios: [10]  # Use N=10
+
+# Validation configuration
+validation:
+  norm_tolerance: 0.005
+  energy_tolerance: 0.01
+  convergence_tolerance: 0.05
+  enforce_R_bounds: true
+  enforce_causality: true
+  check_numerical_stability: true
+
+  scenario: "relativistic_mass"
+
+  # 6-Criteria Validation
+  require_vortex: true
+  winding_tolerance: 0.2
+  require_core: true
+  core_R_threshold: 0.5
+  require_boost: true
+  initial_momentum_tolerance: 0.05
+  validate_gamma_factor: true
+  gamma_tolerance: 0.05
+
+  validate_initial_state: true
+  validate_final_state: true
+  fail_on_critical: false
+  verbose: true
+
+# Output configuration
+output:
+  directory: "output/phase_2.5A_zero_damping"
+  save_every: 10
+  formats: ["csv"]
+  save_spatial_snapshots: true
+
+# Analysis
+analysis:
+  track_trajectory: true
+  measure_velocity: true
+  compute_effective_mass: true
+  test_gamma_factor: true
+  compute_energy: true
+  lorentz_invariants: true

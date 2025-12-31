@@ -1,13 +1,16 @@
 #include "SMFTBufferManager.h"
 #include <stdexcept>
 #include <algorithm>
+#include <iostream>
 
 SMFTBufferManager::SMFTBufferManager(VkDevice device, VkPhysicalDevice physicalDevice)
     : _device(device), _physicalDevice(physicalDevice) {
 }
 
 SMFTBufferManager::~SMFTBufferManager() {
+    std::cout << "[DEBUG] SMFTBufferManager destructor called" << std::endl;
     destroyAllBuffers();
+    std::cout << "[DEBUG] SMFTBufferManager destructor completed" << std::endl;
 }
 
 std::pair<VkBuffer, VkDeviceMemory> SMFTBufferManager::createBuffer(
@@ -170,7 +173,10 @@ void SMFTBufferManager::destroyBuffer(VkBuffer buffer, VkDeviceMemory memory) {
 }
 
 void SMFTBufferManager::destroyAllBuffers() {
+    std::cout << "[DEBUG] destroyAllBuffers: " << _managedBuffers.size() << " buffers to destroy" << std::endl;
+    int count = 0;
     for (const auto& [buffer, memory] : _managedBuffers) {
+        std::cout << "[DEBUG] Destroying buffer " << ++count << "/" << _managedBuffers.size() << std::endl;
         if (buffer != VK_NULL_HANDLE) {
             vkDestroyBuffer(_device, buffer, nullptr);
         }
@@ -179,4 +185,5 @@ void SMFTBufferManager::destroyAllBuffers() {
         }
     }
     _managedBuffers.clear();
+    std::cout << "[DEBUG] destroyAllBuffers completed" << std::endl;
 }

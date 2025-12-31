@@ -155,6 +155,20 @@ public:
         std::vector<VortexConfig> vortices;  // Array of vortices for multi_vortex type
     };
 
+    // Test particle configuration (Lorentz force validation)
+    struct TestParticleConfig {
+        bool enabled = false;
+        double x0 = 60.0;          // Initial position x [Planck lengths]
+        double y0 = 50.0;          // Initial position y [Planck lengths]
+        double vx0 = 0.0;          // Initial velocity vx [c = 1]
+        double vy0 = 0.1;          // Initial velocity vy [c = 1]
+        double charge = -1.0;      // Particle charge [natural units]
+        double mass = 1.0;         // Particle mass [natural units]
+        int record_every = 10;     // Record trajectory every N steps
+        bool use_uniform_B = false; // Use uniform B-field instead of from phase
+        double uniform_B_z = 0.1;  // Uniform B-field strength
+    };
+
     // Operator splitting configuration
     struct OperatorSplittingConfig {
         bool enabled = false;
@@ -183,6 +197,16 @@ public:
         float initial_momentum_tolerance = 0.05f; // 5%
         bool validate_gamma_factor = false;  // Validate γ_measured vs theory
         float gamma_tolerance = 0.05f;       // 5%
+
+        // EM validation (when em_coupling enabled)
+        bool validate_maxwell_equations = false;  // Verify ∇·E, ∇×B, etc.
+        float maxwell_tolerance = 1.0e-6f;        // Maxwell equation residual tolerance
+        bool validate_flux_quantization = false;  // Verify ∮A·dl = 2πW
+        float flux_quantization_tolerance = 0.1f; // 10% tolerance for flux quantization
+        int expected_winding_number = 1;          // Expected vortex winding W
+        bool validate_gauge_invariance = false;   // Test θ → θ + α invariance
+        float gauge_shift_angle = 0.785398f;      // Gauge shift angle (π/4 rad)
+        float gauge_invariance_tolerance = 1.0e-10f; // Field strength difference tolerance
 
         // Validation timing
         bool validate_initial_state = true;
@@ -241,6 +265,7 @@ public:
     PhysicsConfig physics;
     DiracInitialCondition dirac_initial;
     KuramotoInitialCondition kuramoto_initial;
+    TestParticleConfig test_particle;
     OperatorSplittingConfig operator_splitting;
     ValidationConfig validation;
     OutputConfig output;
@@ -289,6 +314,7 @@ private:
     void parseOutput(const YAML::Node& node);
     void parseAnalysis(const YAML::Node& node);
     void parseEMCoupling(const YAML::Node& node);  // Parse em_coupling section (Phase 5/6)
+    void parseTestParticle(const YAML::Node& node);  // Parse test_particle section (Lorentz force)
 };
 
 #endif // TEST_CONFIG_H

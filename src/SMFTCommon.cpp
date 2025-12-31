@@ -500,3 +500,91 @@ void initializeBoostedGaussian(DiracEvolution& dirac,
 }
 
 } // namespace SMFT
+
+// ============================================================================
+// KLEIN-GORDON FIELD INITIALIZATION
+// ============================================================================
+
+#include "KleinGordonEvolution.h"
+
+namespace SMFT {
+
+void initializeBoostedGaussian(::KleinGordonEvolution& kg,
+                              float x0, float y0, float sigma,
+                              float vx, float vy,
+                              float delta, float R_bg) {
+
+    const uint32_t Nx = kg.getNx();
+    const uint32_t Ny = kg.getNy();
+
+    // Compute Lorentz factor: γ = 1/√(1 - v²/c²), where c=1 in Planck units
+    const float v2 = vx*vx + vy*vy;
+    const float gamma = 1.0f / std::sqrt(1.0f - v2);
+
+    // Rest mass in SMFT: m₀ = Δ·R_bg
+    const float m0 = delta * R_bg;
+
+    // Relativistic momentum: p = γ·m₀·v
+    const float px = gamma * m0 * vx;
+    const float py = gamma * m0 * vy;
+    const float p_mag = std::sqrt(px*px + py*py);
+
+    // Relativistic energy: ω = √(p² + m₀²) (Klein-Gordon dispersion)
+    const float omega = std::sqrt(p_mag*p_mag + m0*m0);
+
+    std::cout << "[SMFT] Boosted Gaussian initialization (Klein-Gordon):\n";
+    std::cout << "  Position: (" << x0 << ", " << y0 << ") grid units\n";
+    std::cout << "  Width: σ = " << sigma << " grid units\n";
+    std::cout << "  Velocity: v = (" << vx << ", " << vy << ")c\n";
+    std::cout << "  |v| = " << std::sqrt(v2) << "c\n";
+    std::cout << "  Lorentz factor: γ = " << gamma << "\n";
+    std::cout << "  Rest mass: m₀ = Δ·R = " << delta << " × " << R_bg << " = " << m0 << " m_P\n";
+    std::cout << "  Momentum: p = (" << px << ", " << py << ") m_P·c\n";
+    std::cout << "  |p| = " << p_mag << " m_P·c\n";
+    std::cout << "  Energy: ω = " << omega << " m_P·c²\n";
+
+    // First, initialize with standard Gaussian (stationary)
+    kg.initialize(x0, y0, sigma);
+
+    // Now apply momentum boost phase to φ and compute φ_dot
+    // Klein-Gordon plane wave: φ = A·exp(i(k·r - ωt))
+    // At t=0: φ = A·exp(i·k·r), φ_dot = -iω·φ
+
+    auto& phi = const_cast<std::vector<std::complex<float>>&>(kg.getField());
+    auto& phi_dot = const_cast<std::vector<std::complex<float>>&>(kg.getFieldDot());
+
+    for (uint32_t iy = 0; iy < Ny; iy++) {
+        for (uint32_t ix = 0; ix < Nx; ix++) {
+            const uint32_t idx = iy * Nx + ix;
+
+            const float dx = static_cast<float>(ix) - x0;
+            const float dy = static_cast<float>(iy) - y0;
+
+            // Momentum phase: exp(i·p·r)
+            const float phase = px * dx + py * dy;
+            const std::complex<float> momentum_boost = std::complex<float>(
+                std::cos(phase), std::sin(phase)
+            );
+
+            // Apply boost to φ
+            phi[idx] *= momentum_boost;
+
+            // Initialize φ_dot = -iω·φ for moving wavepacket
+            // -i = exp(-iπ/2) = (0, -1)
+            phi_dot[idx] = std::complex<float>(0.0f, -omega) * phi[idx];
+        }
+    }
+
+    // Verify normalization (should still be 1.0 since boost is just a phase)
+    const float final_norm = kg.getNorm();
+    std::cout << "  Final norm: ||φ||² = " << final_norm << "\n";
+
+    // Verify initial position
+    float x_mean, y_mean;
+    kg.getCenterOfMass(x_mean, y_mean);
+    std::cout << "  Initial position: <r> = (" << x_mean << ", " << y_mean << ")\n";
+
+    std::cout << "✓ Boosted Gaussian initialized (Klein-Gordon)" << std::endl;
+}
+
+} // namespace SMFT
