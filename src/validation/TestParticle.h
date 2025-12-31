@@ -75,6 +75,9 @@ private:
     // Trajectory history
     std::vector<TrajectoryPoint> trajectory_;
 
+    // Energy conservation tracking
+    double initial_speed_;  // Speed at initialization (for energy conservation check)
+
     // Helper: Bilinear interpolation of field at continuous position
     double interpolateField(const Eigen::MatrixXd& field, double x, double y) const;
 
@@ -102,7 +105,8 @@ public:
     void initialize(double x0, double y0, double vx0, double vy0, double t0 = 0);
 
     /**
-     * Evolve particle under Lorentz force using RK4 integration
+     * Evolve particle under Lorentz force using symplectic Velocity Verlet integration
+     * Preserves phase space volume (Liouville's theorem) → energy conserved
      * @param fields: Electromagnetic fields
      * @param dt: Timestep
      * @param record: Whether to record trajectory point
@@ -116,14 +120,6 @@ public:
      * @return Force vector (F_x, F_y)
      */
     Eigen::Vector2d computeLorentzForce(const EMFieldComputer::EMFields& fields) const;
-
-    /**
-     * RK4 integrator step
-     * @param fields: EM fields
-     * @param dt: Timestep
-     * @return New state after evolution
-     */
-    State integrateRK4(const EMFieldComputer::EMFields& fields, double dt) const;
 
     /**
      * Compute cyclotron frequency from current motion

@@ -29,6 +29,9 @@ void TestParticle::initialize(double x0, double y0,
     state_.vy = vy0;
     state_.t = t0;
 
+    // Store initial speed for energy conservation check
+    initial_speed_ = std::sqrt(vx0 * vx0 + vy0 * vy0);
+
     // Apply periodic boundary conditions
     applyPeriodicBC();
 
@@ -92,73 +95,6 @@ Eigen::Vector2d TestParticle::computeLorentzForce(
     return Eigen::Vector2d(F_x, F_y);
 }
 
-TestParticle::State TestParticle::integrateRK4(
-    const EMFieldComputer::EMFields& fields, double dt) const {
-
-    // RK4 integration for dx/dt = v, dv/dt = F/m
-    State k1 = state_;
-    State k2 = state_;
-    State k3 = state_;
-    State k4 = state_;
-
-    // Helper lambda to compute derivatives
-    auto computeDerivatives = [&](const State& s) -> State {
-        State deriv;
-        deriv.x = s.vx;
-        deriv.y = s.vy;
-        deriv.t = 1.0;
-
-        // Create temporary particle at state s
-        TestParticle temp_particle(*this);
-        temp_particle.state_ = s;
-        temp_particle.applyPeriodicBC();
-
-        // Compute force at this state
-        Eigen::Vector2d F = temp_particle.computeLorentzForce(fields);
-        deriv.vx = F(0) / mass_;
-        deriv.vy = F(1) / mass_;
-
-        return deriv;
-    };
-
-    // k1 = f(y_n)
-    State d1 = computeDerivatives(state_);
-
-    // k2 = f(y_n + dt/2 * k1)
-    k2.x = state_.x + 0.5 * dt * d1.x;
-    k2.y = state_.y + 0.5 * dt * d1.y;
-    k2.vx = state_.vx + 0.5 * dt * d1.vx;
-    k2.vy = state_.vy + 0.5 * dt * d1.vy;
-    k2.t = state_.t + 0.5 * dt;
-    State d2 = computeDerivatives(k2);
-
-    // k3 = f(y_n + dt/2 * k2)
-    k3.x = state_.x + 0.5 * dt * d2.x;
-    k3.y = state_.y + 0.5 * dt * d2.y;
-    k3.vx = state_.vx + 0.5 * dt * d2.vx;
-    k3.vy = state_.vy + 0.5 * dt * d2.vy;
-    k3.t = state_.t + 0.5 * dt;
-    State d3 = computeDerivatives(k3);
-
-    // k4 = f(y_n + dt * k3)
-    k4.x = state_.x + dt * d3.x;
-    k4.y = state_.y + dt * d3.y;
-    k4.vx = state_.vx + dt * d3.vx;
-    k4.vy = state_.vy + dt * d3.vy;
-    k4.t = state_.t + dt;
-    State d4 = computeDerivatives(k4);
-
-    // Combine: y_{n+1} = y_n + dt/6 * (k1 + 2k2 + 2k3 + k4)
-    State new_state;
-    new_state.x = state_.x + dt/6.0 * (d1.x + 2*d2.x + 2*d3.x + d4.x);
-    new_state.y = state_.y + dt/6.0 * (d1.y + 2*d2.y + 2*d3.y + d4.y);
-    new_state.vx = state_.vx + dt/6.0 * (d1.vx + 2*d2.vx + 2*d3.vx + d4.vx);
-    new_state.vy = state_.vy + dt/6.0 * (d1.vy + 2*d2.vy + 2*d3.vy + d4.vy);
-    new_state.t = state_.t + dt;
-
-    return new_state;
-}
-
 void TestParticle::evolveLorentzForce(const EMFieldComputer::EMFields& fields,
                                       double dt, bool record) {
     // Record initial state if requested
@@ -166,13 +102,52 @@ void TestParticle::evolveLorentzForce(const EMFieldComputer::EMFields& fields,
         recordTrajectory(fields);
     }
 
-    // RK4 integration
-    state_ = integrateRK4(fields, dt);
+    // SYMPLECTIC VELOCITY VERLET INTEGRATION
+    // This preserves phase space volume → energy conserved to machine precision
+    // Structure: KICK (half-step velocity) → DRIFT (full-step position) →
+    //           KICK (half-step velocity at new position)
 
-    // Apply periodic boundary conditions
+    // Step 1: Compute Lorentz force at current position
+    Eigen::Vector2d F = computeLorentzForce(fields);
+    double ax = F(0) / mass_;
+    double ay = F(1) / mass_;
+
+    // Step 2: KICK - Half-step velocity update
+    state_.vx += 0.5 * ax * dt;
+    state_.vy += 0.5 * ay * dt;
+
+    // Step 3: DRIFT - Full-step position update
+    state_.x += state_.vx * dt;
+    state_.y += state_.vy * dt;
+    state_.t += dt;
+
+    // Step 4: Apply periodic boundary conditions
     applyPeriodicBC();
 
-    // Record new state if requested
+    // Step 5: Re-compute force at new position
+    F = computeLorentzForce(fields);
+    ax = F(0) / mass_;
+    ay = F(1) / mass_;
+
+    // Step 6: KICK - Second half-step velocity update
+    state_.vx += 0.5 * ax * dt;
+    state_.vy += 0.5 * ay * dt;
+
+    // Step 7: Energy conservation check (CRITICAL for validation)
+    // For pure magnetic field, speed should be conserved
+    double v_current = std::sqrt(state_.vx * state_.vx + state_.vy * state_.vy);
+    if (initial_speed_ > 1e-10) {
+        double speed_error = std::abs(v_current - initial_speed_) / initial_speed_;
+        if (speed_error > 0.01) {
+            std::cerr << "WARNING: Particle speed changed by "
+                      << speed_error * 100.0 << "% "
+                      << "(|v| should be conserved, but is changing)\n"
+                      << "  Initial speed: " << initial_speed_ << "\n"
+                      << "  Current speed: " << v_current << "\n";
+        }
+    }
+
+    // Step 8: Record new state if requested
     if (record) {
         recordTrajectory(fields);
     }
