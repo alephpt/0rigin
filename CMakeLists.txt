@@ -24,6 +24,7 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 add_library(Physics STATIC
     src/physics/ProcaEM.cpp
+    src/physics/ProcaVulkanPipeline.cpp
 )
 
 target_include_directories(Physics PUBLIC
@@ -34,6 +35,57 @@ target_compile_options(Physics PRIVATE
     -Wall
     -Wextra
     -Wpedantic
+)
+
+# ============================================================================
+# SMFTCORE LIBRARY
+# ============================================================================
+
+add_library(SMFTCore STATIC
+    src/SMFTCore.cpp
+)
+
+target_include_directories(SMFTCore PUBLIC
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(SMFTCore PUBLIC
+    Physics
+)
+
+target_compile_options(SMFTCore PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+)
+
+# ============================================================================
+# SMFT EXECUTABLE (Minimal Demo)
+# ============================================================================
+
+add_executable(smft
+    src/main_smft.cpp
+)
+
+target_include_directories(smft PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(smft PRIVATE
+    SMFTCore
+    Physics
+    pthread
+    m
+)
+
+target_compile_options(smft PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+)
+
+set_target_properties(smft PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
 # ============================================================================
@@ -49,5 +101,7 @@ message(STATUS "  Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "")
 message(STATUS "  Targets:")
 message(STATUS "    • Physics (static library)")
+message(STATUS "    • SMFTCore (static library)")
+message(STATUS "    • smft (executable)")
 message(STATUS "")
 message(STATUS "===============================================")
