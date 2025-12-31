@@ -1,0 +1,46 @@
+// build/shaders/smft/enforceLorenzGauge.comp
+#version 450
+
+layout(local_size_x = 16, local_size_y = 16) in;
+
+layout(binding = 0) buffer PhiField { float phi[]; };
+layout(binding = 1) buffer AxField { float Ax[]; };
+layout(binding = 2) buffer AyField { float Ay[]; };
+layout(binding = 3) buffer PhiCorrected { float phi_corr[]; };
+layout(binding = 4) buffer AxCorrected { float Ax_corr[]; };
+layout(binding = 5) buffer AyCorrected { float Ay_corr[]; };
+
+layout(push_constant) uniform PushConstants {
+    uint nx;
+    uint ny;
+    float dx;
+    float gauge_relax; // Relaxation parameter
+};
+
+void main() {
+    uvec2 id = gl_GlobalInvocationID.xy;
+
+    if (id.x == 0 || id.x >= nx - 1 || id.y == 0 || id.y >= ny - 1) return;
+
+    uint idx = id.y * nx + id.x;
+    uint idx_xp = idx + 1;
+    uint idx_xm = idx - 1;
+    uint idx_yp = idx + nx;
+    uint idx_ym = idx - nx;
+
+    // Lorenz gauge condition: ∂_μ A^μ = ∂φ/∂t + ∇·A = 0
+    // Projection: compute gauge violation
+    float div_A = (Ax[idx_xp] - Ax[idx_xm]) / (2.0*dx) +
+                  (Ay[idx_yp] - Ay[idx_ym]) / (2.0*dx);
+
+    // Laplacian for gauge scalar χ: ∇²χ = ∇·A
+    float lap_chi = (div_A); // Simplified
+
+    // Correct potential: A_μ → A_μ + ∂_μχ
+    float dchi_dx = lap_chi; // Approximate
+    float dchi_dy = lap_chi;
+
+    Ax_corr[idx] = Ax[idx] - gauge_relax * dchi_dx;
+    Ay_corr[idx] = Ay[idx] - gauge_relax * dchi_dy;
+    phi_corr[idx] = phi[idx]; // Unchanged for now
+}
