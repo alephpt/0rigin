@@ -1,0 +1,44 @@
+// build/shaders/smft/computeProcaEnergy.comp
+#version 450
+
+layout(local_size_x = 256) in;
+
+layout(binding = 0) buffer ExField { float Ex[]; };
+layout(binding = 1) buffer EyField { float Ey[]; };
+layout(binding = 2) buffer BzField { float Bz[]; };
+layout(binding = 3) buffer EnergyOut { float energy_partial[]; };
+
+layout(push_constant) uniform PushConstants {
+    uint total_size;
+    float dx;
+};
+
+shared float partial_sum[256];
+
+void main() {
+    uint gid = gl_GlobalInvocationID.x;
+    uint lid = gl_LocalInvocationID.x;
+
+    float local_energy = 0.0;
+
+    if (gid < total_size) {
+        float E_sq = Ex[gid]*Ex[gid] + Ey[gid]*Ey[gid];
+        float B_sq = Bz[gid]*Bz[gid];
+        local_energy = (E_sq + B_sq) * 0.5 * dx * dx;
+    }
+
+    partial_sum[lid] = local_energy;
+    barrier();
+
+    // Reduction
+    for (uint s = 128; s > 0; s >>= 1) {
+        if (lid < s) {
+            partial_sum[lid] += partial_sum[lid + s];
+        }
+        barrier();
+    }
+
+    if (lid == 0) {
+        energy_partial[gl_WorkGroupID.x] = partial_sum[0];
+    }
+}

@@ -1,0 +1,60 @@
+# config/proca_em_test.yaml
+# Test configuration for Proca EM integration with SMFTCore
+
+physics:
+  # Time evolution parameters
+  total_steps: 1000
+  dt: 0.01
+
+  # Spatial grid
+  nx: 64
+  ny: 64
+  dx: 1.0
+
+  # Electromagnetic field parameters
+  em_enabled: true
+  photon_mass_coupling: 0.1  # g in m_γ = g(1-R)
+
+initial_conditions:
+  # Vortex configuration for phase field
+  vortex:
+    enabled: true
+    x0: 32.0
+    y0: 32.0
+    winding: 1
+
+  # Synchronization field profile
+  sync:
+    type: "gaussian"
+    center_x: 32.0
+    center_y: 32.0
+    sigma: 10.0
+
+output:
+  # Field data output
+  save_fields: true
+  save_interval: 100
+  output_dir: "output/proca_test"
+
+  # What to save
+  fields:
+    - "theta"      # Phase field
+    - "R"          # Synchronization
+    - "Ex"         # Electric field x
+    - "Ey"         # Electric field y
+    - "Bz"         # Magnetic field z
+    - "phi"        # Scalar potential
+    - "Ax"         # Vector potential x
+    - "Ay"         # Vector potential y
+
+validation:
+  # Energy conservation checks
+  check_energy: true
+  energy_tolerance: 0.01
+
+  # Gauge condition checks
+  check_lorenz_gauge: true
+  gauge_tolerance: 1e-6
+
+  # Physical bounds
+  max_field_strength: 100.0

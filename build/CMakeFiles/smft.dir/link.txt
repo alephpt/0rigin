@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/smft.dir/link.d CMakeFiles/smft.dir/src/main_smft.cpp.o -o bin/smft  libSMFTCore.a libPhysics.a -lpthread -lm
