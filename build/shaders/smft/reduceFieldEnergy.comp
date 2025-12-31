@@ -1,0 +1,132 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+#extension GL_GOOGLE_include_directive : enable
+
+#include "../include/precision.glsl"
+
+/**
+ * @file reduceFieldEnergy.comp
+ * @brief Parallel reduction to compute total electromagnetic field energy
+ *
+ * Physics:
+ * --------
+ * Electromagnetic field energy density:
+ * u_EM = (E² + B²) / (8π)
+ *
+ * Total field energy:
+ * U_EM = ∫ u_EM dV = Σ_{i,j} (E_x² + E_y² + B_z²) / (8π) · dx·dy
+ *
+ * In natural units (ε₀ = μ₀ = 1):
+ * u_EM = (E² + B²) / 2
+ *
+ * For SMFT coupling validation: U_EM should match Kuramoto synchronization energy
+ * when phase gradients emerge from spinor dynamics.
+ *
+ * Numerical Method:
+ * -----------------
+ * - Tree-based parallel reduction in shared memory
+ * - Workgroup size: 256 (power of 2 for efficient reduction)
+ * - Multi-workgroup: Atomic add for final accumulation
+ * - Initialize energy[0] = 0 before dispatch
+ *
+ * GPU Compatibility:
+ * ------------------
+ * - Uses atomicCompSwap fallback for GPUs without GL_EXT_shader_atomic_float
+ * - Compatible with AMD RADV (RX 6800 XT) and other GPUs lacking atomic float ops
+ *
+ * Reference: accumulate.comp (same reduction pattern)
+ */
+
+layout(local_size_x = 256, local_size_y = 1, local_size_z = 1) in;
+
+// Descriptor set 0: Energy reduction
+layout(set = 0, binding = 0) readonly buffer E_x {
+    float E_x_in[];  // E_x field
+};
+
+layout(set = 0, binding = 1) readonly buffer E_y {
+    float E_y_in[];  // E_y field
+};
+
+layout(set = 0, binding = 2) readonly buffer B_z {
+    float B_z_in[];  // B_z field
+};
+
+layout(set = 0, binding = 3) buffer EnergyTotal {
+    uint energy_uint[];  // Uint view for atomic operations
+};
+
+layout(set = 0, binding = 4) uniform Params {
+    uint Nx;       // Grid width
+    uint Ny;       // Grid height
+    float dx;      // Spatial step size
+    float dy;      // Spatial step size
+} params;
+
+// Shared memory for workgroup reduction
+shared float sdata[256];
+
+void main() {
+    uint tid = gl_LocalInvocationID.x;     // Thread ID within workgroup
+    uint gid = gl_GlobalInvocationID.x;    // Global thread ID
+    uint total = params.Nx * params.Ny;    // Total grid points
+
+    // Physical element area (for volume integration)
+    float element_area = params.dx * params.dy;
+
+    // Energy density normalization: 1/(8π) in Gaussian units
+    // In natural units with ε₀ = μ₀ = 1, this becomes 1/2
+    const float PI = 3.14159265359;
+    float factor = 1.0 / (8.0 * PI);
+
+    // ========================================================================
+    // LOAD AND COMPUTE LOCAL ENERGY DENSITY
+    // ========================================================================
+    // Each thread computes energy for one grid point
+    float local_energy = 0.0;
+
+    if (gid < total) {
+        float Ex = E_x_in[gid];
+        float Ey = E_y_in[gid];
+        float Bz = B_z_in[gid];
+
+        // Energy density: u = (E² + B²) / (8π)
+        float energy_density = (Ex*Ex + Ey*Ey + Bz*Bz) * factor;
+
+        // Volume element contribution: u · dV
+        local_energy = energy_density * element_area;
+    }
+
+    // Store in shared memory
+    sdata[tid] = local_energy;
+    barrier();
+
+    // ========================================================================
+    // TREE-BASED PARALLEL REDUCTION
+    // ========================================================================
+    // Reduce 256 → 128 → 64 → 32 → 16 → 8 → 4 → 2 → 1
+
+    // Unrolled reduction for efficiency (following accumulate.comp pattern)
+    if (tid < 128) { sdata[tid] += sdata[tid + 128]; } barrier();
+    if (tid < 64)  { sdata[tid] += sdata[tid + 64];  } barrier();
+    if (tid < 32)  { sdata[tid] += sdata[tid + 32];  } barrier();
+    if (tid < 16)  { sdata[tid] += sdata[tid + 16];  } barrier();
+    if (tid < 8)   { sdata[tid] += sdata[tid + 8];   } barrier();
+    if (tid < 4)   { sdata[tid] += sdata[tid + 4];   } barrier();
+    if (tid < 2)   { sdata[tid] += sdata[tid + 2];   } barrier();
+    if (tid < 1)   { sdata[tid] += sdata[tid + 1];   } barrier();
+
+    // ========================================================================
+    // WORKGROUP RESULT ACCUMULATION
+    // ========================================================================
+    // Thread 0 writes this workgroup's result to global memory
+    // Use atomic add for multi-workgroup reduction (GPU-compatible fallback)
+    if (tid == 0) {
+        // atomicAdd fallback using atomicCompSwap (works on all GPUs)
+        uint old_val, new_val;
+        do {
+            old_val = energy_uint[0];
+            new_val = floatBitsToUint(uintBitsToFloat(old_val) + sdata[0]);
+        } while (atomicCompSwap(energy_uint[0], old_val, new_val) != old_val);
+    }
+}

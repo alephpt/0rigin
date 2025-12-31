@@ -1,0 +1,165 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+#extension GL_GOOGLE_include_directive : enable
+
+#include "../include/precision.glsl"
+
+/**
+ * @file computeEMPotentials.comp
+ * @brief Extract electromagnetic gauge potentials A_μ from Kuramoto phase field
+ *
+ * Physics:
+ * --------
+ * A_μ = ∂_μ θ (gauge potentials from phase gradient)
+ *
+ * φ(x,y) = ∂_t θ = (θ_current - θ_previous) / dt  (scalar potential)
+ * A_x(x,y) = ∂_x θ                                 (vector potential x-component)
+ * A_y(x,y) = ∂_y θ                                 (vector potential y-component)
+ *
+ * Numerical Method:
+ * -----------------
+ * - Temporal derivative: First-order finite difference with phase wrapping
+ * - Spatial derivatives: Conjugate product method (stable at vortex cores)
+ * - Boundary conditions: Periodic
+ *
+ * Conjugate Product Method:
+ * --------------------------
+ * For complex field Z = R·exp(iθ):
+ *   ∇Z = (∇R + i·R·∇θ)·exp(iθ)
+ *   Z*·∇Z = R²·∇θ·i  (real parts cancel)
+ *   Im(Z*·∇Z) = R²·∇θ
+ *   ∇θ = Im(Z*·∇Z) / max(R², ε)
+ *
+ * Advantage: Numerically stable at vortex cores where R→0 and θ has 2π branch cuts
+ *
+ * Workgroup: 16×16 threads (matching kuramoto_step.comp)
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+// Descriptor set 0: EM potentials computation
+layout(set = 0, binding = 0) readonly buffer ThetaCurrent {
+    float theta_current[];  // θ(t)
+};
+
+layout(set = 0, binding = 1) readonly buffer ThetaPrevious {
+    float theta_previous[];  // θ(t-dt)
+};
+
+layout(set = 0, binding = 2) readonly buffer RField {
+    float R_field[];  // R(x,y) - Kuramoto order parameter
+};
+
+layout(set = 0, binding = 3) writeonly buffer Phi {
+    float phi[];  // φ = ∂_t θ (scalar potential)
+};
+
+layout(set = 0, binding = 4) writeonly buffer A_x {
+    float A_x_out[];  // A_x = ∂_x θ
+};
+
+layout(set = 0, binding = 5) writeonly buffer A_y {
+    float A_y_out[];  // A_y = ∂_y θ
+};
+
+layout(set = 0, binding = 6) uniform Params {
+    uint Nx;       // Grid width
+    uint Ny;       // Grid height
+    float dx;      // Spatial step size
+    float dy;      // Spatial step size
+    float dt;      // Time step
+} params;
+
+const float PI = 3.14159265359;
+const float EPSILON = 1e-10;  // Regularization for division by zero at vortex cores
+
+void main() {
+    uint i = gl_GlobalInvocationID.x;
+    uint j = gl_GlobalInvocationID.y;
+
+    // Bounds check
+    if (i >= params.Nx || j >= params.Ny) {
+        return;
+    }
+
+    uint idx = j * params.Nx + i;
+
+    // ========================================================================
+    // TEMPORAL DERIVATIVE: φ = ∂_t θ
+    // ========================================================================
+    // First-order finite difference with phase wrapping
+    float theta_diff = theta_current[idx] - theta_previous[idx];
+
+    // Wrap to [-π, π] to handle 2π branch cuts
+    while (theta_diff > PI) theta_diff -= 2.0 * PI;
+    while (theta_diff < -PI) theta_diff += 2.0 * PI;
+
+    float phi_val = theta_diff / params.dt;
+
+    // ========================================================================
+    // CONJUGATE PRODUCT METHOD: A_x = ∂_x θ
+    // ========================================================================
+    // Periodic boundary conditions
+    uint i_left = (i == 0) ? (params.Nx - 1) : (i - 1);
+    uint i_right = (i == params.Nx - 1) ? 0 : (i + 1);
+    uint idx_left = j * params.Nx + i_left;
+    uint idx_right = j * params.Nx + i_right;
+
+    // Get R and θ at center and neighbors
+    float R_center = R_field[idx];
+    float theta_center = theta_current[idx];
+    float R_left = R_field[idx_left];
+    float theta_left = theta_current[idx_left];
+    float R_right = R_field[idx_right];
+    float theta_right = theta_current[idx_right];
+
+    // Construct complex field Z = R·exp(iθ) at center and neighbors
+    vec2 Z_center = vec2(R_center * cos(theta_center), R_center * sin(theta_center));
+    vec2 Z_left = vec2(R_left * cos(theta_left), R_left * sin(theta_left));
+    vec2 Z_right = vec2(R_right * cos(theta_right), R_right * sin(theta_right));
+
+    // Compute gradient of complex field (centered difference)
+    vec2 dZ_dx = (Z_right - Z_left) / (2.0 * params.dx);
+
+    // Compute Im(Z*·∇Z) = Z_real·(∇Z)_imag - Z_imag·(∇Z)_real
+    float Im_Z_conj_dZ_x = Z_center.x * dZ_dx.y - Z_center.y * dZ_dx.x;
+
+    // Normalize by max(R², ε) to prevent division by zero at vortex cores
+    float R_squared = R_center * R_center;
+    float A_x_val = Im_Z_conj_dZ_x / max(R_squared, EPSILON);
+
+    // ========================================================================
+    // CONJUGATE PRODUCT METHOD: A_y = ∂_y θ
+    // ========================================================================
+    // Periodic boundary conditions
+    uint j_down = (j == 0) ? (params.Ny - 1) : (j - 1);
+    uint j_up = (j == params.Ny - 1) ? 0 : (j + 1);
+    uint idx_down = j_down * params.Nx + i;
+    uint idx_up = j_up * params.Nx + i;
+
+    // Get R and θ at neighbors
+    float R_down = R_field[idx_down];
+    float theta_down = theta_current[idx_down];
+    float R_up = R_field[idx_up];
+    float theta_up = theta_current[idx_up];
+
+    // Construct complex field Z at neighbors
+    vec2 Z_down = vec2(R_down * cos(theta_down), R_down * sin(theta_down));
+    vec2 Z_up = vec2(R_up * cos(theta_up), R_up * sin(theta_up));
+
+    // Compute gradient of complex field
+    vec2 dZ_dy = (Z_up - Z_down) / (2.0 * params.dy);
+
+    // Compute Im(Z*·∇Z)
+    float Im_Z_conj_dZ_y = Z_center.x * dZ_dy.y - Z_center.y * dZ_dy.x;
+
+    // Normalize
+    float A_y_val = Im_Z_conj_dZ_y / max(R_squared, EPSILON);
+
+    // ========================================================================
+    // OUTPUT
+    // ========================================================================
+    phi[idx] = phi_val;
+    A_x_out[idx] = A_x_val;
+    A_y_out[idx] = A_y_val;
+}

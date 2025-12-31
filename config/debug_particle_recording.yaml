@@ -1,0 +1,46 @@
+test_name: "debug_particle_recording"
+
+# MINIMAL TEST TO DEBUG PARTICLE RECORDING
+
+grid:
+  size_x: 32
+  size_y: 32
+  L_domain: 100.0
+
+physics:
+  solver_type: "gpu"
+  delta: 2.5
+  coupling: 0.1
+  total_steps: 100  # Just 100 steps for quick debugging
+  dt: 0.001        # Larger timestep for speed
+  K: 1.0
+  damping: 0.0
+  noise_strength: 0.0
+  em_coupling_enabled: true
+  em_coupling_strength: 1.0
+  em_coupling_type: "perturbative"
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+  kuramoto:
+    phase_distribution: "uniform"
+
+test_particle:
+    enabled: true
+    x0: 55.0
+    y0: 50.0
+    vx0: 0.0
+    vy0: 0.01
+    charge: -1.0
+    mass: 0.1
+    record_every: 5  # Should record at steps 0, 5, 10, 15, ..., 95, 100
+    use_uniform_B: true
+    uniform_B_z: 0.1
+
+output:
+  directory: "output/debug_particle"
+  save_every: 10  # Different from record_every to test independence
