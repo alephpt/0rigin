@@ -25,6 +25,7 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 add_library(Physics STATIC
     src/physics/ProcaEM.cpp
     src/physics/ProcaVulkanPipeline.cpp
+    src/physics/StuckelbergEM.cpp
 )
 
 target_include_directories(Physics PUBLIC
@@ -99,6 +100,13 @@ set_target_properties(test_proca_vortex_bfield PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+add_executable(test_stuckelberg_vortex_bfield test/test_stuckelberg_vortex_bfield.cpp)
+target_link_libraries(test_stuckelberg_vortex_bfield PRIVATE Physics)
+target_include_directories(test_stuckelberg_vortex_bfield PRIVATE ${CMAKE_SOURCE_DIR}/include)
+set_target_properties(test_stuckelberg_vortex_bfield PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # ============================================================================
 # SUMMARY
 # ============================================================================
@@ -114,6 +122,7 @@ message(STATUS "  Targets:")
 message(STATUS "    • Physics (static library)")
 message(STATUS "    • SMFTCore (static library)")
 message(STATUS "    • smft (executable)")
-message(STATUS "    • test_proca_vortex_bfield (critical test)")
+message(STATUS "    • test_proca_vortex_bfield (Proca test - FAILED)")
+message(STATUS "    • test_stuckelberg_vortex_bfield (Stückelberg test - CRITICAL)")
 message(STATUS "")
 message(STATUS "===============================================")
