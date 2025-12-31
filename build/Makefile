@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/persist/neotec/0rigin
+CMAKE_SOURCE_DIR = /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/build
+CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles /home/persist/neotec/0rigin/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,699 +117,176 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Nova
+# Target rules for targets named Physics
 
 # Build rule for target.
-Nova: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Nova
-.PHONY : Nova
+Physics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Physics
+.PHONY : Physics
 
 # fast build rule for target.
-Nova/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/build
-.PHONY : Nova/fast
+Physics/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/build
+.PHONY : Physics/fast
 
 #=============================================================================
-# Target rules for targets named imgui
+# Target rules for targets named SMFTCore
 
 # Build rule for target.
-imgui: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imgui
-.PHONY : imgui
+SMFTCore: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SMFTCore
+.PHONY : SMFTCore
 
 # fast build rule for target.
-imgui/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/build
-.PHONY : imgui/fast
+SMFTCore/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFTCore.dir/build.make CMakeFiles/SMFTCore.dir/build
+.PHONY : SMFTCore/fast
 
 #=============================================================================
-# Target rules for targets named MSFT
+# Target rules for targets named smft
 
 # Build rule for target.
-MSFT: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MSFT
-.PHONY : MSFT
+smft: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 smft
+.PHONY : smft
 
 # fast build rule for target.
-MSFT/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/build
-.PHONY : MSFT/fast
+smft/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/build
+.PHONY : smft/fast
 
 #=============================================================================
-# Target rules for targets named test_msft_gpu
+# Target rules for targets named test_proca_vortex_bfield
 
 # Build rule for target.
-test_msft_gpu: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_msft_gpu
-.PHONY : test_msft_gpu
+test_proca_vortex_bfield: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_proca_vortex_bfield
+.PHONY : test_proca_vortex_bfield
 
 # fast build rule for target.
-test_msft_gpu/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/build
-.PHONY : test_msft_gpu/fast
+test_proca_vortex_bfield/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/build
+.PHONY : test_proca_vortex_bfield/fast
 
-#=============================================================================
-# Target rules for targets named test_descriptor_bindings
-
-# Build rule for target.
-test_descriptor_bindings: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_descriptor_bindings
-.PHONY : test_descriptor_bindings
-
-# fast build rule for target.
-test_descriptor_bindings/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/build
-.PHONY : test_descriptor_bindings/fast
-
-lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
-.PHONY : lib/Nova/Core/components/genesis.o
+src/SMFTCore.o: src/SMFTCore.cpp.o
+.PHONY : src/SMFTCore.o
 
 # target to build an object file
-lib/Nova/Core/components/genesis.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/genesis.cpp.o
-.PHONY : lib/Nova/Core/components/genesis.cpp.o
+src/SMFTCore.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFTCore.dir/build.make CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o
+.PHONY : src/SMFTCore.cpp.o
 
-lib/Nova/Core/components/genesis.i: lib/Nova/Core/components/genesis.cpp.i
-.PHONY : lib/Nova/Core/components/genesis.i
+src/SMFTCore.i: src/SMFTCore.cpp.i
+.PHONY : src/SMFTCore.i
 
 # target to preprocess a source file
-lib/Nova/Core/components/genesis.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/genesis.cpp.i
-.PHONY : lib/Nova/Core/components/genesis.cpp.i
+src/SMFTCore.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFTCore.dir/build.make CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.i
+.PHONY : src/SMFTCore.cpp.i
 
-lib/Nova/Core/components/genesis.s: lib/Nova/Core/components/genesis.cpp.s
-.PHONY : lib/Nova/Core/components/genesis.s
+src/SMFTCore.s: src/SMFTCore.cpp.s
+.PHONY : src/SMFTCore.s
 
 # target to generate assembly for a file
-lib/Nova/Core/components/genesis.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/genesis.cpp.s
-.PHONY : lib/Nova/Core/components/genesis.cpp.s
+src/SMFTCore.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFTCore.dir/build.make CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.s
+.PHONY : src/SMFTCore.cpp.s
 
-lib/Nova/Core/components/logger.o: lib/Nova/Core/components/logger.cpp.o
-.PHONY : lib/Nova/Core/components/logger.o
+src/main_smft.o: src/main_smft.cpp.o
+.PHONY : src/main_smft.o
 
 # target to build an object file
-lib/Nova/Core/components/logger.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/logger.cpp.o
-.PHONY : lib/Nova/Core/components/logger.cpp.o
+src/main_smft.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/src/main_smft.cpp.o
+.PHONY : src/main_smft.cpp.o
 
-lib/Nova/Core/components/logger.i: lib/Nova/Core/components/logger.cpp.i
-.PHONY : lib/Nova/Core/components/logger.i
+src/main_smft.i: src/main_smft.cpp.i
+.PHONY : src/main_smft.i
 
 # target to preprocess a source file
-lib/Nova/Core/components/logger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/logger.cpp.i
-.PHONY : lib/Nova/Core/components/logger.cpp.i
+src/main_smft.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/src/main_smft.cpp.i
+.PHONY : src/main_smft.cpp.i
 
-lib/Nova/Core/components/logger.s: lib/Nova/Core/components/logger.cpp.s
-.PHONY : lib/Nova/Core/components/logger.s
+src/main_smft.s: src/main_smft.cpp.s
+.PHONY : src/main_smft.s
 
 # target to generate assembly for a file
-lib/Nova/Core/components/logger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/logger.cpp.s
-.PHONY : lib/Nova/Core/components/logger.cpp.s
+src/main_smft.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/src/main_smft.cpp.s
+.PHONY : src/main_smft.cpp.s
 
-lib/Nova/Core/components/obj_loader.o: lib/Nova/Core/components/obj_loader.cpp.o
-.PHONY : lib/Nova/Core/components/obj_loader.o
+src/physics/ProcaEM.o: src/physics/ProcaEM.cpp.o
+.PHONY : src/physics/ProcaEM.o
 
 # target to build an object file
-lib/Nova/Core/components/obj_loader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/obj_loader.cpp.o
-.PHONY : lib/Nova/Core/components/obj_loader.cpp.o
+src/physics/ProcaEM.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o
+.PHONY : src/physics/ProcaEM.cpp.o
 
-lib/Nova/Core/components/obj_loader.i: lib/Nova/Core/components/obj_loader.cpp.i
-.PHONY : lib/Nova/Core/components/obj_loader.i
+src/physics/ProcaEM.i: src/physics/ProcaEM.cpp.i
+.PHONY : src/physics/ProcaEM.i
 
 # target to preprocess a source file
-lib/Nova/Core/components/obj_loader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/obj_loader.cpp.i
-.PHONY : lib/Nova/Core/components/obj_loader.cpp.i
+src/physics/ProcaEM.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.i
+.PHONY : src/physics/ProcaEM.cpp.i
 
-lib/Nova/Core/components/obj_loader.s: lib/Nova/Core/components/obj_loader.cpp.s
-.PHONY : lib/Nova/Core/components/obj_loader.s
+src/physics/ProcaEM.s: src/physics/ProcaEM.cpp.s
+.PHONY : src/physics/ProcaEM.s
 
 # target to generate assembly for a file
-lib/Nova/Core/components/obj_loader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/components/obj_loader.cpp.s
-.PHONY : lib/Nova/Core/components/obj_loader.cpp.s
+src/physics/ProcaEM.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.s
+.PHONY : src/physics/ProcaEM.cpp.s
 
-lib/Nova/Core/core.o: lib/Nova/Core/core.cpp.o
-.PHONY : lib/Nova/Core/core.o
+src/physics/ProcaVulkanPipeline.o: src/physics/ProcaVulkanPipeline.cpp.o
+.PHONY : src/physics/ProcaVulkanPipeline.o
 
 # target to build an object file
-lib/Nova/Core/core.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/core.cpp.o
-.PHONY : lib/Nova/Core/core.cpp.o
+src/physics/ProcaVulkanPipeline.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o
+.PHONY : src/physics/ProcaVulkanPipeline.cpp.o
 
-lib/Nova/Core/core.i: lib/Nova/Core/core.cpp.i
-.PHONY : lib/Nova/Core/core.i
+src/physics/ProcaVulkanPipeline.i: src/physics/ProcaVulkanPipeline.cpp.i
+.PHONY : src/physics/ProcaVulkanPipeline.i
 
 # target to preprocess a source file
-lib/Nova/Core/core.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/core.cpp.i
-.PHONY : lib/Nova/Core/core.cpp.i
+src/physics/ProcaVulkanPipeline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.i
+.PHONY : src/physics/ProcaVulkanPipeline.cpp.i
 
-lib/Nova/Core/core.s: lib/Nova/Core/core.cpp.s
-.PHONY : lib/Nova/Core/core.s
+src/physics/ProcaVulkanPipeline.s: src/physics/ProcaVulkanPipeline.cpp.s
+.PHONY : src/physics/ProcaVulkanPipeline.s
 
 # target to generate assembly for a file
-lib/Nova/Core/core.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/core.cpp.s
-.PHONY : lib/Nova/Core/core.cpp.s
+src/physics/ProcaVulkanPipeline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.s
+.PHONY : src/physics/ProcaVulkanPipeline.cpp.s
 
-lib/Nova/Core/modules/atomic/atomic.o: lib/Nova/Core/modules/atomic/atomic.cpp.o
-.PHONY : lib/Nova/Core/modules/atomic/atomic.o
+test/test_proca_vortex_magnetic_field.o: test/test_proca_vortex_magnetic_field.cpp.o
+.PHONY : test/test_proca_vortex_magnetic_field.o
 
 # target to build an object file
-lib/Nova/Core/modules/atomic/atomic.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/atomic/atomic.cpp.o
-.PHONY : lib/Nova/Core/modules/atomic/atomic.cpp.o
+test/test_proca_vortex_magnetic_field.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o
+.PHONY : test/test_proca_vortex_magnetic_field.cpp.o
 
-lib/Nova/Core/modules/atomic/atomic.i: lib/Nova/Core/modules/atomic/atomic.cpp.i
-.PHONY : lib/Nova/Core/modules/atomic/atomic.i
-
-# target to preprocess a source file
-lib/Nova/Core/modules/atomic/atomic.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/atomic/atomic.cpp.i
-.PHONY : lib/Nova/Core/modules/atomic/atomic.cpp.i
-
-lib/Nova/Core/modules/atomic/atomic.s: lib/Nova/Core/modules/atomic/atomic.cpp.s
-.PHONY : lib/Nova/Core/modules/atomic/atomic.s
-
-# target to generate assembly for a file
-lib/Nova/Core/modules/atomic/atomic.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/atomic/atomic.cpp.s
-.PHONY : lib/Nova/Core/modules/atomic/atomic.cpp.s
-
-lib/Nova/Core/modules/camera/camera.o: lib/Nova/Core/modules/camera/camera.cpp.o
-.PHONY : lib/Nova/Core/modules/camera/camera.o
-
-# target to build an object file
-lib/Nova/Core/modules/camera/camera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/camera.cpp.o
-.PHONY : lib/Nova/Core/modules/camera/camera.cpp.o
-
-lib/Nova/Core/modules/camera/camera.i: lib/Nova/Core/modules/camera/camera.cpp.i
-.PHONY : lib/Nova/Core/modules/camera/camera.i
+test/test_proca_vortex_magnetic_field.i: test/test_proca_vortex_magnetic_field.cpp.i
+.PHONY : test/test_proca_vortex_magnetic_field.i
 
 # target to preprocess a source file
-lib/Nova/Core/modules/camera/camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/camera.cpp.i
-.PHONY : lib/Nova/Core/modules/camera/camera.cpp.i
+test/test_proca_vortex_magnetic_field.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.i
+.PHONY : test/test_proca_vortex_magnetic_field.cpp.i
 
-lib/Nova/Core/modules/camera/camera.s: lib/Nova/Core/modules/camera/camera.cpp.s
-.PHONY : lib/Nova/Core/modules/camera/camera.s
-
-# target to generate assembly for a file
-lib/Nova/Core/modules/camera/camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/camera.cpp.s
-.PHONY : lib/Nova/Core/modules/camera/camera.cpp.s
-
-lib/Nova/Core/modules/camera/perspective.o: lib/Nova/Core/modules/camera/perspective.cpp.o
-.PHONY : lib/Nova/Core/modules/camera/perspective.o
-
-# target to build an object file
-lib/Nova/Core/modules/camera/perspective.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/perspective.cpp.o
-.PHONY : lib/Nova/Core/modules/camera/perspective.cpp.o
-
-lib/Nova/Core/modules/camera/perspective.i: lib/Nova/Core/modules/camera/perspective.cpp.i
-.PHONY : lib/Nova/Core/modules/camera/perspective.i
-
-# target to preprocess a source file
-lib/Nova/Core/modules/camera/perspective.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/perspective.cpp.i
-.PHONY : lib/Nova/Core/modules/camera/perspective.cpp.i
-
-lib/Nova/Core/modules/camera/perspective.s: lib/Nova/Core/modules/camera/perspective.cpp.s
-.PHONY : lib/Nova/Core/modules/camera/perspective.s
+test/test_proca_vortex_magnetic_field.s: test/test_proca_vortex_magnetic_field.cpp.s
+.PHONY : test/test_proca_vortex_magnetic_field.s
 
 # target to generate assembly for a file
-lib/Nova/Core/modules/camera/perspective.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/camera/perspective.cpp.s
-.PHONY : lib/Nova/Core/modules/camera/perspective.cpp.s
-
-lib/Nova/Core/modules/device.o: lib/Nova/Core/modules/device.cpp.o
-.PHONY : lib/Nova/Core/modules/device.o
-
-# target to build an object file
-lib/Nova/Core/modules/device.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/device.cpp.o
-.PHONY : lib/Nova/Core/modules/device.cpp.o
-
-lib/Nova/Core/modules/device.i: lib/Nova/Core/modules/device.cpp.i
-.PHONY : lib/Nova/Core/modules/device.i
-
-# target to preprocess a source file
-lib/Nova/Core/modules/device.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/device.cpp.i
-.PHONY : lib/Nova/Core/modules/device.cpp.i
-
-lib/Nova/Core/modules/device.s: lib/Nova/Core/modules/device.cpp.s
-.PHONY : lib/Nova/Core/modules/device.s
-
-# target to generate assembly for a file
-lib/Nova/Core/modules/device.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/device.cpp.s
-.PHONY : lib/Nova/Core/modules/device.cpp.s
-
-lib/Nova/Core/modules/management.o: lib/Nova/Core/modules/management.cpp.o
-.PHONY : lib/Nova/Core/modules/management.o
-
-# target to build an object file
-lib/Nova/Core/modules/management.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/management.cpp.o
-.PHONY : lib/Nova/Core/modules/management.cpp.o
-
-lib/Nova/Core/modules/management.i: lib/Nova/Core/modules/management.cpp.i
-.PHONY : lib/Nova/Core/modules/management.i
-
-# target to preprocess a source file
-lib/Nova/Core/modules/management.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/management.cpp.i
-.PHONY : lib/Nova/Core/modules/management.cpp.i
-
-lib/Nova/Core/modules/management.s: lib/Nova/Core/modules/management.cpp.s
-.PHONY : lib/Nova/Core/modules/management.s
-
-# target to generate assembly for a file
-lib/Nova/Core/modules/management.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/management.cpp.s
-.PHONY : lib/Nova/Core/modules/management.cpp.s
-
-lib/Nova/Core/modules/pipeline/pipeline.o: lib/Nova/Core/modules/pipeline/pipeline.cpp.o
-.PHONY : lib/Nova/Core/modules/pipeline/pipeline.o
-
-# target to build an object file
-lib/Nova/Core/modules/pipeline/pipeline.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/pipeline.cpp.o
-.PHONY : lib/Nova/Core/modules/pipeline/pipeline.cpp.o
-
-lib/Nova/Core/modules/pipeline/pipeline.i: lib/Nova/Core/modules/pipeline/pipeline.cpp.i
-.PHONY : lib/Nova/Core/modules/pipeline/pipeline.i
-
-# target to preprocess a source file
-lib/Nova/Core/modules/pipeline/pipeline.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/pipeline.cpp.i
-.PHONY : lib/Nova/Core/modules/pipeline/pipeline.cpp.i
-
-lib/Nova/Core/modules/pipeline/pipeline.s: lib/Nova/Core/modules/pipeline/pipeline.cpp.s
-.PHONY : lib/Nova/Core/modules/pipeline/pipeline.s
-
-# target to generate assembly for a file
-lib/Nova/Core/modules/pipeline/pipeline.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/pipeline.cpp.s
-.PHONY : lib/Nova/Core/modules/pipeline/pipeline.cpp.s
-
-lib/Nova/Core/modules/pipeline/scene.o: lib/Nova/Core/modules/pipeline/scene.cpp.o
-.PHONY : lib/Nova/Core/modules/pipeline/scene.o
-
-# target to build an object file
-lib/Nova/Core/modules/pipeline/scene.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/scene.cpp.o
-.PHONY : lib/Nova/Core/modules/pipeline/scene.cpp.o
-
-lib/Nova/Core/modules/pipeline/scene.i: lib/Nova/Core/modules/pipeline/scene.cpp.i
-.PHONY : lib/Nova/Core/modules/pipeline/scene.i
-
-# target to preprocess a source file
-lib/Nova/Core/modules/pipeline/scene.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/scene.cpp.i
-.PHONY : lib/Nova/Core/modules/pipeline/scene.cpp.i
-
-lib/Nova/Core/modules/pipeline/scene.s: lib/Nova/Core/modules/pipeline/scene.cpp.s
-.PHONY : lib/Nova/Core/modules/pipeline/scene.s
-
-# target to generate assembly for a file
-lib/Nova/Core/modules/pipeline/scene.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/pipeline/scene.cpp.s
-.PHONY : lib/Nova/Core/modules/pipeline/scene.cpp.s
-
-lib/Nova/Core/modules/presentation.o: lib/Nova/Core/modules/presentation.cpp.o
-.PHONY : lib/Nova/Core/modules/presentation.o
-
-# target to build an object file
-lib/Nova/Core/modules/presentation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/presentation.cpp.o
-.PHONY : lib/Nova/Core/modules/presentation.cpp.o
-
-lib/Nova/Core/modules/presentation.i: lib/Nova/Core/modules/presentation.cpp.i
-.PHONY : lib/Nova/Core/modules/presentation.i
-
-# target to preprocess a source file
-lib/Nova/Core/modules/presentation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/presentation.cpp.i
-.PHONY : lib/Nova/Core/modules/presentation.cpp.i
-
-lib/Nova/Core/modules/presentation.s: lib/Nova/Core/modules/presentation.cpp.s
-.PHONY : lib/Nova/Core/modules/presentation.s
-
-# target to generate assembly for a file
-lib/Nova/Core/modules/presentation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/presentation.cpp.s
-.PHONY : lib/Nova/Core/modules/presentation.cpp.s
-
-lib/Nova/Core/modules/render.o: lib/Nova/Core/modules/render.cpp.o
-.PHONY : lib/Nova/Core/modules/render.o
-
-# target to build an object file
-lib/Nova/Core/modules/render.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/render.cpp.o
-.PHONY : lib/Nova/Core/modules/render.cpp.o
-
-lib/Nova/Core/modules/render.i: lib/Nova/Core/modules/render.cpp.i
-.PHONY : lib/Nova/Core/modules/render.i
-
-# target to preprocess a source file
-lib/Nova/Core/modules/render.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/render.cpp.i
-.PHONY : lib/Nova/Core/modules/render.cpp.i
-
-lib/Nova/Core/modules/render.s: lib/Nova/Core/modules/render.cpp.s
-.PHONY : lib/Nova/Core/modules/render.s
-
-# target to generate assembly for a file
-lib/Nova/Core/modules/render.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Core/modules/render.cpp.s
-.PHONY : lib/Nova/Core/modules/render.cpp.s
-
-lib/Nova/Nova.o: lib/Nova/Nova.cpp.o
-.PHONY : lib/Nova/Nova.o
-
-# target to build an object file
-lib/Nova/Nova.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Nova.cpp.o
-.PHONY : lib/Nova/Nova.cpp.o
-
-lib/Nova/Nova.i: lib/Nova/Nova.cpp.i
-.PHONY : lib/Nova/Nova.i
-
-# target to preprocess a source file
-lib/Nova/Nova.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Nova.cpp.i
-.PHONY : lib/Nova/Nova.cpp.i
-
-lib/Nova/Nova.s: lib/Nova/Nova.cpp.s
-.PHONY : lib/Nova/Nova.s
-
-# target to generate assembly for a file
-lib/Nova/Nova.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/lib/Nova/Nova.cpp.s
-.PHONY : lib/Nova/Nova.cpp.s
-
-lib/imgui/backends/imgui_impl_sdl2.o: lib/imgui/backends/imgui_impl_sdl2.cpp.o
-.PHONY : lib/imgui/backends/imgui_impl_sdl2.o
-
-# target to build an object file
-lib/imgui/backends/imgui_impl_sdl2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_sdl2.cpp.o
-.PHONY : lib/imgui/backends/imgui_impl_sdl2.cpp.o
-
-lib/imgui/backends/imgui_impl_sdl2.i: lib/imgui/backends/imgui_impl_sdl2.cpp.i
-.PHONY : lib/imgui/backends/imgui_impl_sdl2.i
-
-# target to preprocess a source file
-lib/imgui/backends/imgui_impl_sdl2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_sdl2.cpp.i
-.PHONY : lib/imgui/backends/imgui_impl_sdl2.cpp.i
-
-lib/imgui/backends/imgui_impl_sdl2.s: lib/imgui/backends/imgui_impl_sdl2.cpp.s
-.PHONY : lib/imgui/backends/imgui_impl_sdl2.s
-
-# target to generate assembly for a file
-lib/imgui/backends/imgui_impl_sdl2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_sdl2.cpp.s
-.PHONY : lib/imgui/backends/imgui_impl_sdl2.cpp.s
-
-lib/imgui/backends/imgui_impl_vulkan.o: lib/imgui/backends/imgui_impl_vulkan.cpp.o
-.PHONY : lib/imgui/backends/imgui_impl_vulkan.o
-
-# target to build an object file
-lib/imgui/backends/imgui_impl_vulkan.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_vulkan.cpp.o
-.PHONY : lib/imgui/backends/imgui_impl_vulkan.cpp.o
-
-lib/imgui/backends/imgui_impl_vulkan.i: lib/imgui/backends/imgui_impl_vulkan.cpp.i
-.PHONY : lib/imgui/backends/imgui_impl_vulkan.i
-
-# target to preprocess a source file
-lib/imgui/backends/imgui_impl_vulkan.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_vulkan.cpp.i
-.PHONY : lib/imgui/backends/imgui_impl_vulkan.cpp.i
-
-lib/imgui/backends/imgui_impl_vulkan.s: lib/imgui/backends/imgui_impl_vulkan.cpp.s
-.PHONY : lib/imgui/backends/imgui_impl_vulkan.s
-
-# target to generate assembly for a file
-lib/imgui/backends/imgui_impl_vulkan.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/backends/imgui_impl_vulkan.cpp.s
-.PHONY : lib/imgui/backends/imgui_impl_vulkan.cpp.s
-
-lib/imgui/imgui.o: lib/imgui/imgui.cpp.o
-.PHONY : lib/imgui/imgui.o
-
-# target to build an object file
-lib/imgui/imgui.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui.cpp.o
-.PHONY : lib/imgui/imgui.cpp.o
-
-lib/imgui/imgui.i: lib/imgui/imgui.cpp.i
-.PHONY : lib/imgui/imgui.i
-
-# target to preprocess a source file
-lib/imgui/imgui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui.cpp.i
-.PHONY : lib/imgui/imgui.cpp.i
-
-lib/imgui/imgui.s: lib/imgui/imgui.cpp.s
-.PHONY : lib/imgui/imgui.s
-
-# target to generate assembly for a file
-lib/imgui/imgui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui.cpp.s
-.PHONY : lib/imgui/imgui.cpp.s
-
-lib/imgui/imgui_demo.o: lib/imgui/imgui_demo.cpp.o
-.PHONY : lib/imgui/imgui_demo.o
-
-# target to build an object file
-lib/imgui/imgui_demo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_demo.cpp.o
-.PHONY : lib/imgui/imgui_demo.cpp.o
-
-lib/imgui/imgui_demo.i: lib/imgui/imgui_demo.cpp.i
-.PHONY : lib/imgui/imgui_demo.i
-
-# target to preprocess a source file
-lib/imgui/imgui_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_demo.cpp.i
-.PHONY : lib/imgui/imgui_demo.cpp.i
-
-lib/imgui/imgui_demo.s: lib/imgui/imgui_demo.cpp.s
-.PHONY : lib/imgui/imgui_demo.s
-
-# target to generate assembly for a file
-lib/imgui/imgui_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_demo.cpp.s
-.PHONY : lib/imgui/imgui_demo.cpp.s
-
-lib/imgui/imgui_draw.o: lib/imgui/imgui_draw.cpp.o
-.PHONY : lib/imgui/imgui_draw.o
-
-# target to build an object file
-lib/imgui/imgui_draw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_draw.cpp.o
-.PHONY : lib/imgui/imgui_draw.cpp.o
-
-lib/imgui/imgui_draw.i: lib/imgui/imgui_draw.cpp.i
-.PHONY : lib/imgui/imgui_draw.i
-
-# target to preprocess a source file
-lib/imgui/imgui_draw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_draw.cpp.i
-.PHONY : lib/imgui/imgui_draw.cpp.i
-
-lib/imgui/imgui_draw.s: lib/imgui/imgui_draw.cpp.s
-.PHONY : lib/imgui/imgui_draw.s
-
-# target to generate assembly for a file
-lib/imgui/imgui_draw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_draw.cpp.s
-.PHONY : lib/imgui/imgui_draw.cpp.s
-
-lib/imgui/imgui_tables.o: lib/imgui/imgui_tables.cpp.o
-.PHONY : lib/imgui/imgui_tables.o
-
-# target to build an object file
-lib/imgui/imgui_tables.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_tables.cpp.o
-.PHONY : lib/imgui/imgui_tables.cpp.o
-
-lib/imgui/imgui_tables.i: lib/imgui/imgui_tables.cpp.i
-.PHONY : lib/imgui/imgui_tables.i
-
-# target to preprocess a source file
-lib/imgui/imgui_tables.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_tables.cpp.i
-.PHONY : lib/imgui/imgui_tables.cpp.i
-
-lib/imgui/imgui_tables.s: lib/imgui/imgui_tables.cpp.s
-.PHONY : lib/imgui/imgui_tables.s
-
-# target to generate assembly for a file
-lib/imgui/imgui_tables.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_tables.cpp.s
-.PHONY : lib/imgui/imgui_tables.cpp.s
-
-lib/imgui/imgui_widgets.o: lib/imgui/imgui_widgets.cpp.o
-.PHONY : lib/imgui/imgui_widgets.o
-
-# target to build an object file
-lib/imgui/imgui_widgets.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_widgets.cpp.o
-.PHONY : lib/imgui/imgui_widgets.cpp.o
-
-lib/imgui/imgui_widgets.i: lib/imgui/imgui_widgets.cpp.i
-.PHONY : lib/imgui/imgui_widgets.i
-
-# target to preprocess a source file
-lib/imgui/imgui_widgets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_widgets.cpp.i
-.PHONY : lib/imgui/imgui_widgets.cpp.i
-
-lib/imgui/imgui_widgets.s: lib/imgui/imgui_widgets.cpp.s
-.PHONY : lib/imgui/imgui_widgets.s
-
-# target to generate assembly for a file
-lib/imgui/imgui_widgets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/lib/imgui/imgui_widgets.cpp.s
-.PHONY : lib/imgui/imgui_widgets.cpp.s
-
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/main.cpp.s
-.PHONY : main.cpp.s
-
-src/MSFT.o: src/MSFT.cpp.o
-.PHONY : src/MSFT.o
-
-# target to build an object file
-src/MSFT.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFT.cpp.o
-.PHONY : src/MSFT.cpp.o
-
-src/MSFT.i: src/MSFT.cpp.i
-.PHONY : src/MSFT.i
-
-# target to preprocess a source file
-src/MSFT.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFT.cpp.i
-.PHONY : src/MSFT.cpp.i
-
-src/MSFT.s: src/MSFT.cpp.s
-.PHONY : src/MSFT.s
-
-# target to generate assembly for a file
-src/MSFT.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFT.cpp.s
-.PHONY : src/MSFT.cpp.s
-
-src/MSFTEngine.o: src/MSFTEngine.cpp.o
-.PHONY : src/MSFTEngine.o
-
-# target to build an object file
-src/MSFTEngine.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.o
-.PHONY : src/MSFTEngine.cpp.o
-
-src/MSFTEngine.i: src/MSFTEngine.cpp.i
-.PHONY : src/MSFTEngine.i
-
-# target to preprocess a source file
-src/MSFTEngine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.i
-.PHONY : src/MSFTEngine.cpp.i
-
-src/MSFTEngine.s: src/MSFTEngine.cpp.s
-.PHONY : src/MSFTEngine.s
-
-# target to generate assembly for a file
-src/MSFTEngine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MSFT.dir/build.make CMakeFiles/MSFT.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/src/MSFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/src/MSFTEngine.cpp.s
-.PHONY : src/MSFTEngine.cpp.s
-
-test_descriptor_bindings.o: test_descriptor_bindings.cpp.o
-.PHONY : test_descriptor_bindings.o
-
-# target to build an object file
-test_descriptor_bindings.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.o
-.PHONY : test_descriptor_bindings.cpp.o
-
-test_descriptor_bindings.i: test_descriptor_bindings.cpp.i
-.PHONY : test_descriptor_bindings.i
-
-# target to preprocess a source file
-test_descriptor_bindings.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.i
-.PHONY : test_descriptor_bindings.cpp.i
-
-test_descriptor_bindings.s: test_descriptor_bindings.cpp.s
-.PHONY : test_descriptor_bindings.s
-
-# target to generate assembly for a file
-test_descriptor_bindings.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_descriptor_bindings.dir/build.make CMakeFiles/test_descriptor_bindings.dir/test_descriptor_bindings.cpp.s
-.PHONY : test_descriptor_bindings.cpp.s
-
-test_msft_gpu.o: test_msft_gpu.cpp.o
-.PHONY : test_msft_gpu.o
-
-# target to build an object file
-test_msft_gpu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.o
-.PHONY : test_msft_gpu.cpp.o
-
-test_msft_gpu.i: test_msft_gpu.cpp.i
-.PHONY : test_msft_gpu.i
-
-# target to preprocess a source file
-test_msft_gpu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.i
-.PHONY : test_msft_gpu.cpp.i
-
-test_msft_gpu.s: test_msft_gpu.cpp.s
-.PHONY : test_msft_gpu.s
-
-# target to generate assembly for a file
-test_msft_gpu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_msft_gpu.dir/build.make CMakeFiles/test_msft_gpu.dir/test_msft_gpu.cpp.s
-.PHONY : test_msft_gpu.cpp.s
+test/test_proca_vortex_magnetic_field.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.s
+.PHONY : test/test_proca_vortex_magnetic_field.cpp.s
 
 # Help Target
 help:
@@ -819,89 +296,25 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... MSFT"
-	@echo "... Nova"
-	@echo "... imgui"
-	@echo "... test_descriptor_bindings"
-	@echo "... test_msft_gpu"
-	@echo "... lib/Nova/Core/components/genesis.o"
-	@echo "... lib/Nova/Core/components/genesis.i"
-	@echo "... lib/Nova/Core/components/genesis.s"
-	@echo "... lib/Nova/Core/components/logger.o"
-	@echo "... lib/Nova/Core/components/logger.i"
-	@echo "... lib/Nova/Core/components/logger.s"
-	@echo "... lib/Nova/Core/components/obj_loader.o"
-	@echo "... lib/Nova/Core/components/obj_loader.i"
-	@echo "... lib/Nova/Core/components/obj_loader.s"
-	@echo "... lib/Nova/Core/core.o"
-	@echo "... lib/Nova/Core/core.i"
-	@echo "... lib/Nova/Core/core.s"
-	@echo "... lib/Nova/Core/modules/atomic/atomic.o"
-	@echo "... lib/Nova/Core/modules/atomic/atomic.i"
-	@echo "... lib/Nova/Core/modules/atomic/atomic.s"
-	@echo "... lib/Nova/Core/modules/camera/camera.o"
-	@echo "... lib/Nova/Core/modules/camera/camera.i"
-	@echo "... lib/Nova/Core/modules/camera/camera.s"
-	@echo "... lib/Nova/Core/modules/camera/perspective.o"
-	@echo "... lib/Nova/Core/modules/camera/perspective.i"
-	@echo "... lib/Nova/Core/modules/camera/perspective.s"
-	@echo "... lib/Nova/Core/modules/device.o"
-	@echo "... lib/Nova/Core/modules/device.i"
-	@echo "... lib/Nova/Core/modules/device.s"
-	@echo "... lib/Nova/Core/modules/management.o"
-	@echo "... lib/Nova/Core/modules/management.i"
-	@echo "... lib/Nova/Core/modules/management.s"
-	@echo "... lib/Nova/Core/modules/pipeline/pipeline.o"
-	@echo "... lib/Nova/Core/modules/pipeline/pipeline.i"
-	@echo "... lib/Nova/Core/modules/pipeline/pipeline.s"
-	@echo "... lib/Nova/Core/modules/pipeline/scene.o"
-	@echo "... lib/Nova/Core/modules/pipeline/scene.i"
-	@echo "... lib/Nova/Core/modules/pipeline/scene.s"
-	@echo "... lib/Nova/Core/modules/presentation.o"
-	@echo "... lib/Nova/Core/modules/presentation.i"
-	@echo "... lib/Nova/Core/modules/presentation.s"
-	@echo "... lib/Nova/Core/modules/render.o"
-	@echo "... lib/Nova/Core/modules/render.i"
-	@echo "... lib/Nova/Core/modules/render.s"
-	@echo "... lib/Nova/Nova.o"
-	@echo "... lib/Nova/Nova.i"
-	@echo "... lib/Nova/Nova.s"
-	@echo "... lib/imgui/backends/imgui_impl_sdl2.o"
-	@echo "... lib/imgui/backends/imgui_impl_sdl2.i"
-	@echo "... lib/imgui/backends/imgui_impl_sdl2.s"
-	@echo "... lib/imgui/backends/imgui_impl_vulkan.o"
-	@echo "... lib/imgui/backends/imgui_impl_vulkan.i"
-	@echo "... lib/imgui/backends/imgui_impl_vulkan.s"
-	@echo "... lib/imgui/imgui.o"
-	@echo "... lib/imgui/imgui.i"
-	@echo "... lib/imgui/imgui.s"
-	@echo "... lib/imgui/imgui_demo.o"
-	@echo "... lib/imgui/imgui_demo.i"
-	@echo "... lib/imgui/imgui_demo.s"
-	@echo "... lib/imgui/imgui_draw.o"
-	@echo "... lib/imgui/imgui_draw.i"
-	@echo "... lib/imgui/imgui_draw.s"
-	@echo "... lib/imgui/imgui_tables.o"
-	@echo "... lib/imgui/imgui_tables.i"
-	@echo "... lib/imgui/imgui_tables.s"
-	@echo "... lib/imgui/imgui_widgets.o"
-	@echo "... lib/imgui/imgui_widgets.i"
-	@echo "... lib/imgui/imgui_widgets.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... src/MSFT.o"
-	@echo "... src/MSFT.i"
-	@echo "... src/MSFT.s"
-	@echo "... src/MSFTEngine.o"
-	@echo "... src/MSFTEngine.i"
-	@echo "... src/MSFTEngine.s"
-	@echo "... test_descriptor_bindings.o"
-	@echo "... test_descriptor_bindings.i"
-	@echo "... test_descriptor_bindings.s"
-	@echo "... test_msft_gpu.o"
-	@echo "... test_msft_gpu.i"
-	@echo "... test_msft_gpu.s"
+	@echo "... Physics"
+	@echo "... SMFTCore"
+	@echo "... smft"
+	@echo "... test_proca_vortex_bfield"
+	@echo "... src/SMFTCore.o"
+	@echo "... src/SMFTCore.i"
+	@echo "... src/SMFTCore.s"
+	@echo "... src/main_smft.o"
+	@echo "... src/main_smft.i"
+	@echo "... src/main_smft.s"
+	@echo "... src/physics/ProcaEM.o"
+	@echo "... src/physics/ProcaEM.i"
+	@echo "... src/physics/ProcaEM.s"
+	@echo "... src/physics/ProcaVulkanPipeline.o"
+	@echo "... src/physics/ProcaVulkanPipeline.i"
+	@echo "... src/physics/ProcaVulkanPipeline.s"
+	@echo "... test/test_proca_vortex_magnetic_field.o"
+	@echo "... test/test_proca_vortex_magnetic_field.i"
+	@echo "... test/test_proca_vortex_magnetic_field.s"
 .PHONY : help
 
 

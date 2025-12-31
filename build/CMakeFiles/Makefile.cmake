@@ -7,15 +7,9 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/persist/neotec/0rigin/CMakeLists.txt"
+  "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/CMakeLists.txt"
   "CMakeFiles/4.2.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.2.1/CMakeSystem.cmake"
-  "/usr/lib/cmake/SDL2/SDL2Config.cmake"
-  "/usr/lib/cmake/SDL2/SDL2ConfigVersion.cmake"
-  "/usr/lib/cmake/SDL2/SDL2Targets-none.cmake"
-  "/usr/lib/cmake/SDL2/SDL2Targets.cmake"
-  "/usr/lib/cmake/SDL2/SDL2mainTargets-none.cmake"
-  "/usr/lib/cmake/SDL2/SDL2mainTargets.cmake"
   "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
   "/usr/share/cmake/Modules/CMakeGenericSystem.cmake"
@@ -26,10 +20,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
   "/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake"
   "/usr/share/cmake/Modules/Compiler/GNU.cmake"
-  "/usr/share/cmake/Modules/FeatureSummary.cmake"
-  "/usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
-  "/usr/share/cmake/Modules/FindPackageMessage.cmake"
-  "/usr/share/cmake/Modules/FindVulkan.cmake"
   "/usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake"
   "/usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake"
   "/usr/share/cmake/Modules/Linker/GNU-CXX.cmake"
@@ -57,9 +47,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/Nova.dir/DependInfo.cmake"
-  "CMakeFiles/imgui.dir/DependInfo.cmake"
-  "CMakeFiles/MSFT.dir/DependInfo.cmake"
-  "CMakeFiles/test_msft_gpu.dir/DependInfo.cmake"
-  "CMakeFiles/test_descriptor_bindings.dir/DependInfo.cmake"
+  "CMakeFiles/Physics.dir/DependInfo.cmake"
+  "CMakeFiles/SMFTCore.dir/DependInfo.cmake"
+  "CMakeFiles/smft.dir/DependInfo.cmake"
+  "CMakeFiles/test_proca_vortex_bfield.dir/DependInfo.cmake"
   )

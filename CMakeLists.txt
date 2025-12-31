@@ -89,6 +89,17 @@ set_target_properties(smft PROPERTIES
 )
 
 # ============================================================================
+# TEST EXECUTABLES
+# ============================================================================
+
+add_executable(test_proca_vortex_bfield test/test_proca_vortex_magnetic_field.cpp)
+target_link_libraries(test_proca_vortex_bfield PRIVATE Physics)
+target_include_directories(test_proca_vortex_bfield PRIVATE ${CMAKE_SOURCE_DIR}/include)
+set_target_properties(test_proca_vortex_bfield PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# ============================================================================
 # SUMMARY
 # ============================================================================
 
@@ -103,5 +114,6 @@ message(STATUS "  Targets:")
 message(STATUS "    • Physics (static library)")
 message(STATUS "    • SMFTCore (static library)")
 message(STATUS "    • smft (executable)")
+message(STATUS "    • test_proca_vortex_bfield (critical test)")
 message(STATUS "")
 message(STATUS "===============================================")

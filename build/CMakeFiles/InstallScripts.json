@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/persist/neotec/0rigin/build/cmake_install.cmake"
+		"/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }
