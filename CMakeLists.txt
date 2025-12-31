@@ -107,6 +107,13 @@ set_target_properties(test_stuckelberg_vortex_bfield PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+add_executable(test_proca_parameter_sweep test/test_proca_parameter_sweep.cpp)
+target_link_libraries(test_proca_parameter_sweep PRIVATE Physics)
+target_include_directories(test_proca_parameter_sweep PRIVATE ${CMAKE_SOURCE_DIR}/include)
+set_target_properties(test_proca_parameter_sweep PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # ============================================================================
 # SUMMARY
 # ============================================================================

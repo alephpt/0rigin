@@ -5,8 +5,8 @@
 
 namespace physics {
 
-ProcaEM::ProcaEM(int nx, int ny, float dx, float photon_mass_coupling)
-    : nx_(nx), ny_(ny), dx_(dx), photon_mass_coupling_(photon_mass_coupling) {
+ProcaEM::ProcaEM(int nx, int ny, float dx, float photon_mass_coupling, float alpha_coupling)
+    : nx_(nx), ny_(ny), dx_(dx), photon_mass_coupling_(photon_mass_coupling), alpha_coupling_(alpha_coupling) {
 
     int size = nx * ny;
     phi_.resize(size, 0.0f);
@@ -37,7 +37,7 @@ void ProcaEM::computePotentials(const float* theta_field, const float* R_field,
 
 void ProcaEM::computeCurrent(const float* theta_field, const float* R_field) {
     // Noether current: j_μ = α ∂_μθ
-    const float alpha = 0.1f; // Coupling constant
+    // alpha_coupling_ is now configurable
 
     for (int j = 1; j < ny_ - 1; ++j) {
         for (int i = 1; i < nx_ - 1; ++i) {
@@ -48,8 +48,8 @@ void ProcaEM::computeCurrent(const float* theta_field, const float* R_field) {
             // ∂_y θ
             float dtheta_dy = (theta_field[idx + nx_] - theta_field[idx - nx_]) / (2.0f * dx_);
 
-            j_x_[idx] = alpha * dtheta_dx * R_field[idx];
-            j_y_[idx] = alpha * dtheta_dy * R_field[idx];
+            j_x_[idx] = alpha_coupling_ * dtheta_dx * R_field[idx];
+            j_y_[idx] = alpha_coupling_ * dtheta_dy * R_field[idx];
             j_t_[idx] = 0.0f; // No charge density (current conserved)
         }
     }

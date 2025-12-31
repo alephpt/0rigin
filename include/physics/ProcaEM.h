@@ -7,7 +7,7 @@ namespace physics {
 
 class ProcaEM : public GaugeTheory {
 public:
-    ProcaEM(int nx, int ny, float dx, float photon_mass_coupling);
+    ProcaEM(int nx, int ny, float dx, float photon_mass_coupling, float alpha_coupling = 0.1f);
     ~ProcaEM() override = default;
 
     // GaugeTheory interface
@@ -30,6 +30,7 @@ private:
     int nx_, ny_;
     float dx_;
     float photon_mass_coupling_;  // g in m_γ = g(1-R)
+    float alpha_coupling_;        // α in j_μ = α ∂_μθ
 
     // Field storage: A_μ = (φ, A_x, A_y, A_z)
     std::vector<float> phi_;      // Scalar potential
