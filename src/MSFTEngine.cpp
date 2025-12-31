@@ -67,6 +67,7 @@ MSFTEngine::MSFTEngine(Nova* nova)
       _Ny(0),
       _Delta(0.0f),
       _chiral_angle(0.0f),
+      _time_step(0),
       _theta_buffer(VK_NULL_HANDLE),
       _theta_out_buffer(VK_NULL_HANDLE),
       _omega_buffer(VK_NULL_HANDLE),
@@ -96,7 +97,12 @@ MSFTEngine::MSFTEngine(Nova* nova)
       _descriptor_pool(VK_NULL_HANDLE),
       _spinor_buffer(VK_NULL_HANDLE),
       _spinor_memory(VK_NULL_HANDLE),
-      _dirac_pipeline(VK_NULL_HANDLE) {
+      _dirac_pipeline(VK_NULL_HANDLE),
+      _kuramoto_stochastic_pipeline(VK_NULL_HANDLE),
+      _dirac_stochastic_pipeline(VK_NULL_HANDLE),
+      _dirac_descriptor_set(VK_NULL_HANDLE),
+      _dirac_descriptor_layout(VK_NULL_HANDLE),
+      _dirac_pipeline_layout(VK_NULL_HANDLE) {
     // Phase 1: Just store the Nova pointer
     // Vulkan resources will be created in Phase 2
 }
@@ -1391,3 +1397,213 @@ void MSFTEngine::destroyResources() {
 // This creates the bidirectional quantum-classical bridge that is
 // the key innovation of MSFT theory - explaining mass emergence
 // from vacuum synchronization at the quantum-classical interface.
+
+void MSFTEngine::stepStochastic(float dt, float K, float damping,
+                                float sigma_theta, float sigma_psi) {
+    /**
+     * Stochastic MSFT Evolution with MSR Noise Formalism
+     *
+     * Implements coupled stochastic dynamics:
+     * 1. Kuramoto with noise: dθ = (ω + K·Σsin(θⱼ-θᵢ))dt + σ_θ·dW
+     * 2. Dirac with noise: i∂_tΨ = H_DiracΨ + σ_Ψ·ξ(t)
+     *
+     * Pipeline sequence:
+     * 1. kuramoto_stochastic: Evolve phases with noise
+     * 2. sync_field: Compute R(x) order parameter
+     * 3. gravity_field: Compute gravitational corrections
+     * 4. dirac_stochastic: Evolve spinor with noise
+     */
+
+    // Increment timestep for PRNG seeding
+    _time_step++;
+
+    // Verify stochastic pipelines are created
+    if (_kuramoto_stochastic_pipeline == VK_NULL_HANDLE ||
+        _dirac_stochastic_pipeline == VK_NULL_HANDLE) {
+        // Fall back to deterministic step if pipelines not ready
+        step(dt, K, damping);
+        return;
+    }
+
+    VkDevice device = _nova->_architect->logical_device;
+
+    // 1. Upload current data to GPU
+    uploadToGPU();
+
+    // 2. Create command pool for compute operations
+    VkCommandPool commandPool;
+    VkCommandPoolCreateInfo poolInfo{};
+    poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    poolInfo.queueFamilyIndex = _nova->_architect->queues.indices.compute_family.value_or(
+        _nova->_architect->queues.indices.graphics_family.value());
+    poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+
+    if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
+        return;
+    }
+
+    // 3. Create command buffer
+    VkCommandBufferAllocateInfo allocInfo{};
+    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    allocInfo.commandPool = commandPool;
+    allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocInfo.commandBufferCount = 1;
+
+    VkCommandBuffer commandBuffer;
+    if (vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer) != VK_SUCCESS) {
+        vkDestroyCommandPool(device, commandPool, nullptr);
+        return;
+    }
+
+    // 4. Begin command buffer recording
+    VkCommandBufferBeginInfo beginInfo{};
+    beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+    if (vkBeginCommandBuffer(commandBuffer, &beginInfo) != VK_SUCCESS) {
+        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+        vkDestroyCommandPool(device, commandPool, nullptr);
+        return;
+    }
+
+    // 5. Dispatch stochastic Kuramoto shader
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _kuramoto_stochastic_pipeline);
+    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
+                           _kuramoto_pipeline_layout, 0, 1, &_kuramoto_descriptor_set, 0, nullptr);
+
+    // Push constants for stochastic Kuramoto
+    struct {
+        float dt;
+        float K;
+        float sigma;       // sigma_theta
+        float damping;
+        float omega_mean;
+        uint32_t Nx;
+        uint32_t Ny;
+        uint32_t time_step;
+    } kuramoto_push = {
+        dt, K, sigma_theta, damping, 0.0f, _Nx, _Ny, _time_step
+    };
+
+    vkCmdPushConstants(commandBuffer, _kuramoto_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
+                       0, sizeof(kuramoto_push), &kuramoto_push);
+
+    // Dispatch with 16x16 workgroups
+    uint32_t workgroup_x = (_Nx + 15) / 16;
+    uint32_t workgroup_y = (_Ny + 15) / 16;
+    vkCmdDispatch(commandBuffer, workgroup_x, workgroup_y, 1);
+
+    // Memory barrier before sync field
+    VkMemoryBarrier barrier{};
+    barrier.sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
+    barrier.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
+    barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+
+    vkCmdPipelineBarrier(commandBuffer,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        0, 1, &barrier, 0, nullptr, 0, nullptr);
+
+    // Swap theta buffers
+    std::swap(_theta_buffer, _theta_out_buffer);
+    std::swap(_theta_memory, _theta_out_memory);
+
+    // 6. Dispatch sync field shader
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _sync_pipeline);
+    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
+                           _sync_pipeline_layout, 0, 1, &_sync_descriptor_set, 0, nullptr);
+
+    // Push constants for sync field
+    struct {
+        float dt;
+        float K;
+        float damping;
+        float Delta;
+        float chiral_angle;
+        uint32_t Nx;
+        uint32_t Ny;
+        uint32_t N_total;
+        uint32_t neighborhood_radius;
+    } sync_push = {
+        dt, K, damping, _Delta, _chiral_angle, _Nx, _Ny, _Nx * _Ny, 5
+    };
+
+    vkCmdPushConstants(commandBuffer, _sync_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
+                       0, sizeof(sync_push), &sync_push);
+
+    vkCmdDispatch(commandBuffer, workgroup_x, workgroup_y, 1);
+
+    // Barrier before gravity field
+    vkCmdPipelineBarrier(commandBuffer,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        0, 1, &barrier, 0, nullptr, 0, nullptr);
+
+    // 7. Dispatch gravity field shader
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _gravity_pipeline);
+    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
+                           _gravity_pipeline_layout, 0, 1, &_gravity_descriptor_set, 0, nullptr);
+
+    vkCmdPushConstants(commandBuffer, _gravity_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
+                       0, sizeof(sync_push), &sync_push);
+
+    vkCmdDispatch(commandBuffer, workgroup_x, workgroup_y, 1);
+
+    // Barrier before Dirac stochastic
+    vkCmdPipelineBarrier(commandBuffer,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                        0, 1, &barrier, 0, nullptr, 0, nullptr);
+
+    // 8. Dispatch stochastic Dirac shader
+    if (_dirac_stochastic_pipeline != VK_NULL_HANDLE && _dirac_descriptor_set != VK_NULL_HANDLE) {
+        vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, _dirac_stochastic_pipeline);
+        vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE,
+                               _dirac_pipeline_layout, 0, 1, &_dirac_descriptor_set, 0, nullptr);
+
+        // Push constants for stochastic Dirac
+        struct {
+            float dt;
+            float K;
+            float sigma_psi;
+            float damping;
+            float Delta;
+            uint32_t Nx;
+            uint32_t Ny;
+            uint32_t time_step;
+        } dirac_push = {
+            dt, K, sigma_psi, damping, _Delta, _Nx, _Ny, _time_step
+        };
+
+        vkCmdPushConstants(commandBuffer, _dirac_pipeline_layout, VK_SHADER_STAGE_COMPUTE_BIT,
+                          0, sizeof(dirac_push), &dirac_push);
+
+        vkCmdDispatch(commandBuffer, workgroup_x, workgroup_y, 1);
+    }
+
+    // 9. End command buffer recording
+    if (vkEndCommandBuffer(commandBuffer) != VK_SUCCESS) {
+        vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+        vkDestroyCommandPool(device, commandPool, nullptr);
+        return;
+    }
+
+    // 10. Submit command buffer to compute queue
+    VkSubmitInfo submitInfo{};
+    submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &commandBuffer;
+
+    VkQueue computeQueue = _nova->_architect->queues.compute ?
+        _nova->_architect->queues.compute : _nova->_architect->queues.graphics;
+
+    vkQueueSubmit(computeQueue, 1, &submitInfo, VK_NULL_HANDLE);
+    vkQueueWaitIdle(computeQueue);
+
+    // 11. Download results from GPU
+    downloadFromGPU();
+
+    // 12. Cleanup
+    vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+    vkDestroyCommandPool(device, commandPool, nullptr);
+}

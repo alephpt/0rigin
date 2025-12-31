@@ -1,0 +1,21 @@
+# LONG-DURATION Stochastic Dirac-Kuramoto Evolution Summary
+Grid: 64 x 64
+Steps: 10000
+Total evolution time: 100 seconds
+dt: 0.01
+sigma_theta: 0.05
+sigma_psi: 0.05
+
+R_initial: 1.000000
+R_final: 0.999126
+R_mean: 0.999094
+R_std: 0.000099
+
+Norm_initial: 1.000001
+Norm_final: 0.999975
+Norm_deviation: 0.03%
+
+Particle_initial: (32.0, 32.0)
+Particle_final: (31.6, 31.8)
+Total_drift: 0.51 grid units
+Drift_rate: 0.005 grid units/second

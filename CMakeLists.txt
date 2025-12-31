@@ -186,6 +186,71 @@ set_target_properties(test_descriptor_bindings PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# Test executable: Stochastic particle evolution
+add_executable(test_stochastic_particle
+    test/test_stochastic_particle.cpp
+    src/MSFTEngine.cpp
+)
+
+target_include_directories(test_stochastic_particle PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_stochastic_particle PRIVATE
+    Nova
+    imgui
+    ${Vulkan_LIBRARIES}
+    ${SDL2_LIBRARIES}
+    pthread
+    dl
+    m
+)
+
+set_target_properties(test_stochastic_particle PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Test executable: CPU-based stochastic validation
+add_executable(test_stochastic_cpu
+    test/test_stochastic_cpu.cpp
+)
+
+target_include_directories(test_stochastic_cpu PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_stochastic_cpu PRIVATE
+    pthread
+    m
+)
+
+set_target_properties(test_stochastic_cpu PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Comprehensive Dirac-Kuramoto test with full data output
+add_executable(test_dirac_stochastic_full
+    test/test_dirac_stochastic_full.cpp
+)
+
+target_include_directories(test_dirac_stochastic_full PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(test_dirac_stochastic_full PRIVATE
+    pthread
+    m
+    stdc++fs
+)
+
+set_target_properties(test_dirac_stochastic_full PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # ============================================================================
 # SHADERS
 # ============================================================================

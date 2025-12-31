@@ -1,0 +1,19 @@
+# Stochastic Dirac-Kuramoto Evolution Summary
+Grid: 64 x 64
+Steps: 500
+dt: 0.01
+sigma_theta: 0.05
+sigma_psi: 0.05
+
+R_initial: 0.999991
+R_final: 0.999222
+R_mean: 0.999350
+R_std: 0.000166
+
+Norm_initial: 1.000001
+Norm_final: 0.999932
+Norm_deviation: 0.01%
+
+Particle_initial: (32.0, 32.0)
+Particle_final: (31.4, 31.5)
+Total_drift: 0.75 grid units
