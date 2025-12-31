@@ -1,0 +1,88 @@
+test_name: "lorentz_force_crossed_fields"
+
+# CROSSED E×B FIELDS TEST
+# Validates E×B drift physics: v_drift = E×B/B²
+# With E_x = 0.01, B_z = 0.1: v_drift_y = 0.001 c
+
+grid:
+  size_x: 128  # Larger grid for drift motion
+  size_y: 128
+  L_domain: 200.0  # Larger domain to accommodate drift
+  boundary_conditions: "periodic"
+
+physics:
+  hbar: 1.0
+  mass: 0.1
+  coupling_strength: 0.0
+  damping: 0.0
+  total_steps: 40000  # Longer simulation to observe drift
+  dt: 0.0005
+  em_coupling_enabled: true
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 100.0
+    y0_physical: 100.0
+    sigma_physical: 3.0
+    k_physical: 0.0
+    k_y_physical: 0.0
+    amplitude: 0.01   # Minimal coupling
+
+  kuramoto:
+    phase_distribution: "uniform"
+    uniform_phase: 0.0
+    R_background: 0.0
+
+  test_particle:
+    enabled: true
+    x0: 100.0     # Start at domain center
+    y0: 20.0      # Start near bottom to observe y-drift
+    vx0: 0.0
+    vy0: 0.01     # Initial velocity perpendicular to drift
+    charge: -1.0
+    mass: 0.1
+    record_every: 2  # Record every 2 steps
+    use_uniform_fields: true
+    uniform_E_x: 0.01    # Electric field in x-direction
+    uniform_E_y: 0.0
+    uniform_B_z: 0.1     # Magnetic field in z-direction
+
+em_coupling:
+  enabled: true
+  regularization: "NONE"
+
+validation:
+  norm_tolerance: 0.01
+  energy_tolerance: 0.05  # E-field does work, so energy not conserved
+  drift_test: true
+  expected_drift_velocity_y: 0.001  # E×B/B² = 0.01×0.1/0.01 = 0.001
+  expected_drift_velocity_x: 0.0    # No x-drift
+
+output:
+  save_every: 2  # Match particle recording
+  save_spatial_snapshots: false
+  formats: ["csv"]
+  track_drift: true  # Enable drift analysis output
+
+# EXPECTED BEHAVIOR IN CROSSED FIELDS:
+# 1. E×B drift velocity: v_drift = E×B/B²
+#    - E = (0.01, 0, 0), B = (0, 0, 0.1)
+#    - E×B = (0, 0.001, 0)
+#    - v_drift_y = 0.001 c (upward drift)
+#
+# 2. Superposed motion:
+#    - Cyclotron motion: ω = qB/m = 1.0 rad/t_P, r ≈ 0.01 ℓ_P
+#    - Drift motion: constant y-velocity = 0.001 c
+#    - Result: Cycloid trajectory (circles drifting upward)
+#
+# 3. Energy dynamics:
+#    - E-field does work: W = q·E·Δx
+#    - Kinetic energy oscillates as particle moves ±x in E-field
+#    - Average energy increases due to E·v work
+#
+# VALIDATION CRITERIA:
+# - Average drift velocity y: 0.001 ± 0.0001 c (10% tolerance)
+# - Average drift velocity x: 0.0 ± 0.0001 c
+# - Cyclotron frequency: 1.0 ± 0.01 rad/t_P
+# - Total y-displacement after 20 t_P: ~0.02 ℓ_P (drift distance)

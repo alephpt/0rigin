@@ -1042,63 +1042,99 @@ bool SMFTTestRunner::runSingleTest(int N) {
             if (_config.physics.em_coupling_enabled && !use_klein_gordon) {
                 _theta_previous = theta_current;
             }
+        }  // End of observables block
 
-            // Evolve test particle for Lorentz force tests (Sprint 6)
-            if (test_particle) {
-                int record_interval = _config.test_particle.record_every > 0 ? _config.test_particle.record_every : save_every;
-                bool record_trajectory = (step % record_interval == 0);
-                // Get current EM fields
-                EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE;
-                if (_config.physics.em_regularization == "R") {
-                    reg_type = EMFieldComputer::RegularizationType::R_FACTOR;
-                } else if (_config.physics.em_regularization == "R2") {
-                    reg_type = EMFieldComputer::RegularizationType::R2_FACTOR;
+        // Evolve test particle for Lorentz force tests (Sprint 6)
+        // CRITICAL: This must be OUTSIDE the observables block to evolve every timestep
+        if (test_particle) {
+            int record_interval = _config.test_particle.record_every > 0 ? _config.test_particle.record_every : save_every;
+            bool record_trajectory = (step % record_interval == 0);
+
+            // Debug: Detect recording logic issue
+            static int last_debug_step = -1;
+            if (step <= 10 || (step % 1000 == 0)) {
+                if (step != last_debug_step) {
+                    std::cout << "[RECORD_DEBUG] Step " << step
+                              << ": modulo=" << (step % record_interval)
+                              << ", should_record=" << record_trajectory
+                              << ", record_interval=" << record_interval << std::endl;
+                    last_debug_step = step;
                 }
-
-                EMFieldComputer::EMFields em_fields(Nx, Ny);
-
-                // Use config-driven field selection
-                if (_config.test_particle.use_uniform_B) {
-                    // PURE UNIFORM B-FIELD (no E-field contamination)
-                    em_fields.E_x = Eigen::MatrixXd::Zero(Nx, Ny);
-                    em_fields.E_y = Eigen::MatrixXd::Zero(Nx, Ny);
-                    em_fields.B_z = Eigen::MatrixXd::Constant(Nx, Ny, _config.test_particle.uniform_B_z);
-                    em_fields.phi = Eigen::MatrixXd::Zero(Nx, Ny);
-                    em_fields.A_x = Eigen::MatrixXd::Zero(Nx, Ny);
-                    em_fields.A_y = Eigen::MatrixXd::Zero(Nx, Ny);
-
-                    // Update field statistics
-                    em_fields.avg_B = _config.test_particle.uniform_B_z;
-                    em_fields.max_B = _config.test_particle.uniform_B_z;
-
-                    if (step == 0) {
-                        std::cout << "  Using PURE uniform B-field: B_z = " << _config.test_particle.uniform_B_z
-                                  << " (E = 0 everywhere)" << std::endl;
-                    }
-                } else {
-                    // SMFT electromagnetic field extraction from Kuramoto phase
-                    em_fields = EMFieldComputer::computeFromPhase(
-                        theta_current, _theta_previous, R_field,
-                        Nx, Ny,
-                        _config.grid.L_domain / Nx,  // dx
-                        _config.grid.L_domain / Ny,  // dy
-                        _config.physics.dt,
-                        reg_type);
-
-                    if (step == 0) {
-                        std::cout << "  Using SMFT electromagnetic fields from Kuramoto phase" << std::endl;
-                    }
-                }
-
-                // Evolve particle under Lorentz force
-                test_particle->evolveLorentzForce(em_fields, _config.physics.dt, record_trajectory);
             }
 
-            if (step % (save_every * 10) == 0) {
-                std::cout << "  Step " << step << "/" << total_steps
-                         << " | R_avg = " << obs.R_avg
-                         << " | norm = " << obs.norm << std::endl;
+            // Debug logging for timestep paradox investigation
+            if (step == 0 || step == 1 || step == 5 || step == 10 || step == 100 || step == 1000 ||
+                step == 19999 || step == 20000 || step == 20001 || step == 99999 || step == 100000-1) {
+                std::cout << "[DEBUG] Step " << step << ": record_interval=" << record_interval
+                          << ", record_every=" << _config.test_particle.record_every
+                          << ", save_every=" << save_every
+                          << ", record_trajectory=" << record_trajectory
+                          << ", trajectory_size=" << test_particle->getTrajectory().size() << std::endl;
             }
+
+            // Get fields needed for EM computation
+            auto theta_current = _engine->getPhaseField();
+            auto R_field = _engine->getSyncField();
+
+            // Get current EM fields
+            EMFieldComputer::RegularizationType reg_type = EMFieldComputer::RegularizationType::NONE;
+            if (_config.physics.em_regularization == "R") {
+                reg_type = EMFieldComputer::RegularizationType::R_FACTOR;
+            } else if (_config.physics.em_regularization == "R2") {
+                reg_type = EMFieldComputer::RegularizationType::R2_FACTOR;
+            }
+
+            EMFieldComputer::EMFields em_fields(Nx, Ny);
+
+            // Use config-driven field selection
+            if (_config.test_particle.use_uniform_B) {
+                // PURE UNIFORM B-FIELD (no E-field contamination)
+                em_fields.E_x = Eigen::MatrixXd::Zero(Nx, Ny);
+                em_fields.E_y = Eigen::MatrixXd::Zero(Nx, Ny);
+                em_fields.B_z = Eigen::MatrixXd::Constant(Nx, Ny, _config.test_particle.uniform_B_z);
+                em_fields.phi = Eigen::MatrixXd::Zero(Nx, Ny);
+                em_fields.A_x = Eigen::MatrixXd::Zero(Nx, Ny);
+                em_fields.A_y = Eigen::MatrixXd::Zero(Nx, Ny);
+
+                // Update field statistics
+                em_fields.avg_B = _config.test_particle.uniform_B_z;
+                em_fields.max_B = _config.test_particle.uniform_B_z;
+
+                if (step == 0) {
+                    std::cout << "  Using PURE uniform B-field: B_z = " << _config.test_particle.uniform_B_z
+                              << " (E = 0 everywhere)" << std::endl;
+                }
+            } else {
+                // SMFT electromagnetic field extraction from Kuramoto phase
+                em_fields = EMFieldComputer::computeFromPhase(
+                    theta_current, _theta_previous, R_field,
+                    Nx, Ny,
+                    _config.grid.L_domain / Nx,  // dx
+                    _config.grid.L_domain / Ny,  // dy
+                    _config.physics.dt,
+                    reg_type);
+
+                if (step == 0) {
+                    std::cout << "  Using SMFT electromagnetic fields from Kuramoto phase" << std::endl;
+                }
+            }
+
+            // Evolve particle under Lorentz force
+            static int evolve_call_count = 0;
+            evolve_call_count++;
+            if (evolve_call_count <= 10 || evolve_call_count == 100 || evolve_call_count == 1000) {
+                std::cout << "[EVOLVE_DEBUG] Call #" << evolve_call_count
+                          << " at step=" << step << ", record=" << record_trajectory << std::endl;
+            }
+            test_particle->evolveLorentzForce(em_fields, _config.physics.dt, record_trajectory);
+        }
+
+        // Progress output every 10*save_every steps
+        if (step % (save_every * 10) == 0 && !observables.empty()) {
+            const auto& obs = observables.back();
+            std::cout << "  Step " << step << "/" << total_steps
+                      << " | R_avg = " << obs.R_avg
+                      << " | norm = " << obs.norm << std::endl;
         }
     }
 

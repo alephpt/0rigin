@@ -1,0 +1,87 @@
+test_name: "lorentz_force_B_field_scaling"
+
+# B-FIELD SCALING LAW VALIDATION
+# Tests fundamental relations: ω ∝ B, r ∝ 1/B
+# Multiple B values to verify linear scaling laws
+
+grid:
+  size_x: 64
+  size_y: 64
+  L_domain: 100.0
+  boundary_conditions: "periodic"
+  # Use grid_sizes to trigger multiple test runs with different B values
+  grid_sizes: [64]  # Single grid size, multiple B values below
+
+physics:
+  hbar: 1.0
+  mass: 0.1
+  coupling_strength: 0.0
+  damping: 0.0
+  total_steps: 20000
+  dt: 0.0005
+  em_coupling_enabled: true
+
+initial_conditions:
+  dirac:
+    type: "gaussian"
+    x0_physical: 50.0
+    y0_physical: 50.0
+    sigma_physical: 3.0
+    k_physical: 0.0
+    k_y_physical: 0.0
+    amplitude: 0.01   # Minimal coupling
+
+  kuramoto:
+    phase_distribution: "uniform"
+    uniform_phase: 0.0
+    R_background: 0.0
+
+  test_particle:
+    enabled: true
+    x0: 60.0      # Start farther from center for larger orbits
+    y0: 50.0
+    vx0: 0.0
+    vy0: 0.01     # 1% speed of light
+    charge: -1.0
+    mass: 0.1
+    record_every: 1  # Record every step
+    use_uniform_B: true
+    # Test multiple B values for scaling law verification
+    B_values: [0.05, 0.1, 0.2, 0.5]  # 4 test values spanning order of magnitude
+    # For each B value:
+    # B = 0.05: r = 0.02 ℓ_P, T = 12.566 t_P, ω = 0.5 rad/t_P
+    # B = 0.10: r = 0.01 ℓ_P, T = 6.283 t_P, ω = 1.0 rad/t_P
+    # B = 0.20: r = 0.005 ℓ_P, T = 3.142 t_P, ω = 2.0 rad/t_P
+    # B = 0.50: r = 0.002 ℓ_P, T = 1.257 t_P, ω = 5.0 rad/t_P
+
+em_coupling:
+  enabled: true
+  regularization: "NONE"
+
+validation:
+  norm_tolerance: 0.01
+  energy_tolerance: 0.01
+  # Scaling law validation criteria:
+  # - ω should scale linearly with B (ω = qB/m)
+  # - r should scale as 1/B (r = mv/qB)
+  # - |v| should remain constant for all B values
+  scaling_test: true
+  expected_omega_scaling: "linear"  # ω ∝ B
+  expected_radius_scaling: "inverse"  # r ∝ 1/B
+
+output:
+  save_every: 1  # Record particle every step
+  save_spatial_snapshots: false
+  formats: ["csv"]
+  # Output directory will include B value in name
+
+# EXPECTED SCALING LAWS:
+# 1. Cyclotron frequency: ω = qB/m = B/0.1 = 10B rad/t_P
+# 2. Larmor radius: r = mv/(qB) = 0.001/B ℓ_P
+# 3. Period: T = 2π/ω = 0.6283/B t_P
+# 4. Speed |v| = 0.01 c (constant for all B)
+#
+# VALIDATION CRITERIA:
+# - Linear fit R² > 0.999 for ω vs B
+# - Inverse fit R² > 0.999 for r vs B
+# - |v| variation < 0.01% across all B values

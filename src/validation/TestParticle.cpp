@@ -18,7 +18,9 @@ TestParticle::TestParticle(double charge, double mass,
       dx_(dx), dy_(dy),
       L_x_(Nx * dx), L_y_(Ny * dy),
       state_(0, 0, 0, 0, 0) {
-    trajectory_.reserve(10000);  // Pre-allocate for efficiency
+    // Pre-allocate sufficient capacity for long simulations
+    // With record_every=5 and 100k steps, we need ~20k points
+    trajectory_.reserve(25000);  // Pre-allocate with safety margin
 }
 
 void TestParticle::initialize(double x0, double y0,
@@ -98,8 +100,8 @@ Eigen::Vector2d TestParticle::computeLorentzForce(
 
 void TestParticle::evolveLorentzForce(const EMFieldComputer::EMFields& fields,
                                       double dt, bool record) {
-    // Record initial state if requested
-    if (record && trajectory_.empty()) {
+    // Record CURRENT state if requested (before evolution)
+    if (record) {
         recordTrajectory(fields);
     }
 
@@ -172,10 +174,8 @@ void TestParticle::evolveLorentzForce(const EMFieldComputer::EMFields& fields,
         }
     }
 
-    // Step 7: Record new state if requested
-    if (record) {
-        recordTrajectory(fields);
-    }
+    // Note: Recording moved to beginning of function to capture pre-evolution state
+    // This avoids double-recording and ensures proper timing alignment
 }
 
 void TestParticle::recordTrajectory(const EMFieldComputer::EMFields& fields) {
