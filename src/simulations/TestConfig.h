@@ -66,6 +66,12 @@ public:
         int total_steps = 100;         // Number of steps to run
         float K = 1.0f;                // Kuramoto coupling strength
         float damping = 0.1f;          // Phase damping
+
+        // EM configuration
+        bool em_coupling_enabled = false;
+        float em_coupling_strength = 1.0f;
+        std::string em_coupling_type = "stuckelberg";
+        float photon_mass = 0.0f;  // For Stückelberg mechanism
     };
 
     // Dirac initial condition
@@ -88,6 +94,19 @@ public:
         float wave_vector_y = 0.0f;
     };
 
+    // EM pulse initial condition
+    struct EMPulseConfig {
+        std::string type = "none";      // "none", "gaussian_pulse"
+        std::string component = "A_y";  // Which component: "A_x", "A_y", "phi"
+        float center_x = 32.0f;         // Pulse center x
+        float center_y = 32.0f;         // Pulse center y
+        float width_x = 8.0f;           // Spatial width x
+        float width_y = 8.0f;           // Spatial width y
+        float amplitude = 0.1f;         // Pulse amplitude
+        float wave_vector_x = 10.0f;    // k_x (determines propagation)
+        float wave_vector_y = 0.0f;     // k_y
+    };
+
     // Operator splitting configuration
     struct OperatorSplittingConfig {
         bool enabled = false;
@@ -99,6 +118,10 @@ public:
         float norm_tolerance = 1.0e-4f;      // ||Ψ||² - 1 tolerance
         float energy_tolerance = 1.0e-2f;    // |ΔE/E₀| tolerance
         float convergence_tolerance = 0.05f; // Convergence check (5%)
+
+        // EM wave validation
+        float expected_wave_speed = 1.0f;    // Expected c in natural units
+        float wave_speed_tolerance = 0.01f;  // 1% tolerance on wave speed
     };
 
     // Output configuration
@@ -107,6 +130,10 @@ public:
         int save_every = 10;                      // Save observables every N steps
         std::vector<std::string> formats = {"csv"}; // Output formats
         bool auto_visualize = false;               // Auto-generate plots after test
+
+        // EM wave tracking
+        bool track_wave_position = false;         // Track wave packet position
+        bool measure_phase_velocity = false;      // Measure phase velocity
     };
 
     // Full test configuration
@@ -117,6 +144,7 @@ public:
     PhysicsConfig physics;
     DiracInitialCondition dirac_initial;
     KuramotoInitialCondition kuramoto_initial;
+    EMPulseConfig em_pulse;
     OperatorSplittingConfig operator_splitting;
     ValidationConfig validation;
     OutputConfig output;
@@ -159,6 +187,7 @@ private:
     void parsePhysics(const YAML::Node& node);
     void parseDiracInitial(const YAML::Node& node);
     void parseKuramotoInitial(const YAML::Node& node);
+    void parseEMPulse(const YAML::Node& node);
     void parseOperatorSplitting(const YAML::Node& node);
     void parseValidation(const YAML::Node& node);
     void parseOutput(const YAML::Node& node);

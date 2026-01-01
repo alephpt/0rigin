@@ -26,7 +26,7 @@ initial_conditions:
     sigma: 0.0
     amplitude: 0.0
   kuramoto:
-    phase_distribution: zero  # No phase vortex for wave test
+    phase_distribution: uniform  # Uniform zero phase
     omega_distribution: zero
     omega_mean: 0.0
     omega_std: 0.0

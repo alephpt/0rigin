@@ -25,6 +25,9 @@ bool TestConfig::loadFromYAML(const std::string& yaml_path) {
             if (config["initial_conditions"]["kuramoto"]) {
                 parseKuramotoInitial(config["initial_conditions"]["kuramoto"]);
             }
+            if (config["initial_conditions"]["em_pulse"]) {
+                parseEMPulse(config["initial_conditions"]["em_pulse"]);
+            }
         }
         if (config["operator_splitting"]) parseOperatorSplitting(config["operator_splitting"]);
         if (config["validation"]) parseValidation(config["validation"]);
@@ -151,18 +154,20 @@ bool TestConfig::validate() const {
         return false;
     }
 
-    // Check Dirac initial condition
-    if (dirac_initial.x0 < 0 || dirac_initial.x0 >= grid.size_x) {
-        std::cerr << "Dirac x0 out of bounds" << std::endl;
-        return false;
-    }
-    if (dirac_initial.y0 < 0 || dirac_initial.y0 >= grid.size_y) {
-        std::cerr << "Dirac y0 out of bounds" << std::endl;
-        return false;
-    }
-    if (dirac_initial.sigma <= 0.0f) {
-        std::cerr << "Invalid Dirac sigma" << std::endl;
-        return false;
+    // Check Dirac initial condition (skip if type is "zero" or "none")
+    if (dirac_initial.type != "zero" && dirac_initial.type != "none") {
+        if (dirac_initial.x0 < 0 || dirac_initial.x0 >= grid.size_x) {
+            std::cerr << "Dirac x0 out of bounds" << std::endl;
+            return false;
+        }
+        if (dirac_initial.y0 < 0 || dirac_initial.y0 >= grid.size_y) {
+            std::cerr << "Dirac y0 out of bounds" << std::endl;
+            return false;
+        }
+        if (dirac_initial.sigma <= 0.0f) {
+            std::cerr << "Invalid Dirac sigma" << std::endl;
+            return false;
+        }
     }
 
     // Check operator splitting
@@ -249,6 +254,12 @@ void TestConfig::parsePhysics(const YAML::Node& node) {
     if (node["total_steps"]) physics.total_steps = node["total_steps"].as<int>();
     if (node["K"]) physics.K = node["K"].as<float>();
     if (node["damping"]) physics.damping = node["damping"].as<float>();
+
+    // EM configuration
+    if (node["em_coupling_enabled"]) physics.em_coupling_enabled = node["em_coupling_enabled"].as<bool>();
+    if (node["em_coupling_strength"]) physics.em_coupling_strength = node["em_coupling_strength"].as<float>();
+    if (node["em_coupling_type"]) physics.em_coupling_type = node["em_coupling_type"].as<std::string>();
+    if (node["photon_mass"]) physics.photon_mass = node["photon_mass"].as<float>();
 }
 
 void TestConfig::parseDiracInitial(const YAML::Node& node) {
@@ -272,6 +283,18 @@ void TestConfig::parseKuramotoInitial(const YAML::Node& node) {
     if (node["wave_vector_y"]) kuramoto_initial.wave_vector_y = node["wave_vector_y"].as<float>();
 }
 
+void TestConfig::parseEMPulse(const YAML::Node& node) {
+    if (node["type"]) em_pulse.type = node["type"].as<std::string>();
+    if (node["component"]) em_pulse.component = node["component"].as<std::string>();
+    if (node["center_x"]) em_pulse.center_x = node["center_x"].as<float>();
+    if (node["center_y"]) em_pulse.center_y = node["center_y"].as<float>();
+    if (node["width_x"]) em_pulse.width_x = node["width_x"].as<float>();
+    if (node["width_y"]) em_pulse.width_y = node["width_y"].as<float>();
+    if (node["amplitude"]) em_pulse.amplitude = node["amplitude"].as<float>();
+    if (node["wave_vector_x"]) em_pulse.wave_vector_x = node["wave_vector_x"].as<float>();
+    if (node["wave_vector_y"]) em_pulse.wave_vector_y = node["wave_vector_y"].as<float>();
+}
+
 void TestConfig::parseOperatorSplitting(const YAML::Node& node) {
     if (node["enabled"]) operator_splitting.enabled = node["enabled"].as<bool>();
     if (node["substep_ratios"]) {
@@ -285,6 +308,9 @@ void TestConfig::parseValidation(const YAML::Node& node) {
     if (node["convergence_tolerance"]) {
         validation.convergence_tolerance = node["convergence_tolerance"].as<float>();
     }
+    // EM wave validation
+    if (node["expected_wave_speed"]) validation.expected_wave_speed = node["expected_wave_speed"].as<float>();
+    if (node["wave_speed_tolerance"]) validation.wave_speed_tolerance = node["wave_speed_tolerance"].as<float>();
 }
 
 void TestConfig::parseOutput(const YAML::Node& node) {
@@ -292,4 +318,7 @@ void TestConfig::parseOutput(const YAML::Node& node) {
     if (node["save_every"]) output.save_every = node["save_every"].as<int>();
     if (node["formats"]) output.formats = node["formats"].as<std::vector<std::string>>();
     if (node["auto_visualize"]) output.auto_visualize = node["auto_visualize"].as<bool>();
+    // EM wave tracking
+    if (node["track_wave_position"]) output.track_wave_position = node["track_wave_position"].as<bool>();
+    if (node["measure_phase_velocity"]) output.measure_phase_velocity = node["measure_phase_velocity"].as<bool>();
 }

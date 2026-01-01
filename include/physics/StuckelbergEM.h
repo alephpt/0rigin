@@ -50,6 +50,9 @@ public:
                                 float amplitude, float k_x, float k_y,
                                 const std::string& component);
 
+    // Wave evolution (made public for testing)
+    void evolveMaxwell(float dt); // □A = 0
+
 private:
     int nx_, ny_;
     float dx_;
@@ -69,7 +72,6 @@ private:
     std::vector<FieldTensor> field_tensor_;
 
     void initializeFromTheta(const float* theta_field);
-    void evolveMaxwell(float dt); // □A = 0
     void evolveKleinGordon(float dt); // □φ + m²φ = 0
     void transformPotential(); // A' = A + ∂φ
 };

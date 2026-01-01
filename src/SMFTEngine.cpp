@@ -1251,6 +1251,122 @@ void SMFTEngine::setSubstepRatio(int N) {
     _substep_count = 0;  // Reset counter
 }
 
+void SMFTEngine::initializeEMPulse(float center_x, float center_y,
+                                  float width_x, float width_y,
+                                  float amplitude, float k_x, float k_y,
+                                  const std::string& component) {
+    /**
+     * Initialize Gaussian EM pulse for wave propagation testing
+     * Creates localized wave packet with given momentum
+     */
+    if (!_stuckelberg_em) {
+        std::cerr << "ERROR: Stückelberg EM not initialized! Call initialize() first." << std::endl;
+        return;
+    }
+
+    // Initialize the pulse in Stückelberg EM
+    _stuckelberg_em->initializeGaussianPulse(center_x, center_y,
+                                            width_x, width_y,
+                                            amplitude, k_x, k_y,
+                                            component);
+
+    // Compute initial field strengths
+    _stuckelberg_em->computeFieldStrengths();
+
+    // Update B_z field for tracking
+    for (int j = 0; j < static_cast<int>(_Ny); ++j) {
+        for (int i = 0; i < static_cast<int>(_Nx); ++i) {
+            int idx = j * _Nx + i;
+            auto F = _stuckelberg_em->getFieldAt(i, j);
+            _em_Bz[idx] = F.Bz;
+        }
+    }
+
+    std::cout << "[SMFTEngine] EM pulse initialized:" << std::endl;
+    std::cout << "  Center: (" << center_x << ", " << center_y << ")" << std::endl;
+    std::cout << "  Width: (" << width_x << ", " << width_y << ")" << std::endl;
+    std::cout << "  Amplitude: " << amplitude << std::endl;
+    std::cout << "  Wave vector: (" << k_x << ", " << k_y << ")" << std::endl;
+    std::cout << "  Component: " << component << std::endl;
+}
+
+float SMFTEngine::trackWavePosition() const {
+    /**
+     * Track wave position by finding center of mass of |B_z| field
+     * Returns x-coordinate of wave packet center
+     */
+    if (_em_Bz.empty()) {
+        return 0.0f;
+    }
+
+    float total_intensity = 0.0f;
+    float weighted_x = 0.0f;
+
+    for (int j = 0; j < static_cast<int>(_Ny); ++j) {
+        for (int i = 0; i < static_cast<int>(_Nx); ++i) {
+            int idx = j * _Nx + i;
+            float intensity = std::abs(_em_Bz[idx]);
+            float x = i * 1.0f;  // Assuming dx = 1.0 in grid units
+
+            weighted_x += x * intensity;
+            total_intensity += intensity;
+        }
+    }
+
+    if (total_intensity > 1e-10f) {
+        return weighted_x / total_intensity;
+    }
+    return 0.0f;
+}
+
+float SMFTEngine::measureWaveVelocity(float dt, int steps) {
+    /**
+     * Measure wave velocity by tracking position over time
+     * Evolves the EM field for specified steps and measures v = Δx/Δt
+     */
+    if (!_stuckelberg_em) {
+        std::cerr << "ERROR: Stückelberg EM not initialized!" << std::endl;
+        return 0.0f;
+    }
+
+    // Get initial position
+    float x0 = trackWavePosition();
+    float t0 = 0.0f;
+
+    // Evolve for specified steps
+    for (int step = 0; step < steps; ++step) {
+        // Evolve EM fields (no Kuramoto coupling for pure EM test)
+        _stuckelberg_em->evolveMaxwell(dt);
+        _stuckelberg_em->computeFieldStrengths();
+
+        // Update B_z field
+        for (int j = 0; j < static_cast<int>(_Ny); ++j) {
+            for (int i = 0; i < static_cast<int>(_Nx); ++i) {
+                int idx = j * _Nx + i;
+                auto F = _stuckelberg_em->getFieldAt(i, j);
+                _em_Bz[idx] = F.Bz;
+            }
+        }
+    }
+
+    // Get final position
+    float x1 = trackWavePosition();
+    float t1 = steps * dt;
+
+    // Calculate velocity
+    float velocity = (x1 - x0) / (t1 - t0);
+
+    std::cout << "[Wave Velocity Measurement]" << std::endl;
+    std::cout << "  Initial position: " << x0 << std::endl;
+    std::cout << "  Final position: " << x1 << std::endl;
+    std::cout << "  Time elapsed: " << (t1 - t0) << std::endl;
+    std::cout << "  Measured velocity: " << velocity << std::endl;
+    std::cout << "  Expected (c=1): 1.0" << std::endl;
+    std::cout << "  Relative error: " << std::abs(velocity - 1.0f) * 100.0f << "%" << std::endl;
+
+    return velocity;
+}
+
 void SMFTEngine::updateAveragedFields(const std::vector<float>& theta_avg,
                                       const std::vector<float>& R_avg) {
     /**
