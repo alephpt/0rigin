@@ -1,2 +1,0 @@
-/usr/bin/ar qc libSMFTCore.a CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o
-/usr/bin/ranlib libSMFTCore.a
