@@ -246,6 +246,39 @@ void SMFTEngine::setInitialPhases(const std::vector<float>& theta) {
     }
 
     _theta_data = theta;
+
+    // Compute initial sync field R(x,y) for CPU fallback mode
+    // (GPU mode will recompute during first step)
+    for (uint32_t j = 0; j < _Ny; j++) {
+        for (uint32_t i = 0; i < _Nx; i++) {
+            uint32_t idx = j * _Nx + i;
+
+            // Average over local neighborhood
+            float sum_cos = 0.0f;
+            float sum_sin = 0.0f;
+            int count = 0;
+
+            for (int dy = -1; dy <= 1; dy++) {
+                for (int dx = -1; dx <= 1; dx++) {
+                    int nx = static_cast<int>(i) + dx;
+                    int ny = static_cast<int>(j) + dy;
+                    if (nx >= 0 && nx < static_cast<int>(_Nx) &&
+                        ny >= 0 && ny < static_cast<int>(_Ny)) {
+                        uint32_t nidx = ny * _Nx + nx;
+                        sum_cos += std::cos(_theta_data[nidx]);
+                        sum_sin += std::sin(_theta_data[nidx]);
+                        count++;
+                    }
+                }
+            }
+
+            // R = |⟨e^(iθ)⟩| = sqrt(⟨cos⟩² + ⟨sin⟩²)
+            float avg_cos = sum_cos / float(count > 0 ? count : 1);
+            float avg_sin = sum_sin / float(count > 0 ? count : 1);
+            _R_field_data[idx] = std::sqrt(avg_cos * avg_cos + avg_sin * avg_sin);
+        }
+    }
+
     uploadToGPU();
 }
 
@@ -260,10 +293,110 @@ void SMFTEngine::setNaturalFrequencies(const std::vector<float>& omega) {
 }
 
 void SMFTEngine::step(float dt, float K, float damping) {
-    // Ensure we have GPU resources
+    // CPU FALLBACK: If GPU pipelines not available, use CPU implementation
     if (!_kuramoto_pipeline || !_sync_pipeline || !_gravity_pipeline) {
-        std::cerr << "[SMFTEngine] Pipelines not created, falling back to CPU simulation" << std::endl;
-        return;
+        // DEBUG: Check if theta field is initialized
+        static bool debug_once = false;
+        if (!debug_once) {
+            float theta_sum = 0.0f;
+            for (const auto& t : _theta_data) theta_sum += std::abs(t);
+            std::cout << "[CPU fallback] theta_data sum = " << theta_sum
+                     << " (should be non-zero for vortex)" << std::endl;
+            debug_once = true;
+        }
+
+        // CPU-based Kuramoto evolution
+        std::vector<float> theta_new = _theta_data; // Copy current state
+
+        for (uint32_t j = 0; j < _Ny; j++) {
+            for (uint32_t i = 0; i < _Nx; i++) {
+                uint32_t idx = j * _Nx + i;
+                float theta_i = _theta_data[idx];
+                float omega_i = _omega_data[idx];
+
+                // Compute coupling sum (nearest neighbors)
+                float coupling_sum = 0.0f;
+                int count = 0;
+                for (int dy = -1; dy <= 1; dy++) {
+                    for (int dx = -1; dx <= 1; dx++) {
+                        if (dx == 0 && dy == 0) continue;
+                        int nx = static_cast<int>(i) + dx;
+                        int ny = static_cast<int>(j) + dy;
+                        if (nx >= 0 && nx < static_cast<int>(_Nx) &&
+                            ny >= 0 && ny < static_cast<int>(_Ny)) {
+                            uint32_t nidx = ny * _Nx + nx;
+                            coupling_sum += std::sin(_theta_data[nidx] - theta_i);
+                            count++;
+                        }
+                    }
+                }
+
+                // Kuramoto equation: dθ/dt = ω + (K/N)Σsin(θ_j - θ_i) - γθ
+                float dtheta_dt = omega_i + (K / float(count > 0 ? count : 1)) * coupling_sum
+                                 - damping * theta_i;
+                theta_new[idx] = theta_i + dt * dtheta_dt;
+            }
+        }
+
+        _theta_data = theta_new;
+
+        // Compute sync field R(x,y) = |⟨e^(iθ)⟩|
+        float R_field_sum = 0.0f;  // DEBUG
+        for (uint32_t j = 0; j < _Ny; j++) {
+            for (uint32_t i = 0; i < _Nx; i++) {
+                uint32_t idx = j * _Nx + i;
+
+                // Average over local neighborhood
+                float sum_cos = 0.0f;
+                float sum_sin = 0.0f;
+                int count = 0;
+
+                for (int dy = -1; dy <= 1; dy++) {
+                    for (int dx = -1; dx <= 1; dx++) {
+                        int nx = static_cast<int>(i) + dx;
+                        int ny = static_cast<int>(j) + dy;
+                        if (nx >= 0 && nx < static_cast<int>(_Nx) &&
+                            ny >= 0 && ny < static_cast<int>(_Ny)) {
+                            uint32_t nidx = ny * _Nx + nx;
+                            sum_cos += std::cos(_theta_data[nidx]);
+                            sum_sin += std::sin(_theta_data[nidx]);
+                            count++;
+                        }
+                    }
+                }
+
+                // R = |⟨e^(iθ)⟩| = sqrt(⟨cos⟩² + ⟨sin⟩²)
+                float avg_cos = sum_cos / float(count > 0 ? count : 1);
+                float avg_sin = sum_sin / float(count > 0 ? count : 1);
+                _R_field_data[idx] = std::sqrt(avg_cos * avg_cos + avg_sin * avg_sin);
+                R_field_sum += _R_field_data[idx];  // DEBUG
+            }
+        }
+
+        // DEBUG: Log R_field sum
+        static int R_debug_count = 0;
+        if (R_debug_count++ % 1000 == 0) {
+            std::cout << "[CPU fallback] R_field sum = " << R_field_sum
+                     << ", avg = " << R_field_sum / (_Nx * _Ny) << std::endl;
+        }
+
+        // Compute gravity field ∇R (central differences)
+        for (uint32_t j = 0; j < _Ny; j++) {
+            for (uint32_t i = 0; i < _Nx; i++) {
+                uint32_t idx = j * _Nx + i;
+
+                // Central differences for gradient
+                float R_xp = (i < _Nx - 1) ? _R_field_data[idx + 1] : _R_field_data[idx];
+                float R_xm = (i > 0) ? _R_field_data[idx - 1] : _R_field_data[idx];
+                float R_yp = (j < _Ny - 1) ? _R_field_data[idx + _Nx] : _R_field_data[idx];
+                float R_ym = (j > 0) ? _R_field_data[idx - _Nx] : _R_field_data[idx];
+
+                _gravity_x_data[idx] = -_Delta * (R_xp - R_xm) / 2.0f;
+                _gravity_y_data[idx] = -_Delta * (R_yp - R_ym) / 2.0f;
+            }
+        }
+
+        return; // CPU fallback complete
     }
 
     // Calculate workgroup counts (local size = 16x16 in shader)

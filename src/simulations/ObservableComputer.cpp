@@ -5,8 +5,14 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
+#include <cstring>
 
-ObservableComputer::Observables ObservableComputer::compute(
+// Define the static member
+thread_local ObservableComputer::Observables* ObservableComputer::g_result_hack = nullptr;
+
+void ObservableComputer::compute(
+    Observables* result,
     const DiracEvolution& dirac,
     const std::vector<double>& R_field,
     double delta,
@@ -16,27 +22,28 @@ ObservableComputer::Observables ObservableComputer::compute(
     double energy_tolerance,
     const SMFTEngine* engine) {
 
-    Observables obs;
-    obs.time = time;
+    // Use g_result_hack (set by caller) if available, otherwise use result parameter
+    Observables* actual_result = (g_result_hack != nullptr) ? g_result_hack : result;
+    actual_result->time = time;
 
     // Dirac observables
-    obs.norm = computeNorm(dirac);
-    obs.norm_error = obs.norm - 1.0;
-    obs.energy_kinetic = computeKineticEnergy(dirac);
-    obs.energy_potential = computePotentialEnergy(dirac, R_field, delta);
-    obs.energy_total = obs.energy_kinetic + obs.energy_potential;
+    actual_result->norm = computeNorm(dirac);
+    actual_result->norm_error = actual_result->norm - 1.0;
+    actual_result->energy_kinetic = computeKineticEnergy(dirac);
+    actual_result->energy_potential = computePotentialEnergy(dirac, R_field, delta);
+    actual_result->energy_total = actual_result->energy_kinetic + actual_result->energy_potential;
 
-    obs.position_x = computePositionExpectation(dirac, 0);
-    obs.position_y = computePositionExpectation(dirac, 1);
-    obs.momentum_x = computeMomentumExpectation(dirac, 0);
-    obs.momentum_y = computeMomentumExpectation(dirac, 1);
+    actual_result->position_x = computePositionExpectation(dirac, 0);
+    actual_result->position_y = computePositionExpectation(dirac, 1);
+    actual_result->momentum_x = computeMomentumExpectation(dirac, 0);
+    actual_result->momentum_y = computeMomentumExpectation(dirac, 1);
 
     // Sync field observables
     auto [R_avg, R_max, R_min, R_var] = computeSyncFieldStats(R_field);
-    obs.R_avg = R_avg;
-    obs.R_max = R_max;
-    obs.R_min = R_min;
-    obs.R_variance = R_var;
+    actual_result->R_avg = R_avg;
+    actual_result->R_max = R_max;
+    actual_result->R_min = R_min;
+    actual_result->R_variance = R_var;
 
     // EM field observables (if engine provided)
     if (engine != nullptr) {
@@ -55,33 +62,33 @@ ObservableComputer::Observables ObservableComputer::compute(
 
             double B_rms = std::sqrt(B_sq_sum / B_z.size());
 
-            obs.EM_B_max = B_max;
-            obs.EM_B_rms = B_rms;
+            actual_result->EM_B_max = B_max;
+            actual_result->EM_B_rms = B_rms;
         } else {
-            obs.EM_B_max = 0.0;
-            obs.EM_B_rms = 0.0;
+            actual_result->EM_B_max = 0.0;
+            actual_result->EM_B_rms = 0.0;
         }
 
         // Get EM energy
-        obs.EM_energy = static_cast<double>(engine->getEM_Energy());
+        actual_result->EM_energy = static_cast<double>(engine->getEM_Energy());
     } else {
         // No EM data available
-        obs.EM_B_max = 0.0;
-        obs.EM_B_rms = 0.0;
-        obs.EM_energy = 0.0;
+        actual_result->EM_B_max = 0.0;
+        actual_result->EM_B_rms = 0.0;
+        actual_result->EM_energy = 0.0;
     }
 
     // Validation
-    obs.norm_valid = std::abs(obs.norm_error) < norm_tolerance;
+    actual_result->norm_valid = std::abs(actual_result->norm_error) < norm_tolerance;
 
     if (E0 != 0.0) {
-        double energy_drift = std::abs(obs.energy_total - E0) / std::abs(E0);
-        obs.energy_valid = energy_drift < energy_tolerance;
+        double energy_drift = std::abs(actual_result->energy_total - E0) / std::abs(E0);
+        actual_result->energy_valid = energy_drift < energy_tolerance;
     } else {
-        obs.energy_valid = true; // Can't validate without E0
+        actual_result->energy_valid = true; // Can't validate without E0
     }
 
-    return obs;
+    g_result_hack = nullptr;  // Clear for next call
 }
 
 double ObservableComputer::computeNorm(const DiracEvolution& dirac) {
@@ -264,10 +271,22 @@ std::tuple<double, double, double, double> ObservableComputer::computeSyncFieldS
     const std::vector<double>& R_field) {
 
     if (R_field.empty()) {
+        static bool warned = false;
+        if (!warned) {
+            std::cerr << "[ObservableComputer] WARNING: R_field is EMPTY!" << std::endl;
+            warned = true;
+        }
         return {0.0, 0.0, 0.0, 0.0};
     }
 
     double R_avg = std::accumulate(R_field.begin(), R_field.end(), 0.0) / R_field.size();
+
+    // DEBUG: Check if R_avg is actually zero
+    static int debug_count = 0;
+    if (debug_count++ % 1000 == 0) {
+        std::cout << "[ObservableComputer] R_field.size()=" << R_field.size()
+                  << ", R_avg=" << R_avg << std::endl;
+    }
     double R_max = *std::max_element(R_field.begin(), R_field.end());
     double R_min = *std::min_element(R_field.begin(), R_field.end());
 

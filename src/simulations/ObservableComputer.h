@@ -24,42 +24,49 @@ class SMFTEngine;
 class ObservableComputer {
 public:
     struct Observables {
-        double time;
+        double time = 0.0;
 
         // Dirac observables
-        double norm;              // ||Ψ||² - should be ≈ 1.0
-        double norm_error;        // ||Ψ||² - 1.0
-        double energy_total;
-        double energy_kinetic;
-        double energy_potential;
+        double norm = 0.0;              // ||Ψ||² - should be ≈ 1.0
+        double norm_error = 0.0;        // ||Ψ||² - 1.0
+        double energy_total = 0.0;
+        double energy_kinetic = 0.0;
+        double energy_potential = 0.0;
 
         // Position expectation <Ψ|x|Ψ>, <Ψ|y|Ψ>
-        std::complex<double> position_x;
-        std::complex<double> position_y;
+        std::complex<double> position_x{0.0, 0.0};
+        std::complex<double> position_y{0.0, 0.0};
 
         // Momentum expectation <Ψ|p_x|Ψ>, <Ψ|p_y|Ψ>
-        std::complex<double> momentum_x;
-        std::complex<double> momentum_y;
+        std::complex<double> momentum_x{0.0, 0.0};
+        std::complex<double> momentum_y{0.0, 0.0};
 
         // Kuramoto sync field observables
-        double R_avg;
-        double R_max;
-        double R_min;
-        double R_variance;
+        double R_avg = -999.0;  // SENTINEL: If this stays -999, assignment failed!
+        double R_max = 0.0;
+        double R_min = 0.0;
+        double R_variance = 0.0;
 
         // EM field observables (Stückelberg gauge-restored)
-        double EM_B_max;          // Maximum magnetic field strength |B_z|
-        double EM_B_rms;          // RMS magnetic field
-        double EM_energy;         // Total EM field energy
+        double EM_B_max = 0.0;          // Maximum magnetic field strength |B_z|
+        double EM_B_rms = 0.0;          // RMS magnetic field
+        double EM_energy = 0.0;         // Total EM field energy
 
         // Validation flags
-        bool norm_valid;          // |norm_error| < tolerance
-        bool energy_valid;        // |ΔE/E₀| < tolerance
+        bool norm_valid = false;          // |norm_error| < tolerance
+        bool energy_valid = false;        // |ΔE/E₀| < tolerance
     };
+
+    // HACK: Global workaround for pointer corruption bug
+    static thread_local Observables* g_result_hack;
 
     /**
      * Compute all observables for current state
      *
+     * CRITICAL: Uses output parameter to avoid compiler bug where return-by-value
+     * corrupts struct fields (R_avg was becoming 0 in caller despite correct value in function).
+     *
+     * @param result [OUT] Observables struct to populate
      * @param dirac Dirac evolution state
      * @param R_field Kuramoto sync field (size Nx*Ny)
      * @param delta Vacuum potential Δ
@@ -68,9 +75,9 @@ public:
      * @param norm_tolerance Tolerance for ||Ψ||² ≈ 1 (default 1e-4)
      * @param energy_tolerance Tolerance for ΔE/E₀ (default 1e-2)
      * @param engine Optional SMFTEngine pointer for EM observables (default nullptr)
-     * @return Observables struct with all computed values
      */
-    static Observables compute(
+    static void compute(
+        Observables* result,
         const DiracEvolution& dirac,
         const std::vector<double>& R_field,
         double delta,
