@@ -171,68 +171,18 @@ set_target_properties(SMFT PROPERTIES
 # ============================================================================
 
 # Stückelberg EM validation test (preserved from Wave1D era)
-add_executable(test_stuckelberg_vortex_bfield
-    test/test_stuckelberg_vortex_bfield.cpp
-)
-
-target_link_libraries(test_stuckelberg_vortex_bfield PRIVATE
-    Physics
-)
-
-target_include_directories(test_stuckelberg_vortex_bfield PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-set_target_properties(test_stuckelberg_vortex_bfield PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
-
-# SMFTEngine + Stückelberg EM integration test
-add_executable(test_smft_em_integration
-    test/test_smft_em_integration.cpp
-    src/SMFTEngine.cpp
-    src/SMFTPipelineFactory.cpp
-    src/SMFTBufferManager.cpp
-    src/SMFTCompute.cpp
-    src/SMFTDescriptorManager.cpp
-    src/DiracEvolution.cpp
-)
-
-target_link_libraries(test_smft_em_integration PRIVATE
-    Nova
-    Physics
-    imgui
-    Vulkan::Vulkan
-    fftw3f
-)
-
-target_include_directories(test_smft_em_integration PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/src
-)
-
-set_target_properties(test_smft_em_integration PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
-
-# DiracEvolution EM coupling test
-add_executable(test_dirac_em_coupling
-    test/test_dirac_em_coupling.cpp
-    src/DiracEvolution.cpp
-)
-
-target_link_libraries(test_dirac_em_coupling PRIVATE
-    ${FFTW3_LIBRARIES}
-)
-
-target_include_directories(test_dirac_em_coupling PRIVATE
-    ${CMAKE_SOURCE_DIR}/src
-    ${FFTW3_INCLUDE_DIRS}
-)
-
-set_target_properties(test_dirac_em_coupling PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# ============================================================================
+# LEGACY TEST BINARIES REMOVED
+# ============================================================================
+# All tests now run through unified smft binary via YAML configs:
+#   ./smft --test config/stuckelberg_integration_test.yaml
+#
+# Removed binaries:
+# - test_stuckelberg_vortex_bfield → config/stuckelberg_integration_test.yaml
+# - test_smft_em_integration → integrated into smft
+# - test_dirac_em_coupling → integrated into smft
+#
+# Single source of truth: ./smft
 
 # ============================================================================
 # SUMMARY
