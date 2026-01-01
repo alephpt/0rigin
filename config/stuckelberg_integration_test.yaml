@@ -11,7 +11,7 @@ physics:
   coupling: 0.1
   dt: 0.0005
   total_steps: 20000
-  K: 1.0
+  K: 0.0  # DISABLE Kuramoto coupling to preserve vortex gradient
   damping: 0.0
   noise_strength: 0.0
   em_coupling_enabled: true
