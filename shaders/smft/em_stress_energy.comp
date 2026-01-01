@@ -1,0 +1,202 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+#extension GL_GOOGLE_include_directive : enable
+
+// Include precision library
+#include "../include/precision.glsl"
+
+/**
+ * @file em_stress_energy.comp
+ * @brief Compute electromagnetic stress-energy tensor T_μν and coupling to R-field
+ *
+ * Implements: T_μν^(EM) = (1/4π)[F_μα F_ν^α - (1/4)g_μν F²]
+ *
+ * G3 EM-Gravity Coupling Test:
+ * - EM field energy curves spacetime via R-field back-reaction
+ * - Energy density: ρ_EM = T^00 = (1/2)(E² + B²)
+ * - Momentum density: g_EM = T^0i = (E × B)_i (Poynting vector)
+ * - Stress: T^ij = -E_i E_j - B_i B_j + (1/2)δ_ij(E² + B²)
+ *
+ * SMFT Coupling:
+ * - R-field evolution influenced by ∇·T^(EM)
+ * - High EM energy → R-field perturbation
+ * - Coupling: ∂R/∂t ~ -ε·∇·(E×B) - ε·ρ_EM
+ * - Expected: ΔR ~ ε·ρ_EM with proportionality constant ε
+ *
+ * Physical Units (natural units: ℏ = c = 1):
+ * - F_μν: field strength tensor (dimensionless in natural units)
+ * - E, B: field strengths [energy/length²]
+ * - T_μν: energy-momentum tensor [energy/volume]
+ * - ρ_EM: energy density [energy/volume]
+ *
+ * Workgroup: 16×16 threads
+ * Grid: Nx × Ny spatial points
+ */
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+// Push constants for simulation parameters
+layout(push_constant) uniform PushConstants {
+    float dt;              // Time step
+    float K;               // Coupling strength (not used)
+    float damping;         // Damping (not used)
+    float Delta;           // MSFT mass gap
+    float chiral_angle;    // Chiral angle (not used)
+    uint Nx;               // Grid width
+    uint Ny;               // Grid height
+    uint N_total;          // Total oscillators
+    float em_energy_scale; // ε: EM→R coupling strength
+} params;
+
+// Input: EM field components (from Stückelberg evolution)
+layout(set = 0, binding = 0) readonly buffer ExBuffer {
+    float Ex[];  // Electric field x-component
+};
+
+layout(set = 0, binding = 1) readonly buffer EyBuffer {
+    float Ey[];  // Electric field y-component
+};
+
+layout(set = 0, binding = 2) readonly buffer BzBuffer {
+    float Bz[];  // Magnetic field z-component (out-of-plane)
+};
+
+// Output: Stress-energy tensor components
+layout(set = 0, binding = 3) buffer T00Buffer {
+    float T00[];  // Energy density: ρ_EM = (1/2)(E² + B²)
+};
+
+layout(set = 0, binding = 4) buffer T0xBuffer {
+    float T0x[];  // Momentum density x: (E × B)_x
+};
+
+layout(set = 0, binding = 5) buffer T0yBuffer {
+    float T0y[];  // Momentum density y: (E × B)_y
+};
+
+layout(set = 0, binding = 6) buffer RFieldSourceBuffer {
+    float R_source[];  // Source term for R-field evolution: -∇·T
+};
+
+/**
+ * @brief Compute EM energy density
+ *
+ * ρ_EM = T^00 = (1/2)(E² + B²)
+ *
+ * This is the time-time component of the stress-energy tensor
+ * Represents energy density stored in EM field
+ */
+float compute_energy_density(float Ex, float Ey, float Bz) {
+    float E_sq = Ex*Ex + Ey*Ey;
+    float B_sq = Bz*Bz;
+    return 0.5f * (E_sq + B_sq);
+}
+
+/**
+ * @brief Compute Poynting vector S = E × B
+ *
+ * In 2D with E = (Ex, Ey, 0) and B = (0, 0, Bz):
+ * S = E × B = (Ey·Bz, -Ex·Bz, 0)
+ *
+ * This represents electromagnetic momentum density
+ */
+vec2 compute_poynting(float Ex, float Ey, float Bz) {
+    // S_x = Ey * Bz
+    // S_y = -Ex * Bz
+    return vec2(Ey * Bz, -Ex * Bz);
+}
+
+/**
+ * @brief Compute divergence of stress-energy tensor for R-field coupling
+ *
+ * ∇·T measures flow of energy-momentum
+ * This acts as source/sink for R-field evolution
+ *
+ * In 2D: ∇·T ≈ (∂T0x/∂x + ∂T0y/∂y)
+ *
+ * Uses central difference for spatial derivatives
+ */
+float compute_stress_divergence(uint x, uint y) {
+    // Get neighboring indices with periodic boundaries
+    uint x_plus = (x + 1) % params.Nx;
+    uint x_minus = (x + params.Nx - 1) % params.Nx;
+    uint y_plus = (y + 1) % params.Ny;
+    uint y_minus = (y + params.Ny - 1) % params.Ny;
+
+    uint idx_xp = y * params.Nx + x_plus;
+    uint idx_xm = y * params.Nx + x_minus;
+    uint idx_yp = y_plus * params.Nx + x;
+    uint idx_ym = y_minus * params.Nx + x;
+
+    // Spatial grid spacing (assume unit spacing)
+    float dx = 1.0;
+    float dy = 1.0;
+
+    // Central difference for ∂T0x/∂x
+    float dT0x_dx = (T0x[idx_xp] - T0x[idx_xm]) / (2.0 * dx);
+
+    // Central difference for ∂T0y/∂y
+    float dT0y_dy = (T0y[idx_yp] - T0y[idx_ym]) / (2.0 * dy);
+
+    // Divergence
+    return dT0x_dx + dT0y_dy;
+}
+
+void main() {
+    uint x = gl_GlobalInvocationID.x;
+    uint y = gl_GlobalInvocationID.y;
+
+    // Bounds check
+    if (x >= params.Nx || y >= params.Ny) return;
+
+    uint idx = y * params.Nx + x;
+
+    // Load EM field components
+    float E_x = Ex[idx];
+    float E_y = Ey[idx];
+    float B_z = Bz[idx];
+
+    // Compute energy density (T^00)
+    float rho_EM = compute_energy_density(E_x, E_y, B_z);
+    T00[idx] = rho_EM;
+
+    // Compute Poynting vector (T^0i)
+    vec2 S = compute_poynting(E_x, E_y, B_z);
+    T0x[idx] = S.x;
+    T0y[idx] = S.y;
+
+    // Synchronize to ensure all T^μν components are computed
+    barrier();
+
+    // Compute divergence of stress-energy for R-field coupling
+    // ∂R/∂t ~ -ε·(∇·T + ρ_EM)
+    // This couples EM energy to spacetime curvature (R-field)
+    float div_T = compute_stress_divergence(x, y);
+
+    // Source term for R-field evolution
+    // Negative sign: EM energy creates R-field "wells" (attracting regions)
+    // Scale by coupling constant ε
+    R_source[idx] = -params.em_energy_scale * (div_T + rho_EM);
+
+    /**
+     * Physical Interpretation:
+     *
+     * T^00 (energy density):
+     * - High ρ_EM → strong EM field energy at this point
+     * - Creates "weight" that curves spacetime (R-field)
+     *
+     * T^0i (momentum density):
+     * - Poynting vector S = E×B shows energy flow direction
+     * - ∇·S measures energy convergence/divergence
+     *
+     * R-field coupling:
+     * - Energy concentration (∇·T + ρ_EM) → R increases
+     * - Creates synchronization "well" analogous to mass
+     * - This IS the EM→gravity coupling!
+     *
+     * Expected Observable:
+     * - ΔR ~ ε·ρ_EM
+     * - Proportionality constant ε determines coupling strength
+     * - Quality gate: measured ΔR/ρ_EM within 10% of ε
+     */
+}
