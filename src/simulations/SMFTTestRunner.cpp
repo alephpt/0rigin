@@ -186,35 +186,14 @@ bool SMFTTestRunner::runSingleTest(int N) {
             ObservableComputer::Observables obs;
 
             if (dirac) {
-                // DEBUG: Check address before compute
-                static int debug_counter = 0;
-                if (debug_counter % 1000 == 0) {
-                    std::cout << "[BEFORE] sizeof(obs) = " << sizeof(obs) << std::endl;
-                    std::cout << "[BEFORE] Address of obs: " << &obs << ", Address of obs.R_avg: " << &obs.R_avg << std::endl;
-                    std::cout << "[BEFORE] Pointer &obs = " << &obs << std::endl;
-                }
-
-                // HACK: Set global workaround pointer
-                ObservableComputer::g_result_hack = &obs;
-
                 // Compute full observables with Dirac state (including EM if available)
-                ObservableComputer::Observables* obs_ptr = &obs;
-                if (debug_counter % 1000 == 0) {
-                    std::cout << "[CALLING] obs_ptr = " << obs_ptr << std::endl;
-                }
+                ObservableComputer::g_result_hack = &obs;
                 ObservableComputer::compute(
-                    obs_ptr,
+                    &obs,
                     *dirac, R_field_d, _config.physics.delta, time,
                     E0, _config.validation.norm_tolerance, _config.validation.energy_tolerance,
                     _engine  // Pass engine for EM observables
                 );
-
-                // DEBUG: Verify R_avg after compute
-                if (debug_counter++ % 1000 == 0) {
-                    std::cout << "[AFTER] obs.R_avg = " << obs.R_avg << std::endl;
-                    std::cout << "[AFTER] Address of obs: " << &obs << ", Address of obs.R_avg: " << &obs.R_avg << std::endl;
-                    std::cout << "[AFTER] obs_ptr->R_avg = " << obs_ptr->R_avg << std::endl;
-                }
             } else {
                 // Fallback if Dirac not initialized
                 obs.time = time;

@@ -1128,6 +1128,13 @@ void SMFTEngine::stepWithDirac(float dt, float lambda_coupling, int substep_rati
         step(substep_dt, K, damping);
     }
 
+    // === CRITICAL FIX: Download GPU data BEFORE reading sync field ===
+    // Only download if using GPU pipelines (not CPU fallback)
+    // CPU fallback updates _R_field_data directly, GPU path needs download
+    if (_kuramoto_pipeline && _sync_pipeline && _gravity_pipeline) {
+        downloadFromGPU();
+    }
+
     // Get current synchronization field for mass coupling
     std::vector<float> R_field = getSyncField();
 
@@ -1136,10 +1143,6 @@ void SMFTEngine::stepWithDirac(float dt, float lambda_coupling, int substep_rati
     for (uint32_t i = 0; i < _Nx * _Ny; i++) {
         mass_field[i] = _Delta * R_field[i];
     }
-
-    // === STÜCKELBERG EM EVOLUTION ===
-    // Download current phase field from GPU for EM coupling
-    downloadFromGPU();
 
     if (_stuckelberg_em) {
         // Direct coupling: phi = theta (proven in test_stuckelberg_vortex_bfield)
