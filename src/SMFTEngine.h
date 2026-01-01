@@ -180,6 +180,36 @@ public:
     void setSubstepRatio(int N);
 
     /**
+     * Initialize electromagnetic pulse for wave propagation test
+     * @param center_x X-coordinate of pulse center
+     * @param center_y Y-coordinate of pulse center
+     * @param width_x Spatial width in x-direction
+     * @param width_y Spatial width in y-direction
+     * @param amplitude Pulse amplitude
+     * @param k_x Wave vector x-component (determines propagation direction)
+     * @param k_y Wave vector y-component
+     * @param component Which EM component to initialize ("A_x", "A_y", "phi")
+     */
+    void initializeEMPulse(float center_x, float center_y,
+                          float width_x, float width_y,
+                          float amplitude, float k_x, float k_y,
+                          const std::string& component = "A_y");
+
+    /**
+     * Track wave position by finding center of mass of B_z field
+     * @return X-coordinate of wave packet center
+     */
+    float trackWavePosition() const;
+
+    /**
+     * Measure wave velocity by tracking position over time
+     * @param dt Time step size
+     * @param steps Number of steps to evolve and measure
+     * @return Measured phase velocity v = Δx/Δt
+     */
+    float measureWaveVelocity(float dt, int steps);
+
+    /**
      * Initialize hybrid GPU-CPU system with operator splitting
      * Sets up Kuramoto (GPU), Dirac (CPU), and accumulator buffers
      *

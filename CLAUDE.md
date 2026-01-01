@@ -1,0 +1,1 @@
+- ./smft is the single executable we should have. No additional executables. All testing should be ran through the --test flag, and all core tests that are crucial to SMFT should be part of the engine to ensure 100% correctness for our theory

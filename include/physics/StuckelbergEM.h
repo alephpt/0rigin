@@ -44,6 +44,12 @@ public:
     float getAprimeX(int i, int j) const;
     float getAprimeY(int i, int j) const;
 
+    // Wave propagation initialization
+    void initializeGaussianPulse(float center_x, float center_y,
+                                float width_x, float width_y,
+                                float amplitude, float k_x, float k_y,
+                                const std::string& component);
+
 private:
     int nx_, ny_;
     float dx_;

@@ -1,0 +1,172 @@
+# config/three_body_em.yaml
+# Three-body electromagnetic dynamics test for SMFT
+# Verifies superposition principle with multiple charges interacting via EM fields
+
+physics:
+  # Time evolution parameters
+  total_steps: 2000
+  dt: 0.005
+
+  # Spatial grid
+  nx: 128
+  ny: 128
+  dx: 0.5
+
+  # Electromagnetic field parameters
+  em_enabled: true
+  photon_mass_coupling: 0.05  # g in m_γ = g(1-R), small for clean EM
+
+  # SMFT coupling parameters
+  delta: 2.5           # Mass gap parameter
+  coupling: 0.1        # Kuramoto-Dirac coupling strength
+  K: 1.0              # Kuramoto coupling between oscillators
+  damping: 0.0        # No damping for energy conservation test
+
+initial_conditions:
+  # Three vortices configuration
+  # Vortex 1: +1 charge at (32, 64)
+  vortex1:
+    enabled: true
+    x0: 32.0
+    y0: 64.0
+    winding: 1          # Positive charge
+    radius: 8.0
+
+  # Vortex 2: +1 charge at (96, 64) - same horizontal line
+  vortex2:
+    enabled: true
+    x0: 96.0
+    y0: 64.0
+    winding: 1          # Positive charge (will repel vortex1)
+    radius: 8.0
+
+  # Vortex 3: -1 charge at (64, 96) - forms triangle
+  vortex3:
+    enabled: true
+    x0: 64.0
+    y0: 96.0
+    winding: -1         # Negative charge (attracts both positive)
+    radius: 8.0
+
+  # Synchronization field profile (high R for strong EM)
+  sync:
+    type: "uniform_high"
+    value: 0.95         # High R for maximum EM field generation
+
+  # Alternative: Localized sync around vortices
+  # sync:
+  #   type: "three_gaussian"
+  #   centers:
+  #     - [32.0, 64.0]
+  #     - [96.0, 64.0]
+  #     - [64.0, 96.0]
+  #   sigma: 12.0
+  #   amplitude: 0.9
+
+# Three-body specific measurements
+observables:
+  # Track individual vortex positions/forces
+  track_vortices: true
+  vortex_positions:
+    - [32, 64]   # Initial vortex 1
+    - [96, 64]   # Initial vortex 2
+    - [64, 96]   # Initial vortex 3
+
+  # Force calculation regions (around each vortex)
+  force_regions:
+    radius: 4.0  # Measure forces in small region around each center
+
+  # Expected Coulomb forces for validation
+  coulomb_validation:
+    enabled: true
+    k_effective: 1.0  # Effective Coulomb constant in SMFT units
+    charges: [1.0, 1.0, -1.0]
+
+output:
+  # Field data output
+  save_fields: true
+  save_interval: 50
+  output_dir: "output/three_body_em"
+
+  # What to save
+  fields:
+    - "theta"      # Phase field
+    - "R"          # Synchronization
+    - "Ex"         # Electric field x
+    - "Ey"         # Electric field y
+    - "Bz"         # Magnetic field z
+    - "phi"        # Scalar potential
+    - "Ax"         # Vector potential x
+    - "Ay"         # Vector potential y
+    - "charge"     # Charge density
+    - "current_x"  # Current density x
+    - "current_y"  # Current density y
+
+  # Force tracking
+  observables:
+    - "F1_x"       # Force on vortex 1, x-component
+    - "F1_y"       # Force on vortex 1, y-component
+    - "F2_x"       # Force on vortex 2, x-component
+    - "F2_y"       # Force on vortex 2, y-component
+    - "F3_x"       # Force on vortex 3, x-component
+    - "F3_y"       # Force on vortex 3, y-component
+    - "F_total"    # Total force magnitude check
+    - "energy_em"  # EM field energy
+    - "energy_interaction"  # Interaction energy
+
+validation:
+  # Superposition principle check
+  check_superposition: true
+  superposition_tolerance: 0.05  # 5% tolerance on force matching
+
+  # Energy conservation checks
+  check_energy: true
+  energy_tolerance: 0.01
+
+  # Force comparison with analytical Coulomb
+  force_comparison:
+    # F_12 = k*q1*q2/r12^2 * r̂_12
+    # F_13 = k*q1*q3/r13^2 * r̂_13
+    # F_total = F_12 + F_13
+    tolerance: 0.05  # 5% agreement with theory
+
+  # Physical bounds
+  max_field_strength: 100.0
+  max_force: 10.0
+
+  # Quality gates
+  gates:
+    - "Force agreement < 5% with Coulomb calculation"
+    - "Superposition verified: |F_total - (F_12 + F_13)| < tolerance"
+    - "Energy conservation < 1%"
+    - "Vortex stability maintained"
+
+# Analysis parameters
+analysis:
+  # Measure forces after initial transient
+  transient_steps: 100
+
+  # Force measurement method
+  force_method: "lorentz"  # F = q*(E + v×B)
+
+  # Time windows for averaging
+  averaging_window: 20  # Steps to average for steady-state force
+
+  # Output formats
+  save_trajectories: true
+  save_force_history: true
+  save_energy_history: true
+
+  # Comparison data
+  analytical_solution:
+    # Expected forces based on Coulomb's law
+    # r12 = 64*0.5 = 32 units
+    # r13 = r23 = sqrt((32*0.5)^2 + (32*0.5)^2) = 22.6 units
+    distances:
+      r12: 32.0
+      r13: 22.6
+      r23: 22.6
+    forces:
+      F12: 0.00098  # k*1*1/32^2
+      F13: 0.00196  # k*1*(-1)/22.6^2 (attractive)
+      F23: 0.00196  # k*1*(-1)/22.6^2 (attractive)
