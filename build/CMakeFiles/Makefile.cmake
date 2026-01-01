@@ -88,6 +88,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/FeatureSummary.cmake"
   "/usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake/Modules/FindPackageMessage.cmake"
+  "/usr/share/cmake/Modules/FindPkgConfig.cmake"
   "/usr/share/cmake/Modules/FindVulkan.cmake"
   "/usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake"
   "/usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake"
@@ -129,4 +130,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/imgui.dir/DependInfo.cmake"
   "CMakeFiles/SMFT.dir/DependInfo.cmake"
   "CMakeFiles/test_stuckelberg_vortex_bfield.dir/DependInfo.cmake"
+  "CMakeFiles/test_smft_em_integration.dir/DependInfo.cmake"
+  "CMakeFiles/test_dirac_em_coupling.dir/DependInfo.cmake"
   )

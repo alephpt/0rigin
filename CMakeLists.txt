@@ -36,6 +36,13 @@ if(NOT SDL2_FOUND)
     message(FATAL_ERROR "SDL2 not found")
 endif()
 
+# FFTW3
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(FFTW3 REQUIRED fftw3f)
+if(NOT FFTW3_FOUND)
+    message(FATAL_ERROR "FFTW3 not found")
+endif()
+
 # ============================================================================
 # PHYSICS LIBRARY (Stückelberg EM)
 # ============================================================================
@@ -180,6 +187,53 @@ set_target_properties(test_stuckelberg_vortex_bfield PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# SMFTEngine + Stückelberg EM integration test
+add_executable(test_smft_em_integration
+    test/test_smft_em_integration.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
+)
+
+target_link_libraries(test_smft_em_integration PRIVATE
+    Nova
+    Physics
+    imgui
+    Vulkan::Vulkan
+    fftw3f
+)
+
+target_include_directories(test_smft_em_integration PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+set_target_properties(test_smft_em_integration PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# DiracEvolution EM coupling test
+add_executable(test_dirac_em_coupling
+    test/test_dirac_em_coupling.cpp
+    src/DiracEvolution.cpp
+)
+
+target_link_libraries(test_dirac_em_coupling PRIVATE
+    ${FFTW3_LIBRARIES}
+)
+
+target_include_directories(test_dirac_em_coupling PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${FFTW3_INCLUDE_DIRS}
+)
+
+set_target_properties(test_dirac_em_coupling PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # ============================================================================
 # SUMMARY
 # ============================================================================
@@ -202,5 +256,6 @@ message(STATUS "       - GPU-accelerated Kuramoto dynamics")
 message(STATUS "       - CPU Dirac evolution (split-operator)")
 message(STATUS "       - Stückelberg EM coupling (ready to integrate)")
 message(STATUS "    • test_stuckelberg_vortex_bfield (EM validation)")
+message(STATUS "    • test_dirac_em_coupling (Dirac EM field coupling)")
 message(STATUS "")
 message(STATUS "===============================================")

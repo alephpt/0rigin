@@ -208,5 +208,59 @@
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stuckelberg_vortex_bfield.dir/test/test_stuckelberg_vortex_bfield.cpp.o -c /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_bfield.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_stuckelberg_vortex_bfield.cpp",
   "output": "CMakeFiles/test_stuckelberg_vortex_bfield.dir/test/test_stuckelberg_vortex_bfield.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_em_integration.dir/test/test_smft_em_integration.cpp.o -c /home/persist/neotec/0rigin/test/test_smft_em_integration.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_smft_em_integration.cpp",
+  "output": "CMakeFiles/test_smft_em_integration.dir/test/test_smft_em_integration.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_em_integration.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_smft_em_integration.dir/src/SMFTEngine.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_em_integration.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_smft_em_integration.dir/src/SMFTPipelineFactory.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_em_integration.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_smft_em_integration.dir/src/SMFTBufferManager.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_em_integration.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_smft_em_integration.dir/src/SMFTCompute.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_em_integration.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_smft_em_integration.dir/src/SMFTDescriptorManager.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft_em_integration.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "output": "CMakeFiles/test_smft_em_integration.dir/src/DiracEvolution.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_em_coupling.dir/test/test_dirac_em_coupling.cpp.o -c /home/persist/neotec/0rigin/test/test_dirac_em_coupling.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_dirac_em_coupling.cpp",
+  "output": "CMakeFiles/test_dirac_em_coupling.dir/test/test_dirac_em_coupling.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_em_coupling.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "output": "CMakeFiles/test_dirac_em_coupling.dir/src/DiracEvolution.cpp.o"
 }
 ]

@@ -128,43 +128,119 @@ void DiracEvolution::initialize(float x0, float y0, float sigma) {
               << x0 << ", " << y0 << ") with σ=" << sigma << std::endl;
 }
 
-void DiracEvolution::step(const std::vector<float>& mass_field, float dt) {
+void DiracEvolution::step(const std::vector<float>& mass_field, float dt,
+                         const std::vector<float>& A_x,
+                         const std::vector<float>& A_y,
+                         const std::vector<float>& A_z,
+                         const std::vector<float>& phi) {
     // Strang splitting: K/2 - V - K/2
-    applyKineticHalfStep(dt / 2.0f);
-    applyPotentialStep(mass_field, dt);
-    applyKineticHalfStep(dt / 2.0f);
+    // With EM fields: kinetic operator includes minimal coupling -iα·(∇ - ieA)
+    // Potential step includes both mass term βm(x) and scalar potential eφ
+
+    applyKineticHalfStep(dt / 2.0f, A_x, A_y, A_z);
+    applyPotentialStep(mass_field, dt, phi);
+    applyKineticHalfStep(dt / 2.0f, A_x, A_y, A_z);
 
     // Invalidate k-space cache after evolution
     _psi_k_valid = false;
 }
 
-void DiracEvolution::applyPotentialStep(const std::vector<float>& mass_field, float dt) {
-    // Potential: V = β * m(x,y)
-    // β = diag(1, 1, -1, -1) in standard representation
-    // exp(-iβmΔt) = diag(e^(-imΔt), e^(-imΔt), e^(+imΔt), e^(+imΔt))
+void DiracEvolution::applyPotentialStep(const std::vector<float>& mass_field, float dt,
+                                        const std::vector<float>& phi) {
+    /**
+     * Potential step: V = β·m(x,y) + e·φ(x,y)
+     *
+     * β = diag(1, 1, -1, -1) in standard representation
+     * The scalar potential φ contributes equally to all components (charge coupling)
+     *
+     * Evolution operator: exp(-i(βm + eφ)Δt)
+     *
+     * For upper components (β=+1): exp(-i(m + eφ)Δt)
+     * For lower components (β=-1): exp(-i(-m + eφ)Δt) = exp(i(m - eφ)Δt)
+     *
+     * Note: We use e=1 (natural units) for the elementary charge
+     */
+
+    // Check if scalar potential is provided
+    bool has_phi = !phi.empty();
+    const float e = 1.0f;  // Elementary charge in natural units
 
     for (uint32_t i = 0; i < _N_points; i++) {
         float m = mass_field[i];
-        std::complex<float> phase_plus(0.0f, -m * dt);  // e^(-imΔt)
-        std::complex<float> phase_minus(0.0f, +m * dt); // e^(+imΔt)
+        float phi_val = has_phi ? phi[i] : 0.0f;
 
         // Upper components: β = +1
-        _psi[0][i] *= std::exp(phase_plus);
-        _psi[1][i] *= std::exp(phase_plus);
+        std::complex<float> phase_upper(0.0f, -(m + e * phi_val) * dt);
+        _psi[0][i] *= std::exp(phase_upper);
+        _psi[1][i] *= std::exp(phase_upper);
 
         // Lower components: β = -1
-        _psi[2][i] *= std::exp(phase_minus);
-        _psi[3][i] *= std::exp(phase_minus);
+        std::complex<float> phase_lower(0.0f, (m - e * phi_val) * dt);
+        _psi[2][i] *= std::exp(phase_lower);
+        _psi[3][i] *= std::exp(phase_lower);
     }
 }
 
-void DiracEvolution::applyKineticHalfStep(float dt_half) {
-    // Forward FFT for all 4 components
+void DiracEvolution::applyKineticHalfStep(float dt_half,
+                                          const std::vector<float>& A_x,
+                                          const std::vector<float>& A_y,
+                                          const std::vector<float>& A_z) {
+    /**
+     * Kinetic operator with minimal coupling: K = α·π where π = -i∇ - eA
+     *
+     * Split-operator approach for gauge-invariant evolution:
+     * 1. Apply gauge phase exp(ieA·x) in position space (Peierls substitution)
+     * 2. FFT to momentum space
+     * 3. Apply free kinetic evolution exp(-iα·k·t)
+     * 4. Inverse FFT to position space
+     * 5. Apply inverse gauge phase exp(-ieA·x)
+     *
+     * This maintains gauge covariance and numerical stability.
+     *
+     * Note: For 2D system, we only use A_x and A_y. A_z is ignored if provided.
+     * Note: We use e=1 (natural units) for the elementary charge
+     */
+
+    const float e = 1.0f;  // Elementary charge in natural units
+    bool has_A = !A_x.empty() || !A_y.empty();
+
+    // Step 1: Apply gauge coupling via local phase transformation
+    // The proper implementation for minimal coupling in split-operator method
+    // uses exp(ieA·r) as a gauge transformation
+    if (has_A) {
+        // Apply gauge-covariant derivative transformation
+        // This implements π = p - eA via local U(1) gauge transformation
+        for (uint32_t j = 0; j < _Ny; j++) {
+            for (uint32_t i = 0; i < _Nx; i++) {
+                uint32_t idx = j * _Nx + i;
+
+                // Get vector potential at this point
+                float Ax = !A_x.empty() ? A_x[idx] : 0.0f;
+                float Ay = !A_y.empty() ? A_y[idx] : 0.0f;
+
+                // Apply gauge transformation that converts ∇ → ∇ - ieA
+                // The phase factor exp(ieA·r·dt) implements minimal coupling
+                // We use position relative to center to avoid boundary issues
+                float x_rel = (float)i - _Nx/2.0f;
+                float y_rel = (float)j - _Ny/2.0f;
+
+                float phase_arg = e * (Ax * x_rel + Ay * y_rel) * dt_half;
+                std::complex<float> gauge_phase = std::exp(std::complex<float>(0.0f, phase_arg));
+
+                // Apply to all spinor components
+                for (int c = 0; c < 4; c++) {
+                    _psi[c][idx] *= gauge_phase;
+                }
+            }
+        }
+    }
+
+    // Step 2: Forward FFT for all 4 components
     for (int c = 0; c < 4; c++) {
         fftwf_execute(static_cast<fftwf_plan>(_fft_forward[c]));
     }
 
-    // Apply kinetic operator in momentum space
+    // Step 3: Apply free kinetic operator in momentum space
     for (uint32_t j = 0; j < _Ny; j++) {
         for (uint32_t i = 0; i < _Nx; i++) {
             uint32_t idx = j * _Nx + i;
@@ -179,7 +255,7 @@ void DiracEvolution::applyKineticHalfStep(float dt_half) {
                 psi_k_point[c] = _psi_k[c][idx];
             }
 
-            // Apply Dirac kinetic matrix
+            // Apply Dirac kinetic matrix (free evolution)
             applyDiracKineticMatrix(psi_k_point, k_mag, kx, ky, dt_half);
 
             // Store result
@@ -189,7 +265,7 @@ void DiracEvolution::applyKineticHalfStep(float dt_half) {
         }
     }
 
-    // Inverse FFT for all 4 components
+    // Step 4: Inverse FFT for all 4 components
     for (int c = 0; c < 4; c++) {
         fftwf_execute(static_cast<fftwf_plan>(_fft_backward[c]));
 
@@ -197,6 +273,31 @@ void DiracEvolution::applyKineticHalfStep(float dt_half) {
         float norm_factor = 1.0f / _N_points;
         for (uint32_t i = 0; i < _N_points; i++) {
             _psi[c][i] *= norm_factor;
+        }
+    }
+
+    // Step 5: Apply inverse gauge transformation
+    if (has_A) {
+        for (uint32_t j = 0; j < _Ny; j++) {
+            for (uint32_t i = 0; i < _Nx; i++) {
+                uint32_t idx = j * _Nx + i;
+
+                // Get vector potential at this point
+                float Ax = !A_x.empty() ? A_x[idx] : 0.0f;
+                float Ay = !A_y.empty() ? A_y[idx] : 0.0f;
+
+                // Apply inverse gauge transformation
+                float x_rel = (float)i - _Nx/2.0f;
+                float y_rel = (float)j - _Ny/2.0f;
+
+                float phase_arg = -e * (Ax * x_rel + Ay * y_rel) * dt_half;
+                std::complex<float> inv_gauge_phase = std::exp(std::complex<float>(0.0f, phase_arg));
+
+                // Apply to all spinor components
+                for (int c = 0; c < 4; c++) {
+                    _psi[c][idx] *= inv_gauge_phase;
+                }
+            }
         }
     }
 }
@@ -382,22 +483,28 @@ void DiracEvolution::getMomentumDistribution(std::vector<float>& kx_out,
 /**
  * Compute total energy E = <Ψ|H|Ψ>
  *
- * Hamiltonian: H = -iα·∇ + βm(x)
+ * Hamiltonian with EM fields: H = -iα·(∇ - ieA) + βm(x) + eφ
+ * Without EM fields: H = -iα·∇ + βm(x)
  *
  * Decomposition:
- *   Kinetic:   E_K = ∫ Ψ*(x) [-iα·∇] Ψ(x) dx
- *            = Σ_k |Ψ̃_k|² ω(k)  where ω(k) = √(k² + m_0²)
+ *   Kinetic:   E_K = ∫ Ψ*(x) [-iα·(∇ - ieA)] Ψ(x) dx
+ *            = Σ_k |Ψ̃_k|² ω(k)  (in gauge where A=0, or after gauge transformation)
  *
- *   Potential: E_V = ∫ |Ψ(x)|² β m(x) dx
+ *   Potential: E_V = ∫ |Ψ(x)|² [β m(x) + eφ(x)] dx
  *
  * For Dirac equation in 2D with 4-component spinor:
  *   β = diag(1, 1, -1, -1)
  *
  * Note: m_0 (rest mass) is assumed ~0 in this implementation (massless Dirac limit)
  *       The mass term m(x) comes from SMFT coupling, not intrinsic mass.
+ *       The EM interaction energy includes both A·j (current coupling) and φ·ρ (charge coupling).
  */
 float DiracEvolution::getEnergy(const std::vector<float>& mass_field,
-                                float& KE_out, float& PE_out) const {
+                                float& KE_out, float& PE_out,
+                                const std::vector<float>& A_x,
+                                const std::vector<float>& A_y,
+                                const std::vector<float>& A_z,
+                                const std::vector<float>& phi) const {
 
     // === Part 1: Kinetic Energy (in momentum space) ===
     //
@@ -444,22 +551,64 @@ float DiracEvolution::getEnergy(const std::vector<float>& mass_field,
 
     // === Part 2: Potential Energy (in position space) ===
     //
-    // E_V = Σ_x |Ψ(x)|² β m(x)
+    // E_V = Σ_x |Ψ(x)|² [β m(x) + eφ(x)]
     //
     // β = diag(1, 1, -1, -1) → upper components contribute +m, lower contribute -m
+    // The scalar potential φ contributes to all components with same sign (charge density)
 
     float PE = 0.0f;
+    const float e = 1.0f;  // Elementary charge in natural units
+    bool has_phi = !phi.empty();
 
     for (uint32_t idx = 0; idx < _N_points; idx++) {
         float m = mass_field[idx];
+        float phi_val = has_phi ? phi[idx] : 0.0f;
 
         // Upper components (c=0,1): β = +1
         float density_upper = std::norm(_psi[0][idx]) + std::norm(_psi[1][idx]);
-        PE += density_upper * m;
+        PE += density_upper * (m + e * phi_val);
 
         // Lower components (c=2,3): β = -1
         float density_lower = std::norm(_psi[2][idx]) + std::norm(_psi[3][idx]);
-        PE -= density_lower * m;
+        PE += density_lower * (-m + e * phi_val);
+    }
+
+    // === Part 2b: Magnetic Energy (from vector potential) ===
+    //
+    // The interaction energy with the vector potential A contributes through
+    // the current density: E_mag = ∫ j·A dx where j = eΨ†αΨ
+    //
+    // For numerical stability, we compute this in position space directly
+    // using the Dirac current j^μ = Ψ†γ^μΨ where γ^i = α^i in our convention
+
+    if (!A_x.empty() || !A_y.empty()) {
+        for (uint32_t idx = 0; idx < _N_points; idx++) {
+            // Compute current density components j_x, j_y
+            // j_x = e·Ψ†α_xΨ where α_x = σ_x ⊗ I (acts on pairs)
+            // j_y = e·Ψ†α_yΨ where α_y = σ_y ⊗ I
+
+            // For α_x (σ_x couples components 0↔1 and 2↔3)
+            std::complex<float> j_x = e * (
+                std::conj(_psi[0][idx]) * _psi[1][idx] +
+                std::conj(_psi[1][idx]) * _psi[0][idx] +
+                std::conj(_psi[2][idx]) * _psi[3][idx] +
+                std::conj(_psi[3][idx]) * _psi[2][idx]
+            );
+
+            // For α_y (σ_y couples components 0↔1 and 2↔3 with i factor)
+            std::complex<float> j_y = e * std::complex<float>(0.0f, 1.0f) * (
+                -std::conj(_psi[0][idx]) * _psi[1][idx] +
+                std::conj(_psi[1][idx]) * _psi[0][idx] +
+                -std::conj(_psi[2][idx]) * _psi[3][idx] +
+                std::conj(_psi[3][idx]) * _psi[2][idx]
+            );
+
+            // Interaction energy: j·A
+            float Ax = !A_x.empty() ? A_x[idx] : 0.0f;
+            float Ay = !A_y.empty() ? A_y[idx] : 0.0f;
+
+            PE += j_x.real() * Ax + j_y.real() * Ay;
+        }
     }
 
     // === Total Energy ===

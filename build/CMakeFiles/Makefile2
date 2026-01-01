@@ -68,6 +68,8 @@ all: CMakeFiles/Nova.dir/all
 all: CMakeFiles/imgui.dir/all
 all: CMakeFiles/SMFT.dir/all
 all: CMakeFiles/test_stuckelberg_vortex_bfield.dir/all
+all: CMakeFiles/test_smft_em_integration.dir/all
+all: CMakeFiles/test_dirac_em_coupling.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
@@ -76,6 +78,8 @@ codegen: CMakeFiles/Nova.dir/codegen
 codegen: CMakeFiles/imgui.dir/codegen
 codegen: CMakeFiles/SMFT.dir/codegen
 codegen: CMakeFiles/test_stuckelberg_vortex_bfield.dir/codegen
+codegen: CMakeFiles/test_smft_em_integration.dir/codegen
+codegen: CMakeFiles/test_dirac_em_coupling.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -88,6 +92,8 @@ clean: CMakeFiles/Nova.dir/clean
 clean: CMakeFiles/imgui.dir/clean
 clean: CMakeFiles/SMFT.dir/clean
 clean: CMakeFiles/test_stuckelberg_vortex_bfield.dir/clean
+clean: CMakeFiles/test_smft_em_integration.dir/clean
+clean: CMakeFiles/test_dirac_em_coupling.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -227,7 +233,7 @@ CMakeFiles/SMFT.dir/clean:
 CMakeFiles/test_stuckelberg_vortex_bfield.dir/all: CMakeFiles/Physics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=39,40 "Built target test_stuckelberg_vortex_bfield"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=50,51 "Built target test_stuckelberg_vortex_bfield"
 .PHONY : CMakeFiles/test_stuckelberg_vortex_bfield.dir/all
 
 # Build rule for subdir invocation for target.
@@ -244,13 +250,79 @@ test_stuckelberg_vortex_bfield: CMakeFiles/test_stuckelberg_vortex_bfield.dir/ru
 # codegen rule for target.
 CMakeFiles/test_stuckelberg_vortex_bfield.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=39,40 "Finished codegen for target test_stuckelberg_vortex_bfield"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=50,51 "Finished codegen for target test_stuckelberg_vortex_bfield"
 .PHONY : CMakeFiles/test_stuckelberg_vortex_bfield.dir/codegen
 
 # clean rule for target.
 CMakeFiles/test_stuckelberg_vortex_bfield.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/clean
 .PHONY : CMakeFiles/test_stuckelberg_vortex_bfield.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_smft_em_integration.dir
+
+# All Build rule for target.
+CMakeFiles/test_smft_em_integration.dir/all: CMakeFiles/Physics.dir/all
+CMakeFiles/test_smft_em_integration.dir/all: CMakeFiles/Nova.dir/all
+CMakeFiles/test_smft_em_integration.dir/all: CMakeFiles/imgui.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=42,43,44,45,46,47,48,49 "Built target test_smft_em_integration"
+.PHONY : CMakeFiles/test_smft_em_integration.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_smft_em_integration.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 33
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_smft_em_integration.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_smft_em_integration.dir/rule
+
+# Convenience name for target.
+test_smft_em_integration: CMakeFiles/test_smft_em_integration.dir/rule
+.PHONY : test_smft_em_integration
+
+# codegen rule for target.
+CMakeFiles/test_smft_em_integration.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=42,43,44,45,46,47,48,49 "Finished codegen for target test_smft_em_integration"
+.PHONY : CMakeFiles/test_smft_em_integration.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_smft_em_integration.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/clean
+.PHONY : CMakeFiles/test_smft_em_integration.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_dirac_em_coupling.dir
+
+# All Build rule for target.
+CMakeFiles/test_dirac_em_coupling.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=39,40,41 "Built target test_dirac_em_coupling"
+.PHONY : CMakeFiles/test_dirac_em_coupling.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_dirac_em_coupling.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_dirac_em_coupling.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_dirac_em_coupling.dir/rule
+
+# Convenience name for target.
+test_dirac_em_coupling: CMakeFiles/test_dirac_em_coupling.dir/rule
+.PHONY : test_dirac_em_coupling
+
+# codegen rule for target.
+CMakeFiles/test_dirac_em_coupling.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=39,40,41 "Finished codegen for target test_dirac_em_coupling"
+.PHONY : CMakeFiles/test_dirac_em_coupling.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_dirac_em_coupling.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/clean
+.PHONY : CMakeFiles/test_dirac_em_coupling.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

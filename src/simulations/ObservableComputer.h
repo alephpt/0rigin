@@ -7,6 +7,9 @@
 #include <map>
 #include <string>
 
+// Forward declaration
+class SMFTEngine;
+
 /**
  * ObservableComputer - Centralized computation of all physical observables
  *
@@ -44,6 +47,11 @@ public:
         double R_min;
         double R_variance;
 
+        // EM field observables (Stückelberg gauge-restored)
+        double EM_B_max;          // Maximum magnetic field strength |B_z|
+        double EM_B_rms;          // RMS magnetic field
+        double EM_energy;         // Total EM field energy
+
         // Validation flags
         bool norm_valid;          // |norm_error| < tolerance
         bool energy_valid;        // |ΔE/E₀| < tolerance
@@ -59,6 +67,7 @@ public:
      * @param E0 Initial energy (for relative energy conservation check)
      * @param norm_tolerance Tolerance for ||Ψ||² ≈ 1 (default 1e-4)
      * @param energy_tolerance Tolerance for ΔE/E₀ (default 1e-2)
+     * @param engine Optional SMFTEngine pointer for EM observables (default nullptr)
      * @return Observables struct with all computed values
      */
     static Observables compute(
@@ -68,7 +77,8 @@ public:
         double time,
         double E0 = 0.0,
         double norm_tolerance = 1e-4,
-        double energy_tolerance = 1e-2);
+        double energy_tolerance = 1e-2,
+        const SMFTEngine* engine = nullptr);
 
     /**
      * Compute norm ||Ψ||² = ∫|Ψ|² dA

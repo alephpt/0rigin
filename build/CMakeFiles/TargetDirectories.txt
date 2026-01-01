@@ -3,5 +3,7 @@
 /home/persist/neotec/0rigin/build/CMakeFiles/imgui.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/SMFT.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_stuckelberg_vortex_bfield.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_smft_em_integration.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_dirac_em_coupling.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/edit_cache.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/rebuild_cache.dir

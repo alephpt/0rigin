@@ -181,6 +181,32 @@ test_stuckelberg_vortex_bfield/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/build
 .PHONY : test_stuckelberg_vortex_bfield/fast
 
+#=============================================================================
+# Target rules for targets named test_smft_em_integration
+
+# Build rule for target.
+test_smft_em_integration: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_smft_em_integration
+.PHONY : test_smft_em_integration
+
+# fast build rule for target.
+test_smft_em_integration/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/build
+.PHONY : test_smft_em_integration/fast
+
+#=============================================================================
+# Target rules for targets named test_dirac_em_coupling
+
+# Build rule for target.
+test_dirac_em_coupling: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_dirac_em_coupling
+.PHONY : test_dirac_em_coupling
+
+# fast build rule for target.
+test_dirac_em_coupling/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/build
+.PHONY : test_dirac_em_coupling/fast
+
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
 
@@ -715,6 +741,8 @@ src/DiracEvolution.o: src/DiracEvolution.cpp.o
 # target to build an object file
 src/DiracEvolution.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/src/DiracEvolution.cpp.o
 .PHONY : src/DiracEvolution.cpp.o
 
 src/DiracEvolution.i: src/DiracEvolution.cpp.i
@@ -723,6 +751,8 @@ src/DiracEvolution.i: src/DiracEvolution.cpp.i
 # target to preprocess a source file
 src/DiracEvolution.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/src/DiracEvolution.cpp.i
 .PHONY : src/DiracEvolution.cpp.i
 
 src/DiracEvolution.s: src/DiracEvolution.cpp.s
@@ -731,6 +761,8 @@ src/DiracEvolution.s: src/DiracEvolution.cpp.s
 # target to generate assembly for a file
 src/DiracEvolution.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/src/DiracEvolution.cpp.s
 .PHONY : src/DiracEvolution.cpp.s
 
 src/SMFTBufferManager.o: src/SMFTBufferManager.cpp.o
@@ -739,6 +771,7 @@ src/SMFTBufferManager.o: src/SMFTBufferManager.cpp.o
 # target to build an object file
 src/SMFTBufferManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTBufferManager.cpp.o
 .PHONY : src/SMFTBufferManager.cpp.o
 
 src/SMFTBufferManager.i: src/SMFTBufferManager.cpp.i
@@ -747,6 +780,7 @@ src/SMFTBufferManager.i: src/SMFTBufferManager.cpp.i
 # target to preprocess a source file
 src/SMFTBufferManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTBufferManager.cpp.i
 .PHONY : src/SMFTBufferManager.cpp.i
 
 src/SMFTBufferManager.s: src/SMFTBufferManager.cpp.s
@@ -755,6 +789,7 @@ src/SMFTBufferManager.s: src/SMFTBufferManager.cpp.s
 # target to generate assembly for a file
 src/SMFTBufferManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTBufferManager.cpp.s
 .PHONY : src/SMFTBufferManager.cpp.s
 
 src/SMFTCompute.o: src/SMFTCompute.cpp.o
@@ -763,6 +798,7 @@ src/SMFTCompute.o: src/SMFTCompute.cpp.o
 # target to build an object file
 src/SMFTCompute.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTCompute.cpp.o
 .PHONY : src/SMFTCompute.cpp.o
 
 src/SMFTCompute.i: src/SMFTCompute.cpp.i
@@ -771,6 +807,7 @@ src/SMFTCompute.i: src/SMFTCompute.cpp.i
 # target to preprocess a source file
 src/SMFTCompute.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTCompute.cpp.i
 .PHONY : src/SMFTCompute.cpp.i
 
 src/SMFTCompute.s: src/SMFTCompute.cpp.s
@@ -779,6 +816,7 @@ src/SMFTCompute.s: src/SMFTCompute.cpp.s
 # target to generate assembly for a file
 src/SMFTCompute.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTCompute.cpp.s
 .PHONY : src/SMFTCompute.cpp.s
 
 src/SMFTCore.o: src/SMFTCore.cpp.o
@@ -811,6 +849,7 @@ src/SMFTDescriptorManager.o: src/SMFTDescriptorManager.cpp.o
 # target to build an object file
 src/SMFTDescriptorManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTDescriptorManager.cpp.o
 .PHONY : src/SMFTDescriptorManager.cpp.o
 
 src/SMFTDescriptorManager.i: src/SMFTDescriptorManager.cpp.i
@@ -819,6 +858,7 @@ src/SMFTDescriptorManager.i: src/SMFTDescriptorManager.cpp.i
 # target to preprocess a source file
 src/SMFTDescriptorManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTDescriptorManager.cpp.i
 .PHONY : src/SMFTDescriptorManager.cpp.i
 
 src/SMFTDescriptorManager.s: src/SMFTDescriptorManager.cpp.s
@@ -827,6 +867,7 @@ src/SMFTDescriptorManager.s: src/SMFTDescriptorManager.cpp.s
 # target to generate assembly for a file
 src/SMFTDescriptorManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTDescriptorManager.cpp.s
 .PHONY : src/SMFTDescriptorManager.cpp.s
 
 src/SMFTEngine.o: src/SMFTEngine.cpp.o
@@ -835,6 +876,7 @@ src/SMFTEngine.o: src/SMFTEngine.cpp.o
 # target to build an object file
 src/SMFTEngine.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTEngine.cpp.o
 .PHONY : src/SMFTEngine.cpp.o
 
 src/SMFTEngine.i: src/SMFTEngine.cpp.i
@@ -843,6 +885,7 @@ src/SMFTEngine.i: src/SMFTEngine.cpp.i
 # target to preprocess a source file
 src/SMFTEngine.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTEngine.cpp.i
 .PHONY : src/SMFTEngine.cpp.i
 
 src/SMFTEngine.s: src/SMFTEngine.cpp.s
@@ -851,6 +894,7 @@ src/SMFTEngine.s: src/SMFTEngine.cpp.s
 # target to generate assembly for a file
 src/SMFTEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTEngine.cpp.s
 .PHONY : src/SMFTEngine.cpp.s
 
 src/SMFTPipelineFactory.o: src/SMFTPipelineFactory.cpp.o
@@ -859,6 +903,7 @@ src/SMFTPipelineFactory.o: src/SMFTPipelineFactory.cpp.o
 # target to build an object file
 src/SMFTPipelineFactory.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTPipelineFactory.cpp.o
 .PHONY : src/SMFTPipelineFactory.cpp.o
 
 src/SMFTPipelineFactory.i: src/SMFTPipelineFactory.cpp.i
@@ -867,6 +912,7 @@ src/SMFTPipelineFactory.i: src/SMFTPipelineFactory.cpp.i
 # target to preprocess a source file
 src/SMFTPipelineFactory.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTPipelineFactory.cpp.i
 .PHONY : src/SMFTPipelineFactory.cpp.i
 
 src/SMFTPipelineFactory.s: src/SMFTPipelineFactory.cpp.s
@@ -875,6 +921,7 @@ src/SMFTPipelineFactory.s: src/SMFTPipelineFactory.cpp.s
 # target to generate assembly for a file
 src/SMFTPipelineFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/src/SMFTPipelineFactory.cpp.s
 .PHONY : src/SMFTPipelineFactory.cpp.s
 
 src/output/OutputManager.o: src/output/OutputManager.cpp.o
@@ -997,6 +1044,54 @@ src/simulations/TestConfig.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.s
 .PHONY : src/simulations/TestConfig.cpp.s
 
+test/test_dirac_em_coupling.o: test/test_dirac_em_coupling.cpp.o
+.PHONY : test/test_dirac_em_coupling.o
+
+# target to build an object file
+test/test_dirac_em_coupling.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/test/test_dirac_em_coupling.cpp.o
+.PHONY : test/test_dirac_em_coupling.cpp.o
+
+test/test_dirac_em_coupling.i: test/test_dirac_em_coupling.cpp.i
+.PHONY : test/test_dirac_em_coupling.i
+
+# target to preprocess a source file
+test/test_dirac_em_coupling.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/test/test_dirac_em_coupling.cpp.i
+.PHONY : test/test_dirac_em_coupling.cpp.i
+
+test/test_dirac_em_coupling.s: test/test_dirac_em_coupling.cpp.s
+.PHONY : test/test_dirac_em_coupling.s
+
+# target to generate assembly for a file
+test/test_dirac_em_coupling.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_em_coupling.dir/build.make CMakeFiles/test_dirac_em_coupling.dir/test/test_dirac_em_coupling.cpp.s
+.PHONY : test/test_dirac_em_coupling.cpp.s
+
+test/test_smft_em_integration.o: test/test_smft_em_integration.cpp.o
+.PHONY : test/test_smft_em_integration.o
+
+# target to build an object file
+test/test_smft_em_integration.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/test/test_smft_em_integration.cpp.o
+.PHONY : test/test_smft_em_integration.cpp.o
+
+test/test_smft_em_integration.i: test/test_smft_em_integration.cpp.i
+.PHONY : test/test_smft_em_integration.i
+
+# target to preprocess a source file
+test/test_smft_em_integration.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/test/test_smft_em_integration.cpp.i
+.PHONY : test/test_smft_em_integration.cpp.i
+
+test/test_smft_em_integration.s: test/test_smft_em_integration.cpp.s
+.PHONY : test/test_smft_em_integration.s
+
+# target to generate assembly for a file
+test/test_smft_em_integration.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft_em_integration.dir/build.make CMakeFiles/test_smft_em_integration.dir/test/test_smft_em_integration.cpp.s
+.PHONY : test/test_smft_em_integration.cpp.s
+
 test/test_stuckelberg_vortex_bfield.o: test/test_stuckelberg_vortex_bfield.cpp.o
 .PHONY : test/test_stuckelberg_vortex_bfield.o
 
@@ -1033,6 +1128,8 @@ help:
 	@echo "... Physics"
 	@echo "... SMFT"
 	@echo "... imgui"
+	@echo "... test_dirac_em_coupling"
+	@echo "... test_smft_em_integration"
 	@echo "... test_stuckelberg_vortex_bfield"
 	@echo "... lib/Nova/Core/components/genesis.o"
 	@echo "... lib/Nova/Core/components/genesis.i"
@@ -1136,6 +1233,12 @@ help:
 	@echo "... src/simulations/TestConfig.o"
 	@echo "... src/simulations/TestConfig.i"
 	@echo "... src/simulations/TestConfig.s"
+	@echo "... test/test_dirac_em_coupling.o"
+	@echo "... test/test_dirac_em_coupling.i"
+	@echo "... test/test_dirac_em_coupling.s"
+	@echo "... test/test_smft_em_integration.o"
+	@echo "... test/test_smft_em_integration.i"
+	@echo "... test/test_smft_em_integration.s"
 	@echo "... test/test_stuckelberg_vortex_bfield.o"
 	@echo "... test/test_stuckelberg_vortex_bfield.i"
 	@echo "... test/test_stuckelberg_vortex_bfield.s"

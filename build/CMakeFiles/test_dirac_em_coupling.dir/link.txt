@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_dirac_em_coupling.dir/link.d CMakeFiles/test_dirac_em_coupling.dir/test/test_dirac_em_coupling.cpp.o CMakeFiles/test_dirac_em_coupling.dir/src/DiracEvolution.cpp.o -o bin/test_dirac_em_coupling  -lfftw3f

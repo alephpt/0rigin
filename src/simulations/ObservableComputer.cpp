@@ -1,4 +1,5 @@
 #include "simulations/ObservableComputer.h"
+#include "SMFTEngine.h"
 #include <cmath>
 #include <numeric>
 #include <algorithm>
@@ -12,7 +13,8 @@ ObservableComputer::Observables ObservableComputer::compute(
     double time,
     double E0,
     double norm_tolerance,
-    double energy_tolerance) {
+    double energy_tolerance,
+    const SMFTEngine* engine) {
 
     Observables obs;
     obs.time = time;
@@ -35,6 +37,39 @@ ObservableComputer::Observables ObservableComputer::compute(
     obs.R_max = R_max;
     obs.R_min = R_min;
     obs.R_variance = R_var;
+
+    // EM field observables (if engine provided)
+    if (engine != nullptr) {
+        const auto& B_z = engine->getEM_Bz();
+
+        if (!B_z.empty()) {
+            // Compute B_max and B_rms from B_z field
+            double B_max = 0.0;
+            double B_sq_sum = 0.0;
+
+            for (float B_val : B_z) {
+                double B_abs = std::abs(static_cast<double>(B_val));
+                B_max = std::max(B_max, B_abs);
+                B_sq_sum += B_val * B_val;
+            }
+
+            double B_rms = std::sqrt(B_sq_sum / B_z.size());
+
+            obs.EM_B_max = B_max;
+            obs.EM_B_rms = B_rms;
+        } else {
+            obs.EM_B_max = 0.0;
+            obs.EM_B_rms = 0.0;
+        }
+
+        // Get EM energy
+        obs.EM_energy = static_cast<double>(engine->getEM_Energy());
+    } else {
+        // No EM data available
+        obs.EM_B_max = 0.0;
+        obs.EM_B_rms = 0.0;
+        obs.EM_energy = 0.0;
+    }
 
     // Validation
     obs.norm_valid = std::abs(obs.norm_error) < norm_tolerance;
@@ -268,6 +303,9 @@ std::string ObservableComputer::toCSVLine(const Observables& obs) {
         << obs.R_max << ","
         << obs.R_min << ","
         << obs.R_variance << ","
+        << obs.EM_B_max << ","
+        << obs.EM_B_rms << ","
+        << obs.EM_energy << ","
         << (obs.norm_valid ? 1 : 0) << ","
         << (obs.energy_valid ? 1 : 0);
 
@@ -279,5 +317,6 @@ std::string ObservableComputer::getCSVHeader() {
            "pos_x_re,pos_x_im,pos_y_re,pos_y_im,"
            "mom_x_re,mom_x_im,mom_y_re,mom_y_im,"
            "R_avg,R_max,R_min,R_var,"
+           "EM_B_max,EM_B_rms,EM_energy,"
            "norm_valid,energy_valid";
 }

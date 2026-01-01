@@ -1,5 +1,6 @@
 #include "SMFTEngine.h"
 #include "DiracEvolution.h"
+#include "physics/StuckelbergEM.h"
 #include <cstring>
 #include <algorithm>
 #include <cmath>
@@ -116,6 +117,7 @@ SMFTEngine::SMFTEngine(Nova* nova)
       _dirac_pipeline_layout(VK_NULL_HANDLE),
       _dirac_evolution(nullptr),
       _dirac_initialized(false),  // Initialize Dirac field flag
+      _stuckelberg_em(nullptr),  // Initialize Stückelberg EM
       _substep_count(0),
       _substep_ratio(10),  // Default: 10 Kuramoto steps per Dirac step
       _lambda_coupling(0.0f),
@@ -161,6 +163,12 @@ SMFTEngine::~SMFTEngine() {
         _dirac_evolution = nullptr;
     }
 
+    // Clean up Stückelberg EM
+    if (_stuckelberg_em) {
+        delete _stuckelberg_em;
+        _stuckelberg_em = nullptr;
+    }
+
     // Clean up all Vulkan resources
     destroyResources();
 }
@@ -191,6 +199,13 @@ void SMFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     _gravity_x_data.resize(total);
     _gravity_y_data.resize(total);
 
+    // Initialize EM field arrays
+    _em_Ax.resize(total);
+    _em_Ay.resize(total);
+    _em_Az.resize(total);
+    _em_phi.resize(total);
+    _em_Bz.resize(total);
+
     // Initialize spinor field for Phase 3
     // Each point has 4 complex components (8 floats total)
     _spinor_field.resize(4 * total);
@@ -202,6 +217,19 @@ void SMFTEngine::initialize(uint32_t Nx, uint32_t Ny, float Delta, float chiral_
     std::fill(_gravity_x_data.begin(), _gravity_x_data.end(), 0.0f);
     std::fill(_gravity_y_data.begin(), _gravity_y_data.end(), 0.0f);
     std::fill(_spinor_field.begin(), _spinor_field.end(), std::complex<float>(0.0f, 0.0f));
+
+    // Initialize EM fields to zero
+    std::fill(_em_Ax.begin(), _em_Ax.end(), 0.0f);
+    std::fill(_em_Ay.begin(), _em_Ay.end(), 0.0f);
+    std::fill(_em_Az.begin(), _em_Az.end(), 0.0f);
+    std::fill(_em_phi.begin(), _em_phi.end(), 0.0f);
+    std::fill(_em_Bz.begin(), _em_Bz.end(), 0.0f);
+
+    // Initialize Stückelberg EM (photon mass = 0.01 for stability)
+    if (!_stuckelberg_em) {
+        _stuckelberg_em = new physics::StuckelbergEM(_Nx, _Ny, 1.0f, 0.01f);
+        std::cout << "[SMFTEngine] Initialized Stückelberg EM with photon mass = 0.01" << std::endl;
+    }
 
     // Create GPU resources
     createBuffers();
@@ -976,8 +1004,50 @@ void SMFTEngine::stepWithDirac(float dt, float lambda_coupling, int substep_rati
         mass_field[i] = _Delta * R_field[i];
     }
 
-    // Split-operator evolution step (unitary, preserves norm exactly)
-    _dirac_evolution->step(mass_field, dt);
+    // === STÜCKELBERG EM EVOLUTION ===
+    // Download current phase field from GPU for EM coupling
+    downloadFromGPU();
+
+    if (_stuckelberg_em) {
+        // Direct coupling: phi = theta (proven in test_stuckelberg_vortex_bfield)
+        // This couples the phase field directly to the Stückelberg scalar
+        _stuckelberg_em->computePotentials(_theta_data.data(), R_field.data(),
+                                           _Nx, _Ny, 1.0f, dt);
+
+        // Compute field strengths (B field)
+        _stuckelberg_em->computeFieldStrengths();
+
+        // Extract EM fields for Dirac coupling
+        for (uint32_t j = 0; j < _Ny; j++) {
+            for (uint32_t i = 0; i < _Nx; i++) {
+                uint32_t idx = j * _Nx + i;
+
+                // Get gauge-invariant potentials A'_μ = A_μ + ∂_μφ/e
+                _em_Ax[idx] = _stuckelberg_em->getAprimeX(i, j);
+                _em_Ay[idx] = _stuckelberg_em->getAprimeY(i, j);
+                _em_Az[idx] = 0.0f; // 2D system
+
+                // Get Stückelberg scalar (direct coupling to theta)
+                _em_phi[idx] = _stuckelberg_em->getPhiAt(i, j);
+
+                // Get magnetic field for observables
+                auto field_tensor = _stuckelberg_em->getFieldAt(i, j);
+                _em_Bz[idx] = field_tensor.Bz; // B_z component
+            }
+        }
+
+        // Log EM field strength periodically
+        static int em_log_count = 0;
+        if (em_log_count++ % 100 == 0) {
+            float max_B = *std::max_element(_em_Bz.begin(), _em_Bz.end());
+            float em_energy = _stuckelberg_em->computeFieldEnergy();
+            std::cout << "[stepWithDirac] EM: max|B_z|=" << max_B
+                     << ", energy=" << em_energy << std::endl;
+        }
+    }
+
+    // Split-operator evolution step WITH EM FIELDS (minimal coupling)
+    _dirac_evolution->step(mass_field, dt, _em_Ax, _em_Ay, _em_Az, _em_phi);
 
     // Optional: Feedback to phase field (via lambda_coupling)
     if (lambda_coupling > 0.0f && _theta_data.size() == _Nx * _Ny) {
@@ -1015,6 +1085,17 @@ const DiracEvolution* SMFTEngine::getDiracEvolution() const {
      * Returns nullptr if not initialized
      */
     return _dirac_evolution;
+}
+
+float SMFTEngine::getEM_Energy() const {
+    /**
+     * Get total electromagnetic field energy from Stückelberg EM
+     * Returns 0 if EM not initialized
+     */
+    if (_stuckelberg_em) {
+        return _stuckelberg_em->computeFieldEnergy();
+    }
+    return 0.0f;
 }
 
 // ============================================================================

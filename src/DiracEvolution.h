@@ -19,8 +19,15 @@ public:
     // Initialize 4-component spinor field
     void initialize(float x0, float y0, float sigma);
 
-    // Split-operator evolution step
-    void step(const std::vector<float>& mass_field, float dt);
+    // Split-operator evolution step with optional EM field coupling
+    // A_x, A_y, A_z: Vector potential components (default empty = no EM field)
+    // phi: Scalar potential (Stückelberg scalar) (default empty = no scalar field)
+    // Empty vectors preserve backward compatibility (pure mass field evolution)
+    void step(const std::vector<float>& mass_field, float dt,
+              const std::vector<float>& A_x = {},
+              const std::vector<float>& A_y = {},
+              const std::vector<float>& A_z = {},
+              const std::vector<float>& phi = {});
 
     // Get spinor density |Ψ|² at each point
     std::vector<float> getDensity() const;
@@ -57,7 +64,9 @@ public:
 
     // === CRITICAL DIAGNOSTIC: Energy ===
 
-    // Compute total energy E = <Ψ|H|Ψ> where H = -iα·∇ + βm(x)
+    // Compute total energy E = <Ψ|H|Ψ>
+    // where H = -iα·(∇ - ieA) + βm(x) + eφ (with EM fields)
+    //      or H = -iα·∇ + βm(x) (without EM fields)
     // Returns: Total energy (kinetic + potential)
     //
     // For bound state: E < 0
@@ -65,7 +74,11 @@ public:
     //
     // Also returns KE and PE separately via output parameters
     float getEnergy(const std::vector<float>& mass_field,
-                   float& KE_out, float& PE_out) const;
+                   float& KE_out, float& PE_out,
+                   const std::vector<float>& A_x = {},
+                   const std::vector<float>& A_y = {},
+                   const std::vector<float>& A_z = {},
+                   const std::vector<float>& phi = {}) const;
 
 private:
     uint32_t _Nx, _Ny;
@@ -86,8 +99,12 @@ private:
     mutable bool _psi_k_valid;
 
     // Split-operator sub-steps
-    void applyPotentialStep(const std::vector<float>& mass_field, float dt);
-    void applyKineticHalfStep(float dt_half);
+    void applyPotentialStep(const std::vector<float>& mass_field, float dt,
+                           const std::vector<float>& phi = {});
+    void applyKineticHalfStep(float dt_half,
+                              const std::vector<float>& A_x = {},
+                              const std::vector<float>& A_y = {},
+                              const std::vector<float>& A_z = {});
 
     // Helper: apply Dirac kinetic matrix at single k-point
     void applyDiracKineticMatrix(std::complex<float> psi_k[4],

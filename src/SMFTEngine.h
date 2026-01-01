@@ -9,8 +9,11 @@
 #include <complex>
 #include <memory>
 
-// Forward declaration
+// Forward declarations
 class DiracEvolution;
+namespace physics {
+    class StuckelbergEM;
+}
 
 /**
  * SMFTEngine - Synchronization Mass Field Theory Physics Compute Engine
@@ -156,6 +159,18 @@ public:
     const DiracEvolution* getDiracEvolution() const;
 
     /**
+     * Get EM observables from Stückelberg gauge-restored fields
+     * @return Vector of B_z field values (size = Nx * Ny)
+     */
+    const std::vector<float>& getEM_Bz() const { return _em_Bz; }
+
+    /**
+     * Get EM field energy
+     * @return Total electromagnetic field energy
+     */
+    float getEM_Energy() const;
+
+    /**
      * Set the substep ratio N for operator splitting adiabatic approximation
      * N = ratio of fast (Kuramoto) to slow (Dirac) timescales
      * Typical values: 10 (testing), 100 (production)
@@ -246,6 +261,12 @@ private:
     // Dirac field state (CPU-side, avoiding GPU timeouts)
     class DiracEvolution* _dirac_evolution;  // Split-operator Dirac evolution
     bool _dirac_initialized;
+
+    // Stückelberg EM fields (CPU-side)
+    physics::StuckelbergEM* _stuckelberg_em;  // Gauge-restored EM implementation
+    std::vector<float> _em_Ax, _em_Ay, _em_Az;  // Vector potential components
+    std::vector<float> _em_phi;                  // Scalar potential (Stückelberg)
+    std::vector<float> _em_Bz;                   // Magnetic field for observables
 
     // Operator splitting state for GPU-CPU hybrid
     int _substep_count;              // Current substep counter

@@ -183,10 +183,11 @@ bool SMFTTestRunner::runSingleTest(int N) {
             ObservableComputer::Observables obs;
 
             if (dirac) {
-                // Compute full observables with Dirac state
+                // Compute full observables with Dirac state (including EM if available)
                 obs = ObservableComputer::compute(
                     *dirac, R_field_d, _config.physics.delta, time,
-                    E0, _config.validation.norm_tolerance, _config.validation.energy_tolerance
+                    E0, _config.validation.norm_tolerance, _config.validation.energy_tolerance,
+                    _engine  // Pass engine for EM observables
                 );
             } else {
                 // Fallback if Dirac not initialized
@@ -504,6 +505,43 @@ void SMFTTestRunner::generateReport(const std::string& output_path) const {
             report << "  Energy: max_drift = " << std::scientific << std::setprecision(3)
                    << result.max_energy_drift << " (threshold: " << _config.validation.energy_tolerance << ")" << std::endl;
         }
+    }
+
+    // EM Field Statistics (if available)
+    report << "\n[EM Field Observables]" << std::endl;
+    bool has_em_data = false;
+    for (const auto& [N, observables] : _results) {
+        if (!observables.empty() && (observables.back().EM_B_max > 0.0 || observables.back().EM_energy > 0.0)) {
+            has_em_data = true;
+            report << "\nN=" << N << ":" << std::endl;
+
+            // Get initial and final EM observables
+            const auto& obs_initial = observables.front();
+            const auto& obs_final = observables.back();
+
+            report << "  Initial: B_max = " << std::scientific << std::setprecision(3) << obs_initial.EM_B_max
+                   << ", B_rms = " << obs_initial.EM_B_rms
+                   << ", E_EM = " << obs_initial.EM_energy << std::endl;
+
+            report << "  Final:   B_max = " << std::scientific << std::setprecision(3) << obs_final.EM_B_max
+                   << ", B_rms = " << obs_final.EM_B_rms
+                   << ", E_EM = " << obs_final.EM_energy << std::endl;
+
+            // EM energy conservation check
+            if (obs_initial.EM_energy > 0.0) {
+                double em_drift = std::abs(obs_final.EM_energy - obs_initial.EM_energy) / obs_initial.EM_energy;
+                report << "  EM energy drift: " << std::scientific << std::setprecision(3) << em_drift;
+                if (em_drift < 0.01) {
+                    report << " ✓ CONSERVED" << std::endl;
+                } else {
+                    report << " ✗ DRIFT DETECTED" << std::endl;
+                }
+            }
+        }
+    }
+
+    if (!has_em_data) {
+        report << "  No EM data available (EM integration not enabled)" << std::endl;
     }
 
     report << "\n[Overall Result]" << std::endl;

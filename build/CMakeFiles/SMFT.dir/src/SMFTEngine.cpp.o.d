@@ -409,6 +409,9 @@ CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o: \
  /usr/include/c++/15.2.1/bits/istream.tcc \
  /usr/include/c++/15.2.1/bits/sstream.tcc \
  /home/persist/neotec/0rigin/src/DiracEvolution.h \
+ /home/persist/neotec/0rigin/include/physics/StuckelbergEM.h \
+ /home/persist/neotec/0rigin/include/physics/GaugeTheory.h \
+ /home/persist/neotec/0rigin/include/physics/PhysicsTypes.h \
  /usr/include/c++/15.2.1/algorithm \
  /usr/include/c++/15.2.1/bits/stl_algo.h \
  /usr/include/c++/15.2.1/bits/algorithmfwd.h \
