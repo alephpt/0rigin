@@ -1,0 +1,33 @@
+===== SMFT Test Report =====
+Test: scenario_2.5A_klein_gordon_comparison
+Description: Klein-Gordon vs Dirac comparison at high velocities (Phase 2.5A)
+
+[Configuration]
+Grid: 128 x 128
+Delta: 1
+Coupling: 0.1
+Total steps: 5000
+dt: 0.01
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+Detected Scenario: 2.3
+
+N=10 Global Validation: ✗ FAIL
+  ✗ Energy Conservation: Energy drift: 9.367785%
+  ✓ R Field Bounds: R field within [0,1]
+
+--- Legacy Validation Metrics ---
+
+Convergence Validation: ✗ FAIL
+  Convergence errors: []
+
+N=10: ✗ FAIL
+  Norm: max_error = 8.326e-01 (threshold: 5.000e-01)
+  Energy: max_drift = 1.601e-01 (threshold: 1.000e-02)
+
+[Overall Result]
+✗ SOME TESTS FAILED
+
+===== End of Report ====

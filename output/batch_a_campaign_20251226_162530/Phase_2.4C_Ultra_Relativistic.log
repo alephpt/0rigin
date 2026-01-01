@@ -1,0 +1,592 @@
+
+===== SMFT Test Mode =====
+Configuration: config/scenario_2.4C_ultra_relativistic.yaml
+
+[1/3] Initializing...
+
+===== Test Configuration: scenario_2.4C_ultra_relativistic =====
+Description: Phase 2 Scenario 2.4C: Ultra-relativistic regime with ultra-fine grid. Tests v=[0.7, 0.8, 0.9]c on 512×512 grid to rule out grid resolution issues and probe fundamental SMFT limitations at v→c.
+
+[Grid]
+  size: 512 x 512
+
+[Physics]
+  solver_type: dirac
+  delta: 1
+  coupling: 0.1
+  dt: 0.005
+  total_steps: 10000
+  K (Kuramoto): 1
+  damping: 0.1
+  noise_strength: 0
+
+[Initial Conditions - Dirac]
+  type: boosted_gaussian
+  center: (32, 32)
+  sigma: 3
+  amplitude: 1
+
+[Initial Conditions - Kuramoto]
+  phase_distribution: vortex
+  omega_distribution: zero
+  omega_mean: 0
+  omega_std: 0.1
+
+[Operator Splitting]
+  enabled: yes
+  substep_ratios: [10]
+
+[Validation]
+  norm_tolerance: 0.01
+  energy_tolerance: 0.02
+  convergence_tolerance: 0.05
+
+[Output]
+  directory: output/scenario_2.4C_ultra_relativistic
+  save_every: 20 steps
+  formats: [csv]
+========================================
+
+ [INFO]: Nova - Instantiating ..
+Logger - Debug Level set to error ..
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 512 x 512 oscillators
+
+[SMFTEngine] Created GPU buffers for 512x512 grid
+  Phase buffers: 1048576 bytes each
+  Spinor buffer: 8388608 bytes
+  Accumulator buffers: 1048576 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251226_183613_scenario_2.4C_ultra_relativistic
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251226_183613_scenario_2.4C_ultra_relativistic
+✓ SMFTTestRunner initialized successfully
+
+[2/3] Running tests...
+
+===== Running Tests =====
+
+========================================
+Velocity: v=0.7c
+========================================
+
+Initializing engine for 512×512 grid, velocity v=0.7c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 512 x 512 oscillators
+
+[SMFTEngine] Created GPU buffers for 512x512 grid
+  Phase buffers: 1048576 bytes each
+  Spinor buffer: 8388608 bytes
+  Accumulator buffers: 1048576 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251226_183613_scenario_2.4C_ultra_relativistic_512x512_v0.7
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251226_183613_scenario_2.4C_ultra_relativistic_512x512_v0.7
+[Logging] Console output for 512x512 v=0.7c writing to: /home/persist/neotec/0rigin/output/20251226_183613_scenario_2.4C_ultra_relativistic_512x512_v0.7/console.log
+
+--- Testing with N=10 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 0.195312 ℓ_P
+    Core radius: 3 ℓ_P (15.36 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (256, 256) grid units
+    Grid width: 15.36 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 512x512 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (256, 256) grid units
+  Width: σ = 15.36 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Pre-normalization: ∫|Ψ|² = 1482.38
+  Normalization factor: 38.5017
+[DiracEvolution] Initialized Gaussian wavepacket at (256, 256) with σ=15.36
+  Final norm: ||Ψ||² = 0.999982
+  Initial position: <r> = (255.999, 255.998)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(256,256), sigma=15.36, boost=(0.7,0)c, norm=0.999982, <r>=(255.999,255.998)
+[DiracEvolution] Initialized 512x512 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (256, 256) grid units
+  Width: σ = 15.36 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Pre-normalization: ∫|Ψ|² = 1482.38
+  Normalization factor: 38.5017
+[DiracEvolution] Initialized Gaussian wavepacket at (256, 256) with σ=15.36
+  Final norm: ||Ψ||² = 0.999982
+  Initial position: <r> = (255.999, 255.998)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.69123
+  Initial norm = 1.00001
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=10
+  substep_dt=0.0005
+  half_substeps=5
+  remaining_substeps=5
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/10000 | R_avg = 0.994462 | norm = 1.00001
+  Step 200/10000 | R_avg = 0.99446 | norm = 0.999934
+  Step 400/10000 | R_avg = 0.994429 | norm = 0.999861
+  Step 600/10000 | R_avg = 0.994403 | norm = 0.99979
+  Step 800/10000 | R_avg = 0.994417 | norm = 0.999719
+  Step 1000/10000 | R_avg = 0.994433 | norm = 0.999649
+  Step 1200/10000 | R_avg = 0.994368 | norm = 0.999579
+  Step 1400/10000 | R_avg = 0.994466 | norm = 0.99951
+  Step 1600/10000 | R_avg = 0.994464 | norm = 0.999441
+  Step 1800/10000 | R_avg = 0.994438 | norm = 0.999373
+  Step 2000/10000 | R_avg = 0.994454 | norm = 0.999304
+  Step 2200/10000 | R_avg = 0.994475 | norm = 0.999236
+  Step 2400/10000 | R_avg = 0.994473 | norm = 0.999167
+  Saved spatial snapshot at t = 12.5 (step 2500)
+  Step 2600/10000 | R_avg = 0.99449 | norm = 0.999098
+  Step 2800/10000 | R_avg = 0.994433 | norm = 0.999029
+  Step 3000/10000 | R_avg = 0.994421 | norm = 0.99896
+  Step 3200/10000 | R_avg = 0.994494 | norm = 0.998889
+  Step 3400/10000 | R_avg = 0.994465 | norm = 0.998818
+  Step 3600/10000 | R_avg = 0.994443 | norm = 0.998745
+  Step 3800/10000 | R_avg = 0.994461 | norm = 0.998672
+  Step 4000/10000 | R_avg = 0.994462 | norm = 0.998597
+  Step 4200/10000 | R_avg = 0.994409 | norm = 0.998522
+  Step 4400/10000 | R_avg = 0.994493 | norm = 0.998445
+  Step 4600/10000 | R_avg = 0.994453 | norm = 0.998367
+  Step 4800/10000 | R_avg = 0.994456 | norm = 0.998288
+  Saved spatial snapshot at t = 25 (step 5000)
+  Step 5000/10000 | R_avg = 0.99447 | norm = 0.998208
+  Step 5200/10000 | R_avg = 0.994423 | norm = 0.998126
+  Step 5400/10000 | R_avg = 0.994463 | norm = 0.998044
+  Step 5600/10000 | R_avg = 0.994477 | norm = 0.997961
+  Step 5800/10000 | R_avg = 0.994436 | norm = 0.997876
+  Step 6000/10000 | R_avg = 0.994456 | norm = 0.997789
+  Step 6200/10000 | R_avg = 0.994373 | norm = 0.997701
+  Step 6400/10000 | R_avg = 0.994412 | norm = 0.997612
+  Step 6600/10000 | R_avg = 0.994409 | norm = 0.997522
+  Step 6800/10000 | R_avg = 0.994405 | norm = 0.99743
+  Step 7000/10000 | R_avg = 0.994417 | norm = 0.997337
+  Step 7200/10000 | R_avg = 0.994436 | norm = 0.997244
+  Step 7400/10000 | R_avg = 0.994406 | norm = 0.99715
+  Saved spatial snapshot at t = 37.5 (step 7500)
+  Step 7600/10000 | R_avg = 0.994438 | norm = 0.997054
+  Step 7800/10000 | R_avg = 0.99447 | norm = 0.996959
+  Step 8000/10000 | R_avg = 0.994465 | norm = 0.996862
+  Step 8200/10000 | R_avg = 0.994486 | norm = 0.996765
+  Step 8400/10000 | R_avg = 0.994467 | norm = 0.996667
+  Step 8600/10000 | R_avg = 0.994447 | norm = 0.996569
+  Step 8800/10000 | R_avg = 0.994454 | norm = 0.996471
+  Step 9000/10000 | R_avg = 0.994419 | norm = 0.996372
+  Step 9200/10000 | R_avg = 0.994419 | norm = 0.996273
+  Step 9400/10000 | R_avg = 0.994439 | norm = 0.996175
+  Step 9600/10000 | R_avg = 0.994486 | norm = 0.996076
+  Step 9800/10000 | R_avg = 0.994407 | norm = 0.995977
+  Saved spatial snapshot at t = 49.995 (step 9999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.995879 (drift: 0.412865% from initial 1.00001) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.6773 (drift: 0.0657698% from initial 1.6762) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.480439 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.3: Relativistic Mass Validation =====
+  Boost velocity: v = 0.7c
+  Theoretical gamma: γ = 1.40028
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  ✗ 4. ψ(x,y,t=0) is Gaussian at offset position: Wavepacket variance = 2.55883e-09 ✗ FAIL (too uniform, not Gaussian)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%): ⟨p⟩ = 0.82973 (expect 0.980196, error = 15.3506%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory: γ_measured = 1.4793 (γ_theory = 1.40028, error = 5.64283%) ✗ FAIL (exceeds 5% tolerance)
+  Norm validation: max_error = 0.00412117 ✓ PASS
+  Energy validation: max_drift = 0.00473735 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_183613_scenario_2.4C_ultra_relativistic_512x512_v0.7/N_10/observables.csv
+
+--- Validating Convergence ---
+✗ Convergence validation FAILED
+
+========================================
+Velocity: v=0.8c
+========================================
+
+Initializing engine for 512×512 grid, velocity v=0.8c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 512 x 512 oscillators
+
+[SMFTEngine] Created GPU buffers for 512x512 grid
+  Phase buffers: 1048576 bytes each
+  Spinor buffer: 8388608 bytes
+  Accumulator buffers: 1048576 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251226_192401_scenario_2.4C_ultra_relativistic_512x512_v0.8
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251226_192401_scenario_2.4C_ultra_relativistic_512x512_v0.8
+[Logging] Console output for 512x512 v=0.8c writing to: /home/persist/neotec/0rigin/output/20251226_192401_scenario_2.4C_ultra_relativistic_512x512_v0.8/console.log
+
+--- Testing with N=10 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 0.195312 ℓ_P
+    Core radius: 3 ℓ_P (15.36 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (256, 256) grid units
+    Grid width: 15.36 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 512x512 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (256, 256) grid units
+  Width: σ = 15.36 grid units
+  Velocity: v = (0.8, 0)c
+  |v| = 0.8c
+  Lorentz factor: γ = 1.66667
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (1.33333, 0) m_P·c
+  |p| = 1.33333 m_P·c
+  Pre-normalization: ∫|Ψ|² = 1482.38
+  Normalization factor: 38.5017
+[DiracEvolution] Initialized Gaussian wavepacket at (256, 256) with σ=15.36
+  Final norm: ||Ψ||² = 0.999982
+  Initial position: <r> = (255.999, 255.998)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(256,256), sigma=15.36, boost=(0.8,0)c, norm=0.999982, <r>=(255.999,255.998)
+[DiracEvolution] Initialized 512x512 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (256, 256) grid units
+  Width: σ = 15.36 grid units
+  Velocity: v = (0.8, 0)c
+  |v| = 0.8c
+  Lorentz factor: γ = 1.66667
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (1.33333, 0) m_P·c
+  |p| = 1.33333 m_P·c
+  Pre-normalization: ∫|Ψ|² = 1482.38
+  Normalization factor: 38.5017
+[DiracEvolution] Initialized Gaussian wavepacket at (256, 256) with σ=15.36
+  Final norm: ||Ψ||² = 0.999982
+  Initial position: <r> = (255.999, 255.998)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.94491
+  Initial norm = 1.00001
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/10000 | R_avg = 0.994412 | norm = 1.00001
+  Step 200/10000 | R_avg = 0.994401 | norm = 0.999929
+  Step 400/10000 | R_avg = 0.994428 | norm = 0.999851
+  Step 600/10000 | R_avg = 0.994475 | norm = 0.999775
+  Step 800/10000 | R_avg = 0.994496 | norm = 0.999699
+  Step 1000/10000 | R_avg = 0.994436 | norm = 0.999624
+  Step 1200/10000 | R_avg = 0.994443 | norm = 0.99955
+  Step 1400/10000 | R_avg = 0.99447 | norm = 0.999476
+  Step 1600/10000 | R_avg = 0.994461 | norm = 0.999402
+  Step 1800/10000 | R_avg = 0.99444 | norm = 0.999329
+  Step 2000/10000 | R_avg = 0.994443 | norm = 0.999255
+  Step 2200/10000 | R_avg = 0.994428 | norm = 0.999182
+  Step 2400/10000 | R_avg = 0.99439 | norm = 0.999109
+  Saved spatial snapshot at t = 12.5 (step 2500)
+  Step 2600/10000 | R_avg = 0.994425 | norm = 0.999035
+  Step 2800/10000 | R_avg = 0.994432 | norm = 0.998961
+  Step 3000/10000 | R_avg = 0.9944 | norm = 0.998886
+  Step 3200/10000 | R_avg = 0.994462 | norm = 0.998811
+  Step 3400/10000 | R_avg = 0.994433 | norm = 0.998735
+  Step 3600/10000 | R_avg = 0.994414 | norm = 0.998657
+  Step 3800/10000 | R_avg = 0.99446 | norm = 0.998579
+  Step 4000/10000 | R_avg = 0.99448 | norm = 0.9985
+  Step 4200/10000 | R_avg = 0.994478 | norm = 0.998419
+  Step 4400/10000 | R_avg = 0.994471 | norm = 0.998338
+  Step 4600/10000 | R_avg = 0.994427 | norm = 0.998255
+  Step 4800/10000 | R_avg = 0.994676 | norm = 0.998171
+  Saved spatial snapshot at t = 25 (step 5000)
+  Step 5000/10000 | R_avg = 0.994649 | norm = 0.998086
+  Step 5200/10000 | R_avg = 0.99466 | norm = 0.998
+  Step 5400/10000 | R_avg = 0.994622 | norm = 0.997913
+  Step 5600/10000 | R_avg = 0.994631 | norm = 0.997825
+  Step 5800/10000 | R_avg = 0.994658 | norm = 0.997735
+  Step 6000/10000 | R_avg = 0.994642 | norm = 0.997643
+  Step 6200/10000 | R_avg = 0.994592 | norm = 0.99755
+  Step 6400/10000 | R_avg = 0.994556 | norm = 0.997456
+  Step 6600/10000 | R_avg = 0.99465 | norm = 0.997361
+  Step 6800/10000 | R_avg = 0.99443 | norm = 0.997264
+  Step 7000/10000 | R_avg = 0.994631 | norm = 0.997166
+  Step 7200/10000 | R_avg = 0.994666 | norm = 0.997068
+  Step 7400/10000 | R_avg = 0.994495 | norm = 0.996968
+  Saved spatial snapshot at t = 37.5 (step 7500)
+  Step 7600/10000 | R_avg = 0.994638 | norm = 0.996868
+  Step 7800/10000 | R_avg = 0.994483 | norm = 0.996767
+  Step 8000/10000 | R_avg = 0.994626 | norm = 0.996664
+  Step 8200/10000 | R_avg = 0.99445 | norm = 0.996562
+  Step 8400/10000 | R_avg = 0.994629 | norm = 0.996458
+  Step 8600/10000 | R_avg = 0.994663 | norm = 0.996355
+  Step 8800/10000 | R_avg = 0.99465 | norm = 0.996251
+  Step 9000/10000 | R_avg = 0.994654 | norm = 0.996147
+  Step 9200/10000 | R_avg = 0.994644 | norm = 0.996043
+  Step 9400/10000 | R_avg = 0.994658 | norm = 0.995938
+  Step 9600/10000 | R_avg = 0.99469 | norm = 0.995834
+  Step 9800/10000 | R_avg = 0.99469 | norm = 0.995729
+  Saved spatial snapshot at t = 49.995 (step 9999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.995625 (drift: 0.438254% from initial 1.00001) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.94035 (drift: 0.556416% from initial 1.92961) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.492426 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.3: Relativistic Mass Validation =====
+  Boost velocity: v = 0.8c
+  Theoretical gamma: γ = 1.66667
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  ✗ 4. ψ(x,y,t=0) is Gaussian at offset position: Wavepacket variance = 2.55883e-09 ✗ FAIL (too uniform, not Gaussian)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%): ⟨p⟩ = 0.970915 (expect 1.33333, error = 27.1814%) ✗ FAIL (exceeds 5% tolerance)
+  ✓ 6. γ_measured(t=final) within 5% of theory: γ_measured = 1.69783 (γ_theory = 1.66667, error = 1.87001%) ✓ PASS
+  Norm validation: max_error = 0.00437509 ✓ PASS
+  Energy validation: max_drift = 0.00837844 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_192401_scenario_2.4C_ultra_relativistic_512x512_v0.8/N_10/observables.csv
+
+--- Validating Convergence ---
+✗ Convergence validation FAILED
+
+========================================
+Velocity: v=0.9c
+========================================
+
+Initializing engine for 512×512 grid, velocity v=0.9c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 512 x 512 oscillators
+
+[SMFTEngine] Created GPU buffers for 512x512 grid
+  Phase buffers: 1048576 bytes each
+  Spinor buffer: 8388608 bytes
+  Accumulator buffers: 1048576 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251226_201728_scenario_2.4C_ultra_relativistic_512x512_v0.9
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251226_201728_scenario_2.4C_ultra_relativistic_512x512_v0.9
+[Logging] Console output for 512x512 v=0.9c writing to: /home/persist/neotec/0rigin/output/20251226_201728_scenario_2.4C_ultra_relativistic_512x512_v0.9/console.log
+
+--- Testing with N=10 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 0.195312 ℓ_P
+    Core radius: 3 ℓ_P (15.36 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (256, 256) grid units
+    Grid width: 15.36 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 512x512 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (256, 256) grid units
+  Width: σ = 15.36 grid units
+  Velocity: v = (0.9, 0)c
+  |v| = 0.9c
+  Lorentz factor: γ = 2.29416
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (2.06474, 0) m_P·c
+  |p| = 2.06474 m_P·c
+  Pre-normalization: ∫|Ψ|² = 1482.38
+  Normalization factor: 38.5017
+[DiracEvolution] Initialized Gaussian wavepacket at (256, 256) with σ=15.36
+  Final norm: ||Ψ||² = 0.999982
+  Initial position: <r> = (255.999, 255.998)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(256,256), sigma=15.36, boost=(0.9,0)c, norm=0.999982, <r>=(255.999,255.998)
+[DiracEvolution] Initialized 512x512 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (256, 256) grid units
+  Width: σ = 15.36 grid units
+  Velocity: v = (0.9, 0)c
+  |v| = 0.9c
+  Lorentz factor: γ = 2.29416
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (2.06474, 0) m_P·c
+  |p| = 2.06474 m_P·c
+  Pre-normalization: ∫|Ψ|² = 1482.38
+  Normalization factor: 38.5017
+[DiracEvolution] Initialized Gaussian wavepacket at (256, 256) with σ=15.36
+  Final norm: ||Ψ||² = 0.999982
+  Initial position: <r> = (255.999, 255.998)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.77619
+  Initial norm = 1.00001
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/10000 | R_avg = 0.994673 | norm = 1.00001
+  Step 200/10000 | R_avg = 0.994438 | norm = 0.999926
+  Step 400/10000 | R_avg = 0.99467 | norm = 0.999845
+  Step 600/10000 | R_avg = 0.994673 | norm = 0.999765
+  Step 800/10000 | R_avg = 0.994651 | norm = 0.999686
+  Step 1000/10000 | R_avg = 0.994662 | norm = 0.999608
+  Step 1200/10000 | R_avg = 0.994632 | norm = 0.99953
+  Step 1400/10000 | R_avg = 0.994648 | norm = 0.999454
+  Step 1600/10000 | R_avg = 0.994465 | norm = 0.999377
+  Step 1800/10000 | R_avg = 0.994662 | norm = 0.999301
+  Step 2000/10000 | R_avg = 0.99454 | norm = 0.999225
+  Step 2200/10000 | R_avg = 0.994658 | norm = 0.999149
+  Step 2400/10000 | R_avg = 0.994657 | norm = 0.999074
+  Saved spatial snapshot at t = 12.5 (step 2500)
+  Step 2600/10000 | R_avg = 0.994647 | norm = 0.998998
+  Step 2800/10000 | R_avg = 0.994627 | norm = 0.998921
+  Step 3000/10000 | R_avg = 0.994482 | norm = 0.998845
+  Step 3200/10000 | R_avg = 0.994631 | norm = 0.998767
+  Step 3400/10000 | R_avg = 0.994568 | norm = 0.998689
+  Step 3600/10000 | R_avg = 0.994661 | norm = 0.99861
+  Step 3800/10000 | R_avg = 0.994644 | norm = 0.998531
+  Step 4000/10000 | R_avg = 0.994584 | norm = 0.99845
+  Step 4200/10000 | R_avg = 0.994646 | norm = 0.998368
+  Step 4400/10000 | R_avg = 0.994653 | norm = 0.998286
+  Step 4600/10000 | R_avg = 0.994682 | norm = 0.998202
+  Step 4800/10000 | R_avg = 0.994567 | norm = 0.998117
+  Saved spatial snapshot at t = 25 (step 5000)
+  Step 5000/10000 | R_avg = 0.994646 | norm = 0.998032
+  Step 5200/10000 | R_avg = 0.994466 | norm = 0.997945
+  Step 5400/10000 | R_avg = 0.994506 | norm = 0.997857
+  Step 5600/10000 | R_avg = 0.99466 | norm = 0.997767
+  Step 5800/10000 | R_avg = 0.99465 | norm = 0.997676
+  Step 6000/10000 | R_avg = 0.994657 | norm = 0.997583
+  Step 6200/10000 | R_avg = 0.994645 | norm = 0.997489
+  Step 6400/10000 | R_avg = 0.994663 | norm = 0.997394
+  Step 6600/10000 | R_avg = 0.994645 | norm = 0.997297
+  Step 6800/10000 | R_avg = 0.994691 | norm = 0.9972
+  Step 7000/10000 | R_avg = 0.994611 | norm = 0.997101
+  Step 7200/10000 | R_avg = 0.994478 | norm = 0.997002
+  Step 7400/10000 | R_avg = 0.994664 | norm = 0.996902
+  Saved spatial snapshot at t = 37.5 (step 7500)
+  Step 7600/10000 | R_avg = 0.99443 | norm = 0.996801
+  Step 7800/10000 | R_avg = 0.994637 | norm = 0.996699
+  Step 8000/10000 | R_avg = 0.99447 | norm = 0.996597
+  Step 8200/10000 | R_avg = 0.994557 | norm = 0.996493
+  Step 8400/10000 | R_avg = 0.994429 | norm = 0.99639
+  Step 8600/10000 | R_avg = 0.994477 | norm = 0.996286
+  Step 8800/10000 | R_avg = 0.994439 | norm = 0.996182
+  Step 9000/10000 | R_avg = 0.994531 | norm = 0.996077
+  Step 9200/10000 | R_avg = 0.994641 | norm = 0.995972
+  Step 9400/10000 | R_avg = 0.994667 | norm = 0.995867
+  Step 9600/10000 | R_avg = 0.994657 | norm = 0.995762
+  Step 9800/10000 | R_avg = 0.994448 | norm = 0.995656
+  Saved spatial snapshot at t = 49.995 (step 9999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✓ Probability Conservation: ||ψ||² = 0.995551 (drift: 0.445659% from initial 1.00001) ✓ PASS
+  ✗ Energy Conservation: E_total = 1.80769 (drift: 2.63749% from initial 1.76124) ✗ FAIL (exceeds tolerance 2%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.488182 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.3: Relativistic Mass Validation =====
+  Boost velocity: v = 0.9c
+  Theoretical gamma: γ = 2.29416
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  ✗ 4. ψ(x,y,t=0) is Gaussian at offset position: Wavepacket variance = 2.55883e-09 ✗ FAIL (too uniform, not Gaussian)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%): ⟨p⟩ = 0.879546 (expect 2.06474, error = 57.4016%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory: γ_measured = 1.58653 (γ_theory = 2.29416, error = 30.8447%) ✗ FAIL (exceeds 5% tolerance)
+  Norm validation: max_error = 0.00444916 ✓ PASS
+  Energy validation: max_drift = 0.0279547 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_201728_scenario_2.4C_ultra_relativistic_512x512_v0.9/N_10/observables.csv
+Test failed for N=10
+
+--- Validating Convergence ---
+✗ Convergence validation FAILED
+Tests failed for velocity 0.9
+
+===== Velocity Sweep Aggregate Analysis =====
+
+Analyzing velocity sweep results...
+Grid size: 512×512
+Velocities tested: 3
+
+=== Relativistic Gamma Comparison ===
+Velocity | γ_theory | γ_measured | Error (%) | Status
+---------|----------|------------|-----------|-------
+0.70c    | 1.4003   | 1.4003     |  0.00%    | PASS
+0.80c    | 1.6667   | 1.4793     | 11.24%    | FAIL
+0.90c    | 2.2942   | 1.6978     | 25.99%    | FAIL
+
+=== Critical Velocity Analysis ===
+v_critical ≈ 0.744c (interpolated threshold where γ error exceeds 5%)
+✓ High critical velocity (>0.7c) - good relativistic accuracy
+
+✓ Velocity sweep report saved to: /home/persist/neotec/0rigin/output/20251226_201728_scenario_2.4C_ultra_relativistic_512x512_AGGREGATE/velocity_sweep_analysis.txt
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251226_201728_scenario_2.4C_ultra_relativistic_512x512_v0.9/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete

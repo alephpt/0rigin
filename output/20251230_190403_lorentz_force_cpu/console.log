@@ -1,0 +1,314 @@
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251230_190403_lorentz_force_cpu/console.log
+  Dirac initialization (DEPRECATED grid units):
+    Position: (32, 32) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+  Initial energy E0 = 0.105161
+  Initial norm = 1
+
+--- Initializing Test Particle for Lorentz Force ---
+  Particle initialized at (55, 50) ℓ_P
+  Initial velocity: (0, 0.01) c
+  Charge: -1, Mass: 0.1 (natural units)
+  Verified state: pos=(55,50), vel=(0,0.01)
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.01
+  half_substeps=0
+  remaining_substeps=1
+[GPU EM Compute] 1 calls | Last: 219 μs | Avg: 219 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0260029, potential: -4094.26, total: -4094.24 (κ=1)
+  Actual initial energy E0 = -4093.83 (from first observation including EM)
+  Using uniform B field: B_z = 0.1 everywhere
+  Step 0/10000 | R_avg = 0.999783 | norm = 1
+[GPU EM Compute] 50 calls | Last: 109 μs | Avg: 102 μs | Grid: 64×64
+[GPU EM Compute] 100 calls | Last: 99 μs | Avg: 102 μs | Grid: 64×64
+[GPU EM Compute] 150 calls | Last: 98 μs | Avg: 101 μs | Grid: 64×64
+[GPU EM Compute] 200 calls | Last: 98 μs | Avg: 101 μs | Grid: 64×64
+[GPU EM Compute] 250 calls | Last: 108 μs | Avg: 101 μs | Grid: 64×64
+[GPU EM Compute] 300 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 350 calls | Last: 97 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 400 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 450 calls | Last: 104 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 500 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+  Step 500/10000 | R_avg = 0.999913 | norm = 0.999921
+[GPU EM Compute] 550 calls | Last: 99 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 600 calls | Last: 105 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 650 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 700 calls | Last: 105 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 750 calls | Last: 100 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 800 calls | Last: 99 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 850 calls | Last: 103 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 900 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 950 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 1000 calls | Last: 97 μs | Avg: 100 μs | Grid: 64×64
+  Particle at step 1000: pos=(54.9996,50.002), vel=(-0.00357519,0.00964126)
+  Step 1000/10000 | R_avg = 0.999831 | norm = 0.999833
+[GPU EM Compute] 1050 calls | Last: 102 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 1100 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 1150 calls | Last: 99 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 1200 calls | Last: 99 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 1250 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 1300 calls | Last: 47 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1350 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1400 calls | Last: 101 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1450 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1500 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+  Step 1500/10000 | R_avg = 0.999806 | norm = 0.999746
+[GPU EM Compute] 1550 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1600 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1650 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1700 calls | Last: 106 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1750 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1800 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1850 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1900 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 1950 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2000 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+  Particle at step 2000: pos=(54.9986,50.0038), vel=(-0.00700679,0.00857951)
+  Step 2000/10000 | R_avg = 0.999881 | norm = 0.99966
+[GPU EM Compute] 2050 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2100 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2150 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2200 calls | Last: 62 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2250 calls | Last: 97 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2300 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2350 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2400 calls | Last: 104 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2450 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2500 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+  Step 2500/10000 | R_avg = 0.999824 | norm = 0.999568
+[GPU EM Compute] 2550 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2600 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2650 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2700 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2750 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2800 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2850 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2900 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 2950 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3000 calls | Last: 115 μs | Avg: 99 μs | Grid: 64×64
+  Particle at step 3000: pos=(54.9969,50.0054), vel=(-0.0101591,0.00685719)
+  Step 3000/10000 | R_avg = 0.999847 | norm = 0.99948
+[GPU EM Compute] 3050 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3100 calls | Last: 101 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3150 calls | Last: 97 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3200 calls | Last: 94 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3250 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3300 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3350 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3400 calls | Last: 107 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3450 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3500 calls | Last: 90 μs | Avg: 99 μs | Grid: 64×64
+  Step 3500/10000 | R_avg = 0.999907 | norm = 0.999392
+[GPU EM Compute] 3550 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3600 calls | Last: 97 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3650 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3700 calls | Last: 97 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3750 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3800 calls | Last: 62 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3850 calls | Last: 105 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3900 calls | Last: 106 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 3950 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4000 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+  Particle at step 4000: pos=(54.9945,50.0065), vel=(-0.0129076,0.00454283)
+  Step 4000/10000 | R_avg = 0.999865 | norm = 0.999304
+[GPU EM Compute] 4050 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4100 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 4150 calls | Last: 71 μs | Avg: 99 μs | Grid: 64×64
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 4200 calls | Last: 106 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4250 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4300 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4350 calls | Last: 103 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4400 calls | Last: 101 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4450 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4500 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+  Step 4500/10000 | R_avg = 0.999863 | norm = 0.999217
+[GPU EM Compute] 4550 calls | Last: 101 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4600 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4650 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4700 calls | Last: 103 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4750 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4800 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4850 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4900 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 4950 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5000 calls | Last: 105 μs | Avg: 99 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0165027, potential: -4094.86, total: -4094.84 (κ=1)
+  Particle at step 5000: pos=(54.9917,50.0071), vel=(-0.0151438,0.00172835)
+  Step 5000/10000 | R_avg = 0.999858 | norm = 0.999129
+[GPU EM Compute] 5050 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5100 calls | Last: 105 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5150 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5200 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5250 calls | Last: 105 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5300 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5350 calls | Last: 104 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5400 calls | Last: 55 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5450 calls | Last: 103 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5500 calls | Last: 97 μs | Avg: 99 μs | Grid: 64×64
+  Step 5500/10000 | R_avg = 0.999833 | norm = 0.999043
+[GPU EM Compute] 5550 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5600 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5650 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5700 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5750 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5800 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5850 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5900 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 5950 calls | Last: 104 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6000 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+  Particle at step 6000: pos=(54.9885,50.0072), vel=(-0.0167798,-0.00147462)
+  Step 6000/10000 | R_avg = 0.999849 | norm = 0.998954
+[GPU EM Compute] 6050 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6100 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6150 calls | Last: 105 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6200 calls | Last: 70 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6250 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6300 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6350 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6400 calls | Last: 113 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6450 calls | Last: 113 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6500 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+  Step 6500/10000 | R_avg = 0.9998 | norm = 0.998866
+[GPU EM Compute] 6550 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6600 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6650 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6700 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6750 calls | Last: 104 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6800 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6850 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6900 calls | Last: 110 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 6950 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7000 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+  Particle at step 7000: pos=(54.9851,50.0065), vel=(-0.0177514,-0.00493921)
+  Step 7000/10000 | R_avg = 0.999819 | norm = 0.998782
+[GPU EM Compute] 7050 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7100 calls | Last: 105 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7150 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7200 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7250 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7300 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7350 calls | Last: 62 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7400 calls | Last: 103 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7450 calls | Last: 107 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7500 calls | Last: 103 μs | Avg: 99 μs | Grid: 64×64
+  Step 7500/10000 | R_avg = 0.999848 | norm = 0.998694
+[GPU EM Compute] 7550 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7600 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7650 calls | Last: 103 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7700 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7750 calls | Last: 105 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7800 calls | Last: 104 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7850 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7900 calls | Last: 104 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 7950 calls | Last: 103 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8000 calls | Last: 105 μs | Avg: 100 μs | Grid: 64×64
+  Particle at step 8000: pos=(54.9815,50.0052), vel=(-0.0180208,-0.0085283)
+  Step 8000/10000 | R_avg = 0.999813 | norm = 0.998605
+[GPU EM Compute] 8050 calls | Last: 102 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8100 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8150 calls | Last: 99 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8200 calls | Last: 103 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8250 calls | Last: 100 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8300 calls | Last: 104 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8350 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8400 calls | Last: 99 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 8450 calls | Last: 97 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8500 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+  Step 8500/10000 | R_avg = 0.999835 | norm = 0.99852
+[GPU EM Compute] 8550 calls | Last: 102 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8600 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8650 calls | Last: 97 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8700 calls | Last: 52 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8750 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8800 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8850 calls | Last: 105 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8900 calls | Last: 103 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 8950 calls | Last: 100 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 9000 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+  Particle at step 9000: pos=(54.9779,50.0031), vel=(-0.0175781,-0.0121)
+  Step 9000/10000 | R_avg = 0.999812 | norm = 0.998432
+[GPU EM Compute] 9050 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 9100 calls | Last: 74 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 9150 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 9200 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 9250 calls | Last: 100 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9300 calls | Last: 100 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9350 calls | Last: 106 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9400 calls | Last: 101 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9450 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9500 calls | Last: 99 μs | Avg: 100 μs | Grid: 64×64
+  Step 9500/10000 | R_avg = 0.999809 | norm = 0.998342
+[GPU EM Compute] 9550 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9600 calls | Last: 99 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9650 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9700 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9750 calls | Last: 98 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9800 calls | Last: 98 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 9850 calls | Last: 101 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9900 calls | Last: 101 μs | Avg: 100 μs | Grid: 64×64
+[GPU EM Compute] 9950 calls | Last: 99 μs | Avg: 99 μs | Grid: 64×64
+[GPU EM Compute] 10000 calls | Last: 58 μs | Avg: 99 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0170573, potential: -4094.72, total: -4094.7 (κ=1)
+
+===== Lorentz Force Analysis =====
+Error: Could not open /home/persist/neotec/0rigin/output/20251230_190403_lorentz_force_cpu/N_1/particle_trajectory.csv for writing
+  Particle trajectory saved to: /home/persist/neotec/0rigin/output/20251230_190403_lorentz_force_cpu/N_1/particle_trajectory.csv
+  Average magnetic field: B_avg = 0.1
+
+Theoretical predictions:
+  Cyclotron frequency: ω_c = 1 rad/τ_P
+  Larmor radius: r_L = 0.1 ℓ_P
+
+Measured from trajectory:
+  Orbital period: T = 0 τ_P
+  Orbital radius: r = 0.00755935 ℓ_P
+  Orbital frequency: ω = 0 rad/τ_P
+
+Validation:
+  Frequency error: 100%
+  Radius error: 92.4406%
+  Lorentz force validation: ✗ FAIL
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998259 (drift: 0.174165% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4094.29 (drift: 0.0112784% from initial -4093.83) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 4.49485e-08 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00174119 ✓ PASS
+  Energy validation: max_drift = 0.00030491 ✓ PASS
+
+===== EM Field Validation =====
+Maxwell Equation Residuals:
+  Gauss law (∇·E - 4πρ): 0 ✓
+  No monopole (∇·B): 0 ✓
+  Faraday law (∇×E + ∂B/∂t): 0 ✓
+  Ampere law (∇×B - 4πJ - ∂E/∂t): 1.59579e-07 ✓
+Overall Maxwell Validation: ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251230_190403_lorentz_force_cpu/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251230_190403_lorentz_force_cpu/N_1/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251230_190403_lorentz_force_cpu/N_1/em_observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251230_190403_lorentz_force_cpu/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%

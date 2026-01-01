@@ -1,0 +1,272 @@
+[Logging] Console output for 64x64 v=0.3c writing to: /home/persist/neotec/0rigin/output/20251228_162332_em_coupling_uniform_field_64x64_v0.3/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (32, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(32,32), sigma=1.92, boost=(0.3,0)c, norm=1, <r>=(32,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.31054
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.01
+  half_substeps=0
+  remaining_substeps=1
+  Saved spatial snapshot at t = 0 (step 0)
+  Actual initial energy E0 = 1.31704 (from first observation including EM)
+  Step 0/2000 | R_avg = 0.999753 | norm = 1
+  Step 100/2000 | R_avg = 0.99976 | norm = 0.999978
+  Step 200/2000 | R_avg = 0.999256 | norm = 0.999952
+  Step 300/2000 | R_avg = 0.999744 | norm = 0.999924
+  Step 400/2000 | R_avg = 0.999261 | norm = 0.999897
+  Step 500/2000 | R_avg = 0.999735 | norm = 0.999868
+  Step 600/2000 | R_avg = 0.999754 | norm = 0.999839
+  Step 700/2000 | R_avg = 0.999285 | norm = 0.999809
+  Step 800/2000 | R_avg = 0.999764 | norm = 0.999779
+  Step 900/2000 | R_avg = 0.999759 | norm = 0.999749
+  Step 1000/2000 | R_avg = 0.999261 | norm = 0.999719
+  Step 1100/2000 | R_avg = 0.999765 | norm = 0.999688
+  Step 1200/2000 | R_avg = 0.999734 | norm = 0.999658
+  Step 1300/2000 | R_avg = 0.999293 | norm = 0.999628
+  Step 1400/2000 | R_avg = 0.999726 | norm = 0.999598
+  Step 1500/2000 | R_avg = 0.999723 | norm = 0.999569
+  Step 1600/2000 | R_avg = 0.999753 | norm = 0.999541
+  Step 1700/2000 | R_avg = 0.99978 | norm = 0.999513
+  Step 1800/2000 | R_avg = 0.999579 | norm = 0.999484
+  Step 1900/2000 | R_avg = 0.999757 | norm = 0.999455
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999426 (drift: 0.0573852% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.31197 (drift: 0.384851% from initial 1.31704) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.209867 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.000573944 ✓ PASS
+  Energy validation: max_drift = 0.0107956 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251228_162332_em_coupling_uniform_field_64x64_v0.3/N_1/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251228_162332_em_coupling_uniform_field_64x64_v0.3/N_1/em_observables.csv
+Test failed for N=1
+
+--- Testing with N=10 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (32, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(32,32), sigma=1.92, boost=(0.3,0)c, norm=1, <r>=(32,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.31054
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Actual initial energy E0 = 1.30539 (from first observation including EM)
+  Step 0/2000 | R_avg = 0.999254 | norm = 1
+  Step 100/2000 | R_avg = 0.999531 | norm = 0.999977
+  Step 200/2000 | R_avg = 0.999565 | norm = 0.999952
+  Step 300/2000 | R_avg = 0.999573 | norm = 0.999924
+  Step 400/2000 | R_avg = 0.999578 | norm = 0.999896
+  Step 500/2000 | R_avg = 0.999735 | norm = 0.999868
+  Step 600/2000 | R_avg = 0.999548 | norm = 0.999838
+  Step 700/2000 | R_avg = 0.999249 | norm = 0.999809
+  Step 800/2000 | R_avg = 0.999755 | norm = 0.999779
+  Step 900/2000 | R_avg = 0.999708 | norm = 0.999749
+  Step 1000/2000 | R_avg = 0.999759 | norm = 0.999718
+  Step 1100/2000 | R_avg = 0.999234 | norm = 0.999688
+  Step 1200/2000 | R_avg = 0.999775 | norm = 0.999658
+  Step 1300/2000 | R_avg = 0.999521 | norm = 0.999628
+  Step 1400/2000 | R_avg = 0.999764 | norm = 0.999598
+  Step 1500/2000 | R_avg = 0.999741 | norm = 0.999569
+  Step 1600/2000 | R_avg = 0.99927 | norm = 0.999541
+  Step 1700/2000 | R_avg = 0.999542 | norm = 0.999513
+  Step 1800/2000 | R_avg = 0.999535 | norm = 0.999484
+  Step 1900/2000 | R_avg = 0.99976 | norm = 0.999454
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999425 (drift: 0.0574541% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.30614 (drift: 0.0578558% from initial 1.30539) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.21841 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00057465 ✓ PASS
+  Energy validation: max_drift = 0.00444969 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251228_162332_em_coupling_uniform_field_64x64_v0.3/N_10/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251228_162332_em_coupling_uniform_field_64x64_v0.3/N_10/em_observables.csv
+
+--- Testing with N=100 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (32, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(32,32), sigma=1.92, boost=(0.3,0)c, norm=1, <r>=(32,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.31054
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Actual initial energy E0 = 1.25438 (from first observation including EM)
+  Step 0/2000 | R_avg = 0.999072 | norm = 1
+  Step 100/2000 | R_avg = 0.99973 | norm = 0.999977
+  Step 200/2000 | R_avg = 0.999337 | norm = 0.999951
+  Step 300/2000 | R_avg = 0.999758 | norm = 0.999923
+  Step 400/2000 | R_avg = 0.999243 | norm = 0.999895
+  Step 500/2000 | R_avg = 0.999269 | norm = 0.999867
+  Step 600/2000 | R_avg = 0.999738 | norm = 0.999837
+  Step 700/2000 | R_avg = 0.999737 | norm = 0.999807
+  Step 800/2000 | R_avg = 0.999507 | norm = 0.999778
+  Step 900/2000 | R_avg = 0.999304 | norm = 0.999747
+  Step 1000/2000 | R_avg = 0.999739 | norm = 0.999717
+  Step 1100/2000 | R_avg = 0.999735 | norm = 0.999687
+  Step 1200/2000 | R_avg = 0.999285 | norm = 0.999657
+  Step 1300/2000 | R_avg = 0.999493 | norm = 0.999626
+  Step 1400/2000 | R_avg = 0.99975 | norm = 0.999597
+  Step 1500/2000 | R_avg = 0.999773 | norm = 0.999567
+  Step 1600/2000 | R_avg = 0.999742 | norm = 0.999539
+  Step 1700/2000 | R_avg = 0.999732 | norm = 0.999511
+  Step 1800/2000 | R_avg = 0.999762 | norm = 0.999482
+  Step 1900/2000 | R_avg = 0.999762 | norm = 0.999452
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✓ Probability Conservation: ||ψ||² = 0.999424 (drift: 0.0576242% from initial 1) ✓ PASS
+  ✗ Energy Conservation: E_total = 1.30602 (drift: 4.11721% from initial 1.25438) ✗ FAIL (exceeds tolerance 1%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.218936 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.000576379 ✓ PASS
+  Energy validation: max_drift = 0.0448767 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251228_162332_em_coupling_uniform_field_64x64_v0.3/N_100/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251228_162332_em_coupling_uniform_field_64x64_v0.3/N_100/em_observables.csv
+Test failed for N=100
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+Tests failed for velocity 0.3
+
+========================================
+Velocity: v=0.5c
+========================================
+
+Initializing engine for 64×64 grid, velocity v=0.5c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251228_162446_em_coupling_uniform_field_64x64_v0.5
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251228_162446_em_coupling_uniform_field_64x64_v0.5

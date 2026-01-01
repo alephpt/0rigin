@@ -1,0 +1,32 @@
+===== SMFT Test Report =====
+Test: flux_quantization_validation
+Description: 
+
+[Configuration]
+Grid: 128 x 128
+Delta: 0.3
+Coupling: 0.1
+Total steps: 100
+dt: 0.01
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999984 (drift: 0.00166728% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 0.422764 (drift: 0.576778% from initial 0.420339) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.000147208 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+N=1: ✗ FAIL
+  Norm: max_error = 1.622e-05 (threshold: 5.000e-03)
+  Energy: max_drift = 3.905e-02 (threshold: 1.000e-02)
+
+[Overall Result]
+✗ SOME TESTS FAILED
+
+===== End of Report ====

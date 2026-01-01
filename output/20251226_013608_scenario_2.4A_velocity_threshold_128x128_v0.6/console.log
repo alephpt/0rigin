@@ -1,0 +1,207 @@
+[Logging] Console output for 128x128 v=0.6c writing to: /home/persist/neotec/0rigin/output/20251226_013608_scenario_2.4A_velocity_threshold_128x128_v0.6/console.log
+
+--- Testing with N=10 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 0.78125 ℓ_P
+    Core radius: 3 ℓ_P (3.84 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 3.84 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.6, 0)c
+  |v| = 0.6c
+  Lorentz factor: γ = 1.25
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.75, 0) m_P·c
+  |p| = 0.75 m_P·c
+  Pre-normalization: ∫|Ψ|² = 92.6492
+  Normalization factor: 9.62545
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(64,64), sigma=3.84, boost=(0.6,0)c, norm=1, <r>=(64,64)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.6, 0)c
+  |v| = 0.6c
+  Lorentz factor: γ = 1.25
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.75, 0) m_P·c
+  |p| = 0.75 m_P·c
+  Pre-normalization: ∫|Ψ|² = 92.6492
+  Normalization factor: 9.62545
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 0.499735
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/10000 | R_avg = 0.983624 | norm = 1
+  Step 100/10000 | R_avg = 0.983632 | norm = 0.999978
+  Step 200/10000 | R_avg = 0.983633 | norm = 0.999954
+  Step 300/10000 | R_avg = 0.983605 | norm = 0.999929
+  Step 400/10000 | R_avg = 0.983619 | norm = 0.999904
+  Step 500/10000 | R_avg = 0.983635 | norm = 0.999879
+  Step 600/10000 | R_avg = 0.983598 | norm = 0.999852
+  Step 700/10000 | R_avg = 0.983613 | norm = 0.999825
+  Step 800/10000 | R_avg = 0.983605 | norm = 0.999797
+  Step 900/10000 | R_avg = 0.983589 | norm = 0.999769
+  Step 1000/10000 | R_avg = 0.983616 | norm = 0.999741
+  Step 1100/10000 | R_avg = 0.983653 | norm = 0.999713
+  Step 1200/10000 | R_avg = 0.983629 | norm = 0.999684
+  Step 1300/10000 | R_avg = 0.983628 | norm = 0.999656
+  Step 1400/10000 | R_avg = 0.983626 | norm = 0.999627
+  Step 1500/10000 | R_avg = 0.983636 | norm = 0.999599
+  Step 1600/10000 | R_avg = 0.983641 | norm = 0.999571
+  Step 1700/10000 | R_avg = 0.983474 | norm = 0.999543
+  Step 1800/10000 | R_avg = 0.983597 | norm = 0.999515
+  Step 1900/10000 | R_avg = 0.983604 | norm = 0.999486
+  Step 2000/10000 | R_avg = 0.983584 | norm = 0.999457
+  Step 2100/10000 | R_avg = 0.983605 | norm = 0.999427
+  Step 2200/10000 | R_avg = 0.98362 | norm = 0.999396
+  Step 2300/10000 | R_avg = 0.983611 | norm = 0.999365
+  Step 2400/10000 | R_avg = 0.983607 | norm = 0.999335
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/10000 | R_avg = 0.983617 | norm = 0.999305
+  Step 2600/10000 | R_avg = 0.983656 | norm = 0.999276
+  Step 2700/10000 | R_avg = 0.983632 | norm = 0.999247
+  Step 2800/10000 | R_avg = 0.983666 | norm = 0.999219
+  Step 2900/10000 | R_avg = 0.983618 | norm = 0.999193
+  Step 3000/10000 | R_avg = 0.983598 | norm = 0.999168
+  Step 3100/10000 | R_avg = 0.983631 | norm = 0.999143
+  Step 3200/10000 | R_avg = 0.9836 | norm = 0.99912
+  Step 3300/10000 | R_avg = 0.983604 | norm = 0.999097
+  Step 3400/10000 | R_avg = 0.983639 | norm = 0.999074
+  Step 3500/10000 | R_avg = 0.983595 | norm = 0.99905
+  Step 3600/10000 | R_avg = 0.983634 | norm = 0.999026
+  Step 3700/10000 | R_avg = 0.983638 | norm = 0.999001
+  Step 3800/10000 | R_avg = 0.983582 | norm = 0.998975
+  Step 3900/10000 | R_avg = 0.983601 | norm = 0.998947
+  Step 4000/10000 | R_avg = 0.983622 | norm = 0.998917
+  Step 4100/10000 | R_avg = 0.98364 | norm = 0.998886
+  Step 4200/10000 | R_avg = 0.983616 | norm = 0.998854
+  Step 4300/10000 | R_avg = 0.983602 | norm = 0.99882
+  Step 4400/10000 | R_avg = 0.983631 | norm = 0.998786
+  Step 4500/10000 | R_avg = 0.983608 | norm = 0.998752
+  Step 4600/10000 | R_avg = 0.983649 | norm = 0.998717
+  Step 4700/10000 | R_avg = 0.983659 | norm = 0.998682
+  Step 4800/10000 | R_avg = 0.983597 | norm = 0.998648
+  Step 4900/10000 | R_avg = 0.983638 | norm = 0.998614
+  Saved spatial snapshot at t = 50 (step 5000)
+  Step 5000/10000 | R_avg = 0.983611 | norm = 0.998579
+  Step 5100/10000 | R_avg = 0.983632 | norm = 0.998545
+  Step 5200/10000 | R_avg = 0.983634 | norm = 0.99851
+  Step 5300/10000 | R_avg = 0.983629 | norm = 0.998475
+  Step 5400/10000 | R_avg = 0.983606 | norm = 0.99844
+  Step 5500/10000 | R_avg = 0.983602 | norm = 0.998406
+  Step 5600/10000 | R_avg = 0.983566 | norm = 0.998371
+  Step 5700/10000 | R_avg = 0.983625 | norm = 0.998337
+  Step 5800/10000 | R_avg = 0.983642 | norm = 0.998303
+  Step 5900/10000 | R_avg = 0.983584 | norm = 0.998269
+  Step 6000/10000 | R_avg = 0.983637 | norm = 0.998236
+  Step 6100/10000 | R_avg = 0.983611 | norm = 0.998203
+  Step 6200/10000 | R_avg = 0.983589 | norm = 0.998171
+  Step 6300/10000 | R_avg = 0.983577 | norm = 0.99814
+  Step 6400/10000 | R_avg = 0.983618 | norm = 0.99811
+  Step 6500/10000 | R_avg = 0.983628 | norm = 0.99808
+  Step 6600/10000 | R_avg = 0.983576 | norm = 0.998049
+  Step 6700/10000 | R_avg = 0.983584 | norm = 0.998019
+  Step 6800/10000 | R_avg = 0.983649 | norm = 0.997987
+  Step 6900/10000 | R_avg = 0.983609 | norm = 0.997956
+  Step 7000/10000 | R_avg = 0.983587 | norm = 0.997923
+  Step 7100/10000 | R_avg = 0.983619 | norm = 0.997891
+  Step 7200/10000 | R_avg = 0.983635 | norm = 0.997858
+  Step 7300/10000 | R_avg = 0.983622 | norm = 0.997825
+  Step 7400/10000 | R_avg = 0.983623 | norm = 0.997791
+  Saved spatial snapshot at t = 75 (step 7500)
+  Step 7500/10000 | R_avg = 0.983618 | norm = 0.997758
+  Step 7600/10000 | R_avg = 0.983608 | norm = 0.997724
+  Step 7700/10000 | R_avg = 0.98361 | norm = 0.99769
+  Step 7800/10000 | R_avg = 0.983614 | norm = 0.997656
+  Step 7900/10000 | R_avg = 0.983642 | norm = 0.997623
+  Step 8000/10000 | R_avg = 0.983587 | norm = 0.997589
+  Step 8100/10000 | R_avg = 0.983631 | norm = 0.997556
+  Step 8200/10000 | R_avg = 0.983618 | norm = 0.997522
+  Step 8300/10000 | R_avg = 0.983626 | norm = 0.997488
+  Step 8400/10000 | R_avg = 0.983629 | norm = 0.997454
+  Step 8500/10000 | R_avg = 0.98362 | norm = 0.99742
+  Step 8600/10000 | R_avg = 0.983622 | norm = 0.997386
+  Step 8700/10000 | R_avg = 0.983608 | norm = 0.997352
+  Step 8800/10000 | R_avg = 0.983608 | norm = 0.997319
+  Step 8900/10000 | R_avg = 0.983622 | norm = 0.997286
+  Step 9000/10000 | R_avg = 0.983605 | norm = 0.997254
+  Step 9100/10000 | R_avg = 0.983638 | norm = 0.997223
+  Step 9200/10000 | R_avg = 0.983625 | norm = 0.997193
+  Step 9300/10000 | R_avg = 0.983624 | norm = 0.997164
+  Step 9400/10000 | R_avg = 0.983671 | norm = 0.997135
+  Step 9500/10000 | R_avg = 0.983663 | norm = 0.997108
+  Step 9600/10000 | R_avg = 0.983574 | norm = 0.997081
+  Step 9700/10000 | R_avg = 0.983616 | norm = 0.997054
+  Step 9800/10000 | R_avg = 0.983622 | norm = 0.997027
+  Step 9900/10000 | R_avg = 0.983615 | norm = 0.997
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.996973 (drift: 0.302798% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.42663 (drift: 0.769114% from initial 1.41574) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.398251 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.3: Relativistic Mass Validation =====
+  Boost velocity: v = 0.6c
+  Theoretical gamma: γ = 1.25
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✓ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 0 ✓ PASS (< 0.5)
+  ✗ 4. ψ(x,y,t=0) is Gaussian at offset position: Wavepacket variance = 6.55052e-07 ✗ FAIL (too uniform, not Gaussian)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%): ⟨p⟩ = 0.670054 (expect 0.75, error = 10.6595%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory: γ_measured = 1.33045 (γ_theory = 1.25, error = 6.4356%) ✗ FAIL (exceeds 5% tolerance)
+  Norm validation: max_error = 0.00302703 ✓ PASS
+  Energy validation: max_drift = 0.0113509 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_013608_scenario_2.4A_velocity_threshold_128x128_v0.6/N_10/observables.csv
+
+--- Validating Convergence ---
+✗ Convergence validation FAILED
+
+========================================
+Velocity: v=0.65c
+========================================
+
+Initializing engine for 128×128 grid, velocity v=0.65c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 128 x 128 oscillators
+
+[SMFTEngine] Created GPU buffers for 128x128 grid
+  Phase buffers: 65536 bytes each
+  Spinor buffer: 524288 bytes
+  Accumulator buffers: 65536 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251226_013750_scenario_2.4A_velocity_threshold_128x128_v0.6
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251226_013750_scenario_2.4A_velocity_threshold_128x128_v0.6

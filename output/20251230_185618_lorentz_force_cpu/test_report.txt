@@ -1,0 +1,32 @@
+===== SMFT Test Report =====
+Test: lorentz_force_cpu
+Description: CPU Lorentz force validation - charged particle in vortex EM field
+
+[Configuration]
+Grid: 64 x 64
+Delta: 0.3
+Coupling: 0.1
+Total steps: 5000
+dt: 0.001
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.998397 (drift: 0.160353% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4095.36 (drift: 0.0371771% from initial -4093.83) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 1.42464e-08 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+N=1: ✓ PASS
+  Norm: max_error = 1.603e-03 (threshold: 1.000e-02)
+  Energy: max_drift = 3.941e-04 (threshold: 5.000e-02)
+
+[Overall Result]
+✓ ALL TESTS PASSED
+
+===== End of Report ====

@@ -1,32 +1,50 @@
 [
 {
-  "directory": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o -c /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/physics/ProcaEM.cpp",
-  "file": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/physics/ProcaEM.cpp",
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o -c /home/persist/neotec/0rigin/src/physics/ProcaEM.cpp",
+  "file": "/home/persist/neotec/0rigin/src/physics/ProcaEM.cpp",
   "output": "CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o"
 },
 {
-  "directory": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o -c /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/physics/ProcaVulkanPipeline.cpp",
-  "file": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/physics/ProcaVulkanPipeline.cpp",
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o -c /home/persist/neotec/0rigin/src/physics/ProcaVulkanPipeline.cpp",
+  "file": "/home/persist/neotec/0rigin/src/physics/ProcaVulkanPipeline.cpp",
   "output": "CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o"
 },
 {
-  "directory": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o -c /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/SMFTCore.cpp",
-  "file": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/SMFTCore.cpp",
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o -c /home/persist/neotec/0rigin/src/physics/StuckelbergEM.cpp",
+  "file": "/home/persist/neotec/0rigin/src/physics/StuckelbergEM.cpp",
+  "output": "CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCore.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCore.cpp",
   "output": "CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o"
 },
 {
-  "directory": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/smft.dir/src/main_smft.cpp.o -c /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/main_smft.cpp",
-  "file": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/main_smft.cpp",
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/smft.dir/src/main_smft.cpp.o -c /home/persist/neotec/0rigin/src/main_smft.cpp",
+  "file": "/home/persist/neotec/0rigin/src/main_smft.cpp",
   "output": "CMakeFiles/smft.dir/src/main_smft.cpp.o"
 },
 {
-  "directory": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o -c /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/test/test_proca_vortex_magnetic_field.cpp",
-  "file": "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/test/test_proca_vortex_magnetic_field.cpp",
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o -c /home/persist/neotec/0rigin/test/test_proca_vortex_magnetic_field.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_proca_vortex_magnetic_field.cpp",
   "output": "CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_stuckelberg_vortex_bfield.dir/test/test_stuckelberg_vortex_bfield.cpp.o -c /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_bfield.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_stuckelberg_vortex_bfield.cpp",
+  "output": "CMakeFiles/test_stuckelberg_vortex_bfield.dir/test/test_stuckelberg_vortex_bfield.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_proca_parameter_sweep.dir/test/test_proca_parameter_sweep.cpp.o -c /home/persist/neotec/0rigin/test/test_proca_parameter_sweep.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_proca_parameter_sweep.cpp",
+  "output": "CMakeFiles/test_proca_parameter_sweep.dir/test/test_proca_parameter_sweep.cpp.o"
 }
 ]

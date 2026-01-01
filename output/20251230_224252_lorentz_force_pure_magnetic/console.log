@@ -1,0 +1,2987 @@
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251230_224252_lorentz_force_pure_magnetic/console.log
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (32, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=1.92, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Initial energy E0 = 0.237587
+  Initial norm = 1
+
+--- Initializing Test Particle for Lorentz Force ---
+  Particle initialized at (55, 50) ℓ_P
+  Initial velocity: (0, 0.01) c
+  Charge: -1, Mass: 0.1 (natural units)
+  Verified state: pos=(55,50), vel=(0,0.01)
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.0005
+  half_substeps=0
+  remaining_substeps=1
+[GPU EM Compute] 1 calls | Last: 587 μs | Avg: 587 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0301801, potential: -4094.01, total: -4093.98 (κ=1)
+  Actual initial energy E0 = -4091.25 (from first observation including EM)
+  Using PURE uniform B-field: B_z = 0.1 (E = 0 everywhere)
+  Step 0/20000 | R_avg = 0.999752 | norm = 1
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 10/20000 | R_avg = 0.999799 | norm = 0.999998
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 20/20000 | R_avg = 0.999715 | norm = 0.999997
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 30/20000 | R_avg = 0.999813 | norm = 0.999995
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 40/20000 | R_avg = 0.999788 | norm = 0.999994
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 50 calls | Last: 113 μs | Avg: 119 μs | Grid: 64×64
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 50/20000 | R_avg = 0.999777 | norm = 0.999993
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 60/20000 | R_avg = 0.999802 | norm = 0.999991
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 70/20000 | R_avg = 0.999792 | norm = 0.99999
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 80/20000 | R_avg = 0.999736 | norm = 0.999988
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 90/20000 | R_avg = 0.999823 | norm = 0.999987
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 100 calls | Last: 105 μs | Avg: 114 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.903816, potential: -4093.48, total: -4092.57 (κ=1)
+  Step 100/20000 | R_avg = 0.999563 | norm = 0.999985
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 110/20000 | R_avg = 0.999814 | norm = 0.999984
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 120/20000 | R_avg = 0.999776 | norm = 0.999982
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 130/20000 | R_avg = 0.999851 | norm = 0.999981
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 140/20000 | R_avg = 0.999839 | norm = 0.999979
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 150 calls | Last: 112 μs | Avg: 113 μs | Grid: 64×64
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 150/20000 | R_avg = 0.999766 | norm = 0.999978
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 160/20000 | R_avg = 0.999782 | norm = 0.999976
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 170/20000 | R_avg = 0.9998 | norm = 0.999974
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 180/20000 | R_avg = 0.999766 | norm = 0.999973
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 190/20000 | R_avg = 0.999782 | norm = 0.999971
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 200 calls | Last: 108 μs | Avg: 112 μs | Grid: 64×64
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  [Kuramoto Energy] grad_R: 0.0276395, potential: -4094.4, total: -4094.37 (κ=1)
+  Step 200/20000 | R_avg = 0.9998 | norm = 0.999969
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 210/20000 | R_avg = 0.999773 | norm = 0.999967
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 220/20000 | R_avg = 0.999806 | norm = 0.999966
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 230/20000 | R_avg = 0.999821 | norm = 0.999964
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 240/20000 | R_avg = 0.999779 | norm = 0.999962
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 250 calls | Last: 108 μs | Avg: 112 μs | Grid: 64×64
+  Step 250/20000 | R_avg = 0.999817 | norm = 0.99996
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 260/20000 | R_avg = 0.999819 | norm = 0.999959
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 270/20000 | R_avg = 0.999779 | norm = 0.999957
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 280/20000 | R_avg = 0.999788 | norm = 0.999955
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 290/20000 | R_avg = 0.999814 | norm = 0.999953
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 300 calls | Last: 107 μs | Avg: 112 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.030678, potential: -4094.12, total: -4094.09 (κ=1)
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 300/20000 | R_avg = 0.999765 | norm = 0.999952
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 310/20000 | R_avg = 0.999827 | norm = 0.99995
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 320/20000 | R_avg = 0.999814 | norm = 0.999948
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 330/20000 | R_avg = 0.999778 | norm = 0.999947
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 340/20000 | R_avg = 0.999828 | norm = 0.999945
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 350 calls | Last: 108 μs | Avg: 111 μs | Grid: 64×64
+  Step 350/20000 | R_avg = 0.999883 | norm = 0.999944
+  Step 360/20000 | R_avg = 0.999757 | norm = 0.999942
+  Step 370/20000 | R_avg = 0.999529 | norm = 0.99994
+  Step 380/20000 | R_avg = 0.999863 | norm = 0.999938
+  Step 390/20000 | R_avg = 0.999735 | norm = 0.999936
+[GPU EM Compute] 400 calls | Last: 106 μs | Avg: 110 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.908275, potential: -4093.34, total: -4092.44 (κ=1)
+  Step 400/20000 | R_avg = 0.999547 | norm = 0.999935
+  Step 410/20000 | R_avg = 0.999715 | norm = 0.999933
+  Step 420/20000 | R_avg = 0.999768 | norm = 0.999931
+  Step 430/20000 | R_avg = 0.999849 | norm = 0.999929
+  Step 440/20000 | R_avg = 0.999784 | norm = 0.999927
+[GPU EM Compute] 450 calls | Last: 107 μs | Avg: 110 μs | Grid: 64×64
+  Step 450/20000 | R_avg = 0.999741 | norm = 0.999925
+  Step 460/20000 | R_avg = 0.999836 | norm = 0.999924
+  Step 470/20000 | R_avg = 0.999777 | norm = 0.999922
+  Step 480/20000 | R_avg = 0.999756 | norm = 0.999921
+  Step 490/20000 | R_avg = 0.999871 | norm = 0.999919
+[GPU EM Compute] 500 calls | Last: 104 μs | Avg: 109 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0240271, potential: -4094.27, total: -4094.25 (κ=1)
+  Step 500/20000 | R_avg = 0.999784 | norm = 0.999917
+  Step 510/20000 | R_avg = 0.999708 | norm = 0.999916
+  Step 520/20000 | R_avg = 0.999834 | norm = 0.999914
+  Step 530/20000 | R_avg = 0.999855 | norm = 0.999912
+  Step 540/20000 | R_avg = 0.999681 | norm = 0.999911
+[GPU EM Compute] 550 calls | Last: 107 μs | Avg: 109 μs | Grid: 64×64
+  Step 550/20000 | R_avg = 0.999836 | norm = 0.999909
+  Step 560/20000 | R_avg = 0.999842 | norm = 0.999907
+  Step 570/20000 | R_avg = 0.999782 | norm = 0.999905
+  Step 580/20000 | R_avg = 0.9998 | norm = 0.999903
+  Step 590/20000 | R_avg = 0.999804 | norm = 0.999901
+[GPU EM Compute] 600 calls | Last: 107 μs | Avg: 109 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0292757, potential: -4094.23, total: -4094.2 (κ=1)
+  Step 600/20000 | R_avg = 0.999779 | norm = 0.999899
+  Step 610/20000 | R_avg = 0.999867 | norm = 0.999898
+  Step 620/20000 | R_avg = 0.999846 | norm = 0.999896
+  Step 630/20000 | R_avg = 0.999779 | norm = 0.999894
+  Step 640/20000 | R_avg = 0.999867 | norm = 0.999892
+[GPU EM Compute] 650 calls | Last: 120 μs | Avg: 109 μs | Grid: 64×64
+  Step 650/20000 | R_avg = 0.999755 | norm = 0.999891
+  Step 660/20000 | R_avg = 0.999789 | norm = 0.999889
+  Step 670/20000 | R_avg = 0.999791 | norm = 0.999887
+  Step 680/20000 | R_avg = 0.999831 | norm = 0.999885
+  Step 690/20000 | R_avg = 0.999726 | norm = 0.999884
+[GPU EM Compute] 700 calls | Last: 101 μs | Avg: 109 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0140384, potential: -4094.9, total: -4094.89 (κ=1)
+  Step 700/20000 | R_avg = 0.999863 | norm = 0.999882
+  Step 710/20000 | R_avg = 0.999848 | norm = 0.99988
+  Step 720/20000 | R_avg = 0.999705 | norm = 0.999878
+  Step 730/20000 | R_avg = 0.99986 | norm = 0.999876
+  Step 740/20000 | R_avg = 0.9998 | norm = 0.999875
+[GPU EM Compute] 750 calls | Last: 108 μs | Avg: 109 μs | Grid: 64×64
+  Step 750/20000 | R_avg = 0.999852 | norm = 0.999873
+  Step 760/20000 | R_avg = 0.99989 | norm = 0.999871
+  Step 770/20000 | R_avg = 0.999725 | norm = 0.999869
+  Step 780/20000 | R_avg = 0.99986 | norm = 0.999867
+  Step 790/20000 | R_avg = 0.999887 | norm = 0.999865
+[GPU EM Compute] 800 calls | Last: 106 μs | Avg: 108 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0196279, potential: -4094.67, total: -4094.65 (κ=1)
+  Step 800/20000 | R_avg = 0.999834 | norm = 0.999864
+  Step 810/20000 | R_avg = 0.999882 | norm = 0.999862
+  Step 820/20000 | R_avg = 0.999836 | norm = 0.99986
+  Step 830/20000 | R_avg = 0.999781 | norm = 0.999859
+  Step 840/20000 | R_avg = 0.999876 | norm = 0.999857
+[GPU EM Compute] 850 calls | Last: 108 μs | Avg: 108 μs | Grid: 64×64
+  Step 850/20000 | R_avg = 0.999902 | norm = 0.999855
+  Step 860/20000 | R_avg = 0.999796 | norm = 0.999853
+  Step 870/20000 | R_avg = 0.999845 | norm = 0.999852
+  Step 880/20000 | R_avg = 0.999903 | norm = 0.99985
+  Step 890/20000 | R_avg = 0.999796 | norm = 0.999848
+[GPU EM Compute] 900 calls | Last: 105 μs | Avg: 108 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0113366, potential: -4095.16, total: -4095.15 (κ=1)
+  Step 900/20000 | R_avg = 0.999895 | norm = 0.999846
+  Step 910/20000 | R_avg = 0.99988 | norm = 0.999845
+  Step 920/20000 | R_avg = 0.999794 | norm = 0.999843
+  Step 930/20000 | R_avg = 0.999877 | norm = 0.999841
+  Step 940/20000 | R_avg = 0.999849 | norm = 0.999839
+[GPU EM Compute] 950 calls | Last: 109 μs | Avg: 108 μs | Grid: 64×64
+  Step 950/20000 | R_avg = 0.999805 | norm = 0.999837
+  Step 960/20000 | R_avg = 0.99986 | norm = 0.999835
+  Step 970/20000 | R_avg = 0.999851 | norm = 0.999834
+  Step 980/20000 | R_avg = 0.999784 | norm = 0.999832
+  Step 990/20000 | R_avg = 0.999867 | norm = 0.99983
+[GPU EM Compute] 1000 calls | Last: 106 μs | Avg: 108 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0335485, potential: -4093.81, total: -4093.77 (κ=1)
+  Step 1000/20000 | R_avg = 0.999726 | norm = 0.999828
+  Step 1010/20000 | R_avg = 0.999792 | norm = 0.999826
+  Step 1020/20000 | R_avg = 0.999825 | norm = 0.999824
+  Step 1030/20000 | R_avg = 0.999863 | norm = 0.999822
+  Step 1040/20000 | R_avg = 0.999789 | norm = 0.99982
+[GPU EM Compute] 1050 calls | Last: 115 μs | Avg: 108 μs | Grid: 64×64
+  Step 1050/20000 | R_avg = 0.999881 | norm = 0.999819
+  Step 1060/20000 | R_avg = 0.999863 | norm = 0.999817
+  Step 1070/20000 | R_avg = 0.999775 | norm = 0.999815
+  Step 1080/20000 | R_avg = 0.999864 | norm = 0.999813
+  Step 1090/20000 | R_avg = 0.999806 | norm = 0.999811
+[GPU EM Compute] 1100 calls | Last: 106 μs | Avg: 108 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0175549, potential: -4094.81, total: -4094.8 (κ=1)
+  Step 1100/20000 | R_avg = 0.999852 | norm = 0.99981
+  Step 1110/20000 | R_avg = 0.99988 | norm = 0.999808
+  Step 1120/20000 | R_avg = 0.999807 | norm = 0.999806
+  Step 1130/20000 | R_avg = 0.999725 | norm = 0.999804
+  Step 1140/20000 | R_avg = 0.999887 | norm = 0.999802
+[GPU EM Compute] 1150 calls | Last: 107 μs | Avg: 108 μs | Grid: 64×64
+  Step 1150/20000 | R_avg = 0.999803 | norm = 0.9998
+  Step 1160/20000 | R_avg = 0.999914 | norm = 0.999799
+  Step 1170/20000 | R_avg = 0.999905 | norm = 0.999797
+  Step 1180/20000 | R_avg = 0.999795 | norm = 0.999795
+  Step 1190/20000 | R_avg = 0.999752 | norm = 0.999793
+[GPU EM Compute] 1200 calls | Last: 105 μs | Avg: 108 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0122636, potential: -4095.26, total: -4095.24 (κ=1)
+  Step 1200/20000 | R_avg = 0.999908 | norm = 0.999792
+  Step 1210/20000 | R_avg = 0.999793 | norm = 0.99979
+  Step 1220/20000 | R_avg = 0.999893 | norm = 0.999788
+  Step 1230/20000 | R_avg = 0.999896 | norm = 0.999786
+  Step 1240/20000 | R_avg = 0.999805 | norm = 0.999784
+[GPU EM Compute] 1250 calls | Last: 102 μs | Avg: 108 μs | Grid: 64×64
+  Step 1250/20000 | R_avg = 0.999841 | norm = 0.999782
+  Step 1260/20000 | R_avg = 0.999893 | norm = 0.99978
+  Step 1270/20000 | R_avg = 0.999803 | norm = 0.999778
+  Step 1280/20000 | R_avg = 0.999845 | norm = 0.999776
+  Step 1290/20000 | R_avg = 0.999923 | norm = 0.999775
+[GPU EM Compute] 1300 calls | Last: 106 μs | Avg: 108 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0244864, potential: -4094.45, total: -4094.42 (κ=1)
+  Step 1300/20000 | R_avg = 0.999806 | norm = 0.999773
+  Step 1310/20000 | R_avg = 0.999876 | norm = 0.999771
+  Step 1320/20000 | R_avg = 0.999883 | norm = 0.999769
+  Step 1330/20000 | R_avg = 0.9998 | norm = 0.999767
+  Step 1340/20000 | R_avg = 0.999861 | norm = 0.999765
+[GPU EM Compute] 1350 calls | Last: 106 μs | Avg: 108 μs | Grid: 64×64
+  Step 1350/20000 | R_avg = 0.99989 | norm = 0.999764
+  Step 1360/20000 | R_avg = 0.999791 | norm = 0.999762
+  Step 1370/20000 | R_avg = 0.99988 | norm = 0.99976
+  Step 1380/20000 | R_avg = 0.999911 | norm = 0.999759
+  Step 1390/20000 | R_avg = 0.999802 | norm = 0.999757
+[GPU EM Compute] 1400 calls | Last: 105 μs | Avg: 108 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0176846, potential: -4094.83, total: -4094.82 (κ=1)
+  Step 1400/20000 | R_avg = 0.999855 | norm = 0.999755
+  Step 1410/20000 | R_avg = 0.999901 | norm = 0.999753
+  Step 1420/20000 | R_avg = 0.999804 | norm = 0.999752
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 1430/20000 | R_avg = 0.999837 | norm = 0.99975
+  Step 1440/20000 | R_avg = 0.999829 | norm = 0.999748
+[GPU EM Compute] 1450 calls | Last: 111 μs | Avg: 107 μs | Grid: 64×64
+  Step 1450/20000 | R_avg = 0.999786 | norm = 0.999746
+  Step 1460/20000 | R_avg = 0.999849 | norm = 0.999744
+  Step 1470/20000 | R_avg = 0.999817 | norm = 0.999742
+  Step 1480/20000 | R_avg = 0.999789 | norm = 0.99974
+  Step 1490/20000 | R_avg = 0.999852 | norm = 0.999738
+[GPU EM Compute] 1500 calls | Last: 106 μs | Avg: 107 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0174504, potential: -4094.59, total: -4094.57 (κ=1)
+  Step 1500/20000 | R_avg = 0.999825 | norm = 0.999737
+  Step 1510/20000 | R_avg = 0.999789 | norm = 0.999734
+  Step 1520/20000 | R_avg = 0.999852 | norm = 0.999732
+  Step 1530/20000 | R_avg = 0.999797 | norm = 0.999731
+  Step 1540/20000 | R_avg = 0.999779 | norm = 0.999729
+[GPU EM Compute] 1550 calls | Last: 105 μs | Avg: 107 μs | Grid: 64×64
+  Step 1550/20000 | R_avg = 0.999882 | norm = 0.999727
+  Step 1560/20000 | R_avg = 0.999937 | norm = 0.999725
+  Step 1570/20000 | R_avg = 0.99978 | norm = 0.999723
+  Step 1580/20000 | R_avg = 0.999817 | norm = 0.999721
+  Step 1590/20000 | R_avg = 0.999816 | norm = 0.999719
+[GPU EM Compute] 1600 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.014738, potential: -4095.11, total: -4095.1 (κ=1)
+  Step 1600/20000 | R_avg = 0.999889 | norm = 0.999717
+  Step 1610/20000 | R_avg = 0.99982 | norm = 0.999715
+  Step 1620/20000 | R_avg = 0.999854 | norm = 0.999714
+  Step 1630/20000 | R_avg = 0.999824 | norm = 0.999712
+  Step 1640/20000 | R_avg = 0.99978 | norm = 0.99971
+[GPU EM Compute] 1650 calls | Last: 105 μs | Avg: 107 μs | Grid: 64×64
+  Step 1650/20000 | R_avg = 0.999837 | norm = 0.999708
+  Step 1660/20000 | R_avg = 0.999751 | norm = 0.999706
+  Step 1670/20000 | R_avg = 0.999813 | norm = 0.999704
+  Step 1680/20000 | R_avg = 0.999826 | norm = 0.999702
+  Step 1690/20000 | R_avg = 0.999838 | norm = 0.9997
+[GPU EM Compute] 1700 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0305472, potential: -4094.16, total: -4094.13 (κ=1)
+  Step 1700/20000 | R_avg = 0.99977 | norm = 0.999698
+  Step 1710/20000 | R_avg = 0.999932 | norm = 0.999696
+  Step 1720/20000 | R_avg = 0.99984 | norm = 0.999694
+  Step 1730/20000 | R_avg = 0.999821 | norm = 0.999692
+  Step 1740/20000 | R_avg = 0.999826 | norm = 0.99969
+[GPU EM Compute] 1750 calls | Last: 110 μs | Avg: 107 μs | Grid: 64×64
+  Step 1750/20000 | R_avg = 0.999839 | norm = 0.999688
+  Step 1760/20000 | R_avg = 0.999808 | norm = 0.999686
+  Step 1770/20000 | R_avg = 0.99983 | norm = 0.999684
+  Step 1780/20000 | R_avg = 0.999831 | norm = 0.999682
+  Step 1790/20000 | R_avg = 0.999821 | norm = 0.999681
+[GPU EM Compute] 1800 calls | Last: 105 μs | Avg: 107 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0187614, potential: -4094.85, total: -4094.83 (κ=1)
+  Step 1800/20000 | R_avg = 0.999857 | norm = 0.999679
+  Step 1810/20000 | R_avg = 0.999866 | norm = 0.999677
+  Step 1820/20000 | R_avg = 0.9998 | norm = 0.999675
+  Step 1830/20000 | R_avg = 0.999844 | norm = 0.999673
+  Step 1840/20000 | R_avg = 0.999819 | norm = 0.999671
+[GPU EM Compute] 1850 calls | Last: 105 μs | Avg: 107 μs | Grid: 64×64
+  Step 1850/20000 | R_avg = 0.999785 | norm = 0.999669
+  Step 1860/20000 | R_avg = 0.999844 | norm = 0.999667
+  Step 1870/20000 | R_avg = 0.999743 | norm = 0.999665
+  Step 1880/20000 | R_avg = 0.999792 | norm = 0.999663
+  Step 1890/20000 | R_avg = 0.999854 | norm = 0.999661
+[GPU EM Compute] 1900 calls | Last: 61 μs | Avg: 107 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0196708, potential: -4094.79, total: -4094.77 (κ=1)
+  Step 1900/20000 | R_avg = 0.999849 | norm = 0.999659
+  Step 1910/20000 | R_avg = 0.999803 | norm = 0.999657
+  Step 1920/20000 | R_avg = 0.999795 | norm = 0.999655
+  Step 1930/20000 | R_avg = 0.999858 | norm = 0.999653
+  Step 1940/20000 | R_avg = 0.999733 | norm = 0.999651
+[GPU EM Compute] 1950 calls | Last: 106 μs | Avg: 107 μs | Grid: 64×64
+  Step 1950/20000 | R_avg = 0.999843 | norm = 0.999649
+  Step 1960/20000 | R_avg = 0.999833 | norm = 0.999647
+  Step 1970/20000 | R_avg = 0.999774 | norm = 0.999645
+  Step 1980/20000 | R_avg = 0.999829 | norm = 0.999643
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 1990/20000 | R_avg = 0.999837 | norm = 0.999641
+[GPU EM Compute] 2000 calls | Last: 106 μs | Avg: 107 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.026924, potential: -4094.3, total: -4094.27 (κ=1)
+  Step 2000/20000 | R_avg = 0.999788 | norm = 0.999639
+  Step 2010/20000 | R_avg = 0.999826 | norm = 0.999637
+  Step 2020/20000 | R_avg = 0.999793 | norm = 0.999635
+  Step 2030/20000 | R_avg = 0.99982 | norm = 0.999633
+  Step 2040/20000 | R_avg = 0.999823 | norm = 0.999632
+[GPU EM Compute] 2050 calls | Last: 105 μs | Avg: 107 μs | Grid: 64×64
+  Step 2050/20000 | R_avg = 0.999816 | norm = 0.99963
+  Step 2060/20000 | R_avg = 0.999816 | norm = 0.999628
+  Step 2070/20000 | R_avg = 0.999824 | norm = 0.999626
+  Step 2080/20000 | R_avg = 0.99982 | norm = 0.999624
+  Step 2090/20000 | R_avg = 0.999823 | norm = 0.999622
+[GPU EM Compute] 2100 calls | Last: 104 μs | Avg: 107 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0222851, potential: -4094.57, total: -4094.55 (κ=1)
+  Step 2100/20000 | R_avg = 0.999822 | norm = 0.999621
+  Step 2110/20000 | R_avg = 0.999799 | norm = 0.999619
+  Step 2120/20000 | R_avg = 0.999792 | norm = 0.999617
+  Step 2130/20000 | R_avg = 0.999834 | norm = 0.999615
+  Step 2140/20000 | R_avg = 0.999787 | norm = 0.999613
+[GPU EM Compute] 2150 calls | Last: 104 μs | Avg: 107 μs | Grid: 64×64
+  Step 2150/20000 | R_avg = 0.999805 | norm = 0.999611
+  Step 2160/20000 | R_avg = 0.99984 | norm = 0.999609
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 2170/20000 | R_avg = 0.999862 | norm = 0.999607
+  Step 2180/20000 | R_avg = 0.999854 | norm = 0.999605
+  Step 2190/20000 | R_avg = 0.999867 | norm = 0.999603
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 2200 calls | Last: 105 μs | Avg: 107 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.016007, potential: -4094.87, total: -4094.86 (κ=1)
+  Step 2200/20000 | R_avg = 0.999859 | norm = 0.999601
+  Step 2210/20000 | R_avg = 0.999829 | norm = 0.999599
+  Step 2220/20000 | R_avg = 0.99985 | norm = 0.999597
+  Step 2230/20000 | R_avg = 0.999809 | norm = 0.999595
+  Step 2240/20000 | R_avg = 0.99982 | norm = 0.999593
+[GPU EM Compute] 2250 calls | Last: 104 μs | Avg: 107 μs | Grid: 64×64
+  Step 2250/20000 | R_avg = 0.999823 | norm = 0.99959
+  Step 2260/20000 | R_avg = 0.999788 | norm = 0.999588
+  Step 2270/20000 | R_avg = 0.999828 | norm = 0.999586
+  Step 2280/20000 | R_avg = 0.999823 | norm = 0.999584
+  Step 2290/20000 | R_avg = 0.999753 | norm = 0.999582
+[GPU EM Compute] 2300 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0226581, potential: -4094.42, total: -4094.4 (κ=1)
+  Step 2300/20000 | R_avg = 0.999803 | norm = 0.99958
+  Step 2310/20000 | R_avg = 0.999836 | norm = 0.999578
+  Step 2320/20000 | R_avg = 0.999805 | norm = 0.999576
+  Step 2330/20000 | R_avg = 0.999858 | norm = 0.999574
+  Step 2340/20000 | R_avg = 0.999808 | norm = 0.999572
+[GPU EM Compute] 2350 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 2350/20000 | R_avg = 0.999874 | norm = 0.99957
+  Step 2360/20000 | R_avg = 0.999857 | norm = 0.999568
+  Step 2370/20000 | R_avg = 0.999809 | norm = 0.999566
+  Step 2380/20000 | R_avg = 0.99988 | norm = 0.999564
+  Step 2390/20000 | R_avg = 0.999914 | norm = 0.999562
+[GPU EM Compute] 2400 calls | Last: 103 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.022122, potential: -4094.6, total: -4094.58 (κ=1)
+  Step 2400/20000 | R_avg = 0.999826 | norm = 0.99956
+  Step 2410/20000 | R_avg = 0.999865 | norm = 0.999558
+  Step 2420/20000 | R_avg = 0.999794 | norm = 0.999556
+  Step 2430/20000 | R_avg = 0.999826 | norm = 0.999554
+  Step 2440/20000 | R_avg = 0.999859 | norm = 0.999552
+[GPU EM Compute] 2450 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 2450/20000 | R_avg = 0.999791 | norm = 0.99955
+  Step 2460/20000 | R_avg = 0.999792 | norm = 0.999548
+  Step 2470/20000 | R_avg = 0.999852 | norm = 0.999546
+  Step 2480/20000 | R_avg = 0.999874 | norm = 0.999544
+  Step 2490/20000 | R_avg = 0.999809 | norm = 0.999542
+[GPU EM Compute] 2500 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0164069, potential: -4094.93, total: -4094.91 (κ=1)
+  Step 2500/20000 | R_avg = 0.999867 | norm = 0.99954
+  Step 2510/20000 | R_avg = 0.999874 | norm = 0.999538
+  Step 2520/20000 | R_avg = 0.999809 | norm = 0.999536
+  Step 2530/20000 | R_avg = 0.999754 | norm = 0.999534
+  Step 2540/20000 | R_avg = 0.999865 | norm = 0.999531
+[GPU EM Compute] 2550 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 2550/20000 | R_avg = 0.999805 | norm = 0.999529
+  Step 2560/20000 | R_avg = 0.999859 | norm = 0.999527
+  Step 2570/20000 | R_avg = 0.99987 | norm = 0.999525
+  Step 2580/20000 | R_avg = 0.999808 | norm = 0.999523
+  Step 2590/20000 | R_avg = 0.999873 | norm = 0.999521
+[GPU EM Compute] 2600 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0124121, potential: -4095.09, total: -4095.08 (κ=1)
+  Step 2600/20000 | R_avg = 0.999886 | norm = 0.999519
+  Step 2610/20000 | R_avg = 0.999863 | norm = 0.999517
+  Step 2620/20000 | R_avg = 0.999821 | norm = 0.999514
+  Step 2630/20000 | R_avg = 0.99979 | norm = 0.999512
+  Step 2640/20000 | R_avg = 0.999845 | norm = 0.99951
+[GPU EM Compute] 2650 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 2650/20000 | R_avg = 0.99974 | norm = 0.999508
+  Step 2660/20000 | R_avg = 0.999793 | norm = 0.999506
+  Step 2670/20000 | R_avg = 0.999919 | norm = 0.999504
+  Step 2680/20000 | R_avg = 0.999821 | norm = 0.999502
+  Step 2690/20000 | R_avg = 0.999796 | norm = 0.9995
+[GPU EM Compute] 2700 calls | Last: 113 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0146995, potential: -4094.99, total: -4094.98 (κ=1)
+  Step 2700/20000 | R_avg = 0.999874 | norm = 0.999498
+  Step 2710/20000 | R_avg = 0.999868 | norm = 0.999496
+  Step 2720/20000 | R_avg = 0.999803 | norm = 0.999494
+  Step 2730/20000 | R_avg = 0.99985 | norm = 0.999492
+  Step 2740/20000 | R_avg = 0.999829 | norm = 0.99949
+[GPU EM Compute] 2750 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  Step 2750/20000 | R_avg = 0.999702 | norm = 0.999488
+  Step 2760/20000 | R_avg = 0.999851 | norm = 0.999485
+  Step 2770/20000 | R_avg = 0.999867 | norm = 0.999483
+  Step 2780/20000 | R_avg = 0.999812 | norm = 0.999481
+  Step 2790/20000 | R_avg = 0.999826 | norm = 0.999479
+[GPU EM Compute] 2800 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0240872, potential: -4094.47, total: -4094.45 (κ=1)
+  Step 2800/20000 | R_avg = 0.99981 | norm = 0.999477
+  Step 2810/20000 | R_avg = 0.999864 | norm = 0.999475
+  Step 2820/20000 | R_avg = 0.999857 | norm = 0.999472
+  Step 2830/20000 | R_avg = 0.999813 | norm = 0.99947
+  Step 2840/20000 | R_avg = 0.999849 | norm = 0.999468
+[GPU EM Compute] 2850 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 2850/20000 | R_avg = 0.999873 | norm = 0.999466
+  Step 2860/20000 | R_avg = 0.999806 | norm = 0.999464
+  Step 2870/20000 | R_avg = 0.999855 | norm = 0.999461
+  Step 2880/20000 | R_avg = 0.999889 | norm = 0.999459
+  Step 2890/20000 | R_avg = 0.999824 | norm = 0.999457
+[GPU EM Compute] 2900 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0164894, potential: -4094.94, total: -4094.93 (κ=1)
+  Step 2900/20000 | R_avg = 0.999868 | norm = 0.999455
+  Step 2910/20000 | R_avg = 0.999865 | norm = 0.999453
+  Step 2920/20000 | R_avg = 0.999806 | norm = 0.99945
+  Step 2930/20000 | R_avg = 0.999787 | norm = 0.999448
+  Step 2940/20000 | R_avg = 0.999853 | norm = 0.999446
+[GPU EM Compute] 2950 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  Step 2950/20000 | R_avg = 0.999838 | norm = 0.999444
+  Step 2960/20000 | R_avg = 0.99977 | norm = 0.999442
+  Step 2970/20000 | R_avg = 0.999811 | norm = 0.99944
+  Step 2980/20000 | R_avg = 0.999793 | norm = 0.999438
+  Step 2990/20000 | R_avg = 0.999868 | norm = 0.999436
+[GPU EM Compute] 3000 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.030643, potential: -4094.01, total: -4093.98 (κ=1)
+  Step 3000/20000 | R_avg = 0.999751 | norm = 0.999434
+  Step 3010/20000 | R_avg = 0.999887 | norm = 0.999432
+  Step 3020/20000 | R_avg = 0.999812 | norm = 0.999429
+  Step 3030/20000 | R_avg = 0.999769 | norm = 0.999427
+  Step 3040/20000 | R_avg = 0.999816 | norm = 0.999425
+[GPU EM Compute] 3050 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  Step 3050/20000 | R_avg = 0.999813 | norm = 0.999423
+  Step 3060/20000 | R_avg = 0.999959 | norm = 0.999421
+  Step 3070/20000 | R_avg = 0.999826 | norm = 0.999419
+  Step 3080/20000 | R_avg = 0.999722 | norm = 0.999417
+  Step 3090/20000 | R_avg = 0.999813 | norm = 0.999415
+[GPU EM Compute] 3100 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0330538, potential: -4094.01, total: -4093.97 (κ=1)
+  Step 3100/20000 | R_avg = 0.999751 | norm = 0.999413
+  Step 3110/20000 | R_avg = 0.999852 | norm = 0.99941
+  Step 3120/20000 | R_avg = 0.999891 | norm = 0.999408
+  Step 3130/20000 | R_avg = 0.999812 | norm = 0.999406
+  Step 3140/20000 | R_avg = 0.999868 | norm = 0.999403
+[GPU EM Compute] 3150 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 3150/20000 | R_avg = 0.999691 | norm = 0.999401
+  Step 3160/20000 | R_avg = 0.999832 | norm = 0.999399
+  Step 3170/20000 | R_avg = 0.999851 | norm = 0.999396
+  Step 3180/20000 | R_avg = 0.999816 | norm = 0.999394
+  Step 3190/20000 | R_avg = 0.999827 | norm = 0.999392
+[GPU EM Compute] 3200 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.552761, potential: -4094.16, total: -4093.6 (κ=1)
+  Step 3200/20000 | R_avg = 0.999645 | norm = 0.99939
+  Step 3210/20000 | R_avg = 0.99981 | norm = 0.999387
+  Step 3220/20000 | R_avg = 0.999843 | norm = 0.999385
+  Step 3230/20000 | R_avg = 0.999827 | norm = 0.999383
+  Step 3240/20000 | R_avg = 0.99981 | norm = 0.99938
+[GPU EM Compute] 3250 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 3250/20000 | R_avg = 0.999859 | norm = 0.999378
+  Step 3260/20000 | R_avg = 0.999828 | norm = 0.999376
+  Step 3270/20000 | R_avg = 0.99981 | norm = 0.999374
+  Step 3280/20000 | R_avg = 0.999852 | norm = 0.999371
+  Step 3290/20000 | R_avg = 0.999772 | norm = 0.999369
+[GPU EM Compute] 3300 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0219528, potential: -4094.63, total: -4094.61 (κ=1)
+  Step 3300/20000 | R_avg = 0.999829 | norm = 0.999367
+  Step 3310/20000 | R_avg = 0.999859 | norm = 0.999365
+  Step 3320/20000 | R_avg = 0.99979 | norm = 0.999362
+  Step 3330/20000 | R_avg = 0.999791 | norm = 0.99936
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 3340/20000 | R_avg = 0.999645 | norm = 0.999358
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 3350 calls | Last: 101 μs | Avg: 106 μs | Grid: 64×64
+  Step 3350/20000 | R_avg = 0.999815 | norm = 0.999356
+  Step 3360/20000 | R_avg = 0.999833 | norm = 0.999354
+  Step 3370/20000 | R_avg = 0.999788 | norm = 0.999351
+  Step 3380/20000 | R_avg = 0.999828 | norm = 0.999349
+  Step 3390/20000 | R_avg = 0.999893 | norm = 0.999347
+[GPU EM Compute] 3400 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0232795, potential: -4094.44, total: -4094.42 (κ=1)
+  Step 3400/20000 | R_avg = 0.999806 | norm = 0.999345
+  Step 3410/20000 | R_avg = 0.999807 | norm = 0.999342
+  Step 3420/20000 | R_avg = 0.999835 | norm = 0.99934
+  Step 3430/20000 | R_avg = 0.999804 | norm = 0.999338
+  Step 3440/20000 | R_avg = 0.999851 | norm = 0.999336
+[GPU EM Compute] 3450 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 3450/20000 | R_avg = 0.999843 | norm = 0.999333
+  Step 3460/20000 | R_avg = 0.999779 | norm = 0.999331
+  Step 3470/20000 | R_avg = 0.999837 | norm = 0.999329
+  Step 3480/20000 | R_avg = 0.999824 | norm = 0.999327
+  Step 3490/20000 | R_avg = 0.99979 | norm = 0.999324
+[GPU EM Compute] 3500 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0227033, potential: -4094.62, total: -4094.59 (κ=1)
+  Step 3500/20000 | R_avg = 0.999827 | norm = 0.999322
+  Step 3510/20000 | R_avg = 0.999788 | norm = 0.99932
+  Step 3520/20000 | R_avg = 0.999801 | norm = 0.999318
+  Step 3530/20000 | R_avg = 0.999845 | norm = 0.999315
+  Step 3540/20000 | R_avg = 0.999849 | norm = 0.999313
+[GPU EM Compute] 3550 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 3550/20000 | R_avg = 0.999785 | norm = 0.99931
+  Step 3560/20000 | R_avg = 0.999645 | norm = 0.999308
+  Step 3570/20000 | R_avg = 0.999871 | norm = 0.999305
+  Step 3580/20000 | R_avg = 0.999836 | norm = 0.999303
+  Step 3590/20000 | R_avg = 0.999861 | norm = 0.9993
+[GPU EM Compute] 3600 calls | Last: 97 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0257414, potential: -4094.42, total: -4094.39 (κ=1)
+  Step 3600/20000 | R_avg = 0.999802 | norm = 0.999298
+  Step 3610/20000 | R_avg = 0.999906 | norm = 0.999296
+  Step 3620/20000 | R_avg = 0.999645 | norm = 0.999293
+  Step 3630/20000 | R_avg = 0.999805 | norm = 0.999291
+  Step 3640/20000 | R_avg = 0.999872 | norm = 0.999289
+[GPU EM Compute] 3650 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  Step 3650/20000 | R_avg = 0.999868 | norm = 0.999286
+  Step 3660/20000 | R_avg = 0.999753 | norm = 0.999284
+  Step 3670/20000 | R_avg = 0.999818 | norm = 0.999282
+  Step 3680/20000 | R_avg = 0.999691 | norm = 0.999279
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 3690/20000 | R_avg = 0.999727 | norm = 0.999277
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 3700 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0167649, potential: -4094.84, total: -4094.82 (κ=1)
+  Step 3700/20000 | R_avg = 0.999855 | norm = 0.999274
+  Step 3710/20000 | R_avg = 0.999894 | norm = 0.999272
+  Step 3720/20000 | R_avg = 0.99978 | norm = 0.99927
+  Step 3730/20000 | R_avg = 0.999783 | norm = 0.999268
+  Step 3740/20000 | R_avg = 0.999864 | norm = 0.999265
+[GPU EM Compute] 3750 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 3750/20000 | R_avg = 0.999863 | norm = 0.999263
+  Step 3760/20000 | R_avg = 0.999792 | norm = 0.999261
+  Step 3770/20000 | R_avg = 0.999863 | norm = 0.999259
+  Step 3780/20000 | R_avg = 0.999781 | norm = 0.999256
+  Step 3790/20000 | R_avg = 0.999779 | norm = 0.999254
+[GPU EM Compute] 3800 calls | Last: 109 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0231577, potential: -4094.45, total: -4094.43 (κ=1)
+  Step 3800/20000 | R_avg = 0.999806 | norm = 0.999252
+  Step 3810/20000 | R_avg = 0.99985 | norm = 0.999249
+  Step 3820/20000 | R_avg = 0.999839 | norm = 0.999247
+  Step 3830/20000 | R_avg = 0.999721 | norm = 0.999244
+  Step 3840/20000 | R_avg = 0.999867 | norm = 0.999242
+[GPU EM Compute] 3850 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 3850/20000 | R_avg = 0.99984 | norm = 0.99924
+  Step 3860/20000 | R_avg = 0.999813 | norm = 0.999237
+  Step 3870/20000 | R_avg = 0.999875 | norm = 0.999235
+  Step 3880/20000 | R_avg = 0.999856 | norm = 0.999233
+  Step 3890/20000 | R_avg = 0.999787 | norm = 0.999231
+[GPU EM Compute] 3900 calls | Last: 101 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0165931, potential: -4094.89, total: -4094.88 (κ=1)
+  Step 3900/20000 | R_avg = 0.999862 | norm = 0.999228
+  Step 3910/20000 | R_avg = 0.999828 | norm = 0.999226
+  Step 3920/20000 | R_avg = 0.999875 | norm = 0.999224
+  Step 3930/20000 | R_avg = 0.999834 | norm = 0.999221
+  Step 3940/20000 | R_avg = 0.999819 | norm = 0.999219
+[GPU EM Compute] 3950 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 3950/20000 | R_avg = 0.999867 | norm = 0.999216
+  Step 3960/20000 | R_avg = 0.999847 | norm = 0.999214
+  Step 3970/20000 | R_avg = 0.999819 | norm = 0.999212
+  Step 3980/20000 | R_avg = 0.999867 | norm = 0.999209
+  Step 3990/20000 | R_avg = 0.999835 | norm = 0.999207
+[GPU EM Compute] 4000 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0254232, potential: -4094.38, total: -4094.35 (κ=1)
+  Step 4000/20000 | R_avg = 0.999797 | norm = 0.999205
+  Step 4010/20000 | R_avg = 0.99987 | norm = 0.999203
+  Step 4020/20000 | R_avg = 0.999754 | norm = 0.9992
+  Step 4030/20000 | R_avg = 0.999871 | norm = 0.999198
+  Step 4040/20000 | R_avg = 0.999862 | norm = 0.999195
+[GPU EM Compute] 4050 calls | Last: 103 μs | Avg: 106 μs | Grid: 64×64
+  Step 4050/20000 | R_avg = 0.99975 | norm = 0.999193
+  Step 4060/20000 | R_avg = 0.999865 | norm = 0.999191
+  Step 4070/20000 | R_avg = 0.99975 | norm = 0.999188
+  Step 4080/20000 | R_avg = 0.999805 | norm = 0.999186
+  Step 4090/20000 | R_avg = 0.999812 | norm = 0.999183
+[GPU EM Compute] 4100 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0193807, potential: -4094.75, total: -4094.74 (κ=1)
+  Step 4100/20000 | R_avg = 0.999845 | norm = 0.999181
+  Step 4110/20000 | R_avg = 0.999863 | norm = 0.999178
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 4120/20000 | R_avg = 0.999867 | norm = 0.999176
+  Step 4130/20000 | R_avg = 0.999778 | norm = 0.999174
+  Step 4140/20000 | R_avg = 0.99977 | norm = 0.999171
+[GPU EM Compute] 4150 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 4150/20000 | R_avg = 0.99987 | norm = 0.999169
+  Step 4160/20000 | R_avg = 0.999809 | norm = 0.999166
+  Step 4170/20000 | R_avg = 0.999858 | norm = 0.999164
+  Step 4180/20000 | R_avg = 0.999891 | norm = 0.999162
+  Step 4190/20000 | R_avg = 0.999721 | norm = 0.99916
+[GPU EM Compute] 4200 calls | Last: 109 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0280727, potential: -4094.04, total: -4094.01 (κ=1)
+  Step 4200/20000 | R_avg = 0.999756 | norm = 0.999157
+  Step 4210/20000 | R_avg = 0.999882 | norm = 0.999155
+  Step 4220/20000 | R_avg = 0.999793 | norm = 0.999153
+  Step 4230/20000 | R_avg = 0.999873 | norm = 0.99915
+  Step 4240/20000 | R_avg = 0.999869 | norm = 0.999148
+[GPU EM Compute] 4250 calls | Last: 60 μs | Avg: 105 μs | Grid: 64×64
+  Step 4250/20000 | R_avg = 0.999755 | norm = 0.999146
+  Step 4260/20000 | R_avg = 0.999847 | norm = 0.999143
+  Step 4270/20000 | R_avg = 0.999819 | norm = 0.999141
+  Step 4280/20000 | R_avg = 0.999809 | norm = 0.999139
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 4290/20000 | R_avg = 0.999806 | norm = 0.999136
+[GPU EM Compute] 4300 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0262197, potential: -4094.37, total: -4094.34 (κ=1)
+  Step 4300/20000 | R_avg = 0.999796 | norm = 0.999134
+  Step 4310/20000 | R_avg = 0.99978 | norm = 0.999131
+  Step 4320/20000 | R_avg = 0.999849 | norm = 0.999129
+  Step 4330/20000 | R_avg = 0.999825 | norm = 0.999127
+  Step 4340/20000 | R_avg = 0.999844 | norm = 0.999124
+[GPU EM Compute] 4350 calls | Last: 101 μs | Avg: 105 μs | Grid: 64×64
+  Step 4350/20000 | R_avg = 0.999809 | norm = 0.999122
+  Step 4360/20000 | R_avg = 0.999826 | norm = 0.99912
+  Step 4370/20000 | R_avg = 0.999798 | norm = 0.999118
+  Step 4380/20000 | R_avg = 0.999838 | norm = 0.999115
+  Step 4390/20000 | R_avg = 0.999845 | norm = 0.999113
+[GPU EM Compute] 4400 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.024665, potential: -4094.29, total: -4094.26 (κ=1)
+  Step 4400/20000 | R_avg = 0.999786 | norm = 0.999111
+  Step 4410/20000 | R_avg = 0.999851 | norm = 0.999108
+  Step 4420/20000 | R_avg = 0.999843 | norm = 0.999106
+  Step 4430/20000 | R_avg = 0.9998 | norm = 0.999104
+  Step 4440/20000 | R_avg = 0.999869 | norm = 0.999101
+[GPU EM Compute] 4450 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 4450/20000 | R_avg = 0.999729 | norm = 0.999099
+  Step 4460/20000 | R_avg = 0.999812 | norm = 0.999096
+  Step 4470/20000 | R_avg = 0.999853 | norm = 0.999094
+  Step 4480/20000 | R_avg = 0.999797 | norm = 0.999092
+  Step 4490/20000 | R_avg = 0.99982 | norm = 0.999089
+[GPU EM Compute] 4500 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0202643, potential: -4094.61, total: -4094.59 (κ=1)
+  Step 4500/20000 | R_avg = 0.999827 | norm = 0.999087
+  Step 4510/20000 | R_avg = 0.999831 | norm = 0.999085
+  Step 4520/20000 | R_avg = 0.999739 | norm = 0.999082
+  Step 4530/20000 | R_avg = 0.999806 | norm = 0.99908
+  Step 4540/20000 | R_avg = 0.999836 | norm = 0.999078
+[GPU EM Compute] 4550 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 4550/20000 | R_avg = 0.99982 | norm = 0.999076
+  Step 4560/20000 | R_avg = 0.999832 | norm = 0.999073
+  Step 4570/20000 | R_avg = 0.999746 | norm = 0.999071
+  Step 4580/20000 | R_avg = 0.999831 | norm = 0.999069
+  Step 4590/20000 | R_avg = 0.999856 | norm = 0.999066
+[GPU EM Compute] 4600 calls | Last: 100 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.024776, potential: -4094.51, total: -4094.48 (κ=1)
+  Step 4600/20000 | R_avg = 0.999814 | norm = 0.999064
+  Step 4610/20000 | R_avg = 0.999832 | norm = 0.999062
+  Step 4620/20000 | R_avg = 0.999858 | norm = 0.999059
+  Step 4630/20000 | R_avg = 0.99983 | norm = 0.999057
+  Step 4640/20000 | R_avg = 0.999831 | norm = 0.999055
+[GPU EM Compute] 4650 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  Step 4650/20000 | R_avg = 0.999854 | norm = 0.999052
+  Step 4660/20000 | R_avg = 0.999848 | norm = 0.99905
+  Step 4670/20000 | R_avg = 0.999808 | norm = 0.999048
+  Step 4680/20000 | R_avg = 0.999826 | norm = 0.999046
+  Step 4690/20000 | R_avg = 0.999818 | norm = 0.999043
+[GPU EM Compute] 4700 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0212768, potential: -4094.47, total: -4094.45 (κ=1)
+  Step 4700/20000 | R_avg = 0.999809 | norm = 0.999041
+  Step 4710/20000 | R_avg = 0.999787 | norm = 0.999038
+  Step 4720/20000 | R_avg = 0.999838 | norm = 0.999036
+  Step 4730/20000 | R_avg = 0.999821 | norm = 0.999033
+  Step 4740/20000 | R_avg = 0.999805 | norm = 0.999031
+[GPU EM Compute] 4750 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 4750/20000 | R_avg = 0.999803 | norm = 0.999029
+  Step 4760/20000 | R_avg = 0.999816 | norm = 0.999026
+  Step 4770/20000 | R_avg = 0.999823 | norm = 0.999024
+  Step 4780/20000 | R_avg = 0.999818 | norm = 0.999022
+  Step 4790/20000 | R_avg = 0.999814 | norm = 0.999019
+[GPU EM Compute] 4800 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.029183, potential: -4094.25, total: -4094.23 (κ=1)
+  Step 4800/20000 | R_avg = 0.999782 | norm = 0.999017
+  Step 4810/20000 | R_avg = 0.999829 | norm = 0.999015
+  Step 4820/20000 | R_avg = 0.999858 | norm = 0.999012
+  Step 4830/20000 | R_avg = 0.999875 | norm = 0.99901
+  Step 4840/20000 | R_avg = 0.9998 | norm = 0.999007
+[GPU EM Compute] 4850 calls | Last: 108 μs | Avg: 105 μs | Grid: 64×64
+  Step 4850/20000 | R_avg = 0.9999 | norm = 0.999005
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 4860/20000 | R_avg = 0.99993 | norm = 0.999003
+  Step 4870/20000 | R_avg = 0.999817 | norm = 0.999
+  Step 4880/20000 | R_avg = 0.999942 | norm = 0.998998
+  Step 4890/20000 | R_avg = 0.99982 | norm = 0.998995
+[GPU EM Compute] 4900 calls | Last: 97 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0248907, potential: -4094.41, total: -4094.39 (κ=1)
+  Step 4900/20000 | R_avg = 0.999802 | norm = 0.998993
+  Step 4910/20000 | R_avg = 0.999925 | norm = 0.998991
+  Step 4920/20000 | R_avg = 0.999908 | norm = 0.998988
+  Step 4930/20000 | R_avg = 0.999793 | norm = 0.998986
+  Step 4940/20000 | R_avg = 0.999894 | norm = 0.998984
+[GPU EM Compute] 4950 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 4950/20000 | R_avg = 0.999859 | norm = 0.998981
+  Step 4960/20000 | R_avg = 0.999833 | norm = 0.998979
+  Step 4970/20000 | R_avg = 0.999797 | norm = 0.998977
+  Step 4980/20000 | R_avg = 0.999811 | norm = 0.998974
+  Step 4990/20000 | R_avg = 0.999887 | norm = 0.998972
+[GPU EM Compute] 5000 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0260983, potential: -4094.37, total: -4094.35 (κ=1)
+  Step 5000/20000 | R_avg = 0.999797 | norm = 0.998969
+  Step 5010/20000 | R_avg = 0.999833 | norm = 0.998967
+  Step 5020/20000 | R_avg = 0.999867 | norm = 0.998964
+  Step 5030/20000 | R_avg = 0.999792 | norm = 0.998962
+  Step 5040/20000 | R_avg = 0.99984 | norm = 0.998959
+[GPU EM Compute] 5050 calls | Last: 110 μs | Avg: 105 μs | Grid: 64×64
+  Step 5050/20000 | R_avg = 0.999818 | norm = 0.998957
+  Step 5060/20000 | R_avg = 0.999776 | norm = 0.998954
+  Step 5070/20000 | R_avg = 0.999795 | norm = 0.998952
+  Step 5080/20000 | R_avg = 0.99989 | norm = 0.99895
+  Step 5090/20000 | R_avg = 0.999745 | norm = 0.998947
+[GPU EM Compute] 5100 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0197377, potential: -4094.66, total: -4094.64 (κ=1)
+  Step 5100/20000 | R_avg = 0.999833 | norm = 0.998945
+  Step 5110/20000 | R_avg = 0.999796 | norm = 0.998942
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 5120/20000 | R_avg = 0.999645 | norm = 0.99894
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 5130/20000 | R_avg = 0.999859 | norm = 0.998937
+  Step 5140/20000 | R_avg = 0.999844 | norm = 0.998935
+[GPU EM Compute] 5150 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 5150/20000 | R_avg = 0.999828 | norm = 0.998933
+  Step 5160/20000 | R_avg = 0.999822 | norm = 0.99893
+  Step 5170/20000 | R_avg = 0.999808 | norm = 0.998928
+  Step 5180/20000 | R_avg = 0.999804 | norm = 0.998925
+  Step 5190/20000 | R_avg = 0.999809 | norm = 0.998923
+[GPU EM Compute] 5200 calls | Last: 111 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0178844, potential: -4094.74, total: -4094.72 (κ=1)
+  Step 5200/20000 | R_avg = 0.999842 | norm = 0.998921
+  Step 5210/20000 | R_avg = 0.999823 | norm = 0.998918
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 5220/20000 | R_avg = 0.999843 | norm = 0.998916
+  Step 5230/20000 | R_avg = 0.999795 | norm = 0.998914
+  Step 5240/20000 | R_avg = 0.999814 | norm = 0.998911
+[GPU EM Compute] 5250 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 5250/20000 | R_avg = 0.999798 | norm = 0.998909
+  Step 5260/20000 | R_avg = 0.999811 | norm = 0.998906
+  Step 5270/20000 | R_avg = 0.999844 | norm = 0.998904
+  Step 5280/20000 | R_avg = 0.999812 | norm = 0.998901
+  Step 5290/20000 | R_avg = 0.999799 | norm = 0.998899
+[GPU EM Compute] 5300 calls | Last: 98 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0198177, potential: -4094.75, total: -4094.73 (κ=1)
+  Step 5300/20000 | R_avg = 0.999845 | norm = 0.998897
+  Step 5310/20000 | R_avg = 0.999836 | norm = 0.998894
+  Step 5320/20000 | R_avg = 0.999847 | norm = 0.998892
+  Step 5330/20000 | R_avg = 0.999831 | norm = 0.99889
+  Step 5340/20000 | R_avg = 0.99982 | norm = 0.998887
+[GPU EM Compute] 5350 calls | Last: 108 μs | Avg: 105 μs | Grid: 64×64
+  Step 5350/20000 | R_avg = 0.999827 | norm = 0.998885
+  Step 5360/20000 | R_avg = 0.99982 | norm = 0.998882
+  Step 5370/20000 | R_avg = 0.999859 | norm = 0.99888
+  Step 5380/20000 | R_avg = 0.999878 | norm = 0.998878
+  Step 5390/20000 | R_avg = 0.999791 | norm = 0.998875
+[GPU EM Compute] 5400 calls | Last: 107 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0229982, potential: -4094.43, total: -4094.41 (κ=1)
+  Step 5400/20000 | R_avg = 0.999804 | norm = 0.998873
+  Step 5410/20000 | R_avg = 0.999876 | norm = 0.998871
+  Step 5420/20000 | R_avg = 0.999778 | norm = 0.998868
+  Step 5430/20000 | R_avg = 0.999756 | norm = 0.998866
+  Step 5440/20000 | R_avg = 0.999847 | norm = 0.998864
+[GPU EM Compute] 5450 calls | Last: 117 μs | Avg: 105 μs | Grid: 64×64
+  Step 5450/20000 | R_avg = 0.999761 | norm = 0.998862
+  Step 5460/20000 | R_avg = 0.999792 | norm = 0.998859
+  Step 5470/20000 | R_avg = 0.999843 | norm = 0.998857
+  Step 5480/20000 | R_avg = 0.999785 | norm = 0.998855
+  Step 5490/20000 | R_avg = 0.999861 | norm = 0.998852
+[GPU EM Compute] 5500 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0157108, potential: -4095.11, total: -4095.09 (κ=1)
+  Step 5500/20000 | R_avg = 0.999889 | norm = 0.99885
+  Step 5510/20000 | R_avg = 0.999772 | norm = 0.998848
+  Step 5520/20000 | R_avg = 0.999862 | norm = 0.998845
+  Step 5530/20000 | R_avg = 0.999856 | norm = 0.998843
+  Step 5540/20000 | R_avg = 0.999805 | norm = 0.998841
+[GPU EM Compute] 5550 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 5550/20000 | R_avg = 0.999845 | norm = 0.998838
+  Step 5560/20000 | R_avg = 0.999877 | norm = 0.998836
+  Step 5570/20000 | R_avg = 0.999785 | norm = 0.998834
+  Step 5580/20000 | R_avg = 0.999879 | norm = 0.998832
+  Step 5590/20000 | R_avg = 0.999907 | norm = 0.998829
+[GPU EM Compute] 5600 calls | Last: 107 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0291861, potential: -4094.21, total: -4094.18 (κ=1)
+  Step 5600/20000 | R_avg = 0.999776 | norm = 0.998827
+  Step 5610/20000 | R_avg = 0.999855 | norm = 0.998825
+  Step 5620/20000 | R_avg = 0.999883 | norm = 0.998822
+  Step 5630/20000 | R_avg = 0.999791 | norm = 0.99882
+  Step 5640/20000 | R_avg = 0.999872 | norm = 0.998818
+[GPU EM Compute] 5650 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 5650/20000 | R_avg = 0.999884 | norm = 0.998815
+  Step 5660/20000 | R_avg = 0.999749 | norm = 0.998813
+  Step 5670/20000 | R_avg = 0.999718 | norm = 0.998811
+  Step 5680/20000 | R_avg = 0.999868 | norm = 0.998808
+  Step 5690/20000 | R_avg = 0.999794 | norm = 0.998806
+[GPU EM Compute] 5700 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0158812, potential: -4095, total: -4094.98 (κ=1)
+  Step 5700/20000 | R_avg = 0.999875 | norm = 0.998804
+  Step 5710/20000 | R_avg = 0.999875 | norm = 0.998802
+  Step 5720/20000 | R_avg = 0.999802 | norm = 0.998799
+  Step 5730/20000 | R_avg = 0.999863 | norm = 0.998797
+  Step 5740/20000 | R_avg = 0.999885 | norm = 0.998795
+[GPU EM Compute] 5750 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 5750/20000 | R_avg = 0.999774 | norm = 0.998792
+  Step 5760/20000 | R_avg = 0.99979 | norm = 0.99879
+  Step 5770/20000 | R_avg = 0.999892 | norm = 0.998788
+  Step 5780/20000 | R_avg = 0.999786 | norm = 0.998785
+  Step 5790/20000 | R_avg = 0.999882 | norm = 0.998783
+[GPU EM Compute] 5800 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0220645, potential: -4094.71, total: -4094.69 (κ=1)
+  Step 5800/20000 | R_avg = 0.99984 | norm = 0.998781
+  Step 5810/20000 | R_avg = 0.999714 | norm = 0.998778
+  Step 5820/20000 | R_avg = 0.999913 | norm = 0.998776
+  Step 5830/20000 | R_avg = 0.999874 | norm = 0.998774
+  Step 5840/20000 | R_avg = 0.999783 | norm = 0.998771
+[GPU EM Compute] 5850 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  Step 5850/20000 | R_avg = 0.999884 | norm = 0.998769
+  Step 5860/20000 | R_avg = 0.999828 | norm = 0.998767
+  Step 5870/20000 | R_avg = 0.999727 | norm = 0.998764
+  Step 5880/20000 | R_avg = 0.999905 | norm = 0.998762
+  Step 5890/20000 | R_avg = 0.999809 | norm = 0.99876
+[GPU EM Compute] 5900 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0283536, potential: -4094.11, total: -4094.09 (κ=1)
+  Step 5900/20000 | R_avg = 0.999765 | norm = 0.998757
+  Step 5910/20000 | R_avg = 0.999736 | norm = 0.998755
+  Step 5920/20000 | R_avg = 0.999873 | norm = 0.998753
+  Step 5930/20000 | R_avg = 0.999789 | norm = 0.998751
+  Step 5940/20000 | R_avg = 0.999891 | norm = 0.998748
+[GPU EM Compute] 5950 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  Step 5950/20000 | R_avg = 0.999807 | norm = 0.998746
+  Step 5960/20000 | R_avg = 0.999747 | norm = 0.998744
+  Step 5970/20000 | R_avg = 0.999874 | norm = 0.998741
+  Step 5980/20000 | R_avg = 0.99986 | norm = 0.998739
+  Step 5990/20000 | R_avg = 0.99979 | norm = 0.998737
+[GPU EM Compute] 6000 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0138466, potential: -4094.99, total: -4094.97 (κ=1)
+  Step 6000/20000 | R_avg = 0.999874 | norm = 0.998734
+  Step 6010/20000 | R_avg = 0.999852 | norm = 0.998732
+  Step 6020/20000 | R_avg = 0.999798 | norm = 0.99873
+  Step 6030/20000 | R_avg = 0.999757 | norm = 0.998727
+  Step 6040/20000 | R_avg = 0.999848 | norm = 0.998725
+[GPU EM Compute] 6050 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 6050/20000 | R_avg = 0.999837 | norm = 0.998723
+  Step 6060/20000 | R_avg = 0.999806 | norm = 0.99872
+  Step 6070/20000 | R_avg = 0.999862 | norm = 0.998718
+  Step 6080/20000 | R_avg = 0.999828 | norm = 0.998716
+  Step 6090/20000 | R_avg = 0.999839 | norm = 0.998713
+[GPU EM Compute] 6100 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0161572, potential: -4094.91, total: -4094.9 (κ=1)
+  Step 6100/20000 | R_avg = 0.999864 | norm = 0.998711
+  Step 6110/20000 | R_avg = 0.999833 | norm = 0.998709
+  Step 6120/20000 | R_avg = 0.999786 | norm = 0.998706
+  Step 6130/20000 | R_avg = 0.999859 | norm = 0.998704
+  Step 6140/20000 | R_avg = 0.999849 | norm = 0.998701
+[GPU EM Compute] 6150 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 6150/20000 | R_avg = 0.999796 | norm = 0.998699
+  Step 6160/20000 | R_avg = 0.999847 | norm = 0.998697
+  Step 6170/20000 | R_avg = 0.999845 | norm = 0.998695
+  Step 6180/20000 | R_avg = 0.999808 | norm = 0.998692
+  Step 6190/20000 | R_avg = 0.999861 | norm = 0.99869
+[GPU EM Compute] 6200 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0145217, potential: -4094.8, total: -4094.79 (κ=1)
+  Step 6200/20000 | R_avg = 0.999851 | norm = 0.998688
+  Step 6210/20000 | R_avg = 0.999802 | norm = 0.998686
+  Step 6220/20000 | R_avg = 0.999837 | norm = 0.998683
+  Step 6230/20000 | R_avg = 0.999872 | norm = 0.998681
+  Step 6240/20000 | R_avg = 0.999803 | norm = 0.998679
+[GPU EM Compute] 6250 calls | Last: 113 μs | Avg: 105 μs | Grid: 64×64
+  Step 6250/20000 | R_avg = 0.999847 | norm = 0.998676
+  Step 6260/20000 | R_avg = 0.999854 | norm = 0.998674
+  Step 6270/20000 | R_avg = 0.999753 | norm = 0.998671
+  Step 6280/20000 | R_avg = 0.999845 | norm = 0.998669
+  Step 6290/20000 | R_avg = 0.999852 | norm = 0.998667
+[GPU EM Compute] 6300 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.021834, potential: -4094.52, total: -4094.5 (κ=1)
+  Step 6300/20000 | R_avg = 0.999815 | norm = 0.998664
+  Step 6310/20000 | R_avg = 0.999816 | norm = 0.998662
+  Step 6320/20000 | R_avg = 0.999874 | norm = 0.99866
+  Step 6330/20000 | R_avg = 0.999822 | norm = 0.998657
+  Step 6340/20000 | R_avg = 0.999964 | norm = 0.998655
+[GPU EM Compute] 6350 calls | Last: 121 μs | Avg: 106 μs | Grid: 64×64
+  Step 6350/20000 | R_avg = 0.999789 | norm = 0.998652
+  Step 6360/20000 | R_avg = 0.999763 | norm = 0.99865
+  Step 6370/20000 | R_avg = 0.999898 | norm = 0.998648
+  Step 6380/20000 | R_avg = 0.999784 | norm = 0.998645
+  Step 6390/20000 | R_avg = 0.99984 | norm = 0.998643
+[GPU EM Compute] 6400 calls | Last: 114 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0209767, potential: -4094.48, total: -4094.46 (κ=1)
+  Step 6400/20000 | R_avg = 0.99981 | norm = 0.998641
+  Step 6410/20000 | R_avg = 0.999806 | norm = 0.998638
+  Step 6420/20000 | R_avg = 0.999845 | norm = 0.998636
+  Step 6430/20000 | R_avg = 0.999851 | norm = 0.998634
+  Step 6440/20000 | R_avg = 0.999813 | norm = 0.998631
+[GPU EM Compute] 6450 calls | Last: 109 μs | Avg: 106 μs | Grid: 64×64
+  Step 6450/20000 | R_avg = 0.999849 | norm = 0.998629
+  Step 6460/20000 | R_avg = 0.999797 | norm = 0.998627
+  Step 6470/20000 | R_avg = 0.999786 | norm = 0.998624
+  Step 6480/20000 | R_avg = 0.999949 | norm = 0.998622
+  Step 6490/20000 | R_avg = 0.99984 | norm = 0.998619
+[GPU EM Compute] 6500 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0246973, potential: -4094.47, total: -4094.44 (κ=1)
+  Step 6500/20000 | R_avg = 0.999809 | norm = 0.998617
+  Step 6510/20000 | R_avg = 0.99986 | norm = 0.998615
+  Step 6520/20000 | R_avg = 0.999827 | norm = 0.998612
+  Step 6530/20000 | R_avg = 0.999803 | norm = 0.99861
+  Step 6540/20000 | R_avg = 0.999855 | norm = 0.998608
+[GPU EM Compute] 6550 calls | Last: 110 μs | Avg: 106 μs | Grid: 64×64
+  Step 6550/20000 | R_avg = 0.999746 | norm = 0.998605
+  Step 6560/20000 | R_avg = 0.999819 | norm = 0.998603
+  Step 6570/20000 | R_avg = 0.999847 | norm = 0.998601
+  Step 6580/20000 | R_avg = 0.999832 | norm = 0.998598
+  Step 6590/20000 | R_avg = 0.999847 | norm = 0.998596
+[GPU EM Compute] 6600 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.028688, potential: -4094.11, total: -4094.08 (κ=1)
+  Step 6600/20000 | R_avg = 0.999764 | norm = 0.998594
+  Step 6610/20000 | R_avg = 0.999838 | norm = 0.998591
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 6620/20000 | R_avg = 0.999804 | norm = 0.998589
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 6630/20000 | R_avg = 0.999855 | norm = 0.998587
+  Step 6640/20000 | R_avg = 0.999859 | norm = 0.998584
+[GPU EM Compute] 6650 calls | Last: 112 μs | Avg: 106 μs | Grid: 64×64
+  Step 6650/20000 | R_avg = 0.99982 | norm = 0.998582
+  Step 6660/20000 | R_avg = 0.999791 | norm = 0.998579
+  Step 6670/20000 | R_avg = 0.999856 | norm = 0.998577
+  Step 6680/20000 | R_avg = 0.999814 | norm = 0.998574
+  Step 6690/20000 | R_avg = 0.999756 | norm = 0.998572
+[GPU EM Compute] 6700 calls | Last: 111 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0251483, potential: -4094.47, total: -4094.45 (κ=1)
+  Step 6700/20000 | R_avg = 0.99981 | norm = 0.99857
+  Step 6710/20000 | R_avg = 0.999767 | norm = 0.998567
+  Step 6720/20000 | R_avg = 0.999805 | norm = 0.998565
+  Step 6730/20000 | R_avg = 0.999843 | norm = 0.998562
+  Step 6740/20000 | R_avg = 0.999797 | norm = 0.99856
+[GPU EM Compute] 6750 calls | Last: 122 μs | Avg: 106 μs | Grid: 64×64
+  Step 6750/20000 | R_avg = 0.999773 | norm = 0.998558
+  Step 6760/20000 | R_avg = 0.999852 | norm = 0.998555
+  Step 6770/20000 | R_avg = 0.999835 | norm = 0.998553
+  Step 6780/20000 | R_avg = 0.99977 | norm = 0.998551
+  Step 6790/20000 | R_avg = 0.999853 | norm = 0.998548
+[GPU EM Compute] 6800 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0277868, potential: -4094.25, total: -4094.22 (κ=1)
+  Step 6800/20000 | R_avg = 0.999782 | norm = 0.998546
+  Step 6810/20000 | R_avg = 0.999803 | norm = 0.998544
+  Step 6820/20000 | R_avg = 0.999873 | norm = 0.998541
+  Step 6830/20000 | R_avg = 0.9998 | norm = 0.998539
+  Step 6840/20000 | R_avg = 0.999801 | norm = 0.998537
+[GPU EM Compute] 6850 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 6850/20000 | R_avg = 0.999874 | norm = 0.998534
+  Step 6860/20000 | R_avg = 0.999795 | norm = 0.998532
+  Step 6870/20000 | R_avg = 0.999816 | norm = 0.99853
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 6880/20000 | R_avg = 0.999813 | norm = 0.998527
+  Step 6890/20000 | R_avg = 0.99985 | norm = 0.998525
+[GPU EM Compute] 6900 calls | Last: 123 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.00929405, potential: -4095.02, total: -4095.01 (κ=1)
+  Step 6900/20000 | R_avg = 0.999879 | norm = 0.998523
+  Step 6910/20000 | R_avg = 0.99986 | norm = 0.99852
+  Step 6920/20000 | R_avg = 0.999862 | norm = 0.998518
+  Step 6930/20000 | R_avg = 0.999813 | norm = 0.998516
+  Step 6940/20000 | R_avg = 0.9998 | norm = 0.998513
+[GPU EM Compute] 6950 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 6950/20000 | R_avg = 0.99981 | norm = 0.998511
+  Step 6960/20000 | R_avg = 0.99981 | norm = 0.998509
+  Step 6970/20000 | R_avg = 0.999844 | norm = 0.998506
+  Step 6980/20000 | R_avg = 0.999829 | norm = 0.998504
+  Step 6990/20000 | R_avg = 0.99981 | norm = 0.998502
+[GPU EM Compute] 7000 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0194663, potential: -4094.75, total: -4094.73 (κ=1)
+  Step 7000/20000 | R_avg = 0.999844 | norm = 0.998499
+  Step 7010/20000 | R_avg = 0.999809 | norm = 0.998497
+  Step 7020/20000 | R_avg = 0.999794 | norm = 0.998495
+  Step 7030/20000 | R_avg = 0.99986 | norm = 0.998492
+  Step 7040/20000 | R_avg = 0.9998 | norm = 0.99849
+[GPU EM Compute] 7050 calls | Last: 101 μs | Avg: 106 μs | Grid: 64×64
+  Step 7050/20000 | R_avg = 0.999734 | norm = 0.998488
+  Step 7060/20000 | R_avg = 0.999852 | norm = 0.998486
+  Step 7070/20000 | R_avg = 0.999816 | norm = 0.998484
+  Step 7080/20000 | R_avg = 0.999788 | norm = 0.998481
+  Step 7090/20000 | R_avg = 0.999865 | norm = 0.998479
+[GPU EM Compute] 7100 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0225373, potential: -4094.62, total: -4094.6 (κ=1)
+  Step 7100/20000 | R_avg = 0.999828 | norm = 0.998477
+  Step 7110/20000 | R_avg = 0.999788 | norm = 0.998474
+  Step 7120/20000 | R_avg = 0.999805 | norm = 0.998472
+  Step 7130/20000 | R_avg = 0.999811 | norm = 0.99847
+  Step 7140/20000 | R_avg = 0.999802 | norm = 0.998467
+[GPU EM Compute] 7150 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 7150/20000 | R_avg = 0.999847 | norm = 0.998465
+  Step 7160/20000 | R_avg = 0.999831 | norm = 0.998462
+  Step 7170/20000 | R_avg = 0.999789 | norm = 0.99846
+  Step 7180/20000 | R_avg = 0.999811 | norm = 0.998458
+  Step 7190/20000 | R_avg = 0.999802 | norm = 0.998456
+[GPU EM Compute] 7200 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0245165, potential: -4094.4, total: -4094.38 (κ=1)
+  Step 7200/20000 | R_avg = 0.999801 | norm = 0.998453
+  Step 7210/20000 | R_avg = 0.999847 | norm = 0.998451
+  Step 7220/20000 | R_avg = 0.999856 | norm = 0.998449
+  Step 7230/20000 | R_avg = 0.999791 | norm = 0.998446
+  Step 7240/20000 | R_avg = 0.999884 | norm = 0.998444
+[GPU EM Compute] 7250 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 7250/20000 | R_avg = 0.99984 | norm = 0.998441
+  Step 7260/20000 | R_avg = 0.999813 | norm = 0.998439
+  Step 7270/20000 | R_avg = 0.99986 | norm = 0.998437
+  Step 7280/20000 | R_avg = 0.999831 | norm = 0.998435
+  Step 7290/20000 | R_avg = 0.999829 | norm = 0.998432
+[GPU EM Compute] 7300 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0223436, potential: -4094.65, total: -4094.62 (κ=1)
+  Step 7300/20000 | R_avg = 0.999831 | norm = 0.99843
+  Step 7310/20000 | R_avg = 0.99983 | norm = 0.998427
+  Step 7320/20000 | R_avg = 0.999826 | norm = 0.998425
+  Step 7330/20000 | R_avg = 0.999848 | norm = 0.998423
+  Step 7340/20000 | R_avg = 0.99983 | norm = 0.99842
+[GPU EM Compute] 7350 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 7350/20000 | R_avg = 0.999826 | norm = 0.998418
+  Step 7360/20000 | R_avg = 0.999828 | norm = 0.998416
+  Step 7370/20000 | R_avg = 0.999843 | norm = 0.998413
+  Step 7380/20000 | R_avg = 0.9998 | norm = 0.998411
+  Step 7390/20000 | R_avg = 0.999864 | norm = 0.998408
+[GPU EM Compute] 7400 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0218836, potential: -4094.52, total: -4094.49 (κ=1)
+  Step 7400/20000 | R_avg = 0.999815 | norm = 0.998406
+  Step 7410/20000 | R_avg = 0.9998 | norm = 0.998404
+  Step 7420/20000 | R_avg = 0.999809 | norm = 0.998401
+  Step 7430/20000 | R_avg = 0.999826 | norm = 0.998399
+  Step 7440/20000 | R_avg = 0.99985 | norm = 0.998397
+[GPU EM Compute] 7450 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  Step 7450/20000 | R_avg = 0.99983 | norm = 0.998394
+  Step 7460/20000 | R_avg = 0.999738 | norm = 0.998392
+  Step 7470/20000 | R_avg = 0.999856 | norm = 0.99839
+  Step 7480/20000 | R_avg = 0.999797 | norm = 0.998387
+  Step 7490/20000 | R_avg = 0.999755 | norm = 0.998385
+[GPU EM Compute] 7500 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0173702, potential: -4094.8, total: -4094.78 (κ=1)
+  Step 7500/20000 | R_avg = 0.999851 | norm = 0.998383
+  Step 7510/20000 | R_avg = 0.999835 | norm = 0.998381
+  Step 7520/20000 | R_avg = 0.999814 | norm = 0.998378
+  Step 7530/20000 | R_avg = 0.999848 | norm = 0.998376
+  Step 7540/20000 | R_avg = 0.999794 | norm = 0.998374
+[GPU EM Compute] 7550 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  Step 7550/20000 | R_avg = 0.999803 | norm = 0.998372
+  Step 7560/20000 | R_avg = 0.999836 | norm = 0.998369
+  Step 7570/20000 | R_avg = 0.999817 | norm = 0.998367
+  Step 7580/20000 | R_avg = 0.999827 | norm = 0.998365
+  Step 7590/20000 | R_avg = 0.999867 | norm = 0.998362
+[GPU EM Compute] 7600 calls | Last: 103 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0222082, potential: -4094.57, total: -4094.55 (κ=1)
+  Step 7600/20000 | R_avg = 0.999822 | norm = 0.99836
+  Step 7610/20000 | R_avg = 0.99982 | norm = 0.998358
+  Step 7620/20000 | R_avg = 0.999856 | norm = 0.998355
+  Step 7630/20000 | R_avg = 0.999822 | norm = 0.998353
+  Step 7640/20000 | R_avg = 0.999811 | norm = 0.998351
+[GPU EM Compute] 7650 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 7650/20000 | R_avg = 0.99984 | norm = 0.998348
+  Step 7660/20000 | R_avg = 0.999877 | norm = 0.998346
+  Step 7670/20000 | R_avg = 0.999873 | norm = 0.998344
+  Step 7680/20000 | R_avg = 0.999892 | norm = 0.998341
+  Step 7690/20000 | R_avg = 0.999882 | norm = 0.998339
+[GPU EM Compute] 7700 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0205445, potential: -4094.73, total: -4094.71 (κ=1)
+  Step 7700/20000 | R_avg = 0.999842 | norm = 0.998336
+  Step 7710/20000 | R_avg = 0.999873 | norm = 0.998334
+  Step 7720/20000 | R_avg = 0.99979 | norm = 0.998332
+  Step 7730/20000 | R_avg = 0.999854 | norm = 0.998329
+  Step 7740/20000 | R_avg = 0.999844 | norm = 0.998327
+[GPU EM Compute] 7750 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 7750/20000 | R_avg = 0.999861 | norm = 0.998324
+  Step 7760/20000 | R_avg = 0.999878 | norm = 0.998322
+  Step 7770/20000 | R_avg = 0.999886 | norm = 0.99832
+  Step 7780/20000 | R_avg = 0.999892 | norm = 0.998318
+  Step 7790/20000 | R_avg = 0.999832 | norm = 0.998315
+[GPU EM Compute] 7800 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0162665, potential: -4095.01, total: -4094.99 (κ=1)
+  Step 7800/20000 | R_avg = 0.999876 | norm = 0.998313
+  Step 7810/20000 | R_avg = 0.999887 | norm = 0.998311
+  Step 7820/20000 | R_avg = 0.99985 | norm = 0.998308
+  Step 7830/20000 | R_avg = 0.999869 | norm = 0.998306
+  Step 7840/20000 | R_avg = 0.999839 | norm = 0.998304
+[GPU EM Compute] 7850 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 7850/20000 | R_avg = 0.999791 | norm = 0.998302
+  Step 7860/20000 | R_avg = 0.999797 | norm = 0.998299
+  Step 7870/20000 | R_avg = 0.999863 | norm = 0.998297
+  Step 7880/20000 | R_avg = 0.999813 | norm = 0.998295
+  Step 7890/20000 | R_avg = 0.999802 | norm = 0.998293
+[GPU EM Compute] 7900 calls | Last: 116 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0182403, potential: -4094.9, total: -4094.88 (κ=1)
+  Step 7900/20000 | R_avg = 0.999863 | norm = 0.99829
+  Step 7910/20000 | R_avg = 0.999813 | norm = 0.998288
+  Step 7920/20000 | R_avg = 0.999849 | norm = 0.998285
+  Step 7930/20000 | R_avg = 0.999882 | norm = 0.998283
+  Step 7940/20000 | R_avg = 0.999825 | norm = 0.998281
+[GPU EM Compute] 7950 calls | Last: 110 μs | Avg: 106 μs | Grid: 64×64
+  Step 7950/20000 | R_avg = 0.999794 | norm = 0.998278
+  Step 7960/20000 | R_avg = 0.999882 | norm = 0.998276
+  Step 7970/20000 | R_avg = 0.999761 | norm = 0.998274
+  Step 7980/20000 | R_avg = 0.999799 | norm = 0.998271
+  Step 7990/20000 | R_avg = 0.999874 | norm = 0.998269
+[GPU EM Compute] 8000 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0206943, potential: -4094.62, total: -4094.6 (κ=1)
+  Step 8000/20000 | R_avg = 0.999827 | norm = 0.998267
+  Step 8010/20000 | R_avg = 0.999765 | norm = 0.998264
+  Step 8020/20000 | R_avg = 0.999874 | norm = 0.998262
+  Step 8030/20000 | R_avg = 0.999793 | norm = 0.99826
+  Step 8040/20000 | R_avg = 0.999806 | norm = 0.998257
+[GPU EM Compute] 8050 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  Step 8050/20000 | R_avg = 0.999882 | norm = 0.998255
+  Step 8060/20000 | R_avg = 0.999791 | norm = 0.998253
+  Step 8070/20000 | R_avg = 0.999787 | norm = 0.99825
+  Step 8080/20000 | R_avg = 0.999871 | norm = 0.998248
+  Step 8090/20000 | R_avg = 0.999806 | norm = 0.998245
+[GPU EM Compute] 8100 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0262264, potential: -4094.42, total: -4094.39 (κ=1)
+  Step 8100/20000 | R_avg = 0.999802 | norm = 0.998243
+  Step 8110/20000 | R_avg = 0.999874 | norm = 0.998241
+  Step 8120/20000 | R_avg = 0.999837 | norm = 0.998238
+  Step 8130/20000 | R_avg = 0.999738 | norm = 0.998236
+  Step 8140/20000 | R_avg = 0.999851 | norm = 0.998234
+[GPU EM Compute] 8150 calls | Last: 117 μs | Avg: 106 μs | Grid: 64×64
+  Step 8150/20000 | R_avg = 0.999733 | norm = 0.998231
+  Step 8160/20000 | R_avg = 0.9998 | norm = 0.998229
+  Step 8170/20000 | R_avg = 0.999903 | norm = 0.998227
+  Step 8180/20000 | R_avg = 0.999738 | norm = 0.998224
+  Step 8190/20000 | R_avg = 0.999798 | norm = 0.998222
+[GPU EM Compute] 8200 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0160415, potential: -4094.9, total: -4094.88 (κ=1)
+  Step 8200/20000 | R_avg = 0.999863 | norm = 0.99822
+  Step 8210/20000 | R_avg = 0.999804 | norm = 0.998217
+  Step 8220/20000 | R_avg = 0.999757 | norm = 0.998215
+  Step 8230/20000 | R_avg = 0.999859 | norm = 0.998212
+  Step 8240/20000 | R_avg = 0.999818 | norm = 0.99821
+[GPU EM Compute] 8250 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 8250/20000 | R_avg = 0.999816 | norm = 0.998208
+  Step 8260/20000 | R_avg = 0.999866 | norm = 0.998205
+  Step 8270/20000 | R_avg = 0.999813 | norm = 0.998203
+  Step 8280/20000 | R_avg = 0.99975 | norm = 0.998201
+  Step 8290/20000 | R_avg = 0.999898 | norm = 0.998198
+[GPU EM Compute] 8300 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0260502, potential: -4094.17, total: -4094.14 (κ=1)
+  Step 8300/20000 | R_avg = 0.999771 | norm = 0.998196
+  Step 8310/20000 | R_avg = 0.999807 | norm = 0.998193
+  Step 8320/20000 | R_avg = 0.999881 | norm = 0.998191
+  Step 8330/20000 | R_avg = 0.999793 | norm = 0.998189
+  Step 8340/20000 | R_avg = 0.999784 | norm = 0.998187
+[GPU EM Compute] 8350 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 8350/20000 | R_avg = 0.999884 | norm = 0.998184
+  Step 8360/20000 | R_avg = 0.999835 | norm = 0.998182
+  Step 8370/20000 | R_avg = 0.999803 | norm = 0.99818
+  Step 8380/20000 | R_avg = 0.999785 | norm = 0.998177
+  Step 8390/20000 | R_avg = 0.999895 | norm = 0.998175
+[GPU EM Compute] 8400 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0246646, potential: -4094.41, total: -4094.39 (κ=1)
+  Step 8400/20000 | R_avg = 0.999802 | norm = 0.998172
+  Step 8410/20000 | R_avg = 0.999762 | norm = 0.99817
+  Step 8420/20000 | R_avg = 0.99989 | norm = 0.998168
+  Step 8430/20000 | R_avg = 0.999785 | norm = 0.998165
+  Step 8440/20000 | R_avg = 0.999856 | norm = 0.998163
+[GPU EM Compute] 8450 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 8450/20000 | R_avg = 0.99989 | norm = 0.99816
+  Step 8460/20000 | R_avg = 0.999792 | norm = 0.998158
+  Step 8470/20000 | R_avg = 0.99983 | norm = 0.998155
+  Step 8480/20000 | R_avg = 0.999857 | norm = 0.998153
+  Step 8490/20000 | R_avg = 0.999802 | norm = 0.998151
+[GPU EM Compute] 8500 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0156478, potential: -4094.82, total: -4094.8 (κ=1)
+  Step 8500/20000 | R_avg = 0.999852 | norm = 0.998148
+  Step 8510/20000 | R_avg = 0.999858 | norm = 0.998146
+  Step 8520/20000 | R_avg = 0.999812 | norm = 0.998144
+  Step 8530/20000 | R_avg = 0.999791 | norm = 0.998141
+  Step 8540/20000 | R_avg = 0.999811 | norm = 0.998139
+[GPU EM Compute] 8550 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 8550/20000 | R_avg = 0.999791 | norm = 0.998136
+  Step 8560/20000 | R_avg = 0.999842 | norm = 0.998134
+  Step 8570/20000 | R_avg = 0.999811 | norm = 0.998131
+  Step 8580/20000 | R_avg = 0.99981 | norm = 0.998129
+  Step 8590/20000 | R_avg = 0.999822 | norm = 0.998127
+[GPU EM Compute] 8600 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0218316, potential: -4094.64, total: -4094.62 (κ=1)
+  Step 8600/20000 | R_avg = 0.999831 | norm = 0.998124
+  Step 8610/20000 | R_avg = 0.999791 | norm = 0.998122
+  Step 8620/20000 | R_avg = 0.999837 | norm = 0.998119
+  Step 8630/20000 | R_avg = 0.999831 | norm = 0.998117
+  Step 8640/20000 | R_avg = 0.999813 | norm = 0.998115
+[GPU EM Compute] 8650 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 8650/20000 | R_avg = 0.999837 | norm = 0.998112
+  Step 8660/20000 | R_avg = 0.999802 | norm = 0.99811
+  Step 8670/20000 | R_avg = 0.999781 | norm = 0.998108
+  Step 8680/20000 | R_avg = 0.999843 | norm = 0.998105
+  Step 8690/20000 | R_avg = 0.999734 | norm = 0.998103
+[GPU EM Compute] 8700 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0269471, potential: -4094.19, total: -4094.16 (κ=1)
+  Step 8700/20000 | R_avg = 0.999774 | norm = 0.998101
+  Step 8710/20000 | R_avg = 0.99984 | norm = 0.998098
+  Step 8720/20000 | R_avg = 0.999731 | norm = 0.998096
+  Step 8730/20000 | R_avg = 0.999805 | norm = 0.998094
+  Step 8740/20000 | R_avg = 0.999846 | norm = 0.998091
+[GPU EM Compute] 8750 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 8750/20000 | R_avg = 0.999822 | norm = 0.998089
+  Step 8760/20000 | R_avg = 0.999792 | norm = 0.998087
+  Step 8770/20000 | R_avg = 0.999891 | norm = 0.998084
+  Step 8780/20000 | R_avg = 0.999805 | norm = 0.998082
+  Step 8790/20000 | R_avg = 0.999841 | norm = 0.99808
+[GPU EM Compute] 8800 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0189337, potential: -4094.65, total: -4094.63 (κ=1)
+  Step 8800/20000 | R_avg = 0.999832 | norm = 0.998077
+  Step 8810/20000 | R_avg = 0.999849 | norm = 0.998075
+  Step 8820/20000 | R_avg = 0.999825 | norm = 0.998073
+  Step 8830/20000 | R_avg = 0.999903 | norm = 0.99807
+  Step 8840/20000 | R_avg = 0.999832 | norm = 0.998068
+[GPU EM Compute] 8850 calls | Last: 92 μs | Avg: 106 μs | Grid: 64×64
+  Step 8850/20000 | R_avg = 0.999835 | norm = 0.998066
+  Step 8860/20000 | R_avg = 0.999859 | norm = 0.998063
+  Step 8870/20000 | R_avg = 0.99986 | norm = 0.998061
+  Step 8880/20000 | R_avg = 0.999793 | norm = 0.998059
+  Step 8890/20000 | R_avg = 0.99984 | norm = 0.998056
+[GPU EM Compute] 8900 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0253826, potential: -4094.32, total: -4094.3 (κ=1)
+  Step 8900/20000 | R_avg = 0.999791 | norm = 0.998054
+  Step 8910/20000 | R_avg = 0.999819 | norm = 0.998052
+  Step 8920/20000 | R_avg = 0.999875 | norm = 0.998049
+  Step 8930/20000 | R_avg = 0.999872 | norm = 0.998047
+  Step 8940/20000 | R_avg = 0.999805 | norm = 0.998045
+[GPU EM Compute] 8950 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 8950/20000 | R_avg = 0.999858 | norm = 0.998042
+  Step 8960/20000 | R_avg = 0.999872 | norm = 0.99804
+  Step 8970/20000 | R_avg = 0.999815 | norm = 0.998038
+  Step 8980/20000 | R_avg = 0.999848 | norm = 0.998035
+  Step 8990/20000 | R_avg = 0.999862 | norm = 0.998033
+[GPU EM Compute] 9000 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0220696, potential: -4094.57, total: -4094.55 (κ=1)
+  Step 9000/20000 | R_avg = 0.999822 | norm = 0.99803
+  Step 9010/20000 | R_avg = 0.999841 | norm = 0.998028
+  Step 9020/20000 | R_avg = 0.999875 | norm = 0.998026
+  Step 9030/20000 | R_avg = 0.999819 | norm = 0.998023
+  Step 9040/20000 | R_avg = 0.999885 | norm = 0.998021
+[GPU EM Compute] 9050 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 9050/20000 | R_avg = 0.999863 | norm = 0.998018
+  Step 9060/20000 | R_avg = 0.999819 | norm = 0.998016
+  Step 9070/20000 | R_avg = 0.999885 | norm = 0.998013
+  Step 9080/20000 | R_avg = 0.999805 | norm = 0.998011
+  Step 9090/20000 | R_avg = 0.9998 | norm = 0.998009
+[GPU EM Compute] 9100 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0158006, potential: -4095.01, total: -4095 (κ=1)
+  Step 9100/20000 | R_avg = 0.999877 | norm = 0.998006
+  Step 9110/20000 | R_avg = 0.999856 | norm = 0.998004
+  Step 9120/20000 | R_avg = 0.999723 | norm = 0.998002
+  Step 9130/20000 | R_avg = 0.999836 | norm = 0.997999
+  Step 9140/20000 | R_avg = 0.999884 | norm = 0.997997
+[GPU EM Compute] 9150 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 9150/20000 | R_avg = 0.999807 | norm = 0.997995
+  Step 9160/20000 | R_avg = 0.99985 | norm = 0.997992
+  Step 9170/20000 | R_avg = 0.999865 | norm = 0.99799
+  Step 9180/20000 | R_avg = 0.999809 | norm = 0.997988
+  Step 9190/20000 | R_avg = 0.99986 | norm = 0.997985
+[GPU EM Compute] 9200 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0187288, potential: -4094.91, total: -4094.89 (κ=1)
+  Step 9200/20000 | R_avg = 0.999864 | norm = 0.997983
+  Step 9210/20000 | R_avg = 0.99981 | norm = 0.99798
+  Step 9220/20000 | R_avg = 0.999819 | norm = 0.997978
+  Step 9230/20000 | R_avg = 0.999767 | norm = 0.997976
+  Step 9240/20000 | R_avg = 0.9998 | norm = 0.997973
+[GPU EM Compute] 9250 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  Step 9250/20000 | R_avg = 0.99985 | norm = 0.997971
+  Step 9260/20000 | R_avg = 0.999809 | norm = 0.997969
+  Step 9270/20000 | R_avg = 0.999833 | norm = 0.997966
+  Step 9280/20000 | R_avg = 0.99987 | norm = 0.997964
+  Step 9290/20000 | R_avg = 0.999873 | norm = 0.997961
+[GPU EM Compute] 9300 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0244051, potential: -4094.48, total: -4094.45 (κ=1)
+  Step 9300/20000 | R_avg = 0.99981 | norm = 0.997959
+  Step 9310/20000 | R_avg = 0.999875 | norm = 0.997957
+  Step 9320/20000 | R_avg = 0.99987 | norm = 0.997954
+  Step 9330/20000 | R_avg = 0.999804 | norm = 0.997952
+  Step 9340/20000 | R_avg = 0.999739 | norm = 0.997949
+[GPU EM Compute] 9350 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  Step 9350/20000 | R_avg = 0.999881 | norm = 0.997947
+  Step 9360/20000 | R_avg = 0.999811 | norm = 0.997944
+  Step 9370/20000 | R_avg = 0.999821 | norm = 0.997942
+  Step 9380/20000 | R_avg = 0.99987 | norm = 0.99794
+  Step 9390/20000 | R_avg = 0.999852 | norm = 0.997937
+[GPU EM Compute] 9400 calls | Last: 109 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0199538, potential: -4094.73, total: -4094.71 (κ=1)
+  Step 9400/20000 | R_avg = 0.999841 | norm = 0.997935
+  Step 9410/20000 | R_avg = 0.999746 | norm = 0.997933
+  Step 9420/20000 | R_avg = 0.999867 | norm = 0.99793
+  Step 9430/20000 | R_avg = 0.999835 | norm = 0.997928
+  Step 9440/20000 | R_avg = 0.999788 | norm = 0.997926
+[GPU EM Compute] 9450 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 9450/20000 | R_avg = 0.999843 | norm = 0.997923
+  Step 9460/20000 | R_avg = 0.999795 | norm = 0.997921
+  Step 9470/20000 | R_avg = 0.99981 | norm = 0.997919
+  Step 9480/20000 | R_avg = 0.999857 | norm = 0.997916
+  Step 9490/20000 | R_avg = 0.999809 | norm = 0.997914
+[GPU EM Compute] 9500 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0224363, potential: -4094.5, total: -4094.48 (κ=1)
+  Step 9500/20000 | R_avg = 0.999813 | norm = 0.997912
+  Step 9510/20000 | R_avg = 0.999844 | norm = 0.997909
+  Step 9520/20000 | R_avg = 0.999839 | norm = 0.997907
+  Step 9530/20000 | R_avg = 0.999824 | norm = 0.997904
+  Step 9540/20000 | R_avg = 0.99984 | norm = 0.997902
+[GPU EM Compute] 9550 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  Step 9550/20000 | R_avg = 0.999835 | norm = 0.9979
+  Step 9560/20000 | R_avg = 0.999824 | norm = 0.997897
+  Step 9570/20000 | R_avg = 0.99984 | norm = 0.997895
+  Step 9580/20000 | R_avg = 0.999724 | norm = 0.997892
+  Step 9590/20000 | R_avg = 0.99975 | norm = 0.99789
+[GPU EM Compute] 9600 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0154617, potential: -4094.89, total: -4094.88 (κ=1)
+  Step 9600/20000 | R_avg = 0.999862 | norm = 0.997888
+  Step 9610/20000 | R_avg = 0.999836 | norm = 0.997885
+  Step 9620/20000 | R_avg = 0.999849 | norm = 0.997883
+  Step 9630/20000 | R_avg = 0.999868 | norm = 0.99788
+  Step 9640/20000 | R_avg = 0.99986 | norm = 0.997878
+[GPU EM Compute] 9650 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 9650/20000 | R_avg = 0.999858 | norm = 0.997876
+  Step 9660/20000 | R_avg = 0.999872 | norm = 0.997873
+  Step 9670/20000 | R_avg = 0.999845 | norm = 0.997871
+  Step 9680/20000 | R_avg = 0.999856 | norm = 0.997868
+  Step 9690/20000 | R_avg = 0.999874 | norm = 0.997866
+[GPU EM Compute] 9700 calls | Last: 66 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0146126, potential: -4094.89, total: -4094.87 (κ=1)
+  Step 9700/20000 | R_avg = 0.999861 | norm = 0.997864
+  Step 9710/20000 | R_avg = 0.999837 | norm = 0.997861
+  Step 9720/20000 | R_avg = 0.999861 | norm = 0.997859
+  Step 9730/20000 | R_avg = 0.999855 | norm = 0.997856
+  Step 9740/20000 | R_avg = 0.999808 | norm = 0.997854
+[GPU EM Compute] 9750 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 9750/20000 | R_avg = 0.999861 | norm = 0.997852
+  Step 9760/20000 | R_avg = 0.999812 | norm = 0.997849
+  Step 9770/20000 | R_avg = 0.999801 | norm = 0.997847
+  Step 9780/20000 | R_avg = 0.999856 | norm = 0.997844
+  Step 9790/20000 | R_avg = 0.999847 | norm = 0.997842
+[GPU EM Compute] 9800 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0190364, potential: -4094.7, total: -4094.68 (κ=1)
+  Step 9800/20000 | R_avg = 0.999838 | norm = 0.99784
+  Step 9810/20000 | R_avg = 0.99987 | norm = 0.997837
+  Step 9820/20000 | R_avg = 0.999861 | norm = 0.997835
+  Step 9830/20000 | R_avg = 0.999833 | norm = 0.997832
+  Step 9840/20000 | R_avg = 0.999861 | norm = 0.99783
+[GPU EM Compute] 9850 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 9850/20000 | R_avg = 0.999826 | norm = 0.997828
+  Step 9860/20000 | R_avg = 0.999872 | norm = 0.997825
+  Step 9870/20000 | R_avg = 0.999868 | norm = 0.997823
+  Step 9880/20000 | R_avg = 0.999826 | norm = 0.997821
+  Step 9890/20000 | R_avg = 0.999818 | norm = 0.997819
+[GPU EM Compute] 9900 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0204447, potential: -4094.56, total: -4094.54 (κ=1)
+  Step 9900/20000 | R_avg = 0.999821 | norm = 0.997816
+  Step 9910/20000 | R_avg = 0.999842 | norm = 0.997814
+  Step 9920/20000 | R_avg = 0.999839 | norm = 0.997812
+  Step 9930/20000 | R_avg = 0.999824 | norm = 0.997809
+  Step 9940/20000 | R_avg = 0.999827 | norm = 0.997807
+[GPU EM Compute] 9950 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 9950/20000 | R_avg = 0.999762 | norm = 0.997805
+  Step 9960/20000 | R_avg = 0.999822 | norm = 0.997802
+  Step 9970/20000 | R_avg = 0.99985 | norm = 0.9978
+  Step 9980/20000 | R_avg = 0.999819 | norm = 0.997797
+  Step 9990/20000 | R_avg = 0.999836 | norm = 0.997795
+[GPU EM Compute] 10000 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.546009, potential: -4094.16, total: -4093.61 (κ=1)
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 10000/20000 | R_avg = 0.999645 | norm = 0.997792
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 10010/20000 | R_avg = 0.999853 | norm = 0.99779
+  Step 10020/20000 | R_avg = 0.999847 | norm = 0.997788
+  Step 10030/20000 | R_avg = 0.999822 | norm = 0.997786
+  Step 10040/20000 | R_avg = 0.99981 | norm = 0.997783
+[GPU EM Compute] 10050 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 10050/20000 | R_avg = 0.999853 | norm = 0.997781
+  Step 10060/20000 | R_avg = 0.99981 | norm = 0.997779
+  Step 10070/20000 | R_avg = 0.999799 | norm = 0.997776
+  Step 10080/20000 | R_avg = 0.999868 | norm = 0.997774
+  Step 10090/20000 | R_avg = 0.999844 | norm = 0.997771
+[GPU EM Compute] 10100 calls | Last: 100 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0190676, potential: -4094.74, total: -4094.72 (κ=1)
+  Step 10100/20000 | R_avg = 0.999843 | norm = 0.997769
+  Step 10110/20000 | R_avg = 0.999803 | norm = 0.997767
+  Step 10120/20000 | R_avg = 0.999778 | norm = 0.997764
+  Step 10130/20000 | R_avg = 0.999763 | norm = 0.997762
+  Step 10140/20000 | R_avg = 0.999828 | norm = 0.997759
+[GPU EM Compute] 10150 calls | Last: 107 μs | Avg: 106 μs | Grid: 64×64
+  Step 10150/20000 | R_avg = 0.999814 | norm = 0.997757
+  Step 10160/20000 | R_avg = 0.999822 | norm = 0.997754
+  Step 10170/20000 | R_avg = 0.999842 | norm = 0.997752
+  Step 10180/20000 | R_avg = 0.999762 | norm = 0.99775
+  Step 10190/20000 | R_avg = 0.999822 | norm = 0.997747
+[GPU EM Compute] 10200 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0202898, potential: -4094.71, total: -4094.69 (κ=1)
+  Step 10200/20000 | R_avg = 0.999839 | norm = 0.997745
+  Step 10210/20000 | R_avg = 0.99978 | norm = 0.997743
+  Step 10220/20000 | R_avg = 0.999825 | norm = 0.99774
+  Step 10230/20000 | R_avg = 0.999802 | norm = 0.997738
+  Step 10240/20000 | R_avg = 0.999764 | norm = 0.997736
+[GPU EM Compute] 10250 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 10250/20000 | R_avg = 0.999807 | norm = 0.997733
+  Step 10260/20000 | R_avg = 0.999842 | norm = 0.997731
+  Step 10270/20000 | R_avg = 0.999816 | norm = 0.997728
+  Step 10280/20000 | R_avg = 0.999813 | norm = 0.997726
+  Step 10290/20000 | R_avg = 0.999821 | norm = 0.997723
+[GPU EM Compute] 10300 calls | Last: 154 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0257365, potential: -4094.35, total: -4094.33 (κ=1)
+  Step 10300/20000 | R_avg = 0.999795 | norm = 0.997721
+  Step 10310/20000 | R_avg = 0.999834 | norm = 0.997718
+  Step 10320/20000 | R_avg = 0.999854 | norm = 0.997716
+  Step 10330/20000 | R_avg = 0.999773 | norm = 0.997714
+  Step 10340/20000 | R_avg = 0.999815 | norm = 0.997711
+[GPU EM Compute] 10350 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 10350/20000 | R_avg = 0.999851 | norm = 0.997709
+  Step 10360/20000 | R_avg = 0.999869 | norm = 0.997706
+  Step 10370/20000 | R_avg = 0.999784 | norm = 0.997704
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 10380/20000 | R_avg = 0.999876 | norm = 0.997702
+  Step 10390/20000 | R_avg = 0.999877 | norm = 0.997699
+[GPU EM Compute] 10400 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0183192, potential: -4094.73, total: -4094.71 (κ=1)
+  Step 10400/20000 | R_avg = 0.999842 | norm = 0.997697
+  Step 10410/20000 | R_avg = 0.999876 | norm = 0.997694
+  Step 10420/20000 | R_avg = 0.999871 | norm = 0.997692
+  Step 10430/20000 | R_avg = 0.999862 | norm = 0.99769
+  Step 10440/20000 | R_avg = 0.999874 | norm = 0.997687
+[GPU EM Compute] 10450 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  Step 10450/20000 | R_avg = 0.999869 | norm = 0.997684
+  Step 10460/20000 | R_avg = 0.999852 | norm = 0.997682
+  Step 10470/20000 | R_avg = 0.999872 | norm = 0.99768
+  Step 10480/20000 | R_avg = 0.999878 | norm = 0.997677
+  Step 10490/20000 | R_avg = 0.999876 | norm = 0.997675
+[GPU EM Compute] 10500 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0168963, potential: -4094.97, total: -4094.95 (κ=1)
+  Step 10500/20000 | R_avg = 0.999871 | norm = 0.997672
+  Step 10510/20000 | R_avg = 0.999866 | norm = 0.99767
+  Step 10520/20000 | R_avg = 0.999839 | norm = 0.997667
+  Step 10530/20000 | R_avg = 0.999785 | norm = 0.997665
+  Step 10540/20000 | R_avg = 0.999801 | norm = 0.997663
+[GPU EM Compute] 10550 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 10550/20000 | R_avg = 0.999832 | norm = 0.99766
+  Step 10560/20000 | R_avg = 0.999778 | norm = 0.997658
+  Step 10570/20000 | R_avg = 0.999814 | norm = 0.997655
+  Step 10580/20000 | R_avg = 0.999848 | norm = 0.997653
+  Step 10590/20000 | R_avg = 0.999801 | norm = 0.99765
+[GPU EM Compute] 10600 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0173442, potential: -4094.9, total: -4094.88 (κ=1)
+  Step 10600/20000 | R_avg = 0.999863 | norm = 0.997648
+  Step 10610/20000 | R_avg = 0.999848 | norm = 0.997646
+  Step 10620/20000 | R_avg = 0.99982 | norm = 0.997643
+  Step 10630/20000 | R_avg = 0.999805 | norm = 0.997641
+  Step 10640/20000 | R_avg = 0.999803 | norm = 0.997638
+[GPU EM Compute] 10650 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 10650/20000 | R_avg = 0.999784 | norm = 0.997636
+  Step 10660/20000 | R_avg = 0.999798 | norm = 0.997633
+  Step 10670/20000 | R_avg = 0.999839 | norm = 0.997631
+  Step 10680/20000 | R_avg = 0.999818 | norm = 0.997628
+  Step 10690/20000 | R_avg = 0.999747 | norm = 0.997626
+[GPU EM Compute] 10700 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0272286, potential: -4094.29, total: -4094.26 (κ=1)
+  Step 10700/20000 | R_avg = 0.999786 | norm = 0.997623
+  Step 10710/20000 | R_avg = 0.999845 | norm = 0.997621
+  Step 10720/20000 | R_avg = 0.999745 | norm = 0.997618
+  Step 10730/20000 | R_avg = 0.999844 | norm = 0.997616
+  Step 10740/20000 | R_avg = 0.999813 | norm = 0.997613
+[GPU EM Compute] 10750 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 10750/20000 | R_avg = 0.999788 | norm = 0.997611
+  Step 10760/20000 | R_avg = 0.99985 | norm = 0.997608
+  Step 10770/20000 | R_avg = 0.999846 | norm = 0.997606
+  Step 10780/20000 | R_avg = 0.999801 | norm = 0.997603
+  Step 10790/20000 | R_avg = 0.999851 | norm = 0.997601
+[GPU EM Compute] 10800 calls | Last: 111 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0190747, potential: -4094.64, total: -4094.62 (κ=1)
+  Step 10800/20000 | R_avg = 0.999831 | norm = 0.997598
+  Step 10810/20000 | R_avg = 0.999801 | norm = 0.997596
+  Step 10820/20000 | R_avg = 0.999869 | norm = 0.997593
+  Step 10830/20000 | R_avg = 0.999849 | norm = 0.997591
+  Step 10840/20000 | R_avg = 0.999801 | norm = 0.997589
+[GPU EM Compute] 10850 calls | Last: 110 μs | Avg: 106 μs | Grid: 64×64
+  Step 10850/20000 | R_avg = 0.99986 | norm = 0.997586
+  Step 10860/20000 | R_avg = 0.99984 | norm = 0.997584
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 10870/20000 | R_avg = 0.999822 | norm = 0.997581
+  Step 10880/20000 | R_avg = 0.999799 | norm = 0.997579
+  Step 10890/20000 | R_avg = 0.999852 | norm = 0.997577
+[GPU EM Compute] 10900 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0319688, potential: -4093.91, total: -4093.88 (κ=1)
+  Step 10900/20000 | R_avg = 0.999739 | norm = 0.997574
+  Step 10910/20000 | R_avg = 0.999791 | norm = 0.997572
+  Step 10920/20000 | R_avg = 0.999839 | norm = 0.997569
+  Step 10930/20000 | R_avg = 0.999839 | norm = 0.997567
+  Step 10940/20000 | R_avg = 0.999817 | norm = 0.997564
+[GPU EM Compute] 10950 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 10950/20000 | R_avg = 0.999827 | norm = 0.997562
+  Step 10960/20000 | R_avg = 0.999797 | norm = 0.997559
+  Step 10970/20000 | R_avg = 0.999729 | norm = 0.997557
+  Step 10980/20000 | R_avg = 0.99987 | norm = 0.997554
+  Step 10990/20000 | R_avg = 0.999849 | norm = 0.997552
+[GPU EM Compute] 11000 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0248908, potential: -4094.47, total: -4094.44 (κ=1)
+  Step 11000/20000 | R_avg = 0.999809 | norm = 0.997549
+  Step 11010/20000 | R_avg = 0.999846 | norm = 0.997547
+  Step 11020/20000 | R_avg = 0.999855 | norm = 0.997545
+  Step 11030/20000 | R_avg = 0.999794 | norm = 0.997542
+  Step 11040/20000 | R_avg = 0.999849 | norm = 0.99754
+[GPU EM Compute] 11050 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 11050/20000 | R_avg = 0.999821 | norm = 0.997537
+  Step 11060/20000 | R_avg = 0.999806 | norm = 0.997535
+  Step 11070/20000 | R_avg = 0.999873 | norm = 0.997532
+  Step 11080/20000 | R_avg = 0.999839 | norm = 0.99753
+  Step 11090/20000 | R_avg = 0.999823 | norm = 0.997527
+[GPU EM Compute] 11100 calls | Last: 93 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0251779, potential: -4094.46, total: -4094.44 (κ=1)
+  Step 11100/20000 | R_avg = 0.999808 | norm = 0.997525
+  Step 11110/20000 | R_avg = 0.999854 | norm = 0.997522
+  Step 11120/20000 | R_avg = 0.999842 | norm = 0.99752
+  Step 11130/20000 | R_avg = 0.999796 | norm = 0.997517
+  Step 11140/20000 | R_avg = 0.99983 | norm = 0.997515
+[GPU EM Compute] 11150 calls | Last: 111 μs | Avg: 106 μs | Grid: 64×64
+  Step 11150/20000 | R_avg = 0.999803 | norm = 0.997513
+  Step 11160/20000 | R_avg = 0.999793 | norm = 0.99751
+  Step 11170/20000 | R_avg = 0.999817 | norm = 0.997508
+  Step 11180/20000 | R_avg = 0.999829 | norm = 0.997505
+  Step 11190/20000 | R_avg = 0.999839 | norm = 0.997503
+[GPU EM Compute] 11200 calls | Last: 66 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0227818, potential: -4094.59, total: -4094.56 (κ=1)
+  Step 11200/20000 | R_avg = 0.999824 | norm = 0.9975
+  Step 11210/20000 | R_avg = 0.999862 | norm = 0.997498
+  Step 11220/20000 | R_avg = 0.999806 | norm = 0.997495
+  Step 11230/20000 | R_avg = 0.999784 | norm = 0.997493
+  Step 11240/20000 | R_avg = 0.999853 | norm = 0.99749
+[GPU EM Compute] 11250 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 11250/20000 | R_avg = 0.999816 | norm = 0.997488
+  Step 11260/20000 | R_avg = 0.999845 | norm = 0.997485
+  Step 11270/20000 | R_avg = 0.999835 | norm = 0.997483
+  Step 11280/20000 | R_avg = 0.999819 | norm = 0.99748
+  Step 11290/20000 | R_avg = 0.999842 | norm = 0.997478
+[GPU EM Compute] 11300 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0361335, potential: -4093.78, total: -4093.74 (κ=1)
+  Step 11300/20000 | R_avg = 0.999723 | norm = 0.997475
+  Step 11310/20000 | R_avg = 0.999799 | norm = 0.997473
+  Step 11320/20000 | R_avg = 0.999843 | norm = 0.99747
+  Step 11330/20000 | R_avg = 0.999829 | norm = 0.997468
+  Step 11340/20000 | R_avg = 0.999802 | norm = 0.997465
+[GPU EM Compute] 11350 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 11350/20000 | R_avg = 0.999832 | norm = 0.997463
+  Step 11360/20000 | R_avg = 0.999754 | norm = 0.99746
+  Step 11370/20000 | R_avg = 0.99982 | norm = 0.997458
+  Step 11380/20000 | R_avg = 0.999896 | norm = 0.997455
+  Step 11390/20000 | R_avg = 0.999773 | norm = 0.997453
+[GPU EM Compute] 11400 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0239149, potential: -4094.48, total: -4094.46 (κ=1)
+  Step 11400/20000 | R_avg = 0.999811 | norm = 0.99745
+  Step 11410/20000 | R_avg = 0.99983 | norm = 0.997448
+  Step 11420/20000 | R_avg = 0.999846 | norm = 0.997445
+  Step 11430/20000 | R_avg = 0.999807 | norm = 0.997442
+  Step 11440/20000 | R_avg = 0.999867 | norm = 0.99744
+[GPU EM Compute] 11450 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 11450/20000 | R_avg = 0.999832 | norm = 0.997437
+  Step 11460/20000 | R_avg = 0.999802 | norm = 0.997435
+  Step 11470/20000 | R_avg = 0.999813 | norm = 0.997432
+  Step 11480/20000 | R_avg = 0.99982 | norm = 0.99743
+  Step 11490/20000 | R_avg = 0.999812 | norm = 0.997427
+[GPU EM Compute] 11500 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0168311, potential: -4094.98, total: -4094.96 (κ=1)
+  Step 11500/20000 | R_avg = 0.999873 | norm = 0.997425
+  Step 11510/20000 | R_avg = 0.999775 | norm = 0.997422
+  Step 11520/20000 | R_avg = 0.999812 | norm = 0.99742
+  Step 11530/20000 | R_avg = 0.999855 | norm = 0.997417
+  Step 11540/20000 | R_avg = 0.999854 | norm = 0.997415
+[GPU EM Compute] 11550 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 11550/20000 | R_avg = 0.999799 | norm = 0.997412
+  Step 11560/20000 | R_avg = 0.999824 | norm = 0.99741
+  Step 11570/20000 | R_avg = 0.999842 | norm = 0.997407
+  Step 11580/20000 | R_avg = 0.999732 | norm = 0.997405
+  Step 11590/20000 | R_avg = 0.999805 | norm = 0.997403
+[GPU EM Compute] 11600 calls | Last: 101 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.022553, potential: -4094.55, total: -4094.53 (κ=1)
+  Step 11600/20000 | R_avg = 0.99982 | norm = 0.9974
+  Step 11610/20000 | R_avg = 0.999741 | norm = 0.997398
+  Step 11620/20000 | R_avg = 0.999832 | norm = 0.997395
+  Step 11630/20000 | R_avg = 0.999811 | norm = 0.997393
+  Step 11640/20000 | R_avg = 0.99977 | norm = 0.99739
+[GPU EM Compute] 11650 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 11650/20000 | R_avg = 0.999857 | norm = 0.997388
+  Step 11660/20000 | R_avg = 0.999844 | norm = 0.997385
+  Step 11670/20000 | R_avg = 0.999814 | norm = 0.997383
+  Step 11680/20000 | R_avg = 0.999843 | norm = 0.99738
+  Step 11690/20000 | R_avg = 0.999819 | norm = 0.997378
+[GPU EM Compute] 11700 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0254167, potential: -4094.5, total: -4094.48 (κ=1)
+  Step 11700/20000 | R_avg = 0.999813 | norm = 0.997375
+  Step 11710/20000 | R_avg = 0.999803 | norm = 0.997373
+  Step 11720/20000 | R_avg = 0.999829 | norm = 0.99737
+  Step 11730/20000 | R_avg = 0.999817 | norm = 0.997368
+  Step 11740/20000 | R_avg = 0.999835 | norm = 0.997365
+[GPU EM Compute] 11750 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 11750/20000 | R_avg = 0.999852 | norm = 0.997363
+  Step 11760/20000 | R_avg = 0.999831 | norm = 0.99736
+  Step 11770/20000 | R_avg = 0.999948 | norm = 0.997357
+  Step 11780/20000 | R_avg = 0.999823 | norm = 0.997355
+  Step 11790/20000 | R_avg = 0.999805 | norm = 0.997352
+[GPU EM Compute] 11800 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0194741, potential: -4094.89, total: -4094.87 (κ=1)
+  Step 11800/20000 | R_avg = 0.999861 | norm = 0.99735
+  Step 11810/20000 | R_avg = 0.99984 | norm = 0.997347
+  Step 11820/20000 | R_avg = 0.999756 | norm = 0.997345
+  Step 11830/20000 | R_avg = 0.999843 | norm = 0.997342
+  Step 11840/20000 | R_avg = 0.999803 | norm = 0.99734
+[GPU EM Compute] 11850 calls | Last: 110 μs | Avg: 106 μs | Grid: 64×64
+  Step 11850/20000 | R_avg = 0.999772 | norm = 0.997337
+  Step 11860/20000 | R_avg = 0.999828 | norm = 0.997335
+  Step 11870/20000 | R_avg = 0.99983 | norm = 0.997332
+  Step 11880/20000 | R_avg = 0.999796 | norm = 0.99733
+  Step 11890/20000 | R_avg = 0.999809 | norm = 0.997327
+[GPU EM Compute] 11900 calls | Last: 109 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0298649, potential: -4094.1, total: -4094.07 (κ=1)
+  Step 11900/20000 | R_avg = 0.999763 | norm = 0.997325
+  Step 11910/20000 | R_avg = 0.999841 | norm = 0.997322
+  Step 11920/20000 | R_avg = 0.999846 | norm = 0.99732
+  Step 11930/20000 | R_avg = 0.999858 | norm = 0.997317
+  Step 11940/20000 | R_avg = 0.999802 | norm = 0.997315
+[GPU EM Compute] 11950 calls | Last: 111 μs | Avg: 106 μs | Grid: 64×64
+  Step 11950/20000 | R_avg = 0.999765 | norm = 0.997312
+  Step 11960/20000 | R_avg = 0.999832 | norm = 0.99731
+  Step 11970/20000 | R_avg = 0.999828 | norm = 0.997307
+  Step 11980/20000 | R_avg = 0.999881 | norm = 0.997305
+  Step 11990/20000 | R_avg = 0.99982 | norm = 0.997302
+[GPU EM Compute] 12000 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0233221, potential: -4094.54, total: -4094.51 (κ=1)
+  Step 12000/20000 | R_avg = 0.999817 | norm = 0.9973
+  Step 12010/20000 | R_avg = 0.999805 | norm = 0.997297
+  Step 12020/20000 | R_avg = 0.999829 | norm = 0.997295
+  Step 12030/20000 | R_avg = 0.9998 | norm = 0.997292
+  Step 12040/20000 | R_avg = 0.999831 | norm = 0.99729
+[GPU EM Compute] 12050 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 12050/20000 | R_avg = 0.99982 | norm = 0.997287
+  Step 12060/20000 | R_avg = 0.999805 | norm = 0.997284
+  Step 12070/20000 | R_avg = 0.999845 | norm = 0.997282
+  Step 12080/20000 | R_avg = 0.999645 | norm = 0.997279
+  Step 12090/20000 | R_avg = 0.999791 | norm = 0.997277
+[GPU EM Compute] 12100 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0227458, potential: -4094.52, total: -4094.5 (κ=1)
+  Step 12100/20000 | R_avg = 0.999815 | norm = 0.997274
+  Step 12110/20000 | R_avg = 0.999816 | norm = 0.997271
+  Step 12120/20000 | R_avg = 0.999856 | norm = 0.997269
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 12130/20000 | R_avg = 0.999645 | norm = 0.997266
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 12140/20000 | R_avg = 0.999862 | norm = 0.997264
+[GPU EM Compute] 12150 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 12150/20000 | R_avg = 0.999835 | norm = 0.997261
+  Step 12160/20000 | R_avg = 0.999737 | norm = 0.997258
+  Step 12170/20000 | R_avg = 0.999807 | norm = 0.997256
+  Step 12180/20000 | R_avg = 0.999866 | norm = 0.997253
+  Step 12190/20000 | R_avg = 0.999793 | norm = 0.997251
+[GPU EM Compute] 12200 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0251296, potential: -4094.52, total: -4094.5 (κ=1)
+  Step 12200/20000 | R_avg = 0.999816 | norm = 0.997248
+  Step 12210/20000 | R_avg = 0.999869 | norm = 0.997246
+  Step 12220/20000 | R_avg = 0.999808 | norm = 0.997243
+  Step 12230/20000 | R_avg = 0.999781 | norm = 0.997241
+  Step 12240/20000 | R_avg = 0.999816 | norm = 0.997238
+[GPU EM Compute] 12250 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 12250/20000 | R_avg = 0.999782 | norm = 0.997236
+  Step 12260/20000 | R_avg = 0.999756 | norm = 0.997234
+  Step 12270/20000 | R_avg = 0.999833 | norm = 0.997231
+  Step 12280/20000 | R_avg = 0.999764 | norm = 0.997229
+  Step 12290/20000 | R_avg = 0.999793 | norm = 0.997226
+[GPU EM Compute] 12300 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0244375, potential: -4094.36, total: -4094.33 (κ=1)
+  Step 12300/20000 | R_avg = 0.999795 | norm = 0.997224
+  Step 12310/20000 | R_avg = 0.999804 | norm = 0.997221
+  Step 12320/20000 | R_avg = 0.999769 | norm = 0.997219
+  Step 12330/20000 | R_avg = 0.999824 | norm = 0.997216
+  Step 12340/20000 | R_avg = 0.99986 | norm = 0.997214
+[GPU EM Compute] 12350 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 12350/20000 | R_avg = 0.99975 | norm = 0.997211
+  Step 12360/20000 | R_avg = 0.999811 | norm = 0.997209
+  Step 12370/20000 | R_avg = 0.999855 | norm = 0.997206
+  Step 12380/20000 | R_avg = 0.999788 | norm = 0.997204
+  Step 12390/20000 | R_avg = 0.999809 | norm = 0.997201
+[GPU EM Compute] 12400 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0204372, potential: -4094.66, total: -4094.64 (κ=1)
+  Step 12400/20000 | R_avg = 0.999833 | norm = 0.997199
+  Step 12410/20000 | R_avg = 0.999809 | norm = 0.997196
+  Step 12420/20000 | R_avg = 0.999824 | norm = 0.997194
+  Step 12430/20000 | R_avg = 0.999819 | norm = 0.997191
+  Step 12440/20000 | R_avg = 0.999778 | norm = 0.997189
+[GPU EM Compute] 12450 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 12450/20000 | R_avg = 0.999834 | norm = 0.997186
+  Step 12460/20000 | R_avg = 0.999844 | norm = 0.997184
+  Step 12470/20000 | R_avg = 0.999818 | norm = 0.997181
+  Step 12480/20000 | R_avg = 0.999827 | norm = 0.997179
+  Step 12490/20000 | R_avg = 0.999863 | norm = 0.997176
+[GPU EM Compute] 12500 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0260026, potential: -4094.45, total: -4094.43 (κ=1)
+  Step 12500/20000 | R_avg = 0.999807 | norm = 0.997174
+  Step 12510/20000 | R_avg = 0.999831 | norm = 0.997171
+  Step 12520/20000 | R_avg = 0.999863 | norm = 0.997169
+  Step 12530/20000 | R_avg = 0.999807 | norm = 0.997166
+  Step 12540/20000 | R_avg = 0.999754 | norm = 0.997163
+[GPU EM Compute] 12550 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 12550/20000 | R_avg = 0.999822 | norm = 0.997161
+  Step 12560/20000 | R_avg = 0.999799 | norm = 0.997158
+  Step 12570/20000 | R_avg = 0.999818 | norm = 0.997156
+  Step 12580/20000 | R_avg = 0.999846 | norm = 0.997153
+  Step 12590/20000 | R_avg = 0.999808 | norm = 0.997151
+[GPU EM Compute] 12600 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0176133, potential: -4094.69, total: -4094.67 (κ=1)
+  Step 12600/20000 | R_avg = 0.999837 | norm = 0.997148
+  Step 12610/20000 | R_avg = 0.999817 | norm = 0.997146
+  Step 12620/20000 | R_avg = 0.999798 | norm = 0.997143
+  Step 12630/20000 | R_avg = 0.999826 | norm = 0.997141
+  Step 12640/20000 | R_avg = 0.999823 | norm = 0.997138
+[GPU EM Compute] 12650 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  Step 12650/20000 | R_avg = 0.999811 | norm = 0.997136
+  Step 12660/20000 | R_avg = 0.99984 | norm = 0.997133
+  Step 12670/20000 | R_avg = 0.999845 | norm = 0.997131
+  Step 12680/20000 | R_avg = 0.999825 | norm = 0.997128
+  Step 12690/20000 | R_avg = 0.999841 | norm = 0.997126
+[GPU EM Compute] 12700 calls | Last: 108 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.025186, potential: -4094.48, total: -4094.46 (κ=1)
+  Step 12700/20000 | R_avg = 0.99981 | norm = 0.997123
+  Step 12710/20000 | R_avg = 0.999803 | norm = 0.997121
+  Step 12720/20000 | R_avg = 0.999814 | norm = 0.997118
+  Step 12730/20000 | R_avg = 0.999845 | norm = 0.997116
+  Step 12740/20000 | R_avg = 0.999806 | norm = 0.997113
+[GPU EM Compute] 12750 calls | Last: 129 μs | Avg: 106 μs | Grid: 64×64
+  Step 12750/20000 | R_avg = 0.999854 | norm = 0.997111
+  Step 12760/20000 | R_avg = 0.99986 | norm = 0.997108
+  Step 12770/20000 | R_avg = 0.999824 | norm = 0.997106
+  Step 12780/20000 | R_avg = 0.999831 | norm = 0.997103
+  Step 12790/20000 | R_avg = 0.999837 | norm = 0.997101
+[GPU EM Compute] 12800 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0248105, potential: -4094.49, total: -4094.47 (κ=1)
+  Step 12800/20000 | R_avg = 0.999812 | norm = 0.997099
+  Step 12810/20000 | R_avg = 0.999843 | norm = 0.997096
+  Step 12820/20000 | R_avg = 0.999836 | norm = 0.997094
+  Step 12830/20000 | R_avg = 0.999808 | norm = 0.997091
+  Step 12840/20000 | R_avg = 0.999851 | norm = 0.997089
+[GPU EM Compute] 12850 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 12850/20000 | R_avg = 0.999839 | norm = 0.997086
+  Step 12860/20000 | R_avg = 0.999845 | norm = 0.997084
+  Step 12870/20000 | R_avg = 0.999759 | norm = 0.997081
+  Step 12880/20000 | R_avg = 0.99984 | norm = 0.997079
+  Step 12890/20000 | R_avg = 0.999796 | norm = 0.997076
+[GPU EM Compute] 12900 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0197946, potential: -4094.57, total: -4094.55 (κ=1)
+  Step 12900/20000 | R_avg = 0.999821 | norm = 0.997074
+  Step 12910/20000 | R_avg = 0.999838 | norm = 0.997071
+  Step 12920/20000 | R_avg = 0.999818 | norm = 0.997069
+  Step 12930/20000 | R_avg = 0.999842 | norm = 0.997066
+  Step 12940/20000 | R_avg = 0.999835 | norm = 0.997064
+[GPU EM Compute] 12950 calls | Last: 109 μs | Avg: 106 μs | Grid: 64×64
+  Step 12950/20000 | R_avg = 0.999824 | norm = 0.997062
+  Step 12960/20000 | R_avg = 0.999827 | norm = 0.997059
+  Step 12970/20000 | R_avg = 0.99983 | norm = 0.997057
+  Step 12980/20000 | R_avg = 0.999799 | norm = 0.997054
+  Step 12990/20000 | R_avg = 0.999833 | norm = 0.997052
+[GPU EM Compute] 13000 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0218831, potential: -4094.72, total: -4094.69 (κ=1)
+  Step 13000/20000 | R_avg = 0.99984 | norm = 0.997049
+  Step 13010/20000 | R_avg = 0.999803 | norm = 0.997047
+  Step 13020/20000 | R_avg = 0.999836 | norm = 0.997044
+  Step 13030/20000 | R_avg = 0.999854 | norm = 0.997042
+  Step 13040/20000 | R_avg = 0.999792 | norm = 0.997039
+[GPU EM Compute] 13050 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 13050/20000 | R_avg = 0.999721 | norm = 0.997037
+  Step 13060/20000 | R_avg = 0.999772 | norm = 0.997034
+  Step 13070/20000 | R_avg = 0.999782 | norm = 0.997031
+  Step 13080/20000 | R_avg = 0.999823 | norm = 0.997029
+  Step 13090/20000 | R_avg = 0.999812 | norm = 0.997026
+[GPU EM Compute] 13100 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0157124, potential: -4094.89, total: -4094.87 (κ=1)
+  Step 13100/20000 | R_avg = 0.999862 | norm = 0.997024
+  Step 13110/20000 | R_avg = 0.999837 | norm = 0.997021
+  Step 13120/20000 | R_avg = 0.99982 | norm = 0.997019
+  Step 13130/20000 | R_avg = 0.999847 | norm = 0.997016
+  Step 13140/20000 | R_avg = 0.999844 | norm = 0.997014
+[GPU EM Compute] 13150 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  Step 13150/20000 | R_avg = 0.999813 | norm = 0.997011
+  Step 13160/20000 | R_avg = 0.999839 | norm = 0.997009
+  Step 13170/20000 | R_avg = 0.999852 | norm = 0.997006
+  Step 13180/20000 | R_avg = 0.999758 | norm = 0.997004
+  Step 13190/20000 | R_avg = 0.999821 | norm = 0.997001
+[GPU EM Compute] 13200 calls | Last: 105 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0226455, potential: -4094.72, total: -4094.7 (κ=1)
+  Step 13200/20000 | R_avg = 0.99984 | norm = 0.996999
+  Step 13210/20000 | R_avg = 0.999799 | norm = 0.996996
+  Step 13220/20000 | R_avg = 0.999856 | norm = 0.996994
+  Step 13230/20000 | R_avg = 0.999831 | norm = 0.996991
+  Step 13240/20000 | R_avg = 0.999817 | norm = 0.996989
+[GPU EM Compute] 13250 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  Step 13250/20000 | R_avg = 0.999815 | norm = 0.996986
+  Step 13260/20000 | R_avg = 0.99985 | norm = 0.996984
+  Step 13270/20000 | R_avg = 0.999804 | norm = 0.996981
+  Step 13280/20000 | R_avg = 0.999854 | norm = 0.996979
+  Step 13290/20000 | R_avg = 0.999825 | norm = 0.996977
+[GPU EM Compute] 13300 calls | Last: 106 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0290883, potential: -4094.23, total: -4094.2 (κ=1)
+  Step 13300/20000 | R_avg = 0.999778 | norm = 0.996974
+  Step 13310/20000 | R_avg = 0.99984 | norm = 0.996971
+  Step 13320/20000 | R_avg = 0.999838 | norm = 0.996969
+  Step 13330/20000 | R_avg = 0.999806 | norm = 0.996966
+  Step 13340/20000 | R_avg = 0.999793 | norm = 0.996964
+[GPU EM Compute] 13350 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  Step 13350/20000 | R_avg = 0.999844 | norm = 0.996961
+  Step 13360/20000 | R_avg = 0.999767 | norm = 0.996959
+  Step 13370/20000 | R_avg = 0.99985 | norm = 0.996956
+  Step 13380/20000 | R_avg = 0.999843 | norm = 0.996954
+  Step 13390/20000 | R_avg = 0.99981 | norm = 0.996951
+[GPU EM Compute] 13400 calls | Last: 104 μs | Avg: 106 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0198639, potential: -4094.74, total: -4094.72 (κ=1)
+  Step 13400/20000 | R_avg = 0.999843 | norm = 0.996949
+  Step 13410/20000 | R_avg = 0.999843 | norm = 0.996946
+  Step 13420/20000 | R_avg = 0.999796 | norm = 0.996944
+  Step 13430/20000 | R_avg = 0.999799 | norm = 0.996941
+  Step 13440/20000 | R_avg = 0.999842 | norm = 0.996938
+[GPU EM Compute] 13450 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 13450/20000 | R_avg = 0.999816 | norm = 0.996936
+  Step 13460/20000 | R_avg = 0.999788 | norm = 0.996933
+  Step 13470/20000 | R_avg = 0.999816 | norm = 0.996931
+  Step 13480/20000 | R_avg = 0.99983 | norm = 0.996928
+  Step 13490/20000 | R_avg = 0.999786 | norm = 0.996926
+[GPU EM Compute] 13500 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0231766, potential: -4094.58, total: -4094.56 (κ=1)
+  Step 13500/20000 | R_avg = 0.999823 | norm = 0.996924
+  Step 13510/20000 | R_avg = 0.999822 | norm = 0.996921
+  Step 13520/20000 | R_avg = 0.999816 | norm = 0.996919
+  Step 13530/20000 | R_avg = 0.99985 | norm = 0.996916
+  Step 13540/20000 | R_avg = 0.999859 | norm = 0.996913
+[GPU EM Compute] 13550 calls | Last: 116 μs | Avg: 105 μs | Grid: 64×64
+  Step 13550/20000 | R_avg = 0.999794 | norm = 0.996911
+  Step 13560/20000 | R_avg = 0.999789 | norm = 0.996908
+  Step 13570/20000 | R_avg = 0.999828 | norm = 0.996906
+  Step 13580/20000 | R_avg = 0.999793 | norm = 0.996903
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 13590/20000 | R_avg = 0.999844 | norm = 0.9969
+[GPU EM Compute] 13600 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0272582, potential: -4094.31, total: -4094.28 (κ=1)
+  Step 13600/20000 | R_avg = 0.999789 | norm = 0.996898
+  Step 13610/20000 | R_avg = 0.999839 | norm = 0.996895
+  Step 13620/20000 | R_avg = 0.999777 | norm = 0.996893
+  Step 13630/20000 | R_avg = 0.999796 | norm = 0.99689
+  Step 13640/20000 | R_avg = 0.999843 | norm = 0.996888
+[GPU EM Compute] 13650 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 13650/20000 | R_avg = 0.99984 | norm = 0.996885
+  Step 13660/20000 | R_avg = 0.999791 | norm = 0.996883
+  Step 13670/20000 | R_avg = 0.999843 | norm = 0.99688
+  Step 13680/20000 | R_avg = 0.999776 | norm = 0.996878
+  Step 13690/20000 | R_avg = 0.999789 | norm = 0.996875
+[GPU EM Compute] 13700 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0181787, potential: -4094.77, total: -4094.75 (κ=1)
+  Step 13700/20000 | R_avg = 0.999846 | norm = 0.996873
+  Step 13710/20000 | R_avg = 0.999851 | norm = 0.99687
+  Step 13720/20000 | R_avg = 0.999854 | norm = 0.996868
+  Step 13730/20000 | R_avg = 0.999785 | norm = 0.996865
+  Step 13740/20000 | R_avg = 0.999831 | norm = 0.996862
+[GPU EM Compute] 13750 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 13750/20000 | R_avg = 0.999849 | norm = 0.99686
+  Step 13760/20000 | R_avg = 0.999732 | norm = 0.996858
+  Step 13770/20000 | R_avg = 0.999737 | norm = 0.996855
+  Step 13780/20000 | R_avg = 0.999871 | norm = 0.996853
+  Step 13790/20000 | R_avg = 0.999821 | norm = 0.99685
+[GPU EM Compute] 13800 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0219673, potential: -4094.48, total: -4094.46 (κ=1)
+  Step 13800/20000 | R_avg = 0.999811 | norm = 0.996848
+  Step 13810/20000 | R_avg = 0.99984 | norm = 0.996845
+  Step 13820/20000 | R_avg = 0.99976 | norm = 0.996843
+  Step 13830/20000 | R_avg = 0.999837 | norm = 0.99684
+  Step 13840/20000 | R_avg = 0.99985 | norm = 0.996838
+[GPU EM Compute] 13850 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 13850/20000 | R_avg = 0.999803 | norm = 0.996835
+  Step 13860/20000 | R_avg = 0.999808 | norm = 0.996833
+  Step 13870/20000 | R_avg = 0.999831 | norm = 0.996831
+  Step 13880/20000 | R_avg = 0.999821 | norm = 0.996828
+  Step 13890/20000 | R_avg = 0.999736 | norm = 0.996826
+[GPU EM Compute] 13900 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0227932, potential: -4094.72, total: -4094.7 (κ=1)
+  Step 13900/20000 | R_avg = 0.999841 | norm = 0.996823
+  Step 13910/20000 | R_avg = 0.999808 | norm = 0.996821
+  Step 13920/20000 | R_avg = 0.999829 | norm = 0.996818
+  Step 13930/20000 | R_avg = 0.999846 | norm = 0.996816
+  Step 13940/20000 | R_avg = 0.999809 | norm = 0.996813
+[GPU EM Compute] 13950 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 13950/20000 | R_avg = 0.999776 | norm = 0.996811
+  Step 13960/20000 | R_avg = 0.99978 | norm = 0.996808
+  Step 13970/20000 | R_avg = 0.999829 | norm = 0.996806
+  Step 13980/20000 | R_avg = 0.999828 | norm = 0.996803
+  Step 13990/20000 | R_avg = 0.999857 | norm = 0.996801
+[GPU EM Compute] 14000 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0229617, potential: -4094.59, total: -4094.57 (κ=1)
+  Step 14000/20000 | R_avg = 0.999824 | norm = 0.996798
+  Step 14010/20000 | R_avg = 0.999854 | norm = 0.996796
+  Step 14020/20000 | R_avg = 0.999792 | norm = 0.996793
+  Step 14030/20000 | R_avg = 0.999795 | norm = 0.996791
+  Step 14040/20000 | R_avg = 0.999877 | norm = 0.996788
+[GPU EM Compute] 14050 calls | Last: 115 μs | Avg: 105 μs | Grid: 64×64
+  Step 14050/20000 | R_avg = 0.999727 | norm = 0.996786
+  Step 14060/20000 | R_avg = 0.999879 | norm = 0.996783
+  Step 14070/20000 | R_avg = 0.999824 | norm = 0.996781
+  Step 14080/20000 | R_avg = 0.999805 | norm = 0.996778
+  Step 14090/20000 | R_avg = 0.999779 | norm = 0.996776
+[GPU EM Compute] 14100 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0221515, potential: -4094.59, total: -4094.57 (κ=1)
+  Step 14100/20000 | R_avg = 0.999824 | norm = 0.996773
+  Step 14110/20000 | R_avg = 0.999748 | norm = 0.996771
+  Step 14120/20000 | R_avg = 0.999801 | norm = 0.996768
+  Step 14130/20000 | R_avg = 0.999842 | norm = 0.996766
+  Step 14140/20000 | R_avg = 0.999779 | norm = 0.996763
+[GPU EM Compute] 14150 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 14150/20000 | R_avg = 0.999734 | norm = 0.996761
+  Step 14160/20000 | R_avg = 0.999845 | norm = 0.996758
+  Step 14170/20000 | R_avg = 0.999775 | norm = 0.996756
+  Step 14180/20000 | R_avg = 0.999796 | norm = 0.996754
+  Step 14190/20000 | R_avg = 0.999836 | norm = 0.996751
+[GPU EM Compute] 14200 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0275307, potential: -4094.27, total: -4094.25 (κ=1)
+  Step 14200/20000 | R_avg = 0.999784 | norm = 0.996749
+  Step 14210/20000 | R_avg = 0.999803 | norm = 0.996746
+  Step 14220/20000 | R_avg = 0.999837 | norm = 0.996744
+  Step 14230/20000 | R_avg = 0.999827 | norm = 0.996741
+  Step 14240/20000 | R_avg = 0.999804 | norm = 0.996738
+[GPU EM Compute] 14250 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 14250/20000 | R_avg = 0.999809 | norm = 0.996736
+  Step 14260/20000 | R_avg = 0.999823 | norm = 0.996733
+  Step 14270/20000 | R_avg = 0.999778 | norm = 0.996731
+  Step 14280/20000 | R_avg = 0.999835 | norm = 0.996728
+  Step 14290/20000 | R_avg = 0.99981 | norm = 0.996726
+[GPU EM Compute] 14300 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0238786, potential: -4094.4, total: -4094.38 (κ=1)
+  Step 14300/20000 | R_avg = 0.999801 | norm = 0.996724
+  Step 14310/20000 | R_avg = 0.99983 | norm = 0.996721
+  Step 14320/20000 | R_avg = 0.999818 | norm = 0.996719
+  Step 14330/20000 | R_avg = 0.999807 | norm = 0.996716
+  Step 14340/20000 | R_avg = 0.999843 | norm = 0.996714
+[GPU EM Compute] 14350 calls | Last: 100 μs | Avg: 105 μs | Grid: 64×64
+  Step 14350/20000 | R_avg = 0.999837 | norm = 0.996711
+  Step 14360/20000 | R_avg = 0.999824 | norm = 0.996709
+  Step 14370/20000 | R_avg = 0.999851 | norm = 0.996706
+  Step 14380/20000 | R_avg = 0.99981 | norm = 0.996704
+  Step 14390/20000 | R_avg = 0.999799 | norm = 0.996701
+[GPU EM Compute] 14400 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0221378, potential: -4094.66, total: -4094.64 (κ=1)
+  Step 14400/20000 | R_avg = 0.999833 | norm = 0.996699
+  Step 14410/20000 | R_avg = 0.999824 | norm = 0.996696
+  Step 14420/20000 | R_avg = 0.99982 | norm = 0.996693
+  Step 14430/20000 | R_avg = 0.999797 | norm = 0.996691
+  Step 14440/20000 | R_avg = 0.999835 | norm = 0.996688
+[GPU EM Compute] 14450 calls | Last: 115 μs | Avg: 105 μs | Grid: 64×64
+  Step 14450/20000 | R_avg = 0.999826 | norm = 0.996686
+  Step 14460/20000 | R_avg = 0.999831 | norm = 0.996683
+  Step 14470/20000 | R_avg = 0.999845 | norm = 0.996681
+  Step 14480/20000 | R_avg = 0.99975 | norm = 0.996678
+  Step 14490/20000 | R_avg = 0.999798 | norm = 0.996676
+[GPU EM Compute] 14500 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0215498, potential: -4094.74, total: -4094.71 (κ=1)
+  Step 14500/20000 | R_avg = 0.999842 | norm = 0.996673
+  Step 14510/20000 | R_avg = 0.999817 | norm = 0.996671
+  Step 14520/20000 | R_avg = 0.999853 | norm = 0.996668
+  Step 14530/20000 | R_avg = 0.999834 | norm = 0.996666
+  Step 14540/20000 | R_avg = 0.999779 | norm = 0.996663
+[GPU EM Compute] 14550 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 14550/20000 | R_avg = 0.999851 | norm = 0.996661
+  Step 14560/20000 | R_avg = 0.999814 | norm = 0.996658
+  Step 14570/20000 | R_avg = 0.999826 | norm = 0.996656
+  Step 14580/20000 | R_avg = 0.999801 | norm = 0.996653
+  Step 14590/20000 | R_avg = 0.99982 | norm = 0.996651
+[GPU EM Compute] 14600 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.022378, potential: -4094.51, total: -4094.49 (κ=1)
+  Step 14600/20000 | R_avg = 0.999814 | norm = 0.996648
+  Step 14610/20000 | R_avg = 0.999803 | norm = 0.996646
+  Step 14620/20000 | R_avg = 0.999832 | norm = 0.996643
+  Step 14630/20000 | R_avg = 0.999814 | norm = 0.996641
+  Step 14640/20000 | R_avg = 0.999797 | norm = 0.996639
+[GPU EM Compute] 14650 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 14650/20000 | R_avg = 0.999837 | norm = 0.996636
+  Step 14660/20000 | R_avg = 0.999811 | norm = 0.996634
+  Step 14670/20000 | R_avg = 0.999802 | norm = 0.996631
+  Step 14680/20000 | R_avg = 0.999852 | norm = 0.996629
+  Step 14690/20000 | R_avg = 0.999819 | norm = 0.996626
+[GPU EM Compute] 14700 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0214322, potential: -4094.57, total: -4094.55 (κ=1)
+  Step 14700/20000 | R_avg = 0.999822 | norm = 0.996624
+  Step 14710/20000 | R_avg = 0.999852 | norm = 0.996621
+  Step 14720/20000 | R_avg = 0.999819 | norm = 0.996619
+  Step 14730/20000 | R_avg = 0.9998 | norm = 0.996616
+  Step 14740/20000 | R_avg = 0.999809 | norm = 0.996614
+[GPU EM Compute] 14750 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 14750/20000 | R_avg = 0.999861 | norm = 0.996612
+  Step 14760/20000 | R_avg = 0.999861 | norm = 0.996609
+  Step 14770/20000 | R_avg = 0.999816 | norm = 0.996607
+  Step 14780/20000 | R_avg = 0.999837 | norm = 0.996604
+  Step 14790/20000 | R_avg = 0.999868 | norm = 0.996602
+[GPU EM Compute] 14800 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0179928, potential: -4094.73, total: -4094.71 (κ=1)
+  Step 14800/20000 | R_avg = 0.999841 | norm = 0.996599
+  Step 14810/20000 | R_avg = 0.99986 | norm = 0.996597
+  Step 14820/20000 | R_avg = 0.999861 | norm = 0.996594
+  Step 14830/20000 | R_avg = 0.999847 | norm = 0.996591
+  Step 14840/20000 | R_avg = 0.99985 | norm = 0.996589
+[GPU EM Compute] 14850 calls | Last: 111 μs | Avg: 105 μs | Grid: 64×64
+  Step 14850/20000 | R_avg = 0.999839 | norm = 0.996586
+  Step 14860/20000 | R_avg = 0.999827 | norm = 0.996584
+  Step 14870/20000 | R_avg = 0.999712 | norm = 0.996582
+  Step 14880/20000 | R_avg = 0.999854 | norm = 0.996579
+  Step 14890/20000 | R_avg = 0.999793 | norm = 0.996577
+[GPU EM Compute] 14900 calls | Last: 118 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0301913, potential: -4094, total: -4093.97 (κ=1)
+  Step 14900/20000 | R_avg = 0.999751 | norm = 0.996574
+  Step 14910/20000 | R_avg = 0.999831 | norm = 0.996572
+  Step 14920/20000 | R_avg = 0.999848 | norm = 0.996569
+  Step 14930/20000 | R_avg = 0.999848 | norm = 0.996567
+  Step 14940/20000 | R_avg = 0.999824 | norm = 0.996564
+[GPU EM Compute] 14950 calls | Last: 110 μs | Avg: 105 μs | Grid: 64×64
+  Step 14950/20000 | R_avg = 0.999858 | norm = 0.996562
+  Step 14960/20000 | R_avg = 0.999837 | norm = 0.996559
+  Step 14970/20000 | R_avg = 0.999824 | norm = 0.996557
+  Step 14980/20000 | R_avg = 0.999848 | norm = 0.996554
+  Step 14990/20000 | R_avg = 0.999807 | norm = 0.996552
+[GPU EM Compute] 15000 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0227672, potential: -4094.51, total: -4094.48 (κ=1)
+  Step 15000/20000 | R_avg = 0.999814 | norm = 0.996549
+  Step 15010/20000 | R_avg = 0.999827 | norm = 0.996547
+  Step 15020/20000 | R_avg = 0.999829 | norm = 0.996544
+  Step 15030/20000 | R_avg = 0.99982 | norm = 0.996542
+  Step 15040/20000 | R_avg = 0.999837 | norm = 0.996539
+[GPU EM Compute] 15050 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 15050/20000 | R_avg = 0.999759 | norm = 0.996537
+  Step 15060/20000 | R_avg = 0.999795 | norm = 0.996534
+  Step 15070/20000 | R_avg = 0.999844 | norm = 0.996532
+  Step 15080/20000 | R_avg = 0.999756 | norm = 0.996529
+  Step 15090/20000 | R_avg = 0.999784 | norm = 0.996527
+[GPU EM Compute] 15100 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0176349, potential: -4094.88, total: -4094.86 (κ=1)
+  Step 15100/20000 | R_avg = 0.99986 | norm = 0.996525
+  Step 15110/20000 | R_avg = 0.99982 | norm = 0.996522
+  Step 15120/20000 | R_avg = 0.999832 | norm = 0.99652
+  Step 15130/20000 | R_avg = 0.99986 | norm = 0.996517
+  Step 15140/20000 | R_avg = 0.999817 | norm = 0.996515
+[GPU EM Compute] 15150 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  Step 15150/20000 | R_avg = 0.999813 | norm = 0.996512
+  Step 15160/20000 | R_avg = 0.99983 | norm = 0.99651
+  Step 15170/20000 | R_avg = 0.999731 | norm = 0.996507
+  Step 15180/20000 | R_avg = 0.999792 | norm = 0.996505
+  Step 15190/20000 | R_avg = 0.999842 | norm = 0.996502
+[GPU EM Compute] 15200 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0240084, potential: -4094.46, total: -4094.44 (κ=1)
+  Step 15200/20000 | R_avg = 0.999808 | norm = 0.9965
+  Step 15210/20000 | R_avg = 0.999756 | norm = 0.996497
+  Step 15220/20000 | R_avg = 0.999842 | norm = 0.996495
+  Step 15230/20000 | R_avg = 0.99975 | norm = 0.996492
+  Step 15240/20000 | R_avg = 0.999811 | norm = 0.99649
+[GPU EM Compute] 15250 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 15250/20000 | R_avg = 0.999856 | norm = 0.996487
+  Step 15260/20000 | R_avg = 0.999771 | norm = 0.996485
+  Step 15270/20000 | R_avg = 0.999788 | norm = 0.996482
+  Step 15280/20000 | R_avg = 0.999848 | norm = 0.99648
+  Step 15290/20000 | R_avg = 0.999782 | norm = 0.996477
+[GPU EM Compute] 15300 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0212205, potential: -4094.63, total: -4094.6 (κ=1)
+  Step 15300/20000 | R_avg = 0.999829 | norm = 0.996475
+  Step 15310/20000 | R_avg = 0.999894 | norm = 0.996472
+  Step 15320/20000 | R_avg = 0.9998 | norm = 0.99647
+  Step 15330/20000 | R_avg = 0.999832 | norm = 0.996467
+  Step 15340/20000 | R_avg = 0.999831 | norm = 0.996465
+[GPU EM Compute] 15350 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 15350/20000 | R_avg = 0.999755 | norm = 0.996463
+  Step 15360/20000 | R_avg = 0.999833 | norm = 0.99646
+  Step 15370/20000 | R_avg = 0.999848 | norm = 0.996457
+  Step 15380/20000 | R_avg = 0.999823 | norm = 0.996455
+  Step 15390/20000 | R_avg = 0.999804 | norm = 0.996452
+[GPU EM Compute] 15400 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0196928, potential: -4094.73, total: -4094.71 (κ=1)
+  Step 15400/20000 | R_avg = 0.999842 | norm = 0.99645
+  Step 15410/20000 | R_avg = 0.999792 | norm = 0.996447
+  Step 15420/20000 | R_avg = 0.999788 | norm = 0.996445
+  Step 15430/20000 | R_avg = 0.999855 | norm = 0.996442
+  Step 15440/20000 | R_avg = 0.999796 | norm = 0.99644
+[GPU EM Compute] 15450 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 15450/20000 | R_avg = 0.999799 | norm = 0.996437
+  Step 15460/20000 | R_avg = 0.999823 | norm = 0.996435
+  Step 15470/20000 | R_avg = 0.999829 | norm = 0.996433
+  Step 15480/20000 | R_avg = 0.9998 | norm = 0.99643
+  Step 15490/20000 | R_avg = 0.999851 | norm = 0.996428
+[GPU EM Compute] 15500 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0201313, potential: -4094.65, total: -4094.63 (κ=1)
+  Step 15500/20000 | R_avg = 0.999832 | norm = 0.996425
+  Step 15510/20000 | R_avg = 0.999836 | norm = 0.996422
+  Step 15520/20000 | R_avg = 0.999849 | norm = 0.99642
+  Step 15530/20000 | R_avg = 0.999838 | norm = 0.996418
+  Step 15540/20000 | R_avg = 0.999793 | norm = 0.996415
+[GPU EM Compute] 15550 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 15550/20000 | R_avg = 0.999873 | norm = 0.996413
+  Step 15560/20000 | R_avg = 0.999823 | norm = 0.99641
+  Step 15570/20000 | R_avg = 0.999826 | norm = 0.996408
+  Step 15580/20000 | R_avg = 0.999855 | norm = 0.996405
+  Step 15590/20000 | R_avg = 0.999749 | norm = 0.996402
+[GPU EM Compute] 15600 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0251206, potential: -4094.4, total: -4094.37 (κ=1)
+  Step 15600/20000 | R_avg = 0.9998 | norm = 0.9964
+  Step 15610/20000 | R_avg = 0.999797 | norm = 0.996397
+  Step 15620/20000 | R_avg = 0.999755 | norm = 0.996395
+  Step 15630/20000 | R_avg = 0.999808 | norm = 0.996393
+  Step 15640/20000 | R_avg = 0.999839 | norm = 0.99639
+[GPU EM Compute] 15650 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 15650/20000 | R_avg = 0.999762 | norm = 0.996387
+  Step 15660/20000 | R_avg = 0.999814 | norm = 0.996385
+  Step 15670/20000 | R_avg = 0.999809 | norm = 0.996382
+  Step 15680/20000 | R_avg = 0.999833 | norm = 0.99638
+  Step 15690/20000 | R_avg = 0.999787 | norm = 0.996377
+[GPU EM Compute] 15700 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0225076, potential: -4094.67, total: -4094.65 (κ=1)
+  Step 15700/20000 | R_avg = 0.999834 | norm = 0.996375
+  Step 15710/20000 | R_avg = 0.999815 | norm = 0.996372
+  Step 15720/20000 | R_avg = 0.999861 | norm = 0.99637
+  Step 15730/20000 | R_avg = 0.999853 | norm = 0.996367
+  Step 15740/20000 | R_avg = 0.999843 | norm = 0.996365
+[GPU EM Compute] 15750 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 15750/20000 | R_avg = 0.999809 | norm = 0.996362
+  Step 15760/20000 | R_avg = 0.999819 | norm = 0.996359
+  Step 15770/20000 | R_avg = 0.999843 | norm = 0.996357
+  Step 15780/20000 | R_avg = 0.999815 | norm = 0.996354
+  Step 15790/20000 | R_avg = 0.999787 | norm = 0.996352
+[GPU EM Compute] 15800 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0228809, potential: -4094.56, total: -4094.54 (κ=1)
+  Step 15800/20000 | R_avg = 0.99982 | norm = 0.996349
+  Step 15810/20000 | R_avg = 0.999799 | norm = 0.996347
+  Step 15820/20000 | R_avg = 0.999814 | norm = 0.996344
+  Step 15830/20000 | R_avg = 0.999839 | norm = 0.996342
+  Step 15840/20000 | R_avg = 0.999815 | norm = 0.996339
+[GPU EM Compute] 15850 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 15850/20000 | R_avg = 0.999819 | norm = 0.996337
+  Step 15860/20000 | R_avg = 0.999842 | norm = 0.996334
+  Step 15870/20000 | R_avg = 0.999797 | norm = 0.996331
+  Step 15880/20000 | R_avg = 0.999809 | norm = 0.996329
+  Step 15890/20000 | R_avg = 0.999833 | norm = 0.996326
+[GPU EM Compute] 15900 calls | Last: 103 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0229303, potential: -4094.6, total: -4094.58 (κ=1)
+  Step 15900/20000 | R_avg = 0.999826 | norm = 0.996324
+  Step 15910/20000 | R_avg = 0.999801 | norm = 0.996321
+  Step 15920/20000 | R_avg = 0.999839 | norm = 0.996319
+  Step 15930/20000 | R_avg = 0.999825 | norm = 0.996316
+  Step 15940/20000 | R_avg = 0.999825 | norm = 0.996314
+[GPU EM Compute] 15950 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 15950/20000 | R_avg = 0.999847 | norm = 0.996311
+  Step 15960/20000 | R_avg = 0.999825 | norm = 0.996309
+  Step 15970/20000 | R_avg = 0.999829 | norm = 0.996306
+  Step 15980/20000 | R_avg = 0.999836 | norm = 0.996304
+  Step 15990/20000 | R_avg = 0.999844 | norm = 0.996301
+[GPU EM Compute] 16000 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0258316, potential: -4094.26, total: -4094.23 (κ=1)
+  Step 16000/20000 | R_avg = 0.999782 | norm = 0.996298
+  Step 16010/20000 | R_avg = 0.999852 | norm = 0.996296
+  Step 16020/20000 | R_avg = 0.999829 | norm = 0.996293
+  Step 16030/20000 | R_avg = 0.999839 | norm = 0.996291
+  Step 16040/20000 | R_avg = 0.99986 | norm = 0.996288
+[GPU EM Compute] 16050 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 16050/20000 | R_avg = 0.999806 | norm = 0.996286
+  Step 16060/20000 | R_avg = 0.999805 | norm = 0.996284
+  Step 16070/20000 | R_avg = 0.999841 | norm = 0.996281
+  Step 16080/20000 | R_avg = 0.999803 | norm = 0.996279
+  Step 16090/20000 | R_avg = 0.99982 | norm = 0.996276
+[GPU EM Compute] 16100 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0243956, potential: -4094.53, total: -4094.5 (κ=1)
+  Step 16100/20000 | R_avg = 0.999816 | norm = 0.996273
+  Step 16110/20000 | R_avg = 0.999803 | norm = 0.996271
+  Step 16120/20000 | R_avg = 0.999795 | norm = 0.996268
+  Step 16130/20000 | R_avg = 0.999861 | norm = 0.996266
+  Step 16140/20000 | R_avg = 0.999818 | norm = 0.996263
+[GPU EM Compute] 16150 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 16150/20000 | R_avg = 0.999833 | norm = 0.996261
+  Step 16160/20000 | R_avg = 0.999847 | norm = 0.996258
+  Step 16170/20000 | R_avg = 0.999818 | norm = 0.996256
+  Step 16180/20000 | R_avg = 0.999806 | norm = 0.996253
+  Step 16190/20000 | R_avg = 0.999771 | norm = 0.996251
+[GPU EM Compute] 16200 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.01757, potential: -4094.72, total: -4094.7 (κ=1)
+  Step 16200/20000 | R_avg = 0.99984 | norm = 0.996248
+  Step 16210/20000 | R_avg = 0.999851 | norm = 0.996246
+  Step 16220/20000 | R_avg = 0.999846 | norm = 0.996243
+  Step 16230/20000 | R_avg = 0.999834 | norm = 0.996241
+  Step 16240/20000 | R_avg = 0.999905 | norm = 0.996238
+[GPU EM Compute] 16250 calls | Last: 113 μs | Avg: 105 μs | Grid: 64×64
+  Step 16250/20000 | R_avg = 0.999847 | norm = 0.996235
+  Step 16260/20000 | R_avg = 0.999839 | norm = 0.996233
+  Step 16270/20000 | R_avg = 0.999903 | norm = 0.99623
+  Step 16280/20000 | R_avg = 0.999882 | norm = 0.996228
+  Step 16290/20000 | R_avg = 0.99988 | norm = 0.996225
+[GPU EM Compute] 16300 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0175035, potential: -4094.87, total: -4094.85 (κ=1)
+  Step 16300/20000 | R_avg = 0.999859 | norm = 0.996223
+  Step 16310/20000 | R_avg = 0.999827 | norm = 0.99622
+  Step 16320/20000 | R_avg = 0.999873 | norm = 0.996218
+  Step 16330/20000 | R_avg = 0.999772 | norm = 0.996215
+  Step 16340/20000 | R_avg = 0.999834 | norm = 0.996212
+[GPU EM Compute] 16350 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 16350/20000 | R_avg = 0.999872 | norm = 0.99621
+  Step 16360/20000 | R_avg = 0.999838 | norm = 0.996207
+  Step 16370/20000 | R_avg = 0.99984 | norm = 0.996204
+  Step 16380/20000 | R_avg = 0.999838 | norm = 0.996202
+  Step 16390/20000 | R_avg = 0.99983 | norm = 0.996199
+[GPU EM Compute] 16400 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0229972, potential: -4094.57, total: -4094.55 (κ=1)
+  Step 16400/20000 | R_avg = 0.999821 | norm = 0.996197
+  Step 16410/20000 | R_avg = 0.99982 | norm = 0.996194
+  Step 16420/20000 | R_avg = 0.999805 | norm = 0.996192
+  Step 16430/20000 | R_avg = 0.999799 | norm = 0.996189
+  Step 16440/20000 | R_avg = 0.999864 | norm = 0.996186
+[GPU EM Compute] 16450 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  Step 16450/20000 | R_avg = 0.999774 | norm = 0.996184
+  Step 16460/20000 | R_avg = 0.999838 | norm = 0.996181
+  Step 16470/20000 | R_avg = 0.999887 | norm = 0.996179
+  Step 16480/20000 | R_avg = 0.999851 | norm = 0.996176
+  Step 16490/20000 | R_avg = 0.999848 | norm = 0.996174
+[GPU EM Compute] 16500 calls | Last: 128 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0146757, potential: -4095.02, total: -4095 (κ=1)
+  Step 16500/20000 | R_avg = 0.999877 | norm = 0.996171
+  Step 16510/20000 | R_avg = 0.999767 | norm = 0.996169
+  Step 16520/20000 | R_avg = 0.999812 | norm = 0.996166
+  Step 16530/20000 | R_avg = 0.999866 | norm = 0.996164
+  Step 16540/20000 | R_avg = 0.999775 | norm = 0.996161
+[GPU EM Compute] 16550 calls | Last: 118 μs | Avg: 105 μs | Grid: 64×64
+  Step 16550/20000 | R_avg = 0.999732 | norm = 0.996159
+  Step 16560/20000 | R_avg = 0.999839 | norm = 0.996156
+  Step 16570/20000 | R_avg = 0.999786 | norm = 0.996154
+  Step 16580/20000 | R_avg = 0.99983 | norm = 0.996151
+  Step 16590/20000 | R_avg = 0.99988 | norm = 0.996149
+[GPU EM Compute] 16600 calls | Last: 111 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0110302, potential: -4095.02, total: -4095.01 (κ=1)
+  Step 16600/20000 | R_avg = 0.999878 | norm = 0.996146
+  Step 16610/20000 | R_avg = 0.999857 | norm = 0.996144
+  Step 16620/20000 | R_avg = 0.999779 | norm = 0.996142
+  Step 16630/20000 | R_avg = 0.999839 | norm = 0.996139
+  Step 16640/20000 | R_avg = 0.999841 | norm = 0.996137
+[GPU EM Compute] 16650 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 16650/20000 | R_avg = 0.999794 | norm = 0.996134
+  Step 16660/20000 | R_avg = 0.999767 | norm = 0.996132
+  Step 16670/20000 | R_avg = 0.999845 | norm = 0.996129
+  Step 16680/20000 | R_avg = 0.999812 | norm = 0.996127
+  Step 16690/20000 | R_avg = 0.999844 | norm = 0.996124
+[GPU EM Compute] 16700 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0187964, potential: -4094.8, total: -4094.78 (κ=1)
+  Step 16700/20000 | R_avg = 0.999851 | norm = 0.996122
+  Step 16710/20000 | R_avg = 0.999854 | norm = 0.996119
+  Step 16720/20000 | R_avg = 0.99984 | norm = 0.996117
+  Step 16730/20000 | R_avg = 0.999769 | norm = 0.996114
+  Step 16740/20000 | R_avg = 0.999791 | norm = 0.996111
+[GPU EM Compute] 16750 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 16750/20000 | R_avg = 0.999839 | norm = 0.996109
+  Step 16760/20000 | R_avg = 0.999861 | norm = 0.996107
+  Step 16770/20000 | R_avg = 0.99981 | norm = 0.996104
+  Step 16780/20000 | R_avg = 0.999833 | norm = 0.996101
+  Step 16790/20000 | R_avg = 0.999819 | norm = 0.996099
+[GPU EM Compute] 16800 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.025332, potential: -4094.41, total: -4094.39 (κ=1)
+  Step 16800/20000 | R_avg = 0.999802 | norm = 0.996096
+  Step 16810/20000 | R_avg = 0.999827 | norm = 0.996094
+  Step 16820/20000 | R_avg = 0.999793 | norm = 0.996091
+  Step 16830/20000 | R_avg = 0.999793 | norm = 0.996089
+  Step 16840/20000 | R_avg = 0.999858 | norm = 0.996086
+[GPU EM Compute] 16850 calls | Last: 107 μs | Avg: 105 μs | Grid: 64×64
+  Step 16850/20000 | R_avg = 0.999798 | norm = 0.996084
+  Step 16860/20000 | R_avg = 0.999801 | norm = 0.996081
+  Step 16870/20000 | R_avg = 0.999891 | norm = 0.996079
+  Step 16880/20000 | R_avg = 0.99979 | norm = 0.996076
+  Step 16890/20000 | R_avg = 0.999812 | norm = 0.996073
+[GPU EM Compute] 16900 calls | Last: 64 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0275641, potential: -4094.28, total: -4094.25 (κ=1)
+  Step 16900/20000 | R_avg = 0.999785 | norm = 0.996071
+  Step 16910/20000 | R_avg = 0.999771 | norm = 0.996068
+  Step 16920/20000 | R_avg = 0.999834 | norm = 0.996066
+  Step 16930/20000 | R_avg = 0.999884 | norm = 0.996063
+  Step 16940/20000 | R_avg = 0.999785 | norm = 0.996061
+[GPU EM Compute] 16950 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 16950/20000 | R_avg = 0.999872 | norm = 0.996058
+  Step 16960/20000 | R_avg = 0.999874 | norm = 0.996056
+  Step 16970/20000 | R_avg = 0.999786 | norm = 0.996053
+  Step 16980/20000 | R_avg = 0.999869 | norm = 0.996051
+  Step 16990/20000 | R_avg = 0.999859 | norm = 0.996048
+[GPU EM Compute] 17000 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0275459, potential: -4094.29, total: -4094.27 (κ=1)
+  Step 17000/20000 | R_avg = 0.999787 | norm = 0.996045
+  Step 17010/20000 | R_avg = 0.99985 | norm = 0.996043
+  Step 17020/20000 | R_avg = 0.999771 | norm = 0.99604
+  Step 17030/20000 | R_avg = 0.999793 | norm = 0.996038
+  Step 17040/20000 | R_avg = 0.999824 | norm = 0.996035
+[GPU EM Compute] 17050 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 17050/20000 | R_avg = 0.999848 | norm = 0.996033
+  Step 17060/20000 | R_avg = 0.99979 | norm = 0.99603
+  Step 17070/20000 | R_avg = 0.999833 | norm = 0.996028
+  Step 17080/20000 | R_avg = 0.999882 | norm = 0.996025
+  Step 17090/20000 | R_avg = 0.99979 | norm = 0.996023
+[GPU EM Compute] 17100 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0149354, potential: -4095.03, total: -4095.01 (κ=1)
+  Step 17100/20000 | R_avg = 0.999879 | norm = 0.99602
+  Step 17110/20000 | R_avg = 0.999872 | norm = 0.996018
+  Step 17120/20000 | R_avg = 0.999766 | norm = 0.996015
+  Step 17130/20000 | R_avg = 0.999826 | norm = 0.996013
+  Step 17140/20000 | R_avg = 0.99987 | norm = 0.99601
+[GPU EM Compute] 17150 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 17150/20000 | R_avg = 0.999785 | norm = 0.996008
+  Step 17160/20000 | R_avg = 0.999822 | norm = 0.996005
+  Step 17170/20000 | R_avg = 0.999878 | norm = 0.996002
+  Step 17180/20000 | R_avg = 0.999784 | norm = 0.996
+  Step 17190/20000 | R_avg = 0.999822 | norm = 0.995997
+[GPU EM Compute] 17200 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0170542, potential: -4095.03, total: -4095.01 (κ=1)
+  Step 17200/20000 | R_avg = 0.999878 | norm = 0.995995
+  Step 17210/20000 | R_avg = 0.999762 | norm = 0.995992
+  Step 17220/20000 | R_avg = 0.999853 | norm = 0.99599
+  Step 17230/20000 | R_avg = 0.999877 | norm = 0.995987
+  Step 17240/20000 | R_avg = 0.999813 | norm = 0.995984
+[GPU EM Compute] 17250 calls | Last: 110 μs | Avg: 105 μs | Grid: 64×64
+  Step 17250/20000 | R_avg = 0.999821 | norm = 0.995982
+  Step 17260/20000 | R_avg = 0.99989 | norm = 0.995979
+  Step 17270/20000 | R_avg = 0.99977 | norm = 0.995977
+  Step 17280/20000 | R_avg = 0.999858 | norm = 0.995974
+  Step 17290/20000 | R_avg = 0.999859 | norm = 0.995972
+[GPU EM Compute] 17300 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0288075, potential: -4094.22, total: -4094.19 (κ=1)
+  Step 17300/20000 | R_avg = 0.999777 | norm = 0.995969
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 17310/20000 | R_avg = 0.999706 | norm = 0.995966
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 17320/20000 | R_avg = 0.999781 | norm = 0.995964
+  Step 17330/20000 | R_avg = 0.999905 | norm = 0.995961
+  Step 17340/20000 | R_avg = 0.999861 | norm = 0.995959
+[GPU EM Compute] 17350 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 17350/20000 | R_avg = 0.999792 | norm = 0.995956
+  Step 17360/20000 | R_avg = 0.999899 | norm = 0.995954
+  Step 17370/20000 | R_avg = 0.99988 | norm = 0.995951
+  Step 17380/20000 | R_avg = 0.999803 | norm = 0.995948
+  Step 17390/20000 | R_avg = 0.999877 | norm = 0.995946
+[GPU EM Compute] 17400 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0142662, potential: -4095.04, total: -4095.02 (κ=1)
+  Step 17400/20000 | R_avg = 0.99988 | norm = 0.995943
+  Step 17410/20000 | R_avg = 0.999868 | norm = 0.995941
+  Step 17420/20000 | R_avg = 0.999805 | norm = 0.995938
+  Step 17430/20000 | R_avg = 0.999843 | norm = 0.995935
+  Step 17440/20000 | R_avg = 0.999872 | norm = 0.995933
+[GPU EM Compute] 17450 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 17450/20000 | R_avg = 0.999835 | norm = 0.99593
+  Step 17460/20000 | R_avg = 0.99983 | norm = 0.995928
+  Step 17470/20000 | R_avg = 0.99986 | norm = 0.995925
+  Step 17480/20000 | R_avg = 0.999856 | norm = 0.995922
+  Step 17490/20000 | R_avg = 0.999879 | norm = 0.99592
+[GPU EM Compute] 17500 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.024162, potential: -4094.48, total: -4094.45 (κ=1)
+  Step 17500/20000 | R_avg = 0.99981 | norm = 0.995917
+  Step 17510/20000 | R_avg = 0.999801 | norm = 0.995915
+  Step 17520/20000 | R_avg = 0.999869 | norm = 0.995912
+  Step 17530/20000 | R_avg = 0.999797 | norm = 0.99591
+  Step 17540/20000 | R_avg = 0.999941 | norm = 0.995907
+[GPU EM Compute] 17550 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 17550/20000 | R_avg = 0.999853 | norm = 0.995904
+  Step 17560/20000 | R_avg = 0.999828 | norm = 0.995902
+  Step 17570/20000 | R_avg = 0.999827 | norm = 0.995899
+  Step 17580/20000 | R_avg = 0.999905 | norm = 0.995897
+  Step 17590/20000 | R_avg = 0.999801 | norm = 0.995894
+[GPU EM Compute] 17600 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0197288, potential: -4094.71, total: -4094.69 (κ=1)
+  Step 17600/20000 | R_avg = 0.99984 | norm = 0.995891
+  Step 17610/20000 | R_avg = 0.999828 | norm = 0.995889
+  Step 17620/20000 | R_avg = 0.999769 | norm = 0.995886
+  Step 17630/20000 | R_avg = 0.999837 | norm = 0.995884
+  Step 17640/20000 | R_avg = 0.999839 | norm = 0.995881
+[GPU EM Compute] 17650 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 17650/20000 | R_avg = 0.999802 | norm = 0.995879
+  Step 17660/20000 | R_avg = 0.999807 | norm = 0.995876
+  Step 17670/20000 | R_avg = 0.999876 | norm = 0.995873
+  Step 17680/20000 | R_avg = 0.999795 | norm = 0.995871
+  Step 17690/20000 | R_avg = 0.999844 | norm = 0.995868
+[GPU EM Compute] 17700 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0173166, potential: -4095.06, total: -4095.05 (κ=1)
+  Step 17700/20000 | R_avg = 0.999883 | norm = 0.995865
+  Step 17710/20000 | R_avg = 0.999804 | norm = 0.995863
+  Step 17720/20000 | R_avg = 0.999844 | norm = 0.99586
+  Step 17730/20000 | R_avg = 0.999865 | norm = 0.995857
+  Step 17740/20000 | R_avg = 0.999792 | norm = 0.995855
+[GPU EM Compute] 17750 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 17750/20000 | R_avg = 0.999772 | norm = 0.995852
+  Step 17760/20000 | R_avg = 0.999885 | norm = 0.99585
+  Step 17770/20000 | R_avg = 0.999827 | norm = 0.995847
+  Step 17780/20000 | R_avg = 0.999827 | norm = 0.995844
+  Step 17790/20000 | R_avg = 0.999863 | norm = 0.995842
+[GPU EM Compute] 17800 calls | Last: 111 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.025703, potential: -4094.42, total: -4094.4 (κ=1)
+  Step 17800/20000 | R_avg = 0.999803 | norm = 0.995839
+  Step 17810/20000 | R_avg = 0.999827 | norm = 0.995837
+  Step 17820/20000 | R_avg = 0.999831 | norm = 0.995834
+  Step 17830/20000 | R_avg = 0.999797 | norm = 0.995832
+  Step 17840/20000 | R_avg = 0.99983 | norm = 0.995829
+[GPU EM Compute] 17850 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 17850/20000 | R_avg = 0.999868 | norm = 0.995826
+  Step 17860/20000 | R_avg = 0.999817 | norm = 0.995824
+  Step 17870/20000 | R_avg = 0.99984 | norm = 0.995821
+  Step 17880/20000 | R_avg = 0.999871 | norm = 0.995819
+  Step 17890/20000 | R_avg = 0.999797 | norm = 0.995816
+[GPU EM Compute] 17900 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.019681, potential: -4094.61, total: -4094.59 (κ=1)
+  Step 17900/20000 | R_avg = 0.999827 | norm = 0.995814
+  Step 17910/20000 | R_avg = 0.999838 | norm = 0.995811
+  Step 17920/20000 | R_avg = 0.999786 | norm = 0.995808
+  Step 17930/20000 | R_avg = 0.999818 | norm = 0.995806
+  Step 17940/20000 | R_avg = 0.999866 | norm = 0.995803
+[GPU EM Compute] 17950 calls | Last: 102 μs | Avg: 105 μs | Grid: 64×64
+  Step 17950/20000 | R_avg = 0.999774 | norm = 0.995801
+  Step 17960/20000 | R_avg = 0.999804 | norm = 0.995798
+  Step 17970/20000 | R_avg = 0.99987 | norm = 0.995795
+  Step 17980/20000 | R_avg = 0.999799 | norm = 0.995793
+  Step 17990/20000 | R_avg = 0.999857 | norm = 0.99579
+[GPU EM Compute] 18000 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0168989, potential: -4094.95, total: -4094.93 (κ=1)
+  Step 18000/20000 | R_avg = 0.999869 | norm = 0.995788
+  Step 18010/20000 | R_avg = 0.999822 | norm = 0.995785
+  Step 18020/20000 | R_avg = 0.999791 | norm = 0.995783
+  Step 18030/20000 | R_avg = 0.999821 | norm = 0.99578
+  Step 18040/20000 | R_avg = 0.999826 | norm = 0.995777
+[GPU EM Compute] 18050 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 18050/20000 | R_avg = 0.999849 | norm = 0.995775
+  Step 18060/20000 | R_avg = 0.999852 | norm = 0.995772
+  Step 18070/20000 | R_avg = 0.999826 | norm = 0.99577
+  Step 18080/20000 | R_avg = 0.999837 | norm = 0.995767
+  Step 18090/20000 | R_avg = 0.999851 | norm = 0.995765
+[GPU EM Compute] 18100 calls | Last: 114 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0255065, potential: -4094.34, total: -4094.31 (κ=1)
+  Step 18100/20000 | R_avg = 0.999792 | norm = 0.995762
+  Step 18110/20000 | R_avg = 0.999832 | norm = 0.99576
+  Step 18120/20000 | R_avg = 0.999861 | norm = 0.995757
+  Step 18130/20000 | R_avg = 0.999788 | norm = 0.995754
+  Step 18140/20000 | R_avg = 0.999806 | norm = 0.995752
+[GPU EM Compute] 18150 calls | Last: 108 μs | Avg: 105 μs | Grid: 64×64
+  Step 18150/20000 | R_avg = 0.999892 | norm = 0.995749
+  Step 18160/20000 | R_avg = 0.999786 | norm = 0.995747
+  Step 18170/20000 | R_avg = 0.999846 | norm = 0.995744
+  Step 18180/20000 | R_avg = 0.999861 | norm = 0.995742
+  Step 18190/20000 | R_avg = 0.9998 | norm = 0.995739
+[GPU EM Compute] 18200 calls | Last: 117 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0202358, potential: -4094.64, total: -4094.62 (κ=1)
+  Step 18200/20000 | R_avg = 0.99983 | norm = 0.995737
+  Step 18210/20000 | R_avg = 0.999863 | norm = 0.995734
+  Step 18220/20000 | R_avg = 0.999806 | norm = 0.995732
+  Step 18230/20000 | R_avg = 0.99984 | norm = 0.995729
+  Step 18240/20000 | R_avg = 0.999876 | norm = 0.995726
+[GPU EM Compute] 18250 calls | Last: 107 μs | Avg: 105 μs | Grid: 64×64
+  Step 18250/20000 | R_avg = 0.999811 | norm = 0.995724
+  Step 18260/20000 | R_avg = 0.999793 | norm = 0.995721
+  Step 18270/20000 | R_avg = 0.999868 | norm = 0.995719
+  Step 18280/20000 | R_avg = 0.999806 | norm = 0.995716
+  Step 18290/20000 | R_avg = 0.999784 | norm = 0.995714
+[GPU EM Compute] 18300 calls | Last: 107 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0148333, potential: -4095.08, total: -4095.06 (κ=1)
+  Step 18300/20000 | R_avg = 0.999885 | norm = 0.995711
+  Step 18310/20000 | R_avg = 0.999827 | norm = 0.995708
+  Step 18320/20000 | R_avg = 0.999784 | norm = 0.995706
+  Step 18330/20000 | R_avg = 0.999841 | norm = 0.995703
+  Step 18340/20000 | R_avg = 0.999775 | norm = 0.995701
+[GPU EM Compute] 18350 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 18350/20000 | R_avg = 0.999808 | norm = 0.995698
+  Step 18360/20000 | R_avg = 0.999847 | norm = 0.995696
+  Step 18370/20000 | R_avg = 0.999831 | norm = 0.995693
+  Step 18380/20000 | R_avg = 0.999741 | norm = 0.99569
+  Step 18390/20000 | R_avg = 0.9998 | norm = 0.995688
+[GPU EM Compute] 18400 calls | Last: 107 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0225035, potential: -4094.44, total: -4094.42 (κ=1)
+  Step 18400/20000 | R_avg = 0.999806 | norm = 0.995685
+  Step 18410/20000 | R_avg = 0.999801 | norm = 0.995683
+  Step 18420/20000 | R_avg = 0.999858 | norm = 0.99568
+  Step 18430/20000 | R_avg = 0.999806 | norm = 0.995677
+  Step 18440/20000 | R_avg = 0.999713 | norm = 0.995675
+[GPU EM Compute] 18450 calls | Last: 111 μs | Avg: 105 μs | Grid: 64×64
+  Step 18450/20000 | R_avg = 0.999867 | norm = 0.995672
+  Step 18460/20000 | R_avg = 0.999827 | norm = 0.99567
+  Step 18470/20000 | R_avg = 0.999785 | norm = 0.995667
+  Step 18480/20000 | R_avg = 0.999864 | norm = 0.995664
+  Step 18490/20000 | R_avg = 0.99984 | norm = 0.995662
+[GPU EM Compute] 18500 calls | Last: 107 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0248348, potential: -4094.39, total: -4094.36 (κ=1)
+  Step 18500/20000 | R_avg = 0.999799 | norm = 0.995659
+  Step 18510/20000 | R_avg = 0.999813 | norm = 0.995657
+  Step 18520/20000 | R_avg = 0.999809 | norm = 0.995654
+  Step 18530/20000 | R_avg = 0.999856 | norm = 0.995651
+  Step 18540/20000 | R_avg = 0.999841 | norm = 0.995649
+[GPU EM Compute] 18550 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  Step 18550/20000 | R_avg = 0.999817 | norm = 0.995646
+  Step 18560/20000 | R_avg = 0.999863 | norm = 0.995644
+  Step 18570/20000 | R_avg = 0.999733 | norm = 0.995641
+  Step 18580/20000 | R_avg = 0.999779 | norm = 0.995638
+  Step 18590/20000 | R_avg = 0.99986 | norm = 0.995636
+[GPU EM Compute] 18600 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0195953, potential: -4094.73, total: -4094.71 (κ=1)
+  Step 18600/20000 | R_avg = 0.999842 | norm = 0.995633
+  Step 18610/20000 | R_avg = 0.999817 | norm = 0.99563
+  Step 18620/20000 | R_avg = 0.999867 | norm = 0.995628
+  Step 18630/20000 | R_avg = 0.999842 | norm = 0.995625
+  Step 18640/20000 | R_avg = 0.999769 | norm = 0.995623
+[GPU EM Compute] 18650 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 18650/20000 | R_avg = 0.999862 | norm = 0.99562
+  Step 18660/20000 | R_avg = 0.999823 | norm = 0.995618
+  Step 18670/20000 | R_avg = 0.999782 | norm = 0.995615
+  Step 18680/20000 | R_avg = 0.999868 | norm = 0.995612
+  Step 18690/20000 | R_avg = 0.999702 | norm = 0.99561
+[GPU EM Compute] 18700 calls | Last: 110 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0354824, potential: -4093.75, total: -4093.72 (κ=1)
+  Step 18700/20000 | R_avg = 0.99972 | norm = 0.995607
+  Step 18710/20000 | R_avg = 0.999858 | norm = 0.995605
+  Step 18720/20000 | R_avg = 0.999793 | norm = 0.995602
+  Step 18730/20000 | R_avg = 0.99981 | norm = 0.9956
+  Step 18740/20000 | R_avg = 0.999858 | norm = 0.995597
+[GPU EM Compute] 18750 calls | Last: 107 μs | Avg: 105 μs | Grid: 64×64
+  Step 18750/20000 | R_avg = 0.999724 | norm = 0.995594
+  Step 18760/20000 | R_avg = 0.999795 | norm = 0.995592
+  Step 18770/20000 | R_avg = 0.999854 | norm = 0.995589
+  Step 18780/20000 | R_avg = 0.999854 | norm = 0.995587
+  Step 18790/20000 | R_avg = 0.999807 | norm = 0.995584
+[GPU EM Compute] 18800 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0163884, potential: -4094.98, total: -4094.96 (κ=1)
+  Step 18800/20000 | R_avg = 0.999873 | norm = 0.995582
+  Step 18810/20000 | R_avg = 0.999854 | norm = 0.995579
+  Step 18820/20000 | R_avg = 0.999813 | norm = 0.995577
+  Step 18830/20000 | R_avg = 0.999854 | norm = 0.995574
+  Step 18840/20000 | R_avg = 0.999835 | norm = 0.995571
+[GPU EM Compute] 18850 calls | Last: 99 μs | Avg: 105 μs | Grid: 64×64
+  Step 18850/20000 | R_avg = 0.999804 | norm = 0.995569
+  Step 18860/20000 | R_avg = 0.999856 | norm = 0.995566
+  Step 18870/20000 | R_avg = 0.999828 | norm = 0.995563
+  Step 18880/20000 | R_avg = 0.999792 | norm = 0.995561
+  Step 18890/20000 | R_avg = 0.999862 | norm = 0.995558
+[GPU EM Compute] 18900 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0229795, potential: -4094.61, total: -4094.59 (κ=1)
+  Step 18900/20000 | R_avg = 0.999827 | norm = 0.995556
+  Step 18910/20000 | R_avg = 0.99982 | norm = 0.995553
+  Step 18920/20000 | R_avg = 0.999847 | norm = 0.99555
+  Step 18930/20000 | R_avg = 0.999827 | norm = 0.995548
+  Step 18940/20000 | R_avg = 0.99982 | norm = 0.995545
+[GPU EM Compute] 18950 calls | Last: 100 μs | Avg: 105 μs | Grid: 64×64
+  Step 18950/20000 | R_avg = 0.999865 | norm = 0.995543
+  Step 18960/20000 | R_avg = 0.999807 | norm = 0.99554
+  Step 18970/20000 | R_avg = 0.999798 | norm = 0.995537
+  Step 18980/20000 | R_avg = 0.999831 | norm = 0.995535
+  Step 18990/20000 | R_avg = 0.999861 | norm = 0.995532
+[GPU EM Compute] 19000 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.023611, potential: -4094.49, total: -4094.46 (κ=1)
+  Step 19000/20000 | R_avg = 0.999811 | norm = 0.99553
+  Step 19010/20000 | R_avg = 0.999863 | norm = 0.995527
+  Step 19020/20000 | R_avg = 0.999808 | norm = 0.995524
+  Step 19030/20000 | R_avg = 0.999832 | norm = 0.995522
+  Step 19040/20000 | R_avg = 0.999822 | norm = 0.995519
+[GPU EM Compute] 19050 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  Step 19050/20000 | R_avg = 0.999862 | norm = 0.995516
+  Step 19060/20000 | R_avg = 0.999755 | norm = 0.995514
+  Step 19070/20000 | R_avg = 0.999861 | norm = 0.995511
+  Step 19080/20000 | R_avg = 0.999832 | norm = 0.995509
+  Step 19090/20000 | R_avg = 0.99979 | norm = 0.995506
+[GPU EM Compute] 19100 calls | Last: 109 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0173478, potential: -4094.96, total: -4094.94 (κ=1)
+  Step 19100/20000 | R_avg = 0.99987 | norm = 0.995503
+  Step 19110/20000 | R_avg = 0.999813 | norm = 0.995501
+  Step 19120/20000 | R_avg = 0.999815 | norm = 0.995498
+  Step 19130/20000 | R_avg = 0.999847 | norm = 0.995496
+  Step 19140/20000 | R_avg = 0.999831 | norm = 0.995493
+[GPU EM Compute] 19150 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 19150/20000 | R_avg = 0.999713 | norm = 0.99549
+  Step 19160/20000 | R_avg = 0.999816 | norm = 0.995488
+  Step 19170/20000 | R_avg = 0.999805 | norm = 0.995485
+  Step 19180/20000 | R_avg = 0.999829 | norm = 0.995483
+  Step 19190/20000 | R_avg = 0.999873 | norm = 0.99548
+[GPU EM Compute] 19200 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.023197, potential: -4094.49, total: -4094.47 (κ=1)
+  Step 19200/20000 | R_avg = 0.999812 | norm = 0.995478
+  Step 19210/20000 | R_avg = 0.999747 | norm = 0.995475
+  Step 19220/20000 | R_avg = 0.999885 | norm = 0.995472
+  Step 19230/20000 | R_avg = 0.999787 | norm = 0.99547
+  Step 19240/20000 | R_avg = 0.999832 | norm = 0.995467
+[GPU EM Compute] 19250 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 19250/20000 | R_avg = 0.999778 | norm = 0.995465
+  Step 19260/20000 | R_avg = 0.999793 | norm = 0.995462
+  Step 19270/20000 | R_avg = 0.999795 | norm = 0.995459
+  Step 19280/20000 | R_avg = 0.999807 | norm = 0.995457
+  Step 19290/20000 | R_avg = 0.999786 | norm = 0.995454
+[GPU EM Compute] 19300 calls | Last: 109 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0190722, potential: -4094.64, total: -4094.62 (κ=1)
+  Step 19300/20000 | R_avg = 0.99983 | norm = 0.995452
+  Step 19310/20000 | R_avg = 0.999836 | norm = 0.995449
+  Step 19320/20000 | R_avg = 0.999785 | norm = 0.995446
+  Step 19330/20000 | R_avg = 0.999794 | norm = 0.995444
+  Step 19340/20000 | R_avg = 0.999884 | norm = 0.995441
+[GPU EM Compute] 19350 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 19350/20000 | R_avg = 0.999836 | norm = 0.995439
+  Step 19360/20000 | R_avg = 0.999833 | norm = 0.995436
+  Step 19370/20000 | R_avg = 0.999854 | norm = 0.995434
+  Step 19380/20000 | R_avg = 0.999833 | norm = 0.995431
+  Step 19390/20000 | R_avg = 0.999746 | norm = 0.995428
+[GPU EM Compute] 19400 calls | Last: 113 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.01683, potential: -4094.88, total: -4094.86 (κ=1)
+  Step 19400/20000 | R_avg = 0.99986 | norm = 0.995426
+  Step 19410/20000 | R_avg = 0.999752 | norm = 0.995423
+  Step 19420/20000 | R_avg = 0.999811 | norm = 0.995421
+  Step 19430/20000 | R_avg = 0.999854 | norm = 0.995418
+  Step 19440/20000 | R_avg = 0.99984 | norm = 0.995416
+[GPU EM Compute] 19450 calls | Last: 108 μs | Avg: 105 μs | Grid: 64×64
+  Step 19450/20000 | R_avg = 0.999794 | norm = 0.995413
+  Step 19460/20000 | R_avg = 0.999853 | norm = 0.995411
+  Step 19470/20000 | R_avg = 0.999846 | norm = 0.995408
+  Step 19480/20000 | R_avg = 0.999817 | norm = 0.995406
+  Step 19490/20000 | R_avg = 0.999854 | norm = 0.995403
+[GPU EM Compute] 19500 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0219087, potential: -4094.53, total: -4094.5 (κ=1)
+  Step 19500/20000 | R_avg = 0.999816 | norm = 0.995401
+  Step 19510/20000 | R_avg = 0.999819 | norm = 0.995398
+  Step 19520/20000 | R_avg = 0.999865 | norm = 0.995395
+  Step 19530/20000 | R_avg = 0.99981 | norm = 0.995393
+  Step 19540/20000 | R_avg = 0.999827 | norm = 0.99539
+[GPU EM Compute] 19550 calls | Last: 103 μs | Avg: 105 μs | Grid: 64×64
+  Step 19550/20000 | R_avg = 0.999865 | norm = 0.995388
+  Step 19560/20000 | R_avg = 0.99974 | norm = 0.995385
+  Step 19570/20000 | R_avg = 0.999761 | norm = 0.995383
+  Step 19580/20000 | R_avg = 0.999876 | norm = 0.99538
+  Step 19590/20000 | R_avg = 0.999831 | norm = 0.995378
+[GPU EM Compute] 19600 calls | Last: 100 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0214612, potential: -4094.62, total: -4094.59 (κ=1)
+  Step 19600/20000 | R_avg = 0.999827 | norm = 0.995375
+  Step 19610/20000 | R_avg = 0.999853 | norm = 0.995373
+  Step 19620/20000 | R_avg = 0.99975 | norm = 0.99537
+  Step 19630/20000 | R_avg = 0.999833 | norm = 0.995368
+  Step 19640/20000 | R_avg = 0.999843 | norm = 0.995365
+[GPU EM Compute] 19650 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 19650/20000 | R_avg = 0.999835 | norm = 0.995363
+  Step 19660/20000 | R_avg = 0.999814 | norm = 0.99536
+  Step 19670/20000 | R_avg = 0.99981 | norm = 0.995357
+  Step 19680/20000 | R_avg = 0.999841 | norm = 0.995355
+  Step 19690/20000 | R_avg = 0.999813 | norm = 0.995352
+[GPU EM Compute] 19700 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0195854, potential: -4094.76, total: -4094.74 (κ=1)
+  Step 19700/20000 | R_avg = 0.999845 | norm = 0.99535
+  Step 19710/20000 | R_avg = 0.999837 | norm = 0.995347
+  Step 19720/20000 | R_avg = 0.999824 | norm = 0.995345
+  Step 19730/20000 | R_avg = 0.999856 | norm = 0.995342
+  Step 19740/20000 | R_avg = 0.999709 | norm = 0.995339
+[GPU EM Compute] 19750 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+  Step 19750/20000 | R_avg = 0.999797 | norm = 0.995337
+  Step 19760/20000 | R_avg = 0.999838 | norm = 0.995334
+  Step 19770/20000 | R_avg = 0.999805 | norm = 0.995332
+  Step 19780/20000 | R_avg = 0.9998 | norm = 0.995329
+  Step 19790/20000 | R_avg = 0.999888 | norm = 0.995326
+[GPU EM Compute] 19800 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0273559, potential: -4094.32, total: -4094.29 (κ=1)
+  Step 19800/20000 | R_avg = 0.99979 | norm = 0.995324
+  Step 19810/20000 | R_avg = 0.999857 | norm = 0.995321
+  Step 19820/20000 | R_avg = 0.999741 | norm = 0.995318
+  Step 19830/20000 | R_avg = 0.999768 | norm = 0.995316
+  Step 19840/20000 | R_avg = 0.999817 | norm = 0.995313
+[GPU EM Compute] 19850 calls | Last: 113 μs | Avg: 105 μs | Grid: 64×64
+  Step 19850/20000 | R_avg = 0.999805 | norm = 0.995311
+  Step 19860/20000 | R_avg = 0.999799 | norm = 0.995308
+  Step 19870/20000 | R_avg = 0.99987 | norm = 0.995306
+  Step 19880/20000 | R_avg = 0.999832 | norm = 0.995303
+  Step 19890/20000 | R_avg = 0.99981 | norm = 0.9953
+[GPU EM Compute] 19900 calls | Last: 106 μs | Avg: 105 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0216698, potential: -4094.65, total: -4094.63 (κ=1)
+  Step 19900/20000 | R_avg = 0.999831 | norm = 0.995298
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 19910/20000 | R_avg = 0.999816 | norm = 0.995295
+  Step 19920/20000 | R_avg = 0.999835 | norm = 0.995292
+  Step 19930/20000 | R_avg = 0.999865 | norm = 0.99529
+  Step 19940/20000 | R_avg = 0.999836 | norm = 0.995287
+[GPU EM Compute] 19950 calls | Last: 105 μs | Avg: 105 μs | Grid: 64×64
+  Step 19950/20000 | R_avg = 0.999817 | norm = 0.995284
+  Step 19960/20000 | R_avg = 0.99986 | norm = 0.995282
+  Step 19970/20000 | R_avg = 0.999852 | norm = 0.995279
+  Step 19980/20000 | R_avg = 0.999784 | norm = 0.995277
+  Step 19990/20000 | R_avg = 0.999855 | norm = 0.995274
+[GPU EM Compute] 20000 calls | Last: 104 μs | Avg: 105 μs | Grid: 64×64
+
+===== Lorentz Force Analysis =====
+  Trajectory written to /home/persist/neotec/0rigin/output/20251230_224252_lorentz_force_pure_magnetic/N_1/particle_trajectory.csv (20001 points)
+  Particle trajectory saved to: /home/persist/neotec/0rigin/output/20251230_224252_lorentz_force_pure_magnetic/N_1/particle_trajectory.csv
+  Average magnetic field: B_avg = 0.1
+
+Theoretical predictions:
+  Cyclotron frequency: ω_c = 1 rad/τ_P
+  Larmor radius: r_L = 0.1 ℓ_P
+
+Measured from trajectory:
+  Orbital period: T = 12.5664 τ_P
+  Orbital radius: r = 0.00973749 ℓ_P
+  Orbital frequency: ω = 0.5 rad/τ_P
+
+Validation:
+  Frequency error: 50%
+  Radius error: 90.2625%
+  Lorentz force validation: ✗ FAIL
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.995272 (drift: 0.472824% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4092.09 (drift: 0.0205202% from initial -4091.25) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 9.99516e-07 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00472827 ✓ PASS
+  Energy validation: max_drift = 0.000752859 ✓ PASS
+
+===== EM Field Validation =====
+Maxwell Equation Residuals:
+  Gauss law (∇·E - 4πρ): 0 ✓
+  No monopole (∇·B): 0 ✓
+  Faraday law (∇×E + ∂B/∂t): 0 ✓
+  Ampere law (∇×B - 4πJ - ∂E/∂t): 8.54325e-11 ✓
+Overall Maxwell Validation: ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251230_224252_lorentz_force_pure_magnetic/N_1/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251230_224252_lorentz_force_pure_magnetic/N_1/em_observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251230_224252_lorentz_force_pure_magnetic/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%

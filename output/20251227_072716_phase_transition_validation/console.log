@@ -1,0 +1,45 @@
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation/console.log
+  Dirac initialization (DEPRECATED grid units):
+    Position: (32, 32) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+  Initial energy E0 = 1.10516
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.05
+  half_substeps=0
+  remaining_substeps=1
+  Step 0/4000 | R_avg = 0.999796 | norm = 1
+  Step 1000/4000 | R_avg = 0.999789 | norm = 0.99974
+  Step 2000/4000 | R_avg = 0.999789 | norm = 0.99948
+  Step 3000/4000 | R_avg = 0.999753 | norm = 0.99922
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998959 (drift: 0.104141% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.10373 (drift: 0.0196514% from initial 1.10352) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.000948123 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00104092 ✓ PASS
+  Energy validation: max_drift = 0.00140296 ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation/N_1/observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%

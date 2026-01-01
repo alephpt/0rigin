@@ -1,0 +1,57 @@
+===== SMFT Test Report =====
+Test: em_coupling_uniform_field
+Description: Phase 6.1: Uniform EM field - verify minimal coupling with constant magnetic field produces expected Larmor radius and cyclotron frequency
+
+[Configuration]
+Grid: 64 x 64
+Delta: 1
+Coupling: 0.1
+Total steps: 2000
+dt: 0.01
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999408 (drift: 0.0591809% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.47171 (drift: 0% from initial -nan) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.345133 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+N=10 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999407 (drift: 0.0592974% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.46012 (drift: 0.0492776% from initial 1.45941) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.346878 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+N=100 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999407 (drift: 0.0593049% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.45958 (drift: 0.32356% from initial 1.46432) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.346891 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+Convergence Validation: ✓ PASS
+  Convergence errors: [1.133e-05, 2.933e-04, 4.402e-04]
+
+N=1: ✓ PASS
+  Norm: max_error = 5.919e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 0.000e+00 (threshold: 1.000e-02)
+
+N=10: ✓ PASS
+  Norm: max_error = 5.931e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 6.622e-03 (threshold: 1.000e-02)
+
+N=100: ✗ FAIL
+  Norm: max_error = 5.931e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 1.520e-02 (threshold: 1.000e-02)
+
+[Overall Result]
+✗ SOME TESTS FAILED
+
+===== End of Report ====

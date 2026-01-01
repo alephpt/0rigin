@@ -1,0 +1,37 @@
+[Logging] Console output for 128x128 writing to: /home/persist/neotec/0rigin/output/20251223_102336_scenario_2.5A_klein_gordon_comparison/console.log
+
+--- Testing with N=10 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 0.78125 ℓ_P
+    Core radius: 3 ℓ_P (3.84 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (60, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (76.8, 64) grid units
+    Grid width: 3.84 grid units
+  Using Klein-Gordon solver (scalar field)
+[KleinGordonEvolution] Initialized 128x128 scalar field
+[KleinGordonEvolution] Initialized Gaussian wavepacket at (76.8, 64) with σ=3.84
+[SMFTEngine] Klein-Gordon field initialized: center=(76.8,64), sigma=3.84, norm=0.999999
+[DiracEvolution] Initialized 128x128 4-component spinor field
+[DiracEvolution] Initialized Gaussian wavepacket at (76.8, 64) with σ=3.84
+  Initial energy E0 = 0.0655684
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=10
+  substep_dt=0.001
+  half_substeps=5
+  remaining_substeps=5
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.983447 | norm = 1
+  Step 500/5000 | R_avg = 0.983536 | norm = 1
+  Saved spatial snapshot at t = 10 (step 1000)
+  Step 1000/5000 | R_avg = 0.983497 | norm = 1
+  Step 1500/5000 | R_avg = 0.983542 | norm = 1
+  Step 2000/5000 | R_avg = 0.983551 | norm = 1
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.983503 | norm = 1
+  Step 3000/5000 | R_avg = 0.983519 | norm = 1

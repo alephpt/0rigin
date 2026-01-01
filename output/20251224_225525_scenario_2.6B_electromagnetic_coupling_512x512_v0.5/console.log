@@ -1,0 +1,50 @@
+[Logging] Console output for 512x512 v=0.5c writing to: /home/persist/neotec/0rigin/output/20251224_225525_scenario_2.6B_electromagnetic_coupling_512x512_v0.5/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (256, 256) grid units
+    Grid width: 15.36 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 512x512 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (256, 256) grid units
+  Width: σ = 15.36 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 1482.38
+  Normalization factor: 38.5017
+[DiracEvolution] Initialized Gaussian wavepacket at (256, 256) with σ=15.36
+  Final norm: ||Ψ||² = 0.999982
+  Initial position: <r> = (255.999, 255.999)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(256,256), sigma=15.36, boost=(0.5,0)c, norm=0.999982, <r>=(255.999,255.999)
+[DiracEvolution] Initialized 512x512 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (256, 256) grid units
+  Width: σ = 15.36 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 1482.38
+  Normalization factor: 38.5017
+[DiracEvolution] Initialized Gaussian wavepacket at (256, 256) with σ=15.36
+  Final norm: ||Ψ||² = 0.999982
+  Initial position: <r> = (255.999, 255.999)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 0.300876
+  Initial norm = 1.00001
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.994441 | norm = 1.00001
+  Step 100/5000 | R_avg = 0.994504 | norm = 0.999968
+  Step 200/5000 | R_avg = 0.994494 | norm = 0.999928
+  Step 300/5000 | R_avg = 0.994485 | norm = 0.999889

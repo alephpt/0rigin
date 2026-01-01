@@ -1,0 +1,32 @@
+===== SMFT Test Report =====
+Test: lorentz_force_refined_timestep
+Description: 
+
+[Configuration]
+Grid: 64 x 64
+Delta: 2.5
+Coupling: 0.1
+Total steps: 100000
+dt: 0.0001
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✗ FAIL
+  ✗ Probability Conservation: ||ψ||² = 0.963393 (drift: 3.66067% from initial 1) ✗ FAIL (exceeds tolerance 1%)
+  ✓ Energy Conservation: E_total = -4092.16 (drift: 0.0153264% from initial -4091.53) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 8.82429e-07 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+N=1: ✗ FAIL
+  Norm: max_error = 3.661e-02 (threshold: 1.000e-02)
+  Energy: max_drift = 5.970e-04 (threshold: 1.000e-02)
+
+[Overall Result]
+✗ SOME TESTS FAILED
+
+===== End of Report ====

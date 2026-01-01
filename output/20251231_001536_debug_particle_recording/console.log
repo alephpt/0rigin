@@ -1,0 +1,58 @@
+[Logging] Console output for 32x32 writing to: /home/persist/neotec/0rigin/output/20251231_001536_debug_particle_recording/console.log
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (16, 16) grid units
+    Grid width: 0.96 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 32x32 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 16) with σ=0.96
+[SMFTEngine] Dirac field initialized: center=(16,16), sigma=0.96, norm=1
+[DiracEvolution] Initialized 32x32 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 16) with σ=0.96
+  Initial energy E0 = 0.662122
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.001
+  half_substeps=0
+  remaining_substeps=1
+[GPU EM Compute] 1 calls | Last: 222 μs | Avg: 222 μs | Grid: 32×32
+  [Kuramoto Energy] grad_R: 0.00905444, potential: -1023.49, total: -1023.49 (κ=1)
+  Actual initial energy E0 = -1020.37 (from first observation including EM)
+  Step 0/100 | R_avg = 0.999748 | norm = 1
+[GPU EM Compute] 50 calls | Last: 61 μs | Avg: 70 μs | Grid: 32×32
+[GPU EM Compute] 100 calls | Last: 62 μs | Avg: 67 μs | Grid: 32×32
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999984 (drift: 0.00159312% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -1020.35 (drift: 0.00131019% from initial -1020.37) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 6.9726e-07 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 1.59485e-05 ✓ PASS
+  Energy validation: max_drift = 0.000179088 ✓ PASS
+
+===== EM Field Validation =====
+Maxwell Equation Residuals:
+  Gauss law (∇·E - 4πρ): 0 ✓
+  No monopole (∇·B): 0 ✓
+  Faraday law (∇×E + ∂B/∂t): 0 ✓
+  Ampere law (∇×B - 4πJ - ∂E/∂t): 3.16223e-08 ✓
+Overall Maxwell Validation: ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251231_001536_debug_particle_recording/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251231_001536_debug_particle_recording/N_1/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251231_001536_debug_particle_recording/N_1/em_observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251231_001536_debug_particle_recording/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%

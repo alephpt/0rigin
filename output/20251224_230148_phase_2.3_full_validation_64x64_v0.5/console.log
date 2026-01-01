@@ -1,0 +1,267 @@
+[Logging] Console output for 64x64 v=0.5c writing to: /home/persist/neotec/0rigin/output/20251224_230148_phase_2.3_full_validation_64x64_v0.5/console.log
+
+--- Testing with N=1 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 1.5625 ℓ_P
+    Core radius: 3 ℓ_P (1.92 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (60, 50) ℓ_P
+    Width: 5 ℓ_P
+    Grid coordinates: (38.4, 32) grid units
+    Grid width: 3.2 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (38.4, 32) grid units
+  Width: σ = 3.2 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 64.3398
+  Normalization factor: 8.02121
+[DiracEvolution] Initialized Gaussian wavepacket at (38.4, 32) with σ=3.2
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (38.4, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(38.4,32), sigma=3.2, boost=(0.5,0)c, norm=1, <r>=(38.4,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (38.4, 32) grid units
+  Width: σ = 3.2 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 64.3398
+  Normalization factor: 8.02121
+[DiracEvolution] Initialized Gaussian wavepacket at (38.4, 32) with σ=3.2
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (38.4, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 0.363227
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.967844 | norm = 1
+  Step 1000/5000 | R_avg = 0.967784 | norm = 0.999727
+  Step 2000/5000 | R_avg = 0.96807 | norm = 0.999442
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 3000/5000 | R_avg = 0.967845 | norm = 0.99918
+  Step 4000/5000 | R_avg = 0.967784 | norm = 0.998905
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998633 (drift: 0.136766% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.34849 (drift: 0.286246% from initial 1.35236) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.371699 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.3: Relativistic Mass Validation =====
+  Boost velocity: v = 0.5c
+  Theoretical gamma: γ = 1.1547
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✓ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 0 ✓ PASS (< 0.5)
+  ✓ 4. ψ(x,y,t=0) is Gaussian at offset position: Wavepacket variance = 3.73495e-06 ✓ PASS (localized)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%): ⟨p⟩ = 0.532642 (expect 0.57735, error = 7.74374%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory: γ_measured = 1.29369 (γ_theory = 1.1547, error = 12.0364%) ✗ FAIL (exceeds 5% tolerance)
+  Norm validation: max_error = 0.00136743 ✓ PASS
+  Energy validation: max_drift = 0.0110814 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_230148_phase_2.3_full_validation_64x64_v0.5/N_1/observables.csv
+
+--- Testing with N=10 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 1.5625 ℓ_P
+    Core radius: 3 ℓ_P (1.92 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (60, 50) ℓ_P
+    Width: 5 ℓ_P
+    Grid coordinates: (38.4, 32) grid units
+    Grid width: 3.2 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (38.4, 32) grid units
+  Width: σ = 3.2 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 64.3398
+  Normalization factor: 8.02121
+[DiracEvolution] Initialized Gaussian wavepacket at (38.4, 32) with σ=3.2
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (38.4, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(38.4,32), sigma=3.2, boost=(0.5,0)c, norm=1, <r>=(38.4,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (38.4, 32) grid units
+  Width: σ = 3.2 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 64.3398
+  Normalization factor: 8.02121
+[DiracEvolution] Initialized Gaussian wavepacket at (38.4, 32) with σ=3.2
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (38.4, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.35231
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.968024 | norm = 1
+  Step 1000/5000 | R_avg = 0.967859 | norm = 0.999728
+  Step 2000/5000 | R_avg = 0.967844 | norm = 0.999441
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 3000/5000 | R_avg = 0.96791 | norm = 0.999179
+  Step 4000/5000 | R_avg = 0.96768 | norm = 0.998903
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.99863 (drift: 0.136994% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.34849 (drift: 0.282851% from initial 1.35232) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0.999826] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.372173 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.3: Relativistic Mass Validation =====
+  Boost velocity: v = 0.5c
+  Theoretical gamma: γ = 1.1547
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✓ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 0 ✓ PASS (< 0.5)
+  ✓ 4. ψ(x,y,t=0) is Gaussian at offset position: Wavepacket variance = 3.73495e-06 ✓ PASS (localized)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%): ⟨p⟩ = 0.532608 (expect 0.57735, error = 7.74952%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory: γ_measured = 1.29343 (γ_theory = 1.1547, error = 12.0139%) ✗ FAIL (exceeds 5% tolerance)
+  Norm validation: max_error = 0.0013697 ✓ PASS
+  Energy validation: max_drift = 0.0104124 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_230148_phase_2.3_full_validation_64x64_v0.5/N_10/observables.csv
+
+--- Testing with N=100 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 1.5625 ℓ_P
+    Core radius: 3 ℓ_P (1.92 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (60, 50) ℓ_P
+    Width: 5 ℓ_P
+    Grid coordinates: (38.4, 32) grid units
+    Grid width: 3.2 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (38.4, 32) grid units
+  Width: σ = 3.2 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 64.3398
+  Normalization factor: 8.02121
+[DiracEvolution] Initialized Gaussian wavepacket at (38.4, 32) with σ=3.2
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (38.4, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(38.4,32), sigma=3.2, boost=(0.5,0)c, norm=1, <r>=(38.4,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (38.4, 32) grid units
+  Width: σ = 3.2 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 64.3398
+  Normalization factor: 8.02121
+[DiracEvolution] Initialized Gaussian wavepacket at (38.4, 32) with σ=3.2
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (38.4, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.35231
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.967784 | norm = 1
+  Step 1000/5000 | R_avg = 0.967815 | norm = 0.999728
+  Step 2000/5000 | R_avg = 0.967977 | norm = 0.999441
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 3000/5000 | R_avg = 0.96776 | norm = 0.999181
+  Step 4000/5000 | R_avg = 0.96782 | norm = 0.998904
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998632 (drift: 0.136853% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.34861 (drift: 0.268956% from initial 1.35225) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0.999826] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.372052 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.3: Relativistic Mass Validation =====
+  Boost velocity: v = 0.5c
+  Theoretical gamma: γ = 1.1547
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✓ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 0 ✓ PASS (< 0.5)
+  ✓ 4. ψ(x,y,t=0) is Gaussian at offset position: Wavepacket variance = 3.73495e-06 ✓ PASS (localized)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%): ⟨p⟩ = 0.532608 (expect 0.57735, error = 7.74952%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory: γ_measured = 1.29342 (γ_theory = 1.1547, error = 12.0135%) ✗ FAIL (exceeds 5% tolerance)
+  Norm validation: max_error = 0.00136832 ✓ PASS
+  Energy validation: max_drift = 0.0104767 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_230148_phase_2.3_full_validation_64x64_v0.5/N_100/observables.csv
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+
+========================================
+Grid: 64×64 | Velocity: v=0.7c
+========================================
+
+Initializing engine for 64×64 grid, velocity v=0.7c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251224_230449_phase_2.3_full_validation_64x64_v0.7
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251224_230449_phase_2.3_full_validation_64x64_v0.7

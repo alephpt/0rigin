@@ -1,0 +1,149 @@
+
+===== SMFT Test Mode =====
+Configuration: config/phase_transition_validation.yaml
+
+[1/3] Initializing...
+
+===== Test Configuration: phase_transition_validation =====
+Description: Test 3.3 - Noise-driven phase transition in Kuramoto synchronization
+
+[Grid]
+  size: 64 x 64
+
+[Physics]
+  solver_type: none
+  delta: 1
+  coupling: 0
+  dt: 0.05
+  total_steps: 4000
+  K (Kuramoto): 1
+  damping: 0.1
+  noise_strength: 0
+  noise_scan: [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1]
+
+[Initial Conditions - Dirac]
+  type: none
+  center: (32, 32)
+  sigma: 3
+  amplitude: 1
+
+[Initial Conditions - Kuramoto]
+  phase_distribution: uniform
+  omega_distribution: zero
+  omega_mean: 0
+  omega_std: 0.1
+
+[Operator Splitting]
+  enabled: no
+
+[Validation]
+  norm_tolerance: 0.01
+  energy_tolerance: 0.01
+  convergence_tolerance: 0.05
+
+[Output]
+  directory: output/phase_transition
+  save_every: 100 steps
+  formats: [csv]
+========================================
+
+ [INFO]: Nova - Instantiating ..
+Logger - Debug Level set to error ..
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation
+✓ SMFTTestRunner initialized successfully
+
+[2/3] Running tests...
+
+===== Running Tests =====
+
+Initializing engine for 64×64 grid...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation/console.log
+  Dirac initialization (DEPRECATED grid units):
+    Position: (32, 32) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+  Initial energy E0 = 1.10516
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.05
+  half_substeps=0
+  remaining_substeps=1
+  Step 0/4000 | R_avg = 0.999796 | norm = 1
+  Step 1000/4000 | R_avg = 0.999789 | norm = 0.99974
+  Step 2000/4000 | R_avg = 0.999789 | norm = 0.99948
+  Step 3000/4000 | R_avg = 0.999753 | norm = 0.99922
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998959 (drift: 0.104141% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.10373 (drift: 0.0196514% from initial 1.10352) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.000948123 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00104092 ✓ PASS
+  Energy validation: max_drift = 0.00140296 ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation/N_1/observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251227_072716_phase_transition_validation/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete

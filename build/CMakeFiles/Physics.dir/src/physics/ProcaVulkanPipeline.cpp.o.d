@@ -1,7 +1,7 @@
 CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o: \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/physics/ProcaVulkanPipeline.cpp \
+ /home/persist/neotec/0rigin/src/physics/ProcaVulkanPipeline.cpp \
  /usr/include/stdc-predef.h \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/physics/ProcaVulkanPipeline.h \
+ /home/persist/neotec/0rigin/include/physics/ProcaVulkanPipeline.h \
  /usr/include/vulkan/vulkan.h /usr/include/vulkan/vk_platform.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stddef.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdint.h \

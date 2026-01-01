@@ -1,0 +1,58 @@
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251230_184057_em_cpu_validation/console.log
+  Dirac initialization (DEPRECATED grid units):
+    Position: (32, 32) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+  Initial energy E0 = 0.105161
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.01
+  half_substeps=0
+  remaining_substeps=1
+[GPU EM Compute] 1 calls | Last: 224 μs | Avg: 224 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.0245538, potential: -4094.39, total: -4094.37 (κ=1)
+  Actual initial energy E0 = -4093.96 (from first observation including EM)
+  Step 0/100 | R_avg = 0.999799 | norm = 1
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 50 calls | Last: 102 μs | Avg: 104 μs | Grid: 64×64
+[GPU EM Compute] 100 calls | Last: 103 μs | Avg: 106 μs | Grid: 64×64
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999987 (drift: 0.00137082% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4094.5 (drift: 0.0130504% from initial -4093.96) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 1.21855e-08 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 1.32441e-05 ✓ PASS
+  Energy validation: max_drift = 0.000482704 ✓ PASS
+
+===== EM Field Validation =====
+Maxwell Equation Residuals:
+  Gauss law (∇·E - 4πρ): 0 ✓
+  No monopole (∇·B): 0 ✓
+  Faraday law (∇×E + ∂B/∂t): 0 ✓
+  Ampere law (∇×B - 4πJ - ∂E/∂t): 3.09734e-08 ✓
+Overall Maxwell Validation: ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251230_184057_em_cpu_validation/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251230_184057_em_cpu_validation/N_1/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251230_184057_em_cpu_validation/N_1/em_observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251230_184057_em_cpu_validation/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%

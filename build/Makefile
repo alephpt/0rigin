@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em
+CMAKE_SOURCE_DIR = /home/persist/neotec/0rigin
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build
+CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles /home/persist/neotec/0rigin/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -167,6 +167,32 @@ test_proca_vortex_bfield: cmake_check_build_system
 test_proca_vortex_bfield/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/build
 .PHONY : test_proca_vortex_bfield/fast
+
+#=============================================================================
+# Target rules for targets named test_stuckelberg_vortex_bfield
+
+# Build rule for target.
+test_stuckelberg_vortex_bfield: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_stuckelberg_vortex_bfield
+.PHONY : test_stuckelberg_vortex_bfield
+
+# fast build rule for target.
+test_stuckelberg_vortex_bfield/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/build
+.PHONY : test_stuckelberg_vortex_bfield/fast
+
+#=============================================================================
+# Target rules for targets named test_proca_parameter_sweep
+
+# Build rule for target.
+test_proca_parameter_sweep: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_proca_parameter_sweep
+.PHONY : test_proca_parameter_sweep
+
+# fast build rule for target.
+test_proca_parameter_sweep/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/build
+.PHONY : test_proca_parameter_sweep/fast
 
 src/SMFTCore.o: src/SMFTCore.cpp.o
 .PHONY : src/SMFTCore.o
@@ -264,6 +290,54 @@ src/physics/ProcaVulkanPipeline.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.s
 .PHONY : src/physics/ProcaVulkanPipeline.cpp.s
 
+src/physics/StuckelbergEM.o: src/physics/StuckelbergEM.cpp.o
+.PHONY : src/physics/StuckelbergEM.o
+
+# target to build an object file
+src/physics/StuckelbergEM.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o
+.PHONY : src/physics/StuckelbergEM.cpp.o
+
+src/physics/StuckelbergEM.i: src/physics/StuckelbergEM.cpp.i
+.PHONY : src/physics/StuckelbergEM.i
+
+# target to preprocess a source file
+src/physics/StuckelbergEM.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.i
+.PHONY : src/physics/StuckelbergEM.cpp.i
+
+src/physics/StuckelbergEM.s: src/physics/StuckelbergEM.cpp.s
+.PHONY : src/physics/StuckelbergEM.s
+
+# target to generate assembly for a file
+src/physics/StuckelbergEM.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.s
+.PHONY : src/physics/StuckelbergEM.cpp.s
+
+test/test_proca_parameter_sweep.o: test/test_proca_parameter_sweep.cpp.o
+.PHONY : test/test_proca_parameter_sweep.o
+
+# target to build an object file
+test/test_proca_parameter_sweep.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/test/test_proca_parameter_sweep.cpp.o
+.PHONY : test/test_proca_parameter_sweep.cpp.o
+
+test/test_proca_parameter_sweep.i: test/test_proca_parameter_sweep.cpp.i
+.PHONY : test/test_proca_parameter_sweep.i
+
+# target to preprocess a source file
+test/test_proca_parameter_sweep.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/test/test_proca_parameter_sweep.cpp.i
+.PHONY : test/test_proca_parameter_sweep.cpp.i
+
+test/test_proca_parameter_sweep.s: test/test_proca_parameter_sweep.cpp.s
+.PHONY : test/test_proca_parameter_sweep.s
+
+# target to generate assembly for a file
+test/test_proca_parameter_sweep.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/test/test_proca_parameter_sweep.cpp.s
+.PHONY : test/test_proca_parameter_sweep.cpp.s
+
 test/test_proca_vortex_magnetic_field.o: test/test_proca_vortex_magnetic_field.cpp.o
 .PHONY : test/test_proca_vortex_magnetic_field.o
 
@@ -288,6 +362,30 @@ test/test_proca_vortex_magnetic_field.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.s
 .PHONY : test/test_proca_vortex_magnetic_field.cpp.s
 
+test/test_stuckelberg_vortex_bfield.o: test/test_stuckelberg_vortex_bfield.cpp.o
+.PHONY : test/test_stuckelberg_vortex_bfield.o
+
+# target to build an object file
+test/test_stuckelberg_vortex_bfield.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/test/test_stuckelberg_vortex_bfield.cpp.o
+.PHONY : test/test_stuckelberg_vortex_bfield.cpp.o
+
+test/test_stuckelberg_vortex_bfield.i: test/test_stuckelberg_vortex_bfield.cpp.i
+.PHONY : test/test_stuckelberg_vortex_bfield.i
+
+# target to preprocess a source file
+test/test_stuckelberg_vortex_bfield.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/test/test_stuckelberg_vortex_bfield.cpp.i
+.PHONY : test/test_stuckelberg_vortex_bfield.cpp.i
+
+test/test_stuckelberg_vortex_bfield.s: test/test_stuckelberg_vortex_bfield.cpp.s
+.PHONY : test/test_stuckelberg_vortex_bfield.s
+
+# target to generate assembly for a file
+test/test_stuckelberg_vortex_bfield.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/test/test_stuckelberg_vortex_bfield.cpp.s
+.PHONY : test/test_stuckelberg_vortex_bfield.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -299,7 +397,9 @@ help:
 	@echo "... Physics"
 	@echo "... SMFTCore"
 	@echo "... smft"
+	@echo "... test_proca_parameter_sweep"
 	@echo "... test_proca_vortex_bfield"
+	@echo "... test_stuckelberg_vortex_bfield"
 	@echo "... src/SMFTCore.o"
 	@echo "... src/SMFTCore.i"
 	@echo "... src/SMFTCore.s"
@@ -312,9 +412,18 @@ help:
 	@echo "... src/physics/ProcaVulkanPipeline.o"
 	@echo "... src/physics/ProcaVulkanPipeline.i"
 	@echo "... src/physics/ProcaVulkanPipeline.s"
+	@echo "... src/physics/StuckelbergEM.o"
+	@echo "... src/physics/StuckelbergEM.i"
+	@echo "... src/physics/StuckelbergEM.s"
+	@echo "... test/test_proca_parameter_sweep.o"
+	@echo "... test/test_proca_parameter_sweep.i"
+	@echo "... test/test_proca_parameter_sweep.s"
 	@echo "... test/test_proca_vortex_magnetic_field.o"
 	@echo "... test/test_proca_vortex_magnetic_field.i"
 	@echo "... test/test_proca_vortex_magnetic_field.s"
+	@echo "... test/test_stuckelberg_vortex_bfield.o"
+	@echo "... test/test_stuckelberg_vortex_bfield.i"
+	@echo "... test/test_stuckelberg_vortex_bfield.s"
 .PHONY : help
 
 

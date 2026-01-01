@@ -1,0 +1,86 @@
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251230_215548_lorentz_force_pure_magnetic/console.log
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (32, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=1.92, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Initial energy E0 = 0.237587
+  Initial norm = 1
+
+--- Initializing Test Particle for Lorentz Force ---
+  Particle initialized at (60, 50) ℓ_P
+  Initial velocity: (0, 0.1) c
+  Charge: -1, Mass: 1 (natural units)
+  Verified state: pos=(60,50), vel=(0,0.1)
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.01
+  half_substeps=0
+  remaining_substeps=1
+[GPU EM Compute] 1 calls | Last: 224 μs | Avg: 224 μs | Grid: 64×64
+  [Kuramoto Energy] grad_R: 0.17398, potential: -4094.04, total: -4093.87 (κ=1)
+  Actual initial energy E0 = -4091.13 (from first observation including EM)
+  Using uniform B field: B_z = 0.1 everywhere
+  Step 0/100 | R_avg = 0.999736 | norm = 1
+[GPU EM Compute] 50 calls | Last: 107 μs | Avg: 109 μs | Grid: 64×64
+[GPU EM Compute] 100 calls | Last: 108 μs | Avg: 108 μs | Grid: 64×64
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+
+===== Lorentz Force Analysis =====
+Error: Could not open /home/persist/neotec/0rigin/output/20251230_215548_lorentz_force_pure_magnetic/N_1/particle_trajectory.csv for writing
+  Particle trajectory saved to: /home/persist/neotec/0rigin/output/20251230_215548_lorentz_force_pure_magnetic/N_1/particle_trajectory.csv
+  Average magnetic field: B_avg = 0.1
+
+Theoretical predictions:
+  Cyclotron frequency: ω_c = 0.1 rad/τ_P
+  Larmor radius: r_L = 1 ℓ_P
+
+Measured from trajectory:
+  Orbital period: T = 0 τ_P
+  Orbital radius: r = 0 ℓ_P
+  Orbital frequency: ω = 0 rad/τ_P
+
+Validation:
+  Frequency error: 100%
+  Radius error: 100%
+  Lorentz force validation: ✗ FAIL
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999976 (drift: 0.00238181% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4092.51 (drift: 0.0337012% from initial -4091.13) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 5.56704e-07 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 2.3793e-05 ✓ PASS
+  Energy validation: max_drift = 0.000337012 ✓ PASS
+
+===== EM Field Validation =====
+Maxwell Equation Residuals:
+  Gauss law (∇·E - 4πρ): 0 ✓
+  No monopole (∇·B): 0 ✓
+  Faraday law (∇×E + ∂B/∂t): 0 ✓
+  Ampere law (∇×B - 4πJ - ∂E/∂t): 1.63152e-07 ✓
+Overall Maxwell Validation: ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251230_215548_lorentz_force_pure_magnetic/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251230_215548_lorentz_force_pure_magnetic/N_1/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251230_215548_lorentz_force_pure_magnetic/N_1/em_observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251230_215548_lorentz_force_pure_magnetic/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%

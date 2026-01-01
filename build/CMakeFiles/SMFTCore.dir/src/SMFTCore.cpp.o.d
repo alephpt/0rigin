@@ -1,10 +1,9 @@
 CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/SMFTCore.cpp \
- /usr/include/stdc-predef.h \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/SMFTCore.h \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/physics/ProcaEM.h \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/physics/GaugeTheory.h \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/physics/PhysicsTypes.h \
+ /home/persist/neotec/0rigin/src/SMFTCore.cpp /usr/include/stdc-predef.h \
+ /home/persist/neotec/0rigin/include/SMFTCore.h \
+ /home/persist/neotec/0rigin/include/physics/ProcaEM.h \
+ /home/persist/neotec/0rigin/include/physics/GaugeTheory.h \
+ /home/persist/neotec/0rigin/include/physics/PhysicsTypes.h \
  /usr/include/c++/15.2.1/array /usr/include/c++/15.2.1/compare \
  /usr/include/c++/15.2.1/bits/version.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -120,7 +119,7 @@ CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: \
  /usr/include/c++/15.2.1/bits/stl_vector.h \
  /usr/include/c++/15.2.1/bits/stl_bvector.h \
  /usr/include/c++/15.2.1/bits/vector.tcc \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/physics/ProcaVulkanPipeline.h \
+ /home/persist/neotec/0rigin/include/physics/ProcaVulkanPipeline.h \
  /usr/include/vulkan/vulkan.h /usr/include/vulkan/vk_platform.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \

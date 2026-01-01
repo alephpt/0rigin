@@ -1,0 +1,285 @@
+[Logging] Console output for 64x64 v=0.5c writing to: /home/persist/neotec/0rigin/output/20251229_233630_em_coupling_uniform_field_64x64_v0.5/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (32, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(32,32), sigma=1.92, boost=(0.5,0)c, norm=1, <r>=(32,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 0.464713
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Actual initial energy E0 = 1.46863 (from first observation including EM)
+  Step 0/2000 | R_avg = 0.999742 | norm = 1
+[GPU EM Compute] 6050 calls | Last: 104 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6100 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+  Step 100/2000 | R_avg = 0.999876 | norm = 0.999976
+[GPU EM Compute] 6150 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6200 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 200/2000 | R_avg = 0.999842 | norm = 0.99995
+[GPU EM Compute] 6250 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6300 calls | Last: 102 μs | Avg: 107 μs | Grid: 64×64
+  Step 300/2000 | R_avg = 0.999827 | norm = 0.999921
+[GPU EM Compute] 6350 calls | Last: 109 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6400 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 400/2000 | R_avg = 0.9998 | norm = 0.999893
+[GPU EM Compute] 6450 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6500 calls | Last: 110 μs | Avg: 107 μs | Grid: 64×64
+  Step 500/2000 | R_avg = 0.99985 | norm = 0.999863
+[GPU EM Compute] 6550 calls | Last: 109 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6600 calls | Last: 110 μs | Avg: 107 μs | Grid: 64×64
+  Step 600/2000 | R_avg = 0.999844 | norm = 0.999833
+[GPU EM Compute] 6650 calls | Last: 104 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6700 calls | Last: 110 μs | Avg: 107 μs | Grid: 64×64
+  Step 700/2000 | R_avg = 0.999778 | norm = 0.999802
+[GPU EM Compute] 6750 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6800 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 800/2000 | R_avg = 0.999823 | norm = 0.999772
+[GPU EM Compute] 6850 calls | Last: 103 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 6900 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 900/2000 | R_avg = 0.999866 | norm = 0.999741
+[GPU EM Compute] 6950 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7000 calls | Last: 110 μs | Avg: 107 μs | Grid: 64×64
+  Step 1000/2000 | R_avg = 0.999855 | norm = 0.999709
+[GPU EM Compute] 7050 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7100 calls | Last: 106 μs | Avg: 107 μs | Grid: 64×64
+  Step 1100/2000 | R_avg = 0.999865 | norm = 0.999678
+[GPU EM Compute] 7150 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7200 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 1200/2000 | R_avg = 0.999837 | norm = 0.999647
+[GPU EM Compute] 7250 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7300 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 1300/2000 | R_avg = 0.999844 | norm = 0.999615
+[GPU EM Compute] 7350 calls | Last: 111 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7400 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 1400/2000 | R_avg = 0.999818 | norm = 0.999584
+[GPU EM Compute] 7450 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7500 calls | Last: 111 μs | Avg: 107 μs | Grid: 64×64
+  Step 1500/2000 | R_avg = 0.999784 | norm = 0.999554
+[GPU EM Compute] 7550 calls | Last: 98 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7600 calls | Last: 111 μs | Avg: 107 μs | Grid: 64×64
+  Step 1600/2000 | R_avg = 0.999897 | norm = 0.999525
+[GPU EM Compute] 7650 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7700 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 1700/2000 | R_avg = 0.999872 | norm = 0.999496
+[GPU EM Compute] 7750 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7800 calls | Last: 94 μs | Avg: 107 μs | Grid: 64×64
+  Step 1800/2000 | R_avg = 0.999806 | norm = 0.999466
+[GPU EM Compute] 7850 calls | Last: 117 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 7900 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 1900/2000 | R_avg = 0.999891 | norm = 0.999436
+[GPU EM Compute] 7950 calls | Last: 109 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8000 calls | Last: 109 μs | Avg: 107 μs | Grid: 64×64
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999406 (drift: 0.0593866% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.46918 (drift: 0.0376951% from initial 1.46863) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.345415 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00059393 ✓ PASS
+  Energy validation: max_drift = 0.00352117 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251229_233630_em_coupling_uniform_field_64x64_v0.5/N_1/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251229_233630_em_coupling_uniform_field_64x64_v0.5/N_1/em_observables.csv
+
+--- Testing with N=10 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (32, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(32,32), sigma=1.92, boost=(0.5,0)c, norm=1, <r>=(32,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.46074
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Actual initial energy E0 = 1.46376 (from first observation including EM)
+  Step 0/2000 | R_avg = 0.999922 | norm = 1
+[GPU EM Compute] 8050 calls | Last: 71 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8100 calls | Last: 113 μs | Avg: 107 μs | Grid: 64×64
+  Step 100/2000 | R_avg = 0.999821 | norm = 0.999976
+[GPU EM Compute] 8150 calls | Last: 112 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8200 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+  Step 200/2000 | R_avg = 0.999796 | norm = 0.99995
+[GPU EM Compute] 8250 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8300 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 300/2000 | R_avg = 0.999825 | norm = 0.999921
+[GPU EM Compute] 8350 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8400 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+  Step 400/2000 | R_avg = 0.999808 | norm = 0.999892
+[GPU EM Compute] 8450 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8500 calls | Last: 101 μs | Avg: 107 μs | Grid: 64×64
+  Step 500/2000 | R_avg = 0.999795 | norm = 0.999863
+[GPU EM Compute] 8550 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8600 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 600/2000 | R_avg = 0.999829 | norm = 0.999832
+[GPU EM Compute] 8650 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8700 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 700/2000 | R_avg = 0.999774 | norm = 0.999801
+[GPU EM Compute] 8750 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8800 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 800/2000 | R_avg = 0.999805 | norm = 0.999771
+[GPU EM Compute] 8850 calls | Last: 110 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 8900 calls | Last: 109 μs | Avg: 107 μs | Grid: 64×64
+  Step 900/2000 | R_avg = 0.999893 | norm = 0.99974
+[GPU EM Compute] 8950 calls | Last: 112 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9000 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 1000/2000 | R_avg = 0.999866 | norm = 0.999709
+[GPU EM Compute] 9050 calls | Last: 110 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9100 calls | Last: 114 μs | Avg: 107 μs | Grid: 64×64
+  Step 1100/2000 | R_avg = 0.999771 | norm = 0.999677
+[GPU EM Compute] 9150 calls | Last: 112 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9200 calls | Last: 113 μs | Avg: 107 μs | Grid: 64×64
+  Step 1200/2000 | R_avg = 0.99973 | norm = 0.999646
+[GPU EM Compute] 9250 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9300 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 1300/2000 | R_avg = 0.999779 | norm = 0.999614
+[GPU EM Compute] 9350 calls | Last: 111 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9400 calls | Last: 109 μs | Avg: 107 μs | Grid: 64×64
+  Step 1400/2000 | R_avg = 0.999812 | norm = 0.999583
+[GPU EM Compute] 9450 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9500 calls | Last: 109 μs | Avg: 107 μs | Grid: 64×64
+  Step 1500/2000 | R_avg = 0.999781 | norm = 0.999553
+[GPU EM Compute] 9550 calls | Last: 103 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9600 calls | Last: 66 μs | Avg: 107 μs | Grid: 64×64
+  Step 1600/2000 | R_avg = 0.999774 | norm = 0.999524
+[GPU EM Compute] 9650 calls | Last: 103 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9700 calls | Last: 104 μs | Avg: 107 μs | Grid: 64×64
+  Step 1700/2000 | R_avg = 0.99976 | norm = 0.999495
+[GPU EM Compute] 9750 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9800 calls | Last: 103 μs | Avg: 107 μs | Grid: 64×64
+  Step 1800/2000 | R_avg = 0.999827 | norm = 0.999465
+[GPU EM Compute] 9850 calls | Last: 102 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 9900 calls | Last: 107 μs | Avg: 107 μs | Grid: 64×64
+  Step 1900/2000 | R_avg = 0.999794 | norm = 0.999435
+[GPU EM Compute] 9950 calls | Last: 109 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 10000 calls | Last: 108 μs | Avg: 107 μs | Grid: 64×64
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999405 (drift: 0.0594592% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.46203 (drift: 0.118277% from initial 1.46376) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0.813903, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.347722 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.000594681 ✓ PASS
+  Energy validation: max_drift = 0.00295792 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251229_233630_em_coupling_uniform_field_64x64_v0.5/N_10/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251229_233630_em_coupling_uniform_field_64x64_v0.5/N_10/em_observables.csv
+
+--- Testing with N=100 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (32, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(32,32), sigma=1.92, boost=(0.5,0)c, norm=1, <r>=(32,32)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (32, 32) grid units
+  Width: σ = 1.92 grid units
+  Velocity: v = (0.5, 0)c
+  |v| = 0.5c
+  Lorentz factor: γ = 1.1547
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.57735, 0) m_P·c
+  |p| = 0.57735 m_P·c
+  Pre-normalization: ∫|Ψ|² = 23.1623
+  Normalization factor: 4.81273
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=1.92
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (32, 32)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.4586
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Actual initial energy E0 = 1.46031 (from first observation including EM)
+  Step 0/2000 | R_avg = 0.999728 | norm = 1
+[GPU EM Compute] 10050 calls | Last: 114 μs | Avg: 107 μs | Grid: 64×64
+[GPU EM Compute] 10100 calls | Last: 110 μs | Avg: 107 μs | Grid: 64×64
+  Step 100/2000 | R_avg = 0.999778 | norm = 0.999976

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/main_smft.cpp" "CMakeFiles/smft.dir/src/main_smft.cpp.o" "gcc" "CMakeFiles/smft.dir/src/main_smft.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/main_smft.cpp" "CMakeFiles/smft.dir/src/main_smft.cpp.o" "gcc" "CMakeFiles/smft.dir/src/main_smft.cpp.o.d"
   "" "bin/smft" "gcc" "CMakeFiles/smft.dir/link.d"
   )
 

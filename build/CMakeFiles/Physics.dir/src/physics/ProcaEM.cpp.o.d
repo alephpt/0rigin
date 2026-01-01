@@ -1,9 +1,9 @@
 CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o: \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/physics/ProcaEM.cpp \
+ /home/persist/neotec/0rigin/src/physics/ProcaEM.cpp \
  /usr/include/stdc-predef.h \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/physics/ProcaEM.h \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/physics/GaugeTheory.h \
- /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include/physics/PhysicsTypes.h \
+ /home/persist/neotec/0rigin/include/physics/ProcaEM.h \
+ /home/persist/neotec/0rigin/include/physics/GaugeTheory.h \
+ /home/persist/neotec/0rigin/include/physics/PhysicsTypes.h \
  /usr/include/c++/15.2.1/array /usr/include/c++/15.2.1/compare \
  /usr/include/c++/15.2.1/bits/version.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h \

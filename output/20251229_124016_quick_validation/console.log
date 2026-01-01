@@ -1,0 +1,72 @@
+[Logging] Console output for 32x32 writing to: /home/persist/neotec/0rigin/output/20251229_124016_quick_validation/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (DEPRECATED grid units):
+    Position: (16, 16) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 32x32 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 16) with σ=2
+[SMFTEngine] Dirac field initialized: center=(16,16), sigma=2, norm=1
+[DiracEvolution] Initialized 32x32 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 16) with σ=2
+  Initial energy E0 = 0.221199
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.01
+  half_substeps=0
+  remaining_substeps=1
+  Actual initial energy E0 = 2.7212 (from first observation including EM)
+  Step 0/50 | R_avg = 1 | norm = 1
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999988 (drift: 0.0012175% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 2.7213 (drift: 0.00374059% from initial 2.7212) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.000776893 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 1.2238e-05 ✓ PASS
+  Energy validation: max_drift = 0.0199859 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251229_124016_quick_validation/N_1/observables.csv
+Test failed for N=1
+
+--- Testing with N=10 ---
+  Dirac initialization (DEPRECATED grid units):
+    Position: (16, 16) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 16) with σ=2
+[SMFTEngine] Dirac field initialized: center=(16,16), sigma=2, norm=1
+[DiracEvolution] Initialized 32x32 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 16) with σ=2
+  Initial energy E0 = 2.7212
+  Initial norm = 1
+  Actual initial energy E0 = 2.7212 (from first observation including EM)
+  Step 0/50 | R_avg = 1 | norm = 1
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999988 (drift: 0.0011931% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 2.70844 (drift: 0.468937% from initial 2.7212) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0.999997, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.000576221 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 1.1982e-05 ✓ PASS
+  Energy validation: max_drift = 0.0158318 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251229_124016_quick_validation/N_10/observables.csv
+Test failed for N=10
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251229_124016_quick_validation/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.

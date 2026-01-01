@@ -1,0 +1,57 @@
+[Logging] Console output for 128x128 writing to: /home/persist/neotec/0rigin/output/20251230_214831_lorentz_comprehensive_validation/console.log
+  Dirac initialization (grid-independent):
+    Position: (100, 100) ℓ_P
+    Width: 5 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 3.2 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.2
+[SMFTEngine] Dirac field initialized: center=(64,64), sigma=3.2, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.2
+  Initial energy E0 = 0.0930395
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.01
+  half_substeps=0
+  remaining_substeps=1
+[GPU EM Compute] 1 calls | Last: 228 μs | Avg: 228 μs | Grid: 128×128
+  [Kuramoto Energy] grad_R: 0.0527962, potential: -16379.8, total: -16379.7 (κ=1)
+  Actual initial energy E0 = -16377.1 (from first observation including EM)
+  Step 0/100 | R_avg = 0.999868 | norm = 1
+[GPU EM Compute] 50 calls | Last: 133 μs | Avg: 114 μs | Grid: 128×128
+[GPU EM Compute] 100 calls | Last: 105 μs | Avg: 110 μs | Grid: 128×128
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 0.999974 (drift: 0.00269425% from initial 1) ✗ FAIL (exceeds tolerance 1e-08%)
+  ✗ Energy Conservation: E_total = -16377.5 (drift: 0.00243722% from initial -16377.1) ✗ FAIL (exceeds tolerance 1e-08%)
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 1.52446e-08 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 2.6186e-05 ✗ FAIL
+  Energy validation: max_drift = 2.43722e-05 ✗ FAIL
+
+===== EM Field Validation =====
+Maxwell Equation Residuals:
+  Gauss law (∇·E - 4πρ): 0 ✓
+  No monopole (∇·B): 0 ✓
+  Faraday law (∇×E + ∂B/∂t): 0 ✓
+  Ampere law (∇×B - 4πJ - ∂E/∂t): 4.15678e-09 ✓
+Overall Maxwell Validation: ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251230_214831_lorentz_comprehensive_validation/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251230_214831_lorentz_comprehensive_validation/N_1/observables.csv
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251230_214831_lorentz_comprehensive_validation/N_1/em_observables.csv
+Test failed
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251230_214831_lorentz_comprehensive_validation/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.

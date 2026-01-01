@@ -1,0 +1,57 @@
+===== SMFT Test Report =====
+Test: em_coupling_uniform_field
+Description: Phase 6.1: Uniform EM field - verify minimal coupling with constant magnetic field produces expected Larmor radius and cyclotron frequency
+
+[Configuration]
+Grid: 64 x 64
+Delta: 1
+Coupling: 0.1
+Total steps: 2000
+dt: 0.01
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999407 (drift: 0.0593086% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.46033 (drift: 0.0252564% from initial 1.4607) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.347108 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+N=10 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999406 (drift: 0.0593453% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.45973 (drift: 0.0660648% from initial 1.4607) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.346714 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+N=100 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999406 (drift: 0.0594017% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.46048 (drift: 0.0146963% from initial 1.4607) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.346888 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+Convergence Validation: ✓ PASS
+  Convergence errors: [1.618e-04, 1.855e-04, 2.303e-04]
+
+N=1: ✓ PASS
+  Norm: max_error = 5.932e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 2.013e-03 (threshold: 1.000e-02)
+
+N=10: ✓ PASS
+  Norm: max_error = 5.935e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 5.320e-03 (threshold: 1.000e-02)
+
+N=100: ✓ PASS
+  Norm: max_error = 5.941e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 5.187e-03 (threshold: 1.000e-02)
+
+[Overall Result]
+✓ ALL TESTS PASSED
+
+===== End of Report ====

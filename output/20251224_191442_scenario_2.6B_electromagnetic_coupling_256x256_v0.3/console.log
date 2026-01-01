@@ -1,0 +1,357 @@
+[Logging] Console output for 256x256 v=0.3c writing to: /home/persist/neotec/0rigin/output/20251224_191442_scenario_2.6B_electromagnetic_coupling_256x256_v0.3/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (128, 128) grid units
+    Grid width: 7.68 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (128, 128) grid units
+  Width: σ = 7.68 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 370.596
+  Normalization factor: 19.2509
+[DiracEvolution] Initialized Gaussian wavepacket at (128, 128) with σ=7.68
+  Final norm: ||Ψ||² = 0.999994
+  Initial position: <r> = (128, 128)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(128,128), sigma=7.68, boost=(0.3,0)c, norm=0.999994, <r>=(128,128)
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (128, 128) grid units
+  Width: σ = 7.68 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 370.596
+  Normalization factor: 19.2509
+[DiracEvolution] Initialized Gaussian wavepacket at (128, 128) with σ=7.68
+  Final norm: ||Ψ||² = 0.999994
+  Initial position: <r> = (128, 128)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 0.110886
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.994958 | norm = 1
+  Step 100/5000 | R_avg = 0.994945 | norm = 0.99998
+  Step 200/5000 | R_avg = 0.994968 | norm = 0.999959
+  Step 300/5000 | R_avg = 0.994964 | norm = 0.999939
+  Step 400/5000 | R_avg = 0.994953 | norm = 0.999919
+  Step 500/5000 | R_avg = 0.99497 | norm = 0.9999
+  Step 600/5000 | R_avg = 0.994976 | norm = 0.99988
+  Step 700/5000 | R_avg = 0.99494 | norm = 0.999861
+  Step 800/5000 | R_avg = 0.994938 | norm = 0.999842
+  Step 900/5000 | R_avg = 0.994958 | norm = 0.999823
+  Saved spatial snapshot at t = 10 (step 1000)
+  Step 1000/5000 | R_avg = 0.994925 | norm = 0.999804
+  Step 1100/5000 | R_avg = 0.994948 | norm = 0.999784
+  Step 1200/5000 | R_avg = 0.994927 | norm = 0.999765
+  Step 1300/5000 | R_avg = 0.994928 | norm = 0.999744
+  Step 1400/5000 | R_avg = 0.99493 | norm = 0.999722
+  Step 1500/5000 | R_avg = 0.994939 | norm = 0.9997
+  Step 1600/5000 | R_avg = 0.994929 | norm = 0.999677
+  Step 1700/5000 | R_avg = 0.994931 | norm = 0.999653
+  Step 1800/5000 | R_avg = 0.99497 | norm = 0.999628
+  Step 1900/5000 | R_avg = 0.994946 | norm = 0.999602
+  Step 2000/5000 | R_avg = 0.994937 | norm = 0.999575
+  Step 2100/5000 | R_avg = 0.994955 | norm = 0.999547
+  Step 2200/5000 | R_avg = 0.994956 | norm = 0.999518
+  Step 2300/5000 | R_avg = 0.994926 | norm = 0.999489
+  Step 2400/5000 | R_avg = 0.994918 | norm = 0.999459
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.994936 | norm = 0.999429
+  Step 2600/5000 | R_avg = 0.994936 | norm = 0.999399
+  Step 2700/5000 | R_avg = 0.994935 | norm = 0.999368
+  Step 2800/5000 | R_avg = 0.994942 | norm = 0.999338
+  Step 2900/5000 | R_avg = 0.994932 | norm = 0.999308
+  Step 3000/5000 | R_avg = 0.99493 | norm = 0.999279
+  Step 3100/5000 | R_avg = 0.99493 | norm = 0.999249
+  Step 3200/5000 | R_avg = 0.994963 | norm = 0.999221
+  Step 3300/5000 | R_avg = 0.994945 | norm = 0.999193
+  Step 3400/5000 | R_avg = 0.994947 | norm = 0.999165
+  Step 3500/5000 | R_avg = 0.994966 | norm = 0.999137
+  Step 3600/5000 | R_avg = 0.994925 | norm = 0.99911
+  Step 3700/5000 | R_avg = 0.994942 | norm = 0.999084
+  Step 3800/5000 | R_avg = 0.994958 | norm = 0.999057
+  Step 3900/5000 | R_avg = 0.994937 | norm = 0.999031
+  Step 4000/5000 | R_avg = 0.994952 | norm = 0.999005
+  Step 4100/5000 | R_avg = 0.994956 | norm = 0.998978
+  Step 4200/5000 | R_avg = 0.994946 | norm = 0.998952
+  Step 4300/5000 | R_avg = 0.994948 | norm = 0.998926
+  Step 4400/5000 | R_avg = 0.99496 | norm = 0.998899
+  Step 4500/5000 | R_avg = 0.994951 | norm = 0.998872
+  Step 4600/5000 | R_avg = 0.994949 | norm = 0.998846
+  Step 4700/5000 | R_avg = 0.994945 | norm = 0.998818
+  Step 4800/5000 | R_avg = 0.994948 | norm = 0.998791
+  Step 4900/5000 | R_avg = 0.994962 | norm = 0.998763
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998734 (drift: 0.12677% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.10533 (drift: 0.193155% from initial 1.10747) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.278415 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00126566 ✓ PASS
+  Energy validation: max_drift = 0.00227519 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_191442_scenario_2.6B_electromagnetic_coupling_256x256_v0.3/N_1/observables.csv
+
+--- Testing with N=10 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (128, 128) grid units
+    Grid width: 7.68 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (128, 128) grid units
+  Width: σ = 7.68 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 370.596
+  Normalization factor: 19.2509
+[DiracEvolution] Initialized Gaussian wavepacket at (128, 128) with σ=7.68
+  Final norm: ||Ψ||² = 0.999994
+  Initial position: <r> = (128, 128)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(128,128), sigma=7.68, boost=(0.3,0)c, norm=0.999994, <r>=(128,128)
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (128, 128) grid units
+  Width: σ = 7.68 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 370.596
+  Normalization factor: 19.2509
+[DiracEvolution] Initialized Gaussian wavepacket at (128, 128) with σ=7.68
+  Final norm: ||Ψ||² = 0.999994
+  Initial position: <r> = (128, 128)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.10732
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.99497 | norm = 1
+  Step 100/5000 | R_avg = 0.994938 | norm = 0.999981
+  Step 200/5000 | R_avg = 0.99495 | norm = 0.999959
+  Step 300/5000 | R_avg = 0.994957 | norm = 0.999939
+  Step 400/5000 | R_avg = 0.994949 | norm = 0.99992
+  Step 500/5000 | R_avg = 0.994934 | norm = 0.9999
+  Step 600/5000 | R_avg = 0.99495 | norm = 0.999881
+  Step 700/5000 | R_avg = 0.994954 | norm = 0.999862
+  Step 800/5000 | R_avg = 0.99496 | norm = 0.999843
+  Step 900/5000 | R_avg = 0.994955 | norm = 0.999824
+  Saved spatial snapshot at t = 10 (step 1000)
+  Step 1000/5000 | R_avg = 0.99495 | norm = 0.999805
+  Step 1100/5000 | R_avg = 0.994948 | norm = 0.999785
+  Step 1200/5000 | R_avg = 0.99494 | norm = 0.999766
+  Step 1300/5000 | R_avg = 0.994962 | norm = 0.999745
+  Step 1400/5000 | R_avg = 0.994956 | norm = 0.999724
+  Step 1500/5000 | R_avg = 0.994944 | norm = 0.999702
+  Step 1600/5000 | R_avg = 0.994941 | norm = 0.999678
+  Step 1700/5000 | R_avg = 0.994937 | norm = 0.999654
+  Step 1800/5000 | R_avg = 0.994942 | norm = 0.999629
+  Step 1900/5000 | R_avg = 0.994952 | norm = 0.999604
+  Step 2000/5000 | R_avg = 0.994939 | norm = 0.999577
+  Step 2100/5000 | R_avg = 0.994938 | norm = 0.999549
+  Step 2200/5000 | R_avg = 0.99494 | norm = 0.99952
+  Step 2300/5000 | R_avg = 0.994942 | norm = 0.999491
+  Step 2400/5000 | R_avg = 0.994957 | norm = 0.999461
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.994957 | norm = 0.999431
+  Step 2600/5000 | R_avg = 0.99495 | norm = 0.999401
+  Step 2700/5000 | R_avg = 0.994953 | norm = 0.99937
+  Step 2800/5000 | R_avg = 0.994938 | norm = 0.99934
+  Step 2900/5000 | R_avg = 0.994953 | norm = 0.999311
+  Step 3000/5000 | R_avg = 0.994946 | norm = 0.999281
+  Step 3100/5000 | R_avg = 0.994946 | norm = 0.999252
+  Step 3200/5000 | R_avg = 0.994954 | norm = 0.999224
+  Step 3300/5000 | R_avg = 0.994956 | norm = 0.999196
+  Step 3400/5000 | R_avg = 0.994954 | norm = 0.999168
+  Step 3500/5000 | R_avg = 0.994939 | norm = 0.999141
+  Step 3600/5000 | R_avg = 0.994949 | norm = 0.999114
+  Step 3700/5000 | R_avg = 0.994943 | norm = 0.999087
+  Step 3800/5000 | R_avg = 0.994947 | norm = 0.99906
+  Step 3900/5000 | R_avg = 0.994969 | norm = 0.999034
+  Step 4000/5000 | R_avg = 0.994953 | norm = 0.999008
+  Step 4100/5000 | R_avg = 0.994935 | norm = 0.998982
+  Step 4200/5000 | R_avg = 0.994951 | norm = 0.998956
+  Step 4300/5000 | R_avg = 0.994934 | norm = 0.998929
+  Step 4400/5000 | R_avg = 0.994945 | norm = 0.998903
+  Step 4500/5000 | R_avg = 0.994966 | norm = 0.998876
+  Step 4600/5000 | R_avg = 0.994958 | norm = 0.998849
+  Step 4700/5000 | R_avg = 0.994953 | norm = 0.998822
+  Step 4800/5000 | R_avg = 0.994959 | norm = 0.998794
+  Step 4900/5000 | R_avg = 0.99494 | norm = 0.998767
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998738 (drift: 0.126378% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.10514 (drift: 0.187299% from initial 1.10722) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0.997293] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.278465 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00126171 ✓ PASS
+  Energy validation: max_drift = 0.00200853 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_191442_scenario_2.6B_electromagnetic_coupling_256x256_v0.3/N_10/observables.csv
+
+--- Testing with N=100 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (128, 128) grid units
+    Grid width: 7.68 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (128, 128) grid units
+  Width: σ = 7.68 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 370.596
+  Normalization factor: 19.2509
+[DiracEvolution] Initialized Gaussian wavepacket at (128, 128) with σ=7.68
+  Final norm: ||Ψ||² = 0.999994
+  Initial position: <r> = (128, 128)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(128,128), sigma=7.68, boost=(0.3,0)c, norm=0.999994, <r>=(128,128)
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (128, 128) grid units
+  Width: σ = 7.68 grid units
+  Velocity: v = (0.3, 0)c
+  |v| = 0.3c
+  Lorentz factor: γ = 1.04828
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.314485, 0) m_P·c
+  |p| = 0.314485 m_P·c
+  Pre-normalization: ∫|Ψ|² = 370.596
+  Normalization factor: 19.2509
+[DiracEvolution] Initialized Gaussian wavepacket at (128, 128) with σ=7.68
+  Final norm: ||Ψ||² = 0.999994
+  Initial position: <r> = (128, 128)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.10731
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.994925 | norm = 1
+  Step 100/5000 | R_avg = 0.994948 | norm = 0.999981
+  Step 200/5000 | R_avg = 0.994942 | norm = 0.999959
+  Step 300/5000 | R_avg = 0.994941 | norm = 0.999939
+  Step 400/5000 | R_avg = 0.99495 | norm = 0.999919
+  Step 500/5000 | R_avg = 0.994942 | norm = 0.9999
+  Step 600/5000 | R_avg = 0.994932 | norm = 0.999881
+  Step 700/5000 | R_avg = 0.994953 | norm = 0.999862
+  Step 800/5000 | R_avg = 0.99495 | norm = 0.999843
+  Step 900/5000 | R_avg = 0.994949 | norm = 0.999824
+  Saved spatial snapshot at t = 10 (step 1000)
+  Step 1000/5000 | R_avg = 0.994949 | norm = 0.999805
+  Step 1100/5000 | R_avg = 0.994965 | norm = 0.999785
+  Step 1200/5000 | R_avg = 0.994946 | norm = 0.999765
+  Step 1300/5000 | R_avg = 0.994965 | norm = 0.999745
+  Step 1400/5000 | R_avg = 0.99496 | norm = 0.999723
+  Step 1500/5000 | R_avg = 0.994935 | norm = 0.999701
+  Step 1600/5000 | R_avg = 0.994944 | norm = 0.999678
+  Step 1700/5000 | R_avg = 0.994932 | norm = 0.999654
+  Step 1800/5000 | R_avg = 0.994938 | norm = 0.999629
+  Step 1900/5000 | R_avg = 0.994943 | norm = 0.999603
+  Step 2000/5000 | R_avg = 0.994952 | norm = 0.999576
+  Step 2100/5000 | R_avg = 0.994956 | norm = 0.999548
+  Step 2200/5000 | R_avg = 0.994959 | norm = 0.999519
+  Step 2300/5000 | R_avg = 0.994961 | norm = 0.99949
+  Step 2400/5000 | R_avg = 0.994953 | norm = 0.99946
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.994948 | norm = 0.999431
+  Step 2600/5000 | R_avg = 0.994954 | norm = 0.9994
+  Step 2700/5000 | R_avg = 0.994955 | norm = 0.99937
+  Step 2800/5000 | R_avg = 0.994957 | norm = 0.99934
+  Step 2900/5000 | R_avg = 0.994967 | norm = 0.99931
+  Step 3000/5000 | R_avg = 0.994969 | norm = 0.99928
+  Step 3100/5000 | R_avg = 0.99494 | norm = 0.999251
+  Step 3200/5000 | R_avg = 0.994922 | norm = 0.999223
+  Step 3300/5000 | R_avg = 0.994868 | norm = 0.999195
+  Step 3400/5000 | R_avg = 0.994876 | norm = 0.999167
+  Step 3500/5000 | R_avg = 0.994884 | norm = 0.99914
+  Step 3600/5000 | R_avg = 0.99494 | norm = 0.999113
+  Step 3700/5000 | R_avg = 0.994963 | norm = 0.999086
+  Step 3800/5000 | R_avg = 0.994963 | norm = 0.999059
+  Step 3900/5000 | R_avg = 0.994955 | norm = 0.999033
+  Step 4000/5000 | R_avg = 0.994956 | norm = 0.999007
+  Step 4100/5000 | R_avg = 0.994944 | norm = 0.998981
+  Step 4200/5000 | R_avg = 0.994942 | norm = 0.998955
+  Step 4300/5000 | R_avg = 0.994944 | norm = 0.998928
+  Step 4400/5000 | R_avg = 0.994944 | norm = 0.998902
+  Step 4500/5000 | R_avg = 0.994955 | norm = 0.998875
+  Step 4600/5000 | R_avg = 0.994948 | norm = 0.998848
+  Step 4700/5000 | R_avg = 0.994944 | norm = 0.998821
+  Step 4800/5000 | R_avg = 0.994943 | norm = 0.998794
+  Step 4900/5000 | R_avg = 0.994926 | norm = 0.998766
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998737 (drift: 0.126474% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.10519 (drift: 0.188972% from initial 1.10728) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0.997293] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.278039 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00126268 ✓ PASS
+  Energy validation: max_drift = 0.00219681 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_191442_scenario_2.6B_electromagnetic_coupling_256x256_v0.3/N_100/observables.csv
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+
+========================================
+Grid: 256×256 | Velocity: v=0.5c
+========================================
+
+Initializing engine for 256×256 grid, velocity v=0.5c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 256 x 256 oscillators
+
+[SMFTEngine] Created GPU buffers for 256x256 grid
+  Phase buffers: 262144 bytes each
+  Spinor buffer: 2097152 bytes
+  Accumulator buffers: 262144 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251224_194854_scenario_2.6B_electromagnetic_coupling_256x256_v0.5
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251224_194854_scenario_2.6B_electromagnetic_coupling_256x256_v0.5

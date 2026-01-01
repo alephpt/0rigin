@@ -1,0 +1,32 @@
+===== SMFT Test Report =====
+Test: lorentz_force_pure_magnetic
+Description: 
+
+[Configuration]
+Grid: 64 x 64
+Delta: 2.5
+Coupling: 0.1
+Total steps: 20000
+dt: 0.0005
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.99527 (drift: 0.47298% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4092.07 (drift: 0.0207464% from initial -4091.22) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 9.16507e-07 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+N=1: ✓ PASS
+  Norm: max_error = 4.730e-03 (threshold: 1.000e-02)
+  Energy: max_drift = 4.640e-04 (threshold: 1.000e-02)
+
+[Overall Result]
+✓ ALL TESTS PASSED
+
+===== End of Report ====

@@ -1,0 +1,24 @@
+========================================
+   VELOCITY SWEEP ANALYSIS REPORT      
+========================================
+
+Test Configuration:
+  Grid Size: 64×64
+  Velocities Tested: 2
+  Velocity Range: 0.3c - 0.5c
+
+Detailed Results:
+Velocity | γ_theory | γ_measured | Error (%) | Status
+---------|----------|------------|-----------|-------
+    0.30c |   1.0483 |     1.0483 |      0.00% |   PASS
+    0.50c |   1.1547 |     1.2761 |     10.52% |   FAIL
+
+========================================
+Critical Velocity Analysis:
+  v_critical = 0.395c (where γ error exceeds 5%)
+
+Overall Assessment:
+  ⚠ FAIR: Relativistic accuracy degrades at 0.395c
+
+========================================
+Report generated at: /home/persist/neotec/0rigin/output/20251228_044202_em_coupling_uniform_field_64x64_AGGREGATE/velocity_sweep_analysis.txt

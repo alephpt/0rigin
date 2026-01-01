@@ -1,0 +1,281 @@
+[Logging] Console output for 128x128 writing to: /home/persist/neotec/0rigin/output/20251226_014506_scenario_2.5A_klein_gordon_comparison_v0.7/console.log
+
+--- Testing with N=10 ---
+[DEBUG] solver_type = 'klein_gordon', use_klein_gordon = 1
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 3.84 grid units
+  Using Klein-Gordon solver (scalar field) with boosted initialization
+    Background R (expected): 1
+[KleinGordonEvolution] Initialized 128x128 scalar field
+[SMFT] Boosted Gaussian initialization (Klein-Gordon):
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Energy: ω = 1.40028 m_P·c²
+[KleinGordonEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||φ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized (Klein-Gordon)
+[SMFTEngine] Boosted Klein-Gordon field initialized: center=(64,64), sigma=3.84, boost=(0.7,0)c, norm=1, <r>=(64,64)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DEBUG] Computing Klein-Gordon initial observables...
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.96079, sample phi_dot[0]=(0,0)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(0,0)
+[DEBUG] Klein-Gordon E0 = 2.67103, norm = 1
+  Initial energy E0 = 2.67103
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=10
+  substep_dt=0.001
+  half_substeps=5
+  remaining_substeps=5
+  Saved spatial snapshot at t = 0 (step 0)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.96042, sample phi_dot[0]=(8.44338e-11,-4.06163e-09)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.8852e-09,9.68455e-09)
+  Step 0/5000 | R_avg = 0.999905 | norm = 1.00038
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.28877, sample phi_dot[0]=(1.30823e-08,-1.13811e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.57315e-08,4.98509e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.18745, sample phi_dot[0]=(-6.78483e-10,-4.40906e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(4.49535e-08,9.17554e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.87823, sample phi_dot[0]=(-8.47429e-08,-9.54752e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.52776e-07,9.05e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.46744, sample phi_dot[0]=(-3.84914e-07,-1.30019e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(7.73119e-07,-3.1709e-08)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.18948, sample phi_dot[0]=(-7.55821e-07,-7.84977e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(8.91672e-07,-1.67608e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.69075, sample phi_dot[0]=(-1.12526e-06,3.69514e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.02637e-07,-3.04664e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.57279, sample phi_dot[0]=(-1.02405e-06,1.91725e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-9.79599e-07,-3.23856e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.30185, sample phi_dot[0]=(-2.00594e-07,3.26185e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.21342e-06,-1.55974e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.53332, sample phi_dot[0]=(1.05705e-06,3.43654e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.48591e-06,1.6043e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.57251, sample phi_dot[0]=(2.11239e-06,1.69859e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.45666e-06,4.5934e-06)
+  Step 500/5000 | R_avg = 0.999934 | norm = 1.38599
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.42063, sample phi_dot[0]=(2.35869e-06,-1.12129e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(4.78787e-07,5.62302e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.47071, sample phi_dot[0]=(1.6299e-06,-3.43157e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.3918e-06,4.23419e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.52584, sample phi_dot[0]=(1.09119e-07,-4.90278e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.41026e-06,8.49091e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48039, sample phi_dot[0]=(-1.57331e-06,-4.2429e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.95426e-06,-3.16435e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.47154, sample phi_dot[0]=(-2.63822e-06,-1.71369e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.24695e-06,-5.75088e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.49343, sample phi_dot[0]=(-2.60906e-06,9.37911e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-8.74007e-07,-6.07133e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.49121, sample phi_dot[0]=(-1.75529e-06,3.60969e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.62109e-06,-4.14357e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48338, sample phi_dot[0]=(-3.24572e-07,4.84543e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-3.37366e-06,-4.42319e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48541, sample phi_dot[0]=(1.22096e-06,4.07097e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.84635e-06,3.22335e-06)
+  Saved spatial snapshot at t = 10 (step 1000)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48782, sample phi_dot[0]=(2.30792e-06,2.1018e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.21547e-06,5.47495e-06)
+  Step 1000/5000 | R_avg = 0.999759 | norm = 1.49812
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48701, sample phi_dot[0]=(2.55035e-06,-7.93171e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(8.78759e-07,5.43519e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48627, sample phi_dot[0]=(1.7199e-06,-3.08906e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.47308e-06,3.02642e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48629, sample phi_dot[0]=(2.24832e-07,-3.94722e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.80197e-06,-3.99808e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48669, sample phi_dot[0]=(-1.12663e-06,-3.00255e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.78204e-06,-3.24555e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48671, sample phi_dot[0]=(-1.61613e-06,-7.97469e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.68702e-07,-4.0151e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48625, sample phi_dot[0]=(-1.286e-06,1.07971e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.01555e-06,-2.6844e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48647, sample phi_dot[0]=(-4.79374e-07,1.90767e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.27288e-06,-4.1852e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48645, sample phi_dot[0]=(1.23076e-07,1.44539e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-7.71585e-07,1.48178e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48632, sample phi_dot[0]=(2.4532e-07,2.30613e-08)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-6.29668e-08,1.86171e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48644, sample phi_dot[0]=(-5.45805e-08,-6.6285e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.88347e-07,8.86923e-07)
+  Step 1500/5000 | R_avg = 0.999758 | norm = 1.49868
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48646, sample phi_dot[0]=(-3.34371e-07,-5.03081e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.47414e-07,-3.07711e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48645, sample phi_dot[0]=(-2.61881e-07,1.51917e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.89589e-07,-1.19196e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48637, sample phi_dot[0]=(1.34319e-07,1.03864e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-4.57269e-07,-1.30825e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48618, sample phi_dot[0]=(5.06409e-07,1.40594e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-5.78714e-07,-7.28141e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48644, sample phi_dot[0]=(8.59113e-07,1.24058e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-5.68095e-07,3.28073e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48633, sample phi_dot[0]=(1.04001e-06,5.24144e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.71322e-07,1.64349e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48606, sample phi_dot[0]=(9.01798e-07,-9.02412e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.95421e-07,2.44188e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48627, sample phi_dot[0]=(2.29577e-07,-1.83639e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.1167e-06,2.17667e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48633, sample phi_dot[0]=(-6.23047e-07,-2.19922e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.44296e-06,1.05951e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48609, sample phi_dot[0]=(-1.23617e-06,-1.63694e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.09572e-06,-5.42673e-07)
+  Step 2000/5000 | R_avg = 0.99975 | norm = 1.49861
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48608, sample phi_dot[0]=(-9.76997e-07,-7.76436e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(4.79165e-07,-1.77984e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48624, sample phi_dot[0]=(-5.59757e-07,-4.33727e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.00898e-07,-2.76406e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48614, sample phi_dot[0]=(-5.65816e-07,-1.2999e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.06335e-07,-3.70058e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.486, sample phi_dot[0]=(-1.02511e-06,1.17137e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-9.47992e-07,-4.01947e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48607, sample phi_dot[0]=(-1.34106e-06,3.5367e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.33877e-06,-2.56525e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.4861, sample phi_dot[0]=(-1.71363e-07,5.84423e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-3.72235e-06,1.58821e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48599, sample phi_dot[0]=(2.65852e-06,5.18226e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-3.1306e-06,7.10502e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48596, sample phi_dot[0]=(4.96843e-06,2.74455e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.75813e-07,1.0364e-05)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48599, sample phi_dot[0]=(4.72311e-06,-7.06731e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(4.94098e-06,7.61403e-06)
+  Saved spatial snapshot at t = 25 (step 2500)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48595, sample phi_dot[0]=(4.94769e-07,-1.12182e-05)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(7.77976e-06,-1.09628e-06)
+  Step 2500/5000 | R_avg = 0.999779 | norm = 1.49829
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48592, sample phi_dot[0]=(-5.51567e-06,-8.2788e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(5.49941e-06,-1.06959e-05)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48593, sample phi_dot[0]=(-8.07772e-06,1.20541e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.36293e-06,-1.39035e-05)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48585, sample phi_dot[0]=(-4.6804e-06,1.02537e-05)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-7.67949e-06,-7.42706e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48586, sample phi_dot[0]=(2.45566e-06,1.17601e-05)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-8.41917e-06,4.48595e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48587, sample phi_dot[0]=(7.60296e-06,3.90869e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.45664e-06,1.25641e-05)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48576, sample phi_dot[0]=(5.78469e-06,-6.60104e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(5.14705e-06,1.02764e-05)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48581, sample phi_dot[0]=(-1.15365e-06,-1.0485e-05)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(7.62395e-06,-2.02555e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.4858, sample phi_dot[0]=(-6.30542e-06,-4.22765e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.05834e-06,-9.1951e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48568, sample phi_dot[0]=(-5.26667e-06,5.56539e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-3.95955e-06,-8.93109e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48577, sample phi_dot[0]=(1.41674e-06,9.30531e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-6.81069e-06,-6.17054e-07)
+  Step 3000/5000 | R_avg = 0.999757 | norm = 1.49804
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48573, sample phi_dot[0]=(6.66523e-06,3.90194e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.75519e-06,7.12889e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48561, sample phi_dot[0]=(5.25915e-06,-4.98067e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.64183e-06,7.28912e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48569, sample phi_dot[0]=(-1.22918e-06,-8.18212e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(5.91268e-06,6.62561e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48571, sample phi_dot[0]=(-5.67934e-06,-3.03396e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.23867e-06,-4.73199e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48561, sample phi_dot[0]=(-3.93103e-06,3.66512e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.72817e-06,-3.66984e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.4856, sample phi_dot[0]=(1.46876e-06,4.3991e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-3.48249e-06,1.36726e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48561, sample phi_dot[0]=(3.71122e-06,-5.61554e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.17031e-07,3.40297e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48557, sample phi_dot[0]=(1.08269e-06,-4.82091e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.32487e-06,-1.8369e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48547, sample phi_dot[0]=(-3.57805e-06,-2.85498e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.11238e-06,-5.58722e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48555, sample phi_dot[0]=(-3.96632e-06,3.47285e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.35065e-06,-6.37154e-06)
+  Step 3500/5000 | R_avg = 0.999755 | norm = 1.49783
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48558, sample phi_dot[0]=(-9.49212e-08,7.67447e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-5.15632e-06,-1.09025e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.4854, sample phi_dot[0]=(4.25377e-06,5.18372e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-3.48604e-06,5.67699e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48544, sample phi_dot[0]=(4.59109e-06,-6.24767e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(7.46095e-07,8.24269e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.4855, sample phi_dot[0]=(1.92021e-06,-5.291e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.87332e-06,5.62413e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48538, sample phi_dot[0]=(-1.41271e-06,-5.37301e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(3.84819e-06,6.75492e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48536, sample phi_dot[0]=(-1.9758e-06,-3.4686e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.11635e-06,-2.96441e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48541, sample phi_dot[0]=(-1.63834e-06,-1.24582e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(6.0694e-07,-4.63811e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48536, sample phi_dot[0]=(-1.34036e-06,-1.20696e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.71429e-07,-4.8465e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48528, sample phi_dot[0]=(-1.76979e-06,1.58358e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.34869e-06,-4.18431e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48531, sample phi_dot[0]=(-1.20902e-06,3.23742e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.401e-06,-2.15406e-06)
+  Step 4000/5000 | R_avg = 0.99977 | norm = 1.49762
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.4853, sample phi_dot[0]=(-1.37034e-08,4.6531e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.96119e-06,1.21254e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48522, sample phi_dot[0]=(1.94962e-06,3.09538e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.91149e-06,4.4529e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48522, sample phi_dot[0]=(2.42384e-06,6.04125e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(7.42784e-09,5.58049e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48525, sample phi_dot[0]=(1.94532e-06,-2.67882e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.92007e-06,3.88172e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48518, sample phi_dot[0]=(6.07432e-07,-3.49275e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.53352e-06,3.67932e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48514, sample phi_dot[0]=(-5.15531e-07,-3.03662e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.13639e-06,-2.82169e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48517, sample phi_dot[0]=(-1.40766e-06,-9.13249e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(5.96548e-07,-4.0895e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48513, sample phi_dot[0]=(-1.48686e-06,5.75448e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-8.35546e-07,-3.33947e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48504, sample phi_dot[0]=(-8.02727e-07,2.72322e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.9185e-06,-5.34004e-07)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48508, sample phi_dot[0]=(4.9255e-07,1.87686e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.33908e-06,2.58011e-06)
+  Step 4500/5000 | R_avg = 0.999765 | norm = 1.4974
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48506, sample phi_dot[0]=(1.19917e-06,2.07947e-08)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(7.76745e-08,3.86708e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48499, sample phi_dot[0]=(4.90487e-07,-2.66422e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.76029e-06,1.97827e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.485, sample phi_dot[0]=(-7.6271e-07,-2.55142e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.75991e-06,-1.4152e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48497, sample phi_dot[0]=(-2.07045e-06,-7.2454e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(4.32308e-07,-4.1867e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48501, sample phi_dot[0]=(-1.1934e-06,2.468e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-1.80007e-06,-3.75595e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48475, sample phi_dot[0]=(6.86268e-08,3.34857e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.53358e-06,-1.43086e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48498, sample phi_dot[0]=(2.04972e-06,3.30608e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-2.08529e-06,2.00293e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48522, sample phi_dot[0]=(2.20514e-06,6.11879e-07)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(-5.61122e-08,3.74846e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48402, sample phi_dot[0]=(1.96556e-06,-1.4416e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(1.48204e-06,3.81097e-06)
+[DEBUG KE_KG] Nx=128, Ny=128, dx=1, T=1.48569, sample phi_dot[0]=(-4.31435e-07,-2.84612e-06)
+[DEBUG PE_KG] Starting computation: Nx=128, Ny=128, sample phi[0]=(2.18651e-06,1.89513e-06)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 1.49636 (drift: 49.5984% from initial 1.00038) ✗ FAIL (exceeds tolerance 0.5%)
+  ✗ Energy Conservation: E_total = 4.01279 (drift: 9.31803% from initial 3.67075) ✗ FAIL (exceeds tolerance 1%)
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.299579 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+[INFO] Skipping scenario validation for Klein-Gordon test (validator requires Dirac field)
+  Norm validation: max_error = 0.835523 ✗ FAIL
+  Energy validation: max_drift = 0.160128 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_014506_scenario_2.5A_klein_gordon_comparison_v0.7/N_10/observables.csv
+Test failed for N=10
+
+--- Validating Convergence ---
+✗ Convergence validation FAILED
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251226_014506_scenario_2.5A_klein_gordon_comparison_v0.7/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.

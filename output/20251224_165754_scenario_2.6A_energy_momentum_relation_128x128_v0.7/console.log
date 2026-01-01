@@ -1,0 +1,495 @@
+[Logging] Console output for 128x128 v=0.7c writing to: /home/persist/neotec/0rigin/output/20251224_165754_scenario_2.6A_energy_momentum_relation_128x128_v0.7/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 3.84 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Pre-normalization: ∫|Ψ|² = 92.6492
+  Normalization factor: 9.62545
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(64,64), sigma=3.84, boost=(0.7,0)c, norm=1, <r>=(64,64)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Pre-normalization: ∫|Ψ|² = 92.6492
+  Normalization factor: 9.62545
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 0.71024
+  Initial norm = 1
+  Step 0/10000 | R_avg = 0.999867 | norm = 1
+  Step 100/10000 | R_avg = 0.999883 | norm = 0.999976
+  Step 200/10000 | R_avg = 0.999777 | norm = 0.99995
+  Step 300/10000 | R_avg = 0.999794 | norm = 0.999924
+  Step 400/10000 | R_avg = 0.999864 | norm = 0.999897
+  Step 500/10000 | R_avg = 0.999895 | norm = 0.999869
+  Step 600/10000 | R_avg = 0.999786 | norm = 0.999841
+  Step 700/10000 | R_avg = 0.999819 | norm = 0.999812
+  Step 800/10000 | R_avg = 0.999851 | norm = 0.999782
+  Step 900/10000 | R_avg = 0.99978 | norm = 0.999752
+  Step 1000/10000 | R_avg = 0.999786 | norm = 0.999723
+  Step 1100/10000 | R_avg = 0.9998 | norm = 0.999692
+  Step 1200/10000 | R_avg = 0.999872 | norm = 0.999662
+  Step 1300/10000 | R_avg = 0.999882 | norm = 0.999632
+  Step 1400/10000 | R_avg = 0.999782 | norm = 0.999603
+  Step 1500/10000 | R_avg = 0.999799 | norm = 0.999573
+  Step 1600/10000 | R_avg = 0.999923 | norm = 0.999543
+  Step 1700/10000 | R_avg = 0.999789 | norm = 0.999513
+  Step 1800/10000 | R_avg = 0.999777 | norm = 0.999483
+  Step 1900/10000 | R_avg = 0.999801 | norm = 0.999454
+  Step 2000/10000 | R_avg = 0.999853 | norm = 0.999423
+  Step 2100/10000 | R_avg = 0.999907 | norm = 0.999393
+  Step 2200/10000 | R_avg = 0.999788 | norm = 0.999362
+  Step 2300/10000 | R_avg = 0.999729 | norm = 0.999331
+  Step 2400/10000 | R_avg = 0.999871 | norm = 0.9993
+  Step 2500/10000 | R_avg = 0.99979 | norm = 0.999269
+  Step 2600/10000 | R_avg = 0.999869 | norm = 0.999238
+  Step 2700/10000 | R_avg = 0.9998 | norm = 0.999208
+  Step 2800/10000 | R_avg = 0.999849 | norm = 0.999177
+  Step 2900/10000 | R_avg = 0.999789 | norm = 0.999148
+  Step 3000/10000 | R_avg = 0.999869 | norm = 0.99912
+  Step 3100/10000 | R_avg = 0.999813 | norm = 0.999092
+  Step 3200/10000 | R_avg = 0.999879 | norm = 0.999064
+  Step 3300/10000 | R_avg = 0.999791 | norm = 0.999037
+  Step 3400/10000 | R_avg = 0.999857 | norm = 0.999009
+  Step 3500/10000 | R_avg = 0.99979 | norm = 0.998981
+  Step 3600/10000 | R_avg = 0.999844 | norm = 0.998952
+  Step 3700/10000 | R_avg = 0.999788 | norm = 0.998922
+  Step 3800/10000 | R_avg = 0.999839 | norm = 0.998892
+  Step 3900/10000 | R_avg = 0.999883 | norm = 0.998861
+  Step 4000/10000 | R_avg = 0.999872 | norm = 0.99883
+  Step 4100/10000 | R_avg = 0.999778 | norm = 0.998798
+  Step 4200/10000 | R_avg = 0.999858 | norm = 0.998766
+  Step 4300/10000 | R_avg = 0.999794 | norm = 0.998734
+  Step 4400/10000 | R_avg = 0.999858 | norm = 0.998702
+  Step 4500/10000 | R_avg = 0.999792 | norm = 0.99867
+  Step 4600/10000 | R_avg = 0.999858 | norm = 0.998638
+  Step 4700/10000 | R_avg = 0.999824 | norm = 0.998607
+  Step 4800/10000 | R_avg = 0.999852 | norm = 0.998575
+  Step 4900/10000 | R_avg = 0.999782 | norm = 0.998544
+  Step 5000/10000 | R_avg = 0.9998 | norm = 0.998513
+  Step 5100/10000 | R_avg = 0.999878 | norm = 0.998481
+  Step 5200/10000 | R_avg = 0.999889 | norm = 0.998449
+  Step 5300/10000 | R_avg = 0.99979 | norm = 0.998417
+  Step 5400/10000 | R_avg = 0.999803 | norm = 0.998385
+  Step 5500/10000 | R_avg = 0.999863 | norm = 0.998352
+  Step 5600/10000 | R_avg = 0.999862 | norm = 0.99832
+  Step 5700/10000 | R_avg = 0.999778 | norm = 0.998288
+  Step 5800/10000 | R_avg = 0.999795 | norm = 0.998256
+  Step 5900/10000 | R_avg = 0.999862 | norm = 0.998224
+  Step 6000/10000 | R_avg = 0.999885 | norm = 0.998193
+  Step 6100/10000 | R_avg = 0.99979 | norm = 0.998162
+  Step 6200/10000 | R_avg = 0.999742 | norm = 0.998132
+  Step 6300/10000 | R_avg = 0.999749 | norm = 0.998102
+  Step 6400/10000 | R_avg = 0.999851 | norm = 0.998073
+  Step 6500/10000 | R_avg = 0.99978 | norm = 0.998045
+  Step 6600/10000 | R_avg = 0.999795 | norm = 0.998016
+  Step 6700/10000 | R_avg = 0.999859 | norm = 0.997987
+  Step 6800/10000 | R_avg = 0.999861 | norm = 0.997957
+  Step 6900/10000 | R_avg = 0.999784 | norm = 0.997927
+  Step 7000/10000 | R_avg = 0.999801 | norm = 0.997896
+  Step 7100/10000 | R_avg = 0.999852 | norm = 0.997865
+  Step 7200/10000 | R_avg = 0.99978 | norm = 0.997832
+  Step 7300/10000 | R_avg = 0.999785 | norm = 0.9978
+  Step 7400/10000 | R_avg = 0.999797 | norm = 0.997768
+  Step 7500/10000 | R_avg = 0.999882 | norm = 0.997736
+  Step 7600/10000 | R_avg = 0.999904 | norm = 0.997703
+  Step 7700/10000 | R_avg = 0.999862 | norm = 0.99767
+  Step 7800/10000 | R_avg = 0.999858 | norm = 0.997638
+  Step 7900/10000 | R_avg = 0.999879 | norm = 0.997606
+  Step 8000/10000 | R_avg = 0.99979 | norm = 0.997574
+  Step 8100/10000 | R_avg = 0.999787 | norm = 0.997542
+  Step 8200/10000 | R_avg = 0.9998 | norm = 0.99751
+  Step 8300/10000 | R_avg = 0.999869 | norm = 0.997477
+  Step 8400/10000 | R_avg = 0.999861 | norm = 0.997445
+  Step 8500/10000 | R_avg = 0.999862 | norm = 0.997413
+  Step 8600/10000 | R_avg = 0.999802 | norm = 0.99738
+  Step 8700/10000 | R_avg = 0.999856 | norm = 0.997348
+  Step 8800/10000 | R_avg = 0.999783 | norm = 0.997315
+  Step 8900/10000 | R_avg = 0.999844 | norm = 0.997283
+  Step 9000/10000 | R_avg = 0.999799 | norm = 0.99725
+  Step 9100/10000 | R_avg = 0.999892 | norm = 0.997218
+  Step 9200/10000 | R_avg = 0.999772 | norm = 0.997186
+  Step 9300/10000 | R_avg = 0.999886 | norm = 0.997155
+  Step 9400/10000 | R_avg = 0.999873 | norm = 0.997125
+  Step 9500/10000 | R_avg = 0.999872 | norm = 0.997095
+  Step 9600/10000 | R_avg = 0.999783 | norm = 0.997066
+  Step 9700/10000 | R_avg = 0.999808 | norm = 0.997037
+  Step 9800/10000 | R_avg = 0.999867 | norm = 0.997007
+  Step 9900/10000 | R_avg = 0.999883 | norm = 0.996978
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.996949 (drift: 0.305194% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.70415 (drift: 0.287755% from initial 1.70906) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.477575 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00305104 ✓ PASS
+  Energy validation: max_drift = 0.00287755 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_165754_scenario_2.6A_energy_momentum_relation_128x128_v0.7/N_1/observables.csv
+
+--- Testing with N=10 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 3.84 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Pre-normalization: ∫|Ψ|² = 92.6492
+  Normalization factor: 9.62545
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(64,64), sigma=3.84, boost=(0.7,0)c, norm=1, <r>=(64,64)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Pre-normalization: ∫|Ψ|² = 92.6492
+  Normalization factor: 9.62545
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.70963
+  Initial norm = 1
+  Step 0/10000 | R_avg = 0.999883 | norm = 1
+  Step 100/10000 | R_avg = 0.999783 | norm = 0.999976
+  Step 200/10000 | R_avg = 0.999781 | norm = 0.99995
+  Step 300/10000 | R_avg = 0.999778 | norm = 0.999924
+  Step 400/10000 | R_avg = 0.999805 | norm = 0.999897
+  Step 500/10000 | R_avg = 0.999778 | norm = 0.999869
+  Step 600/10000 | R_avg = 0.99979 | norm = 0.999841
+  Step 700/10000 | R_avg = 0.99979 | norm = 0.999812
+  Step 800/10000 | R_avg = 0.999789 | norm = 0.999782
+  Step 900/10000 | R_avg = 0.999784 | norm = 0.999752
+  Step 1000/10000 | R_avg = 0.999721 | norm = 0.999723
+  Step 1100/10000 | R_avg = 0.999788 | norm = 0.999693
+  Step 1200/10000 | R_avg = 0.999779 | norm = 0.999663
+  Step 1300/10000 | R_avg = 0.999781 | norm = 0.999633
+  Step 1400/10000 | R_avg = 0.999778 | norm = 0.999603
+  Step 1500/10000 | R_avg = 0.999778 | norm = 0.999574
+  Step 1600/10000 | R_avg = 0.99978 | norm = 0.999544
+  Step 1700/10000 | R_avg = 0.999787 | norm = 0.999515
+  Step 1800/10000 | R_avg = 0.999779 | norm = 0.999485
+  Step 1900/10000 | R_avg = 0.999785 | norm = 0.999455
+  Step 2000/10000 | R_avg = 0.999776 | norm = 0.999424
+  Step 2100/10000 | R_avg = 0.999779 | norm = 0.999393
+  Step 2200/10000 | R_avg = 0.99979 | norm = 0.999363
+  Step 2300/10000 | R_avg = 0.999844 | norm = 0.999332
+  Step 2400/10000 | R_avg = 0.999783 | norm = 0.999301
+  Step 2500/10000 | R_avg = 0.999781 | norm = 0.99927
+  Step 2600/10000 | R_avg = 0.99977 | norm = 0.99924
+  Step 2700/10000 | R_avg = 0.999784 | norm = 0.999209
+  Step 2800/10000 | R_avg = 0.999787 | norm = 0.999179
+  Step 2900/10000 | R_avg = 0.99978 | norm = 0.99915
+  Step 3000/10000 | R_avg = 0.999783 | norm = 0.999121
+  Step 3100/10000 | R_avg = 0.999783 | norm = 0.999093
+  Step 3200/10000 | R_avg = 0.999778 | norm = 0.999066
+  Step 3300/10000 | R_avg = 0.999789 | norm = 0.999038
+  Step 3400/10000 | R_avg = 0.999783 | norm = 0.99901
+  Step 3500/10000 | R_avg = 0.999782 | norm = 0.998982
+  Step 3600/10000 | R_avg = 0.999784 | norm = 0.998953
+  Step 3700/10000 | R_avg = 0.999769 | norm = 0.998923
+  Step 3800/10000 | R_avg = 0.999783 | norm = 0.998893
+  Step 3900/10000 | R_avg = 0.999783 | norm = 0.998862
+  Step 4000/10000 | R_avg = 0.99978 | norm = 0.998831
+  Step 4100/10000 | R_avg = 0.999773 | norm = 0.998799
+  Step 4200/10000 | R_avg = 0.999862 | norm = 0.998767
+  Step 4300/10000 | R_avg = 0.999784 | norm = 0.998735
+  Step 4400/10000 | R_avg = 0.999782 | norm = 0.998703
+  Step 4500/10000 | R_avg = 0.999776 | norm = 0.998671
+  Step 4600/10000 | R_avg = 0.999778 | norm = 0.998639
+  Step 4700/10000 | R_avg = 0.999779 | norm = 0.998608
+  Step 4800/10000 | R_avg = 0.999803 | norm = 0.998576
+  Step 4900/10000 | R_avg = 0.999792 | norm = 0.998545
+  Step 5000/10000 | R_avg = 0.999777 | norm = 0.998514
+  Step 5100/10000 | R_avg = 0.999833 | norm = 0.998482
+  Step 5200/10000 | R_avg = 0.999777 | norm = 0.99845
+  Step 5300/10000 | R_avg = 0.99979 | norm = 0.998418
+  Step 5400/10000 | R_avg = 0.999783 | norm = 0.998386
+  Step 5500/10000 | R_avg = 0.999774 | norm = 0.998354
+  Step 5600/10000 | R_avg = 0.999782 | norm = 0.998321
+  Step 5700/10000 | R_avg = 0.99978 | norm = 0.998289
+  Step 5800/10000 | R_avg = 0.999781 | norm = 0.998257
+  Step 5900/10000 | R_avg = 0.999779 | norm = 0.998225
+  Step 6000/10000 | R_avg = 0.999782 | norm = 0.998194
+  Step 6100/10000 | R_avg = 0.999784 | norm = 0.998163
+  Step 6200/10000 | R_avg = 0.999775 | norm = 0.998133
+  Step 6300/10000 | R_avg = 0.999795 | norm = 0.998104
+  Step 6400/10000 | R_avg = 0.999786 | norm = 0.998075
+  Step 6500/10000 | R_avg = 0.999788 | norm = 0.998046
+  Step 6600/10000 | R_avg = 0.999791 | norm = 0.998017
+  Step 6700/10000 | R_avg = 0.999728 | norm = 0.997988
+  Step 6800/10000 | R_avg = 0.999775 | norm = 0.997958
+  Step 6900/10000 | R_avg = 0.999783 | norm = 0.997928
+  Step 7000/10000 | R_avg = 0.999843 | norm = 0.997897
+  Step 7100/10000 | R_avg = 0.999778 | norm = 0.997866
+  Step 7200/10000 | R_avg = 0.999798 | norm = 0.997834
+  Step 7300/10000 | R_avg = 0.999798 | norm = 0.997802
+  Step 7400/10000 | R_avg = 0.999794 | norm = 0.99777
+  Step 7500/10000 | R_avg = 0.999779 | norm = 0.997737
+  Step 7600/10000 | R_avg = 0.99973 | norm = 0.997705
+  Step 7700/10000 | R_avg = 0.999794 | norm = 0.997672
+  Step 7800/10000 | R_avg = 0.99979 | norm = 0.99764
+  Step 7900/10000 | R_avg = 0.999778 | norm = 0.997607
+  Step 8000/10000 | R_avg = 0.999772 | norm = 0.997575
+  Step 8100/10000 | R_avg = 0.999784 | norm = 0.997544
+  Step 8200/10000 | R_avg = 0.999782 | norm = 0.997512
+  Step 8300/10000 | R_avg = 0.999775 | norm = 0.99748
+  Step 8400/10000 | R_avg = 0.999776 | norm = 0.997448
+  Step 8500/10000 | R_avg = 0.999784 | norm = 0.997415
+  Step 8600/10000 | R_avg = 0.999729 | norm = 0.997382
+  Step 8700/10000 | R_avg = 0.999777 | norm = 0.99735
+  Step 8800/10000 | R_avg = 0.999778 | norm = 0.997317
+  Step 8900/10000 | R_avg = 0.999859 | norm = 0.997285
+  Step 9000/10000 | R_avg = 0.999785 | norm = 0.997253
+  Step 9100/10000 | R_avg = 0.999786 | norm = 0.997221
+  Step 9200/10000 | R_avg = 0.999776 | norm = 0.997189
+  Step 9300/10000 | R_avg = 0.999796 | norm = 0.997158
+  Step 9400/10000 | R_avg = 0.999786 | norm = 0.997127
+  Step 9500/10000 | R_avg = 0.999737 | norm = 0.997097
+  Step 9600/10000 | R_avg = 0.999786 | norm = 0.997068
+  Step 9700/10000 | R_avg = 0.999881 | norm = 0.997039
+  Step 9800/10000 | R_avg = 0.999942 | norm = 0.99701
+  Step 9900/10000 | R_avg = 0.999934 | norm = 0.99698
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.996951 (drift: 0.304991% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.70431 (drift: 0.32789% from initial 1.70992) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0.953517, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.477498 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00304906 ✓ PASS
+  Energy validation: max_drift = 0.00338349 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_165754_scenario_2.6A_energy_momentum_relation_128x128_v0.7/N_10/observables.csv
+
+--- Testing with N=100 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 3.84 grid units
+  Using Dirac solver (spinor field) with boosted initialization
+    Background R (expected): 1
+[SMFT] Boosted Gaussian initialization:
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Pre-normalization: ∫|Ψ|² = 92.6492
+  Normalization factor: 9.62545
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized
+[SMFTEngine] Boosted Dirac field initialized: center=(64,64), sigma=3.84, boost=(0.7,0)c, norm=1, <r>=(64,64)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[SMFT] Boosted Gaussian initialization:
+  Position: (64, 64) grid units
+  Width: σ = 3.84 grid units
+  Velocity: v = (0.7, 0)c
+  |v| = 0.7c
+  Lorentz factor: γ = 1.40028
+  Rest mass: m₀ = Δ·R = 1 × 1 = 1 m_P
+  Momentum: p = (0.980196, 0) m_P·c
+  |p| = 0.980196 m_P·c
+  Pre-normalization: ∫|Ψ|² = 92.6492
+  Normalization factor: 9.62545
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=3.84
+  Final norm: ||Ψ||² = 1
+  Initial position: <r> = (64, 64)
+✓ Boosted Gaussian initialized
+  Initial energy E0 = 1.7102
+  Initial norm = 1
+  Step 0/10000 | R_avg = 0.999936 | norm = 1
+  Step 100/10000 | R_avg = 0.999883 | norm = 0.999976
+  Step 200/10000 | R_avg = 0.999885 | norm = 0.99995
+  Step 300/10000 | R_avg = 0.999882 | norm = 0.999925
+  Step 400/10000 | R_avg = 0.99988 | norm = 0.999897
+  Step 500/10000 | R_avg = 0.999882 | norm = 0.99987
+  Step 600/10000 | R_avg = 0.999884 | norm = 0.999841
+  Step 700/10000 | R_avg = 0.999879 | norm = 0.999812
+  Step 800/10000 | R_avg = 0.999877 | norm = 0.999782
+  Step 900/10000 | R_avg = 0.999877 | norm = 0.999753
+  Step 1000/10000 | R_avg = 0.999883 | norm = 0.999723
+  Step 1100/10000 | R_avg = 0.999885 | norm = 0.999693
+  Step 1200/10000 | R_avg = 0.999882 | norm = 0.999663
+  Step 1300/10000 | R_avg = 0.99988 | norm = 0.999633
+  Step 1400/10000 | R_avg = 0.999882 | norm = 0.999603
+  Step 1500/10000 | R_avg = 0.999884 | norm = 0.999573
+  Step 1600/10000 | R_avg = 0.999879 | norm = 0.999544
+  Step 1700/10000 | R_avg = 0.999877 | norm = 0.999514
+  Step 1800/10000 | R_avg = 0.999877 | norm = 0.999484
+  Step 1900/10000 | R_avg = 0.999883 | norm = 0.999454
+  Step 2000/10000 | R_avg = 0.999885 | norm = 0.999423
+  Step 2100/10000 | R_avg = 0.99986 | norm = 0.999392
+  Step 2200/10000 | R_avg = 0.999858 | norm = 0.999362
+  Step 2300/10000 | R_avg = 0.999864 | norm = 0.99933
+  Step 2400/10000 | R_avg = 0.99987 | norm = 0.999299
+  Step 2500/10000 | R_avg = 0.999866 | norm = 0.999269
+  Step 2600/10000 | R_avg = 0.999864 | norm = 0.999238
+  Step 2700/10000 | R_avg = 0.999863 | norm = 0.999207
+  Step 2800/10000 | R_avg = 0.999869 | norm = 0.999178
+  Step 2900/10000 | R_avg = 0.999868 | norm = 0.999148
+  Step 3000/10000 | R_avg = 0.99986 | norm = 0.99912
+  Step 3100/10000 | R_avg = 0.999858 | norm = 0.999092
+  Step 3200/10000 | R_avg = 0.999864 | norm = 0.999064
+  Step 3300/10000 | R_avg = 0.99987 | norm = 0.999037
+  Step 3400/10000 | R_avg = 0.999866 | norm = 0.999009
+  Step 3500/10000 | R_avg = 0.999864 | norm = 0.998981
+  Step 3600/10000 | R_avg = 0.999863 | norm = 0.998952
+  Step 3700/10000 | R_avg = 0.999869 | norm = 0.998923
+  Step 3800/10000 | R_avg = 0.999868 | norm = 0.998892
+  Step 3900/10000 | R_avg = 0.99986 | norm = 0.998861
+  Step 4000/10000 | R_avg = 0.999858 | norm = 0.99883
+  Step 4100/10000 | R_avg = 0.999864 | norm = 0.998799
+  Step 4200/10000 | R_avg = 0.99987 | norm = 0.998767
+  Step 4300/10000 | R_avg = 0.999866 | norm = 0.998735
+  Step 4400/10000 | R_avg = 0.999864 | norm = 0.998703
+  Step 4500/10000 | R_avg = 0.999863 | norm = 0.998671
+  Step 4600/10000 | R_avg = 0.999869 | norm = 0.998639
+  Step 4700/10000 | R_avg = 0.999868 | norm = 0.998608
+  Step 4800/10000 | R_avg = 0.99986 | norm = 0.998576
+  Step 4900/10000 | R_avg = 0.999858 | norm = 0.998545
+  Step 5000/10000 | R_avg = 0.999864 | norm = 0.998514
+  Step 5100/10000 | R_avg = 0.99987 | norm = 0.998482
+  Step 5200/10000 | R_avg = 0.999866 | norm = 0.99845
+  Step 5300/10000 | R_avg = 0.999911 | norm = 0.998418
+  Step 5400/10000 | R_avg = 0.999908 | norm = 0.998386
+  Step 5500/10000 | R_avg = 0.999913 | norm = 0.998353
+  Step 5600/10000 | R_avg = 0.999905 | norm = 0.998321
+  Step 5700/10000 | R_avg = 0.999906 | norm = 0.998289
+  Step 5800/10000 | R_avg = 0.999905 | norm = 0.998257
+  Step 5900/10000 | R_avg = 0.999905 | norm = 0.998225
+  Step 6000/10000 | R_avg = 0.999912 | norm = 0.998194
+  Step 6100/10000 | R_avg = 0.999915 | norm = 0.998163
+  Step 6200/10000 | R_avg = 0.999911 | norm = 0.998133
+  Step 6300/10000 | R_avg = 0.999908 | norm = 0.998104
+  Step 6400/10000 | R_avg = 0.999913 | norm = 0.998075
+  Step 6500/10000 | R_avg = 0.999905 | norm = 0.998046
+  Step 6600/10000 | R_avg = 0.999906 | norm = 0.998017
+  Step 6700/10000 | R_avg = 0.999906 | norm = 0.997988
+  Step 6800/10000 | R_avg = 0.999905 | norm = 0.997959
+  Step 6900/10000 | R_avg = 0.999912 | norm = 0.997928
+  Step 7000/10000 | R_avg = 0.999915 | norm = 0.997897
+  Step 7100/10000 | R_avg = 0.999911 | norm = 0.997866
+  Step 7200/10000 | R_avg = 0.999884 | norm = 0.997834
+  Step 7300/10000 | R_avg = 0.999884 | norm = 0.997802
+  Step 7400/10000 | R_avg = 0.999889 | norm = 0.99777
+  Step 7500/10000 | R_avg = 0.999886 | norm = 0.997737
+  Step 7600/10000 | R_avg = 0.999883 | norm = 0.997704
+  Step 7700/10000 | R_avg = 0.999881 | norm = 0.997672
+  Step 7800/10000 | R_avg = 0.999889 | norm = 0.997639
+  Step 7900/10000 | R_avg = 0.999884 | norm = 0.997607
+  Step 8000/10000 | R_avg = 0.999879 | norm = 0.997575
+  Step 8100/10000 | R_avg = 0.999884 | norm = 0.997543
+  Step 8200/10000 | R_avg = 0.999884 | norm = 0.997511
+  Step 8300/10000 | R_avg = 0.999889 | norm = 0.997479
+  Step 8400/10000 | R_avg = 0.999886 | norm = 0.997447
+  Step 8500/10000 | R_avg = 0.999883 | norm = 0.997414
+  Step 8600/10000 | R_avg = 0.999881 | norm = 0.997381
+  Step 8700/10000 | R_avg = 0.999778 | norm = 0.997349
+  Step 8800/10000 | R_avg = 0.999782 | norm = 0.997316
+  Step 8900/10000 | R_avg = 0.999751 | norm = 0.997283
+  Step 9000/10000 | R_avg = 0.999781 | norm = 0.997251
+  Step 9100/10000 | R_avg = 0.999794 | norm = 0.997219
+  Step 9200/10000 | R_avg = 0.999777 | norm = 0.997187
+  Step 9300/10000 | R_avg = 0.999717 | norm = 0.997156
+  Step 9400/10000 | R_avg = 0.999794 | norm = 0.997125
+  Step 9500/10000 | R_avg = 0.999778 | norm = 0.997096
+  Step 9600/10000 | R_avg = 0.999764 | norm = 0.997066
+  Step 9700/10000 | R_avg = 0.99976 | norm = 0.997037
+  Step 9800/10000 | R_avg = 0.999732 | norm = 0.997008
+  Step 9900/10000 | R_avg = 0.999731 | norm = 0.996979
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.99695 (drift: 0.305112% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.70446 (drift: 0.331245% from initial 1.71012) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0.953517, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.477525 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00305023 ✓ PASS
+  Energy validation: max_drift = 0.00352554 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251224_165754_scenario_2.6A_energy_momentum_relation_128x128_v0.7/N_100/observables.csv
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+
+========================================
+Grid: 128×128 | Velocity: v=0.8c
+========================================
+
+Initializing engine for 128×128 grid, velocity v=0.8c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 128 x 128 oscillators
+
+[SMFTEngine] Created GPU buffers for 128x128 grid
+  Phase buffers: 65536 bytes each
+  Spinor buffer: 524288 bytes
+  Accumulator buffers: 65536 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251224_171523_scenario_2.6A_energy_momentum_relation_128x128_v0.8
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251224_171523_scenario_2.6A_energy_momentum_relation_128x128_v0.8

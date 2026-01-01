@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/include
+CXX_INCLUDES = -I/home/persist/neotec/0rigin/include
 
 CXX_FLAGS = -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic
 

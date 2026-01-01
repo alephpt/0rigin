@@ -1,0 +1,190 @@
+
+===== SMFT Test Mode =====
+Configuration: config/antiparticle_separation_validation.yaml
+
+[1/3] Initializing...
+
+===== Test Configuration: antiparticle_separation_validation =====
+Description: Test 3.4 - Particle and antiparticle separation in vortex defect field
+
+[Grid]
+  size: 64 x 64
+
+[Physics]
+  solver_type: dirac
+  delta: 2.5
+  coupling: 0
+  dt: 0.01
+  total_steps: 10000
+  K (Kuramoto): 1
+  damping: 0.1
+  noise_strength: 0
+
+[Initial Conditions - Dirac]
+  type: two_particle
+  center: (32, 32)
+  sigma: 3
+  amplitude: 1
+
+[Initial Conditions - Kuramoto]
+  phase_distribution: vortex
+  omega_distribution: zero
+  omega_mean: 0
+  omega_std: 0.1
+
+[Operator Splitting]
+  enabled: yes
+  substep_ratios: [10]
+
+[Validation]
+  norm_tolerance: 0.001
+  energy_tolerance: 0.01
+  convergence_tolerance: 0.05
+
+[Output]
+  directory: output/antiparticle_separation
+  save_every: 50 steps
+  formats: [csv]
+========================================
+
+ [INFO]: Nova - Instantiating ..
+Logger - Debug Level set to error ..
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 2.5 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251227_072719_antiparticle_separation_validation
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251227_072719_antiparticle_separation_validation
+✓ SMFTTestRunner initialized successfully
+
+[2/3] Running tests...
+
+===== Running Tests =====
+
+Initializing engine for 64×64 grid...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 2.5 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251227_072719_antiparticle_separation_validation/console.log
+
+--- Testing with N=10 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 1.5625 ℓ_P
+    Core radius: 3 ℓ_P (1.92 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Phase 3 IC: Two-particle mode (Antiparticle separation test)
+    Particle 1: (40, 50) ℓ_P, boost = (0, 0)c
+    Particle 2: (40, 50) ℓ_P, boost = (0, 0)c
+    WARNING: Two-particle mode not yet fully implemented in SMFTEngine
+    Falling back to single-particle initialization
+  Dirac initialization (grid-independent):
+    Position: (40, 50) ℓ_P
+    Width: 3 ℓ_P
+    Grid coordinates: (25.6, 32) grid units
+    Grid width: 1.92 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (25.6, 32) with σ=1.92
+[SMFTEngine] Dirac field initialized: center=(25.6,32), sigma=1.92, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (25.6, 32) with σ=1.92
+  Initial energy E0 = 2.73759
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=10
+  substep_dt=0.001
+  half_substeps=5
+  remaining_substeps=5
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/10000 | R_avg = 0.968149 | norm = 1
+  Step 500/10000 | R_avg = 0.968146 | norm = 0.999872
+  Step 1000/10000 | R_avg = 0.968167 | norm = 0.999743
+  Step 1500/10000 | R_avg = 0.968209 | norm = 0.999607
+  Step 2000/10000 | R_avg = 0.968215 | norm = 0.999476
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/10000 | R_avg = 0.968256 | norm = 0.999345
+  Step 3000/10000 | R_avg = 0.96818 | norm = 0.999213
+  Step 3500/10000 | R_avg = 0.968214 | norm = 0.999088
+  Step 4000/10000 | R_avg = 0.96817 | norm = 0.998959
+  Step 4500/10000 | R_avg = 0.968121 | norm = 0.998829
+  Saved spatial snapshot at t = 50 (step 5000)
+  Step 5000/10000 | R_avg = 0.96815 | norm = 0.998703
+  Step 5500/10000 | R_avg = 0.968123 | norm = 0.998579
+  Step 6000/10000 | R_avg = 0.968182 | norm = 0.998453
+  Step 6500/10000 | R_avg = 0.96814 | norm = 0.998327
+  Step 7000/10000 | R_avg = 0.968094 | norm = 0.9982
+  Saved spatial snapshot at t = 75 (step 7500)
+  Step 7500/10000 | R_avg = 0.968201 | norm = 0.998069
+  Step 8000/10000 | R_avg = 0.968204 | norm = 0.997935
+  Step 8500/10000 | R_avg = 0.968087 | norm = 0.997805
+  Step 9000/10000 | R_avg = 0.968169 | norm = 0.997676
+  Step 9500/10000 | R_avg = 0.968224 | norm = 0.997542
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 0.997414 (drift: 0.258639% from initial 1) ✗ FAIL (exceeds tolerance 0.1%)
+  ✗ Energy Conservation: E_total = 2.64252 (drift: 2.37747% from initial 2.70688) ✗ FAIL (exceeds tolerance 1%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.0243425 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.1: Defect Localization Validation =====
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  Norm validation: max_error = 0.00258637 ✗ FAIL
+  Energy validation: max_drift = 0.0375791 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_072719_antiparticle_separation_validation/N_10/observables.csv
+Test failed for N=10
+
+--- Validating Convergence ---
+✗ Convergence validation FAILED
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251227_072719_antiparticle_separation_validation/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete

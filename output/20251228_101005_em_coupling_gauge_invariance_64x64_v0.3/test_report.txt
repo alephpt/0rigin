@@ -1,0 +1,94 @@
+===== SMFT Test Report =====
+Test: em_coupling_gauge_invariance
+Description: Phase 6.1: Gauge invariance test - verify that physics remains invariant under gauge transformation U(1) of phase field. Tests ψ → e^(iχ)ψ, A → A + ∇χ. Observables should be identical in both gauges.
+
+[Configuration]
+Grid: 64 x 64
+Delta: 1
+Coupling: 0.1
+Total steps: 1000
+dt: 0.01
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+Detected Scenario: 2.3
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999743 (drift: 0.0257001% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 39271.6 (drift: 5.03088e-05% from initial 39271.6) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 4.39517e-06 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+N=1 Scenario 2.3 Validation: ✗ FAIL
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1)
+    Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5)
+    R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  ✓ 4. ψ(x,y,t=0) is Gaussian at offset position
+    Wavepacket variance = 1.04808e-05 ✓ PASS (localized)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%)
+    ⟨p⟩ = 0.289045 (expect 0.314485, error = 8.08952%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory
+    γ_measured = 40569.6 (γ_theory = 1.04828, error = 3.86999e+06%) ✗ FAIL (exceeds 5% tolerance)
+
+N=10 Global Validation: ✗ FAIL
+  ✓ Probability Conservation: ||ψ||² = 0.999745 (drift: 0.0255008% from initial 1) ✓ PASS
+  ✗ Energy Conservation: E_total = 1.26535 (drift: 9.03389% from initial 1.16051) ✗ FAIL (exceeds tolerance 1%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.134562 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+N=10 Scenario 2.3 Validation: ✗ FAIL
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1)
+    Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5)
+    R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  ✓ 4. ψ(x,y,t=0) is Gaussian at offset position
+    Wavepacket variance = 1.04808e-05 ✓ PASS (localized)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%)
+    ⟨p⟩ = 0.288349 (expect 0.314485, error = 8.31102%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory
+    γ_measured = 1.29523 (γ_theory = 1.04828, error = 23.5574%) ✗ FAIL (exceeds 5% tolerance)
+
+N=100 Global Validation: ✗ FAIL
+  ✓ Probability Conservation: ||ψ||² = 0.999746 (drift: 0.025349% from initial 1) ✓ PASS
+  ✗ Energy Conservation: E_total = 1.26512 (drift: 9.16112% from initial 1.15895) ✗ FAIL (exceeds tolerance 1%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.136167 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+N=100 Scenario 2.3 Validation: ✗ FAIL
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1)
+    Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5)
+    R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  ✓ 4. ψ(x,y,t=0) is Gaussian at offset position
+    Wavepacket variance = 1.04808e-05 ✓ PASS (localized)
+  ✗ 5. ⟨p⟩(t=0) = γmv (within 5%)
+    ⟨p⟩ = 0.288348 (expect 0.314485, error = 8.31103%) ✗ FAIL (exceeds 5% tolerance)
+  ✗ 6. γ_measured(t=final) within 5% of theory
+    γ_measured = 1.29477 (γ_theory = 1.04828, error = 23.513%) ✗ FAIL (exceeds 5% tolerance)
+
+--- Legacy Validation Metrics ---
+
+Convergence Validation: ✓ PASS
+  Convergence errors: [2.087e-06, 3.542e-05, 1.158e-05]
+
+N=1: ✗ FAIL
+  Norm: max_error = 2.571e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 1.000e+00 (threshold: 1.000e-02)
+
+N=10: ✗ FAIL
+  Norm: max_error = 2.551e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 9.034e-02 (threshold: 1.000e-02)
+
+N=100: ✗ FAIL
+  Norm: max_error = 2.536e-04 (threshold: 5.000e-03)
+  Energy: max_drift = 9.161e-02 (threshold: 1.000e-02)
+
+[Overall Result]
+✗ SOME TESTS FAILED
+
+===== End of Report ====

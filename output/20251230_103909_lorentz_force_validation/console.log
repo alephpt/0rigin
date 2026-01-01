@@ -1,0 +1,368 @@
+[Logging] Console output for 128x128 writing to: /home/persist/neotec/0rigin/output/20251230_103909_lorentz_force_validation/console.log
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 5 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 6.4 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=6.4
+[SMFTEngine] Dirac field initialized: center=(64,64), sigma=6.4, norm=0.999998
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=6.4
+  Initial energy E0 = 0.0241185
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.001
+  half_substeps=0
+  remaining_substeps=1
+[GPU EM Compute] 1 calls | Last: 246 μs | Avg: 246 μs | Grid: 128×128
+  Actual initial energy E0 = 0.324105 (from first observation including EM)
+  Step 0/10000 | R_avg = 0.999883 | norm = 1
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 50 calls | Last: 118 μs | Avg: 121 μs | Grid: 128×128
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 100 calls | Last: 120 μs | Avg: 121 μs | Grid: 128×128
+  Step 100/10000 | R_avg = 0.999959 | norm = 0.999977
+[GPU EM Compute] 150 calls | Last: 120 μs | Avg: 122 μs | Grid: 128×128
+[GPU EM Compute] 200 calls | Last: 121 μs | Avg: 122 μs | Grid: 128×128
+  Step 200/10000 | R_avg = 0.99996 | norm = 0.999951
+[GPU EM Compute] 250 calls | Last: 141 μs | Avg: 123 μs | Grid: 128×128
+[GPU EM Compute] 300 calls | Last: 129 μs | Avg: 123 μs | Grid: 128×128
+  Step 300/10000 | R_avg = 0.999909 | norm = 0.999925
+[GPU EM Compute] 350 calls | Last: 116 μs | Avg: 122 μs | Grid: 128×128
+[GPU EM Compute] 400 calls | Last: 115 μs | Avg: 121 μs | Grid: 128×128
+  Step 400/10000 | R_avg = 0.999875 | norm = 0.999899
+[GPU EM Compute] 450 calls | Last: 118 μs | Avg: 121 μs | Grid: 128×128
+[GPU EM Compute] 500 calls | Last: 117 μs | Avg: 121 μs | Grid: 128×128
+  Step 500/10000 | R_avg = 0.99989 | norm = 0.999873
+[GPU EM Compute] 550 calls | Last: 121 μs | Avg: 121 μs | Grid: 128×128
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 600 calls | Last: 115 μs | Avg: 121 μs | Grid: 128×128
+  Step 600/10000 | R_avg = 0.999883 | norm = 0.999847
+[GPU EM Compute] 650 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 700 calls | Last: 115 μs | Avg: 120 μs | Grid: 128×128
+  Step 700/10000 | R_avg = 0.999894 | norm = 0.999821
+[GPU EM Compute] 750 calls | Last: 115 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 800 calls | Last: 115 μs | Avg: 120 μs | Grid: 128×128
+  Step 800/10000 | R_avg = 0.999819 | norm = 0.999795
+[GPU EM Compute] 850 calls | Last: 135 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 900 calls | Last: 115 μs | Avg: 120 μs | Grid: 128×128
+  Step 900/10000 | R_avg = 0.999876 | norm = 0.999769
+[GPU EM Compute] 950 calls | Last: 117 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 1000 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+  Step 1000/10000 | R_avg = 0.999961 | norm = 0.999743
+[GPU EM Compute] 1050 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 1100 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+  Step 1100/10000 | R_avg = 0.999859 | norm = 0.999716
+[GPU EM Compute] 1150 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 1200 calls | Last: 115 μs | Avg: 120 μs | Grid: 128×128
+  Step 1200/10000 | R_avg = 0.999945 | norm = 0.99969
+[GPU EM Compute] 1250 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 1300 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 1300/10000 | R_avg = 0.999876 | norm = 0.999663
+[GPU EM Compute] 1350 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 1400 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+  Step 1400/10000 | R_avg = 0.999582 | norm = 0.999636
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[ERROR] Invalid theta fields detected (NaN/Inf), returning zero EM observables
+[GPU EM Compute] 1450 calls | Last: 117 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 1500 calls | Last: 119 μs | Avg: 120 μs | Grid: 128×128
+  Step 1500/10000 | R_avg = 0.999928 | norm = 0.999609
+[GPU EM Compute] 1550 calls | Last: 115 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 1600 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+  Step 1600/10000 | R_avg = 0.999957 | norm = 0.999583
+[GPU EM Compute] 1650 calls | Last: 119 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 1700 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+  Step 1700/10000 | R_avg = 0.999969 | norm = 0.999556
+[GPU EM Compute] 1750 calls | Last: 122 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 1800 calls | Last: 117 μs | Avg: 120 μs | Grid: 128×128
+  Step 1800/10000 | R_avg = 0.999958 | norm = 0.999529
+[GPU EM Compute] 1850 calls | Last: 117 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 1900 calls | Last: 118 μs | Avg: 120 μs | Grid: 128×128
+  Step 1900/10000 | R_avg = 0.999906 | norm = 0.999502
+[GPU EM Compute] 1950 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 2000 calls | Last: 117 μs | Avg: 120 μs | Grid: 128×128
+  Step 2000/10000 | R_avg = 0.999948 | norm = 0.999474
+[GPU EM Compute] 2050 calls | Last: 119 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 2100 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+  Step 2100/10000 | R_avg = 0.999863 | norm = 0.999447
+[GPU EM Compute] 2150 calls | Last: 136 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 2200 calls | Last: 119 μs | Avg: 120 μs | Grid: 128×128
+  Step 2200/10000 | R_avg = 0.999895 | norm = 0.999419
+[GPU EM Compute] 2250 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 2300 calls | Last: 76 μs | Avg: 120 μs | Grid: 128×128
+  Step 2300/10000 | R_avg = 0.99987 | norm = 0.999392
+[GPU EM Compute] 2350 calls | Last: 73 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 2400 calls | Last: 118 μs | Avg: 120 μs | Grid: 128×128
+  Step 2400/10000 | R_avg = 0.999951 | norm = 0.999364
+[GPU EM Compute] 2450 calls | Last: 116 μs | Avg: 120 μs | Grid: 128×128
+[GPU EM Compute] 2500 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 2500/10000 | R_avg = 0.999885 | norm = 0.999335
+[GPU EM Compute] 2550 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 2600 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+  Step 2600/10000 | R_avg = 0.999889 | norm = 0.999307
+[GPU EM Compute] 2650 calls | Last: 71 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 2700 calls | Last: 122 μs | Avg: 119 μs | Grid: 128×128
+  Step 2700/10000 | R_avg = 0.999852 | norm = 0.999279
+[GPU EM Compute] 2750 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 2800 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+  Step 2800/10000 | R_avg = 0.999952 | norm = 0.999251
+[GPU EM Compute] 2850 calls | Last: 111 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 2900 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 2900/10000 | R_avg = 0.999881 | norm = 0.999222
+[GPU EM Compute] 2950 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3000 calls | Last: 133 μs | Avg: 119 μs | Grid: 128×128
+  Step 3000/10000 | R_avg = 0.999891 | norm = 0.999194
+[GPU EM Compute] 3050 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3100 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 3100/10000 | R_avg = 0.999859 | norm = 0.999166
+[GPU EM Compute] 3150 calls | Last: 122 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3200 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 3200/10000 | R_avg = 0.999956 | norm = 0.999137
+[GPU EM Compute] 3250 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3300 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 3300/10000 | R_avg = 0.999877 | norm = 0.999109
+[GPU EM Compute] 3350 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3400 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 3400/10000 | R_avg = 0.999945 | norm = 0.999081
+[GPU EM Compute] 3450 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3500 calls | Last: 126 μs | Avg: 119 μs | Grid: 128×128
+  Step 3500/10000 | R_avg = 0.999869 | norm = 0.999053
+[GPU EM Compute] 3550 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3600 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 3600/10000 | R_avg = 0.999957 | norm = 0.999024
+[GPU EM Compute] 3650 calls | Last: 131 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3700 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 3700/10000 | R_avg = 0.999884 | norm = 0.998996
+[GPU EM Compute] 3750 calls | Last: 122 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3800 calls | Last: 126 μs | Avg: 119 μs | Grid: 128×128
+  Step 3800/10000 | R_avg = 0.9998 | norm = 0.998968
+[GPU EM Compute] 3850 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 3900 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 3900/10000 | R_avg = 0.999781 | norm = 0.99894
+[GPU EM Compute] 3950 calls | Last: 118 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4000 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 4000/10000 | R_avg = 0.999875 | norm = 0.998912
+[GPU EM Compute] 4050 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4100 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+  Step 4100/10000 | R_avg = 0.999861 | norm = 0.998884
+[GPU EM Compute] 4150 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4200 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 4200/10000 | R_avg = 0.99988 | norm = 0.998855
+[GPU EM Compute] 4250 calls | Last: 125 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4300 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 4300/10000 | R_avg = 0.999947 | norm = 0.998827
+[GPU EM Compute] 4350 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4400 calls | Last: 132 μs | Avg: 119 μs | Grid: 128×128
+  Step 4400/10000 | R_avg = 0.999882 | norm = 0.998799
+[GPU EM Compute] 4450 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4500 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 4500/10000 | R_avg = 0.999951 | norm = 0.99877
+[GPU EM Compute] 4550 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4600 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 4600/10000 | R_avg = 0.999925 | norm = 0.998741
+[GPU EM Compute] 4650 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4700 calls | Last: 122 μs | Avg: 119 μs | Grid: 128×128
+  Step 4700/10000 | R_avg = 0.99995 | norm = 0.998713
+[GPU EM Compute] 4750 calls | Last: 118 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4800 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+  Step 4800/10000 | R_avg = 0.999953 | norm = 0.998683
+[GPU EM Compute] 4850 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 4900 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 4900/10000 | R_avg = 0.999862 | norm = 0.998654
+[GPU EM Compute] 4950 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5000 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 5000/10000 | R_avg = 0.999888 | norm = 0.998625
+[GPU EM Compute] 5050 calls | Last: 118 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5100 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 5100/10000 | R_avg = 0.999894 | norm = 0.998596
+[GPU EM Compute] 5150 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5200 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 5200/10000 | R_avg = 0.999893 | norm = 0.998566
+[GPU EM Compute] 5250 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5300 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+  Step 5300/10000 | R_avg = 0.999844 | norm = 0.998538
+[GPU EM Compute] 5350 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5400 calls | Last: 125 μs | Avg: 119 μs | Grid: 128×128
+  Step 5400/10000 | R_avg = 0.999857 | norm = 0.998508
+[GPU EM Compute] 5450 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5500 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 5500/10000 | R_avg = 0.999893 | norm = 0.998478
+[GPU EM Compute] 5550 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5600 calls | Last: 114 μs | Avg: 119 μs | Grid: 128×128
+  Step 5600/10000 | R_avg = 0.999758 | norm = 0.998448
+[GPU EM Compute] 5650 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5700 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 5700/10000 | R_avg = 0.999909 | norm = 0.998419
+[GPU EM Compute] 5750 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5800 calls | Last: 114 μs | Avg: 119 μs | Grid: 128×128
+  Step 5800/10000 | R_avg = 0.999962 | norm = 0.998389
+[GPU EM Compute] 5850 calls | Last: 127 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 5900 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 5900/10000 | R_avg = 0.999957 | norm = 0.998359
+[GPU EM Compute] 5950 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6000 calls | Last: 121 μs | Avg: 119 μs | Grid: 128×128
+  Step 6000/10000 | R_avg = 0.999958 | norm = 0.998329
+[GPU EM Compute] 6050 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6100 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 6100/10000 | R_avg = 0.999941 | norm = 0.998299
+[GPU EM Compute] 6150 calls | Last: 118 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6200 calls | Last: 113 μs | Avg: 119 μs | Grid: 128×128
+  Step 6200/10000 | R_avg = 0.999955 | norm = 0.998269
+[GPU EM Compute] 6250 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6300 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 6300/10000 | R_avg = 0.999942 | norm = 0.99824
+[GPU EM Compute] 6350 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6400 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+  Step 6400/10000 | R_avg = 0.999953 | norm = 0.99821
+[GPU EM Compute] 6450 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6500 calls | Last: 121 μs | Avg: 119 μs | Grid: 128×128
+  Step 6500/10000 | R_avg = 0.99987 | norm = 0.99818
+[GPU EM Compute] 6550 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6600 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+  Step 6600/10000 | R_avg = 0.999888 | norm = 0.99815
+[GPU EM Compute] 6650 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6700 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 6700/10000 | R_avg = 0.999873 | norm = 0.99812
+[GPU EM Compute] 6750 calls | Last: 131 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6800 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 6800/10000 | R_avg = 0.999887 | norm = 0.998091
+[GPU EM Compute] 6850 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 6900 calls | Last: 114 μs | Avg: 119 μs | Grid: 128×128
+  Step 6900/10000 | R_avg = 0.999883 | norm = 0.998061
+[GPU EM Compute] 6950 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7000 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 7000/10000 | R_avg = 0.999883 | norm = 0.99803
+[GPU EM Compute] 7050 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7100 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+  Step 7100/10000 | R_avg = 0.999894 | norm = 0.998
+[GPU EM Compute] 7150 calls | Last: 121 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7200 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 7200/10000 | R_avg = 0.999949 | norm = 0.99797
+[GPU EM Compute] 7250 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7300 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 7300/10000 | R_avg = 0.999943 | norm = 0.99794
+[GPU EM Compute] 7350 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7400 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 7400/10000 | R_avg = 0.999954 | norm = 0.997909
+[GPU EM Compute] 7450 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7500 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 7500/10000 | R_avg = 0.999948 | norm = 0.997879
+[GPU EM Compute] 7550 calls | Last: 119 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7600 calls | Last: 112 μs | Avg: 119 μs | Grid: 128×128
+  Step 7600/10000 | R_avg = 0.99978 | norm = 0.997849
+[GPU EM Compute] 7650 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7700 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 7700/10000 | R_avg = 0.999962 | norm = 0.997819
+[GPU EM Compute] 7750 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7800 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 7800/10000 | R_avg = 0.999884 | norm = 0.997788
+[GPU EM Compute] 7850 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 7900 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 7900/10000 | R_avg = 0.99995 | norm = 0.997758
+[GPU EM Compute] 7950 calls | Last: 125 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8000 calls | Last: 118 μs | Avg: 119 μs | Grid: 128×128
+  Step 8000/10000 | R_avg = 0.999944 | norm = 0.997728
+[GPU EM Compute] 8050 calls | Last: 121 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8100 calls | Last: 118 μs | Avg: 119 μs | Grid: 128×128
+  Step 8100/10000 | R_avg = 0.999955 | norm = 0.997697
+[GPU EM Compute] 8150 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8200 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 8200/10000 | R_avg = 0.999971 | norm = 0.997667
+[GPU EM Compute] 8250 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8300 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+  Step 8300/10000 | R_avg = 0.999891 | norm = 0.997637
+[GPU EM Compute] 8350 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8400 calls | Last: 132 μs | Avg: 119 μs | Grid: 128×128
+  Step 8400/10000 | R_avg = 0.999952 | norm = 0.997608
+[GPU EM Compute] 8450 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8500 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 8500/10000 | R_avg = 0.999947 | norm = 0.997578
+[GPU EM Compute] 8550 calls | Last: 123 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8600 calls | Last: 129 μs | Avg: 119 μs | Grid: 128×128
+  Step 8600/10000 | R_avg = 0.999855 | norm = 0.997548
+[GPU EM Compute] 8650 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8700 calls | Last: 118 μs | Avg: 119 μs | Grid: 128×128
+  Step 8700/10000 | R_avg = 0.999882 | norm = 0.997518
+[GPU EM Compute] 8750 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8800 calls | Last: 112 μs | Avg: 119 μs | Grid: 128×128
+  Step 8800/10000 | R_avg = 0.999873 | norm = 0.997488
+[GPU EM Compute] 8850 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 8900 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 8900/10000 | R_avg = 0.999852 | norm = 0.997458
+[GPU EM Compute] 8950 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9000 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+  Step 9000/10000 | R_avg = 0.999904 | norm = 0.997428
+[GPU EM Compute] 9050 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9100 calls | Last: 115 μs | Avg: 119 μs | Grid: 128×128
+  Step 9100/10000 | R_avg = 0.99996 | norm = 0.997398
+[GPU EM Compute] 9150 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9200 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 9200/10000 | R_avg = 0.999922 | norm = 0.997367
+[GPU EM Compute] 9250 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9300 calls | Last: 123 μs | Avg: 119 μs | Grid: 128×128
+  Step 9300/10000 | R_avg = 0.999962 | norm = 0.997336
+[GPU EM Compute] 9350 calls | Last: 120 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9400 calls | Last: 118 μs | Avg: 119 μs | Grid: 128×128
+  Step 9400/10000 | R_avg = 0.999885 | norm = 0.997306
+[GPU EM Compute] 9450 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9500 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+  Step 9500/10000 | R_avg = 0.999875 | norm = 0.997275
+[GPU EM Compute] 9550 calls | Last: 122 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9600 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 9600/10000 | R_avg = 0.999942 | norm = 0.997244
+[GPU EM Compute] 9650 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9700 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 9700/10000 | R_avg = 0.999963 | norm = 0.997214
+[GPU EM Compute] 9750 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9800 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 9800/10000 | R_avg = 0.999924 | norm = 0.997184
+[GPU EM Compute] 9850 calls | Last: 117 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 9900 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+  Step 9900/10000 | R_avg = 0.999954 | norm = 0.997153
+[GPU EM Compute] 9950 calls | Last: 116 μs | Avg: 119 μs | Grid: 128×128
+[GPU EM Compute] 10000 calls | Last: 123 μs | Avg: 119 μs | Grid: 128×128
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✓ Probability Conservation: ||ψ||² = 0.997123 (drift: 0.287928% from initial 1) ✓ PASS
+  ✗ Energy Conservation: E_total = 0.331049 (drift: 2.14232% from initial 0.324105) ✗ FAIL (exceeds tolerance 0.1%)
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 5.47923e-05 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00287724 ✓ PASS
+  Energy validation: max_drift = 0.121828 ✗ FAIL
+Failed to open /home/persist/neotec/0rigin/output/20251230_103909_lorentz_force_validation/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251230_103909_lorentz_force_validation/N_1/observables.csv
+Failed to open /home/persist/neotec/0rigin/output/20251230_103909_lorentz_force_validation/N_1/em_observables.csv for writing
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251230_103909_lorentz_force_validation/N_1/em_observables.csv
+Test failed
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251230_103909_lorentz_force_validation/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.

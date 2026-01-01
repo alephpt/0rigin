@@ -1,0 +1,432 @@
+
+===== SMFT Test Mode =====
+Configuration: config/casimir_force_validation.yaml
+
+[1/3] Initializing...
+
+===== Test Configuration: casimir_force =====
+Description: Phase 3 Test 3.1: Casimir-like Force Between Defect Sheets - F(d) ∝ d^(-2)
+
+[Grid]
+  size: 128 x 128
+
+[Physics]
+  solver_type: dirac
+  delta: 1
+  coupling: 0.1
+  dt: 0.01
+  total_steps: 5000
+  K (Kuramoto): 1
+  damping: 0.1
+  noise_strength: 0
+
+[Initial Conditions - Dirac]
+  type: gaussian
+  center: (32, 32)
+  sigma: 3
+  amplitude: 0.1
+
+[Initial Conditions - Kuramoto]
+  phase_distribution: linear_defects
+  omega_distribution: zero
+  omega_mean: 0
+  omega_std: 0.1
+
+[Operator Splitting]
+  enabled: yes
+  substep_ratios: [1, 10]
+
+[Validation]
+  norm_tolerance: 0.001
+  energy_tolerance: 0.01
+  convergence_tolerance: 0.05
+
+[Output]
+  directory: output/casimir_force
+  save_every: 50 steps
+  formats: [csv]
+========================================
+
+ [INFO]: Nova - Instantiating ..
+Logger - Debug Level set to error ..
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 128 x 128 oscillators
+
+[SMFTEngine] Created GPU buffers for 128x128 grid
+  Phase buffers: 65536 bytes each
+  Spinor buffer: 524288 bytes
+  Accumulator buffers: 65536 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251227_071846_casimir_force
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251227_071846_casimir_force
+✓ SMFTTestRunner initialized successfully
+
+[2/3] Running tests...
+
+===== Running Tests =====
+
+===== Grid Convergence Testing =====
+Testing grid sizes: 64, 128, 256
+
+========================================
+Grid Size: 64×64
+========================================
+
+Initializing engine for 64×64 grid...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 64 x 64 oscillators
+
+[SMFTEngine] Created GPU buffers for 64x64 grid
+  Phase buffers: 16384 bytes each
+  Spinor buffer: 131072 bytes
+  Accumulator buffers: 16384 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (25, 50) ℓ_P
+    Width: 1 ℓ_P
+    Grid coordinates: (16, 32) grid units
+    Grid width: 0.64 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 32) with σ=0.64
+[SMFTEngine] Dirac field initialized: center=(16,32), sigma=0.64, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 32) with σ=0.64
+  Initial energy E0 = 1.91296
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.01
+  half_substeps=0
+  remaining_substeps=1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.999776 | norm = 1
+  Step 500/5000 | R_avg = 0.999793 | norm = 0.99987
+  Step 1000/5000 | R_avg = 0.99979 | norm = 0.999713
+  Step 1500/5000 | R_avg = 0.999812 | norm = 0.999552
+  Step 2000/5000 | R_avg = 0.999796 | norm = 0.999405
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.999793 | norm = 0.99925
+  Step 3000/5000 | R_avg = 0.999814 | norm = 0.99909
+  Step 3500/5000 | R_avg = 0.99979 | norm = 0.998939
+  Step 4000/5000 | R_avg = 0.999779 | norm = 0.998785
+  Step 4500/5000 | R_avg = 0.999807 | norm = 0.998628
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 0.998476 (drift: 0.152372% from initial 1) ✗ FAIL (exceeds tolerance 0.1%)
+  ✗ Energy Conservation: E_total = 1.90862 (drift: 1.56924% from initial 1.87913) ✗ FAIL (exceeds tolerance 1%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00251194 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00152377 ✗ FAIL
+  Energy validation: max_drift = 0.0177827 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/N_1/observables.csv
+Test failed for N=1
+
+--- Testing with N=10 ---
+  Dirac initialization (grid-independent):
+    Position: (25, 50) ℓ_P
+    Width: 1 ℓ_P
+    Grid coordinates: (16, 32) grid units
+    Grid width: 0.64 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 32) with σ=0.64
+[SMFTEngine] Dirac field initialized: center=(16,32), sigma=0.64, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (16, 32) with σ=0.64
+  Initial energy E0 = 1.91296
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.99977 | norm = 1
+  Step 500/5000 | R_avg = 0.999777 | norm = 0.99987
+  Step 1000/5000 | R_avg = 0.999786 | norm = 0.999712
+  Step 1500/5000 | R_avg = 0.999791 | norm = 0.999551
+  Step 2000/5000 | R_avg = 0.999771 | norm = 0.999403
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.999746 | norm = 0.999248
+  Step 3000/5000 | R_avg = 0.999777 | norm = 0.999089
+  Step 3500/5000 | R_avg = 0.999798 | norm = 0.998938
+  Step 4000/5000 | R_avg = 0.999775 | norm = 0.998785
+  Step 4500/5000 | R_avg = 0.99981 | norm = 0.998628
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 0.998476 (drift: 0.152416% from initial 1) ✗ FAIL (exceeds tolerance 0.1%)
+  ✗ Energy Conservation: E_total = 1.90881 (drift: 1.71174% from initial 1.87668) ✗ FAIL (exceeds tolerance 1%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00235225 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00152409 ✗ FAIL
+  Energy validation: max_drift = 0.0192174 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/N_10/observables.csv
+Test failed for N=10
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+Tests failed for grid size 64
+
+========================================
+Grid Size: 128×128
+========================================
+
+Initializing engine for 128×128 grid...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 128 x 128 oscillators
+
+[SMFTEngine] Created GPU buffers for 128x128 grid
+  Phase buffers: 65536 bytes each
+  Spinor buffer: 524288 bytes
+  Accumulator buffers: 65536 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+[Logging] Console output for 128x128 writing to: /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (25, 50) ℓ_P
+    Width: 1 ℓ_P
+    Grid coordinates: (32, 64) grid units
+    Grid width: 1.28 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 64) with σ=1.28
+[SMFTEngine] Dirac field initialized: center=(32,64), sigma=1.28, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 64) with σ=1.28
+  Initial energy E0 = 1.45684
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.999786 | norm = 1
+  Step 500/5000 | R_avg = 0.999781 | norm = 0.999873
+  Step 1000/5000 | R_avg = 0.999782 | norm = 0.999715
+  Step 1500/5000 | R_avg = 0.999791 | norm = 0.999548
+  Step 2000/5000 | R_avg = 0.999771 | norm = 0.999384
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.999775 | norm = 0.999214
+  Step 3000/5000 | R_avg = 0.999772 | norm = 0.999046
+  Step 3500/5000 | R_avg = 0.999788 | norm = 0.99889
+  Step 4000/5000 | R_avg = 0.99977 | norm = 0.998729
+  Step 4500/5000 | R_avg = 0.999784 | norm = 0.998564
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 0.998399 (drift: 0.160173% from initial 1) ✗ FAIL (exceeds tolerance 0.1%)
+  ✓ Energy Conservation: E_total = 1.45386 (drift: 0.0156196% from initial 1.45363) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00243558 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00160103 ✗ FAIL
+  Energy validation: max_drift = 0.00484636 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/N_1/observables.csv
+Test failed for N=1
+
+--- Testing with N=10 ---
+  Dirac initialization (grid-independent):
+    Position: (25, 50) ℓ_P
+    Width: 1 ℓ_P
+    Grid coordinates: (32, 64) grid units
+    Grid width: 1.28 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 64) with σ=1.28
+[SMFTEngine] Dirac field initialized: center=(32,64), sigma=1.28, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 64) with σ=1.28
+  Initial energy E0 = 1.45684
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.999753 | norm = 1
+  Step 500/5000 | R_avg = 0.999788 | norm = 0.999873
+  Step 1000/5000 | R_avg = 0.999784 | norm = 0.999714
+  Step 1500/5000 | R_avg = 0.999781 | norm = 0.999547
+  Step 2000/5000 | R_avg = 0.999776 | norm = 0.999383
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.99979 | norm = 0.999214
+  Step 3000/5000 | R_avg = 0.999766 | norm = 0.999045
+  Step 3500/5000 | R_avg = 0.999774 | norm = 0.998888
+  Step 4000/5000 | R_avg = 0.999787 | norm = 0.998728
+  Step 4500/5000 | R_avg = 0.999782 | norm = 0.998563
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 0.998398 (drift: 0.160302% from initial 1) ✗ FAIL (exceeds tolerance 0.1%)
+  ✓ Energy Conservation: E_total = 1.45394 (drift: 0.423207% from initial 1.44781) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00236089 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00160235 ✗ FAIL
+  Energy validation: max_drift = 0.00608685 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/N_10/observables.csv
+Test failed for N=10
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+Tests failed for grid size 128
+
+========================================
+Grid Size: 256×256
+========================================
+
+Initializing engine for 256×256 grid...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 256 x 256 oscillators
+
+[SMFTEngine] Created GPU buffers for 256x256 grid
+  Phase buffers: 262144 bytes each
+  Spinor buffer: 2097152 bytes
+  Accumulator buffers: 262144 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+[Logging] Console output for 256x256 writing to: /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (25, 50) ℓ_P
+    Width: 1 ℓ_P
+    Grid coordinates: (64, 128) grid units
+    Grid width: 2.56 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 128) with σ=2.56
+[SMFTEngine] Dirac field initialized: center=(64,128), sigma=2.56, norm=1
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 128) with σ=2.56
+  Initial energy E0 = 1.14152
+  Initial norm = 0.999999
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.999755 | norm = 0.999999
+  Step 500/5000 | R_avg = 0.999749 | norm = 0.999849
+  Step 1000/5000 | R_avg = 0.999733 | norm = 0.999678
+  Step 1500/5000 | R_avg = 0.999752 | norm = 0.999506
+  Step 2000/5000 | R_avg = 0.999745 | norm = 0.999311
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.999752 | norm = 0.999101
+  Step 3000/5000 | R_avg = 0.999749 | norm = 0.998891
+  Step 3500/5000 | R_avg = 0.999729 | norm = 0.998689
+  Step 4000/5000 | R_avg = 0.999747 | norm = 0.998489
+  Step 4500/5000 | R_avg = 0.999733 | norm = 0.998288
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 0.998084 (drift: 0.191521% from initial 0.999999) ✗ FAIL (exceeds tolerance 0.1%)
+  ✓ Energy Conservation: E_total = 1.13906 (drift: 0.0129195% from initial 1.13921) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.000761541 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00191603 ✗ FAIL
+  Energy validation: max_drift = 0.00193198 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/N_1/observables.csv
+Test failed for N=1
+
+--- Testing with N=10 ---
+  Dirac initialization (grid-independent):
+    Position: (25, 50) ℓ_P
+    Width: 1 ℓ_P
+    Grid coordinates: (64, 128) grid units
+    Grid width: 2.56 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 128) with σ=2.56
+[SMFTEngine] Dirac field initialized: center=(64,128), sigma=2.56, norm=1
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 128) with σ=2.56
+  Initial energy E0 = 1.14152
+  Initial norm = 0.999999
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.999754 | norm = 0.999999
+  Step 500/5000 | R_avg = 0.999748 | norm = 0.999849
+  Step 1000/5000 | R_avg = 0.999749 | norm = 0.999679
+  Step 1500/5000 | R_avg = 0.999745 | norm = 0.999505
+  Step 2000/5000 | R_avg = 0.999738 | norm = 0.999311
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 2500/5000 | R_avg = 0.99969 | norm = 0.999101
+  Step 3000/5000 | R_avg = 0.999748 | norm = 0.998891
+  Step 3500/5000 | R_avg = 0.999746 | norm = 0.998689
+  Step 4000/5000 | R_avg = 0.999726 | norm = 0.998488
+  Step 4500/5000 | R_avg = 0.999745 | norm = 0.998288
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✗ Probability Conservation: ||ψ||² = 0.998083 (drift: 0.191568% from initial 0.999999) ✗ FAIL (exceeds tolerance 0.1%)
+  ✓ Energy Conservation: E_total = 1.1388 (drift: 0.0184795% from initial 1.13902) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00101417 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00191653 ✗ FAIL
+  Energy validation: max_drift = 0.00210452 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/N_10/observables.csv
+Test failed for N=10
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+Tests failed for grid size 256
+
+===== Tests Complete ====
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251227_071846_casimir_force/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.
+[SMFTEngine] Resources cleanup delegated to component managers
+[DEBUG NovaCore destructor] Entry - using ResourceRegistry for cleanup
+[DEBUG NovaCore destructor] Flushing legacy deletion queue
+[DEBUG NovaCore destructor] Cleaning up 3 registered resources
+[DEBUG NovaCore destructor] Blanking context
+[DEBUG NovaCore destructor] Complete

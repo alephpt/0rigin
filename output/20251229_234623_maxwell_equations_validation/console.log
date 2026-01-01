@@ -1,0 +1,42 @@
+[Logging] Console output for 256x256 writing to: /home/persist/neotec/0rigin/output/20251229_234623_maxwell_equations_validation/console.log
+  Dirac initialization (DEPRECATED grid units):
+    Position: (32, 32) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[DiracEvolution] Initialized 256x256 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+  Initial energy E0 = 0.105161
+  Initial norm = 1
+  Actual initial energy E0 = -nan (from first observation including EM)
+  Step 0/100 | R_avg = 0.999749 | norm = 1
+[GPU EM Compute] 350 calls | Last: 172 μs | Avg: 116 μs | Grid: 256×256
+[GPU EM Compute] 400 calls | Last: 198 μs | Avg: 126 μs | Grid: 256×256
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✓ Probability Conservation: ||ψ||² = 0.999972 (drift: 0.00281074% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = nan (drift: 0% from initial -nan) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0 (c = 1) ✓ PASS (v ≤ c)
+  ✗ Numerical Stability: NaN or Inf detected ✗ FAIL
+  Norm validation: max_error = 2.77598e-05 ✓ PASS
+  Energy validation: max_drift = 0 ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251229_234623_maxwell_equations_validation/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251229_234623_maxwell_equations_validation/N_1/observables.csv
+Failed to open /home/persist/neotec/0rigin/output/20251229_234623_maxwell_equations_validation/N_1/em_observables.csv for writing
+  Saved EM observables to /home/persist/neotec/0rigin/output/20251229_234623_maxwell_equations_validation/N_1/em_observables.csv
+
+===== Tests Complete ====
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251229_234623_maxwell_equations_validation/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.

@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em
+CMAKE_SOURCE_DIR = /home/persist/neotec/0rigin
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build
+CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/test_proca_vortex_bfield.dir/depend.make
@@ -73,18 +73,18 @@ CMakeFiles/test_proca_vortex_bfield.dir/codegen:
 .PHONY : CMakeFiles/test_proca_vortex_bfield.dir/codegen
 
 CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o: CMakeFiles/test_proca_vortex_bfield.dir/flags.make
-CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o: /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/test/test_proca_vortex_magnetic_field.cpp
+CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o: /home/persist/neotec/0rigin/test/test_proca_vortex_magnetic_field.cpp
 CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o: CMakeFiles/test_proca_vortex_bfield.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o -MF CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o.d -o CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o -c /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/test/test_proca_vortex_magnetic_field.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o -MF CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o.d -o CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o -c /home/persist/neotec/0rigin/test/test_proca_vortex_magnetic_field.cpp
 
 CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/test/test_proca_vortex_magnetic_field.cpp > CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_proca_vortex_magnetic_field.cpp > CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.i
 
 CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/test/test_proca_vortex_magnetic_field.cpp -o CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_proca_vortex_magnetic_field.cpp -o CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.s
 
 # Object files for target test_proca_vortex_bfield
 test_proca_vortex_bfield_OBJECTS = \
@@ -98,7 +98,7 @@ bin/test_proca_vortex_bfield: CMakeFiles/test_proca_vortex_bfield.dir/build.make
 bin/test_proca_vortex_bfield: CMakeFiles/test_proca_vortex_bfield.dir/compiler_depend.ts
 bin/test_proca_vortex_bfield: libPhysics.a
 bin/test_proca_vortex_bfield: CMakeFiles/test_proca_vortex_bfield.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/test_proca_vortex_bfield"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/test_proca_vortex_bfield"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_proca_vortex_bfield.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -110,6 +110,6 @@ CMakeFiles/test_proca_vortex_bfield.dir/clean:
 .PHONY : CMakeFiles/test_proca_vortex_bfield.dir/clean
 
 CMakeFiles/test_proca_vortex_bfield.dir/depend:
-	cd /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles/test_proca_vortex_bfield.dir/DependInfo.cmake "--color=$(COLOR)" test_proca_vortex_bfield
+	cd /home/persist/neotec/0rigin/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/persist/neotec/0rigin /home/persist/neotec/0rigin /home/persist/neotec/0rigin/build /home/persist/neotec/0rigin/build /home/persist/neotec/0rigin/build/CMakeFiles/test_proca_vortex_bfield.dir/DependInfo.cmake "--color=$(COLOR)" test_proca_vortex_bfield
 .PHONY : CMakeFiles/test_proca_vortex_bfield.dir/depend
 

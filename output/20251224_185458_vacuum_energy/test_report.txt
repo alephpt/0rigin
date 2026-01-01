@@ -1,0 +1,46 @@
+===== SMFT Test Report =====
+Test: vacuum_energy
+Description: Phase 3 Test 3.2: Vacuum Energy Density Scaling - ρ(R) ∝ R^n
+
+[Configuration]
+Grid: 64 x 64
+Delta: 1
+Coupling: 0.1
+Total steps: 5000
+dt: 0.01
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✗ FAIL
+  ✗ Probability Conservation: ||ψ||² = 0.998398 (drift: 0.160246% from initial 1) ✗ FAIL (exceeds tolerance 0.1%)
+  ✓ Energy Conservation: E_total = 1.45396 (drift: 0.470792% from initial 1.44715) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00160515 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+N=10 Global Validation: ✗ FAIL
+  ✗ Probability Conservation: ||ψ||² = 0.998398 (drift: 0.16024% from initial 1) ✗ FAIL (exceeds tolerance 0.1%)
+  ✓ Energy Conservation: E_total = 1.45416 (drift: 0.150291% from initial 1.45635) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0.953517, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00191797 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+Convergence Validation: ✓ PASS
+  Convergence errors: [9.930e-06, 2.700e-07, 1.364e-06]
+
+N=1: ✗ FAIL
+  Norm: max_error = 1.602e-03 (threshold: 1.000e-03)
+  Energy: max_drift = 6.611e-03 (threshold: 1.000e-02)
+
+N=10: ✗ FAIL
+  Norm: max_error = 1.602e-03 (threshold: 1.000e-03)
+  Energy: max_drift = 4.349e-03 (threshold: 1.000e-02)
+
+[Overall Result]
+✗ SOME TESTS FAILED
+
+===== End of Report ====

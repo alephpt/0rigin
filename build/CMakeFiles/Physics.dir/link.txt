@@ -1,2 +1,2 @@
-/usr/bin/ar qc libPhysics.a CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o
+/usr/bin/ar qc libPhysics.a CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o
 /usr/bin/ranlib libPhysics.a

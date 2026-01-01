@@ -1,0 +1,43 @@
+[Logging] Console output for 128x128 writing to: /home/persist/neotec/0rigin/output/20251229_210009_flux_quantization_validation/console.log
+  Dirac initialization (DEPRECATED grid units):
+    Position: (32, 32) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+  Initial energy E0 = 0.105161
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.01
+  half_substeps=0
+  remaining_substeps=1
+  Actual initial energy E0 = 0.40436 (from first observation including EM)
+  Step 0/100 | R_avg = 0.999761 | norm = 1
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.999984 (drift: 0.00168591% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 0.404857 (drift: 0.122892% from initial 0.40436) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00016507 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 1.64063e-05 ✓ PASS
+  Energy validation: max_drift = 0.00175854 ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251229_210009_flux_quantization_validation/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251229_210009_flux_quantization_validation/N_1/observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251229_210009_flux_quantization_validation/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%

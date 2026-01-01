@@ -1,0 +1,168 @@
+[Logging] Console output for 128x128 v=0c writing to: /home/persist/neotec/0rigin/output/20251226_164612_phase_2.3_full_validation_128x128/console.log
+
+--- Testing with N=1 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 0.78125 ℓ_P
+    Core radius: 3 ℓ_P (3.84 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (60, 50) ℓ_P
+    Width: 5 ℓ_P
+    Grid coordinates: (76.8, 64) grid units
+    Grid width: 6.4 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (76.8, 64) with σ=6.4
+[SMFTEngine] Dirac field initialized: center=(76.8,64), sigma=6.4, norm=0.999999
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (76.8, 64) with σ=6.4
+  Initial energy E0 = 1.02412
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.983654 | norm = 1
+  Step 1000/5000 | R_avg = 0.983619 | norm = 0.999688
+  Step 2000/5000 | R_avg = 0.983645 | norm = 0.999389
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 3000/5000 | R_avg = 0.983654 | norm = 0.999084
+  Step 4000/5000 | R_avg = 0.983619 | norm = 0.998746
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✓ Probability Conservation: ||ψ||² = 0.998409 (drift: 0.159418% from initial 1) ✓ PASS
+  ✗ Energy Conservation: E_total = 1.00053 (drift: 2.01551% from initial 1.02111) ✗ FAIL (exceeds tolerance 2%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.0270144 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.1: Defect Localization Validation =====
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  Norm validation: max_error = 0.00159143 ✓ PASS
+  Energy validation: max_drift = 0.0201551 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_164612_phase_2.3_full_validation_128x128/N_1/observables.csv
+Test failed for N=1
+
+--- Testing with N=10 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 0.78125 ℓ_P
+    Core radius: 3 ℓ_P (3.84 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (60, 50) ℓ_P
+    Width: 5 ℓ_P
+    Grid coordinates: (76.8, 64) grid units
+    Grid width: 6.4 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized Gaussian wavepacket at (76.8, 64) with σ=6.4
+[SMFTEngine] Dirac field initialized: center=(76.8,64), sigma=6.4, norm=0.999999
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (76.8, 64) with σ=6.4
+  Initial energy E0 = 1.02412
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.983614 | norm = 1
+  Step 1000/5000 | R_avg = 0.983585 | norm = 0.999689
+  Step 2000/5000 | R_avg = 0.983633 | norm = 0.99939
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 3000/5000 | R_avg = 0.983651 | norm = 0.999084
+  Step 4000/5000 | R_avg = 0.983632 | norm = 0.998746
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✗ Global validation FAILED:
+  ✓ Probability Conservation: ||ψ||² = 0.998408 (drift: 0.15943% from initial 1) ✓ PASS
+  ✗ Energy Conservation: E_total = 1.00052 (drift: 2.03696% from initial 1.02133) ✗ FAIL (exceeds tolerance 2%)
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.027008 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.1: Defect Localization Validation =====
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  Norm validation: max_error = 0.00159152 ✓ PASS
+  Energy validation: max_drift = 0.0203696 ✗ FAIL
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_164612_phase_2.3_full_validation_128x128/N_10/observables.csv
+Test failed for N=10
+
+--- Testing with N=100 ---
+  Vortex initialization (grid-independent):
+    Domain size: 100 ℓ_P
+    Grid spacing: 0.78125 ℓ_P
+    Core radius: 3 ℓ_P (3.84 grid points)
+    Center: (50, 50) ℓ_P
+    Winding number: W = 1
+  Dirac initialization (grid-independent):
+    Position: (60, 50) ℓ_P
+    Width: 5 ℓ_P
+    Grid coordinates: (76.8, 64) grid units
+    Grid width: 6.4 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized Gaussian wavepacket at (76.8, 64) with σ=6.4
+[SMFTEngine] Dirac field initialized: center=(76.8,64), sigma=6.4, norm=0.999999
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (76.8, 64) with σ=6.4
+  Initial energy E0 = 1.02412
+  Initial norm = 1
+  Saved spatial snapshot at t = 0 (step 0)
+  Step 0/5000 | R_avg = 0.983586 | norm = 1
+  Step 1000/5000 | R_avg = 0.983658 | norm = 0.999689
+  Step 2000/5000 | R_avg = 0.983603 | norm = 0.99939
+  Saved spatial snapshot at t = 25 (step 2500)
+  Step 3000/5000 | R_avg = 0.983595 | norm = 0.999084
+  Step 4000/5000 | R_avg = 0.983647 | norm = 0.998746
+  Saved spatial snapshot at t = 49.99 (step 4999)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998408 (drift: 0.159434% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.00065 (drift: 1.99631% from initial 1.02103) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [1, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.0270435 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+===== Scenario 2.1: Defect Localization Validation =====
+✗ Scenario validation FAILED:
+  ✓ 1. θ(x,y,t=0) shows vortex structure (W = ±1): Winding number W = 1 ✓ PASS (|W| ≈ 1)
+  ✗ 3. R(x,y,t=0) shows core (R_min < 0.5): R_min = 1 ✗ FAIL (expect R_min < 0.5)
+  Norm validation: max_error = 0.00159156 ✓ PASS
+  Energy validation: max_drift = 0.0199631 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_164612_phase_2.3_full_validation_128x128/N_100/observables.csv
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+Tests failed for grid 128, velocity 0
+
+========================================
+Grid: 128×128 | Velocity: v=0.3c
+========================================
+
+Initializing engine for 128×128 grid, velocity v=0.3c...
+[SMFTEngine] Resources cleanup delegated to component managers
+
+[SMFTEngine] Physical Interpretation:
+  Vacuum potential Δ = 1 (Planck mass in natural units)
+  Synchronization field R(x) → Emergent spacetime metric
+  Mass field m(x) = Δ·R(x) → Local energy density
+  ∇R(x) → Gravitational field (not separate force)
+  Grid: 128 x 128 oscillators
+
+[SMFTEngine] Created GPU buffers for 128x128 grid
+  Phase buffers: 65536 bytes each
+  Spinor buffer: 524288 bytes
+  Accumulator buffers: 65536 bytes each (operator splitting)
+[SMFTEngine] Created compute pipelines
+  ✓ Kuramoto pipeline
+  ✓ Sync field pipeline
+  ✓ Gravity field pipeline
+  ✓ Stochastic Kuramoto pipeline
+  ✓ Stochastic Dirac pipeline
+  ✓ Accumulation pipeline (operator splitting)
+Created experiment directory: /home/persist/neotec/0rigin/output/20251226_165409_phase_2.3_full_validation_128x128_v0.3
+[OutputManager] Created timestamped directory: /home/persist/neotec/0rigin/output/20251226_165409_phase_2.3_full_validation_128x128_v0.3

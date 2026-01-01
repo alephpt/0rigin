@@ -1,0 +1,32 @@
+===== SMFT Test Report =====
+Test: pure_magnetic_field
+Description: Pure magnetic field test - particle speed should be conserved exactly
+
+[Configuration]
+Grid: 64 x 64
+Delta: 0.3
+Coupling: 0.1
+Total steps: 5000
+dt: 0.001
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.998393 (drift: 0.160735% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4093.71 (drift: 0.00299955% from initial -4093.59) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 6.85825e-08 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+N=1: ✓ PASS
+  Norm: max_error = 1.607e-03 (threshold: 1.000e-02)
+  Energy: max_drift = 1.198e-03 (threshold: 5.000e-02)
+
+[Overall Result]
+✓ ALL TESTS PASSED
+
+===== End of Report ====

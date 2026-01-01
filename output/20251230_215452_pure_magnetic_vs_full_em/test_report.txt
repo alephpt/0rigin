@@ -1,0 +1,32 @@
+===== SMFT Test Report =====
+Test: pure_magnetic_vs_full_em
+Description: 
+
+[Configuration]
+Grid: 64 x 64
+Delta: 2.5
+Coupling: 0.1
+Total steps: 100
+dt: 0.01
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999977 (drift: 0.00231037% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4091.35 (drift: 0.0134236% from initial -4090.8) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 8.6802e-07 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+N=1: ✓ PASS
+  Norm: max_error = 2.308e-05 (threshold: 1.000e-02)
+  Energy: max_drift = 1.342e-04 (threshold: 1.000e-02)
+
+[Overall Result]
+✓ ALL TESTS PASSED
+
+===== End of Report ====

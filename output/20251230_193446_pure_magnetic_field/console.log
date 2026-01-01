@@ -1,0 +1,54 @@
+[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251230_193446_pure_magnetic_field/console.log
+  Dirac initialization (DEPRECATED grid units):
+    Position: (32, 32) grid units
+    ⚠️  WARNING: Using grid-dependent coordinates (not recommended)
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+[SMFTEngine] Dirac field initialized: center=(32,32), sigma=3, norm=1
+[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (32, 32) with σ=3
+  Initial energy E0 = 0.105161
+  Initial norm = 1
+[stepWithDirac] Strang splitting enabled:
+  substep_ratio=1
+  substep_dt=0.001
+  half_substeps=0
+  remaining_substeps=1
+  [Kuramoto Energy] grad_R: 0.0286816, potential: -4094.02, total: -4093.99 (κ=1)
+  Actual initial energy E0 = -4093.59 (from first observation including EM)
+  Step 0/5000 | R_avg = 0.999753 | norm = 1
+  Step 500/5000 | R_avg = 0.999784 | norm = 0.999853
+  Step 1000/5000 | R_avg = 0.999742 | norm = 0.999706
+  Step 1500/5000 | R_avg = 0.99975 | norm = 0.999556
+  Step 2000/5000 | R_avg = 0.999759 | norm = 0.999398
+  Step 2500/5000 | R_avg = 0.99982 | norm = 0.999234
+  Step 3000/5000 | R_avg = 0.999747 | norm = 0.999069
+  Step 3500/5000 | R_avg = 0.99975 | norm = 0.9989
+  Step 4000/5000 | R_avg = 0.999576 | norm = 0.998732
+  Step 4500/5000 | R_avg = 0.999745 | norm = 0.998563
+  [Kuramoto Energy] grad_R: 0.0286093, potential: -4094.14, total: -4094.11 (κ=1)
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998393 (drift: 0.160735% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -4093.71 (drift: 0.00299955% from initial -4093.59) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 6.85825e-08 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00160689 ✓ PASS
+  Energy validation: max_drift = 0.00119754 ✓ PASS
+Failed to open /home/persist/neotec/0rigin/output/20251230_193446_pure_magnetic_field/N_1/observables.csv for writing
+  Saved observables to /home/persist/neotec/0rigin/output/20251230_193446_pure_magnetic_field/N_1/observables.csv
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251230_193446_pure_magnetic_field/test_report.txt
+
+===== Test Summary =====
+✓ ALL TESTS PASSED
+
+Validation criteria met:
+  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴
+  ✓ Energy conservation |ΔE/E₀| < 1%
+  ✓ Convergence between N ratios < 5%

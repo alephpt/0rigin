@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em
+CMAKE_SOURCE_DIR = /home/persist/neotec/0rigin
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build
+CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SMFTCore.dir/depend.make
@@ -73,18 +73,18 @@ CMakeFiles/SMFTCore.dir/codegen:
 .PHONY : CMakeFiles/SMFTCore.dir/codegen
 
 CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: CMakeFiles/SMFTCore.dir/flags.make
-CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/SMFTCore.cpp
+CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: /home/persist/neotec/0rigin/src/SMFTCore.cpp
 CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: CMakeFiles/SMFTCore.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o -MF CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o.d -o CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o -c /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/SMFTCore.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o -MF CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o.d -o CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCore.cpp
 
 CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/SMFTCore.cpp > CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCore.cpp > CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.i
 
 CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/src/SMFTCore.cpp -o CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCore.cpp -o CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.s
 
 # Object files for target SMFTCore
 SMFTCore_OBJECTS = \
@@ -96,7 +96,7 @@ SMFTCore_EXTERNAL_OBJECTS =
 libSMFTCore.a: CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o
 libSMFTCore.a: CMakeFiles/SMFTCore.dir/build.make
 libSMFTCore.a: CMakeFiles/SMFTCore.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libSMFTCore.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libSMFTCore.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/SMFTCore.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SMFTCore.dir/link.txt --verbose=$(VERBOSE)
 
@@ -109,6 +109,6 @@ CMakeFiles/SMFTCore.dir/clean:
 .PHONY : CMakeFiles/SMFTCore.dir/clean
 
 CMakeFiles/SMFTCore.dir/depend:
-	cd /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build /home/persist/neotec/0rigin/worktrees/feature-wave1d-gauge-covariant-em/build/CMakeFiles/SMFTCore.dir/DependInfo.cmake "--color=$(COLOR)" SMFTCore
+	cd /home/persist/neotec/0rigin/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/persist/neotec/0rigin /home/persist/neotec/0rigin /home/persist/neotec/0rigin/build /home/persist/neotec/0rigin/build /home/persist/neotec/0rigin/build/CMakeFiles/SMFTCore.dir/DependInfo.cmake "--color=$(COLOR)" SMFTCore
 .PHONY : CMakeFiles/SMFTCore.dir/depend
 

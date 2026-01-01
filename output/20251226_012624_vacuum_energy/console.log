@@ -1,0 +1,87 @@
+[Logging] Console output for 128x128 writing to: /home/persist/neotec/0rigin/output/20251226_012624_vacuum_energy/console.log
+
+--- Testing with N=1 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 1 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 1.28 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=1.28
+[SMFTEngine] Dirac field initialized: center=(64,64), sigma=1.28, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=1.28
+  Initial energy E0 = 0.456841
+  Initial norm = 1
+  Step 0/5000 | R_avg = 0.999679 | norm = 1
+  Step 500/5000 | R_avg = 0.999705 | norm = 0.999873
+  Step 1000/5000 | R_avg = 0.999699 | norm = 0.999714
+  Step 1500/5000 | R_avg = 0.999706 | norm = 0.999547
+  Step 2000/5000 | R_avg = 0.999703 | norm = 0.999383
+  Step 2500/5000 | R_avg = 0.999698 | norm = 0.999213
+  Step 3000/5000 | R_avg = 0.999702 | norm = 0.999045
+  Step 3500/5000 | R_avg = 0.999698 | norm = 0.998888
+  Step 4000/5000 | R_avg = 0.999686 | norm = 0.998728
+  Step 4500/5000 | R_avg = 0.999696 | norm = 0.998563
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998398 (drift: 0.160273% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.45382 (drift: 0.542247% from initial 1.44598) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00257714 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00160201 ✓ PASS
+  Energy validation: max_drift = 0.00736605 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_012624_vacuum_energy/N_1/observables.csv
+
+--- Testing with N=10 ---
+  Dirac initialization (grid-independent):
+    Position: (50, 50) ℓ_P
+    Width: 1 ℓ_P
+    Grid coordinates: (64, 64) grid units
+    Grid width: 1.28 grid units
+  Using Dirac solver (spinor field)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=1.28
+[SMFTEngine] Dirac field initialized: center=(64,64), sigma=1.28, norm=1
+[DiracEvolution] Initialized 128x128 4-component spinor field (particle, β=1)
+[DiracEvolution] Initialized Gaussian wavepacket at (64, 64) with σ=1.28
+  Initial energy E0 = 1.45504
+  Initial norm = 1
+  Step 0/5000 | R_avg = 0.999693 | norm = 1
+  Step 500/5000 | R_avg = 0.999719 | norm = 0.999872
+  Step 1000/5000 | R_avg = 0.999686 | norm = 0.999714
+  Step 1500/5000 | R_avg = 0.999686 | norm = 0.999546
+  Step 2000/5000 | R_avg = 0.999697 | norm = 0.999382
+  Step 2500/5000 | R_avg = 0.999697 | norm = 0.999213
+  Step 3000/5000 | R_avg = 0.999693 | norm = 0.999045
+  Step 3500/5000 | R_avg = 0.999707 | norm = 0.998888
+  Step 4000/5000 | R_avg = 0.999703 | norm = 0.998727
+  Step 4500/5000 | R_avg = 0.999697 | norm = 0.998562
+
+===== Global Validation =====
+✓ Global validation PASSED
+  ✓ Probability Conservation: ||ψ||² = 0.998397 (drift: 0.16039% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = 1.45393 (drift: 0.671294% from initial 1.44423) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 1] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 0.00266111 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+  Norm validation: max_error = 0.00160324 ✓ PASS
+  Energy validation: max_drift = 0.0086766 ✓ PASS
+  Saved observables to /home/persist/neotec/0rigin/output/20251226_012624_vacuum_energy/N_10/observables.csv
+
+--- Validating Convergence ---
+✓ Convergence validation PASSED
+
+===== Tests Complete ====
+
+[3/3] Generating report...
+
+✓ Report saved to /home/persist/neotec/0rigin/output/20251226_012624_vacuum_energy/test_report.txt
+
+===== Test Summary =====
+✗ TESTS FAILED
+
+Some validation criteria not met.
+Check test report for details.

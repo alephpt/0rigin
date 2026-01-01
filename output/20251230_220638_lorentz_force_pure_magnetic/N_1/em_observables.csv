@@ -1,0 +1,2 @@
+timestep,field_energy,max_E,max_B,total_flux,avg_lorentz_force,charge_rms,current_rms,maxwell_violation
+0,0.02330112596,0.1399511997,1.80214268e-05,5.622495051e-07,0.003251406607,0.002882416045,0.002881664837,0.03291290073

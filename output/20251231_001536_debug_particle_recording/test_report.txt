@@ -1,0 +1,32 @@
+===== SMFT Test Report =====
+Test: debug_particle_recording
+Description: 
+
+[Configuration]
+Grid: 32 x 32
+Delta: 2.5
+Coupling: 0.1
+Total steps: 100
+dt: 0.001
+
+[Validation Results]
+
+--- Physics Validation Framework ---
+
+N=1 Global Validation: ✓ PASS
+  ✓ Probability Conservation: ||ψ||² = 0.999984 (drift: 0.00159312% from initial 1) ✓ PASS
+  ✓ Energy Conservation: E_total = -1020.35 (drift: 0.00131019% from initial -1020.37) ✓ PASS
+  ✓ Order Parameter Bounds: R ∈ [0, 0] ✓ PASS (within [0,1])
+  ✓ Causality: v = |p|/E = 6.9726e-07 (c = 1) ✓ PASS (v ≤ c)
+  ✓ Numerical Stability: All fields finite ✓ PASS
+
+--- Legacy Validation Metrics ---
+
+N=1: ✓ PASS
+  Norm: max_error = 1.595e-05 (threshold: 5.000e-03)
+  Energy: max_drift = 1.791e-04 (threshold: 1.000e-02)
+
+[Overall Result]
+✓ ALL TESTS PASSED
+
+===== End of Report ====
