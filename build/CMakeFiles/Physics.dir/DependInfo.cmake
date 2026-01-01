@@ -8,8 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/persist/neotec/0rigin/src/physics/ProcaEM.cpp" "CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o" "gcc" "CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o.d"
-  "/home/persist/neotec/0rigin/src/physics/ProcaVulkanPipeline.cpp" "CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o" "gcc" "CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o.d"
   "/home/persist/neotec/0rigin/src/physics/StuckelbergEM.cpp" "CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o" "gcc" "CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o.d"
   )
 

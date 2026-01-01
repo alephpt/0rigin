@@ -1,8 +1,6 @@
 /home/persist/neotec/0rigin/build/CMakeFiles/Physics.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/SMFTCore.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/smft.dir
-/home/persist/neotec/0rigin/build/CMakeFiles/test_proca_vortex_bfield.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_stuckelberg_vortex_bfield.dir
-/home/persist/neotec/0rigin/build/CMakeFiles/test_proca_parameter_sweep.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/edit_cache.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/rebuild_cache.dir

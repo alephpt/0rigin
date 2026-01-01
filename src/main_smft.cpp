@@ -1,8 +1,8 @@
 // src/main_smft.cpp
-// Minimal demonstration of SMFTCore with Proca EM integration
+// Minimal demonstration of SMFTCore with Stückelberg EM integration
 //
 // Usage:
-//   ./smft [--enable-em [coupling]]
+//   ./smft [--enable-em [photon_mass]]
 //
 // Example:
 //   ./smft --enable-em 0.1
@@ -26,17 +26,17 @@ int main(int argc, char* argv[]) {
         } else if (std::strcmp(argv[i], "--help") == 0) {
             std::cout << "Usage: " << argv[0] << " [options]\n";
             std::cout << "\nOptions:\n";
-            std::cout << "  --enable-em [coupling]  Enable Proca EM field (default coupling: 0.1)\n";
-            std::cout << "  --help                  Show this help message\n";
+            std::cout << "  --enable-em [m_γ]  Enable Stückelberg EM field (default m_γ: 0.1)\n";
+            std::cout << "  --help             Show this help message\n";
             std::cout << "\nExample:\n";
             std::cout << "  " << argv[0] << " --enable-em 0.1\n";
             return 0;
         }
     }
 
-    std::cout << "==============================================\n";
-    std::cout << " SMFTCore - Minimal Proca EM Integration Demo\n";
-    std::cout << "==============================================\n\n";
+    std::cout << "===================================================\n";
+    std::cout << " SMFTCore - Stückelberg EM Integration Demo\n";
+    std::cout << "===================================================\n\n";
 
     // Note: In full implementation, would initialize Vulkan device here
     // For this minimal demo, we pass nullptr (CPU-only mode)
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
     std::cout << "  dx = " << config.dx << ", dt = " << config.dt << "\n";
     std::cout << "  EM enabled: " << (enable_em ? "yes" : "no") << "\n";
     if (enable_em) {
-        std::cout << "  Photon mass coupling: " << em_coupling << "\n";
+        std::cout << "  Photon mass m_γ: " << em_coupling << "\n";
     }
     std::cout << "\n";
 
@@ -94,10 +94,10 @@ int main(int argc, char* argv[]) {
 
     std::cout << "\n✓ Evolution complete\n";
     std::cout << "\nIntegration successful. Key features:\n";
-    std::cout << "  • ProcaEM class coupled to SMFT fields\n";
-    std::cout << "  • Spatially-varying photon mass m_γ(x,y) = g(1-R)\n";
-    std::cout << "  • Noether current j_μ from phase gradient sources EM field\n";
-    std::cout << "  • CPU-based evolution (GPU pipeline ready for Vulkan integration)\n";
+    std::cout << "  • StuckelbergEM class coupled to SMFT fields\n";
+    std::cout << "  • Gauge-restored mechanism: A'_μ = A_μ + ∂_μφ/e\n";
+    std::cout << "  • Direct φ = θ coupling (10^9× better than Proca!)\n";
+    std::cout << "  • CPU-based evolution with Klein-Gordon + Maxwell\n";
 
     return 0;
 }

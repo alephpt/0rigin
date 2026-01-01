@@ -1,7 +1,7 @@
 CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: \
  /home/persist/neotec/0rigin/src/SMFTCore.cpp /usr/include/stdc-predef.h \
  /home/persist/neotec/0rigin/include/SMFTCore.h \
- /home/persist/neotec/0rigin/include/physics/ProcaEM.h \
+ /home/persist/neotec/0rigin/include/physics/StuckelbergEM.h \
  /home/persist/neotec/0rigin/include/physics/GaugeTheory.h \
  /home/persist/neotec/0rigin/include/physics/PhysicsTypes.h \
  /usr/include/c++/15.2.1/array /usr/include/c++/15.2.1/compare \
@@ -118,29 +118,7 @@ CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: \
  /usr/include/c++/15.2.1/bits/stl_uninitialized.h \
  /usr/include/c++/15.2.1/bits/stl_vector.h \
  /usr/include/c++/15.2.1/bits/stl_bvector.h \
- /usr/include/c++/15.2.1/bits/vector.tcc \
- /home/persist/neotec/0rigin/include/physics/ProcaVulkanPipeline.h \
- /usr/include/vulkan/vulkan.h /usr/include/vulkan/vk_platform.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h /usr/include/vulkan/vulkan_core.h \
- /usr/include/vk_video/vulkan_video_codec_h264std.h \
- /usr/include/vk_video/vulkan_video_codecs_common.h \
- /usr/include/vk_video/vulkan_video_codec_h264std_encode.h \
- /usr/include/vk_video/vulkan_video_codec_h264std.h \
- /usr/include/vk_video/vulkan_video_codec_h265std.h \
- /usr/include/vk_video/vulkan_video_codec_h265std_encode.h \
- /usr/include/vk_video/vulkan_video_codec_h265std.h \
- /usr/include/vk_video/vulkan_video_codec_h264std_decode.h \
- /usr/include/vk_video/vulkan_video_codec_h265std_decode.h \
- /usr/include/vk_video/vulkan_video_codec_av1std.h \
- /usr/include/vk_video/vulkan_video_codec_av1std_decode.h \
- /usr/include/vk_video/vulkan_video_codec_av1std.h \
- /usr/include/vk_video/vulkan_video_codec_av1std_encode.h \
- /usr/include/vk_video/vulkan_video_codec_vp9std.h \
- /usr/include/vk_video/vulkan_video_codec_vp9std_decode.h \
- /usr/include/vk_video/vulkan_video_codec_vp9std.h \
- /usr/include/c++/15.2.1/memory \
+ /usr/include/c++/15.2.1/bits/vector.tcc /usr/include/c++/15.2.1/memory \
  /usr/include/c++/15.2.1/bits/stl_tempbuf.h \
  /usr/include/c++/15.2.1/bits/stl_raw_storage_iter.h \
  /usr/include/c++/15.2.1/bits/align.h \
@@ -194,7 +172,10 @@ CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: \
  /usr/include/c++/15.2.1/bits/atomic_base.h \
  /usr/include/c++/15.2.1/bits/atomic_lockfree_defines.h \
  /usr/include/c++/15.2.1/bits/atomic_wait.h \
- /usr/include/c++/15.2.1/cstdint /usr/include/c++/15.2.1/climits \
+ /usr/include/c++/15.2.1/cstdint \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
+ /usr/include/bits/stdint-least.h /usr/include/c++/15.2.1/climits \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/limits.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
@@ -213,6 +194,24 @@ CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.o: \
  /usr/include/c++/15.2.1/bits/ranges_algobase.h \
  /usr/include/c++/15.2.1/pstl/glue_memory_defs.h \
  /usr/include/c++/15.2.1/pstl/execution_defs.h \
+ /usr/include/vulkan/vulkan.h /usr/include/vulkan/vk_platform.h \
+ /usr/include/vulkan/vulkan_core.h \
+ /usr/include/vk_video/vulkan_video_codec_h264std.h \
+ /usr/include/vk_video/vulkan_video_codecs_common.h \
+ /usr/include/vk_video/vulkan_video_codec_h264std_encode.h \
+ /usr/include/vk_video/vulkan_video_codec_h264std.h \
+ /usr/include/vk_video/vulkan_video_codec_h265std.h \
+ /usr/include/vk_video/vulkan_video_codec_h265std_encode.h \
+ /usr/include/vk_video/vulkan_video_codec_h265std.h \
+ /usr/include/vk_video/vulkan_video_codec_h264std_decode.h \
+ /usr/include/vk_video/vulkan_video_codec_h265std_decode.h \
+ /usr/include/vk_video/vulkan_video_codec_av1std.h \
+ /usr/include/vk_video/vulkan_video_codec_av1std_decode.h \
+ /usr/include/vk_video/vulkan_video_codec_av1std.h \
+ /usr/include/vk_video/vulkan_video_codec_av1std_encode.h \
+ /usr/include/vk_video/vulkan_video_codec_vp9std.h \
+ /usr/include/vk_video/vulkan_video_codec_vp9std_decode.h \
+ /usr/include/vk_video/vulkan_video_codec_vp9std.h \
  /usr/include/c++/15.2.1/iostream /usr/include/c++/15.2.1/ostream \
  /usr/include/c++/15.2.1/bits/ostream.tcc /usr/include/c++/15.2.1/istream \
  /usr/include/c++/15.2.1/bits/istream.tcc /usr/include/c++/15.2.1/cmath \

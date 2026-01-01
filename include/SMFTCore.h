@@ -1,8 +1,7 @@
 // include/SMFTCore.h
 #pragma once
 
-#include "physics/ProcaEM.h"
-#include "physics/ProcaVulkanPipeline.h"
+#include "physics/StuckelbergEM.h"
 #include <vector>
 #include <memory>
 #include <vulkan/vulkan.h>
@@ -11,13 +10,13 @@
  * SMFTCore - Minimal demonstration core for SMFT+EM coupled evolution
  *
  * This is a lightweight wrapper demonstrating the integration pattern
- * for coupling Proca EM fields to SMFT dynamics. In the full MSFTEngine,
+ * for coupling Stückelberg EM fields to SMFT dynamics. In the full MSFTEngine,
  * this functionality would be integrated directly.
  *
  * Physics:
  *   - SMFT: θ(x,y) phase field, R(x,y) synchronization order parameter
- *   - Proca EM: Massive photon with m_γ(x,y) = g·(1-R(x,y))
- *   - Coupling: SMFT Noether current j_μ sources EM field
+ *   - Stückelberg EM: Gauge-restored massive photon A'_μ = A_μ + ∂_μφ/e
+ *   - Coupling: Direct φ = θ coupling (gauge invariant!)
  */
 class SMFTCore {
 public:
@@ -37,8 +36,8 @@ public:
     void initialize(const Config& config);
 
     /**
-     * Enable electromagnetic field evolution with Proca mechanism
-     * @param photon_mass_coupling: g in m_γ = g(1-R)
+     * Enable electromagnetic field evolution with Stückelberg mechanism
+     * @param photon_mass_coupling: photon mass m_γ
      */
     void enableEM(float photon_mass_coupling);
 
@@ -48,7 +47,7 @@ public:
     void evolveFields(float dt);
 
     /**
-     * Evolve EM fields one timestep using Proca dynamics
+     * Evolve EM fields one timestep using Stückelberg dynamics
      */
     void evolveEM(float dt);
 
@@ -81,6 +80,5 @@ private:
 
     // EM support
     bool em_enabled_ = false;
-    std::unique_ptr<physics::ProcaEM> proca_em_;
-    std::unique_ptr<physics::ProcaVulkanPipeline> proca_pipeline_;
+    std::unique_ptr<physics::StuckelbergEM> stuckelberg_em_;
 };

@@ -66,18 +66,14 @@ CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/build
 all: CMakeFiles/Physics.dir/all
 all: CMakeFiles/SMFTCore.dir/all
 all: CMakeFiles/smft.dir/all
-all: CMakeFiles/test_proca_vortex_bfield.dir/all
 all: CMakeFiles/test_stuckelberg_vortex_bfield.dir/all
-all: CMakeFiles/test_proca_parameter_sweep.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/Physics.dir/codegen
 codegen: CMakeFiles/SMFTCore.dir/codegen
 codegen: CMakeFiles/smft.dir/codegen
-codegen: CMakeFiles/test_proca_vortex_bfield.dir/codegen
 codegen: CMakeFiles/test_stuckelberg_vortex_bfield.dir/codegen
-codegen: CMakeFiles/test_proca_parameter_sweep.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -88,9 +84,7 @@ preinstall:
 clean: CMakeFiles/Physics.dir/clean
 clean: CMakeFiles/SMFTCore.dir/clean
 clean: CMakeFiles/smft.dir/clean
-clean: CMakeFiles/test_proca_vortex_bfield.dir/clean
 clean: CMakeFiles/test_stuckelberg_vortex_bfield.dir/clean
-clean: CMakeFiles/test_proca_parameter_sweep.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -100,12 +94,12 @@ clean: CMakeFiles/test_proca_parameter_sweep.dir/clean
 CMakeFiles/Physics.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=1,2,3,4 "Built target Physics"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=1,2 "Built target Physics"
 .PHONY : CMakeFiles/Physics.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Physics.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Physics.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : CMakeFiles/Physics.dir/rule
@@ -117,7 +111,7 @@ Physics: CMakeFiles/Physics.dir/rule
 # codegen rule for target.
 CMakeFiles/Physics.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target Physics"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=1,2 "Finished codegen for target Physics"
 .PHONY : CMakeFiles/Physics.dir/codegen
 
 # clean rule for target.
@@ -132,12 +126,12 @@ CMakeFiles/Physics.dir/clean:
 CMakeFiles/SMFTCore.dir/all: CMakeFiles/Physics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFTCore.dir/build.make CMakeFiles/SMFTCore.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFTCore.dir/build.make CMakeFiles/SMFTCore.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=5,6 "Built target SMFTCore"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=3,4 "Built target SMFTCore"
 .PHONY : CMakeFiles/SMFTCore.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/SMFTCore.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/SMFTCore.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : CMakeFiles/SMFTCore.dir/rule
@@ -149,7 +143,7 @@ SMFTCore: CMakeFiles/SMFTCore.dir/rule
 # codegen rule for target.
 CMakeFiles/SMFTCore.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFTCore.dir/build.make CMakeFiles/SMFTCore.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=5,6 "Finished codegen for target SMFTCore"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=3,4 "Finished codegen for target SMFTCore"
 .PHONY : CMakeFiles/SMFTCore.dir/codegen
 
 # clean rule for target.
@@ -165,12 +159,12 @@ CMakeFiles/smft.dir/all: CMakeFiles/Physics.dir/all
 CMakeFiles/smft.dir/all: CMakeFiles/SMFTCore.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=7,8 "Built target smft"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=5,6 "Built target smft"
 .PHONY : CMakeFiles/smft.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/smft.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/smft.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : CMakeFiles/smft.dir/rule
@@ -182,7 +176,7 @@ smft: CMakeFiles/smft.dir/rule
 # codegen rule for target.
 CMakeFiles/smft.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=7,8 "Finished codegen for target smft"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=5,6 "Finished codegen for target smft"
 .PHONY : CMakeFiles/smft.dir/codegen
 
 # clean rule for target.
@@ -191,50 +185,18 @@ CMakeFiles/smft.dir/clean:
 .PHONY : CMakeFiles/smft.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_proca_vortex_bfield.dir
-
-# All Build rule for target.
-CMakeFiles/test_proca_vortex_bfield.dir/all: CMakeFiles/Physics.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=11,12 "Built target test_proca_vortex_bfield"
-.PHONY : CMakeFiles/test_proca_vortex_bfield.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_proca_vortex_bfield.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_proca_vortex_bfield.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_proca_vortex_bfield.dir/rule
-
-# Convenience name for target.
-test_proca_vortex_bfield: CMakeFiles/test_proca_vortex_bfield.dir/rule
-.PHONY : test_proca_vortex_bfield
-
-# codegen rule for target.
-CMakeFiles/test_proca_vortex_bfield.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=11,12 "Finished codegen for target test_proca_vortex_bfield"
-.PHONY : CMakeFiles/test_proca_vortex_bfield.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_proca_vortex_bfield.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/clean
-.PHONY : CMakeFiles/test_proca_vortex_bfield.dir/clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/test_stuckelberg_vortex_bfield.dir
 
 # All Build rule for target.
 CMakeFiles/test_stuckelberg_vortex_bfield.dir/all: CMakeFiles/Physics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=13,14 "Built target test_stuckelberg_vortex_bfield"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=7,8 "Built target test_stuckelberg_vortex_bfield"
 .PHONY : CMakeFiles/test_stuckelberg_vortex_bfield.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/test_stuckelberg_vortex_bfield.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_stuckelberg_vortex_bfield.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : CMakeFiles/test_stuckelberg_vortex_bfield.dir/rule
@@ -246,45 +208,13 @@ test_stuckelberg_vortex_bfield: CMakeFiles/test_stuckelberg_vortex_bfield.dir/ru
 # codegen rule for target.
 CMakeFiles/test_stuckelberg_vortex_bfield.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=13,14 "Finished codegen for target test_stuckelberg_vortex_bfield"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=7,8 "Finished codegen for target test_stuckelberg_vortex_bfield"
 .PHONY : CMakeFiles/test_stuckelberg_vortex_bfield.dir/codegen
 
 # clean rule for target.
 CMakeFiles/test_stuckelberg_vortex_bfield.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/clean
 .PHONY : CMakeFiles/test_stuckelberg_vortex_bfield.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_proca_parameter_sweep.dir
-
-# All Build rule for target.
-CMakeFiles/test_proca_parameter_sweep.dir/all: CMakeFiles/Physics.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=9,10 "Built target test_proca_parameter_sweep"
-.PHONY : CMakeFiles/test_proca_parameter_sweep.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_proca_parameter_sweep.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_proca_parameter_sweep.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_proca_parameter_sweep.dir/rule
-
-# Convenience name for target.
-test_proca_parameter_sweep: CMakeFiles/test_proca_parameter_sweep.dir/rule
-.PHONY : test_proca_parameter_sweep
-
-# codegen rule for target.
-CMakeFiles/test_proca_parameter_sweep.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=9,10 "Finished codegen for target test_proca_parameter_sweep"
-.PHONY : CMakeFiles/test_proca_parameter_sweep.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_proca_parameter_sweep.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/clean
-.PHONY : CMakeFiles/test_proca_parameter_sweep.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

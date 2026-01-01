@@ -156,19 +156,6 @@ smft/fast:
 .PHONY : smft/fast
 
 #=============================================================================
-# Target rules for targets named test_proca_vortex_bfield
-
-# Build rule for target.
-test_proca_vortex_bfield: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_proca_vortex_bfield
-.PHONY : test_proca_vortex_bfield
-
-# fast build rule for target.
-test_proca_vortex_bfield/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/build
-.PHONY : test_proca_vortex_bfield/fast
-
-#=============================================================================
 # Target rules for targets named test_stuckelberg_vortex_bfield
 
 # Build rule for target.
@@ -180,19 +167,6 @@ test_stuckelberg_vortex_bfield: cmake_check_build_system
 test_stuckelberg_vortex_bfield/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/build
 .PHONY : test_stuckelberg_vortex_bfield/fast
-
-#=============================================================================
-# Target rules for targets named test_proca_parameter_sweep
-
-# Build rule for target.
-test_proca_parameter_sweep: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_proca_parameter_sweep
-.PHONY : test_proca_parameter_sweep
-
-# fast build rule for target.
-test_proca_parameter_sweep/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/build
-.PHONY : test_proca_parameter_sweep/fast
 
 src/SMFTCore.o: src/SMFTCore.cpp.o
 .PHONY : src/SMFTCore.o
@@ -242,54 +216,6 @@ src/main_smft.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/src/main_smft.cpp.s
 .PHONY : src/main_smft.cpp.s
 
-src/physics/ProcaEM.o: src/physics/ProcaEM.cpp.o
-.PHONY : src/physics/ProcaEM.o
-
-# target to build an object file
-src/physics/ProcaEM.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o
-.PHONY : src/physics/ProcaEM.cpp.o
-
-src/physics/ProcaEM.i: src/physics/ProcaEM.cpp.i
-.PHONY : src/physics/ProcaEM.i
-
-# target to preprocess a source file
-src/physics/ProcaEM.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.i
-.PHONY : src/physics/ProcaEM.cpp.i
-
-src/physics/ProcaEM.s: src/physics/ProcaEM.cpp.s
-.PHONY : src/physics/ProcaEM.s
-
-# target to generate assembly for a file
-src/physics/ProcaEM.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.s
-.PHONY : src/physics/ProcaEM.cpp.s
-
-src/physics/ProcaVulkanPipeline.o: src/physics/ProcaVulkanPipeline.cpp.o
-.PHONY : src/physics/ProcaVulkanPipeline.o
-
-# target to build an object file
-src/physics/ProcaVulkanPipeline.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o
-.PHONY : src/physics/ProcaVulkanPipeline.cpp.o
-
-src/physics/ProcaVulkanPipeline.i: src/physics/ProcaVulkanPipeline.cpp.i
-.PHONY : src/physics/ProcaVulkanPipeline.i
-
-# target to preprocess a source file
-src/physics/ProcaVulkanPipeline.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.i
-.PHONY : src/physics/ProcaVulkanPipeline.cpp.i
-
-src/physics/ProcaVulkanPipeline.s: src/physics/ProcaVulkanPipeline.cpp.s
-.PHONY : src/physics/ProcaVulkanPipeline.s
-
-# target to generate assembly for a file
-src/physics/ProcaVulkanPipeline.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.s
-.PHONY : src/physics/ProcaVulkanPipeline.cpp.s
-
 src/physics/StuckelbergEM.o: src/physics/StuckelbergEM.cpp.o
 .PHONY : src/physics/StuckelbergEM.o
 
@@ -313,54 +239,6 @@ src/physics/StuckelbergEM.s: src/physics/StuckelbergEM.cpp.s
 src/physics/StuckelbergEM.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.s
 .PHONY : src/physics/StuckelbergEM.cpp.s
-
-test/test_proca_parameter_sweep.o: test/test_proca_parameter_sweep.cpp.o
-.PHONY : test/test_proca_parameter_sweep.o
-
-# target to build an object file
-test/test_proca_parameter_sweep.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/test/test_proca_parameter_sweep.cpp.o
-.PHONY : test/test_proca_parameter_sweep.cpp.o
-
-test/test_proca_parameter_sweep.i: test/test_proca_parameter_sweep.cpp.i
-.PHONY : test/test_proca_parameter_sweep.i
-
-# target to preprocess a source file
-test/test_proca_parameter_sweep.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/test/test_proca_parameter_sweep.cpp.i
-.PHONY : test/test_proca_parameter_sweep.cpp.i
-
-test/test_proca_parameter_sweep.s: test/test_proca_parameter_sweep.cpp.s
-.PHONY : test/test_proca_parameter_sweep.s
-
-# target to generate assembly for a file
-test/test_proca_parameter_sweep.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_parameter_sweep.dir/build.make CMakeFiles/test_proca_parameter_sweep.dir/test/test_proca_parameter_sweep.cpp.s
-.PHONY : test/test_proca_parameter_sweep.cpp.s
-
-test/test_proca_vortex_magnetic_field.o: test/test_proca_vortex_magnetic_field.cpp.o
-.PHONY : test/test_proca_vortex_magnetic_field.o
-
-# target to build an object file
-test/test_proca_vortex_magnetic_field.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o
-.PHONY : test/test_proca_vortex_magnetic_field.cpp.o
-
-test/test_proca_vortex_magnetic_field.i: test/test_proca_vortex_magnetic_field.cpp.i
-.PHONY : test/test_proca_vortex_magnetic_field.i
-
-# target to preprocess a source file
-test/test_proca_vortex_magnetic_field.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.i
-.PHONY : test/test_proca_vortex_magnetic_field.cpp.i
-
-test/test_proca_vortex_magnetic_field.s: test/test_proca_vortex_magnetic_field.cpp.s
-.PHONY : test/test_proca_vortex_magnetic_field.s
-
-# target to generate assembly for a file
-test/test_proca_vortex_magnetic_field.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_proca_vortex_bfield.dir/build.make CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.s
-.PHONY : test/test_proca_vortex_magnetic_field.cpp.s
 
 test/test_stuckelberg_vortex_bfield.o: test/test_stuckelberg_vortex_bfield.cpp.o
 .PHONY : test/test_stuckelberg_vortex_bfield.o
@@ -397,8 +275,6 @@ help:
 	@echo "... Physics"
 	@echo "... SMFTCore"
 	@echo "... smft"
-	@echo "... test_proca_parameter_sweep"
-	@echo "... test_proca_vortex_bfield"
 	@echo "... test_stuckelberg_vortex_bfield"
 	@echo "... src/SMFTCore.o"
 	@echo "... src/SMFTCore.i"
@@ -406,21 +282,9 @@ help:
 	@echo "... src/main_smft.o"
 	@echo "... src/main_smft.i"
 	@echo "... src/main_smft.s"
-	@echo "... src/physics/ProcaEM.o"
-	@echo "... src/physics/ProcaEM.i"
-	@echo "... src/physics/ProcaEM.s"
-	@echo "... src/physics/ProcaVulkanPipeline.o"
-	@echo "... src/physics/ProcaVulkanPipeline.i"
-	@echo "... src/physics/ProcaVulkanPipeline.s"
 	@echo "... src/physics/StuckelbergEM.o"
 	@echo "... src/physics/StuckelbergEM.i"
 	@echo "... src/physics/StuckelbergEM.s"
-	@echo "... test/test_proca_parameter_sweep.o"
-	@echo "... test/test_proca_parameter_sweep.i"
-	@echo "... test/test_proca_parameter_sweep.s"
-	@echo "... test/test_proca_vortex_magnetic_field.o"
-	@echo "... test/test_proca_vortex_magnetic_field.i"
-	@echo "... test/test_proca_vortex_magnetic_field.s"
 	@echo "... test/test_stuckelberg_vortex_bfield.o"
 	@echo "... test/test_stuckelberg_vortex_bfield.i"
 	@echo "... test/test_stuckelberg_vortex_bfield.s"

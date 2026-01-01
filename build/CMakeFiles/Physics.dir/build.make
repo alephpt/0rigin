@@ -72,38 +72,10 @@ include CMakeFiles/Physics.dir/flags.make
 CMakeFiles/Physics.dir/codegen:
 .PHONY : CMakeFiles/Physics.dir/codegen
 
-CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o: CMakeFiles/Physics.dir/flags.make
-CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o: /home/persist/neotec/0rigin/src/physics/ProcaEM.cpp
-CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o: CMakeFiles/Physics.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o -MF CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o.d -o CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o -c /home/persist/neotec/0rigin/src/physics/ProcaEM.cpp
-
-CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/physics/ProcaEM.cpp > CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.i
-
-CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/physics/ProcaEM.cpp -o CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.s
-
-CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o: CMakeFiles/Physics.dir/flags.make
-CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o: /home/persist/neotec/0rigin/src/physics/ProcaVulkanPipeline.cpp
-CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o: CMakeFiles/Physics.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o -MF CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o.d -o CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o -c /home/persist/neotec/0rigin/src/physics/ProcaVulkanPipeline.cpp
-
-CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/physics/ProcaVulkanPipeline.cpp > CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.i
-
-CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/physics/ProcaVulkanPipeline.cpp -o CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.s
-
 CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o: CMakeFiles/Physics.dir/flags.make
 CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o: /home/persist/neotec/0rigin/src/physics/StuckelbergEM.cpp
 CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o: CMakeFiles/Physics.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o -MF CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o.d -o CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o -c /home/persist/neotec/0rigin/src/physics/StuckelbergEM.cpp
 
 CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.i: cmake_force
@@ -116,19 +88,15 @@ CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.s: cmake_force
 
 # Object files for target Physics
 Physics_OBJECTS = \
-"CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o" \
-"CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o" \
 "CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o"
 
 # External object files for target Physics
 Physics_EXTERNAL_OBJECTS =
 
-libPhysics.a: CMakeFiles/Physics.dir/src/physics/ProcaEM.cpp.o
-libPhysics.a: CMakeFiles/Physics.dir/src/physics/ProcaVulkanPipeline.cpp.o
 libPhysics.a: CMakeFiles/Physics.dir/src/physics/StuckelbergEM.cpp.o
 libPhysics.a: CMakeFiles/Physics.dir/build.make
 libPhysics.a: CMakeFiles/Physics.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libPhysics.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libPhysics.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/Physics.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Physics.dir/link.txt --verbose=$(VERBOSE)
 

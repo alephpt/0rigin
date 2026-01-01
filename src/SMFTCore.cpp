@@ -42,21 +42,14 @@ void SMFTCore::initialize(const Config& config) {
 void SMFTCore::enableEM(float photon_mass_coupling) {
     em_enabled_ = true;
 
-    // Create CPU version for Proca field evolution
-    proca_em_ = std::make_unique<physics::ProcaEM>(
+    // Create Stückelberg field evolution
+    stuckelberg_em_ = std::make_unique<physics::StuckelbergEM>(
         config_.nx, config_.ny, config_.dx, photon_mass_coupling
     );
 
-    // Create GPU pipeline (placeholder - would be initialized with device/physical_device_)
-    // For now, we'll use CPU-only evolution
-    // proca_pipeline_ = std::make_unique<physics::ProcaVulkanPipeline>(
-    //     device_, physical_device_
-    // );
-    // proca_pipeline_->initialize(config_.nx, config_.ny);
-
-    std::cout << "[SMFTCore] Proca EM enabled (m_γ coupling = "
+    std::cout << "[SMFTCore] Stückelberg EM enabled (m_γ = "
               << photon_mass_coupling << ")" << std::endl;
-    std::cout << "[SMFTCore] Using CPU-based Proca evolution (GPU pipeline not yet implemented)"
+    std::cout << "[SMFTCore] Gauge-restored mechanism: A'_μ = A_μ + ∂_μφ/e (φ = θ)"
               << std::endl;
 }
 
@@ -76,8 +69,8 @@ void SMFTCore::evolveEM(float dt) {
         return;
     }
 
-    // CPU-based Proca evolution
-    proca_em_->computePotentials(
+    // Stückelberg evolution
+    stuckelberg_em_->computePotentials(
         theta_field_.data(),
         R_field_.data(),
         config_.nx,
@@ -86,17 +79,12 @@ void SMFTCore::evolveEM(float dt) {
         dt
     );
 
-    proca_em_->computeFieldStrengths();
-
-    // TODO: GPU version when Vulkan pipeline is complete
-    // VkCommandBuffer cmd = ...; // would acquire from command pool
-    // proca_pipeline_->evolveProca(cmd, dt);
-    // proca_pipeline_->computeFieldTensor(cmd);
+    stuckelberg_em_->computeFieldStrengths();
 }
 
 physics::FieldTensor SMFTCore::getEMFieldAt(int i, int j) const {
     if (!em_enabled_) {
         return physics::FieldTensor{};
     }
-    return proca_em_->getFieldAt(i, j);
+    return stuckelberg_em_->getFieldAt(i, j);
 }

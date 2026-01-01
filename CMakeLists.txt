@@ -23,8 +23,6 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 # ============================================================================
 
 add_library(Physics STATIC
-    src/physics/ProcaEM.cpp
-    src/physics/ProcaVulkanPipeline.cpp
     src/physics/StuckelbergEM.cpp
 )
 
@@ -93,24 +91,10 @@ set_target_properties(smft PROPERTIES
 # TEST EXECUTABLES
 # ============================================================================
 
-add_executable(test_proca_vortex_bfield test/test_proca_vortex_magnetic_field.cpp)
-target_link_libraries(test_proca_vortex_bfield PRIVATE Physics)
-target_include_directories(test_proca_vortex_bfield PRIVATE ${CMAKE_SOURCE_DIR}/include)
-set_target_properties(test_proca_vortex_bfield PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
-
 add_executable(test_stuckelberg_vortex_bfield test/test_stuckelberg_vortex_bfield.cpp)
 target_link_libraries(test_stuckelberg_vortex_bfield PRIVATE Physics)
 target_include_directories(test_stuckelberg_vortex_bfield PRIVATE ${CMAKE_SOURCE_DIR}/include)
 set_target_properties(test_stuckelberg_vortex_bfield PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
-
-add_executable(test_proca_parameter_sweep test/test_proca_parameter_sweep.cpp)
-target_link_libraries(test_proca_parameter_sweep PRIVATE Physics)
-target_include_directories(test_proca_parameter_sweep PRIVATE ${CMAKE_SOURCE_DIR}/include)
-set_target_properties(test_proca_parameter_sweep PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
@@ -126,10 +110,9 @@ message(STATUS "")
 message(STATUS "  Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "")
 message(STATUS "  Targets:")
-message(STATUS "    • Physics (static library)")
+message(STATUS "    • Physics (static library - Stückelberg only)")
 message(STATUS "    • SMFTCore (static library)")
 message(STATUS "    • smft (executable)")
-message(STATUS "    • test_proca_vortex_bfield (Proca test - FAILED)")
-message(STATUS "    • test_stuckelberg_vortex_bfield (Stückelberg test - CRITICAL)")
+message(STATUS "    • test_stuckelberg_vortex_bfield (Stückelberg validation)")
 message(STATUS "")
 message(STATUS "===============================================")
