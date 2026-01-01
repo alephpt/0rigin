@@ -9,6 +9,7 @@ bin/smft: \
   CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o \
   CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o \
+  CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o \
   CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o \
   CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o \
   CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o \
@@ -71,6 +72,8 @@ CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o:
 CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o:
 
 CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o:
+
+CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o:
 
 CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o:
 

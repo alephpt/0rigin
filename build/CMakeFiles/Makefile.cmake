@@ -62,4 +62,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Nova.dir/DependInfo.cmake"
   "CMakeFiles/imgui.dir/DependInfo.cmake"
   "CMakeFiles/SMFT.dir/DependInfo.cmake"
+  "CMakeFiles/test_geodesic_verification.dir/DependInfo.cmake"
+  "CMakeFiles/test_weak_field_limit.dir/DependInfo.cmake"
   )

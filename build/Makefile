@@ -168,6 +168,32 @@ SMFT/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/build
 .PHONY : SMFT/fast
 
+#=============================================================================
+# Target rules for targets named test_geodesic_verification
+
+# Build rule for target.
+test_geodesic_verification: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_geodesic_verification
+.PHONY : test_geodesic_verification
+
+# fast build rule for target.
+test_geodesic_verification/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/build
+.PHONY : test_geodesic_verification/fast
+
+#=============================================================================
+# Target rules for targets named test_weak_field_limit
+
+# Build rule for target.
+test_weak_field_limit: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_weak_field_limit
+.PHONY : test_weak_field_limit
+
+# fast build rule for target.
+test_weak_field_limit/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/build
+.PHONY : test_weak_field_limit/fast
+
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
 
@@ -702,6 +728,8 @@ src/DiracEvolution.o: src/DiracEvolution.cpp.o
 # target to build an object file
 src/DiracEvolution.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o
 .PHONY : src/DiracEvolution.cpp.o
 
 src/DiracEvolution.i: src/DiracEvolution.cpp.i
@@ -710,6 +738,8 @@ src/DiracEvolution.i: src/DiracEvolution.cpp.i
 # target to preprocess a source file
 src/DiracEvolution.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.i
 .PHONY : src/DiracEvolution.cpp.i
 
 src/DiracEvolution.s: src/DiracEvolution.cpp.s
@@ -718,7 +748,39 @@ src/DiracEvolution.s: src/DiracEvolution.cpp.s
 # target to generate assembly for a file
 src/DiracEvolution.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.s
 .PHONY : src/DiracEvolution.cpp.s
+
+src/GeodesicIntegrator.o: src/GeodesicIntegrator.cpp.o
+.PHONY : src/GeodesicIntegrator.o
+
+# target to build an object file
+src/GeodesicIntegrator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.o
+.PHONY : src/GeodesicIntegrator.cpp.o
+
+src/GeodesicIntegrator.i: src/GeodesicIntegrator.cpp.i
+.PHONY : src/GeodesicIntegrator.i
+
+# target to preprocess a source file
+src/GeodesicIntegrator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.i
+.PHONY : src/GeodesicIntegrator.cpp.i
+
+src/GeodesicIntegrator.s: src/GeodesicIntegrator.cpp.s
+.PHONY : src/GeodesicIntegrator.s
+
+# target to generate assembly for a file
+src/GeodesicIntegrator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.s
+.PHONY : src/GeodesicIntegrator.cpp.s
 
 src/SMFTBufferManager.o: src/SMFTBufferManager.cpp.o
 .PHONY : src/SMFTBufferManager.o
@@ -726,6 +788,7 @@ src/SMFTBufferManager.o: src/SMFTBufferManager.cpp.o
 # target to build an object file
 src/SMFTBufferManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o
 .PHONY : src/SMFTBufferManager.cpp.o
 
 src/SMFTBufferManager.i: src/SMFTBufferManager.cpp.i
@@ -734,6 +797,7 @@ src/SMFTBufferManager.i: src/SMFTBufferManager.cpp.i
 # target to preprocess a source file
 src/SMFTBufferManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.i
 .PHONY : src/SMFTBufferManager.cpp.i
 
 src/SMFTBufferManager.s: src/SMFTBufferManager.cpp.s
@@ -742,6 +806,7 @@ src/SMFTBufferManager.s: src/SMFTBufferManager.cpp.s
 # target to generate assembly for a file
 src/SMFTBufferManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.s
 .PHONY : src/SMFTBufferManager.cpp.s
 
 src/SMFTCompute.o: src/SMFTCompute.cpp.o
@@ -750,6 +815,7 @@ src/SMFTCompute.o: src/SMFTCompute.cpp.o
 # target to build an object file
 src/SMFTCompute.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o
 .PHONY : src/SMFTCompute.cpp.o
 
 src/SMFTCompute.i: src/SMFTCompute.cpp.i
@@ -758,6 +824,7 @@ src/SMFTCompute.i: src/SMFTCompute.cpp.i
 # target to preprocess a source file
 src/SMFTCompute.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.i
 .PHONY : src/SMFTCompute.cpp.i
 
 src/SMFTCompute.s: src/SMFTCompute.cpp.s
@@ -766,6 +833,7 @@ src/SMFTCompute.s: src/SMFTCompute.cpp.s
 # target to generate assembly for a file
 src/SMFTCompute.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.s
 .PHONY : src/SMFTCompute.cpp.s
 
 src/SMFTCore.o: src/SMFTCore.cpp.o
@@ -774,6 +842,7 @@ src/SMFTCore.o: src/SMFTCore.cpp.o
 # target to build an object file
 src/SMFTCore.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o
 .PHONY : src/SMFTCore.cpp.o
 
 src/SMFTCore.i: src/SMFTCore.cpp.i
@@ -782,6 +851,7 @@ src/SMFTCore.i: src/SMFTCore.cpp.i
 # target to preprocess a source file
 src/SMFTCore.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.i
 .PHONY : src/SMFTCore.cpp.i
 
 src/SMFTCore.s: src/SMFTCore.cpp.s
@@ -790,6 +860,7 @@ src/SMFTCore.s: src/SMFTCore.cpp.s
 # target to generate assembly for a file
 src/SMFTCore.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.s
 .PHONY : src/SMFTCore.cpp.s
 
 src/SMFTDescriptorManager.o: src/SMFTDescriptorManager.cpp.o
@@ -798,6 +869,7 @@ src/SMFTDescriptorManager.o: src/SMFTDescriptorManager.cpp.o
 # target to build an object file
 src/SMFTDescriptorManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o
 .PHONY : src/SMFTDescriptorManager.cpp.o
 
 src/SMFTDescriptorManager.i: src/SMFTDescriptorManager.cpp.i
@@ -806,6 +878,7 @@ src/SMFTDescriptorManager.i: src/SMFTDescriptorManager.cpp.i
 # target to preprocess a source file
 src/SMFTDescriptorManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.i
 .PHONY : src/SMFTDescriptorManager.cpp.i
 
 src/SMFTDescriptorManager.s: src/SMFTDescriptorManager.cpp.s
@@ -814,6 +887,7 @@ src/SMFTDescriptorManager.s: src/SMFTDescriptorManager.cpp.s
 # target to generate assembly for a file
 src/SMFTDescriptorManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.s
 .PHONY : src/SMFTDescriptorManager.cpp.s
 
 src/SMFTEngine.o: src/SMFTEngine.cpp.o
@@ -822,6 +896,7 @@ src/SMFTEngine.o: src/SMFTEngine.cpp.o
 # target to build an object file
 src/SMFTEngine.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o
 .PHONY : src/SMFTEngine.cpp.o
 
 src/SMFTEngine.i: src/SMFTEngine.cpp.i
@@ -830,6 +905,7 @@ src/SMFTEngine.i: src/SMFTEngine.cpp.i
 # target to preprocess a source file
 src/SMFTEngine.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.i
 .PHONY : src/SMFTEngine.cpp.i
 
 src/SMFTEngine.s: src/SMFTEngine.cpp.s
@@ -838,6 +914,7 @@ src/SMFTEngine.s: src/SMFTEngine.cpp.s
 # target to generate assembly for a file
 src/SMFTEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.s
 .PHONY : src/SMFTEngine.cpp.s
 
 src/SMFTPipelineFactory.o: src/SMFTPipelineFactory.cpp.o
@@ -846,6 +923,7 @@ src/SMFTPipelineFactory.o: src/SMFTPipelineFactory.cpp.o
 # target to build an object file
 src/SMFTPipelineFactory.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o
 .PHONY : src/SMFTPipelineFactory.cpp.o
 
 src/SMFTPipelineFactory.i: src/SMFTPipelineFactory.cpp.i
@@ -854,6 +932,7 @@ src/SMFTPipelineFactory.i: src/SMFTPipelineFactory.cpp.i
 # target to preprocess a source file
 src/SMFTPipelineFactory.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.i
 .PHONY : src/SMFTPipelineFactory.cpp.i
 
 src/SMFTPipelineFactory.s: src/SMFTPipelineFactory.cpp.s
@@ -862,6 +941,7 @@ src/SMFTPipelineFactory.s: src/SMFTPipelineFactory.cpp.s
 # target to generate assembly for a file
 src/SMFTPipelineFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.s
 .PHONY : src/SMFTPipelineFactory.cpp.s
 
 src/output/OutputManager.o: src/output/OutputManager.cpp.o
@@ -870,6 +950,7 @@ src/output/OutputManager.o: src/output/OutputManager.cpp.o
 # target to build an object file
 src/output/OutputManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.o
 .PHONY : src/output/OutputManager.cpp.o
 
 src/output/OutputManager.i: src/output/OutputManager.cpp.i
@@ -878,6 +959,7 @@ src/output/OutputManager.i: src/output/OutputManager.cpp.i
 # target to preprocess a source file
 src/output/OutputManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.i
 .PHONY : src/output/OutputManager.cpp.i
 
 src/output/OutputManager.s: src/output/OutputManager.cpp.s
@@ -886,6 +968,7 @@ src/output/OutputManager.s: src/output/OutputManager.cpp.s
 # target to generate assembly for a file
 src/output/OutputManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.s
 .PHONY : src/output/OutputManager.cpp.s
 
 src/physics/StuckelbergEM.o: src/physics/StuckelbergEM.cpp.o
@@ -918,6 +1001,7 @@ src/simulations/ObservableComputer.o: src/simulations/ObservableComputer.cpp.o
 # target to build an object file
 src/simulations/ObservableComputer.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.o
 .PHONY : src/simulations/ObservableComputer.cpp.o
 
 src/simulations/ObservableComputer.i: src/simulations/ObservableComputer.cpp.i
@@ -926,6 +1010,7 @@ src/simulations/ObservableComputer.i: src/simulations/ObservableComputer.cpp.i
 # target to preprocess a source file
 src/simulations/ObservableComputer.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.i
 .PHONY : src/simulations/ObservableComputer.cpp.i
 
 src/simulations/ObservableComputer.s: src/simulations/ObservableComputer.cpp.s
@@ -934,6 +1019,7 @@ src/simulations/ObservableComputer.s: src/simulations/ObservableComputer.cpp.s
 # target to generate assembly for a file
 src/simulations/ObservableComputer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.s
 .PHONY : src/simulations/ObservableComputer.cpp.s
 
 src/simulations/SMFTTestRunner.o: src/simulations/SMFTTestRunner.cpp.o
@@ -942,6 +1028,7 @@ src/simulations/SMFTTestRunner.o: src/simulations/SMFTTestRunner.cpp.o
 # target to build an object file
 src/simulations/SMFTTestRunner.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o
 .PHONY : src/simulations/SMFTTestRunner.cpp.o
 
 src/simulations/SMFTTestRunner.i: src/simulations/SMFTTestRunner.cpp.i
@@ -950,6 +1037,7 @@ src/simulations/SMFTTestRunner.i: src/simulations/SMFTTestRunner.cpp.i
 # target to preprocess a source file
 src/simulations/SMFTTestRunner.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.i
 .PHONY : src/simulations/SMFTTestRunner.cpp.i
 
 src/simulations/SMFTTestRunner.s: src/simulations/SMFTTestRunner.cpp.s
@@ -958,6 +1046,7 @@ src/simulations/SMFTTestRunner.s: src/simulations/SMFTTestRunner.cpp.s
 # target to generate assembly for a file
 src/simulations/SMFTTestRunner.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.s
 .PHONY : src/simulations/SMFTTestRunner.cpp.s
 
 src/simulations/TestConfig.o: src/simulations/TestConfig.cpp.o
@@ -966,6 +1055,7 @@ src/simulations/TestConfig.o: src/simulations/TestConfig.cpp.o
 # target to build an object file
 src/simulations/TestConfig.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o
 .PHONY : src/simulations/TestConfig.cpp.o
 
 src/simulations/TestConfig.i: src/simulations/TestConfig.cpp.i
@@ -974,6 +1064,7 @@ src/simulations/TestConfig.i: src/simulations/TestConfig.cpp.i
 # target to preprocess a source file
 src/simulations/TestConfig.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.i
 .PHONY : src/simulations/TestConfig.cpp.i
 
 src/simulations/TestConfig.s: src/simulations/TestConfig.cpp.s
@@ -982,7 +1073,56 @@ src/simulations/TestConfig.s: src/simulations/TestConfig.cpp.s
 # target to generate assembly for a file
 src/simulations/TestConfig.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.s
 .PHONY : src/simulations/TestConfig.cpp.s
+
+test/test_geodesic_verification.o: test/test_geodesic_verification.cpp.o
+.PHONY : test/test_geodesic_verification.o
+
+# target to build an object file
+test/test_geodesic_verification.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.o
+.PHONY : test/test_geodesic_verification.cpp.o
+
+test/test_geodesic_verification.i: test/test_geodesic_verification.cpp.i
+.PHONY : test/test_geodesic_verification.i
+
+# target to preprocess a source file
+test/test_geodesic_verification.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.i
+.PHONY : test/test_geodesic_verification.cpp.i
+
+test/test_geodesic_verification.s: test/test_geodesic_verification.cpp.s
+.PHONY : test/test_geodesic_verification.s
+
+# target to generate assembly for a file
+test/test_geodesic_verification.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.s
+.PHONY : test/test_geodesic_verification.cpp.s
+
+test/test_weak_field_limit.o: test/test_weak_field_limit.cpp.o
+.PHONY : test/test_weak_field_limit.o
+
+# target to build an object file
+test/test_weak_field_limit.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.o
+.PHONY : test/test_weak_field_limit.cpp.o
+
+test/test_weak_field_limit.i: test/test_weak_field_limit.cpp.i
+.PHONY : test/test_weak_field_limit.i
+
+# target to preprocess a source file
+test/test_weak_field_limit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.i
+.PHONY : test/test_weak_field_limit.cpp.i
+
+test/test_weak_field_limit.s: test/test_weak_field_limit.cpp.s
+.PHONY : test/test_weak_field_limit.s
+
+# target to generate assembly for a file
+test/test_weak_field_limit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.s
+.PHONY : test/test_weak_field_limit.cpp.s
 
 # Help Target
 help:
@@ -996,6 +1136,8 @@ help:
 	@echo "... Physics"
 	@echo "... SMFT"
 	@echo "... imgui"
+	@echo "... test_geodesic_verification"
+	@echo "... test_weak_field_limit"
 	@echo "... lib/Nova/Core/components/genesis.o"
 	@echo "... lib/Nova/Core/components/genesis.i"
 	@echo "... lib/Nova/Core/components/genesis.s"
@@ -1065,6 +1207,9 @@ help:
 	@echo "... src/DiracEvolution.o"
 	@echo "... src/DiracEvolution.i"
 	@echo "... src/DiracEvolution.s"
+	@echo "... src/GeodesicIntegrator.o"
+	@echo "... src/GeodesicIntegrator.i"
+	@echo "... src/GeodesicIntegrator.s"
 	@echo "... src/SMFTBufferManager.o"
 	@echo "... src/SMFTBufferManager.i"
 	@echo "... src/SMFTBufferManager.s"
@@ -1098,6 +1243,12 @@ help:
 	@echo "... src/simulations/TestConfig.o"
 	@echo "... src/simulations/TestConfig.i"
 	@echo "... src/simulations/TestConfig.s"
+	@echo "... test/test_geodesic_verification.o"
+	@echo "... test/test_geodesic_verification.i"
+	@echo "... test/test_geodesic_verification.s"
+	@echo "... test/test_weak_field_limit.o"
+	@echo "... test/test_weak_field_limit.i"
+	@echo "... test/test_weak_field_limit.s"
 .PHONY : help
 
 

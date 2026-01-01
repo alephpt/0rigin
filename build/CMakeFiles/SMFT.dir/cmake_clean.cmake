@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/SMFT.dir/main.cpp.o.d"
   "CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o"
   "CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o.d"
+  "CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o"
+  "CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o.d"
   "CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o"
   "CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o.d"
   "CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o"

@@ -1,0 +1,45 @@
+test_name: geodesic_equation_verification
+description: "Geodesic Equation Verification - Particles follow geodesics in SMFT curved spacetime"
+
+grid:
+  size_x: 128
+  size_y: 128
+
+physics:
+  solver_type: gpu
+  delta: 2.5
+  coupling: 0.1
+  dt: 0.001
+  total_steps: 1000
+  K: 0.0  # No Kuramoto coupling - pure R-field evolution
+  damping: 0.0
+  noise_strength: 0.0
+  em_coupling_enabled: false
+
+initial_conditions:
+  dirac:
+    type: gaussian
+    center: [64, 64]
+    sigma: 3.0
+    amplitude: 0.1
+  kuramoto:
+    phase_distribution: uniform
+    vortex_charge: 0
+    omega_distribution: uniform
+    omega_mean: 0.5
+    omega_std: 0.05
+
+operator_splitting:
+  enabled: false
+
+validation:
+  norm_tolerance: 0.01
+  energy_tolerance: 0.05
+  convergence_tolerance: 0.05
+  # Geodesic validation
+  geodesic_deviation_tolerance: 0.01  # <1% deviation from analytical solution
+
+output:
+  directory: output/geodesic_test
+  save_every: 10
+  formats: [csv, png]

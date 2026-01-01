@@ -175,6 +175,12 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
+  "file": "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp",
   "file": "/home/persist/neotec/0rigin/src/output/OutputManager.cpp",
   "output": "CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o"
@@ -202,5 +208,101 @@
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
   "file": "/home/persist/neotec/0rigin/main.cpp",
   "output": "CMakeFiles/SMFT.dir/main.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.o -c /home/persist/neotec/0rigin/test/test_geodesic_verification.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_geodesic_verification.cpp",
+  "output": "CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
+  "file": "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
+  "output": "CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "output": "CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.o -c /home/persist/neotec/0rigin/test/test_weak_field_limit.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_weak_field_limit.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o -c /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp",
+  "file": "/home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp",
+  "file": "/home/persist/neotec/0rigin/src/simulations/TestConfig.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.o -c /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp",
+  "file": "/home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCore.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCore.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCompute.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
+  "file": "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp",
+  "file": "/home/persist/neotec/0rigin/src/output/OutputManager.cpp",
+  "output": "CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.o"
 }
 ]

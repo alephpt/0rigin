@@ -129,6 +129,7 @@ set(SMFT_SOURCES
     src/SMFTCompute.cpp
     src/SMFTDescriptorManager.cpp
     src/DiracEvolution.cpp
+    src/GeodesicIntegrator.cpp
     src/output/OutputManager.cpp
     src/simulations/TestConfig.cpp
     src/simulations/SMFTTestRunner.cpp
@@ -170,7 +171,69 @@ set_target_properties(SMFT PROPERTIES
 # TEST EXECUTABLES
 # ============================================================================
 
-# Stückelberg EM validation test (preserved from Wave1D era)
+# Geodesic Equation Verification Test
+add_executable(test_geodesic_verification
+    test/test_geodesic_verification.cpp
+    src/GeodesicIntegrator.cpp
+    src/DiracEvolution.cpp
+)
+
+target_include_directories(test_geodesic_verification PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/lib
+)
+
+target_link_libraries(test_geodesic_verification PRIVATE
+    fftw3f
+    pthread
+    m
+)
+
+set_target_properties(test_geodesic_verification PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# A2: Weak Field Limit Validation Test
+add_executable(test_weak_field_limit
+    test/test_weak_field_limit.cpp
+    src/simulations/SMFTTestRunner.cpp
+    src/simulations/TestConfig.cpp
+    src/simulations/ObservableComputer.cpp
+    src/SMFTCore.cpp
+    src/SMFTEngine.cpp
+    src/SMFTPipelineFactory.cpp
+    src/SMFTBufferManager.cpp
+    src/SMFTCompute.cpp
+    src/SMFTDescriptorManager.cpp
+    src/DiracEvolution.cpp
+    src/GeodesicIntegrator.cpp
+    src/output/OutputManager.cpp
+)
+
+target_include_directories(test_weak_field_limit PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_weak_field_limit PRIVATE
+    Nova
+    Physics
+    fftw3f
+    yaml-cpp
+    pthread
+    m
+    ${Vulkan_LIBRARIES}
+)
+
+set_target_properties(test_weak_field_limit PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # ============================================================================
 # LEGACY TEST BINARIES REMOVED
 # ============================================================================
