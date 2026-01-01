@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_proca_vortex_bfield.dir/link.d CMakeFiles/test_proca_vortex_bfield.dir/test/test_proca_vortex_magnetic_field.cpp.o -o bin/test_proca_vortex_bfield  libPhysics.a

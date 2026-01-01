@@ -155,8 +155,8 @@ CMakeFiles/SMFTCore.dir/clean:
 # Target rules for target CMakeFiles/smft.dir
 
 # All Build rule for target.
-CMakeFiles/smft.dir/all: CMakeFiles/Physics.dir/all
 CMakeFiles/smft.dir/all: CMakeFiles/SMFTCore.dir/all
+CMakeFiles/smft.dir/all: CMakeFiles/Physics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=5,6 "Built target smft"

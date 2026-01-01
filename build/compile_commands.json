@@ -13,9 +13,9 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/smft.dir/src/main_smft.cpp.o -c /home/persist/neotec/0rigin/src/main_smft.cpp",
-  "file": "/home/persist/neotec/0rigin/src/main_smft.cpp",
-  "output": "CMakeFiles/smft.dir/src/main_smft.cpp.o"
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/smft.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
+  "file": "/home/persist/neotec/0rigin/main.cpp",
+  "output": "CMakeFiles/smft.dir/main.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",

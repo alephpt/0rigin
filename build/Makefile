@@ -168,6 +168,30 @@ test_stuckelberg_vortex_bfield/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stuckelberg_vortex_bfield.dir/build.make CMakeFiles/test_stuckelberg_vortex_bfield.dir/build
 .PHONY : test_stuckelberg_vortex_bfield/fast
 
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 src/SMFTCore.o: src/SMFTCore.cpp.o
 .PHONY : src/SMFTCore.o
 
@@ -191,30 +215,6 @@ src/SMFTCore.s: src/SMFTCore.cpp.s
 src/SMFTCore.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFTCore.dir/build.make CMakeFiles/SMFTCore.dir/src/SMFTCore.cpp.s
 .PHONY : src/SMFTCore.cpp.s
-
-src/main_smft.o: src/main_smft.cpp.o
-.PHONY : src/main_smft.o
-
-# target to build an object file
-src/main_smft.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/src/main_smft.cpp.o
-.PHONY : src/main_smft.cpp.o
-
-src/main_smft.i: src/main_smft.cpp.i
-.PHONY : src/main_smft.i
-
-# target to preprocess a source file
-src/main_smft.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/src/main_smft.cpp.i
-.PHONY : src/main_smft.cpp.i
-
-src/main_smft.s: src/main_smft.cpp.s
-.PHONY : src/main_smft.s
-
-# target to generate assembly for a file
-src/main_smft.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/smft.dir/build.make CMakeFiles/smft.dir/src/main_smft.cpp.s
-.PHONY : src/main_smft.cpp.s
 
 src/physics/StuckelbergEM.o: src/physics/StuckelbergEM.cpp.o
 .PHONY : src/physics/StuckelbergEM.o
@@ -276,12 +276,12 @@ help:
 	@echo "... SMFTCore"
 	@echo "... smft"
 	@echo "... test_stuckelberg_vortex_bfield"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... src/SMFTCore.o"
 	@echo "... src/SMFTCore.i"
 	@echo "... src/SMFTCore.s"
-	@echo "... src/main_smft.o"
-	@echo "... src/main_smft.i"
-	@echo "... src/main_smft.s"
 	@echo "... src/physics/StuckelbergEM.o"
 	@echo "... src/physics/StuckelbergEM.i"
 	@echo "... src/physics/StuckelbergEM.s"

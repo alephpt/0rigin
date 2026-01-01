@@ -59,11 +59,11 @@ target_compile_options(SMFTCore PRIVATE
 )
 
 # ============================================================================
-# SMFT EXECUTABLE (Minimal Demo)
+# SMFT EXECUTABLE (Full Test Framework)
 # ============================================================================
 
 add_executable(smft
-    src/main_smft.cpp
+    main.cpp
 )
 
 target_include_directories(smft PRIVATE
