@@ -268,10 +268,94 @@ CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp -o CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s
 
+CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o: /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp
+CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o -MF CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o.d -o CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp
+
+CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp > CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.i
+
+CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp -o CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.s
+
+CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o: /home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp
+CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o -MF CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o.d -o CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp
+
+CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp > CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.i
+
+CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp -o CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.s
+
+CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o: /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp
+CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o -MF CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o.d -o CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp
+
+CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp > CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.i
+
+CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp -o CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.s
+
+CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o: /home/persist/neotec/0rigin/test/test_geodesic_3d.cpp
+CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o -MF CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o.d -o CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_geodesic_3d.cpp
+
+CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_geodesic_3d.cpp > CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.i
+
+CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_geodesic_3d.cpp -o CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.s
+
+CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o: /home/persist/neotec/0rigin/test/test_weak_field_3d.cpp
+CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o -MF CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o.d -o CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_weak_field_3d.cpp
+
+CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_weak_field_3d.cpp > CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.i
+
+CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_weak_field_3d.cpp -o CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.s
+
+CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o: CMakeFiles/SMFT.dir/flags.make
+CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o: /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp
+CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o -MF CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o.d -o CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp
+
+CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp > CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.i
+
+CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp -o CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.s
+
 CMakeFiles/SMFT.dir/main.cpp.o: CMakeFiles/SMFT.dir/flags.make
 CMakeFiles/SMFT.dir/main.cpp.o: /home/persist/neotec/0rigin/main.cpp
 CMakeFiles/SMFT.dir/main.cpp.o: CMakeFiles/SMFT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/SMFT.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/SMFT.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SMFT.dir/main.cpp.o -MF CMakeFiles/SMFT.dir/main.cpp.o.d -o CMakeFiles/SMFT.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp
 
 CMakeFiles/SMFT.dir/main.cpp.i: cmake_force
@@ -298,6 +382,12 @@ SMFT_OBJECTS = \
 "CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o" \
 "CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o" \
 "CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o" \
+"CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o" \
+"CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o" \
+"CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o" \
+"CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o" \
+"CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o" \
+"CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o" \
 "CMakeFiles/SMFT.dir/main.cpp.o"
 
 # External object files for target SMFT
@@ -317,6 +407,12 @@ bin/smft: CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o
 bin/smft: CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o
 bin/smft: CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o
 bin/smft: CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o
+bin/smft: CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o
 bin/smft: CMakeFiles/SMFT.dir/main.cpp.o
 bin/smft: CMakeFiles/SMFT.dir/build.make
 bin/smft: CMakeFiles/SMFT.dir/compiler_depend.ts
@@ -327,7 +423,7 @@ bin/smft: /lib/libvulkan.so
 bin/smft: /usr/lib/libSDL2main.a
 bin/smft: /usr/lib/libSDL2-2.0.so.0.3200.60
 bin/smft: CMakeFiles/SMFT.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable bin/smft"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable bin/smft"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SMFT.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_weak_field_3d.dir/link.d CMakeFiles/test_weak_field_3d.dir/test/test_weak_field_3d.cpp.o -o bin/test_weak_field_3d  -lpthread -lm

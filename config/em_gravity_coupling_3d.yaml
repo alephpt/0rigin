@@ -1,0 +1,82 @@
+# EM-Gravity Coupling 3D Configuration
+#
+# Test: EM field energy curves SMFT spacetime
+# Physics: T^μν(EM) → R-field evolution, ∂R/∂t ~ -ε·ρ_EM
+#
+# Quality Gates:
+#   - Coupling constant within 10% of theoretical
+#   - Energy-momentum conservation < 1%
+
+simulation:
+  coupling: "em_gravity"
+  stress_energy_tensor: "maxwell"
+  grid_size: 32
+  spacing: 0.5
+
+test_scenarios:
+  - name: "EM_Pulse_Coupling"
+    description: "High-energy EM pulse → R-field response"
+    em_pulse:
+      amplitude: 2.0  # E0
+      width: 2.0      # σ
+      polarization: "Ex-By"
+    coupling_constant: 0.1  # ε
+    integration:
+      time_step: 0.01
+      num_steps: 100
+    expected:
+      coupling_error: 0.10  # 10%
+
+  - name: "R_Field_EM_Correlation"
+    description: "R perturbation correlates with ρ_EM"
+    em_pulse:
+      amplitude: 2.0
+      width: 2.0
+    coupling_constant: 0.1
+    integration:
+      time_step: 0.01
+      num_steps: 100
+    expected:
+      correlation_threshold: -0.8  # Strong anti-correlation
+
+  - name: "Energy_Budget"
+    description: "EM energy → Gravitational potential energy"
+    em_pulse:
+      amplitude: 2.0
+      width: 2.0
+    coupling_constant: 0.1
+    integration:
+      time_step: 0.01
+      num_steps: 100
+    expected:
+      transfer_min: 0.001  # 0.1%
+      transfer_max: 0.1    # 10%
+
+physics:
+  stress_energy_tensor: "T^μν from Maxwell fields"
+  em_energy_density: "ρ_EM = (E² + B²)/2"
+  r_field_evolution: "∂R/∂t = -ε·ρ_EM"
+  gravitational_potential: "U_grav ~ ∫ (R-1)² dV"
+
+  coupling_mechanism:
+    - "EM field energy acts as source for curvature"
+    - "R-field perturbation inversely correlates with ρ_EM"
+    - "Energy transfer: EM → Gravitational"
+
+validation:
+  framework: "2D→3D Validation Migration - Phase 4"
+  test_file: "test/test_em_gravity_coupling_3d.cpp"
+  build_target: "test_em_gravity_coupling_3d"
+
+  physics_to_validate:
+    - "EM stress-energy coupling to R-field"
+    - "Correlation between R and ρ_EM"
+    - "Energy transfer (EM → Gravity)"
+    - "Back-reaction of spacetime to EM fields"
+
+  quality_metrics:
+    - "Coupling constant accuracy (10% tolerance)"
+    - "Correlation coefficient (< -0.8)"
+    - "Energy budget (0.1% - 10% transfer)"
+
+  completion: "2D→3D Validation Migration COMPLETE"

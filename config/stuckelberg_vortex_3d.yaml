@@ -1,0 +1,85 @@
+# Stückelberg Vortex 3D Validation Configuration
+#
+# Test: Vortex line configurations in 3D and magnetic field generation
+# Physics: Phase winding → Vector potential A = ħ∇θ → B = ∇×A
+#
+# Quality Gates:
+#   - B_max within 5% of 2D benchmark (1.567)
+#   - Flux quantization: Φ/2π = integer ± 0.01
+#   - Topological charge conservation
+
+simulation:
+  grid_size: 32
+  spacing: 0.5
+  dimensions: 3
+
+test_scenarios:
+  - name: "Vortex_Line_Z"
+    description: "Vortex line along z-axis → B_z field (2D equivalent)"
+    vortex_axis: "z"
+    vortex_center: [0.0, 0.0]  # (x₀, y₀)
+    phase_function: "atan2(y-y₀, x-x₀)"
+    expected:
+      B_max: 1.567
+      B_tolerance: 0.05  # 5%
+      dominant_component: "Bz"
+
+  - name: "Vortex_Line_X"
+    description: "Vortex line along x-axis → B_x field (NEW 3D)"
+    vortex_axis: "x"
+    vortex_center: [0.0, 0.0]  # (y₀, z₀)
+    phase_function: "atan2(z-z₀, y-y₀)"
+    expected:
+      B_max: 1.567
+      B_tolerance: 0.05
+      dominant_component: "Bx"
+
+  - name: "Vortex_Line_Y"
+    description: "Vortex line along y-axis → B_y field (NEW 3D)"
+    vortex_axis: "y"
+    vortex_center: [0.0, 0.0]  # (x₀, z₀)
+    phase_function: "atan2(z-z₀, x-x₀)"
+    expected:
+      B_max: 1.567
+      B_tolerance: 0.05
+      dominant_component: "By"
+
+  - name: "Vortex_Ring"
+    description: "Toroidal vortex ring → Full 3D B-field"
+    topology: "toroidal"
+    ring_radius: 4.0
+    ring_height: 0.0  # z₀
+    ring_thickness: 1.0
+    expected:
+      flux_quantization: true
+      winding_number: 1
+      quantization_tolerance: 0.01
+
+physics:
+  stuckelberg_relation: "A_μ = ħ∇θ"
+  magnetic_field: "B = ∇ × A"
+  flux_quantum: 6.28318530718  # 2π (natural units, ħ=1)
+
+  topological_properties:
+    - "Vortex lines are topological defects (1D in 3D space)"
+    - "Phase winding around vortex: Δθ = 2πn"
+    - "Flux quantization: ∮ A·dl = 2πn"
+    - "Vortex rings: closed topological loops"
+
+validation:
+  framework: "2D→3D Validation Migration - Phase 1.2"
+  test_file: "test/test_stuckelberg_vortex_3d.cpp"
+  build_target: "test_stuckelberg_vortex_3d"
+
+  physics_to_validate:
+    - "Vortex line configurations (straight lines in x, y, z directions)"
+    - "Magnetic field symmetry under rotations"
+    - "Toroidal vortex rings (NEW 3D topology)"
+    - "Flux quantization (topological invariant)"
+
+  quality_metrics:
+    - "B_max reproduction (2D→3D consistency)"
+    - "Rotational symmetry (B_max invariant under axis choice)"
+    - "Flux quantization (integer winding numbers)"
+
+  next_phase: "Phase 2.1: Geodesic equation in 3D"

@@ -480,9 +480,10 @@ bool testExBDrift() {
 }
 
 /**
- * Main test runner
+ * Lorentz Force 3D Test Entry Point
+ * Called from main.cpp when: ./smft --test config/lorentz_force_3d.yaml
  */
-int main() {
+int runLorentzForce3DTest() {
     std::cout << "========================================\n";
     std::cout << "  3D Lorentz Force Validation Suite\n";
     std::cout << "========================================\n";

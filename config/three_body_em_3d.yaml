@@ -1,0 +1,79 @@
+# Three-Body EM Dynamics 3D Configuration
+#
+# Test: Multiple charged particles interact via Coulomb forces
+# Physics: F_ij = k·q_i·q_j·r_ij/|r_ij|³, superposition principle
+#
+# Quality Gates:
+#   - Total energy conserved < 0.1%
+#   - Total momentum conserved < 0.1%
+
+simulation:
+  num_particles: 3
+  integration: "velocity_verlet"
+  force: "coulomb"
+
+test_scenarios:
+  - name: "Three_Body_Conservation"
+    description: "(+q, +q, -2q) in equilateral triangle"
+    particles:
+      - charge: 1.0
+        mass: 1.0
+        position: [0.0, 0.0, 0.0]
+        velocity: [0.0, 0.0, 0.0]
+      - charge: 1.0
+        mass: 1.0
+        position: [5.0, 0.0, 0.0]
+        velocity: [0.0, 0.0, 0.0]
+      - charge: -2.0
+        mass: 1.0
+        position: [2.5, 4.33, 0.0]  # L*√3/2 ≈ 4.33
+        velocity: [0.0, 0.0, 0.0]
+    total_charge: 0.0
+    integration:
+      time_step: 0.01
+      num_steps: 1000
+    expected:
+      energy_tolerance: 0.001  # 0.1%
+      momentum_tolerance: 0.001  # 0.1%
+
+  - name: "Superposition_Principle"
+    description: "Verify F_1 = F_12 + F_13"
+    particles:
+      - charge: 1.0
+        mass: 1.0
+        position: [0.0, 0.0, 0.0]
+      - charge: 1.0
+        mass: 1.0
+        position: [2.0, 0.0, 0.0]
+      - charge: -1.0
+        mass: 1.0
+        position: [0.0, 3.0, 0.0]
+    expected:
+      superposition_error: 1.0e-6  # Numerical precision
+
+physics:
+  coulomb_constant: 1.0  # Natural units
+  coulomb_force: "F_ij = k·q_i·q_j·r_ij/|r_ij|³"
+  coulomb_potential: "U_ij = k·q_i·q_j/r_ij"
+  superposition: "F_i = Σ_j F_ij"
+
+  regularization:
+    min_distance: 0.1  # Prevent singularity at r→0
+
+validation:
+  framework: "2D→3D Validation Migration - Phase 3"
+  test_file: "test/test_three_body_em_3d.cpp"
+  build_target: "test_three_body_em_3d"
+
+  physics_to_validate:
+    - "Multi-particle Coulomb interactions"
+    - "Energy conservation (kinetic + potential)"
+    - "Momentum conservation (isolated system)"
+    - "Superposition principle"
+
+  quality_metrics:
+    - "Energy drift (< 0.1%)"
+    - "Momentum drift (< 0.1%)"
+    - "Force superposition (numerical precision)"
+
+  next_phase: "Phase 4: EM-gravity coupling"

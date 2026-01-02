@@ -1,0 +1,66 @@
+# Geodesic Equation 3D Validation Configuration
+#
+# Test: Particles follow geodesics in curved SMFT spacetime
+# Physics: d²x^μ/dτ² = -Γ^μ_αβ u^α u^β
+#
+# Quality Gates:
+#   - Trajectory deviation < 1% from analytical
+#   - Energy along geodesic conserved < 0.1%
+
+simulation:
+  metric: "g_μν = R²(x,y,z)·η_μν"
+  signature: "(-,+,+,+)"
+  integration: "RK4"
+
+test_scenarios:
+  - name: "Flat_Space"
+    description: "R=1 everywhere → straight-line motion"
+    r_field: "constant"
+    r_value: 1.0
+    initial_position: [-5.0, 0.0, 0.0]
+    initial_velocity: [0.5, 0.0, 0.0]
+    integration:
+      proper_time_step: 0.01
+      num_steps: 1000
+    expected:
+      trajectory: "straight_line"
+      position_error: 0.01  # 1%
+      energy_tolerance: 0.001  # 0.1%
+
+  - name: "Gaussian_Peak"
+    description: "R(r) = 1 + A·exp(-r²/2σ²) → curved trajectory"
+    r_field: "gaussian"
+    amplitude: 0.5
+    width: 2.0
+    initial_position: [-8.0, 2.0, 0.0]
+    initial_velocity: [0.5, 0.0, 0.0]
+    integration:
+      proper_time_step: 0.01
+      num_steps: 3000
+    expected:
+      deflection: true
+      deflection_threshold: 0.01
+      energy_tolerance: 0.001
+
+physics:
+  christoffel_symbols: "Γ^μ_αβ = (∂_α ln R)δ^μ_β + (∂_β ln R)δ^μ_α - η^μν η_αβ (∂_ν ln R)"
+  normalization: "g_μν u^μ u^ν = -1 (timelike)"
+  geodesic_equation: "conformal_metric"
+
+validation:
+  framework: "2D→3D Validation Migration - Phase 2.1"
+  test_file: "test/test_geodesic_3d.cpp"
+  build_target: "test_geodesic_3d"
+
+  physics_to_validate:
+    - "Geodesic motion in flat spacetime (R=1)"
+    - "Trajectory deflection in curved spacetime"
+    - "Energy conservation along geodesic"
+    - "Christoffel symbol computation"
+
+  quality_metrics:
+    - "Position accuracy in flat space"
+    - "Deflection detection in curved space"
+    - "Energy conservation"
+
+  next_phase: "Phase 2.2: Weak field limit (Newtonian gravity)"

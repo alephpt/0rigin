@@ -1316,6 +1316,54 @@ test/test_dirac3d_free.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac3d_free.dir/build.make CMakeFiles/test_dirac3d_free.dir/test/test_dirac3d_free.cpp.s
 .PHONY : test/test_dirac3d_free.cpp.s
 
+test/test_em_gravity_coupling_3d.o: test/test_em_gravity_coupling_3d.cpp.o
+.PHONY : test/test_em_gravity_coupling_3d.o
+
+# target to build an object file
+test/test_em_gravity_coupling_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o
+.PHONY : test/test_em_gravity_coupling_3d.cpp.o
+
+test/test_em_gravity_coupling_3d.i: test/test_em_gravity_coupling_3d.cpp.i
+.PHONY : test/test_em_gravity_coupling_3d.i
+
+# target to preprocess a source file
+test/test_em_gravity_coupling_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.i
+.PHONY : test/test_em_gravity_coupling_3d.cpp.i
+
+test/test_em_gravity_coupling_3d.s: test/test_em_gravity_coupling_3d.cpp.s
+.PHONY : test/test_em_gravity_coupling_3d.s
+
+# target to generate assembly for a file
+test/test_em_gravity_coupling_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.s
+.PHONY : test/test_em_gravity_coupling_3d.cpp.s
+
+test/test_geodesic_3d.o: test/test_geodesic_3d.cpp.o
+.PHONY : test/test_geodesic_3d.o
+
+# target to build an object file
+test/test_geodesic_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o
+.PHONY : test/test_geodesic_3d.cpp.o
+
+test/test_geodesic_3d.i: test/test_geodesic_3d.cpp.i
+.PHONY : test/test_geodesic_3d.i
+
+# target to preprocess a source file
+test/test_geodesic_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.i
+.PHONY : test/test_geodesic_3d.cpp.i
+
+test/test_geodesic_3d.s: test/test_geodesic_3d.cpp.s
+.PHONY : test/test_geodesic_3d.s
+
+# target to generate assembly for a file
+test/test_geodesic_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.s
+.PHONY : test/test_geodesic_3d.cpp.s
+
 test/test_geodesic_verification.o: test/test_geodesic_verification.cpp.o
 .PHONY : test/test_geodesic_verification.o
 
@@ -1339,6 +1387,30 @@ test/test_geodesic_verification.s: test/test_geodesic_verification.cpp.s
 test/test_geodesic_verification.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.s
 .PHONY : test/test_geodesic_verification.cpp.s
+
+test/test_lorentz_force_3d.o: test/test_lorentz_force_3d.cpp.o
+.PHONY : test/test_lorentz_force_3d.o
+
+# target to build an object file
+test/test_lorentz_force_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o
+.PHONY : test/test_lorentz_force_3d.cpp.o
+
+test/test_lorentz_force_3d.i: test/test_lorentz_force_3d.cpp.i
+.PHONY : test/test_lorentz_force_3d.i
+
+# target to preprocess a source file
+test/test_lorentz_force_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.i
+.PHONY : test/test_lorentz_force_3d.cpp.i
+
+test/test_lorentz_force_3d.s: test/test_lorentz_force_3d.cpp.s
+.PHONY : test/test_lorentz_force_3d.s
+
+# target to generate assembly for a file
+test/test_lorentz_force_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.s
+.PHONY : test/test_lorentz_force_3d.cpp.s
 
 test/test_maxwell3d_wave.o: test/test_maxwell3d_wave.cpp.o
 .PHONY : test/test_maxwell3d_wave.o
@@ -1435,6 +1507,78 @@ test/test_smftcore3d_gpu_simple.s: test/test_smftcore3d_gpu_simple.cpp.s
 test/test_smftcore3d_gpu_simple.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/test/test_smftcore3d_gpu_simple.cpp.s
 .PHONY : test/test_smftcore3d_gpu_simple.cpp.s
+
+test/test_stuckelberg_vortex_3d.o: test/test_stuckelberg_vortex_3d.cpp.o
+.PHONY : test/test_stuckelberg_vortex_3d.o
+
+# target to build an object file
+test/test_stuckelberg_vortex_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o
+.PHONY : test/test_stuckelberg_vortex_3d.cpp.o
+
+test/test_stuckelberg_vortex_3d.i: test/test_stuckelberg_vortex_3d.cpp.i
+.PHONY : test/test_stuckelberg_vortex_3d.i
+
+# target to preprocess a source file
+test/test_stuckelberg_vortex_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.i
+.PHONY : test/test_stuckelberg_vortex_3d.cpp.i
+
+test/test_stuckelberg_vortex_3d.s: test/test_stuckelberg_vortex_3d.cpp.s
+.PHONY : test/test_stuckelberg_vortex_3d.s
+
+# target to generate assembly for a file
+test/test_stuckelberg_vortex_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.s
+.PHONY : test/test_stuckelberg_vortex_3d.cpp.s
+
+test/test_three_body_em_3d.o: test/test_three_body_em_3d.cpp.o
+.PHONY : test/test_three_body_em_3d.o
+
+# target to build an object file
+test/test_three_body_em_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o
+.PHONY : test/test_three_body_em_3d.cpp.o
+
+test/test_three_body_em_3d.i: test/test_three_body_em_3d.cpp.i
+.PHONY : test/test_three_body_em_3d.i
+
+# target to preprocess a source file
+test/test_three_body_em_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.i
+.PHONY : test/test_three_body_em_3d.cpp.i
+
+test/test_three_body_em_3d.s: test/test_three_body_em_3d.cpp.s
+.PHONY : test/test_three_body_em_3d.s
+
+# target to generate assembly for a file
+test/test_three_body_em_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.s
+.PHONY : test/test_three_body_em_3d.cpp.s
+
+test/test_weak_field_3d.o: test/test_weak_field_3d.cpp.o
+.PHONY : test/test_weak_field_3d.o
+
+# target to build an object file
+test/test_weak_field_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o
+.PHONY : test/test_weak_field_3d.cpp.o
+
+test/test_weak_field_3d.i: test/test_weak_field_3d.cpp.i
+.PHONY : test/test_weak_field_3d.i
+
+# target to preprocess a source file
+test/test_weak_field_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.i
+.PHONY : test/test_weak_field_3d.cpp.i
+
+test/test_weak_field_3d.s: test/test_weak_field_3d.cpp.s
+.PHONY : test/test_weak_field_3d.s
+
+# target to generate assembly for a file
+test/test_weak_field_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.s
+.PHONY : test/test_weak_field_3d.cpp.s
 
 test/test_weak_field_limit.o: test/test_weak_field_limit.cpp.o
 .PHONY : test/test_weak_field_limit.o
@@ -1603,9 +1747,18 @@ help:
 	@echo "... test/test_dirac3d_free.o"
 	@echo "... test/test_dirac3d_free.i"
 	@echo "... test/test_dirac3d_free.s"
+	@echo "... test/test_em_gravity_coupling_3d.o"
+	@echo "... test/test_em_gravity_coupling_3d.i"
+	@echo "... test/test_em_gravity_coupling_3d.s"
+	@echo "... test/test_geodesic_3d.o"
+	@echo "... test/test_geodesic_3d.i"
+	@echo "... test/test_geodesic_3d.s"
 	@echo "... test/test_geodesic_verification.o"
 	@echo "... test/test_geodesic_verification.i"
 	@echo "... test/test_geodesic_verification.s"
+	@echo "... test/test_lorentz_force_3d.o"
+	@echo "... test/test_lorentz_force_3d.i"
+	@echo "... test/test_lorentz_force_3d.s"
 	@echo "... test/test_maxwell3d_wave.o"
 	@echo "... test/test_maxwell3d_wave.i"
 	@echo "... test/test_maxwell3d_wave.s"
@@ -1618,6 +1771,15 @@ help:
 	@echo "... test/test_smftcore3d_gpu_simple.o"
 	@echo "... test/test_smftcore3d_gpu_simple.i"
 	@echo "... test/test_smftcore3d_gpu_simple.s"
+	@echo "... test/test_stuckelberg_vortex_3d.o"
+	@echo "... test/test_stuckelberg_vortex_3d.i"
+	@echo "... test/test_stuckelberg_vortex_3d.s"
+	@echo "... test/test_three_body_em_3d.o"
+	@echo "... test/test_three_body_em_3d.i"
+	@echo "... test/test_three_body_em_3d.s"
+	@echo "... test/test_weak_field_3d.o"
+	@echo "... test/test_weak_field_3d.i"
+	@echo "... test/test_weak_field_3d.s"
 	@echo "... test/test_weak_field_limit.o"
 	@echo "... test/test_weak_field_limit.i"
 	@echo "... test/test_weak_field_limit.s"

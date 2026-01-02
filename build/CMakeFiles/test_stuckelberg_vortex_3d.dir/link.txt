@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_stuckelberg_vortex_3d.dir/link.d CMakeFiles/test_stuckelberg_vortex_3d.dir/test/test_stuckelberg_vortex_3d.cpp.o -o bin/test_stuckelberg_vortex_3d  -lpthread -lm

@@ -23,6 +23,12 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp" "CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o.d"
   "/home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp" "CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o.d"
   "/home/persist/neotec/0rigin/src/simulations/TestConfig.cpp" "CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp" "CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_geodesic_3d.cpp" "CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp" "CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp" "CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp" "CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_weak_field_3d.cpp" "CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o.d"
   "" "bin/smft" "gcc" "CMakeFiles/SMFT.dir/link.d"
   )
 

@@ -136,6 +136,13 @@ set(SMFT_SOURCES
     src/simulations/TestConfig.cpp
     src/simulations/SMFTTestRunner.cpp
     src/simulations/ObservableComputer.cpp
+    # 3D particle physics tests (integrated into single executable)
+    test/test_lorentz_force_3d.cpp
+    test/test_three_body_em_3d.cpp
+    test/test_stuckelberg_vortex_3d.cpp
+    test/test_geodesic_3d.cpp
+    test/test_weak_field_3d.cpp
+    test/test_em_gravity_coupling_3d.cpp
     main.cpp
 )
 
@@ -322,23 +329,22 @@ set_target_properties(test_maxwell3d_wave PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
-# Lorentz Force 3D Test (2D→3D Validation Migration)
-add_executable(test_lorentz_force_3d
-    test/test_lorentz_force_3d.cpp
-)
-
-target_include_directories(test_lorentz_force_3d PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_lorentz_force_3d PRIVATE
-    pthread
-    m
-)
-
-set_target_properties(test_lorentz_force_3d PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# ============================================================================
+# 2D→3D VALIDATION MIGRATION TEST SUITE
+# ============================================================================
+#
+# CONSOLIDATED: All 3D particle physics tests now run through single ./smft executable
+#   Usage: ./smft --test config/<test_name>_3d.yaml
+#
+# Integrated tests:
+#   - Lorentz Force 3D        → ./smft --test config/lorentz_force_3d.yaml
+#   - Stückelberg Vortex 3D   → ./smft --test config/stuckelberg_vortex_3d.yaml
+#   - Geodesic 3D             → ./smft --test config/geodesic_3d.yaml
+#   - Weak Field 3D           → ./smft --test config/weak_field_3d.yaml
+#   - Three-Body EM 3D        → ./smft --test config/three_body_em_3d.yaml
+#   - EM-Gravity Coupling 3D  → ./smft --test config/em_gravity_coupling_3d.yaml
+#
+# REMOVED standalone test executables (architecture violation - single executable only)
 
 # Dirac3D Free Particle Test (Week 7-8)
 add_executable(test_dirac3d_free

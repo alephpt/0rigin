@@ -5,6 +5,7 @@ bin/smft: \
   CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o \
+  CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o \
@@ -15,6 +16,12 @@ bin/smft: \
   CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o \
   CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o \
   CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o \
+  CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o \
+  CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o \
+  CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o \
+  CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o \
+  CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o \
+  CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o \
   CMakeFiles/SMFT.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
@@ -66,6 +73,8 @@ CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o:
 
 CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o:
 
+CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o:
+
 CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o:
 
 CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o:
@@ -85,6 +94,18 @@ CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o:
 CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o:
 
 CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o:
+
+CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o:
+
+CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o:
+
+CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o:
+
+CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o:
+
+CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o:
+
+CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o:
 
 CMakeFiles/SMFT.dir/main.cpp.o:
 

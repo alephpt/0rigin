@@ -1,0 +1,74 @@
+# Weak Field Limit 3D Validation Configuration
+#
+# Test: SMFT reproduces Newtonian gravity in weak field limit
+# Physics: R ≈ 1 + ε, |ε| ≪ 1 → ∇²φ = 4πG·ρ
+#
+# Quality Gates:
+#   - Acceleration within 1% of GM/r²
+#   - Potential within 1% of -GM/r
+
+simulation:
+  approximation: "weak_field"
+  metric_perturbation: "h_μν = 2ε·η_μν"
+  newtonian_limit: "∇²φ = 4πG·ρ"
+
+test_scenarios:
+  - name: "Point_Mass_R_Field"
+    description: "Verify R(r) = 1 - GM/r"
+    mass: 1.0
+    test_radii: [1.0, 2.0, 5.0, 10.0]
+    expected:
+      r_field_accuracy: 0.01  # 1%
+
+  - name: "Gravitational_Acceleration"
+    description: "Verify a = GM/r² (Newton's law)"
+    mass: 1.0
+    test_positions:
+      - [2.0, 0.0, 0.0]
+      - [0.0, 3.0, 0.0]
+      - [0.0, 0.0, 5.0]
+      - [1.0, 1.0, 1.0]
+    expected:
+      acceleration_accuracy: 0.01  # 1%
+
+  - name: "Gravitational_Potential"
+    description: "Verify φ = -GM/r"
+    mass: 1.0
+    test_radii: [1.0, 2.0, 5.0, 10.0]
+    expected:
+      potential_accuracy: 0.01  # 1%
+
+  - name: "Acceleration_Direction"
+    description: "Verify a points toward mass (radial)"
+    mass: 1.0
+    test_positions:
+      - [3.0, 0.0, 0.0]
+      - [0.0, 4.0, 0.0]
+      - [2.0, 2.0, 0.0]
+      - [1.0, 1.0, 1.0]
+    expected:
+      alignment_threshold: 0.99  # 99% alignment
+
+physics:
+  gravitational_constant: 1.0  # Natural units
+  weak_field_condition: "|ε| < 0.1"
+  newtonian_acceleration: "a = -∇φ = ∇ε"
+
+validation:
+  framework: "2D→3D Validation Migration - Phase 2.2"
+  test_file: "test/test_weak_field_3d.cpp"
+  build_target: "test_weak_field_3d"
+
+  physics_to_validate:
+    - "Point mass R-field (R = 1 - GM/r)"
+    - "Newtonian acceleration (a = GM/r²)"
+    - "Newtonian potential (φ = -GM/r)"
+    - "Force direction (radial, toward mass)"
+
+  quality_metrics:
+    - "R-field accuracy (1% tolerance)"
+    - "Acceleration magnitude (1% tolerance)"
+    - "Potential accuracy (1% tolerance)"
+    - "Direction alignment (99% threshold)"
+
+  next_phase: "Phase 3: Three-body EM dynamics"

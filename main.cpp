@@ -46,10 +46,35 @@ void printUsage(const char* program_name) {
     std::cout << "\n==================================================\n" << std::endl;
 }
 
+// Forward declarations for 3D particle physics tests
+int runLorentzForce3DTest();
+int runStuckelbergVortex3DTest();
+int runGeodesic3DTest();
+int runWeakField3DTest();
+int runThreeBodyEM3DTest();
+int runEMGravityCoupling3DTest();
+
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== SMFT Test Mode =====" << std::endl;
     std::cout << "Configuration: " << config_path << std::endl;
 
+    // Detect test type from config path
+    std::string test_type;
+    if (config_path.find("lorentz_force_3d") != std::string::npos) {
+        return runLorentzForce3DTest();
+    } else if (config_path.find("stuckelberg_vortex_3d") != std::string::npos) {
+        return runStuckelbergVortex3DTest();
+    } else if (config_path.find("geodesic_3d") != std::string::npos) {
+        return runGeodesic3DTest();
+    } else if (config_path.find("weak_field_3d") != std::string::npos) {
+        return runWeakField3DTest();
+    } else if (config_path.find("three_body_em_3d") != std::string::npos) {
+        return runThreeBodyEM3DTest();
+    } else if (config_path.find("em_gravity_coupling_3d") != std::string::npos) {
+        return runEMGravityCoupling3DTest();
+    }
+
+    // Default: SMFT field theory test (timesync, etc.)
     // Create test runner
     SMFTTestRunner runner(config_path);
 
