@@ -123,6 +123,7 @@ target_include_directories(imgui PUBLIC
 # SMFT sources - unified executable with interactive and test modes
 set(SMFT_SOURCES
     src/SMFTCore.cpp
+    src/SMFTCore3D.cpp
     src/SMFTEngine.cpp
     src/SMFTPipelineFactory.cpp
     src/SMFTBufferManager.cpp
@@ -231,6 +232,52 @@ target_link_libraries(test_weak_field_limit PRIVATE
 )
 
 set_target_properties(test_weak_field_limit PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# SMFTCore3D Basic Test
+add_executable(test_smftcore3d_basic
+    test/test_smftcore3d_basic.cpp
+    src/SMFTCore3D.cpp
+)
+
+target_include_directories(test_smftcore3d_basic PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/lib
+    ${Vulkan_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_smftcore3d_basic PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+
+set_target_properties(test_smftcore3d_basic PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# SMFTCore3D GPU Test (Simplified)
+add_executable(test_smftcore3d_gpu
+    test/test_smftcore3d_gpu_simple.cpp
+    src/SMFTCore3D.cpp
+)
+
+target_include_directories(test_smftcore3d_gpu PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/lib/Nova
+    ${Vulkan_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_smftcore3d_gpu PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+
+set_target_properties(test_smftcore3d_gpu PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 

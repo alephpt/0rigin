@@ -1,0 +1,156 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+/**
+ * @file kuramoto3d.comp
+ * @brief 3D Kuramoto oscillator evolution for SMFTCore3D
+ *
+ * Implements: dθᵢ/dt = ωᵢ + (K/6)Σⱼsin(θⱼ - θᵢ)
+ *
+ * Sprint 1, Week 2: Basic 3D Kuramoto dynamics
+ * - 6-neighbor coupling (±x, ±y, ±z)
+ * - Periodic boundary conditions
+ * - 32³ development grid, 64³ production grid
+ *
+ * Workgroup: 8×8×8 threads (512 threads total)
+ * Grid: Nx × Ny × Nz oscillators in 3D space
+ */
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 8) in;
+
+// Push constants for simulation parameters
+layout(push_constant) uniform PushConstants {
+    float dt;              // Time step
+    float K;               // Coupling strength
+    float damping;         // Phase damping γ
+    uint Nx;               // Grid width
+    uint Ny;               // Grid height
+    uint Nz;               // Grid depth
+    uint N_total;          // Total oscillators
+    uint time_step;        // Current time step
+} params;
+
+// Storage buffers
+layout(set = 0, binding = 0) buffer ThetaBuffer {
+    float theta[];  // Current phases
+};
+
+layout(set = 0, binding = 1) buffer ThetaOutBuffer {
+    float theta_out[];  // Updated phases
+};
+
+layout(set = 0, binding = 2) readonly buffer OmegaBuffer {
+    float omega[];  // Natural frequencies
+};
+
+layout(set = 0, binding = 3) buffer RFieldBuffer {
+    float R_field[];  // Synchronization field (computed separately)
+};
+
+/**
+ * @brief Convert 3D coordinates to linear index
+ */
+uint index3D(uint i, uint j, uint k) {
+    return k * (params.Nx * params.Ny) + j * params.Nx + i;
+}
+
+/**
+ * @brief Wrap coordinate with periodic boundary condition
+ */
+uint wrap_coord(int coord, uint max_val) {
+    // Handle negative wrapping
+    if (coord < 0) {
+        return uint(int(max_val) + coord);
+    }
+    // Handle positive wrapping
+    if (coord >= int(max_val)) {
+        return uint(coord - int(max_val));
+    }
+    return uint(coord);
+}
+
+/**
+ * @brief Get neighbor index with periodic boundaries
+ */
+uint get_neighbor(uint i, uint j, uint k, int di, int dj, int dk) {
+    uint ni = wrap_coord(int(i) + di, params.Nx);
+    uint nj = wrap_coord(int(j) + dj, params.Ny);
+    uint nk = wrap_coord(int(k) + dk, params.Nz);
+    return index3D(ni, nj, nk);
+}
+
+/**
+ * @brief Compute 6-neighbor Kuramoto coupling force
+ *
+ * K/6 · Σ_neighbors sin(θⱼ - θᵢ)
+ *
+ * Uses 6-neighborhood (von Neumann neighborhood) for 3D coupling
+ */
+float compute_coupling_force_3d(uint i, uint j, uint k, float theta_i) {
+    float coupling = 0.0;
+
+    // +X neighbor
+    uint idx_px = get_neighbor(i, j, k, 1, 0, 0);
+    coupling += sin(theta[idx_px] - theta_i);
+
+    // -X neighbor
+    uint idx_mx = get_neighbor(i, j, k, -1, 0, 0);
+    coupling += sin(theta[idx_mx] - theta_i);
+
+    // +Y neighbor
+    uint idx_py = get_neighbor(i, j, k, 0, 1, 0);
+    coupling += sin(theta[idx_py] - theta_i);
+
+    // -Y neighbor
+    uint idx_my = get_neighbor(i, j, k, 0, -1, 0);
+    coupling += sin(theta[idx_my] - theta_i);
+
+    // +Z neighbor
+    uint idx_pz = get_neighbor(i, j, k, 0, 0, 1);
+    coupling += sin(theta[idx_pz] - theta_i);
+
+    // -Z neighbor
+    uint idx_mz = get_neighbor(i, j, k, 0, 0, -1);
+    coupling += sin(theta[idx_mz] - theta_i);
+
+    // Normalize by number of neighbors (6 in 3D)
+    return (params.K / 6.0) * coupling;
+}
+
+void main() {
+    uvec3 global_id = gl_GlobalInvocationID;
+
+    // Bounds check
+    if (global_id.x >= params.Nx ||
+        global_id.y >= params.Ny ||
+        global_id.z >= params.Nz) {
+        return;
+    }
+
+    uint i = global_id.x;
+    uint j = global_id.y;
+    uint k = global_id.z;
+    uint idx = index3D(i, j, k);
+
+    // Get current phase and natural frequency
+    float theta_i = theta[idx];
+    float omega_i = omega[idx];
+
+    // Compute forces
+    float coupling_force = compute_coupling_force_3d(i, j, k, theta_i);
+    float damping_force = -params.damping * sin(theta_i);
+
+    // Total force (Kuramoto dynamics)
+    float total_force = omega_i + coupling_force + damping_force;
+
+    // Euler integration: θ(t+dt) = θ(t) + dt·(dθ/dt)
+    float theta_new = theta_i + params.dt * total_force;
+
+    // Wrap to [-π, π]
+    const float PI = 3.14159265359;
+    while (theta_new > PI) theta_new -= 2.0 * PI;
+    while (theta_new < -PI) theta_new += 2.0 * PI;
+
+    // Write output
+    theta_out[idx] = theta_new;
+}

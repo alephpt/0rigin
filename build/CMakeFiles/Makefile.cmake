@@ -64,4 +64,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/SMFT.dir/DependInfo.cmake"
   "CMakeFiles/test_geodesic_verification.dir/DependInfo.cmake"
   "CMakeFiles/test_weak_field_limit.dir/DependInfo.cmake"
+  "CMakeFiles/test_smftcore3d_basic.dir/DependInfo.cmake"
+  "CMakeFiles/test_smftcore3d_gpu.dir/DependInfo.cmake"
   )

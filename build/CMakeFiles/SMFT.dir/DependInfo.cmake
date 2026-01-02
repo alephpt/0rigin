@@ -14,6 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp" "CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o.d"
   "/home/persist/neotec/0rigin/src/SMFTCompute.cpp" "CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o.d"
   "/home/persist/neotec/0rigin/src/SMFTCore.cpp" "CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/SMFTCore3D.cpp" "CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o.d"
   "/home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp" "CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o.d"
   "/home/persist/neotec/0rigin/src/SMFTEngine.cpp" "CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o.d"
   "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp" "CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o.d"

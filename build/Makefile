@@ -194,6 +194,32 @@ test_weak_field_limit/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/build
 .PHONY : test_weak_field_limit/fast
 
+#=============================================================================
+# Target rules for targets named test_smftcore3d_basic
+
+# Build rule for target.
+test_smftcore3d_basic: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_smftcore3d_basic
+.PHONY : test_smftcore3d_basic
+
+# fast build rule for target.
+test_smftcore3d_basic/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/build
+.PHONY : test_smftcore3d_basic/fast
+
+#=============================================================================
+# Target rules for targets named test_smftcore3d_gpu
+
+# Build rule for target.
+test_smftcore3d_gpu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_smftcore3d_gpu
+.PHONY : test_smftcore3d_gpu
+
+# fast build rule for target.
+test_smftcore3d_gpu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/build
+.PHONY : test_smftcore3d_gpu/fast
+
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
 
@@ -863,6 +889,36 @@ src/SMFTCore.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.s
 .PHONY : src/SMFTCore.cpp.s
 
+src/SMFTCore3D.o: src/SMFTCore3D.cpp.o
+.PHONY : src/SMFTCore3D.o
+
+# target to build an object file
+src/SMFTCore3D.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/src/SMFTCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/src/SMFTCore3D.cpp.o
+.PHONY : src/SMFTCore3D.cpp.o
+
+src/SMFTCore3D.i: src/SMFTCore3D.cpp.i
+.PHONY : src/SMFTCore3D.i
+
+# target to preprocess a source file
+src/SMFTCore3D.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/src/SMFTCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/src/SMFTCore3D.cpp.i
+.PHONY : src/SMFTCore3D.cpp.i
+
+src/SMFTCore3D.s: src/SMFTCore3D.cpp.s
+.PHONY : src/SMFTCore3D.s
+
+# target to generate assembly for a file
+src/SMFTCore3D.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/src/SMFTCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/src/SMFTCore3D.cpp.s
+.PHONY : src/SMFTCore3D.cpp.s
+
 src/SMFTDescriptorManager.o: src/SMFTDescriptorManager.cpp.o
 .PHONY : src/SMFTDescriptorManager.o
 
@@ -1100,6 +1156,54 @@ test/test_geodesic_verification.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.s
 .PHONY : test/test_geodesic_verification.cpp.s
 
+test/test_smftcore3d_basic.o: test/test_smftcore3d_basic.cpp.o
+.PHONY : test/test_smftcore3d_basic.o
+
+# target to build an object file
+test/test_smftcore3d_basic.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/test/test_smftcore3d_basic.cpp.o
+.PHONY : test/test_smftcore3d_basic.cpp.o
+
+test/test_smftcore3d_basic.i: test/test_smftcore3d_basic.cpp.i
+.PHONY : test/test_smftcore3d_basic.i
+
+# target to preprocess a source file
+test/test_smftcore3d_basic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/test/test_smftcore3d_basic.cpp.i
+.PHONY : test/test_smftcore3d_basic.cpp.i
+
+test/test_smftcore3d_basic.s: test/test_smftcore3d_basic.cpp.s
+.PHONY : test/test_smftcore3d_basic.s
+
+# target to generate assembly for a file
+test/test_smftcore3d_basic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/test/test_smftcore3d_basic.cpp.s
+.PHONY : test/test_smftcore3d_basic.cpp.s
+
+test/test_smftcore3d_gpu_simple.o: test/test_smftcore3d_gpu_simple.cpp.o
+.PHONY : test/test_smftcore3d_gpu_simple.o
+
+# target to build an object file
+test/test_smftcore3d_gpu_simple.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/test/test_smftcore3d_gpu_simple.cpp.o
+.PHONY : test/test_smftcore3d_gpu_simple.cpp.o
+
+test/test_smftcore3d_gpu_simple.i: test/test_smftcore3d_gpu_simple.cpp.i
+.PHONY : test/test_smftcore3d_gpu_simple.i
+
+# target to preprocess a source file
+test/test_smftcore3d_gpu_simple.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/test/test_smftcore3d_gpu_simple.cpp.i
+.PHONY : test/test_smftcore3d_gpu_simple.cpp.i
+
+test/test_smftcore3d_gpu_simple.s: test/test_smftcore3d_gpu_simple.cpp.s
+.PHONY : test/test_smftcore3d_gpu_simple.s
+
+# target to generate assembly for a file
+test/test_smftcore3d_gpu_simple.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/test/test_smftcore3d_gpu_simple.cpp.s
+.PHONY : test/test_smftcore3d_gpu_simple.cpp.s
+
 test/test_weak_field_limit.o: test/test_weak_field_limit.cpp.o
 .PHONY : test/test_weak_field_limit.o
 
@@ -1137,6 +1241,8 @@ help:
 	@echo "... SMFT"
 	@echo "... imgui"
 	@echo "... test_geodesic_verification"
+	@echo "... test_smftcore3d_basic"
+	@echo "... test_smftcore3d_gpu"
 	@echo "... test_weak_field_limit"
 	@echo "... lib/Nova/Core/components/genesis.o"
 	@echo "... lib/Nova/Core/components/genesis.i"
@@ -1219,6 +1325,9 @@ help:
 	@echo "... src/SMFTCore.o"
 	@echo "... src/SMFTCore.i"
 	@echo "... src/SMFTCore.s"
+	@echo "... src/SMFTCore3D.o"
+	@echo "... src/SMFTCore3D.i"
+	@echo "... src/SMFTCore3D.s"
 	@echo "... src/SMFTDescriptorManager.o"
 	@echo "... src/SMFTDescriptorManager.i"
 	@echo "... src/SMFTDescriptorManager.s"
@@ -1246,6 +1355,12 @@ help:
 	@echo "... test/test_geodesic_verification.o"
 	@echo "... test/test_geodesic_verification.i"
 	@echo "... test/test_geodesic_verification.s"
+	@echo "... test/test_smftcore3d_basic.o"
+	@echo "... test/test_smftcore3d_basic.i"
+	@echo "... test/test_smftcore3d_basic.s"
+	@echo "... test/test_smftcore3d_gpu_simple.o"
+	@echo "... test/test_smftcore3d_gpu_simple.i"
+	@echo "... test/test_smftcore3d_gpu_simple.s"
 	@echo "... test/test_weak_field_limit.o"
 	@echo "... test/test_weak_field_limit.i"
 	@echo "... test/test_weak_field_limit.s"

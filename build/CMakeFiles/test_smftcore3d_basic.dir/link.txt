@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_smftcore3d_basic.dir/link.d CMakeFiles/test_smftcore3d_basic.dir/test/test_smftcore3d_basic.cpp.o CMakeFiles/test_smftcore3d_basic.dir/src/SMFTCore3D.cpp.o -o bin/test_smftcore3d_basic  /lib/libvulkan.so -lpthread -lm

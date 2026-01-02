@@ -1,0 +1,85 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+/**
+ * @file sync_field3d.comp
+ * @brief Compute synchronization field R for 3D Kuramoto oscillators
+ *
+ * Computes local synchronization order parameter:
+ * R(x,y,z) = |⟨e^(iθ)⟩_local| in a neighborhood around each point
+ *
+ * For now, computes global R and stores uniformly.
+ * Future: Local R in 3×3×3 neighborhoods.
+ */
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 8) in;
+
+layout(push_constant) uniform PushConstants {
+    uint Nx;
+    uint Ny;
+    uint Nz;
+    uint N_total;
+    uint neighborhood_size;  // Radius for local R computation (future)
+} params;
+
+// Storage buffers
+layout(set = 0, binding = 0) readonly buffer ThetaBuffer {
+    float theta[];  // Phase field
+};
+
+layout(set = 0, binding = 1) buffer RFieldBuffer {
+    float R_field[];  // Output R field
+};
+
+// Shared memory for reduction (global R computation)
+shared vec2 s_complex_sum[512];  // 8×8×8 = 512 threads
+
+/**
+ * @brief Convert 3D coordinates to linear index
+ */
+uint index3D(uint i, uint j, uint k) {
+    return k * (params.Nx * params.Ny) + j * params.Nx + i;
+}
+
+void main() {
+    uvec3 global_id = gl_GlobalInvocationID;
+    uint local_idx = gl_LocalInvocationIndex;
+
+    // Initialize shared memory
+    s_complex_sum[local_idx] = vec2(0.0, 0.0);
+
+    // Each thread computes contribution from its grid point
+    if (global_id.x < params.Nx &&
+        global_id.y < params.Ny &&
+        global_id.z < params.Nz) {
+
+        uint idx = index3D(global_id.x, global_id.y, global_id.z);
+        float phase = theta[idx];
+
+        // Add e^(iθ) = cos(θ) + i·sin(θ)
+        s_complex_sum[local_idx] = vec2(cos(phase), sin(phase));
+    }
+
+    barrier();
+
+    // Parallel reduction to sum all contributions
+    for (uint stride = 256; stride > 0; stride >>= 1) {
+        if (local_idx < stride && (local_idx + stride) < 512) {
+            s_complex_sum[local_idx] += s_complex_sum[local_idx + stride];
+        }
+        barrier();
+    }
+
+    // Thread 0 computes final R and writes to all points
+    if (local_idx == 0) {
+        vec2 total = s_complex_sum[0];
+        float magnitude = length(total);
+        float R_global = magnitude / float(params.N_total);
+
+        // For now, store global R at all points
+        // Future: compute local R in neighborhoods
+        for (uint i = 0; i < params.N_total; i++) {
+            R_field[i] = R_global;
+        }
+    }
+}
