@@ -2,3 +2,7 @@
 # Large output files
 output/primitive/
 archive/archive/
+
+# Large log files
+output/primitive/*/noise_sweep*.log
+archive/archive/*.tar.gz
