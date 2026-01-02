@@ -53,6 +53,7 @@ int runGeodesic3DTest();
 int runWeakField3DTest();
 int runThreeBodyEM3DTest();
 int runEMGravityCoupling3DTest();
+int runEinsteinFieldEquationsTest();
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== SMFT Test Mode =====" << std::endl;
@@ -72,6 +73,8 @@ int runTestMode(const std::string& config_path) {
         return runThreeBodyEM3DTest();
     } else if (config_path.find("em_gravity_coupling_3d") != std::string::npos) {
         return runEMGravityCoupling3DTest();
+    } else if (config_path.find("einstein_field_equations") != std::string::npos) {
+        return runEinsteinFieldEquationsTest();
     }
 
     // Default: SMFT field theory test (timesync, etc.)

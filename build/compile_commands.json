@@ -145,6 +145,18 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp",
   "file": "/home/persist/neotec/0rigin/src/SMFTEngine.cpp",
   "output": "CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o"
@@ -250,6 +262,12 @@
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp",
   "output": "CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp",
+  "output": "CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",

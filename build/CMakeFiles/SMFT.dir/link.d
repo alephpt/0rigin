@@ -4,6 +4,8 @@ bin/smft: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o \
+  CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.o \
+  CMakeFiles/SMFT.dir/src/Dirac3D.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o \
@@ -22,6 +24,7 @@ bin/smft: \
   CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o \
   CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o \
   CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o \
+  CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.o \
   CMakeFiles/SMFT.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
@@ -71,6 +74,10 @@ CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o:
 
 CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o:
 
+CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.o:
+
+CMakeFiles/SMFT.dir/src/Dirac3D.cpp.o:
+
 CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o:
 
 CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o:
@@ -106,6 +113,8 @@ CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o:
 CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o:
 
 CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o:
+
+CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.o:
 
 CMakeFiles/SMFT.dir/main.cpp.o:
 

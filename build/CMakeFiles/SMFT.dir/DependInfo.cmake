@@ -9,8 +9,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/persist/neotec/0rigin/main.cpp" "CMakeFiles/SMFT.dir/main.cpp.o" "gcc" "CMakeFiles/SMFT.dir/main.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/Dirac3D.cpp" "CMakeFiles/SMFT.dir/src/Dirac3D.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/Dirac3D.cpp.o.d"
   "/home/persist/neotec/0rigin/src/DiracEvolution.cpp" "CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o.d"
   "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp" "CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/Maxwell3D.cpp" "CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.o.d"
   "/home/persist/neotec/0rigin/src/SMFTBufferManager.cpp" "CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o.d"
   "/home/persist/neotec/0rigin/src/SMFTCompute.cpp" "CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o.d"
   "/home/persist/neotec/0rigin/src/SMFTCore.cpp" "CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o.d"
@@ -23,6 +25,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp" "CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o.d"
   "/home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp" "CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o.d"
   "/home/persist/neotec/0rigin/src/simulations/TestConfig.cpp" "CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o" "gcc" "CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp" "CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp" "CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_geodesic_3d.cpp" "CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp" "CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o" "gcc" "CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o.d"

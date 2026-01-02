@@ -805,6 +805,7 @@ src/Dirac3D.o: src/Dirac3D.cpp.o
 
 # target to build an object file
 src/Dirac3D.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Dirac3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac3d_free.dir/build.make CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.o
 .PHONY : src/Dirac3D.cpp.o
@@ -814,6 +815,7 @@ src/Dirac3D.i: src/Dirac3D.cpp.i
 
 # target to preprocess a source file
 src/Dirac3D.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Dirac3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac3d_free.dir/build.make CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.i
 .PHONY : src/Dirac3D.cpp.i
@@ -823,6 +825,7 @@ src/Dirac3D.s: src/Dirac3D.cpp.s
 
 # target to generate assembly for a file
 src/Dirac3D.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Dirac3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac3d_free.dir/build.make CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.s
 .PHONY : src/Dirac3D.cpp.s
@@ -892,6 +895,7 @@ src/Maxwell3D.o: src/Maxwell3D.cpp.o
 
 # target to build an object file
 src/Maxwell3D.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.o
 .PHONY : src/Maxwell3D.cpp.o
@@ -901,6 +905,7 @@ src/Maxwell3D.i: src/Maxwell3D.cpp.i
 
 # target to preprocess a source file
 src/Maxwell3D.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.i
 .PHONY : src/Maxwell3D.cpp.i
@@ -910,6 +915,7 @@ src/Maxwell3D.s: src/Maxwell3D.cpp.s
 
 # target to generate assembly for a file
 src/Maxwell3D.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.s
 .PHONY : src/Maxwell3D.cpp.s
@@ -1315,6 +1321,30 @@ test/test_dirac3d_free.s: test/test_dirac3d_free.cpp.s
 test/test_dirac3d_free.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac3d_free.dir/build.make CMakeFiles/test_dirac3d_free.dir/test/test_dirac3d_free.cpp.s
 .PHONY : test/test_dirac3d_free.cpp.s
+
+test/test_einstein_field_equations.o: test/test_einstein_field_equations.cpp.o
+.PHONY : test/test_einstein_field_equations.o
+
+# target to build an object file
+test/test_einstein_field_equations.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.o
+.PHONY : test/test_einstein_field_equations.cpp.o
+
+test/test_einstein_field_equations.i: test/test_einstein_field_equations.cpp.i
+.PHONY : test/test_einstein_field_equations.i
+
+# target to preprocess a source file
+test/test_einstein_field_equations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.i
+.PHONY : test/test_einstein_field_equations.cpp.i
+
+test/test_einstein_field_equations.s: test/test_einstein_field_equations.cpp.s
+.PHONY : test/test_einstein_field_equations.s
+
+# target to generate assembly for a file
+test/test_einstein_field_equations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.s
+.PHONY : test/test_einstein_field_equations.cpp.s
 
 test/test_em_gravity_coupling_3d.o: test/test_em_gravity_coupling_3d.cpp.o
 .PHONY : test/test_em_gravity_coupling_3d.o
@@ -1747,6 +1777,9 @@ help:
 	@echo "... test/test_dirac3d_free.o"
 	@echo "... test/test_dirac3d_free.i"
 	@echo "... test/test_dirac3d_free.s"
+	@echo "... test/test_einstein_field_equations.o"
+	@echo "... test/test_einstein_field_equations.i"
+	@echo "... test/test_einstein_field_equations.s"
 	@echo "... test/test_em_gravity_coupling_3d.o"
 	@echo "... test/test_em_gravity_coupling_3d.i"
 	@echo "... test/test_em_gravity_coupling_3d.s"

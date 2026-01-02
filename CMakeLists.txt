@@ -124,6 +124,8 @@ target_include_directories(imgui PUBLIC
 set(SMFT_SOURCES
     src/SMFTCore.cpp
     src/SMFTCore3D.cpp
+    src/Maxwell3D.cpp
+    src/Dirac3D.cpp
     src/SMFTEngine.cpp
     src/SMFTEngine3D.cpp
     src/SMFTPipelineFactory.cpp
@@ -143,6 +145,7 @@ set(SMFT_SOURCES
     test/test_geodesic_3d.cpp
     test/test_weak_field_3d.cpp
     test/test_em_gravity_coupling_3d.cpp
+    test/test_einstein_field_equations.cpp
     main.cpp
 )
 

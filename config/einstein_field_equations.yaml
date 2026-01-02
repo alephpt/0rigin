@@ -1,0 +1,49 @@
+# einstein_field_equations.yaml
+# Configuration for Einstein Field Equation Derivation Test
+#
+# Objective: Verify G_μν = 8πG·T_μν from SMFT metric
+#
+# Test validates that the Einstein tensor derived from the SMFT metric
+# (g_μν = R²·η_μν) matches the stress-energy tensor from Maxwell fields
+# to within numerical precision (residual < 10^-12)
+
+# Grid configuration
+grid:
+  nx: 32
+  ny: 32
+  nz: 32
+  dx: 1.0
+  dt: 0.01
+
+# Simulation parameters
+simulation:
+  evolution_steps: 100  # Evolve to steady state
+  sample_points: 10     # Number of grid points to sample for validation
+
+# EM field initialization
+em_field:
+  type: "uniform_magnetic"  # Simple uniform B-field for initial test
+  Bx: 0.0
+  By: 0.0
+  Bz: 1.0   # Uniform magnetic field in z-direction
+  Ex: 0.0
+  Ey: 0.0
+  Ez: 0.0
+
+# Physical constants (natural units)
+constants:
+  c: 1.0           # Speed of light
+  G: 1.0           # Newton's gravitational constant
+  coupling: 8.0    # 8πG coupling constant (8π in natural units with G=1)
+
+# Validation thresholds
+thresholds:
+  max_residual: 1.0e-12    # Maximum allowed |G_μν - 8πG·T_μν|
+  energy_tolerance: 0.01   # 1% tolerance for energy conservation check
+
+# Output configuration
+output:
+  save_residual_field: true
+  output_dir: "output/"
+  filename_prefix: "einstein_field_eq_"
+  verbose: true  # Detailed output for debugging
