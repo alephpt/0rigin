@@ -125,6 +125,7 @@ set(SMFT_SOURCES
     src/SMFTCore.cpp
     src/SMFTCore3D.cpp
     src/SMFTEngine.cpp
+    src/SMFTEngine3D.cpp
     src/SMFTPipelineFactory.cpp
     src/SMFTBufferManager.cpp
     src/SMFTCompute.cpp
@@ -278,6 +279,27 @@ target_link_libraries(test_smftcore3d_gpu PRIVATE
 )
 
 set_target_properties(test_smftcore3d_gpu PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# SMFT 3D CPU-Only Test (no GPU dependency)
+add_executable(test_smft3d_cpu_only
+    test/test_smft3d_cpu_only.cpp
+    src/SMFTCore3D.cpp
+)
+
+target_include_directories(test_smft3d_cpu_only PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_smft3d_cpu_only PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+
+set_target_properties(test_smft3d_cpu_only PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
