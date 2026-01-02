@@ -151,6 +151,8 @@ set(SMFT_SOURCES
 
 add_executable(SMFT ${SMFT_SOURCES})
 
+target_compile_definitions(SMFT PRIVATE SMFT_MAIN_EXECUTABLE)
+
 target_include_directories(SMFT PRIVATE
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/include
