@@ -1,0 +1,147 @@
+# Lorentz Force 3D Validation Configuration
+#
+# Test: Charged particle dynamics in 3D electromagnetic fields
+# Physics: F = q(E + v × B)
+# Integration: Boris algorithm (symplectic)
+#
+# Quality Gates:
+#   - Cyclotron frequency: ω within 3% of qB/m
+#   - Energy conservation: ΔE/E < 0.01%
+#   - Helical pitch: consistent with v_parallel
+#   - E×B drift: within 20% (averaged over gyration)
+
+test_scenarios:
+  - name: "Cyclotron_Bz"
+    description: "Pure B_z field → cyclotron in x-y plane (validates 2D)"
+    magnetic_field: [0.0, 0.0, 1.0]
+    electric_field: [0.0, 0.0, 0.0]
+    particle:
+      charge: 1.0
+      mass: 1.0
+      initial_position: [0.0, 1.0, 0.0]
+      initial_velocity: [1.0, 0.0, 0.0]
+    integration:
+      time_step: 0.01
+      num_steps: 1000
+    expected:
+      cyclotron_frequency: 1.0
+      frequency_tolerance: 0.03  # 3%
+      energy_tolerance: 0.0001   # 0.01%
+
+  - name: "Cyclotron_Bx"
+    description: "Pure B_x field → cyclotron in y-z plane (NEW 3D)"
+    magnetic_field: [1.0, 0.0, 0.0]
+    electric_field: [0.0, 0.0, 0.0]
+    particle:
+      charge: 1.0
+      mass: 1.0
+      initial_position: [0.0, 0.0, 1.0]
+      initial_velocity: [0.0, 1.0, 0.0]
+    integration:
+      time_step: 0.01
+      num_steps: 1000
+    expected:
+      radius_stability: 0.05  # 5%
+      energy_tolerance: 0.0001
+
+  - name: "Cyclotron_By"
+    description: "Pure B_y field → cyclotron in x-z plane (NEW 3D)"
+    magnetic_field: [0.0, 1.0, 0.0]
+    electric_field: [0.0, 0.0, 0.0]
+    particle:
+      charge: 1.0
+      mass: 1.0
+      initial_position: [1.0, 0.0, 0.0]
+      initial_velocity: [0.0, 0.0, 1.0]
+    integration:
+      time_step: 0.01
+      num_steps: 1000
+    expected:
+      radius_stability: 0.05
+      energy_tolerance: 0.0001
+
+  - name: "Helical_Motion"
+    description: "General B field with parallel velocity → helical trajectory"
+    magnetic_field: [0.0, 0.0, 1.0]
+    electric_field: [0.0, 0.0, 0.0]
+    particle:
+      charge: 1.0
+      mass: 1.0
+      initial_position: [0.0, 1.0, 0.0]
+      initial_velocity: [1.0, 0.0, 0.5]  # v_parallel = 0.5 along B_z
+    integration:
+      time_step: 0.01
+      num_steps: 2000
+    expected:
+      helical_pitch_tolerance: 0.05  # 5%
+      energy_tolerance: 0.0001
+
+  - name: "ExB_Drift"
+    description: "Crossed E and B fields → drift perpendicular to both"
+    magnetic_field: [0.0, 0.0, 1.0]
+    electric_field: [0.0, 1.0, 0.0]
+    particle:
+      charge: 1.0
+      mass: 1.0
+      initial_position: [0.0, 0.0, 0.0]
+      initial_velocity: [0.0, 0.0, 0.0]
+    integration:
+      time_step: 0.01
+      warmup_steps: 500   # Reach steady state
+      measure_steps: 1000 # Measure during steady state
+    expected:
+      drift_velocity: [1.0, 0.0, 0.0]  # v_drift = E × B / B²
+      drift_tolerance: 0.20  # 20% (due to gyration effects)
+
+# Test Results (2026-01-02)
+results:
+  test_1_Cyclotron_Bz:
+    status: PASS
+    measured_frequency: 0.999991
+    frequency_error: 0.000870%
+    energy_drift: 0.000059%
+
+  test_2_Cyclotron_Bx:
+    status: PASS
+    radius_error: 0.276%
+    energy_drift: 0.000059%
+
+  test_3_Cyclotron_By:
+    status: PASS
+    radius_error: 0.276%
+    energy_drift: 0.000059%
+
+  test_4_Helical_Motion:
+    status: PASS
+    pitch_error: 0.0018%
+    energy_drift: 0.000114%
+
+  test_5_ExB_Drift:
+    status: PASS
+    drift_error_averaged: 16.94%
+    note: "Within tolerance, coexists with cyclotron gyration"
+
+overall_verdict: PASS
+
+# Validation Summary
+validation:
+  date: 2026-01-02
+  framework: "2D→3D Validation Migration"
+  test_file: "test/test_lorentz_force_3d.cpp"
+  build_target: "test_lorentz_force_3d"
+
+  physics_validated:
+    - "Cyclotron motion in all 3 field orientations (Bx, By, Bz)"
+    - "Helical trajectories with parallel velocity component"
+    - "E×B drift in crossed fields"
+    - "Energy conservation (symplectic Boris integrator)"
+
+  quality_metrics:
+    - "Cyclotron frequency: 0.0009% error (excellent)"
+    - "Energy conservation: <0.0002% drift (excellent)"
+    - "Radius stability: 0.28% (excellent)"
+    - "E×B drift: 17% error (acceptable with gyration)"
+
+  next_phase:
+    - "Phase 1.2: Stückelberg vortex 3D"
+    - "Phase 1.3: EM wave propagation enhancement"

@@ -322,6 +322,24 @@ set_target_properties(test_maxwell3d_wave PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# Lorentz Force 3D Test (2D→3D Validation Migration)
+add_executable(test_lorentz_force_3d
+    test/test_lorentz_force_3d.cpp
+)
+
+target_include_directories(test_lorentz_force_3d PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_lorentz_force_3d PRIVATE
+    pthread
+    m
+)
+
+set_target_properties(test_lorentz_force_3d PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # Dirac3D Free Particle Test (Week 7-8)
 add_executable(test_dirac3d_free
     test/test_dirac3d_free.cpp
