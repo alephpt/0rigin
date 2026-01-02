@@ -281,6 +281,33 @@ VkPipeline SMFTPipelineFactory::createAccumulationPipeline(const std::string& sh
     return createPipelineFromShader(shaderPath, pipelineLayout, "Accumulation");
 }
 
+VkPipeline SMFTPipelineFactory::createRFieldEvolutionPipeline(const std::string& shaderPath,
+                                                              VkPipelineLayout pipelineLayout) {
+    /**
+     * R-Field Evolution Pipeline - Couples EM stress-energy to spacetime curvature
+     *
+     * GPU SAFETY: ✅ SAFE - Simple arithmetic operations only
+     * - Expected shader: r_field_evolution.comp
+     * - Workload: 3 reads + 1 write + arithmetic operations
+     * - Transcendentals: 0
+     * - Timeout risk: NONE - <0.1ms for 256×256 grid
+     *
+     * Implements: dR/dt = -γ(R - R_kuramoto) + ε·R_source
+     *
+     * Physics:
+     * - R relaxes toward Kuramoto synchronization field (R_kuramoto)
+     * - EM stress-energy (R_source) perturbs the R-field
+     * - This creates the EM→gravity coupling in SMFT
+     *
+     * Shader bindings:
+     * - Binding 0: R_field_buffer (current R-field)
+     * - Binding 1: R_kuramoto_buffer (target from sync_field3d)
+     * - Binding 2: R_source_buffer (from em_stress_energy)
+     * - Binding 3: R_new_buffer (output)
+     */
+    return createPipelineFromShader(shaderPath, pipelineLayout, "RFieldEvolution");
+}
+
 void SMFTPipelineFactory::destroyPipeline(VkPipeline pipeline) {
     if (pipeline != VK_NULL_HANDLE) {
         vkDestroyPipeline(_device, pipeline, nullptr);

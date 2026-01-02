@@ -1,0 +1,97 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+#extension GL_GOOGLE_include_directive : enable
+
+/**
+ * @file r_field_evolution.comp
+ * @brief Coupled R-field evolution with EM stress-energy feedback
+ *
+ * Implements: dR/dt = -γ(R - R_kuramoto) + ε·R_source
+ *
+ * Where:
+ * - R_kuramoto: Synchronization field from Kuramoto dynamics
+ * - R_source: EM stress-energy coupling (-∇·T - ρ_EM)
+ * - γ: R relaxation rate (how fast R tracks synchronization)
+ * - ε: EM coupling strength (how strongly EM curves spacetime)
+ *
+ * This couples electromagnetic fields to spacetime curvature via R-field.
+ *
+ * Physical interpretation:
+ * - First term: R relaxes toward Kuramoto synchronization target
+ * - Second term: EM energy perturbs R-field (spacetime curvature)
+ * - Result: EM fields curve spacetime via R-field modulation
+ */
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 8) in;
+
+layout(push_constant) uniform PushConstants {
+    float dt;
+    float K;  // Not used here
+    float damping;  // Not used here
+    float Delta;  // Not used here
+    float chiral_angle;  // Not used here
+    uint Nx;
+    uint Ny;
+    uint Nz;
+    float r_field_gamma;  // γ: R relaxation rate
+    float em_coupling_epsilon;  // ε: EM→R coupling strength
+} params;
+
+// Input buffers
+layout(set = 0, binding = 0) readonly buffer RFieldBuffer {
+    float R[];  // Current R-field
+};
+
+layout(set = 0, binding = 1) readonly buffer RKuramotoBuffer {
+    float R_kuramoto[];  // Target synchronization from Kuramoto
+};
+
+layout(set = 0, binding = 2) readonly buffer RSourceBuffer {
+    float R_source[];  // EM stress-energy contribution
+};
+
+// Output buffer
+layout(set = 0, binding = 3) buffer RNewBuffer {
+    float R_new[];  // Updated R-field
+};
+
+void main() {
+    uvec3 gid = gl_GlobalInvocationID;
+
+    // Bounds check for both 2D and 3D operation
+    if (gid.x >= params.Nx || gid.y >= params.Ny) return;
+
+    // Support both 2D (Nz=1) and 3D cases
+    uint Nz_effective = (params.Nz == 0) ? 1 : params.Nz;
+    if (gid.z >= Nz_effective) return;
+
+    // Calculate linear index
+    uint idx;
+    if (Nz_effective == 1) {
+        // 2D case: index = y * Nx + x
+        idx = gid.y * params.Nx + gid.x;
+    } else {
+        // 3D case: index = z * (Nx * Ny) + y * Nx + x
+        idx = gid.z * (params.Nx * params.Ny) + gid.y * params.Nx + gid.x;
+    }
+
+    // Coupled R-field evolution equation:
+    // dR/dt = -γ(R - R_kuramoto) + ε·R_source
+    //
+    // Physical interpretation:
+    // - First term: R relaxes toward Kuramoto synchronization target
+    // - Second term: EM energy perturbs R-field (spacetime curvature)
+    // - Result: EM fields curve spacetime via R-field modulation
+
+    float R_current = R[idx];
+    float R_target = R_kuramoto[idx];
+    float EM_source = R_source[idx];
+
+    float dR_dt = -params.r_field_gamma * (R_current - R_target)
+                  + params.em_coupling_epsilon * EM_source;
+
+    R_new[idx] = R_current + params.dt * dR_dt;
+
+    // Clamp R to physical range [0, 1]
+    R_new[idx] = clamp(R_new[idx], 0.0, 1.0);
+}

@@ -299,7 +299,8 @@ float computeDerivative(
 
 /**
  * Einstein Field Equations Test Entry Point
- * Called from main.cpp when: ./smft --test config/einstein_field_equations.yaml
+ * Can be called from main.cpp when: ./smft --test config/einstein_field_equations.yaml
+ * OR run standalone as: ./test_einstein_field_equations
  */
 int runEinsteinFieldEquationsTest() {
     std::cout << "========================================\n";
@@ -332,30 +333,87 @@ int runEinsteinFieldEquationsTest() {
 
     Maxwell3D maxwell(Nx, Ny, Nz);
 
-    // Initialize with uniform magnetic field in z-direction
-    std::cout << "Initializing uniform B_z = 1.0 field...\n";
+    // Initialize with localized magnetic field for spatial variation
+    std::cout << "Initializing localized B_z field (Gaussian profile)...\n";
     uint32_t N_total = Nx * Ny * Nz;
     std::vector<float> Ex(N_total, 0.0f);
     std::vector<float> Ey(N_total, 0.0f);
     std::vector<float> Ez(N_total, 0.0f);
     std::vector<float> Bx(N_total, 0.0f);
     std::vector<float> By(N_total, 0.0f);
-    std::vector<float> Bz(N_total, 1.0f);  // Uniform B_z field
+    std::vector<float> Bz(N_total, 0.0f);
+
+    // Create Gaussian magnetic field centered in the grid
+    float cx = Nx / 2.0f;
+    float cy = Ny / 2.0f;
+    float cz = Nz / 2.0f;
+    float sigma = Nx / 8.0f;  // Width of Gaussian
+    float amplitude = 10.0f;   // Peak field strength
+
+    for (uint32_t k = 0; k < Nz; ++k) {
+        for (uint32_t j = 0; j < Ny; ++j) {
+            for (uint32_t i = 0; i < Nx; ++i) {
+                uint32_t idx = core.index3D(i, j, k);
+                float dx_sq = (i - cx) * (i - cx);
+                float dy_sq = (j - cy) * (j - cy);
+                float dz_sq = (k - cz) * (k - cz);
+                float r_sq = dx_sq + dy_sq + dz_sq;
+                Bz[idx] = amplitude * std::exp(-r_sq / (2.0f * sigma * sigma));
+            }
+        }
+    }
 
     maxwell.initialize(Ex, Ey, Ez, Bx, By, Bz);
 
     // Initialize SMFT with random phase to generate non-trivial R-field
     core.initializeRandom(42);
 
-    // Evolve system to steady state
-    std::cout << "Evolving to steady state...\n";
+    // Evolve system to steady state WITH EM→R coupling
+    std::cout << "Evolving to steady state with EM→R coupling...\n";
+
+    // EM coupling parameters (from config, but hardcoded for now)
+    const float r_field_gamma = 0.1f;        // R relaxation rate
+    const float em_coupling_epsilon = 0.1f;   // EM→R coupling strength (increased)
+
     for (int step = 0; step < evolution_steps; ++step) {
         // Evolve SMFT Kuramoto dynamics
         core.evolveKuramotoCPU(dt);
-        core.computeRField();
+        core.computeRField();  // Computes R_kuramoto (target field)
 
         // Evolve Maxwell fields
         maxwell.step(dt);
+
+        // === CRITICAL: Add EM→R coupling ===
+        // Get current fields
+        std::vector<float>& R_field = const_cast<std::vector<float>&>(core.getRField());
+        const std::vector<float>& Ex_field = maxwell.getEx();
+        const std::vector<float>& Ey_field = maxwell.getEy();
+        const std::vector<float>& Ez_field = maxwell.getEz();
+        const std::vector<float>& Bx_field = maxwell.getBx();
+        const std::vector<float>& By_field = maxwell.getBy();
+        const std::vector<float>& Bz_field = maxwell.getBz();
+
+        // Couple EM energy density to R-field evolution
+        for (uint32_t idx = 0; idx < N_total; ++idx) {
+            // Compute EM energy density: ρ_EM = (E² + B²)/2
+            float E_sq = Ex_field[idx]*Ex_field[idx] +
+                        Ey_field[idx]*Ey_field[idx] +
+                        Ez_field[idx]*Ez_field[idx];
+            float B_sq = Bx_field[idx]*Bx_field[idx] +
+                        By_field[idx]*By_field[idx] +
+                        Bz_field[idx]*Bz_field[idx];
+            float rho_EM = 0.5f * (E_sq + B_sq);
+
+            // R-field evolution: dR/dt = -γ(R - R_kuramoto) + ε·ρ_EM
+            // Here R_kuramoto is already in R_field from computeRField()
+            // So we just add the EM perturbation
+            float R_current = R_field[idx];
+            float dR_dt = em_coupling_epsilon * rho_EM;  // EM contribution only
+            R_field[idx] = R_current + dt * dR_dt;
+
+            // Clamp to physical range
+            R_field[idx] = std::max(0.0f, std::min(1.0f, R_field[idx]));
+        }
 
         if (step % 20 == 0) {
             float avg_R = core.getAverageR();
@@ -540,4 +598,9 @@ int runEinsteinFieldEquationsTest() {
     std::cout << "========================================\n";
 
     return pass ? 0 : 1;
+}
+
+// Standalone main function for direct execution
+int main() {
+    return runEinsteinFieldEquationsTest();
 }

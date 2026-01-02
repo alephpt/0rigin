@@ -206,6 +206,24 @@ set_target_properties(test_geodesic_verification PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# A1: Einstein Field Equations Test
+add_executable(test_einstein_field_equations
+    test/test_einstein_field_equations.cpp
+    src/SMFTCore3D.cpp
+    src/Maxwell3D.cpp
+)
+target_include_directories(test_einstein_field_equations PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/include
+)
+target_link_libraries(test_einstein_field_equations PRIVATE
+    ${CMAKE_THREAD_LIBS_INIT}
+    m
+)
+set_target_properties(test_einstein_field_equations PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # A2: Weak Field Limit Validation Test
 add_executable(test_weak_field_limit
     test/test_weak_field_limit.cpp

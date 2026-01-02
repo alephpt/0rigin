@@ -19,6 +19,8 @@ grid:
 simulation:
   evolution_steps: 100  # Evolve to steady state
   sample_points: 10     # Number of grid points to sample for validation
+  r_field_gamma: 0.1        # R-field relaxation rate toward Kuramoto sync
+  em_coupling_epsilon: 0.01  # EM→R coupling strength (start small)
 
 # EM field initialization
 em_field:
