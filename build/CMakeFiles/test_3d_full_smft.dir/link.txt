@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_3d_full_smft.dir/link.d CMakeFiles/test_3d_full_smft.dir/test/test_3d_full_smft.cpp.o CMakeFiles/test_3d_full_smft.dir/src/SMFTCore3D.cpp.o CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.o CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.o -o bin/test_3d_full_smft  /lib/libvulkan.so -lfftw3f -lpthread -lm

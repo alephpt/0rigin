@@ -303,6 +303,69 @@ set_target_properties(test_smft3d_cpu_only PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# Maxwell3D Wave Propagation Test (Week 5-6)
+add_executable(test_maxwell3d_wave
+    test/test_maxwell3d_wave.cpp
+    src/Maxwell3D.cpp
+)
+
+target_include_directories(test_maxwell3d_wave PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_maxwell3d_wave PRIVATE
+    pthread
+    m
+)
+
+set_target_properties(test_maxwell3d_wave PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Dirac3D Free Particle Test (Week 7-8)
+add_executable(test_dirac3d_free
+    test/test_dirac3d_free.cpp
+    src/Dirac3D.cpp
+)
+
+target_include_directories(test_dirac3d_free PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_dirac3d_free PRIVATE
+    fftw3f
+    pthread
+    m
+)
+
+set_target_properties(test_dirac3d_free PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Full 3D SMFT Integration Test (Week 9-10)
+add_executable(test_3d_full_smft
+    test/test_3d_full_smft.cpp
+    src/SMFTCore3D.cpp
+    src/Maxwell3D.cpp
+    src/Dirac3D.cpp
+)
+
+target_include_directories(test_3d_full_smft PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_3d_full_smft PRIVATE
+    ${Vulkan_LIBRARIES}
+    fftw3f
+    pthread
+    m
+)
+
+set_target_properties(test_3d_full_smft PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # ============================================================================
 # LEGACY TEST BINARIES REMOVED
 # ============================================================================

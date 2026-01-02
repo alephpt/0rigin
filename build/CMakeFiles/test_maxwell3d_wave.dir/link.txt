@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_maxwell3d_wave.dir/link.d CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.o CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.o -o bin/test_maxwell3d_wave  -lpthread -lm

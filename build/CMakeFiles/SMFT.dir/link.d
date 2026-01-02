@@ -3,6 +3,7 @@ bin/smft: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o \
+  CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o \
   CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o \
@@ -60,6 +61,8 @@ bin/smft: \
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o:
 
 CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o:
+
+CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o:
 
 CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o:
 

@@ -151,6 +151,12 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTEngine3D.cpp",
+  "output": "CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
   "file": "/home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp",
   "output": "CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o"
@@ -334,5 +340,65 @@
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smftcore3d_gpu.dir/src/SMFTCore3D.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCore3D.cpp",
   "file": "/home/persist/neotec/0rigin/src/SMFTCore3D.cpp",
   "output": "CMakeFiles/test_smftcore3d_gpu.dir/src/SMFTCore3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft3d_cpu_only.dir/test/test_smft3d_cpu_only.cpp.o -c /home/persist/neotec/0rigin/test/test_smft3d_cpu_only.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_smft3d_cpu_only.cpp",
+  "output": "CMakeFiles/test_smft3d_cpu_only.dir/test/test_smft3d_cpu_only.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_smft3d_cpu_only.dir/src/SMFTCore3D.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCore3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCore3D.cpp",
+  "output": "CMakeFiles/test_smft3d_cpu_only.dir/src/SMFTCore3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.o -c /home/persist/neotec/0rigin/test/test_maxwell3d_wave.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_maxwell3d_wave.cpp",
+  "output": "CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
+  "output": "CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac3d_free.dir/test/test_dirac3d_free.cpp.o -c /home/persist/neotec/0rigin/test/test_dirac3d_free.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_dirac3d_free.cpp",
+  "output": "CMakeFiles/test_dirac3d_free.dir/test/test_dirac3d_free.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_smft.dir/test/test_3d_full_smft.cpp.o -c /home/persist/neotec/0rigin/test/test_3d_full_smft.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_3d_full_smft.cpp",
+  "output": "CMakeFiles/test_3d_full_smft.dir/test/test_3d_full_smft.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_smft.dir/src/SMFTCore3D.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCore3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/SMFTCore3D.cpp",
+  "output": "CMakeFiles/test_3d_full_smft.dir/src/SMFTCore3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
+  "output": "CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.o"
 }
 ]

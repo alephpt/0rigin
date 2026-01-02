@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_dirac3d_free.dir/link.d CMakeFiles/test_dirac3d_free.dir/test/test_dirac3d_free.cpp.o CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.o -o bin/test_dirac3d_free  -lfftw3f -lpthread -lm

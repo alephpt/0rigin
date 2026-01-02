@@ -18,6 +18,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o.d"
   "CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o"
   "CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o.d"
+  "CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o"
+  "CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o.d"
   "CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o"
   "CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o.d"
   "CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o"

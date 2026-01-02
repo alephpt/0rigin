@@ -66,4 +66,8 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/test_weak_field_limit.dir/DependInfo.cmake"
   "CMakeFiles/test_smftcore3d_basic.dir/DependInfo.cmake"
   "CMakeFiles/test_smftcore3d_gpu.dir/DependInfo.cmake"
+  "CMakeFiles/test_smft3d_cpu_only.dir/DependInfo.cmake"
+  "CMakeFiles/test_maxwell3d_wave.dir/DependInfo.cmake"
+  "CMakeFiles/test_dirac3d_free.dir/DependInfo.cmake"
+  "CMakeFiles/test_3d_full_smft.dir/DependInfo.cmake"
   )
