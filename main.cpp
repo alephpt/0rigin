@@ -57,11 +57,12 @@ int runThreeBodyEM3DTest();
 int runEMGravityCoupling3DTest();
 int runEinsteinFieldEquationsTest();
 int runLightDeflection3DTest();
-int runParticleSpectrum3DTest();
+int runParticleSpectrumUnifiedTest();
 int runTimeDilation3DTest();
 int runCosmologicalConstantTest();
 int runFriedmannEquationsTest();
 int runDarkMatterTest();
+int runUnitarityTest();
 // int runExperimentalPredictionsTest();  // Compiled as separate executable
 
 int runTestMode(const std::string& config_path) {
@@ -88,14 +89,16 @@ int runTestMode(const std::string& config_path) {
         return runEinsteinFieldEquationsTest();
     } else if (config_path.find("light_deflection_3d") != std::string::npos) {
         return runLightDeflection3DTest();
-    } else if (config_path.find("particle_spectrum_3d") != std::string::npos) {
-        return runParticleSpectrum3DTest();
+    } else if (config_path.find("particle_spectrum") != std::string::npos) {
+        return runParticleSpectrumUnifiedTest();
     } else if (config_path.find("cosmological_constant") != std::string::npos) {
         return runCosmologicalConstantTest();
     } else if (config_path.find("friedmann_equations") != std::string::npos) {
         return runFriedmannEquationsTest();
     } else if (config_path.find("dark_matter") != std::string::npos) {
         return runDarkMatterTest();
+    } else if (config_path.find("unitarity") != std::string::npos) {
+        return runUnitarityTest();
     // } else if (config_path.find("experimental_predictions") != std::string::npos) {
     //     return runExperimentalPredictionsTest();  // Compiled as separate executable
     }

@@ -148,10 +148,11 @@ set(TRD_SOURCES
     test/test_em_gravity_coupling_3d.cpp
     test/test_einstein_field_equations.cpp
     test/test_light_deflection_3d.cpp
-    test/test_particle_spectrum_3d.cpp
+    test/test_particle_spectrum_unified.cpp
     test/test_cosmological_constant.cpp
     test/test_friedmann_equations.cpp
     test/test_dark_matter.cpp
+    test/test_unitarity.cpp
     main.cpp
 )
 
@@ -228,6 +229,45 @@ target_link_libraries(test_geodesic_verification PRIVATE
 )
 
 set_target_properties(test_geodesic_verification PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# E1: Renormalizability Analysis Test (Mathematical Rigor)
+add_executable(test_renormalizability
+    test/test_renormalizability.cpp
+)
+
+target_include_directories(test_renormalizability PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_renormalizability PRIVATE
+    m
+)
+
+set_target_properties(test_renormalizability PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# E3: Causality Validation Test
+add_executable(test_causality
+    test/test_causality.cpp
+    src/TRDCore3D.cpp
+)
+
+target_include_directories(test_causality PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_causality PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+
+set_target_properties(test_causality PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 

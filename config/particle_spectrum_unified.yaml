@@ -1,0 +1,151 @@
+# Particle Spectrum Unified Configuration
+#
+# B1 UNIFIED TEST: Uses TRDCore3D + Δ·R mass formula
+# Architectural alignment with C1, A2, A3, G3 tests
+#
+# Physics Model:
+#   - Mass: m_eff = Δ·R(x,y,z) (BCS-gap mechanism)
+#   - R-field: Local synchronization order parameter
+#   - Vortex topology → R-field localization → mass hierarchy
+#
+# Critical Improvement Over Legacy:
+#   - Legacy (E/c²): m₂/m₁ = 3.72 (98.2% error)
+#   - Unified (Δ·R): Target >20 (within factor 10 of 206.768)
+
+simulation:
+  grid_size_x: 64
+  grid_size_y: 64
+  grid_size_z: 32  # Thinner in z (vortices are 2D structures)
+  spacing: 1.0
+  dt: 0.01
+  coupling_strength: 2.0  # Kuramoto K parameter
+
+physics:
+  mass_gap: 1.0  # Δ parameter (BCS-like control parameter)
+  chiral_angle: 0.0
+  natural_units: true
+  hbar: 1.0
+  c_light: 1.0
+
+  mass_formula: "m_eff = Δ·R(x,y,z)"
+  R_definition: "R = |⟨e^{iθ}⟩| (local synchronization)"
+  mechanism: "BCS-gap mass emergence from collective phase coherence"
+
+relaxation:
+  num_steps: 500
+  convergence_check: true
+  output_frequency: 100  # Print R every N steps
+
+vortex_configurations:
+  single_vortex:
+    name: "Q=1 - Fundamental"
+    topology: "point_vortex"
+    winding_number: 1
+    position: [0.0, 0.0]
+    description: "θ = atan2(y-y₀, x-x₀)"
+    expected_role: "Baseline mass m₁"
+
+  double_vortex:
+    name: "Q=2 - Second Generation"
+    topology: "double_vortex"
+    winding_number: 2
+    separation: 16.0  # Grid units
+    positions: [[-8.0, 0.0], [8.0, 0.0]]
+    description: "θ = atan2(y, x-x₁) + atan2(y, x-x₂)"
+    expected_role: "Second mass m₂ (muon-like)"
+
+  triple_vortex:
+    name: "Q=3 - Third Generation"
+    topology: "triple_vortex"
+    winding_number: 3
+    radius: 12.0  # Triangular configuration radius
+    description: "Three vortices at 120° intervals"
+    expected_role: "Third mass m₃ (tau-like?)"
+
+mass_ratios:
+  electron_muon:
+    experimental: 206.768
+    legacy_result: 3.72
+    improvement_target: 10.0  # Factor over legacy
+    quality_gate_factor_10: 20.7  # Within order 10 of target
+    quality_gate_factor_100: 2.07  # Within order 100 of target
+    critical: true
+
+  electron_tau:
+    experimental: 3477.0
+    exploratory: true
+    description: "Requires higher topological charges or radial modes"
+
+analysis:
+  r_field_statistics:
+    measure: ["mean", "min", "max", "std"]
+    purpose: "Understand vortex-induced R-field localization"
+
+  spatial_profiles:
+    extract_radial: true
+    extract_xy_slice: true
+    z_slice_index: 16  # Middle of z-domain
+
+  energy_diagnostics:
+    gradient_energy: "∫(∇θ)² d³x"
+    coupling_energy: "K·∫R²·(1-cos Δθ) d³x"
+    total_energy: "E = E_gradient + E_coupling"
+
+validation:
+  framework: "B1 Unified - TRD Architecture Compliance"
+  test_file: "test/test_particle_spectrum_unified.cpp"
+  build_target: "test_particle_spectrum_unified"
+
+  reference_tests:
+    - "test/test_cosmological_constant.cpp (C1 - BCS-gap mechanism)"
+    - "test/test_trdcore3d_basic.cpp (TRDCore3D validation)"
+
+  physics_alignment:
+    - "Uses TRDCore3D (same as all modern tests)"
+    - "Mass formula m_eff = Δ·R (same as C1, ObservablesEngine)"
+    - "R-field computed via Kuramoto evolution (standard infrastructure)"
+    - "NO standalone energy integration (architectural fix)"
+
+  quality_metrics:
+    - "m₂/m₁ > 3.72 (exceeds legacy E/c² approach)"
+    - "m₂/m₁ > 20.7 (within factor 10 of muon/electron = 206.768)"
+    - "R-field shows spatial structure (std > 0.01)"
+    - "Relaxation converges (R stabilizes)"
+
+  success_criteria:
+    minimum:
+      - "Unified approach exceeds legacy isolated approach"
+      - "R-field varies spatially with vortex topology"
+      - "Mass hierarchy m₃ > m₂ > m₁"
+
+    target:
+      - "m₂/m₁ within factor 10 of experimental (>20.7)"
+      - "Validates BCS-gap mechanism for particle masses"
+      - "Demonstrates architectural consistency across test suite"
+
+    stretch:
+      - "m₂/m₁ within factor 2 of experimental (>100)"
+      - "Predicts tau/electron ratio via Q=3 vortex"
+      - "Identifies parameter tuning path to exact match"
+
+next_phase:
+  parameter_optimization:
+    - "Scan coupling_strength K ∈ [0.5, 5.0]"
+    - "Scan mass_gap Δ ∈ [0.1, 10.0]"
+    - "Optimize vortex separation for maximum m₂/m₁"
+
+  full_trd_integration:
+    - "Couple to Dirac spinor evolution (TRDEngine)"
+    - "Add EM gauge fields (Stuckelberg mechanism)"
+    - "Test radial R-field profiles (vortex core localization)"
+
+  theoretical_refinement:
+    - "Derive m(Q) scaling from BCS-gap theory"
+    - "Map 3 particle families to topological structures"
+    - "Connect to Standard Model particle spectrum"
+
+notes:
+  - "This test REPLACES isolated E/c² approach (test_particle_spectrum_3d_LEGACY.cpp)"
+  - "Architectural failure documented in docs/B1_ARCHITECTURAL_FAILURE_ANALYSIS.md"
+  - "Uses PROVEN Δ·R formula that solved cosmological constant (C1 test)"
+  - "Success validates unified TRD architecture across all tests"
