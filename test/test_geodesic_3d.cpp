@@ -254,8 +254,14 @@ bool testFlatSpaceGeodesic() {
     }
 
     // Verify straight-line motion
-    float x_expected = x_initial + p.u_x * num_steps * dtau;
-    float x_error = std::abs(p.x - x_expected) / std::abs(x_expected);
+    // BUG FIX: In flat space, u_x is constant, so x_expected = x_initial + u_x * total_tau
+    float total_tau = num_steps * dtau;
+    float x_expected = x_initial + p.u_x * total_tau;
+
+    // Avoid division by zero for x_expected near 0
+    float x_error = (std::abs(x_expected) > 1e-6f)
+        ? std::abs(p.x - x_expected) / std::abs(x_expected)
+        : std::abs(p.x - x_expected);
 
     // Energy conservation
     float E_final = p.getEnergy(1.0f);

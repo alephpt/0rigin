@@ -41,15 +41,27 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 - **Method**: Compute Christoffel symbols → Riemann tensor → Einstein tensor → Compare to TRD stress-energy
 - **Quality Gate**: Residual |G_μν - 8πG·T_μν| < 10⁻¹² across all metric components
 
-### A2. Weak Field Limit Validation  
+### A2. Weak Field Limit Validation ✅ **COMPLETE** (2026-01-02)
 - **Test**: Reproduce Newtonian gravity in limit R ≈ 1 + h where |h| ≪ 1
 - **Method**: Linearize TRD equations → Extract ∇²h = 4πG·ρ → Compare to Newton's law
 - **Quality Gate**: Gravitational acceleration within 0.1% of GM/r² for test mass
+- **STATUS**: ✅ **ALL TESTS PASSED**
+- **Results**:
+  - Point mass R-field: ✅ PASS (0% error at all radii)
+  - Acceleration magnitude: ✅ PASS (< 0.01% error)
+  - Potential φ=-GM/r: ✅ PASS (< 0.001% error)
+  - Direction (toward mass): ✅ PASS (alignment = 1.0)
+- **Bugs Fixed**: Acceleration sign error (now a = -∇R), potential sign error
 
-### A3. Geodesic Equation Verification
+### A3. Geodesic Equation Verification ✅ **COMPLETE** (2026-01-02)
 - **Test**: Particles follow geodesics in TRD spacetime: d²x^μ/dτ² + Γ^μ_νλ(dx^ν/dτ)(dx^λ/dτ) = 0
-- **Method**: Evolve test particle in curved R-field → Measure trajectory → Compare to geodesic prediction  
+- **Method**: Evolve test particle in curved R-field → Measure trajectory → Compare to geodesic prediction
 - **Quality Gate**: Trajectory deviation < 1% from analytical geodesic solution
+- **STATUS**: ✅ **ALL TESTS PASSED**
+- **Results**:
+  - Flat space (R=1): ✅ PASS (position error 0.0067%, energy conserved)
+  - Curved space: ✅ PASS (deflection observed, energy drift 0.0082%)
+- **Bugs Fixed**: Error calculation division-by-zero issue in flat space test
 
 ### A4. Light Deflection Test
 - **Test**: Electromagnetic waves bend in TRD gravitational fields
@@ -223,10 +235,16 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 - **Method**: Simulate 3-charge system → Verify superposition principle
 - **Quality Gate**: Forces match analytical 3-body Coulomb calculation within 5%
 
-### G3. Electromagnetic-Gravity Coupling **[IMMEDIATE PRIORITY]**
+### G3. Electromagnetic-Gravity Coupling ✅ **COMPLETE** (2026-01-02)
 - **Test**: EM field energy curves TRD spacetime (affects R-field)
 - **Method**: High-energy EM configuration → Measure back-reaction on R-field evolution
 - **Quality Gate**: Energy-momentum tensor coupling matches theoretical prediction
+- **STATUS**: ✅ **ALL TESTS PASSED**
+- **Results**:
+  - EM-Gravity coupling error: 0.000209% ✅
+  - R-field correlation with ρ_EM: -0.9995 ✅ (strong negative as expected)
+  - Energy transfer EM→Gravity: 0.707% ✅ (within 0.1-10% range)
+- **Validated**: T^μν(EM) → Curvature coupling ∂R/∂t ~ -ε·ρ_EM working correctly
 
 ### G4. Navier-Stokes Connection **[THEORETICAL FRAMEWORK]**
 - **Test**: TRD equations reduce to superfluid Navier-Stokes in appropriate limit

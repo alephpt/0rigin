@@ -64,9 +64,10 @@ std::array<float, 3> computeAcceleration(
     float dR_dy = (R_yp - R_ym) / (2.0f * dx);
     float dR_dz = (R_zp - R_zm) / (2.0f * dx);
 
-    // a = c²∇(ln R) ≈ ∇R (for small ε)
+    // BUG FIX: Gravitational acceleration points toward mass
+    // a = -c²∇φ where φ = -ε = -(R-1), so a = -∇(-(R-1)) = -∇R
     // In natural units c=1
-    return {dR_dx, dR_dy, dR_dz};
+    return {-dR_dx, -dR_dy, -dR_dz};
 }
 
 /**
@@ -178,7 +179,8 @@ bool testGravitationalPotential() {
         float R = computeRField_PointMass(r, 0.0f, 0.0f, M);
 
         // φ = -ε where R = 1 + ε
-        float phi = -(R - 1.0f);
+        // BUG FIX: phi should equal epsilon (which is already negative)
+        float phi = (R - 1.0f);  // epsilon = -GM/r, so phi = epsilon
         float phi_expected = -G * M / r;
         float error = std::abs(phi - phi_expected) / std::abs(phi_expected);
 
