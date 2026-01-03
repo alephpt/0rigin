@@ -1,0 +1,114 @@
+# Particle Spectrum 3D Configuration
+#
+# B1 CRITICAL TEST: Validate TRD's prediction that particle masses
+# emerge from topological vortex excitations
+#
+# Physics Model:
+#   - Kuramoto phase field θ(x,y,z) supports topological defects
+#   - Vortex types: Single (Q=1), Double (Q=2), Triple (Q=3)
+#   - Effective mass: m_eff = E_vortex / c²
+#   - Vortex energy: E = ∫[(∇θ)² + V(R)] d³x
+#
+# Critical Quality Gate:
+#   m₂/m₁ ≈ 206.768 ± 50% (electron/muon mass ratio)
+
+simulation:
+  grid_size: 32
+  spacing: 0.5
+  dimensions: 3
+  coupling_strength: 1.0  # Kuramoto K parameter
+
+physics:
+  natural_units: true
+  hbar: 1.0
+  c_light: 1.0
+
+  vortex_energy_formula: "E = ∫[(∇θ)² + K·R²·(1 - cos(Δθ))] d³x"
+  effective_mass: "m_eff = E_vortex / c²"
+  topological_charge: "Q = (1/2π)∮∇θ·dl"
+
+test_scenarios:
+  - name: "Single_Vortex_Q1"
+    description: "Fundamental excitation (Q=1) → Electron-like mass"
+    vortex_type: "point_vortex"
+    winding_number: 1
+    expected:
+      charge: 1.0
+      charge_tolerance: 0.2
+
+  - name: "Double_Vortex_Q2"
+    description: "Second excitation (Q=2) → Muon-like mass"
+    vortex_type: "double_vortex"
+    winding_number: 2
+    separation: 4.0
+    expected:
+      charge: 2.0
+      charge_tolerance: 0.4
+
+  - name: "Triple_Vortex_Q3"
+    description: "Third excitation (Q=3) → Tau-like mass"
+    vortex_type: "triple_vortex"
+    winding_number: 3
+    radius: 3.0
+    expected:
+      charge: 3.0
+      charge_tolerance: 0.6
+
+mass_ratios:
+  electron_muon:
+    experimental: 206.768
+    tolerance: 0.5  # ±50% (factor of 2)
+    critical: true
+
+  electron_tau:
+    experimental: 3477.0
+    tolerance: 0.8  # ±80% (exploratory)
+    critical: false
+
+validation:
+  framework: "B1 Critical Test - Particle Spectrum Derivation"
+  test_file: "test/test_particle_spectrum_3d.cpp"
+  build_target: "test_particle_spectrum_3d"
+
+  physics_to_validate:
+    - "Topological vortex excitations in Kuramoto field"
+    - "Energy quantization from topological stability"
+    - "Mass spectrum emergence from vortex hierarchy"
+    - "Electron/muon mass ratio from Q=1/Q=2 excitations"
+
+  quality_metrics:
+    - "Topological charge conservation (Q = n ± 0.2)"
+    - "Energy scaling with winding number (E ~ Q)"
+    - "Mass ratio m₂/m₁ ≈ 206.768 ± 50% (CRITICAL)"
+
+  theoretical_foundation:
+    bekenstein_hawking: "Clustering via gravitational surface tension"
+    planck_mass: "Δ = √(ℏc/G) = fundamental mass scale"
+    vortex_stability: "Topological protection ensures discrete mass spectrum"
+
+  next_steps:
+    if_pass:
+      - "Refine vortex configurations for better mass ratios"
+      - "Analyze radial modes (n,l,m quantum numbers)"
+      - "Map 3 particle families to topological structures"
+    if_fail:
+      - "Investigate coupling strength K dependence"
+      - "Test alternative vortex geometries (knots, links)"
+      - "Include R-field feedback (dynamic synchronization)"
+
+success_criteria:
+  critical:
+    - "m₂/m₁ within factor 2 of 206.768"
+    - "Topological charges Q=1,2,3 correctly identified"
+    - "Energy increases monotonically with Q"
+
+  exploratory:
+    - "m₃/m₁ approaches tau/electron ratio (~3477)"
+    - "Energy scaling E(Q) ~ Q·E₁ (linear)"
+    - "Stable vortex configurations persist under evolution"
+
+notes:
+  - "This test is MAKE-OR-BREAK for TRD theory"
+  - "Success validates topological origin of particle masses"
+  - "Failure indicates need for additional physics (radial modes, etc.)"
+  - "Memory reference: Bekenstein-Hawking + Planck mass determines scale"

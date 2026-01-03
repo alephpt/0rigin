@@ -146,6 +146,8 @@ set(TRD_SOURCES
     test/test_weak_field_3d.cpp
     test/test_em_gravity_coupling_3d.cpp
     test/test_einstein_field_equations.cpp
+    test/test_light_deflection_3d.cpp
+    test/test_particle_spectrum_3d.cpp
     main.cpp
 )
 
@@ -349,6 +351,25 @@ target_link_libraries(test_maxwell3d_wave PRIVATE
 )
 
 set_target_properties(test_maxwell3d_wave PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# G1: EM Wave Propagation 3D Test (comprehensive wave velocity validation)
+add_executable(test_em_wave_propagation_3d
+    test/test_em_wave_propagation_3d.cpp
+    src/Maxwell3D.cpp
+)
+
+target_include_directories(test_em_wave_propagation_3d PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_em_wave_propagation_3d PRIVATE
+    pthread
+    m
+)
+
+set_target_properties(test_em_wave_propagation_3d PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 

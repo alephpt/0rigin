@@ -54,6 +54,8 @@ int runWeakField3DTest();
 int runThreeBodyEM3DTest();
 int runEMGravityCoupling3DTest();
 int runEinsteinFieldEquationsTest();
+int runLightDeflection3DTest();
+int runParticleSpectrum3DTest();
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -75,6 +77,10 @@ int runTestMode(const std::string& config_path) {
         return runEMGravityCoupling3DTest();
     } else if (config_path.find("einstein_field_equations") != std::string::npos) {
         return runEinsteinFieldEquationsTest();
+    } else if (config_path.find("light_deflection_3d") != std::string::npos) {
+        return runLightDeflection3DTest();
+    } else if (config_path.find("particle_spectrum_3d") != std::string::npos) {
+        return runParticleSpectrum3DTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)
