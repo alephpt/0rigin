@@ -107,8 +107,38 @@ success_criteria:
     - "Energy scaling E(Q) ~ Q·E₁ (linear)"
     - "Stable vortex configurations persist under evolution"
 
+b1_phase1_analysis:
+  description: "K-parameter and vortex separation refinement study"
+  goal: "Understand vortex interaction energy dependence"
+
+  k_parameter_scan:
+    values: [0.0, 0.5, 1.0, 2.0, 5.0]
+    fixed_separation: 4.0
+    purpose: "Identify if K affects mass hierarchy or just overall scale"
+
+  vortex_separation_scan:
+    values: [2.0, 4.0, 8.0, 16.0]
+    fixed_k: 1.0
+    purpose: "Measure E_interaction(d) and check if E₂ → 2·E₁ as d → ∞"
+    expected: "E₂/(2·E₁) → 1 as d → ∞ (independent limit)"
+
+  output:
+    file: "analysis/b1_phase1_results.csv"
+    format: "K,d,E1,E2,E3,m2_m1,E2_E1,E3_E1,E_interaction"
+
+  missing_physics_identified:
+    - "Radial modes (n,l,m quantum numbers)"
+    - "R-field feedback (dynamic synchronization)"
+    - "Topological stability vs separation"
+
+  next_phase:
+    - "Phase 2: Add radial modes to vortex configurations"
+    - "Phase 3: Include R-field self-consistency"
+    - "Phase 4: Full stability analysis"
+
 notes:
   - "This test is MAKE-OR-BREAK for TRD theory"
   - "Success validates topological origin of particle masses"
   - "Failure indicates need for additional physics (radial modes, etc.)"
   - "Memory reference: Bekenstein-Hawking + Planck mass determines scale"
+  - "B1 Phase 1: Current m₂/m₁ = 3.65 (target: 206.768, error: 98.2%)"

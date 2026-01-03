@@ -260,6 +260,19 @@ test_maxwell3d_wave/fast:
 .PHONY : test_maxwell3d_wave/fast
 
 #=============================================================================
+# Target rules for targets named test_em_wave_propagation_3d
+
+# Build rule for target.
+test_em_wave_propagation_3d: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_em_wave_propagation_3d
+.PHONY : test_em_wave_propagation_3d
+
+# fast build rule for target.
+test_em_wave_propagation_3d/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/build
+.PHONY : test_em_wave_propagation_3d/fast
+
+#=============================================================================
 # Target rules for targets named test_dirac3d_free
 
 # Build rule for target.
@@ -911,6 +924,7 @@ src/Maxwell3D.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/src/Maxwell3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Maxwell3D.cpp.o
 .PHONY : src/Maxwell3D.cpp.o
 
@@ -922,6 +936,7 @@ src/Maxwell3D.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Maxwell3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/src/Maxwell3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Maxwell3D.cpp.i
 .PHONY : src/Maxwell3D.cpp.i
 
@@ -933,6 +948,7 @@ src/Maxwell3D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Maxwell3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/src/Maxwell3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Maxwell3D.cpp.s
 .PHONY : src/Maxwell3D.cpp.s
 
@@ -1317,6 +1333,30 @@ test/test_3d_full_trd.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/test/test_3d_full_trd.cpp.s
 .PHONY : test/test_3d_full_trd.cpp.s
 
+test/test_cosmological_constant.o: test/test_cosmological_constant.cpp.o
+.PHONY : test/test_cosmological_constant.o
+
+# target to build an object file
+test/test_cosmological_constant.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o
+.PHONY : test/test_cosmological_constant.cpp.o
+
+test/test_cosmological_constant.i: test/test_cosmological_constant.cpp.i
+.PHONY : test/test_cosmological_constant.i
+
+# target to preprocess a source file
+test/test_cosmological_constant.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.i
+.PHONY : test/test_cosmological_constant.cpp.i
+
+test/test_cosmological_constant.s: test/test_cosmological_constant.cpp.s
+.PHONY : test/test_cosmological_constant.s
+
+# target to generate assembly for a file
+test/test_cosmological_constant.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.s
+.PHONY : test/test_cosmological_constant.cpp.s
+
 test/test_dirac3d_free.o: test/test_dirac3d_free.cpp.o
 .PHONY : test/test_dirac3d_free.o
 
@@ -1392,6 +1432,30 @@ test/test_em_gravity_coupling_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.s
 .PHONY : test/test_em_gravity_coupling_3d.cpp.s
 
+test/test_em_wave_propagation_3d.o: test/test_em_wave_propagation_3d.cpp.o
+.PHONY : test/test_em_wave_propagation_3d.o
+
+# target to build an object file
+test/test_em_wave_propagation_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/test/test_em_wave_propagation_3d.cpp.o
+.PHONY : test/test_em_wave_propagation_3d.cpp.o
+
+test/test_em_wave_propagation_3d.i: test/test_em_wave_propagation_3d.cpp.i
+.PHONY : test/test_em_wave_propagation_3d.i
+
+# target to preprocess a source file
+test/test_em_wave_propagation_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/test/test_em_wave_propagation_3d.cpp.i
+.PHONY : test/test_em_wave_propagation_3d.cpp.i
+
+test/test_em_wave_propagation_3d.s: test/test_em_wave_propagation_3d.cpp.s
+.PHONY : test/test_em_wave_propagation_3d.s
+
+# target to generate assembly for a file
+test/test_em_wave_propagation_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/test/test_em_wave_propagation_3d.cpp.s
+.PHONY : test/test_em_wave_propagation_3d.cpp.s
+
 test/test_geodesic_3d.o: test/test_geodesic_3d.cpp.o
 .PHONY : test/test_geodesic_3d.o
 
@@ -1439,6 +1503,30 @@ test/test_geodesic_verification.s: test/test_geodesic_verification.cpp.s
 test/test_geodesic_verification.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.s
 .PHONY : test/test_geodesic_verification.cpp.s
+
+test/test_light_deflection_3d.o: test/test_light_deflection_3d.cpp.o
+.PHONY : test/test_light_deflection_3d.o
+
+# target to build an object file
+test/test_light_deflection_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o
+.PHONY : test/test_light_deflection_3d.cpp.o
+
+test/test_light_deflection_3d.i: test/test_light_deflection_3d.cpp.i
+.PHONY : test/test_light_deflection_3d.i
+
+# target to preprocess a source file
+test/test_light_deflection_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.i
+.PHONY : test/test_light_deflection_3d.cpp.i
+
+test/test_light_deflection_3d.s: test/test_light_deflection_3d.cpp.s
+.PHONY : test/test_light_deflection_3d.s
+
+# target to generate assembly for a file
+test/test_light_deflection_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.s
+.PHONY : test/test_light_deflection_3d.cpp.s
 
 test/test_lorentz_force_3d.o: test/test_lorentz_force_3d.cpp.o
 .PHONY : test/test_lorentz_force_3d.o
@@ -1488,6 +1576,30 @@ test/test_maxwell3d_wave.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.s
 .PHONY : test/test_maxwell3d_wave.cpp.s
 
+test/test_particle_spectrum_3d.o: test/test_particle_spectrum_3d.cpp.o
+.PHONY : test/test_particle_spectrum_3d.o
+
+# target to build an object file
+test/test_particle_spectrum_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o
+.PHONY : test/test_particle_spectrum_3d.cpp.o
+
+test/test_particle_spectrum_3d.i: test/test_particle_spectrum_3d.cpp.i
+.PHONY : test/test_particle_spectrum_3d.i
+
+# target to preprocess a source file
+test/test_particle_spectrum_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.i
+.PHONY : test/test_particle_spectrum_3d.cpp.i
+
+test/test_particle_spectrum_3d.s: test/test_particle_spectrum_3d.cpp.s
+.PHONY : test/test_particle_spectrum_3d.s
+
+# target to generate assembly for a file
+test/test_particle_spectrum_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.s
+.PHONY : test/test_particle_spectrum_3d.cpp.s
+
 test/test_stuckelberg_vortex_3d.o: test/test_stuckelberg_vortex_3d.cpp.o
 .PHONY : test/test_stuckelberg_vortex_3d.o
 
@@ -1535,6 +1647,30 @@ test/test_three_body_em_3d.s: test/test_three_body_em_3d.cpp.s
 test/test_three_body_em_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.s
 .PHONY : test/test_three_body_em_3d.cpp.s
+
+test/test_time_dilation_3d.o: test/test_time_dilation_3d.cpp.o
+.PHONY : test/test_time_dilation_3d.o
+
+# target to build an object file
+test/test_time_dilation_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o
+.PHONY : test/test_time_dilation_3d.cpp.o
+
+test/test_time_dilation_3d.i: test/test_time_dilation_3d.cpp.i
+.PHONY : test/test_time_dilation_3d.i
+
+# target to preprocess a source file
+test/test_time_dilation_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.i
+.PHONY : test/test_time_dilation_3d.cpp.i
+
+test/test_time_dilation_3d.s: test/test_time_dilation_3d.cpp.s
+.PHONY : test/test_time_dilation_3d.s
+
+# target to generate assembly for a file
+test/test_time_dilation_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.s
+.PHONY : test/test_time_dilation_3d.cpp.s
 
 test/test_trd3d_cpu_only.o: test/test_trd3d_cpu_only.cpp.o
 .PHONY : test/test_trd3d_cpu_only.o
@@ -1671,6 +1807,7 @@ help:
 	@echo "... test_3d_full_trd"
 	@echo "... test_dirac3d_free"
 	@echo "... test_einstein_field_equations"
+	@echo "... test_em_wave_propagation_3d"
 	@echo "... test_geodesic_verification"
 	@echo "... test_maxwell3d_wave"
 	@echo "... test_trd3d_cpu_only"
@@ -1797,6 +1934,9 @@ help:
 	@echo "... test/test_3d_full_trd.o"
 	@echo "... test/test_3d_full_trd.i"
 	@echo "... test/test_3d_full_trd.s"
+	@echo "... test/test_cosmological_constant.o"
+	@echo "... test/test_cosmological_constant.i"
+	@echo "... test/test_cosmological_constant.s"
 	@echo "... test/test_dirac3d_free.o"
 	@echo "... test/test_dirac3d_free.i"
 	@echo "... test/test_dirac3d_free.s"
@@ -1806,24 +1946,36 @@ help:
 	@echo "... test/test_em_gravity_coupling_3d.o"
 	@echo "... test/test_em_gravity_coupling_3d.i"
 	@echo "... test/test_em_gravity_coupling_3d.s"
+	@echo "... test/test_em_wave_propagation_3d.o"
+	@echo "... test/test_em_wave_propagation_3d.i"
+	@echo "... test/test_em_wave_propagation_3d.s"
 	@echo "... test/test_geodesic_3d.o"
 	@echo "... test/test_geodesic_3d.i"
 	@echo "... test/test_geodesic_3d.s"
 	@echo "... test/test_geodesic_verification.o"
 	@echo "... test/test_geodesic_verification.i"
 	@echo "... test/test_geodesic_verification.s"
+	@echo "... test/test_light_deflection_3d.o"
+	@echo "... test/test_light_deflection_3d.i"
+	@echo "... test/test_light_deflection_3d.s"
 	@echo "... test/test_lorentz_force_3d.o"
 	@echo "... test/test_lorentz_force_3d.i"
 	@echo "... test/test_lorentz_force_3d.s"
 	@echo "... test/test_maxwell3d_wave.o"
 	@echo "... test/test_maxwell3d_wave.i"
 	@echo "... test/test_maxwell3d_wave.s"
+	@echo "... test/test_particle_spectrum_3d.o"
+	@echo "... test/test_particle_spectrum_3d.i"
+	@echo "... test/test_particle_spectrum_3d.s"
 	@echo "... test/test_stuckelberg_vortex_3d.o"
 	@echo "... test/test_stuckelberg_vortex_3d.i"
 	@echo "... test/test_stuckelberg_vortex_3d.s"
 	@echo "... test/test_three_body_em_3d.o"
 	@echo "... test/test_three_body_em_3d.i"
 	@echo "... test/test_three_body_em_3d.s"
+	@echo "... test/test_time_dilation_3d.o"
+	@echo "... test/test_time_dilation_3d.i"
+	@echo "... test/test_time_dilation_3d.s"
 	@echo "... test/test_trd3d_cpu_only.o"
 	@echo "... test/test_trd3d_cpu_only.i"
 	@echo "... test/test_trd3d_cpu_only.s"

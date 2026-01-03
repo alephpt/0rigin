@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_em_wave_propagation_3d.dir/link.d CMakeFiles/test_em_wave_propagation_3d.dir/test/test_em_wave_propagation_3d.cpp.o CMakeFiles/test_em_wave_propagation_3d.dir/src/Maxwell3D.cpp.o -o bin/test_em_wave_propagation_3d  -lpthread -lm

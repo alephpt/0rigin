@@ -23,8 +23,12 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o \
+  CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o \
+  CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o \
+  CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o \
+  CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o \
   CMakeFiles/TRD.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
@@ -112,9 +116,17 @@ CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o:
 
+CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o:
+
 CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o:
 
 CMakeFiles/TRD.dir/main.cpp.o:
 

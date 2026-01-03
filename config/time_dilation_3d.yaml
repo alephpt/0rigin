@@ -1,0 +1,99 @@
+# Time Dilation 3D Validation Configuration (A5)
+#
+# Test: Gravitational time dilation in curved TRD spacetime
+# Physics: ω₂/ω₁ = R₁/R₂ (frequency ratio from conformal metric)
+#
+# Quality Gates:
+#   - Frequency ratio within 1% of R₁/R₂
+#   - Transitivity: (ω₃/ω₂)·(ω₂/ω₁) = (ω₃/ω₁)
+#   - Numerical stability over long integration
+
+simulation:
+  test_type: "time_dilation"
+  metric: "g_μν = R²(x,y,z)·η_μν"
+  time_component: "g₀₀ = -R²"
+  proper_time: "dτ = R(x)·dt"
+
+test_scenarios:
+  - name: "Flat_Space_No_Dilation"
+    description: "Verify ω₂/ω₁ = 1 for R=1 everywhere"
+    r_field: "flat"
+    positions:
+      - [0.0, 0.0, 0.0]
+      - [5.0, 0.0, 0.0]
+    expected:
+      frequency_ratio: 1.000
+      tolerance: 0.01
+
+  - name: "Gaussian_Peak_Redshift"
+    description: "Clock at peak runs faster than far clock"
+    r_field: "gaussian"
+    gaussian_params:
+      amplitude: 0.5
+      sigma: 2.0
+    positions:
+      - [0.0, 0.0, 0.0]   # Peak
+      - [10.0, 0.0, 0.0]  # Far field
+    expected:
+      frequency_ratio_greater_than_1: true
+      tolerance: 0.01
+
+  - name: "Point_Mass_Time_Dilation"
+    description: "Verify ω₂/ω₁ = R₁/R₂ for weak field"
+    r_field: "point_mass"
+    mass: 1.0
+    positions:
+      - [2.0, 0.0, 0.0]   # Inner (r=2)
+      - [10.0, 0.0, 0.0]  # Outer (r=10)
+    expected:
+      frequency_ratio: "R₁/R₂"
+      tolerance: 0.01
+
+  - name: "Transitivity_Check"
+    description: "Verify (ω₃/ω₂)·(ω₂/ω₁) = (ω₃/ω₁)"
+    r_field: "point_mass"
+    mass: 1.0
+    positions:
+      - [2.0, 0.0, 0.0]   # r=2
+      - [5.0, 0.0, 0.0]   # r=5
+      - [10.0, 0.0, 0.0]  # r=10
+    expected:
+      transitivity_error: 0.01
+
+physics:
+  metric_type: "conformal"
+  signature: "(-,+,+,+)"
+  conformal_factor: "R(x,y,z)"
+  frequency_formula: "ω₂/ω₁ = R₁/R₂"
+
+oscillator:
+  intrinsic_frequency: 1.0  # rad/s in proper time
+  observation_time: 100.0   # coordinate time units
+  timestep: 0.01            # integration timestep
+
+measurement:
+  method: "cycle_counting"
+  phase_tracking: true
+  zero_crossing_detection: true
+
+validation:
+  framework: "A5 - Gravitational Time Dilation"
+  test_file: "test/test_time_dilation_3d.cpp"
+  build_target: "test_time_dilation_3d"
+
+  physics_to_validate:
+    - "Proper time dτ = R(x)·dt"
+    - "Frequency ratio ω₂/ω₁ = R₁/R₂"
+    - "Gravitational redshift (clock at higher R runs faster)"
+    - "Transitivity of frequency ratios"
+
+  quality_metrics:
+    - "Frequency ratio accuracy (1% tolerance)"
+    - "Transitivity consistency (1% tolerance)"
+    - "Numerical stability (100 time units)"
+    - "Phase coherence maintenance"
+
+  comparison:
+    - "General Relativity: ω₂/ω₁ = √(g₀₀(x₁)/g₀₀(x₂))"
+    - "TRD: ω₂/ω₁ = R₁/R₂ (from g₀₀ = -R²)"
+    - "Equivalence: √(R₁²/R₂²) = R₁/R₂ ✓"

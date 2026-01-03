@@ -56,6 +56,8 @@ int runEMGravityCoupling3DTest();
 int runEinsteinFieldEquationsTest();
 int runLightDeflection3DTest();
 int runParticleSpectrum3DTest();
+int runTimeDilation3DTest();
+int runCosmologicalConstantTest();
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -71,6 +73,8 @@ int runTestMode(const std::string& config_path) {
         return runGeodesic3DTest();
     } else if (config_path.find("weak_field_3d") != std::string::npos) {
         return runWeakField3DTest();
+    } else if (config_path.find("time_dilation_3d") != std::string::npos) {
+        return runTimeDilation3DTest();
     } else if (config_path.find("three_body_em_3d") != std::string::npos) {
         return runThreeBodyEM3DTest();
     } else if (config_path.find("em_gravity_coupling_3d") != std::string::npos) {
@@ -81,6 +85,8 @@ int runTestMode(const std::string& config_path) {
         return runLightDeflection3DTest();
     } else if (config_path.find("particle_spectrum_3d") != std::string::npos) {
         return runParticleSpectrum3DTest();
+    } else if (config_path.find("cosmological_constant") != std::string::npos) {
+        return runCosmologicalConstantTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)

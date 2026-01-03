@@ -144,10 +144,12 @@ set(TRD_SOURCES
     test/test_stuckelberg_vortex_3d.cpp
     test/test_geodesic_3d.cpp
     test/test_weak_field_3d.cpp
+    test/test_time_dilation_3d.cpp
     test/test_em_gravity_coupling_3d.cpp
     test/test_einstein_field_equations.cpp
     test/test_light_deflection_3d.cpp
     test/test_particle_spectrum_3d.cpp
+    test/test_cosmological_constant.cpp
     main.cpp
 )
 

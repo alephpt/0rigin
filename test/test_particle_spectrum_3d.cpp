@@ -26,6 +26,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include <cmath>
 #include <vector>
 #include <array>
@@ -480,6 +481,188 @@ void analyzeEnergyScaling() {
 }
 
 /**
+ * B1 Phase 1: K-Parameter Scan
+ *
+ * Goal: Understand how Kuramoto coupling strength K affects mass hierarchy
+ * Test K = 0.0, 0.5, 1.0, 2.0, 5.0
+ * Measure E₁, E₂, E₃ for each K
+ * Analyze m₂/m₁ vs K to identify optimal coupling for mass hierarchy
+ */
+void analyzeKParameterScan() {
+    std::cout << "\n=== B1 Phase 1: K-Parameter Scan ===\n";
+    std::cout << "Goal: Identify K-dependence of mass hierarchy\n\n";
+
+    const int N = 32;
+    const float dx = 0.5f;
+    std::vector<float> K_values = {0.0f, 0.5f, 1.0f, 2.0f, 5.0f};
+
+    std::cout << "  K      E₁        E₂        E₃        m₂/m₁    E₂/E₁    E₃/E₁\n";
+    std::cout << "  -------------------------------------------------------------------\n";
+
+    for (float K : K_values) {
+        // Q=1 vortex
+        KuramotoGrid3D grid1(N, dx, K);
+        initSingleVortex(grid1, 0.0f, 0.0f);
+        float E1 = computeVortexEnergy(grid1);
+
+        // Q=2 vortex
+        KuramotoGrid3D grid2(N, dx, K);
+        initDoubleVortex(grid2, 4.0f);
+        float E2 = computeVortexEnergy(grid2);
+
+        // Q=3 vortex
+        KuramotoGrid3D grid3(N, dx, K);
+        initTripleVortex(grid3, 3.0f);
+        float E3 = computeVortexEnergy(grid3);
+
+        // Mass ratios
+        float m2_m1 = E2 / E1;
+        float E2_E1 = E2 / E1;
+        float E3_E1 = E3 / E1;
+
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout << "  " << std::setw(4) << K << "   "
+                  << std::setw(8) << E1 << "  "
+                  << std::setw(8) << E2 << "  "
+                  << std::setw(8) << E3 << "  "
+                  << std::setw(7) << m2_m1 << "  "
+                  << std::setw(7) << E2_E1 << "  "
+                  << std::setw(7) << E3_E1 << "\n";
+    }
+
+    std::cout << "\n  Analysis:\n";
+    std::cout << "    - Target m₂/m₁ = 206.768 (muon/electron)\n";
+    std::cout << "    - If m₂/m₁ varies significantly with K → K is critical parameter\n";
+    std::cout << "    - If m₂/m₁ ~ constant → K affects overall scale, not hierarchy\n";
+}
+
+/**
+ * B1 Phase 1: Vortex Separation Scan
+ *
+ * Goal: Understand interaction energy vs vortex separation
+ * Initialize Q=2 vortex with varying separation d
+ * Test d = 2, 4, 8, 16 grid units
+ * Check if E₂ → 2·E₁ as d → ∞ (independent limit)
+ * Measure interaction strength E_interaction(d)
+ */
+void analyzeVortexSeparation() {
+    std::cout << "\n=== B1 Phase 1: Vortex Separation Scan ===\n";
+    std::cout << "Goal: Measure vortex interaction energy E(d)\n\n";
+
+    const int N = 32;
+    const float dx = 0.5f;
+    const float K = 1.0f;
+
+    // Reference: Single vortex energy
+    KuramotoGrid3D grid_ref(N, dx, K);
+    initSingleVortex(grid_ref, 0.0f, 0.0f);
+    float E1 = computeVortexEnergy(grid_ref);
+
+    std::vector<float> separations = {2.0f, 4.0f, 8.0f, 16.0f};
+
+    std::cout << "  d (units)   E₂        E₂/E₁    E₂/(2·E₁)  E_interaction\n";
+    std::cout << "  -----------------------------------------------------------\n";
+
+    for (float d : separations) {
+        KuramotoGrid3D grid(N, dx, K);
+        initDoubleVortex(grid, d);
+        float E2 = computeVortexEnergy(grid);
+
+        float E2_E1 = E2 / E1;
+        float E2_2E1 = E2 / (2.0f * E1);
+        float E_int = E2 - 2.0f * E1;  // Interaction energy
+
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout << "  " << std::setw(8) << d << "  "
+                  << std::setw(8) << E2 << "  "
+                  << std::setw(7) << E2_E1 << "  "
+                  << std::setw(10) << E2_2E1 << "  "
+                  << std::setw(14) << E_int << "\n";
+    }
+
+    std::cout << "\n  Analysis:\n";
+    std::cout << "    - If E₂/(2·E₁) → 1 as d → ∞: vortices become independent\n";
+    std::cout << "    - E_interaction < 0: Attractive interaction\n";
+    std::cout << "    - E_interaction > 0: Repulsive interaction\n";
+    std::cout << "    - Interaction strength determines binding energy\n";
+}
+
+/**
+ * B1 Phase 1: Generate CSV Results
+ *
+ * Output comprehensive scan data to CSV for analysis
+ * Format: K, d, E₁, E₂, E₃, m₂/m₁, E₂/E₁, E₃/E₁, E_interaction
+ */
+void generateCSVResults() {
+    std::cout << "\n=== Generating CSV Results ===\n";
+
+    const int N = 32;
+    const float dx = 0.5f;
+    std::vector<float> K_values = {0.0f, 0.5f, 1.0f, 2.0f, 5.0f};
+    std::vector<float> separations = {2.0f, 4.0f, 8.0f, 16.0f};
+
+    // Create output file
+    std::ofstream csv_file("analysis/b1_phase1_results.csv");
+    if (!csv_file.is_open()) {
+        std::cerr << "  ERROR: Could not create analysis/b1_phase1_results.csv\n";
+        std::cerr << "  Make sure 'analysis/' directory exists\n";
+        return;
+    }
+
+    // CSV Header
+    csv_file << "K,d,E1,E2,E3,m2_m1,E2_E1,E3_E1,E_interaction\n";
+
+    // K-parameter scan (fixed d = 4.0)
+    for (float K : K_values) {
+        KuramotoGrid3D grid1(N, dx, K);
+        initSingleVortex(grid1, 0.0f, 0.0f);
+        float E1 = computeVortexEnergy(grid1);
+
+        KuramotoGrid3D grid2(N, dx, K);
+        initDoubleVortex(grid2, 4.0f);
+        float E2 = computeVortexEnergy(grid2);
+
+        KuramotoGrid3D grid3(N, dx, K);
+        initTripleVortex(grid3, 3.0f);
+        float E3 = computeVortexEnergy(grid3);
+
+        float m2_m1 = E2 / E1;
+        float E2_E1 = E2 / E1;
+        float E3_E1 = E3 / E1;
+        float E_int = E2 - 2.0f * E1;
+
+        csv_file << K << ",4.0," << E1 << "," << E2 << "," << E3 << ","
+                 << m2_m1 << "," << E2_E1 << "," << E3_E1 << "," << E_int << "\n";
+    }
+
+    // Separation scan (fixed K = 1.0)
+    KuramotoGrid3D grid_ref(N, dx, 1.0f);
+    initSingleVortex(grid_ref, 0.0f, 0.0f);
+    float E1_ref = computeVortexEnergy(grid_ref);
+
+    for (float d : separations) {
+        KuramotoGrid3D grid2(N, dx, 1.0f);
+        initDoubleVortex(grid2, d);
+        float E2 = computeVortexEnergy(grid2);
+
+        KuramotoGrid3D grid3(N, dx, 1.0f);
+        initTripleVortex(grid3, 3.0f);
+        float E3 = computeVortexEnergy(grid3);
+
+        float m2_m1 = E2 / E1_ref;
+        float E2_E1 = E2 / E1_ref;
+        float E3_E1 = E3 / E1_ref;
+        float E_int = E2 - 2.0f * E1_ref;
+
+        csv_file << "1.0," << d << "," << E1_ref << "," << E2 << "," << E3 << ","
+                 << m2_m1 << "," << E2_E1 << "," << E3_E1 << "," << E_int << "\n";
+    }
+
+    csv_file.close();
+    std::cout << "  ✓ Results written to: analysis/b1_phase1_results.csv\n";
+}
+
+/**
  * Main test runner
  */
 int runParticleSpectrum3DTest() {
@@ -499,6 +682,11 @@ int runParticleSpectrum3DTest() {
 
     analyzeEnergyScaling();
 
+    // B1 Phase 1: K-parameter and vortex separation analysis
+    analyzeKParameterScan();
+    analyzeVortexSeparation();
+    generateCSVResults();
+
     std::cout << "\n========================================\n";
     std::cout << "FINAL VERDICT: " << (all_pass ? "PASS ✓✓✓" : "FAIL ✗✗✗") << "\n";
     std::cout << "========================================\n";
@@ -506,6 +694,10 @@ int runParticleSpectrum3DTest() {
     if (!all_pass) {
         std::cout << "\n⚠️  CRITICAL: TRD particle spectrum derivation failed!\n";
         std::cout << "Theory requires refinement or additional physics.\n";
+        std::cout << "\nB1 Phase 1 Analysis Complete:\n";
+        std::cout << "  - K-parameter scan → Identify coupling strength dependence\n";
+        std::cout << "  - Vortex separation scan → Measure interaction energy\n";
+        std::cout << "  - Results saved to: analysis/b1_phase1_results.csv\n";
     } else {
         std::cout << "\n🎉 BREAKTHROUGH: TRD successfully predicts particle masses!\n";
         std::cout << "Topological vortex excitations → Particle spectrum confirmed!\n";
