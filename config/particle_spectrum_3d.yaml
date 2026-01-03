@@ -110,17 +110,20 @@ success_criteria:
 b1_phase1_analysis:
   description: "K-parameter and vortex separation refinement study"
   goal: "Understand vortex interaction energy dependence"
+  status: "COMPLETE"
 
   k_parameter_scan:
     values: [0.0, 0.5, 1.0, 2.0, 5.0]
     fixed_separation: 4.0
     purpose: "Identify if K affects mass hierarchy or just overall scale"
+    result: "K affects energy scale, NOT hierarchy structure (m₂/m₁ = 3.35-3.74)"
 
   vortex_separation_scan:
     values: [2.0, 4.0, 8.0, 16.0]
     fixed_k: 1.0
     purpose: "Measure E_interaction(d) and check if E₂ → 2·E₁ as d → ∞"
     expected: "E₂/(2·E₁) → 1 as d → ∞ (independent limit)"
+    result: "E_interaction > 0 always (repulsive), E₂/(2·E₁) → 1 confirmed"
 
   output:
     file: "analysis/b1_phase1_results.csv"
@@ -131,10 +134,76 @@ b1_phase1_analysis:
     - "R-field feedback (dynamic synchronization)"
     - "Topological stability vs separation"
 
+  conclusion:
+    - "Parametric fixes ruled out: 98.2% error is systematic, not parametric"
+    - "Radial modes required for larger mass hierarchy"
+
+b1_phase2_analysis:
+  description: "Radial mode implementation for larger mass hierarchy"
+  goal: "Test if radial quantum numbers (n,l) provide m₂/m₁ > 10"
+  status: "ACTIVE"
+
+  radial_wave_functions:
+    ground_state_n1: "f_1(r) = A·exp(-r/r₀)"
+    first_radial_n2: "f_2(r) = A·(1 - r/2r₀)·exp(-r/r₀)"
+    second_radial_n3: "f_3(r) = A·(1 - 2r/3r₀ + 2r²/27r₀²)·exp(-r/r₀)"
+    angular_l1: "f_l(r) = A·(r/r₀)·exp(-r/r₀)"
+
+  vortex_ansatz: "θ(r,φ) = Q·φ + f_n(r)"
+
+  test_scenarios:
+    - name: "Ground state (1s)"
+      config: {Q: 1, n: 1, l: 0}
+      description: "Reference baseline (electron-like)"
+
+    - name: "First radial (2s)"
+      config: {Q: 1, n: 2, l: 0}
+      description: "Radial node excitation"
+      expected: "m/m₁ = 4 (hydrogen-like n² scaling)"
+
+    - name: "Second radial (3s)"
+      config: {Q: 1, n: 3, l: 0}
+      description: "Two radial nodes"
+      expected: "m/m₁ = 9 (hydrogen-like n² scaling)"
+
+    - name: "Angular momentum (2p)"
+      config: {Q: 1, n: 2, l: 1}
+      description: "p-wave excitation"
+      expected: "m/m₁ > 1 (angular barrier energy)"
+
+    - name: "Topological Q=2"
+      config: {Q: 2, n: 1, l: 0}
+      description: "Comparison to Phase 1 result"
+      expected: "m/m₁ ≈ 3.65 (Phase 1 baseline)"
+
+  r0_scan:
+    values: [2.0, 4.0, 6.0, 8.0]
+    purpose: "Identify optimal vortex radius for mass hierarchy"
+    fixed_params: {K: 1.0, N: 32, dx: 0.5}
+
+  output:
+    file: "analysis/b1_phase2_results.csv"
+    format: "Q,n,l,r0,Energy,m_ratio"
+
+  quality_gates:
+    minimum: "m₂/m₁ > 10 (significant improvement over Phase 1)"
+    target: "m₂/m₁ > 100 (within factor 2 of 206.768)"
+    critical: "m₂/m₁ ≈ 206.768 ± 50% (muon/electron ratio)"
+
+  success_criteria:
+    - "Radial modes provide larger mass gaps than topological charge"
+    - "m(n=2)/m(n=1) > m(Q=2)/m(Q=1)"
+    - "Energy scaling consistent with hydrogen-like E_n ∝ 1/n²"
+
   next_phase:
-    - "Phase 2: Add radial modes to vortex configurations"
-    - "Phase 3: Include R-field self-consistency"
-    - "Phase 4: Full stability analysis"
+    if_pass:
+      - "Phase 3: R-field self-consistency for binding"
+      - "Optimize r₀ and coupling parameters"
+      - "Map to particle physics (electron, muon, tau)"
+    if_fail:
+      - "Phase 3: R-field feedback (alternative approach)"
+      - "Phase 4: Topological stability analysis"
+      - "Consider non-linear coupling terms"
 
 notes:
   - "This test is MAKE-OR-BREAK for TRD theory"
