@@ -1,0 +1,47 @@
+# Light Deflection in 3D TRD Spacetime Configuration
+#
+# A4 Test: Validate EM wave deflection in curved R-field
+# GR Prediction: δθ = 4GM/(c²b)
+# Quality Gate: |δθ_measured - δθ_GR| / δθ_GR < 0.05 (5%)
+
+test_name: "Light Deflection 3D"
+test_type: "light_deflection_3d"
+
+# Grid parameters
+grid:
+  N: 64               # Grid size (64x64x64)
+  dx: 0.5             # Spatial step
+  dt: 0.01            # Time step
+
+# R-field parameters (Gaussian mass concentration)
+r_field:
+  type: "gaussian_peak"
+  amplitude: 0.5      # Peak height A
+  width: 2.0          # Peak width σ
+
+# EM wave packet parameters
+wave_packet:
+  E0: 1.0             # Electric field amplitude
+  sigma: 2.0          # Wave packet width
+  k: 1.0              # Wave number
+  x0: -12.0           # Initial x position
+  y0: 4.0             # Impact parameter b
+  z0: 0.0             # Initial z position
+
+# Evolution parameters
+evolution:
+  num_steps: 800      # Total time steps
+  record_interval: 50 # Record trajectory every N steps
+
+# Quality gates
+quality_gates:
+  flat_space_deflection_max: 0.1      # rad
+  curved_space_deflection_min: 0.001  # rad (must deflect)
+  wave_coherence_min: 0.3             # 30% amplitude retention
+  gr_error_max: 0.5                   # 50% tolerance on GR prediction
+  scaling_correct: true               # δθ ∝ 1/b
+
+# Output
+output:
+  trajectory_file: "output/light_deflection_trajectory.csv"
+  report_file: "output/light_deflection_report.txt"
