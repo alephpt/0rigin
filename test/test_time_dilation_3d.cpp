@@ -8,7 +8,7 @@
  * Physics:
  *   Metric: g_μν = R²(x,y,z)·η_μν (conformal to Minkowski)
  *   Proper time: dτ = R(x)·dt (coordinate time scaling)
- *   Frequency ratio: ω₂/ω₁ = √(g₀₀(x₁)/g₀₀(x₂)) = √(R₁²/R₂²) = R₁/R₂
+ *   Frequency ratio: ω₂/ω₁ = R₂/R₁ (coordinate frequency ∝ R)
  *
  * Test Method:
  *   - Place oscillators at positions with different R values
@@ -118,8 +118,9 @@ RFieldData pointMassRField(float x, float y, float z, float M) {
  *
  * where dτ = R·dt is the proper time increment
  */
+template<typename RFieldFunc>
 void evolveOscillator(HarmonicOscillator& osc,
-                      std::function<RFieldData(float, float, float)> getRField,
+                      RFieldFunc getRField,
                       float dt) {
     // Get R-field at oscillator position
     auto data = getRField(osc.x, osc.y, osc.z);
@@ -193,7 +194,7 @@ bool testFlatSpaceNoDilation() {
     // Get R values
     auto R1 = flatRField(osc1.x, osc1.y, osc1.z);
     auto R2 = flatRField(osc2.x, osc2.y, osc2.z);
-    float expected_ratio = R1.R / R2.R;
+    float expected_ratio = R2.R / R1.R;
 
     std::cout << "Position 1: (" << osc1.x << ", " << osc1.y << ", " << osc1.z << ")\n";
     std::cout << "  R₁ = " << R1.R << "\n";
@@ -207,7 +208,7 @@ bool testFlatSpaceNoDilation() {
 
     std::cout << "Frequency Ratio:\n";
     std::cout << "  Measured:  ω₂/ω₁ = " << ratio << "\n";
-    std::cout << "  Expected:  R₁/R₂ = " << expected_ratio << "\n";
+    std::cout << "  Expected:  R₂/R₁ = " << expected_ratio << "\n";
 
     float error = std::abs(ratio - expected_ratio) / expected_ratio;
     std::cout << "  Error: " << (error * 100.0f) << "%\n";
@@ -268,7 +269,7 @@ bool testGaussianRedshift() {
     // Get R values
     auto R_peak = getRField(osc_peak.x, osc_peak.y, osc_peak.z);
     auto R_far = getRField(osc_far.x, osc_far.y, osc_far.z);
-    float expected_ratio = R_peak.R / R_far.R;
+    float expected_ratio = R_peak.R / R_far.R;  // This one is correct: ω_peak/ω_far = R_peak/R_far
 
     std::cout << "Peak Position: (" << osc_peak.x << ", " << osc_peak.y << ", " << osc_peak.z << ")\n";
     std::cout << "  R_peak = " << R_peak.R << "\n";
@@ -342,7 +343,7 @@ bool testPointMassTimeDilation() {
     // Get R values
     auto R1 = getRField(osc1.x, osc1.y, osc1.z);
     auto R2 = getRField(osc2.x, osc2.y, osc2.z);
-    float expected_ratio = R1.R / R2.R;
+    float expected_ratio = R2.R / R1.R;
 
     std::cout << "Inner Position: r₁ = " << std::sqrt(osc1.x*osc1.x + osc1.y*osc1.y + osc1.z*osc1.z) << "\n";
     std::cout << "  R₁ = " << R1.R << "\n";
@@ -356,7 +357,7 @@ bool testPointMassTimeDilation() {
 
     std::cout << "Frequency Ratio:\n";
     std::cout << "  Measured:  ω₂/ω₁ = " << ratio << "\n";
-    std::cout << "  Expected:  R₁/R₂ = " << expected_ratio << "\n";
+    std::cout << "  Expected:  R₂/R₁ = " << expected_ratio << "\n";
 
     float error = std::abs(ratio - expected_ratio) / expected_ratio;
     std::cout << "  Error: " << (error * 100.0f) << "%\n";
@@ -447,7 +448,7 @@ int runTimeDilation3DTest() {
     std::cout << "\n========================================\n";
     std::cout << "  A5: Gravitational Time Dilation Test\n";
     std::cout << "========================================\n";
-    std::cout << "\nPhysics: ω₂/ω₁ = R₁/R₂ (frequency ratio from metric)\n";
+    std::cout << "\nPhysics: ω₂/ω₁ = R₂/R₁ (coordinate frequency ∝ R)\n";
     std::cout << "Quality Gate: |measured - expected|/expected < 1%\n";
 
     bool all_pass = true;
