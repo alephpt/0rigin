@@ -34,14 +34,16 @@ void printUsage(const char* program_name) {
     std::cout << "\nTest Configuration Files:" << std::endl;
     std::cout << "  config/timesync_validation.yaml - Full validation (N=1,10,100, 64x64 grid)" << std::endl;
     std::cout << "  config/quick_validation.yaml    - Quick test (N=1,10, 32x32 grid)" << std::endl;
+    std::cout << "  config/dark_matter.yaml         - C3 dark matter prediction test" << std::endl;
+    std::cout << "  config/weak_field_3d.yaml       - Weak field gravity validation" << std::endl;
 
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  " << program_name << std::endl;
     std::cout << "      → Launch interactive visualization" << std::endl;
-    std::cout << "\n  " << program_name << " --test config/timesync_validation.yaml" << std::endl;
-    std::cout << "      → Run timesync validation test" << std::endl;
-    std::cout << "\n  " << program_name << " --test config/quick_validation.yaml" << std::endl;
-    std::cout << "      → Run quick validation test" << std::endl;
+    std::cout << "\n  " << program_name << " --test config/dark_matter.yaml" << std::endl;
+    std::cout << "      → Test if TRD explains flat galaxy rotation curves" << std::endl;
+    std::cout << "\n  " << program_name << " --test config/weak_field_3d.yaml" << std::endl;
+    std::cout << "      → Validate weak field gravity (Newton's law)" << std::endl;
 
     std::cout << "\n==================================================\n" << std::endl;
 }
@@ -58,6 +60,8 @@ int runLightDeflection3DTest();
 int runParticleSpectrum3DTest();
 int runTimeDilation3DTest();
 int runCosmologicalConstantTest();
+int runFriedmannEquationsTest();
+int runDarkMatterTest();
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -87,6 +91,10 @@ int runTestMode(const std::string& config_path) {
         return runParticleSpectrum3DTest();
     } else if (config_path.find("cosmological_constant") != std::string::npos) {
         return runCosmologicalConstantTest();
+    } else if (config_path.find("friedmann_equations") != std::string::npos) {
+        return runFriedmannEquationsTest();
+    } else if (config_path.find("dark_matter") != std::string::npos) {
+        return runDarkMatterTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)

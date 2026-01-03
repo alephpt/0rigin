@@ -1357,6 +1357,30 @@ test/test_cosmological_constant.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.s
 .PHONY : test/test_cosmological_constant.cpp.s
 
+test/test_dark_matter.o: test/test_dark_matter.cpp.o
+.PHONY : test/test_dark_matter.o
+
+# target to build an object file
+test/test_dark_matter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o
+.PHONY : test/test_dark_matter.cpp.o
+
+test/test_dark_matter.i: test/test_dark_matter.cpp.i
+.PHONY : test/test_dark_matter.i
+
+# target to preprocess a source file
+test/test_dark_matter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_dark_matter.cpp.i
+.PHONY : test/test_dark_matter.cpp.i
+
+test/test_dark_matter.s: test/test_dark_matter.cpp.s
+.PHONY : test/test_dark_matter.s
+
+# target to generate assembly for a file
+test/test_dark_matter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_dark_matter.cpp.s
+.PHONY : test/test_dark_matter.cpp.s
+
 test/test_dirac3d_free.o: test/test_dirac3d_free.cpp.o
 .PHONY : test/test_dirac3d_free.o
 
@@ -1455,6 +1479,30 @@ test/test_em_wave_propagation_3d.s: test/test_em_wave_propagation_3d.cpp.s
 test/test_em_wave_propagation_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/test/test_em_wave_propagation_3d.cpp.s
 .PHONY : test/test_em_wave_propagation_3d.cpp.s
+
+test/test_friedmann_equations.o: test/test_friedmann_equations.cpp.o
+.PHONY : test/test_friedmann_equations.o
+
+# target to build an object file
+test/test_friedmann_equations.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o
+.PHONY : test/test_friedmann_equations.cpp.o
+
+test/test_friedmann_equations.i: test/test_friedmann_equations.cpp.i
+.PHONY : test/test_friedmann_equations.i
+
+# target to preprocess a source file
+test/test_friedmann_equations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.i
+.PHONY : test/test_friedmann_equations.cpp.i
+
+test/test_friedmann_equations.s: test/test_friedmann_equations.cpp.s
+.PHONY : test/test_friedmann_equations.s
+
+# target to generate assembly for a file
+test/test_friedmann_equations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.s
+.PHONY : test/test_friedmann_equations.cpp.s
 
 test/test_geodesic_3d.o: test/test_geodesic_3d.cpp.o
 .PHONY : test/test_geodesic_3d.o
@@ -1937,6 +1985,9 @@ help:
 	@echo "... test/test_cosmological_constant.o"
 	@echo "... test/test_cosmological_constant.i"
 	@echo "... test/test_cosmological_constant.s"
+	@echo "... test/test_dark_matter.o"
+	@echo "... test/test_dark_matter.i"
+	@echo "... test/test_dark_matter.s"
 	@echo "... test/test_dirac3d_free.o"
 	@echo "... test/test_dirac3d_free.i"
 	@echo "... test/test_dirac3d_free.s"
@@ -1949,6 +2000,9 @@ help:
 	@echo "... test/test_em_wave_propagation_3d.o"
 	@echo "... test/test_em_wave_propagation_3d.i"
 	@echo "... test/test_em_wave_propagation_3d.s"
+	@echo "... test/test_friedmann_equations.o"
+	@echo "... test/test_friedmann_equations.i"
+	@echo "... test/test_friedmann_equations.s"
 	@echo "... test/test_geodesic_3d.o"
 	@echo "... test/test_geodesic_3d.i"
 	@echo "... test/test_geodesic_3d.s"

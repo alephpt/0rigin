@@ -295,6 +295,18 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_friedmann_equations.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_friedmann_equations.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o -c /home/persist/neotec/0rigin/test/test_dark_matter.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_dark_matter.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
   "file": "/home/persist/neotec/0rigin/main.cpp",
   "output": "CMakeFiles/TRD.dir/main.cpp.o"

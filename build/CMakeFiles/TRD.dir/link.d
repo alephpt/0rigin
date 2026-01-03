@@ -29,6 +29,8 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o \
+  CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o \
+  CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o \
   CMakeFiles/TRD.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
@@ -127,6 +129,10 @@ CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o:
 CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o:
 
 CMakeFiles/TRD.dir/main.cpp.o:
 

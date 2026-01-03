@@ -1,0 +1,141 @@
+# Friedmann Equations Derivation Configuration
+#
+# C2 COSMOLOGICAL VALIDATION: Derive Friedmann equations from TRD
+#
+# The Friedmann Equations:
+#   - First equation: 3H² = 8πG·ρ (Hubble parameter)
+#   - Second equation: ä/a = -4πG(ρ+3p)/3 (acceleration equation)
+#   - H = ȧ/a (Hubble parameter definition)
+#   - Observed: H₀ ≈ 70 km/s/Mpc
+#
+# TRD Derivation:
+#   - Homogeneous, isotropic R-field: R(t) (depends only on time)
+#   - Scale factor: a(t) ∝ R(t)
+#   - Hubble parameter: H = Ṙ/R
+#   - TRD evolution: ∂R/∂t = -coupling·ρ·R
+#
+# Critical Quality Gate:
+#   Hubble parameter H₀ within factor 2 of 70 km/s/Mpc
+
+simulation:
+  grid_size: 32
+  spacing: 1.0e25  # Cosmological scale (meters)
+  dimensions: 3
+  coupling_strength: 1.0  # K parameter
+
+physics:
+  cosmology_mode: true
+  homogeneous_isotropic: true
+  matter_only: true  # Pressureless dust (p=0)
+
+  # Physical constants
+  c_light_km_s: 299792.458
+  G_SI: 6.674e-11  # m³/(kg·s²)
+  Mpc_to_km: 3.0857e19
+
+  # Observed Hubble parameter
+  H0_obs_km_s_Mpc: 70.0
+
+  # Initial conditions
+  scale_factor_initial: 1.0
+  matter_density_initial_kg_m3: 1.0e-26  # Realistic cosmic density
+
+  # TRD-Friedmann coupling
+  # coupling_gravity = √(8πG/3) for Friedmann equation
+  friedmann_calibration: "coupling = sqrt(8*pi*G/3)"
+
+evolution:
+  time_step_seconds: 1.0e12  # ~30,000 years per step
+  num_steps: 1000
+  integration_method: "RK4"  # Runge-Kutta 4th order
+
+  # Matter conservation: ρ·a³ = constant
+  matter_scaling: "rho ∝ a^(-3)"
+
+test_scenarios:
+  - name: "Hubble_Parameter_Derivation"
+    description: "Derive H = Ṙ/R from TRD dynamics"
+    expected:
+      hubble_range_km_s_Mpc: [35, 140]  # Factor 2 of 70
+      hubble_sign: "negative"  # ȧ/a < 0 for matter (attractive)
+
+  - name: "Matter_Dominated_Universe"
+    description: "Verify ȧ/a ∝ -ρ (attractive gravity)"
+    expected:
+      expansion_rate_sign: "negative"
+      density_scaling: "rho ∝ a^(-3)"
+
+  - name: "Friedmann_Equation_Validation"
+    description: "Test 3H² = 8πG·ρ"
+    expected:
+      residual_max: 0.1  # 10% accuracy
+      equation: "3H^2 = 8*pi*G*rho"
+
+  - name: "Hubble_Coupling_Scan"
+    description: "Find coupling that gives H₀ ≈ 70 km/s/Mpc"
+    coupling_values: [1e-11, 5e-11, 1e-10, 5e-10, 1e-9, 5e-9]
+    expected:
+      best_match_error_percent: 50  # Within factor 2
+
+validation:
+  framework: "C2 Cosmological Validation - Friedmann Equations"
+  test_file: "test/test_friedmann_equations.cpp"
+  build_target: "trd"
+
+  physics_to_validate:
+    - "R-field → scale factor a(t)"
+    - "Hubble parameter H = Ṙ/R"
+    - "Matter density scaling ρ ∝ a⁻³"
+    - "Friedmann equation 3H² = 8πG·ρ"
+    - "Attractive gravity ȧ/a < 0 for matter"
+
+  quality_metrics:
+    excellent: "H within 10% of 70 km/s/Mpc"
+    good: "H within factor 2 of 70 km/s/Mpc"
+    acceptable: "Correct sign (H < 0) and order of magnitude"
+
+theoretical_foundation:
+  flrw_metric: "ds² = -dt² + a²(t)[dr²/(1-kr²) + r²dΩ²]"
+  trd_homogeneous: "R(x,t) = R(t) (spatial homogeneity)"
+  scale_factor: "a(t) ∝ R(t)"
+  hubble_parameter: "H(t) = ȧ/a = Ṙ/R"
+
+  friedmann_derivation:
+    first_equation: "3H² = 8πG·ρ - 3k/a²"
+    flat_universe: "k = 0 → 3H² = 8πG·ρ"
+    matter_only: "ρ ∝ a⁻³, p = 0"
+    second_equation: "ä/a = -4πG(ρ+3p)/3 = -4πGρ/3"
+
+  trd_mechanism:
+    r_field_evolution: "∂R/∂t = -coupling·ρ·R"
+    hubble_from_trd: "H = (∂R/∂t)/R = -coupling·ρ"
+    friedmann_match: "coupling = √(8πG/3) → 3H² = 8πGρ"
+
+success_criteria:
+  critical:
+    - "H has correct sign (negative for matter-dominated)"
+    - "H within factor 10 of observed value"
+    - "Density scales as ρ ∝ a⁻³"
+
+  good:
+    - "H within factor 2 of 70 km/s/Mpc"
+    - "Friedmann equation residual < 10%"
+    - "Clear coupling calibration to match H₀"
+
+  excellent:
+    - "H within 10% of 70 km/s/Mpc"
+    - "Friedmann equation residual < 1%"
+    - "Predict matter-dominated evolution a(t) ∝ t^(2/3)"
+
+cosmological_context:
+  observed_hubble: "H₀ = 70 km/s/Mpc (ΛCDM)"
+  age_of_universe: "t₀ ≈ 13.8 billion years"
+  matter_density: "ρ_m,0 ≈ 10⁻²⁶ kg/m³"
+  critical_density: "ρ_c = 3H₀²/(8πG) ≈ 10⁻²⁶ kg/m³"
+
+notes:
+  - "First test of TRD cosmology (expanding universe)"
+  - "Homogeneous R-field → FLRW metric naturally"
+  - "H = Ṙ/R connects TRD to observable cosmology"
+  - "Success → TRD reproduces GR cosmology!"
+  - "Next: Dark matter (C3), Dark energy (C4), Inflation (C5)"

@@ -150,6 +150,8 @@ set(TRD_SOURCES
     test/test_light_deflection_3d.cpp
     test/test_particle_spectrum_3d.cpp
     test/test_cosmological_constant.cpp
+    test/test_friedmann_equations.cpp
+    test/test_dark_matter.cpp
     main.cpp
 )
 

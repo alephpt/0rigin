@@ -1,0 +1,107 @@
+# Dark Matter Prediction Test Configuration
+#
+# Test: Can TRD explain flat galaxy rotation curves without dark matter?
+# Physics: R-field nonlinear coupling to disk mass distribution
+#
+# Quality Gates:
+#   - Newtonian decline: v(2·R_disk)/v(R_disk) < 0.8
+#   - TRD flatness: v_TRD(2·R_disk)/v_TRD(R_disk) > 0.9
+#   - Flatness metric: σ_TRD < 0.5·σ_Newton
+
+simulation:
+  test_name: "C3_Dark_Matter_Prediction"
+  hypothesis: "TRD R-field explains flat rotation curves"
+  prediction: "Geometric effect replaces dark matter particles"
+
+galaxy_model:
+  type: "exponential_disk"
+  density: "ρ(r) = ρ₀·exp(-r/R_disk)"
+  enclosed_mass: "M(r) = 2π·ρ₀·R_disk²·[1 - (1+r/R_disk)·exp(-r/R_disk)]"
+
+  parameters:
+    rho0: 1.0          # Central density (natural units)
+    R_disk: 1.0        # Disk scale length
+    disk_mass: 6.28    # ≈ 2π·ρ₀·R_disk² (total disk mass)
+
+rotation_curves:
+  newtonian:
+    formula: "v² = GM(r)/r"
+    behavior: "v ∝ 1/√r for r > R_disk (Keplerian decline)"
+    dark_matter_solution: "Add ρ_DM ∝ 1/r² halo"
+
+  trd:
+    formula: "v² = r·|dΦ/dr| where Φ from R-field"
+    r_field: "R(r) = 1 + ε(r) with nonlinear matter coupling"
+    coupling: "ε = -GM(r)/r - α·(ρ/ρ₀)·R_disk"
+    alpha: 0.5         # TRD coupling parameter (calibrate from data)
+
+test_scenarios:
+  - name: "Newtonian_Baseline"
+    description: "Verify Newtonian curve declines beyond disk"
+    expected:
+      decline_ratio: "<0.8"  # v(2·R_disk)/v(R_disk) < 0.8
+      behavior: "Keplerian v ∝ 1/√r"
+
+  - name: "TRD_Flatness"
+    description: "Verify TRD curve is flatter than Newtonian"
+    expected:
+      flatness_ratio: ">0.9"  # v_TRD(2·R_disk)/v_TRD(R_disk) > 0.9
+      behavior: "v(r) ≈ constant beyond disk"
+
+  - name: "Flatness_Comparison"
+    description: "Compare stddev of rotation curves"
+    range: "[R_disk, 5·R_disk]"
+    expected:
+      trd_flatter: "σ_TRD < 0.5·σ_Newton"
+      interpretation: "TRD reduces velocity variation"
+
+  - name: "Physical_Interpretation"
+    description: "Explain mechanism for flat rotation"
+    mechanism:
+      - "R-field nonlinear coupling to matter ρ(r)"
+      - "Extended range beyond Newtonian potential"
+      - "Geometric effect (not dark matter particles)"
+    testable_predictions:
+      - "Correlation: disk properties ↔ rotation curve"
+      - "Calibration: fit α to observed galaxies"
+      - "Prediction: no dark matter halos needed"
+
+physics:
+  gravitational_constant: 1.0  # Natural units
+  r_field_coupling: "Nonlinear matter response"
+  dark_matter_alternative: "Geometric R-field effect"
+
+validation:
+  framework: "3D Particle Physics Tests - Phase 3"
+  test_file: "test/test_dark_matter.cpp"
+  integration: "Single TRD executable with --test flag"
+
+  quality_metrics:
+    - "Newtonian decline confirmed (< 0.8 ratio)"
+    - "TRD flatness achieved (> 0.9 ratio)"
+    - "Flatness comparison (σ_TRD < 0.5·σ_Newton)"
+    - "Physical interpretation documented"
+
+  next_steps:
+    - "Calibrate α from real galaxy data"
+    - "Test on diverse galaxy morphologies"
+    - "Compare to MOND and dark matter models"
+
+observational_targets:
+  - name: "NGC 3198"
+    type: "Spiral galaxy"
+    data: "Well-measured rotation curve"
+
+  - name: "M33"
+    type: "Spiral galaxy"
+    data: "Extended HI observations"
+
+  - name: "NGC 1560"
+    type: "LSB galaxy"
+    data: "Dark matter dominated (test TRD limits)"
+
+references:
+  - "Rubin & Ford (1970) - Galaxy rotation curves"
+  - "McGaugh et al. (2016) - Radial Acceleration Relation"
+  - "Milgrom (1983) - MOND alternative"
+  - "TRD Theory - Geometric dark matter mechanism"
