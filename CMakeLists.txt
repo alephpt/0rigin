@@ -191,6 +191,23 @@ set_target_properties(TRD PROPERTIES
 # TEST EXECUTABLES
 # ============================================================================
 
+# D1: Experimental Predictions Test (Falsifiability)
+add_executable(test_experimental_predictions
+    test/test_experimental_predictions.cpp
+)
+
+target_include_directories(test_experimental_predictions PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_experimental_predictions PRIVATE
+    m
+)
+
+set_target_properties(test_experimental_predictions PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # Geodesic Equation Verification Test
 add_executable(test_geodesic_verification
     test/test_geodesic_verification.cpp

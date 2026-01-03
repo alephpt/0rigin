@@ -169,6 +169,19 @@ TRD/fast:
 .PHONY : TRD/fast
 
 #=============================================================================
+# Target rules for targets named test_experimental_predictions
+
+# Build rule for target.
+test_experimental_predictions: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_experimental_predictions
+.PHONY : test_experimental_predictions
+
+# fast build rule for target.
+test_experimental_predictions/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_experimental_predictions.dir/build.make CMakeFiles/test_experimental_predictions.dir/build
+.PHONY : test_experimental_predictions/fast
+
+#=============================================================================
 # Target rules for targets named test_geodesic_verification
 
 # Build rule for target.
@@ -1480,6 +1493,30 @@ test/test_em_wave_propagation_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_em_wave_propagation_3d.dir/build.make CMakeFiles/test_em_wave_propagation_3d.dir/test/test_em_wave_propagation_3d.cpp.s
 .PHONY : test/test_em_wave_propagation_3d.cpp.s
 
+test/test_experimental_predictions.o: test/test_experimental_predictions.cpp.o
+.PHONY : test/test_experimental_predictions.o
+
+# target to build an object file
+test/test_experimental_predictions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_experimental_predictions.dir/build.make CMakeFiles/test_experimental_predictions.dir/test/test_experimental_predictions.cpp.o
+.PHONY : test/test_experimental_predictions.cpp.o
+
+test/test_experimental_predictions.i: test/test_experimental_predictions.cpp.i
+.PHONY : test/test_experimental_predictions.i
+
+# target to preprocess a source file
+test/test_experimental_predictions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_experimental_predictions.dir/build.make CMakeFiles/test_experimental_predictions.dir/test/test_experimental_predictions.cpp.i
+.PHONY : test/test_experimental_predictions.cpp.i
+
+test/test_experimental_predictions.s: test/test_experimental_predictions.cpp.s
+.PHONY : test/test_experimental_predictions.s
+
+# target to generate assembly for a file
+test/test_experimental_predictions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_experimental_predictions.dir/build.make CMakeFiles/test_experimental_predictions.dir/test/test_experimental_predictions.cpp.s
+.PHONY : test/test_experimental_predictions.cpp.s
+
 test/test_friedmann_equations.o: test/test_friedmann_equations.cpp.o
 .PHONY : test/test_friedmann_equations.o
 
@@ -1856,6 +1893,7 @@ help:
 	@echo "... test_dirac3d_free"
 	@echo "... test_einstein_field_equations"
 	@echo "... test_em_wave_propagation_3d"
+	@echo "... test_experimental_predictions"
 	@echo "... test_geodesic_verification"
 	@echo "... test_maxwell3d_wave"
 	@echo "... test_trd3d_cpu_only"
@@ -2000,6 +2038,9 @@ help:
 	@echo "... test/test_em_wave_propagation_3d.o"
 	@echo "... test/test_em_wave_propagation_3d.i"
 	@echo "... test/test_em_wave_propagation_3d.s"
+	@echo "... test/test_experimental_predictions.o"
+	@echo "... test/test_experimental_predictions.i"
+	@echo "... test/test_experimental_predictions.s"
 	@echo "... test/test_friedmann_equations.o"
 	@echo "... test/test_friedmann_equations.i"
 	@echo "... test/test_friedmann_equations.s"

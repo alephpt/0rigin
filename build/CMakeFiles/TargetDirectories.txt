@@ -2,6 +2,7 @@
 /home/persist/neotec/0rigin/build/CMakeFiles/Nova.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/imgui.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/TRD.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_experimental_predictions.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_geodesic_verification.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_einstein_field_equations.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_weak_field_limit.dir

@@ -313,6 +313,12 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_experimental_predictions.dir/test/test_experimental_predictions.cpp.o -c /home/persist/neotec/0rigin/test/test_experimental_predictions.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_experimental_predictions.cpp",
+  "output": "CMakeFiles/test_experimental_predictions.dir/test/test_experimental_predictions.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.o -c /home/persist/neotec/0rigin/test/test_geodesic_verification.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_geodesic_verification.cpp",
   "output": "CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.o"
