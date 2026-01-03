@@ -1,10 +1,10 @@
-# Gauge-Covariant Electromagnetic Theory for SMFT
+# Gauge-Covariant Electromagnetic Theory for TRD
 ## Wave 1D: High-Integrity Mathematical Formulation
 
 **Author**: Claude Code (Operations Tier 1)
 **Date**: 2025-12-31
 **Status**: DISCOVERY PHASE - Mathematical Design
-**Risk Level**: HIGH - May prove EM emergence incompatible with SMFT
+**Risk Level**: HIGH - May prove EM emergence incompatible with TRD
 
 ---
 
@@ -12,30 +12,30 @@
 
 ### The Problem
 
-Current SMFT EM implementation uses prescription:
+Current TRD EM implementation uses prescription:
 ```
 A_μ = ∂_μθ
 ```
 
 **Fatal flaw**: This gives **B = ∇×A = ∇×(∇θ) ≡ 0** identically (curl of gradient vanishes).
 
-**Consequence**: Cannot produce magnetic fields from SMFT phase field θ alone.
+**Consequence**: Cannot produce magnetic fields from TRD phase field θ alone.
 
 **Evidence**:
 - Boris tests use external B-field (`use_uniform_B: true`), not emergent
 - GPU shaders correctly compute A = ∇θ, confirming B = 0
 - Current implementation mathematically incapable of generating B ≠ 0
 
-### The Solution: Proca Theory with SMFT Coupling
+### The Solution: Proca Theory with TRD Coupling
 
-Replace naive A_μ = ∂_μθ with **massive photon (Proca) coupled to SMFT**:
+Replace naive A_μ = ∂_μθ with **massive photon (Proca) coupled to TRD**:
 
 ```
 ℒ_EM = -1/4 F_μν F^μν + 1/2 m_γ²(R) A_μ A^μ + j_μ(θ,R) A^μ
 ```
 
 **Key physics**:
-1. **Photon mass** m_γ(R) emerges from SMFT synchronization order parameter R
+1. **Photon mass** m_γ(R) emerges from TRD synchronization order parameter R
 2. **EM current** j_μ(θ,R) sources from Goldstone phase θ and coupling strength
 3. **Field strength** F_μν = ∂_μA_ν - ∂_νA_μ (gauge-invariant tensor)
 4. **Breaks U(1) gauge symmetry** in controlled way (Proca mass term)
@@ -91,7 +91,7 @@ where □ = ∂_t² - ∇² (d'Alembertian operator)
 **Physical interpretation**:
 - Photon mass gives finite-range EM interaction: λ = ℏ/(m_γc) = 1/m_γ (natural units)
 - Experimental bounds: m_γ < 10^-18 eV (extremely small, EM appears massless)
-- Here: m_γ emergent from SMFT, vanishes when synchronized
+- Here: m_γ emergent from TRD, vanishes when synchronized
 
 ### 1.3 Why Proca Allows B ≠ 0
 
@@ -114,11 +114,11 @@ Proca equation allows A ≠ ∇θ generically
 
 ---
 
-## 2. SMFT Coupling Prescription
+## 2. TRD Coupling Prescription
 
-### 2.1 SMFT Order Parameter Review
+### 2.1 TRD Order Parameter Review
 
-**SMFT field**: θ(x,t) - phase field of Kuramoto oscillators
+**TRD field**: θ(x,t) - phase field of Kuramoto oscillators
 **Order parameter**: R(x,t) ∈ [0,1] - local synchronization strength
 **Dynamics**:
 ```
@@ -154,7 +154,7 @@ R → 1: λ → ∞ (infinite range)
 R → 0: λ → 1/g (finite screening length)
 ```
 
-### 2.3 Electromagnetic Current from SMFT
+### 2.3 Electromagnetic Current from TRD
 
 **Goldstone current** (from U(1) breaking):
 ```
@@ -171,16 +171,16 @@ where:
        = α · (□θ · f(R) + ∂^μθ · ∂_μf(R))
 ```
 
-For current conservation (∂_μ j^μ = 0), need consistency with SMFT dynamics. This is **non-trivial constraint**.
+For current conservation (∂_μ j^μ = 0), need consistency with TRD dynamics. This is **non-trivial constraint**.
 
-**Alternative**: Construct j_μ from Noether current of SMFT Lagrangian (rigorous but complex).
+**Alternative**: Construct j_μ from Noether current of TRD Lagrangian (rigorous but complex).
 
 ### 2.4 Full Coupled Lagrangian
 
 ```
-ℒ_total = ℒ_SMFT[θ, R] + ℒ_Proca[A_μ, θ, R]
+ℒ_total = ℒ_TRD[θ, R] + ℒ_Proca[A_μ, θ, R]
 
-ℒ_SMFT = (∂_μθ)² + V_SMFT(R) + L_sync(θ, R)
+ℒ_TRD = (∂_μθ)² + V_TRD(R) + L_sync(θ, R)
 
 ℒ_Proca = -1/4 F_μν F^μν + 1/2 m_γ²(R) A_μ A^μ + α ∂_μθ f(R) A^μ
 ```
@@ -192,17 +192,17 @@ For current conservation (∂_μ j^μ = 0), need consistency with SMFT dynamics.
    ∂_ν F^μν + m_γ²(R) A^μ = α ∂^μθ f(R)
    ```
 
-2. **SMFT equation** (from δℒ/δθ = 0):
+2. **TRD equation** (from δℒ/δθ = 0):
    ```
    □θ + ... = α f(R) ∂_μ A^μ  (backreaction from EM)
    ```
 
 3. **Order parameter** (from δℒ/δR = 0):
    ```
-   ∂V_SMFT/∂R + ... = -1/2 ∂m_γ²/∂R · A_μ A^μ + α ∂_μθ ∂f/∂R A^μ
+   ∂V_TRD/∂R + ... = -1/2 ∂m_γ²/∂R · A_μ A^μ + α ∂_μθ ∂f/∂R A^μ
    ```
 
-**Key feature**: EM fields backreact on SMFT (α ≠ 0 couples systems)
+**Key feature**: EM fields backreact on TRD (α ≠ 0 couples systems)
 
 ---
 
@@ -245,14 +245,14 @@ Planck length: ℓ_P = 1.616 × 10^-35 m
 Planck time: t_P = 5.391 × 10^-44 s
 Planck energy: E_P = 1.221 × 10^19 GeV
 
-**SMFT natural scales** (from simulations):
+**TRD natural scales** (from simulations):
 - Lattice spacing: dx ~ 0.1 ℓ_P
 - Coupling K ~ 1 E_P
 - Damping γ ~ 0.1 E_P
 
 **Proposed EM scales**:
 - Photon mass coupling: g ~ 0.1 E_P (so m_γ ~ 0.1 E_P when R=0)
-- Current coupling: α ~ 0.01 E_P² (weak EM-SMFT coupling)
+- Current coupling: α ~ 0.01 E_P² (weak EM-TRD coupling)
 
 **These are PLACEHOLDER values** - must be fit to physics requirements.
 
@@ -264,10 +264,10 @@ Planck energy: E_P = 1.221 × 10^19 GeV
 
 **Operator splitting** (2nd-order Strang):
 
-1. **SMFT evolution** (half-step dt/2):
+1. **TRD evolution** (half-step dt/2):
    ```
-   θ^* = evolve_SMFT(θ^n, R^n, A^n, dt/2)
-   R^* = evolve_SMFT(R^n, θ^n, dt/2)
+   θ^* = evolve_TRD(θ^n, R^n, A^n, dt/2)
+   R^* = evolve_TRD(R^n, θ^n, dt/2)
    ```
 
 2. **Proca EM evolution** (full-step dt):
@@ -277,10 +277,10 @@ Planck energy: E_P = 1.221 × 10^19 GeV
    Compute E, B from A^(n+1)
    ```
 
-3. **SMFT evolution** (half-step dt/2) with EM backreaction:
+3. **TRD evolution** (half-step dt/2) with EM backreaction:
    ```
-   θ^(n+1) = evolve_SMFT(θ^*, R^*, A^(n+1), dt/2)
-   R^(n+1) = evolve_SMFT(R^*, θ^*, dt/2)
+   θ^(n+1) = evolve_TRD(θ^*, R^*, A^(n+1), dt/2)
+   R^(n+1) = evolve_TRD(R^*, θ^*, dt/2)
    ```
 
 ### 4.2 Proca Solver (GPU Shader)
@@ -392,7 +392,7 @@ Should be: Φ_B ~ 2π / m_γ  (quantized flux, screened by mass)
 ### 6.1 High-Risk Failure Modes
 
 **Risk 1: B = 0 even with Proca**
-- **Scenario**: Proca evolution still gives B → 0 due to SMFT current structure
+- **Scenario**: Proca evolution still gives B → 0 due to TRD current structure
 - **Probability**: 30%
 - **Mitigation**: Test early (Week 2), pivot to Stückelberg if needed
 - **Impact**: Invalidates entire EM emergence claim
@@ -403,14 +403,14 @@ Should be: Φ_B ~ 2π / m_γ  (quantized flux, screened by mass)
 - **Mitigation**: Quantify violation in Test 4, compare to theory
 - **Impact**: EM theory not physically meaningful
 
-**Risk 3: SMFT-EM coupling instability**
-- **Scenario**: Backreaction from EM destabilizes SMFT evolution
+**Risk 3: TRD-EM coupling instability**
+- **Scenario**: Backreaction from EM destabilizes TRD evolution
 - **Probability**: 25%
 - **Mitigation**: Weak coupling (small α), operator splitting
 - **Impact**: Cannot integrate systems, EM is "decoration" only
 
 **Risk 4: Computational cost prohibitive**
-- **Scenario**: Proca evolution 10× slower than SMFT
+- **Scenario**: Proca evolution 10× slower than TRD
 - **Probability**: 15%
 - **Mitigation**: Optimize shaders, adaptive time-stepping
 - **Impact**: Simulations infeasible, limited physics exploration
@@ -418,7 +418,7 @@ Should be: Φ_B ~ 2π / m_γ  (quantized flux, screened by mass)
 ### 6.2 Medium-Risk Technical Challenges
 
 **Challenge 1: Current conservation violation**
-- j_μ from SMFT might not satisfy ∂_μ j^μ = 0
+- j_μ from TRD might not satisfy ∂_μ j^μ = 0
 - **Mitigation**: Project j_μ onto divergence-free subspace
 - **Impact**: Requires additional computational step
 
@@ -428,7 +428,7 @@ Should be: Φ_B ~ 2π / m_γ  (quantized flux, screened by mass)
 - **Impact**: Complicates equations, may slow evolution
 
 **Challenge 3: Boundary conditions**
-- Periodic BC for SMFT, what about EM?
+- Periodic BC for TRD, what about EM?
 - **Mitigation**: Use same periodic BC (consistent with vortex physics)
 - **Impact**: May need absorbing BC for radiation tests
 
@@ -436,7 +436,7 @@ Should be: Φ_B ~ 2π / m_γ  (quantized flux, screened by mass)
 
 **Based on physics arguments**:
 - Proca allows B ≠ 0 mathematically: ✓ (certain)
-- SMFT can source Proca current: ✓ (likely)
+- TRD can source Proca current: ✓ (likely)
 - Backreaction manageable: ? (uncertain)
 - Emergent B measurable in vortex test: ? (uncertain)
 
@@ -498,7 +498,7 @@ A_μ → A_μ + ∂_μα  (gauge transform restored)
 □θ · f(R) + ∂^μθ · ∂_μf(R) = 0
 ```
 
-This is **not generally satisfied** by SMFT dynamics.
+This is **not generally satisfied** by TRD dynamics.
 
 **Possible resolutions**:
 1. **Weak coupling**: If α small, violation negligible
@@ -507,9 +507,9 @@ This is **not generally satisfied** by SMFT dynamics.
 
 **Needs investigation**: Week 1-2
 
-### 8.2 Backreaction on SMFT
+### 8.2 Backreaction on TRD
 
-**Question**: How does EM energy density ε_EM = E²+B² affect SMFT?
+**Question**: How does EM energy density ε_EM = E²+B² affect TRD?
 
 **Possible prescription**:
 ```
@@ -518,7 +518,7 @@ This is **not generally satisfied** by SMFT dynamics.
 
 But this is **ad-hoc**. Need principled derivation from ℒ_total.
 
-**Alternative**: Ignore backreaction initially (α = 0 in SMFT equation), test if necessary later.
+**Alternative**: Ignore backreaction initially (α = 0 in TRD equation), test if necessary later.
 
 ### 8.3 Emergence of Coulomb Interaction
 
@@ -530,7 +530,7 @@ But this is **ad-hoc**. Need principled derivation from ℒ_total.
 
 **Implications**:
 - Attractive/repulsive forces between θ structures
-- Could modify SMFT sync dynamics
+- Could modify TRD sync dynamics
 - Needs numerical test
 
 ---
@@ -538,7 +538,7 @@ But this is **ad-hoc**. Need principled derivation from ℒ_total.
 ## 9. Next Steps (Implementation Roadmap)
 
 ### Week 1: Mathematical Formulation (THIS DOCUMENT)
-- ✅ Define Proca Lagrangian with SMFT coupling
+- ✅ Define Proca Lagrangian with TRD coupling
 - ✅ Dimensional analysis and coupling constants
 - ✅ Validation test cases designed
 - ⚠️ **TODO**: Resolve current conservation issue
@@ -552,7 +552,7 @@ But this is **ad-hoc**. Need principled derivation from ℒ_total.
 - **CRITICAL EARLY TEST**: Vortex → B field (Test 2)
 
 ### Week 3: Integration & Testing
-- Integrate ProcaEM into SMFTCore
+- Integrate ProcaEM into TRDCore
 - Run Test 1 (plane wave dispersion)
 - Run Test 2 (vortex B field) **← MAKE-OR-BREAK**
 - Run Test 3 (Boris with emergent B) **← DEFINITIVE**
@@ -576,7 +576,7 @@ But this is **ad-hoc**. Need principled derivation from ℒ_total.
 4. ✅ Larmor radius within 10% of r_L = mv/(qB)
 5. ✅ Energy conservation <0.1% in Boris test
 6. ✅ Gauge violation < 5% (controlled by m_γ)
-7. ✅ All existing SMFT tests still pass
+7. ✅ All existing TRD tests still pass
 8. ✅ Performance degradation <3×
 
 ### CONDITIONAL Requirements (Warning flags):
@@ -587,14 +587,14 @@ But this is **ad-hoc**. Need principled derivation from ℒ_total.
 ### FAIL Criteria (Abort, pivot to Option A):
 ❌ B = 0 even after Proca implementation
 ❌ Gauge violation >10% (uncontrolled)
-❌ SMFT-EM coupling unstable (simulations diverge)
+❌ TRD-EM coupling unstable (simulations diverge)
 ❌ Boris test fails (no cyclotron motion from emergent B)
 
 ---
 
 ## 11. Theoretical Conclusion
 
-**Proca theory with SMFT coupling is mathematically sound** if:
+**Proca theory with TRD coupling is mathematically sound** if:
 1. Photon mass m_γ(R) emerges from synchronization order
 2. Current j_μ sources from Goldstone phase θ (with form factor f(R))
 3. Gauge violation controlled by m_γ scale
@@ -602,7 +602,7 @@ But this is **ad-hoc**. Need principled derivation from ℒ_total.
 
 **Key prediction**: θ vortices → non-zero B fields (screened by m_γ)
 
-**Falsification criterion**: If Test 2 or Test 3 fail → EM emergence incompatible with SMFT
+**Falsification criterion**: If Test 2 or Test 3 fail → EM emergence incompatible with TRD
 
 **This document provides rigorous theoretical foundation for implementation.**
 

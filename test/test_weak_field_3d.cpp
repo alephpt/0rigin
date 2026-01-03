@@ -3,7 +3,7 @@
  *
  * Weak Field Limit Validation in 3D
  *
- * Goal: Verify SMFT reproduces Newtonian gravity in weak field limit
+ * Goal: Verify TRD reproduces Newtonian gravity in weak field limit
  *
  * Physics:
  *   Metric: g_μν = R²·η_μν where R ≈ 1 + ε, |ε| ≪ 1

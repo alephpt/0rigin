@@ -2,7 +2,7 @@
  * @file test_em_gravity_coupling.cpp
  * @brief G3: Electromagnetic-Gravity Coupling Test
  *
- * Goal: Verify EM field energy curves SMFT spacetime (affects R-field)
+ * Goal: Verify EM field energy curves TRD spacetime (affects R-field)
  *
  * Theory:
  * - Energy-momentum tensor: T_μν^(EM) = (1/4π)[F_μα F_ν^α - (1/4)g_μν F²]
@@ -20,9 +20,9 @@
  * Quality Gate: Coupling matches theoretical prediction within 10%
  */
 
-#include "simulations/SMFTTestRunner.h"
-#include "SMFTCore.h"
-#include "SMFTEngine.h"
+#include "simulations/TRDTestRunner.h"
+#include "TRDCore.h"
+#include "TRDEngine.h"
 #include "physics/StuckelbergEM.h"
 #include <iostream>
 #include <fstream>
@@ -149,7 +149,7 @@ CouplingMeasurement measureCoupling(const std::vector<float>& R_field,
 
 int main() {
     std::cout << "=== G3: EM-Gravity Coupling Test ===" << std::endl;
-    std::cout << "Goal: Verify EM field energy curves SMFT spacetime via R-field" << std::endl;
+    std::cout << "Goal: Verify EM field energy curves TRD spacetime via R-field" << std::endl;
     std::cout << std::endl;
 
     // Test configuration
@@ -181,9 +181,9 @@ int main() {
     std::cout << "  Photon mass = " << photon_mass << std::endl;
     std::cout << std::endl;
 
-    // Initialize SMFT core (CPU-based for simplicity)
-    SMFTCore core(VK_NULL_HANDLE, VK_NULL_HANDLE);
-    SMFTCore::Config config;
+    // Initialize TRD core (CPU-based for simplicity)
+    TRDCore core(VK_NULL_HANDLE, VK_NULL_HANDLE);
+    TRDCore::Config config;
     config.nx = nx;
     config.ny = ny;
     config.dx = dx;
@@ -201,14 +201,14 @@ int main() {
     std::cout << std::endl;
 
     // Get Stückelberg EM pointer for pulse initialization
-    // Note: This requires extending SMFTCore API to expose StuckelbergEM
+    // Note: This requires extending TRDCore API to expose StuckelbergEM
     // For now, we'll implement a simplified test
 
     std::cout << "ERROR: Full GPU implementation required for EM-gravity coupling test" << std::endl;
     std::cout << "This test requires:" << std::endl;
     std::cout << "  1. em_stress_energy.comp shader integration" << std::endl;
     std::cout << "  2. R-field evolution with EM source term" << std::endl;
-    std::cout << "  3. SMFTEngine extension for EM→R coupling" << std::endl;
+    std::cout << "  3. TRDEngine extension for EM→R coupling" << std::endl;
     std::cout << std::endl;
     std::cout << "Implementation plan documented in notepad." << std::endl;
 

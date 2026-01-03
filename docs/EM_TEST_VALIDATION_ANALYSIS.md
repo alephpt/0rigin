@@ -27,7 +27,7 @@ All 3 EM verification tests experience failures:
 **Problem**: E0 computed with theta_current == theta_previous → EM energy = NaN
 **Solution**: Skip EM energy computation at step 0, initialize theta_previous after first step
 **Files Modified**:
-- `src/simulations/SMFTTestRunner.cpp` (lines 827-966)
+- `src/simulations/TRDTestRunner.cpp` (lines 827-966)
 
 ### 2. NaN Validation ✓ IMPLEMENTED
 **Problem**: NaN propagated through energy calculations
@@ -87,7 +87,7 @@ All 3 EM verification tests experience failures:
 ## Files Changed
 
 ```
-src/simulations/SMFTTestRunner.cpp      # Fixed E0 NaN, added step > 0 check
+src/simulations/TRDTestRunner.cpp      # Fixed E0 NaN, added step > 0 check
 src/simulations/ObservableComputer.cpp  # Added theta validation
 src/physics/EMFieldComputer.cpp         # Added field validation
 config/em_verification/lorentz_force.yaml        # Extended to 10000 steps

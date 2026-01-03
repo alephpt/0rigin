@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: stuckelberg_integration_test
 Description: Stückelberg EM Integration - Full GPU 256x256
 

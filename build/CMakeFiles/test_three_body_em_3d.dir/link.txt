@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_three_body_em_3d.dir/link.d CMakeFiles/test_three_body_em_3d.dir/test/test_three_body_em_3d.cpp.o -o bin/test_three_body_em_3d  -lpthread -lm

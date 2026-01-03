@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_lorentz_force_3d.dir/link.d CMakeFiles/test_lorentz_force_3d.dir/test/test_lorentz_force_3d.cpp.o -o bin/test_lorentz_force_3d  -lpthread -lm

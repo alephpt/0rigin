@@ -2,7 +2,7 @@
 
 ## Goal: G2 - Verify Superposition Principle
 
-Validate that multiple charges interact correctly via SMFT EM fields, demonstrating that:
+Validate that multiple charges interact correctly via TRD EM fields, demonstrating that:
 1. EM fields from multiple vortices superpose linearly
 2. Forces match analytical three-body Coulomb calculation
 3. Total force on each charge equals vector sum of pairwise forces
@@ -75,10 +75,10 @@ The test will verify:
 
 ## Implementation Code
 
-### 1. Multi-Vortex Initialization (SMFTCore.cpp modification)
+### 1. Multi-Vortex Initialization (TRDCore.cpp modification)
 
 ```cpp
-void SMFTCore::initializeThreeVortices(
+void TRDCore::initializeThreeVortices(
     float x1, float y1, int w1,
     float x2, float y2, int w2,
     float x3, float y3, int w3) {
@@ -167,7 +167,7 @@ VortexForce ObservableComputer::computeVortexForce(
 
 void ObservableComputer::computeThreeBodyForces(
     ThreeBodyObservables* obs,
-    const SMFTEngine* engine) {
+    const TRDEngine* engine) {
 
     // Get EM fields from engine
     const auto& Ex = engine->getEM_Ex();
@@ -201,7 +201,7 @@ void ObservableComputer::computeThreeBodyForces(
     float r13 = sqrtf(32.0f*32.0f + 32.0f*32.0f) * dx;  // Distance V1-V3
     float r23 = r13;  // Distance V2-V3
 
-    // Coulomb constant (effective in SMFT units)
+    // Coulomb constant (effective in TRD units)
     float k = 1.0f;
 
     // Analytical forces
@@ -227,7 +227,7 @@ void ObservableComputer::computeThreeBodyForces(
 #include <iostream>
 #include <iomanip>
 #include <cmath>
-#include "SMFTEngine.h"
+#include "TRDEngine.h"
 #include "simulations/ObservableComputer.h"
 #include "simulations/TestConfig.h"
 
@@ -237,17 +237,17 @@ int main(int argc, char* argv[]) {
     // Load configuration
     TestConfig config("config/three_body_em.yaml");
 
-    // Initialize SMFT engine
-    SMFTConfig smft_config;
-    smft_config.nx = config.grid.size_x;
-    smft_config.ny = config.grid.size_y;
-    smft_config.dt = config.physics.dt;
-    smft_config.delta = config.physics.delta;
-    smft_config.coupling_strength = config.physics.coupling;
-    smft_config.enable_em = true;
-    smft_config.photon_mass_coupling = 0.05f;
+    // Initialize TRD engine
+    TRDConfig trd_config;
+    trd_config.nx = config.grid.size_x;
+    trd_config.ny = config.grid.size_y;
+    trd_config.dt = config.physics.dt;
+    trd_config.delta = config.physics.delta;
+    trd_config.coupling_strength = config.physics.coupling;
+    trd_config.enable_em = true;
+    trd_config.photon_mass_coupling = 0.05f;
 
-    SMFTEngine engine(smft_config);
+    TRDEngine engine(trd_config);
 
     // Initialize three vortices
     engine.initializeThreeVortices(
@@ -271,7 +271,7 @@ int main(int argc, char* argv[]) {
 
     // Print force comparison table
     std::cout << std::fixed << std::setprecision(6);
-    std::cout << "\nVortex Forces (SMFT vs Analytical):" << std::endl;
+    std::cout << "\nVortex Forces (TRD vs Analytical):" << std::endl;
     std::cout << "------------------------------------" << std::endl;
 
     std::cout << "V1 (+1 at 32,64):" << std::endl;
@@ -362,7 +362,7 @@ int main(int argc, char* argv[]) {
 
 ## Next Steps
 
-1. Implement `initializeThreeVortices()` in SMFTCore
+1. Implement `initializeThreeVortices()` in TRDCore
 2. Add `computeThreeBodyForces()` to ObservableComputer
 3. Create and run test_three_body_em.cpp
 4. Validate results against analytical predictions
@@ -376,7 +376,7 @@ Equilibrating for 100 steps...
 
 --- Force Measurements ---
 
-Vortex Forces (SMFT vs Analytical):
+Vortex Forces (TRD vs Analytical):
 ------------------------------------
 V1 (+1 at 32,64):
   Fx =   0.001234

@@ -8,7 +8,7 @@
 #include <string>
 
 // Forward declaration
-class SMFTEngine;
+class TRDEngine;
 
 /**
  * ObservableComputer - Centralized computation of all physical observables
@@ -74,7 +74,7 @@ public:
      * @param E0 Initial energy (for relative energy conservation check)
      * @param norm_tolerance Tolerance for ||Ψ||² ≈ 1 (default 1e-4)
      * @param energy_tolerance Tolerance for ΔE/E₀ (default 1e-2)
-     * @param engine Optional SMFTEngine pointer for EM observables (default nullptr)
+     * @param engine Optional TRDEngine pointer for EM observables (default nullptr)
      */
     static void compute(
         Observables* result,
@@ -85,7 +85,7 @@ public:
         double E0 = 0.0,
         double norm_tolerance = 1e-4,
         double energy_tolerance = 1e-2,
-        const SMFTEngine* engine = nullptr);
+        const TRDEngine* engine = nullptr);
 
     /**
      * Compute norm ||Ψ||² = ∫|Ψ|² dA

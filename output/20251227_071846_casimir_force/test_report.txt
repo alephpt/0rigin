@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: casimir_force
 Description: Phase 3 Test 3.1: Casimir-like Force Between Defect Sheets - F(d) ∝ d^(-2)
 

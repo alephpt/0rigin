@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: maxwell_equations_validation
 Description: 
 

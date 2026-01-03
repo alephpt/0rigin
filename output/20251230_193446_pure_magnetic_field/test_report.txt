@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: pure_magnetic_field
 Description: Pure magnetic field test - particle speed should be conserved exactly
 

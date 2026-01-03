@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: em_coupling_uniform_field
 Description: Phase 6.1: Uniform EM field - verify minimal coupling with constant magnetic field produces expected Larmor radius and cyclotron frequency
 

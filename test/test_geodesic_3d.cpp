@@ -3,7 +3,7 @@
  *
  * Geodesic Equation Validation in 3D
  *
- * Goal: Verify particles follow geodesics in curved SMFT spacetime
+ * Goal: Verify particles follow geodesics in curved TRD spacetime
  *
  * Physics:
  *   Metric: g_μν = R²(x,y,z)·η_μν (conformal to Minkowski)

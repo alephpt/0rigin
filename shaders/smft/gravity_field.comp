@@ -10,7 +10,7 @@
  *
  * Implements: g(x,y) = -Δ · ∇R(x,y)
  *
- * MSFT Gravity Emergence (0.md Step 8):
+ * TRD Gravity Emergence (0.md Step 8):
  * - Gravity is surface tension of synchronization field R(x)
  * - Where R(x) changes rapidly (gradients ∇R), "surface tension" pulls phases into sync
  * - This surface tension IS the gravitational field - no separate force!
@@ -42,7 +42,7 @@ layout(push_constant) uniform PushConstants {
     float dt;              // Time step (not used here)
     float K;               // Coupling strength (not used here)
     float damping;         // Damping (not used here)
-    float Delta;           // MSFT mass gap Δ = √(ℏc/G) - Planck mass
+    float Delta;           // TRD mass gap Δ = √(ℏc/G) - Planck mass
     float chiral_angle;    // Chiral angle (not used here)
     uint Nx;               // Grid width
     uint Ny;               // Grid height

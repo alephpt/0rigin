@@ -66,30 +66,32 @@ CMAKE_BINARY_DIR = /home/persist/neotec/0rigin/build
 all: CMakeFiles/Physics.dir/all
 all: CMakeFiles/Nova.dir/all
 all: CMakeFiles/imgui.dir/all
-all: CMakeFiles/SMFT.dir/all
+all: CMakeFiles/TRD.dir/all
 all: CMakeFiles/test_geodesic_verification.dir/all
+all: CMakeFiles/test_einstein_field_equations.dir/all
 all: CMakeFiles/test_weak_field_limit.dir/all
-all: CMakeFiles/test_smftcore3d_basic.dir/all
-all: CMakeFiles/test_smftcore3d_gpu.dir/all
-all: CMakeFiles/test_smft3d_cpu_only.dir/all
+all: CMakeFiles/test_trdcore3d_basic.dir/all
+all: CMakeFiles/test_trdcore3d_gpu.dir/all
+all: CMakeFiles/test_trd3d_cpu_only.dir/all
 all: CMakeFiles/test_maxwell3d_wave.dir/all
 all: CMakeFiles/test_dirac3d_free.dir/all
-all: CMakeFiles/test_3d_full_smft.dir/all
+all: CMakeFiles/test_3d_full_trd.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/Physics.dir/codegen
 codegen: CMakeFiles/Nova.dir/codegen
 codegen: CMakeFiles/imgui.dir/codegen
-codegen: CMakeFiles/SMFT.dir/codegen
+codegen: CMakeFiles/TRD.dir/codegen
 codegen: CMakeFiles/test_geodesic_verification.dir/codegen
+codegen: CMakeFiles/test_einstein_field_equations.dir/codegen
 codegen: CMakeFiles/test_weak_field_limit.dir/codegen
-codegen: CMakeFiles/test_smftcore3d_basic.dir/codegen
-codegen: CMakeFiles/test_smftcore3d_gpu.dir/codegen
-codegen: CMakeFiles/test_smft3d_cpu_only.dir/codegen
+codegen: CMakeFiles/test_trdcore3d_basic.dir/codegen
+codegen: CMakeFiles/test_trdcore3d_gpu.dir/codegen
+codegen: CMakeFiles/test_trd3d_cpu_only.dir/codegen
 codegen: CMakeFiles/test_maxwell3d_wave.dir/codegen
 codegen: CMakeFiles/test_dirac3d_free.dir/codegen
-codegen: CMakeFiles/test_3d_full_smft.dir/codegen
+codegen: CMakeFiles/test_3d_full_trd.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -100,15 +102,16 @@ preinstall:
 clean: CMakeFiles/Physics.dir/clean
 clean: CMakeFiles/Nova.dir/clean
 clean: CMakeFiles/imgui.dir/clean
-clean: CMakeFiles/SMFT.dir/clean
+clean: CMakeFiles/TRD.dir/clean
 clean: CMakeFiles/test_geodesic_verification.dir/clean
+clean: CMakeFiles/test_einstein_field_equations.dir/clean
 clean: CMakeFiles/test_weak_field_limit.dir/clean
-clean: CMakeFiles/test_smftcore3d_basic.dir/clean
-clean: CMakeFiles/test_smftcore3d_gpu.dir/clean
-clean: CMakeFiles/test_smft3d_cpu_only.dir/clean
+clean: CMakeFiles/test_trdcore3d_basic.dir/clean
+clean: CMakeFiles/test_trdcore3d_gpu.dir/clean
+clean: CMakeFiles/test_trd3d_cpu_only.dir/clean
 clean: CMakeFiles/test_maxwell3d_wave.dir/clean
 clean: CMakeFiles/test_dirac3d_free.dir/clean
-clean: CMakeFiles/test_3d_full_smft.dir/clean
+clean: CMakeFiles/test_3d_full_trd.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -208,38 +211,38 @@ CMakeFiles/imgui.dir/clean:
 .PHONY : CMakeFiles/imgui.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/SMFT.dir
+# Target rules for target CMakeFiles/TRD.dir
 
 # All Build rule for target.
-CMakeFiles/SMFT.dir/all: CMakeFiles/Physics.dir/all
-CMakeFiles/SMFT.dir/all: CMakeFiles/Nova.dir/all
-CMakeFiles/SMFT.dir/all: CMakeFiles/imgui.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42 "Built target SMFT"
-.PHONY : CMakeFiles/SMFT.dir/all
+CMakeFiles/TRD.dir/all: CMakeFiles/Physics.dir/all
+CMakeFiles/TRD.dir/all: CMakeFiles/Nova.dir/all
+CMakeFiles/TRD.dir/all: CMakeFiles/imgui.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42 "Built target TRD"
+.PHONY : CMakeFiles/TRD.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/SMFT.dir/rule: cmake_check_build_system
+CMakeFiles/TRD.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 50
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/SMFT.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TRD.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/SMFT.dir/rule
+.PHONY : CMakeFiles/TRD.dir/rule
 
 # Convenience name for target.
-SMFT: CMakeFiles/SMFT.dir/rule
-.PHONY : SMFT
+TRD: CMakeFiles/TRD.dir/rule
+.PHONY : TRD
 
 # codegen rule for target.
-CMakeFiles/SMFT.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42 "Finished codegen for target SMFT"
-.PHONY : CMakeFiles/SMFT.dir/codegen
+CMakeFiles/TRD.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42 "Finished codegen for target TRD"
+.PHONY : CMakeFiles/TRD.dir/codegen
 
 # clean rule for target.
-CMakeFiles/SMFT.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/clean
-.PHONY : CMakeFiles/SMFT.dir/clean
+CMakeFiles/TRD.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/clean
+.PHONY : CMakeFiles/TRD.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/test_geodesic_verification.dir
@@ -248,7 +251,7 @@ CMakeFiles/SMFT.dir/clean:
 CMakeFiles/test_geodesic_verification.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=59,60,61,62 "Built target test_geodesic_verification"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=63,64,65,66 "Built target test_geodesic_verification"
 .PHONY : CMakeFiles/test_geodesic_verification.dir/all
 
 # Build rule for subdir invocation for target.
@@ -265,13 +268,45 @@ test_geodesic_verification: CMakeFiles/test_geodesic_verification.dir/rule
 # codegen rule for target.
 CMakeFiles/test_geodesic_verification.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=59,60,61,62 "Finished codegen for target test_geodesic_verification"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=63,64,65,66 "Finished codegen for target test_geodesic_verification"
 .PHONY : CMakeFiles/test_geodesic_verification.dir/codegen
 
 # clean rule for target.
 CMakeFiles/test_geodesic_verification.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/clean
 .PHONY : CMakeFiles/test_geodesic_verification.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_einstein_field_equations.dir
+
+# All Build rule for target.
+CMakeFiles/test_einstein_field_equations.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=59,60,61,62 "Built target test_einstein_field_equations"
+.PHONY : CMakeFiles/test_einstein_field_equations.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_einstein_field_equations.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_einstein_field_equations.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_einstein_field_equations.dir/rule
+
+# Convenience name for target.
+test_einstein_field_equations: CMakeFiles/test_einstein_field_equations.dir/rule
+.PHONY : test_einstein_field_equations
+
+# codegen rule for target.
+CMakeFiles/test_einstein_field_equations.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=59,60,61,62 "Finished codegen for target test_einstein_field_equations"
+.PHONY : CMakeFiles/test_einstein_field_equations.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_einstein_field_equations.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/clean
+.PHONY : CMakeFiles/test_einstein_field_equations.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/test_weak_field_limit.dir
@@ -281,7 +316,7 @@ CMakeFiles/test_weak_field_limit.dir/all: CMakeFiles/Physics.dir/all
 CMakeFiles/test_weak_field_limit.dir/all: CMakeFiles/Nova.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=75,76,77,78,79,80,81,82,83,84,85,86,87,88 "Built target test_weak_field_limit"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=79,80,81,82,83,84,85,86,87,88,89,90,91,92 "Built target test_weak_field_limit"
 .PHONY : CMakeFiles/test_weak_field_limit.dir/all
 
 # Build rule for subdir invocation for target.
@@ -298,7 +333,7 @@ test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/rule
 # codegen rule for target.
 CMakeFiles/test_weak_field_limit.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=75,76,77,78,79,80,81,82,83,84,85,86,87,88 "Finished codegen for target test_weak_field_limit"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=79,80,81,82,83,84,85,86,87,88,89,90,91,92 "Finished codegen for target test_weak_field_limit"
 .PHONY : CMakeFiles/test_weak_field_limit.dir/codegen
 
 # clean rule for target.
@@ -307,100 +342,100 @@ CMakeFiles/test_weak_field_limit.dir/clean:
 .PHONY : CMakeFiles/test_weak_field_limit.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_smftcore3d_basic.dir
+# Target rules for target CMakeFiles/test_trdcore3d_basic.dir
 
 # All Build rule for target.
-CMakeFiles/test_smftcore3d_basic.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=69,70,71 "Built target test_smftcore3d_basic"
-.PHONY : CMakeFiles/test_smftcore3d_basic.dir/all
+CMakeFiles/test_trdcore3d_basic.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=73,74,75 "Built target test_trdcore3d_basic"
+.PHONY : CMakeFiles/test_trdcore3d_basic.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test_smftcore3d_basic.dir/rule: cmake_check_build_system
+CMakeFiles/test_trdcore3d_basic.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_smftcore3d_basic.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_trdcore3d_basic.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_smftcore3d_basic.dir/rule
+.PHONY : CMakeFiles/test_trdcore3d_basic.dir/rule
 
 # Convenience name for target.
-test_smftcore3d_basic: CMakeFiles/test_smftcore3d_basic.dir/rule
-.PHONY : test_smftcore3d_basic
+test_trdcore3d_basic: CMakeFiles/test_trdcore3d_basic.dir/rule
+.PHONY : test_trdcore3d_basic
 
 # codegen rule for target.
-CMakeFiles/test_smftcore3d_basic.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=69,70,71 "Finished codegen for target test_smftcore3d_basic"
-.PHONY : CMakeFiles/test_smftcore3d_basic.dir/codegen
+CMakeFiles/test_trdcore3d_basic.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=73,74,75 "Finished codegen for target test_trdcore3d_basic"
+.PHONY : CMakeFiles/test_trdcore3d_basic.dir/codegen
 
 # clean rule for target.
-CMakeFiles/test_smftcore3d_basic.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/clean
-.PHONY : CMakeFiles/test_smftcore3d_basic.dir/clean
+CMakeFiles/test_trdcore3d_basic.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/clean
+.PHONY : CMakeFiles/test_trdcore3d_basic.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_smftcore3d_gpu.dir
+# Target rules for target CMakeFiles/test_trdcore3d_gpu.dir
 
 # All Build rule for target.
-CMakeFiles/test_smftcore3d_gpu.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=72,73,74 "Built target test_smftcore3d_gpu"
-.PHONY : CMakeFiles/test_smftcore3d_gpu.dir/all
+CMakeFiles/test_trdcore3d_gpu.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=76,77,78 "Built target test_trdcore3d_gpu"
+.PHONY : CMakeFiles/test_trdcore3d_gpu.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test_smftcore3d_gpu.dir/rule: cmake_check_build_system
+CMakeFiles/test_trdcore3d_gpu.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_smftcore3d_gpu.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_trdcore3d_gpu.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_smftcore3d_gpu.dir/rule
+.PHONY : CMakeFiles/test_trdcore3d_gpu.dir/rule
 
 # Convenience name for target.
-test_smftcore3d_gpu: CMakeFiles/test_smftcore3d_gpu.dir/rule
-.PHONY : test_smftcore3d_gpu
+test_trdcore3d_gpu: CMakeFiles/test_trdcore3d_gpu.dir/rule
+.PHONY : test_trdcore3d_gpu
 
 # codegen rule for target.
-CMakeFiles/test_smftcore3d_gpu.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=72,73,74 "Finished codegen for target test_smftcore3d_gpu"
-.PHONY : CMakeFiles/test_smftcore3d_gpu.dir/codegen
+CMakeFiles/test_trdcore3d_gpu.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=76,77,78 "Finished codegen for target test_trdcore3d_gpu"
+.PHONY : CMakeFiles/test_trdcore3d_gpu.dir/codegen
 
 # clean rule for target.
-CMakeFiles/test_smftcore3d_gpu.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/clean
-.PHONY : CMakeFiles/test_smftcore3d_gpu.dir/clean
+CMakeFiles/test_trdcore3d_gpu.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/clean
+.PHONY : CMakeFiles/test_trdcore3d_gpu.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_smft3d_cpu_only.dir
+# Target rules for target CMakeFiles/test_trd3d_cpu_only.dir
 
 # All Build rule for target.
-CMakeFiles/test_smft3d_cpu_only.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=66,67,68 "Built target test_smft3d_cpu_only"
-.PHONY : CMakeFiles/test_smft3d_cpu_only.dir/all
+CMakeFiles/test_trd3d_cpu_only.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=70,71,72 "Built target test_trd3d_cpu_only"
+.PHONY : CMakeFiles/test_trd3d_cpu_only.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test_smft3d_cpu_only.dir/rule: cmake_check_build_system
+CMakeFiles/test_trd3d_cpu_only.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_smft3d_cpu_only.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_trd3d_cpu_only.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_smft3d_cpu_only.dir/rule
+.PHONY : CMakeFiles/test_trd3d_cpu_only.dir/rule
 
 # Convenience name for target.
-test_smft3d_cpu_only: CMakeFiles/test_smft3d_cpu_only.dir/rule
-.PHONY : test_smft3d_cpu_only
+test_trd3d_cpu_only: CMakeFiles/test_trd3d_cpu_only.dir/rule
+.PHONY : test_trd3d_cpu_only
 
 # codegen rule for target.
-CMakeFiles/test_smft3d_cpu_only.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=66,67,68 "Finished codegen for target test_smft3d_cpu_only"
-.PHONY : CMakeFiles/test_smft3d_cpu_only.dir/codegen
+CMakeFiles/test_trd3d_cpu_only.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=70,71,72 "Finished codegen for target test_trd3d_cpu_only"
+.PHONY : CMakeFiles/test_trd3d_cpu_only.dir/codegen
 
 # clean rule for target.
-CMakeFiles/test_smft3d_cpu_only.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/clean
-.PHONY : CMakeFiles/test_smft3d_cpu_only.dir/clean
+CMakeFiles/test_trd3d_cpu_only.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/clean
+.PHONY : CMakeFiles/test_trd3d_cpu_only.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/test_maxwell3d_wave.dir
@@ -409,7 +444,7 @@ CMakeFiles/test_smft3d_cpu_only.dir/clean:
 CMakeFiles/test_maxwell3d_wave.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=63,64,65 "Built target test_maxwell3d_wave"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=67,68,69 "Built target test_maxwell3d_wave"
 .PHONY : CMakeFiles/test_maxwell3d_wave.dir/all
 
 # Build rule for subdir invocation for target.
@@ -426,7 +461,7 @@ test_maxwell3d_wave: CMakeFiles/test_maxwell3d_wave.dir/rule
 # codegen rule for target.
 CMakeFiles/test_maxwell3d_wave.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=63,64,65 "Finished codegen for target test_maxwell3d_wave"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=67,68,69 "Finished codegen for target test_maxwell3d_wave"
 .PHONY : CMakeFiles/test_maxwell3d_wave.dir/codegen
 
 # clean rule for target.
@@ -467,36 +502,36 @@ CMakeFiles/test_dirac3d_free.dir/clean:
 .PHONY : CMakeFiles/test_dirac3d_free.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_3d_full_smft.dir
+# Target rules for target CMakeFiles/test_3d_full_trd.dir
 
 # All Build rule for target.
-CMakeFiles/test_3d_full_smft.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=51,52,53,54,55 "Built target test_3d_full_smft"
-.PHONY : CMakeFiles/test_3d_full_smft.dir/all
+CMakeFiles/test_3d_full_trd.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=51,52,53,54,55 "Built target test_3d_full_trd"
+.PHONY : CMakeFiles/test_3d_full_trd.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test_3d_full_smft.dir/rule: cmake_check_build_system
+CMakeFiles/test_3d_full_trd.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 5
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_3d_full_smft.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_3d_full_trd.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_3d_full_smft.dir/rule
+.PHONY : CMakeFiles/test_3d_full_trd.dir/rule
 
 # Convenience name for target.
-test_3d_full_smft: CMakeFiles/test_3d_full_smft.dir/rule
-.PHONY : test_3d_full_smft
+test_3d_full_trd: CMakeFiles/test_3d_full_trd.dir/rule
+.PHONY : test_3d_full_trd
 
 # codegen rule for target.
-CMakeFiles/test_3d_full_smft.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=51,52,53,54,55 "Finished codegen for target test_3d_full_smft"
-.PHONY : CMakeFiles/test_3d_full_smft.dir/codegen
+CMakeFiles/test_3d_full_trd.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=51,52,53,54,55 "Finished codegen for target test_3d_full_trd"
+.PHONY : CMakeFiles/test_3d_full_trd.dir/codegen
 
 # clean rule for target.
-CMakeFiles/test_3d_full_smft.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/clean
-.PHONY : CMakeFiles/test_3d_full_smft.dir/clean
+CMakeFiles/test_3d_full_trd.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/clean
+.PHONY : CMakeFiles/test_3d_full_trd.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -1,5 +1,5 @@
 # config/three_body_em.yaml
-# Three-body electromagnetic dynamics test for SMFT
+# Three-body electromagnetic dynamics test for TRD
 # Verifies superposition principle with multiple charges interacting via EM fields
 
 physics:
@@ -16,7 +16,7 @@ physics:
   em_enabled: true
   photon_mass_coupling: 0.05  # g in m_γ = g(1-R), small for clean EM
 
-  # SMFT coupling parameters
+  # TRD coupling parameters
   delta: 2.5           # Mass gap parameter
   coupling: 0.1        # Kuramoto-Dirac coupling strength
   K: 1.0              # Kuramoto coupling between oscillators
@@ -79,7 +79,7 @@ observables:
   # Expected Coulomb forces for validation
   coulomb_validation:
     enabled: true
-    k_effective: 1.0  # Effective Coulomb constant in SMFT units
+    k_effective: 1.0  # Effective Coulomb constant in TRD units
     charges: [1.0, 1.0, -1.0]
 
 output:

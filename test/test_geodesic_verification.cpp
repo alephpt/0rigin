@@ -3,13 +3,13 @@
  *
  * Geodesic Equation Verification Test
  *
- * Goal: Verify that particles follow geodesics in SMFT curved spacetime
+ * Goal: Verify that particles follow geodesics in TRD curved spacetime
  * Metric: g_μν = R²(x,y) × diag(-(1-v²), 1, 1)
  * Equation: d²x^μ/dτ² + Γ^μ_νλ(dx^ν/dτ)(dx^λ/dτ) = 0
  *
  * Test Plan:
  * 1. Initialize particle as Dirac wavepacket Gaussian
- * 2. Evolve Dirac equation in SMFT curved spacetime
+ * 2. Evolve Dirac equation in TRD curved spacetime
  * 3. Track wavepacket center of mass trajectory
  * 4. Independently solve geodesic equation with same initial conditions
  * 5. Compare trajectories: deviation should be <1%
@@ -253,7 +253,7 @@ int main() {
     if (validation_pass) {
         std::cout << "Result: ✓ PASSED\n\n";
         std::cout << "Conclusion:\n";
-        std::cout << "  Particles follow geodesics in SMFT curved spacetime\n";
+        std::cout << "  Particles follow geodesics in TRD curved spacetime\n";
         std::cout << "  with high accuracy (deviation < 1%).\n";
         return 0;
     } else {

@@ -1,6 +1,6 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: scenario_2.4C_ultra_relativistic
-Description: Phase 2 Scenario 2.4C: Ultra-relativistic regime with ultra-fine grid. Tests v=[0.7, 0.8, 0.9]c on 512×512 grid to rule out grid resolution issues and probe fundamental SMFT limitations at v→c.
+Description: Phase 2 Scenario 2.4C: Ultra-relativistic regime with ultra-fine grid. Tests v=[0.7, 0.8, 0.9]c on 512×512 grid to rule out grid resolution issues and probe fundamental TRD limitations at v→c.
 
 [Configuration]
 Grid: 512 x 512

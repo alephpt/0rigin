@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_trd3d_cpu_only.dir/link.d CMakeFiles/test_trd3d_cpu_only.dir/test/test_trd3d_cpu_only.cpp.o CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.o -o bin/test_trd3d_cpu_only  /lib/libvulkan.so -lpthread -lm

@@ -86,19 +86,19 @@ CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.s: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_weak_field_limit.cpp -o CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.s
 
-CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
-CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o: /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp
-CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o -c /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp
+CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
+CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o: /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp
+CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp
 
-CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp > CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.i
+CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp > CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.i
 
-CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp -o CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.s
+CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp -o CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.s
 
 CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
 CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o: /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp
@@ -128,89 +128,89 @@ CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.s: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp -o CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.s
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o: /home/persist/neotec/0rigin/src/SMFTCore.cpp
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCore.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
+CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o: /home/persist/neotec/0rigin/src/TRDCore.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore.cpp
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCore.cpp > CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.i
+CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/TRDCore.cpp > CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.i
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCore.cpp -o CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.s
+CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/TRDCore.cpp -o CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.s
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
-CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o: /home/persist/neotec/0rigin/src/SMFTEngine.cpp
-CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o -c /home/persist/neotec/0rigin/src/SMFTEngine.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
+CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o: /home/persist/neotec/0rigin/src/TRDEngine.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o -c /home/persist/neotec/0rigin/src/TRDEngine.cpp
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTEngine.cpp > CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.i
+CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/TRDEngine.cpp > CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.i
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTEngine.cpp -o CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.s
+CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/TRDEngine.cpp -o CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.s
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
-CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o: /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp
-CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
+CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o: /home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp > CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.i
+CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp > CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.i
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTPipelineFactory.cpp -o CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.s
+CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp -o CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.s
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
-CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o: /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp
-CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
+CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o: /home/persist/neotec/0rigin/src/TRDBufferManager.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/TRDBufferManager.cpp
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp > CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.i
+CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/TRDBufferManager.cpp > CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.i
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTBufferManager.cpp -o CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.s
+CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/TRDBufferManager.cpp -o CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.s
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o: /home/persist/neotec/0rigin/src/SMFTCompute.cpp
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o -c /home/persist/neotec/0rigin/src/SMFTCompute.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
+CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o: /home/persist/neotec/0rigin/src/TRDCompute.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o -c /home/persist/neotec/0rigin/src/TRDCompute.cpp
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTCompute.cpp > CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.i
+CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/TRDCompute.cpp > CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.i
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTCompute.cpp -o CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.s
+CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/TRDCompute.cpp -o CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.s
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
-CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o: /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp
-CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
+CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o: /home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp
+CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o: CMakeFiles/test_weak_field_limit.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o -MF CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o.d -o CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp > CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.i
+CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp > CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.i
 
-CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/SMFTDescriptorManager.cpp -o CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.s
+CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp -o CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.s
 
 CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o: CMakeFiles/test_weak_field_limit.dir/flags.make
 CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o: /home/persist/neotec/0rigin/src/DiracEvolution.cpp
@@ -257,15 +257,15 @@ CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.s: cmake_force
 # Object files for target test_weak_field_limit
 test_weak_field_limit_OBJECTS = \
 "CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.o" \
-"CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o" \
+"CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o" \
 "CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o" \
 "CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.o" \
-"CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o" \
-"CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o" \
-"CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o" \
-"CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o" \
-"CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o" \
-"CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o" \
+"CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o" \
+"CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o" \
+"CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o" \
+"CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o" \
+"CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o" \
+"CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o" \
 "CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o" \
 "CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.o" \
 "CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.o"
@@ -274,15 +274,15 @@ test_weak_field_limit_OBJECTS = \
 test_weak_field_limit_EXTERNAL_OBJECTS =
 
 bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.o
-bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o
+bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o
 bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o
 bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.o
-bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o
-bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o
-bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o
-bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o
-bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o
-bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o
+bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o
+bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o
+bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o
+bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o
+bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o
+bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o
 bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o
 bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.o
 bin/test_weak_field_limit: CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.o

@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: antiparticle_separation_validation
 Description: Test 3.4 - Particle and antiparticle separation in vortex defect field
 

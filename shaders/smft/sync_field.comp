@@ -11,7 +11,7 @@
  *
  * Implements: R(x,y) = |⟨e^(iθ)⟩_local| = |Σⱼ e^(iθⱼ)|/N_local
  *
- * MSFT Forward Coupling:
+ * TRD Forward Coupling:
  * - Input: θ(x,y) phase field from Kuramoto oscillators
  * - Output: R(x,y) synchronization order parameter
  * - Physics: R = 0 (incoherent), R = 1 (perfect sync)
@@ -31,7 +31,7 @@ layout(push_constant) uniform PushConstants {
     float dt;              // Time step (not used here, but kept for consistency)
     float K;               // Coupling strength (not used here)
     float damping;         // Damping (not used here)
-    float Delta;           // MSFT mass gap (not used here)
+    float Delta;           // TRD mass gap (not used here)
     float chiral_angle;    // Chiral angle (not used here)
     uint Nx;               // Grid width
     uint Ny;               // Grid height
@@ -161,7 +161,7 @@ float compute_local_R(uint local_x, uint local_y) {
  *
  * For comparison/debugging: R_global = |Σⱼ e^(iθⱼ)|/N_total
  *
- * This is NOT used in MSFT (we use local R), but useful for diagnostics
+ * This is NOT used in TRD (we use local R), but useful for diagnostics
  */
 float compute_global_R_contribution(float theta_i) {
     // This would require a reduction across all threads

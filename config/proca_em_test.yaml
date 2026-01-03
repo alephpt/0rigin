@@ -1,5 +1,5 @@
 # config/proca_em_test.yaml
-# Test configuration for Proca EM integration with SMFTCore
+# Test configuration for Proca EM integration with TRDCore
 
 physics:
   # Time evolution parameters

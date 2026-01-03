@@ -1,8 +1,8 @@
 // test/test_em_wave_propagation.cpp
 // Test electromagnetic wave propagation to verify c = 1/√(μ₀ε₀)
 
-#include "SMFTEngine.h"
-#include "simulations/SMFTTestRunner.h"
+#include "TRDEngine.h"
+#include "simulations/TRDTestRunner.h"
 #include "simulations/TestConfig.h"
 #include "Nova.h"
 #include <iostream>
@@ -12,7 +12,7 @@
 /**
  * Test G1: Electromagnetic Wave Propagation
  *
- * Goal: Verify c = 1/√(μ₀ε₀) in SMFT electromagnetic fields
+ * Goal: Verify c = 1/√(μ₀ε₀) in TRD electromagnetic fields
  *
  * Method:
  * 1. Initialize Gaussian EM pulse with known wave vector
@@ -42,8 +42,8 @@ int runManualWaveTest() {
         return 1;
     }
 
-    // Create SMFTEngine
-    SMFTEngine engine(&nova);
+    // Create TRDEngine
+    TRDEngine engine(&nova);
 
     // Initialize grid (256x64 for clear wave propagation)
     const int Nx = 256, Ny = 64;
@@ -120,8 +120,8 @@ int runConfigBasedTest() {
         return 1;
     }
 
-    // Run test using SMFTTestRunner
-    SMFTTestRunner runner(test_config);
+    // Run test using TRDTestRunner
+    TRDTestRunner runner(test_config);
 
     if (!runner.initialize()) {
         std::cerr << "Failed to initialize test runner" << std::endl;

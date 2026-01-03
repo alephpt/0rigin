@@ -1,19 +1,19 @@
-# Research A1: Einstein Field Equation Derivation from SMFT
+# Research A1: Einstein Field Equation Derivation from TRD
 
 **Status**: Research Phase Complete
 **Date**: 2026-01-01
 **Classification**: Technical Research - Mathematical Physics
-**Deliverable**: Comprehensive analysis of EFE derivation from SMFT metric with identified blockers
+**Deliverable**: Comprehensive analysis of EFE derivation from TRD metric with identified blockers
 
 ---
 
 ## Executive Summary
 
 ### Objective
-Derive the Einstein Field Equation (EFE) from the SMFT metric:
+Derive the Einstein Field Equation (EFE) from the TRD metric:
 $$G_{\mu\nu} = 8\pi G T_{\mu\nu}$$
 
-where the SMFT metric is:
+where the TRD metric is:
 $$ds^2 = R^2\left[-(1-v^2)dt^2 - 2\mathbf{v}\cdot d\mathbf{x} dt + d\mathbf{x}^2\right]$$
 
 ### Finding
@@ -35,7 +35,7 @@ The derivation is **mathematically tractable but blocked by fundamental physics 
 
 ## Part 1: Mathematical Structure
 
-### The SMFT Metric in Component Form
+### The TRD Metric in Component Form
 
 In coordinates (t, x¹, x², x³):
 
@@ -171,7 +171,7 @@ In Einstein's equation $G_{\mu\nu} = 8\pi G T_{\mu\nu}$:
 - These encode spacetime curvature
 - Proportional to how matter-energy is distributed
 
-**For SMFT**: The Ricci tensor couples to derivatives of the synchronization field R.
+**For TRD**: The Ricci tensor couples to derivatives of the synchronization field R.
 
 ---
 
@@ -193,7 +193,7 @@ $$[G_{\mu\nu}] = \text{[stress-energy tensor]}$$
 
 3. **Encodes geometry**: Describes how spacetime curvature relates to coordinates
 
-### For SMFT
+### For TRD
 
 The Einstein tensor structure depends on:
 - How $R(x,t)$ and $\nabla R$ vary
@@ -220,7 +220,7 @@ $$G_{\mu\nu} \propto f(R, \nabla R, v, \nabla v) \cdot g_{\mu\nu} + \text{tracel
 **Physics Question**: What determines these fields?
 
 **Options**:
-1. **SMFT field equation**: Is there a PDE like $\partial_t R = F(R, v, \nabla R, \nabla v)$?
+1. **TRD field equation**: Is there a PDE like $\partial_t R = F(R, v, \nabla R, \nabla v)$?
 2. **Variational principle**: Does R minimize some action?
 3. **Conservation laws**: Are R and v determined by energy-momentum conservation?
 4. **External specification**: Are they boundary conditions from the vacuum?
@@ -248,7 +248,7 @@ $$G_{\mu\nu} \propto f(R, \nabla R, v, \nabla v) \cdot g_{\mu\nu} + \text{tracel
 **Issue**: Einstein's equation requires identifying $T_{\mu\nu}$ such that:
 $$G_{\mu\nu} = 8\pi G T_{\mu\nu}$$
 
-**What is T for SMFT?**
+**What is T for TRD?**
 
 Option A: Pure Dirac field
 $$T_{\mu\nu}^{\text{(Dirac)}} = \frac{i}{2}[\bar{\Psi}\gamma_\mu\partial_\nu\Psi - (\partial_\mu\bar{\Psi})\gamma_\nu\Psi] - \delta_{\mu\nu}\mathcal{L}$$
@@ -271,7 +271,7 @@ $$T_{\mu\nu}^{\text{total}} = T_{\mu\nu}^{\text{(Dirac)}} + T_{\mu\nu}^{(R)} + T
 $$G_{\mu\nu} = 8\pi G T_{\mu\nu}$$
 The factor $8\pi$ comes from the action principle; $G$ is an input parameter.
 
-**In SMFT derivation**:
+**In TRD derivation**:
 - G appears in $\Delta = \hbar c/G$ (Planck mass)
 - But how does exactly $8\pi$ emerge?
 - Is it a consequence of the derivation?
@@ -280,13 +280,13 @@ The factor $8\pi$ comes from the action principle; $G$ is an input parameter.
 **Status**: Unknown. Might be:
 - A different numerical factor
 - Dependent on dimensions or regularization
-- Related to the specific form of SMFT action
+- Related to the specific form of TRD action
 
 ### Blocker 5: Quantum to Classical Bridge
 
-**Issue**: SMFT is fundamentally quantum; GR is classical.
+**Issue**: TRD is fundamentally quantum; GR is classical.
 
-**SMFT elements**:
+**TRD elements**:
 - Dirac spinor field $\Psi(x)$ (quantum fermion)
 - Order parameter $R = (1/N)\sum_i e^{i\theta_i}$ (quantum coherence)
 - Quantum vacuum fluctuations
@@ -311,7 +311,7 @@ The factor $8\pi$ comes from the action principle; $G$ is an input parameter.
 
 #### Phase 1: Establish Field Equations (2-3 weeks)
 
-**Task 1.1**: Review SMFT theory thoroughly
+**Task 1.1**: Review TRD theory thoroughly
 - Understand how order parameter R is computed from microscopic oscillators
 - Find any existing PDEs for R(x,t) evolution
 - Determine whether v is fundamental or derived
@@ -399,29 +399,29 @@ $$G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$$
 **Condition**: $G_{\mu\nu} = 8\pi G T_{\mu\nu}$ holds exactly
 
 **Implications**:
-- SMFT provides fundamental derivation of Einstein equation
+- TRD provides fundamental derivation of Einstein equation
 - Synchronization is the physical mechanism for spacetime curvature
 - GR emerges naturally from quantum vacuum organization
 - Explains why gravity couples universally (to all energy-momentum)
 
-**Significance**: Revolutionary—would establish GR as consequence of SMFT, not independent principle
+**Significance**: Revolutionary—would establish GR as consequence of TRD, not independent principle
 
 ### Scenario B: Approximate Success
 **Condition**: $G_{\mu\nu} \approx 8\pi G T_{\mu\nu}$ with corrections
 
 **Implications**:
-- SMFT is effective theory underlying GR
+- TRD is effective theory underlying GR
 - Deviations appear at high energy/strong field (Planck scale)
 - Need higher-order corrections (like quantum gravity effects)
 - Predicts testable deviations from GR
 
-**Significance**: Would support SMFT as deeper theory, explain GR as low-energy limit
+**Significance**: Would support TRD as deeper theory, explain GR as low-energy limit
 
 ### Scenario C: Modified EFE
 **Condition**: $G_{\mu\nu} = f(R) T_{\mu\nu}$ or additional terms
 
 **Implications**:
-- SMFT generates modified gravity theory
+- TRD generates modified gravity theory
 - Einstein equation is incomplete
 - Additional physics needed (scalar fields, higher-order terms, etc.)
 - Could explain dark matter/cosmological constant
@@ -432,7 +432,7 @@ $$G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$$
 **Condition**: $G_{\mu\nu}$ and $T_{\mu\nu}$ incompatible structures
 
 **Implications**:
-- Current approach to gravity from SMFT is incorrect
+- Current approach to gravity from TRD is incorrect
 - Need fundamentally different geometric picture
 - Synchronization might not be the right mechanism
 - Requires rethinking theory foundation
@@ -444,7 +444,7 @@ $$G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$$
 ## Part 9: Critical Dependencies
 
 ### What We Know
-- ✓ SMFT metric structure (conformal with R² factor)
+- ✓ TRD metric structure (conformal with R² factor)
 - ✓ Metric is Lorentzian signature (-,+,+,+)
 - ✓ Inverse metric can be computed
 - ✓ Mathematical tools exist (symbolic algebra)
@@ -468,7 +468,7 @@ $$G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$$
 
 ### Immediate Priority: Clarify Field Equations
 
-Before starting computations, **consult with SMFT theory developers** to answer:
+Before starting computations, **consult with TRD theory developers** to answer:
 
 1. **Is there a known PDE for R(x,t)?**
    - If yes: Use it as given
@@ -529,7 +529,7 @@ Before starting computations, **consult with SMFT theory developers** to answer:
 
 ### Summary
 
-The derivation of Einstein Field Equation from SMFT is:
+The derivation of Einstein Field Equation from TRD is:
 - **Mathematically feasible**: All tools and techniques exist
 - **Physics-limited**: Need clarification of field equations
 - **Well-scoped**: Clear path from metric to Einstein tensor
@@ -542,7 +542,7 @@ The derivation of Einstein Field Equation from SMFT is:
 4. Quantum-to-classical bridge not established
 
 ### Recommendations
-1. Engage with SMFT theory developers immediately
+1. Engage with TRD theory developers immediately
 2. Establish field equations (either find existing or propose)
 3. Choose tractable case (A: static fields) for initial computation
 4. Use computer algebra system for tensor calculations

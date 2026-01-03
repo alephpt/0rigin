@@ -1,4 +1,4 @@
-# 3D SMFT Migration Complete
+# 3D TRD Migration Complete
 
 **Status**: ✅ COMPLETE (Weeks 5-10)
 **Date**: 2026-01-02
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-Full 3D SMFT implementation successfully completed, migrating from 2D to physically realistic 3D spacetime. All core physics components (Kuramoto, Maxwell, Dirac) now operate in 3D with validated evolution.
+Full 3D TRD implementation successfully completed, migrating from 2D to physically realistic 3D spacetime. All core physics components (Kuramoto, Maxwell, Dirac) now operate in 3D with validated evolution.
 
 ---
 
@@ -62,10 +62,10 @@ Current conservation: ✓
 ### Week 9-10: Full Integration ✅
 
 **Implemented**:
-- `test/test_3d_full_smft.cpp` - Coupled 3D SMFT evolution
+- `test/test_3d_full_trd.cpp` - Coupled 3D TRD evolution
 
 **Integration**:
-- SMFTCore3D (Kuramoto synchronization)
+- TRDCore3D (Kuramoto synchronization)
 - Maxwell3D (electromagnetic fields)
 - Dirac3D (fermion dynamics)
 
@@ -118,7 +118,7 @@ iℏ ∂ψ/∂t = (-iℏc α·∇ + βmc²) ψ
 - Mass operator in position space
 - Exact exponential: exp(-iα·k dt) = cos(|k|dt) - i(α·k/|k|)sin(|k|dt)
 
-### 3. SMFTCore3D: Kuramoto Synchronization
+### 3. TRDCore3D: Kuramoto Synchronization
 
 **Equation**:
 ```
@@ -139,7 +139,7 @@ dθ/dt = ω + K Σ sin(θⱼ - θᵢ)
 |-----------|-----------|----------|
 | Maxwell EM | < 5% | 0.053% ✓ |
 | Dirac norm | < 1% | 0.0036% ✓ |
-| Full SMFT EM | < 10% | 0.00078% ✓ |
+| Full TRD EM | < 10% | 0.00078% ✓ |
 
 ### Unitarity
 | Test | Metric | Result |
@@ -177,18 +177,18 @@ dθ/dt = ω + K Σ sin(θⱼ - θᵢ)
 include/
 ├── Maxwell3D.h          # EM field solver header
 ├── Dirac3D.h            # Dirac spinor header
-└── SMFTCore3D.h         # Kuramoto 3D header (Week 3-4)
+└── TRDCore3D.h         # Kuramoto 3D header (Week 3-4)
 
 src/
 ├── Maxwell3D.cpp        # EM field implementation
 ├── Dirac3D.cpp          # Dirac spinor implementation
-├── SMFTCore3D.cpp       # Kuramoto 3D implementation (Week 3-4)
-└── SMFTEngine3D.cpp     # 3D engine infrastructure (Week 3-4)
+├── TRDCore3D.cpp       # Kuramoto 3D implementation (Week 3-4)
+└── TRDEngine3D.cpp     # 3D engine infrastructure (Week 3-4)
 
 test/
 ├── test_maxwell3d_wave.cpp      # Maxwell validation
 ├── test_dirac3d_free.cpp        # Dirac validation
-└── test_3d_full_smft.cpp        # Full integration
+└── test_3d_full_trd.cpp        # Full integration
 ```
 
 ---
@@ -197,7 +197,7 @@ test/
 
 ✅ **Maxwell3D**: 6-component EM fields with energy conservation
 ✅ **Dirac3D**: 4-component spinor with unitary evolution
-✅ **Integration**: Full 3D SMFT coupling validated
+✅ **Integration**: Full 3D TRD coupling validated
 ✅ **Conservation**: All physical quantities conserved to machine precision
 ✅ **Scalability**: Tested up to 64³ grids
 
@@ -228,11 +228,11 @@ test/
 |------|------|--------|
 | Maxwell wave | 64³ | ✅ PASS |
 | Dirac free particle | 32³ | ✅ PASS |
-| Full 3D SMFT | 32³ | ✅ PASS |
+| Full 3D TRD | 32³ | ✅ PASS |
 
 **Overall Status**: 🎉 **3D MIGRATION COMPLETE**
 
-All core SMFT physics now operates in physically realistic 3D spacetime. Ready to resume validation roadmap (TODO.md).
+All core TRD physics now operates in physically realistic 3D spacetime. Ready to resume validation roadmap (TODO.md).
 
 ---
 

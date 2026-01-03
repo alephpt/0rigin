@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: em_coupling_gauge_invariance
 Description: Phase 6.1: Gauge invariance test - verify that physics remains invariant under gauge transformation U(1) of phase field. Tests ψ → e^(iχ)ψ, A → A + ∇χ. Observables should be identical in both gauges.
 

@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: coupled_dynamics_validation
 Description: Validate operator splitting with NON-UNIFORM Kuramoto field (spatial R gradient) to test true Dirac-Kuramoto coupling
 

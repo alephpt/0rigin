@@ -1,6 +1,6 @@
 # Geodesic Equation 3D Validation Configuration
 #
-# Test: Particles follow geodesics in curved SMFT spacetime
+# Test: Particles follow geodesics in curved TRD spacetime
 # Physics: d²x^μ/dτ² = -Γ^μ_αβ u^α u^β
 #
 # Quality Gates:

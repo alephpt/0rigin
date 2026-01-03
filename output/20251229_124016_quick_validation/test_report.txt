@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: quick_validation
 Description: Quick validation test with smaller grid and fewer steps
 

@@ -156,17 +156,17 @@ imgui/fast:
 .PHONY : imgui/fast
 
 #=============================================================================
-# Target rules for targets named SMFT
+# Target rules for targets named TRD
 
 # Build rule for target.
-SMFT: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SMFT
-.PHONY : SMFT
+TRD: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TRD
+.PHONY : TRD
 
 # fast build rule for target.
-SMFT/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/build
-.PHONY : SMFT/fast
+TRD/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/build
+.PHONY : TRD/fast
 
 #=============================================================================
 # Target rules for targets named test_geodesic_verification
@@ -182,6 +182,19 @@ test_geodesic_verification/fast:
 .PHONY : test_geodesic_verification/fast
 
 #=============================================================================
+# Target rules for targets named test_einstein_field_equations
+
+# Build rule for target.
+test_einstein_field_equations: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_einstein_field_equations
+.PHONY : test_einstein_field_equations
+
+# fast build rule for target.
+test_einstein_field_equations/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/build
+.PHONY : test_einstein_field_equations/fast
+
+#=============================================================================
 # Target rules for targets named test_weak_field_limit
 
 # Build rule for target.
@@ -195,43 +208,43 @@ test_weak_field_limit/fast:
 .PHONY : test_weak_field_limit/fast
 
 #=============================================================================
-# Target rules for targets named test_smftcore3d_basic
+# Target rules for targets named test_trdcore3d_basic
 
 # Build rule for target.
-test_smftcore3d_basic: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_smftcore3d_basic
-.PHONY : test_smftcore3d_basic
+test_trdcore3d_basic: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_trdcore3d_basic
+.PHONY : test_trdcore3d_basic
 
 # fast build rule for target.
-test_smftcore3d_basic/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/build
-.PHONY : test_smftcore3d_basic/fast
+test_trdcore3d_basic/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/build
+.PHONY : test_trdcore3d_basic/fast
 
 #=============================================================================
-# Target rules for targets named test_smftcore3d_gpu
+# Target rules for targets named test_trdcore3d_gpu
 
 # Build rule for target.
-test_smftcore3d_gpu: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_smftcore3d_gpu
-.PHONY : test_smftcore3d_gpu
+test_trdcore3d_gpu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_trdcore3d_gpu
+.PHONY : test_trdcore3d_gpu
 
 # fast build rule for target.
-test_smftcore3d_gpu/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/build
-.PHONY : test_smftcore3d_gpu/fast
+test_trdcore3d_gpu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/build
+.PHONY : test_trdcore3d_gpu/fast
 
 #=============================================================================
-# Target rules for targets named test_smft3d_cpu_only
+# Target rules for targets named test_trd3d_cpu_only
 
 # Build rule for target.
-test_smft3d_cpu_only: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_smft3d_cpu_only
-.PHONY : test_smft3d_cpu_only
+test_trd3d_cpu_only: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_trd3d_cpu_only
+.PHONY : test_trd3d_cpu_only
 
 # fast build rule for target.
-test_smft3d_cpu_only/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/build
-.PHONY : test_smft3d_cpu_only/fast
+test_trd3d_cpu_only/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/build
+.PHONY : test_trd3d_cpu_only/fast
 
 #=============================================================================
 # Target rules for targets named test_maxwell3d_wave
@@ -260,17 +273,17 @@ test_dirac3d_free/fast:
 .PHONY : test_dirac3d_free/fast
 
 #=============================================================================
-# Target rules for targets named test_3d_full_smft
+# Target rules for targets named test_3d_full_trd
 
 # Build rule for target.
-test_3d_full_smft: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_3d_full_smft
-.PHONY : test_3d_full_smft
+test_3d_full_trd: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_3d_full_trd
+.PHONY : test_3d_full_trd
 
 # fast build rule for target.
-test_3d_full_smft/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/build
-.PHONY : test_3d_full_smft/fast
+test_3d_full_trd/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/build
+.PHONY : test_3d_full_trd/fast
 
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
@@ -781,7 +794,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -789,7 +802,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -797,7 +810,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 src/Dirac3D.o: src/Dirac3D.cpp.o
@@ -805,9 +818,9 @@ src/Dirac3D.o: src/Dirac3D.cpp.o
 
 # target to build an object file
 src/Dirac3D.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Dirac3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Dirac3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac3d_free.dir/build.make CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Dirac3D.cpp.o
 .PHONY : src/Dirac3D.cpp.o
 
 src/Dirac3D.i: src/Dirac3D.cpp.i
@@ -815,9 +828,9 @@ src/Dirac3D.i: src/Dirac3D.cpp.i
 
 # target to preprocess a source file
 src/Dirac3D.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Dirac3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Dirac3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac3d_free.dir/build.make CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Dirac3D.cpp.i
 .PHONY : src/Dirac3D.cpp.i
 
 src/Dirac3D.s: src/Dirac3D.cpp.s
@@ -825,9 +838,9 @@ src/Dirac3D.s: src/Dirac3D.cpp.s
 
 # target to generate assembly for a file
 src/Dirac3D.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Dirac3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Dirac3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac3d_free.dir/build.make CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Dirac3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Dirac3D.cpp.s
 .PHONY : src/Dirac3D.cpp.s
 
 src/DiracEvolution.o: src/DiracEvolution.cpp.o
@@ -835,7 +848,7 @@ src/DiracEvolution.o: src/DiracEvolution.cpp.o
 
 # target to build an object file
 src/DiracEvolution.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o
 .PHONY : src/DiracEvolution.cpp.o
@@ -845,7 +858,7 @@ src/DiracEvolution.i: src/DiracEvolution.cpp.i
 
 # target to preprocess a source file
 src/DiracEvolution.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/DiracEvolution.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.i
 .PHONY : src/DiracEvolution.cpp.i
@@ -855,7 +868,7 @@ src/DiracEvolution.s: src/DiracEvolution.cpp.s
 
 # target to generate assembly for a file
 src/DiracEvolution.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/DiracEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/DiracEvolution.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.s
 .PHONY : src/DiracEvolution.cpp.s
@@ -865,7 +878,7 @@ src/GeodesicIntegrator.o: src/GeodesicIntegrator.cpp.o
 
 # target to build an object file
 src/GeodesicIntegrator.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.o
 .PHONY : src/GeodesicIntegrator.cpp.o
@@ -875,7 +888,7 @@ src/GeodesicIntegrator.i: src/GeodesicIntegrator.cpp.i
 
 # target to preprocess a source file
 src/GeodesicIntegrator.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.i
 .PHONY : src/GeodesicIntegrator.cpp.i
@@ -885,7 +898,7 @@ src/GeodesicIntegrator.s: src/GeodesicIntegrator.cpp.s
 
 # target to generate assembly for a file
 src/GeodesicIntegrator.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/GeodesicIntegrator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.s
 .PHONY : src/GeodesicIntegrator.cpp.s
@@ -895,9 +908,10 @@ src/Maxwell3D.o: src/Maxwell3D.cpp.o
 
 # target to build an object file
 src/Maxwell3D.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Maxwell3D.cpp.o
 .PHONY : src/Maxwell3D.cpp.o
 
 src/Maxwell3D.i: src/Maxwell3D.cpp.i
@@ -905,9 +919,10 @@ src/Maxwell3D.i: src/Maxwell3D.cpp.i
 
 # target to preprocess a source file
 src/Maxwell3D.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Maxwell3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Maxwell3D.cpp.i
 .PHONY : src/Maxwell3D.cpp.i
 
 src/Maxwell3D.s: src/Maxwell3D.cpp.s
@@ -915,239 +930,243 @@ src/Maxwell3D.s: src/Maxwell3D.cpp.s
 
 # target to generate assembly for a file
 src/Maxwell3D.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/Maxwell3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Maxwell3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/Maxwell3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/Maxwell3D.cpp.s
 .PHONY : src/Maxwell3D.cpp.s
 
-src/SMFTBufferManager.o: src/SMFTBufferManager.cpp.o
-.PHONY : src/SMFTBufferManager.o
+src/TRDBufferManager.o: src/TRDBufferManager.cpp.o
+.PHONY : src/TRDBufferManager.o
 
 # target to build an object file
-src/SMFTBufferManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.o
-.PHONY : src/SMFTBufferManager.cpp.o
+src/TRDBufferManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDBufferManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o
+.PHONY : src/TRDBufferManager.cpp.o
 
-src/SMFTBufferManager.i: src/SMFTBufferManager.cpp.i
-.PHONY : src/SMFTBufferManager.i
+src/TRDBufferManager.i: src/TRDBufferManager.cpp.i
+.PHONY : src/TRDBufferManager.i
 
 # target to preprocess a source file
-src/SMFTBufferManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.i
-.PHONY : src/SMFTBufferManager.cpp.i
+src/TRDBufferManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDBufferManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.i
+.PHONY : src/TRDBufferManager.cpp.i
 
-src/SMFTBufferManager.s: src/SMFTBufferManager.cpp.s
-.PHONY : src/SMFTBufferManager.s
+src/TRDBufferManager.s: src/TRDBufferManager.cpp.s
+.PHONY : src/TRDBufferManager.s
 
 # target to generate assembly for a file
-src/SMFTBufferManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTBufferManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTBufferManager.cpp.s
-.PHONY : src/SMFTBufferManager.cpp.s
+src/TRDBufferManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDBufferManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.s
+.PHONY : src/TRDBufferManager.cpp.s
 
-src/SMFTCompute.o: src/SMFTCompute.cpp.o
-.PHONY : src/SMFTCompute.o
+src/TRDCompute.o: src/TRDCompute.cpp.o
+.PHONY : src/TRDCompute.o
 
 # target to build an object file
-src/SMFTCompute.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.o
-.PHONY : src/SMFTCompute.cpp.o
+src/TRDCompute.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCompute.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o
+.PHONY : src/TRDCompute.cpp.o
 
-src/SMFTCompute.i: src/SMFTCompute.cpp.i
-.PHONY : src/SMFTCompute.i
+src/TRDCompute.i: src/TRDCompute.cpp.i
+.PHONY : src/TRDCompute.i
 
 # target to preprocess a source file
-src/SMFTCompute.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.i
-.PHONY : src/SMFTCompute.cpp.i
+src/TRDCompute.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCompute.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.i
+.PHONY : src/TRDCompute.cpp.i
 
-src/SMFTCompute.s: src/SMFTCompute.cpp.s
-.PHONY : src/SMFTCompute.s
+src/TRDCompute.s: src/TRDCompute.cpp.s
+.PHONY : src/TRDCompute.s
 
 # target to generate assembly for a file
-src/SMFTCompute.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCompute.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCompute.cpp.s
-.PHONY : src/SMFTCompute.cpp.s
+src/TRDCompute.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCompute.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.s
+.PHONY : src/TRDCompute.cpp.s
 
-src/SMFTCore.o: src/SMFTCore.cpp.o
-.PHONY : src/SMFTCore.o
+src/TRDCore.o: src/TRDCore.cpp.o
+.PHONY : src/TRDCore.o
 
 # target to build an object file
-src/SMFTCore.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.o
-.PHONY : src/SMFTCore.cpp.o
+src/TRDCore.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o
+.PHONY : src/TRDCore.cpp.o
 
-src/SMFTCore.i: src/SMFTCore.cpp.i
-.PHONY : src/SMFTCore.i
+src/TRDCore.i: src/TRDCore.cpp.i
+.PHONY : src/TRDCore.i
 
 # target to preprocess a source file
-src/SMFTCore.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.i
-.PHONY : src/SMFTCore.cpp.i
+src/TRDCore.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.i
+.PHONY : src/TRDCore.cpp.i
 
-src/SMFTCore.s: src/SMFTCore.cpp.s
-.PHONY : src/SMFTCore.s
+src/TRDCore.s: src/TRDCore.cpp.s
+.PHONY : src/TRDCore.s
 
 # target to generate assembly for a file
-src/SMFTCore.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTCore.cpp.s
-.PHONY : src/SMFTCore.cpp.s
+src/TRDCore.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.s
+.PHONY : src/TRDCore.cpp.s
 
-src/SMFTCore3D.o: src/SMFTCore3D.cpp.o
-.PHONY : src/SMFTCore3D.o
+src/TRDCore3D.o: src/TRDCore3D.cpp.o
+.PHONY : src/TRDCore3D.o
 
 # target to build an object file
-src/SMFTCore3D.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/src/SMFTCore3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/src/SMFTCore3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/src/SMFTCore3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/SMFTCore3D.cpp.o
-.PHONY : src/SMFTCore3D.cpp.o
+src/TRDCore3D.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/TRDCore3D.cpp.o
+.PHONY : src/TRDCore3D.cpp.o
 
-src/SMFTCore3D.i: src/SMFTCore3D.cpp.i
-.PHONY : src/SMFTCore3D.i
+src/TRDCore3D.i: src/TRDCore3D.cpp.i
+.PHONY : src/TRDCore3D.i
 
 # target to preprocess a source file
-src/SMFTCore3D.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/src/SMFTCore3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/src/SMFTCore3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/src/SMFTCore3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/SMFTCore3D.cpp.i
-.PHONY : src/SMFTCore3D.cpp.i
+src/TRDCore3D.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/TRDCore3D.cpp.i
+.PHONY : src/TRDCore3D.cpp.i
 
-src/SMFTCore3D.s: src/SMFTCore3D.cpp.s
-.PHONY : src/SMFTCore3D.s
+src/TRDCore3D.s: src/TRDCore3D.cpp.s
+.PHONY : src/TRDCore3D.s
 
 # target to generate assembly for a file
-src/SMFTCore3D.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTCore3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/src/SMFTCore3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/src/SMFTCore3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/src/SMFTCore3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/src/SMFTCore3D.cpp.s
-.PHONY : src/SMFTCore3D.cpp.s
+src/TRDCore3D.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/TRDCore3D.cpp.s
+.PHONY : src/TRDCore3D.cpp.s
 
-src/SMFTDescriptorManager.o: src/SMFTDescriptorManager.cpp.o
-.PHONY : src/SMFTDescriptorManager.o
+src/TRDDescriptorManager.o: src/TRDDescriptorManager.cpp.o
+.PHONY : src/TRDDescriptorManager.o
 
 # target to build an object file
-src/SMFTDescriptorManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.o
-.PHONY : src/SMFTDescriptorManager.cpp.o
+src/TRDDescriptorManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o
+.PHONY : src/TRDDescriptorManager.cpp.o
 
-src/SMFTDescriptorManager.i: src/SMFTDescriptorManager.cpp.i
-.PHONY : src/SMFTDescriptorManager.i
+src/TRDDescriptorManager.i: src/TRDDescriptorManager.cpp.i
+.PHONY : src/TRDDescriptorManager.i
 
 # target to preprocess a source file
-src/SMFTDescriptorManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.i
-.PHONY : src/SMFTDescriptorManager.cpp.i
+src/TRDDescriptorManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.i
+.PHONY : src/TRDDescriptorManager.cpp.i
 
-src/SMFTDescriptorManager.s: src/SMFTDescriptorManager.cpp.s
-.PHONY : src/SMFTDescriptorManager.s
+src/TRDDescriptorManager.s: src/TRDDescriptorManager.cpp.s
+.PHONY : src/TRDDescriptorManager.s
 
 # target to generate assembly for a file
-src/SMFTDescriptorManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTDescriptorManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTDescriptorManager.cpp.s
-.PHONY : src/SMFTDescriptorManager.cpp.s
+src/TRDDescriptorManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.s
+.PHONY : src/TRDDescriptorManager.cpp.s
 
-src/SMFTEngine.o: src/SMFTEngine.cpp.o
-.PHONY : src/SMFTEngine.o
+src/TRDEngine.o: src/TRDEngine.cpp.o
+.PHONY : src/TRDEngine.o
 
 # target to build an object file
-src/SMFTEngine.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.o
-.PHONY : src/SMFTEngine.cpp.o
+src/TRDEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o
+.PHONY : src/TRDEngine.cpp.o
 
-src/SMFTEngine.i: src/SMFTEngine.cpp.i
-.PHONY : src/SMFTEngine.i
+src/TRDEngine.i: src/TRDEngine.cpp.i
+.PHONY : src/TRDEngine.i
 
 # target to preprocess a source file
-src/SMFTEngine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.i
-.PHONY : src/SMFTEngine.cpp.i
+src/TRDEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.i
+.PHONY : src/TRDEngine.cpp.i
 
-src/SMFTEngine.s: src/SMFTEngine.cpp.s
-.PHONY : src/SMFTEngine.s
+src/TRDEngine.s: src/TRDEngine.cpp.s
+.PHONY : src/TRDEngine.s
 
 # target to generate assembly for a file
-src/SMFTEngine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTEngine.cpp.s
-.PHONY : src/SMFTEngine.cpp.s
+src/TRDEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.s
+.PHONY : src/TRDEngine.cpp.s
 
-src/SMFTEngine3D.o: src/SMFTEngine3D.cpp.o
-.PHONY : src/SMFTEngine3D.o
+src/TRDEngine3D.o: src/TRDEngine3D.cpp.o
+.PHONY : src/TRDEngine3D.o
 
 # target to build an object file
-src/SMFTEngine3D.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.o
-.PHONY : src/SMFTEngine3D.cpp.o
+src/TRDEngine3D.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDEngine3D.cpp.o
+.PHONY : src/TRDEngine3D.cpp.o
 
-src/SMFTEngine3D.i: src/SMFTEngine3D.cpp.i
-.PHONY : src/SMFTEngine3D.i
+src/TRDEngine3D.i: src/TRDEngine3D.cpp.i
+.PHONY : src/TRDEngine3D.i
 
 # target to preprocess a source file
-src/SMFTEngine3D.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.i
-.PHONY : src/SMFTEngine3D.cpp.i
+src/TRDEngine3D.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDEngine3D.cpp.i
+.PHONY : src/TRDEngine3D.cpp.i
 
-src/SMFTEngine3D.s: src/SMFTEngine3D.cpp.s
-.PHONY : src/SMFTEngine3D.s
+src/TRDEngine3D.s: src/TRDEngine3D.cpp.s
+.PHONY : src/TRDEngine3D.s
 
 # target to generate assembly for a file
-src/SMFTEngine3D.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTEngine3D.cpp.s
-.PHONY : src/SMFTEngine3D.cpp.s
+src/TRDEngine3D.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDEngine3D.cpp.s
+.PHONY : src/TRDEngine3D.cpp.s
 
-src/SMFTPipelineFactory.o: src/SMFTPipelineFactory.cpp.o
-.PHONY : src/SMFTPipelineFactory.o
+src/TRDPipelineFactory.o: src/TRDPipelineFactory.cpp.o
+.PHONY : src/TRDPipelineFactory.o
 
 # target to build an object file
-src/SMFTPipelineFactory.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.o
-.PHONY : src/SMFTPipelineFactory.cpp.o
+src/TRDPipelineFactory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDPipelineFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o
+.PHONY : src/TRDPipelineFactory.cpp.o
 
-src/SMFTPipelineFactory.i: src/SMFTPipelineFactory.cpp.i
-.PHONY : src/SMFTPipelineFactory.i
+src/TRDPipelineFactory.i: src/TRDPipelineFactory.cpp.i
+.PHONY : src/TRDPipelineFactory.i
 
 # target to preprocess a source file
-src/SMFTPipelineFactory.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.i
-.PHONY : src/SMFTPipelineFactory.cpp.i
+src/TRDPipelineFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDPipelineFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.i
+.PHONY : src/TRDPipelineFactory.cpp.i
 
-src/SMFTPipelineFactory.s: src/SMFTPipelineFactory.cpp.s
-.PHONY : src/SMFTPipelineFactory.s
+src/TRDPipelineFactory.s: src/TRDPipelineFactory.cpp.s
+.PHONY : src/TRDPipelineFactory.s
 
 # target to generate assembly for a file
-src/SMFTPipelineFactory.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/SMFTPipelineFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/SMFTPipelineFactory.cpp.s
-.PHONY : src/SMFTPipelineFactory.cpp.s
+src/TRDPipelineFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDPipelineFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.s
+.PHONY : src/TRDPipelineFactory.cpp.s
 
 src/output/OutputManager.o: src/output/OutputManager.cpp.o
 .PHONY : src/output/OutputManager.o
 
 # target to build an object file
 src/output/OutputManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.o
 .PHONY : src/output/OutputManager.cpp.o
 
@@ -1156,7 +1175,7 @@ src/output/OutputManager.i: src/output/OutputManager.cpp.i
 
 # target to preprocess a source file
 src/output/OutputManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/output/OutputManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.i
 .PHONY : src/output/OutputManager.cpp.i
 
@@ -1165,7 +1184,7 @@ src/output/OutputManager.s: src/output/OutputManager.cpp.s
 
 # target to generate assembly for a file
 src/output/OutputManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/output/OutputManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/output/OutputManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.s
 .PHONY : src/output/OutputManager.cpp.s
 
@@ -1198,7 +1217,7 @@ src/simulations/ObservableComputer.o: src/simulations/ObservableComputer.cpp.o
 
 # target to build an object file
 src/simulations/ObservableComputer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.o
 .PHONY : src/simulations/ObservableComputer.cpp.o
 
@@ -1207,7 +1226,7 @@ src/simulations/ObservableComputer.i: src/simulations/ObservableComputer.cpp.i
 
 # target to preprocess a source file
 src/simulations/ObservableComputer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.i
 .PHONY : src/simulations/ObservableComputer.cpp.i
 
@@ -1216,43 +1235,43 @@ src/simulations/ObservableComputer.s: src/simulations/ObservableComputer.cpp.s
 
 # target to generate assembly for a file
 src/simulations/ObservableComputer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/ObservableComputer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.s
 .PHONY : src/simulations/ObservableComputer.cpp.s
 
-src/simulations/SMFTTestRunner.o: src/simulations/SMFTTestRunner.cpp.o
-.PHONY : src/simulations/SMFTTestRunner.o
+src/simulations/TRDTestRunner.o: src/simulations/TRDTestRunner.cpp.o
+.PHONY : src/simulations/TRDTestRunner.o
 
 # target to build an object file
-src/simulations/SMFTTestRunner.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.o
-.PHONY : src/simulations/SMFTTestRunner.cpp.o
+src/simulations/TRDTestRunner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o
+.PHONY : src/simulations/TRDTestRunner.cpp.o
 
-src/simulations/SMFTTestRunner.i: src/simulations/SMFTTestRunner.cpp.i
-.PHONY : src/simulations/SMFTTestRunner.i
+src/simulations/TRDTestRunner.i: src/simulations/TRDTestRunner.cpp.i
+.PHONY : src/simulations/TRDTestRunner.i
 
 # target to preprocess a source file
-src/simulations/SMFTTestRunner.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.i
-.PHONY : src/simulations/SMFTTestRunner.cpp.i
+src/simulations/TRDTestRunner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.i
+.PHONY : src/simulations/TRDTestRunner.cpp.i
 
-src/simulations/SMFTTestRunner.s: src/simulations/SMFTTestRunner.cpp.s
-.PHONY : src/simulations/SMFTTestRunner.s
+src/simulations/TRDTestRunner.s: src/simulations/TRDTestRunner.cpp.s
+.PHONY : src/simulations/TRDTestRunner.s
 
 # target to generate assembly for a file
-src/simulations/SMFTTestRunner.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/SMFTTestRunner.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/SMFTTestRunner.cpp.s
-.PHONY : src/simulations/SMFTTestRunner.cpp.s
+src/simulations/TRDTestRunner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.s
+.PHONY : src/simulations/TRDTestRunner.cpp.s
 
 src/simulations/TestConfig.o: src/simulations/TestConfig.cpp.o
 .PHONY : src/simulations/TestConfig.o
 
 # target to build an object file
 src/simulations/TestConfig.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o
 .PHONY : src/simulations/TestConfig.cpp.o
 
@@ -1261,7 +1280,7 @@ src/simulations/TestConfig.i: src/simulations/TestConfig.cpp.i
 
 # target to preprocess a source file
 src/simulations/TestConfig.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.i
 .PHONY : src/simulations/TestConfig.cpp.i
 
@@ -1270,33 +1289,33 @@ src/simulations/TestConfig.s: src/simulations/TestConfig.cpp.s
 
 # target to generate assembly for a file
 src/simulations/TestConfig.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/src/simulations/TestConfig.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.s
 .PHONY : src/simulations/TestConfig.cpp.s
 
-test/test_3d_full_smft.o: test/test_3d_full_smft.cpp.o
-.PHONY : test/test_3d_full_smft.o
+test/test_3d_full_trd.o: test/test_3d_full_trd.cpp.o
+.PHONY : test/test_3d_full_trd.o
 
 # target to build an object file
-test/test_3d_full_smft.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/test/test_3d_full_smft.cpp.o
-.PHONY : test/test_3d_full_smft.cpp.o
+test/test_3d_full_trd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/test/test_3d_full_trd.cpp.o
+.PHONY : test/test_3d_full_trd.cpp.o
 
-test/test_3d_full_smft.i: test/test_3d_full_smft.cpp.i
-.PHONY : test/test_3d_full_smft.i
+test/test_3d_full_trd.i: test/test_3d_full_trd.cpp.i
+.PHONY : test/test_3d_full_trd.i
 
 # target to preprocess a source file
-test/test_3d_full_smft.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/test/test_3d_full_smft.cpp.i
-.PHONY : test/test_3d_full_smft.cpp.i
+test/test_3d_full_trd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/test/test_3d_full_trd.cpp.i
+.PHONY : test/test_3d_full_trd.cpp.i
 
-test/test_3d_full_smft.s: test/test_3d_full_smft.cpp.s
-.PHONY : test/test_3d_full_smft.s
+test/test_3d_full_trd.s: test/test_3d_full_trd.cpp.s
+.PHONY : test/test_3d_full_trd.s
 
 # target to generate assembly for a file
-test/test_3d_full_smft.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_smft.dir/build.make CMakeFiles/test_3d_full_smft.dir/test/test_3d_full_smft.cpp.s
-.PHONY : test/test_3d_full_smft.cpp.s
+test/test_3d_full_trd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/test/test_3d_full_trd.cpp.s
+.PHONY : test/test_3d_full_trd.cpp.s
 
 test/test_dirac3d_free.o: test/test_dirac3d_free.cpp.o
 .PHONY : test/test_dirac3d_free.o
@@ -1327,7 +1346,8 @@ test/test_einstein_field_equations.o: test/test_einstein_field_equations.cpp.o
 
 # target to build an object file
 test/test_einstein_field_equations.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/test/test_einstein_field_equations.cpp.o
 .PHONY : test/test_einstein_field_equations.cpp.o
 
 test/test_einstein_field_equations.i: test/test_einstein_field_equations.cpp.i
@@ -1335,7 +1355,8 @@ test/test_einstein_field_equations.i: test/test_einstein_field_equations.cpp.i
 
 # target to preprocess a source file
 test/test_einstein_field_equations.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/test/test_einstein_field_equations.cpp.i
 .PHONY : test/test_einstein_field_equations.cpp.i
 
 test/test_einstein_field_equations.s: test/test_einstein_field_equations.cpp.s
@@ -1343,7 +1364,8 @@ test/test_einstein_field_equations.s: test/test_einstein_field_equations.cpp.s
 
 # target to generate assembly for a file
 test/test_einstein_field_equations.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_einstein_field_equations.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/test/test_einstein_field_equations.cpp.s
 .PHONY : test/test_einstein_field_equations.cpp.s
 
 test/test_em_gravity_coupling_3d.o: test/test_em_gravity_coupling_3d.cpp.o
@@ -1351,7 +1373,7 @@ test/test_em_gravity_coupling_3d.o: test/test_em_gravity_coupling_3d.cpp.o
 
 # target to build an object file
 test/test_em_gravity_coupling_3d.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o
 .PHONY : test/test_em_gravity_coupling_3d.cpp.o
 
 test/test_em_gravity_coupling_3d.i: test/test_em_gravity_coupling_3d.cpp.i
@@ -1359,7 +1381,7 @@ test/test_em_gravity_coupling_3d.i: test/test_em_gravity_coupling_3d.cpp.i
 
 # target to preprocess a source file
 test/test_em_gravity_coupling_3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.i
 .PHONY : test/test_em_gravity_coupling_3d.cpp.i
 
 test/test_em_gravity_coupling_3d.s: test/test_em_gravity_coupling_3d.cpp.s
@@ -1367,7 +1389,7 @@ test/test_em_gravity_coupling_3d.s: test/test_em_gravity_coupling_3d.cpp.s
 
 # target to generate assembly for a file
 test/test_em_gravity_coupling_3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_em_gravity_coupling_3d.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.s
 .PHONY : test/test_em_gravity_coupling_3d.cpp.s
 
 test/test_geodesic_3d.o: test/test_geodesic_3d.cpp.o
@@ -1375,7 +1397,7 @@ test/test_geodesic_3d.o: test/test_geodesic_3d.cpp.o
 
 # target to build an object file
 test/test_geodesic_3d.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o
 .PHONY : test/test_geodesic_3d.cpp.o
 
 test/test_geodesic_3d.i: test/test_geodesic_3d.cpp.i
@@ -1383,7 +1405,7 @@ test/test_geodesic_3d.i: test/test_geodesic_3d.cpp.i
 
 # target to preprocess a source file
 test/test_geodesic_3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.i
 .PHONY : test/test_geodesic_3d.cpp.i
 
 test/test_geodesic_3d.s: test/test_geodesic_3d.cpp.s
@@ -1391,7 +1413,7 @@ test/test_geodesic_3d.s: test/test_geodesic_3d.cpp.s
 
 # target to generate assembly for a file
 test/test_geodesic_3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_geodesic_3d.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.s
 .PHONY : test/test_geodesic_3d.cpp.s
 
 test/test_geodesic_verification.o: test/test_geodesic_verification.cpp.o
@@ -1423,7 +1445,7 @@ test/test_lorentz_force_3d.o: test/test_lorentz_force_3d.cpp.o
 
 # target to build an object file
 test/test_lorentz_force_3d.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o
 .PHONY : test/test_lorentz_force_3d.cpp.o
 
 test/test_lorentz_force_3d.i: test/test_lorentz_force_3d.cpp.i
@@ -1431,7 +1453,7 @@ test/test_lorentz_force_3d.i: test/test_lorentz_force_3d.cpp.i
 
 # target to preprocess a source file
 test/test_lorentz_force_3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.i
 .PHONY : test/test_lorentz_force_3d.cpp.i
 
 test/test_lorentz_force_3d.s: test/test_lorentz_force_3d.cpp.s
@@ -1439,7 +1461,7 @@ test/test_lorentz_force_3d.s: test/test_lorentz_force_3d.cpp.s
 
 # target to generate assembly for a file
 test/test_lorentz_force_3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_lorentz_force_3d.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.s
 .PHONY : test/test_lorentz_force_3d.cpp.s
 
 test/test_maxwell3d_wave.o: test/test_maxwell3d_wave.cpp.o
@@ -1466,84 +1488,12 @@ test/test_maxwell3d_wave.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.s
 .PHONY : test/test_maxwell3d_wave.cpp.s
 
-test/test_smft3d_cpu_only.o: test/test_smft3d_cpu_only.cpp.o
-.PHONY : test/test_smft3d_cpu_only.o
-
-# target to build an object file
-test/test_smft3d_cpu_only.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/test/test_smft3d_cpu_only.cpp.o
-.PHONY : test/test_smft3d_cpu_only.cpp.o
-
-test/test_smft3d_cpu_only.i: test/test_smft3d_cpu_only.cpp.i
-.PHONY : test/test_smft3d_cpu_only.i
-
-# target to preprocess a source file
-test/test_smft3d_cpu_only.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/test/test_smft3d_cpu_only.cpp.i
-.PHONY : test/test_smft3d_cpu_only.cpp.i
-
-test/test_smft3d_cpu_only.s: test/test_smft3d_cpu_only.cpp.s
-.PHONY : test/test_smft3d_cpu_only.s
-
-# target to generate assembly for a file
-test/test_smft3d_cpu_only.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smft3d_cpu_only.dir/build.make CMakeFiles/test_smft3d_cpu_only.dir/test/test_smft3d_cpu_only.cpp.s
-.PHONY : test/test_smft3d_cpu_only.cpp.s
-
-test/test_smftcore3d_basic.o: test/test_smftcore3d_basic.cpp.o
-.PHONY : test/test_smftcore3d_basic.o
-
-# target to build an object file
-test/test_smftcore3d_basic.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/test/test_smftcore3d_basic.cpp.o
-.PHONY : test/test_smftcore3d_basic.cpp.o
-
-test/test_smftcore3d_basic.i: test/test_smftcore3d_basic.cpp.i
-.PHONY : test/test_smftcore3d_basic.i
-
-# target to preprocess a source file
-test/test_smftcore3d_basic.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/test/test_smftcore3d_basic.cpp.i
-.PHONY : test/test_smftcore3d_basic.cpp.i
-
-test/test_smftcore3d_basic.s: test/test_smftcore3d_basic.cpp.s
-.PHONY : test/test_smftcore3d_basic.s
-
-# target to generate assembly for a file
-test/test_smftcore3d_basic.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_basic.dir/build.make CMakeFiles/test_smftcore3d_basic.dir/test/test_smftcore3d_basic.cpp.s
-.PHONY : test/test_smftcore3d_basic.cpp.s
-
-test/test_smftcore3d_gpu_simple.o: test/test_smftcore3d_gpu_simple.cpp.o
-.PHONY : test/test_smftcore3d_gpu_simple.o
-
-# target to build an object file
-test/test_smftcore3d_gpu_simple.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/test/test_smftcore3d_gpu_simple.cpp.o
-.PHONY : test/test_smftcore3d_gpu_simple.cpp.o
-
-test/test_smftcore3d_gpu_simple.i: test/test_smftcore3d_gpu_simple.cpp.i
-.PHONY : test/test_smftcore3d_gpu_simple.i
-
-# target to preprocess a source file
-test/test_smftcore3d_gpu_simple.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/test/test_smftcore3d_gpu_simple.cpp.i
-.PHONY : test/test_smftcore3d_gpu_simple.cpp.i
-
-test/test_smftcore3d_gpu_simple.s: test/test_smftcore3d_gpu_simple.cpp.s
-.PHONY : test/test_smftcore3d_gpu_simple.s
-
-# target to generate assembly for a file
-test/test_smftcore3d_gpu_simple.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_smftcore3d_gpu.dir/build.make CMakeFiles/test_smftcore3d_gpu.dir/test/test_smftcore3d_gpu_simple.cpp.s
-.PHONY : test/test_smftcore3d_gpu_simple.cpp.s
-
 test/test_stuckelberg_vortex_3d.o: test/test_stuckelberg_vortex_3d.cpp.o
 .PHONY : test/test_stuckelberg_vortex_3d.o
 
 # target to build an object file
 test/test_stuckelberg_vortex_3d.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o
 .PHONY : test/test_stuckelberg_vortex_3d.cpp.o
 
 test/test_stuckelberg_vortex_3d.i: test/test_stuckelberg_vortex_3d.cpp.i
@@ -1551,7 +1501,7 @@ test/test_stuckelberg_vortex_3d.i: test/test_stuckelberg_vortex_3d.cpp.i
 
 # target to preprocess a source file
 test/test_stuckelberg_vortex_3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.i
 .PHONY : test/test_stuckelberg_vortex_3d.cpp.i
 
 test/test_stuckelberg_vortex_3d.s: test/test_stuckelberg_vortex_3d.cpp.s
@@ -1559,7 +1509,7 @@ test/test_stuckelberg_vortex_3d.s: test/test_stuckelberg_vortex_3d.cpp.s
 
 # target to generate assembly for a file
 test/test_stuckelberg_vortex_3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_stuckelberg_vortex_3d.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.s
 .PHONY : test/test_stuckelberg_vortex_3d.cpp.s
 
 test/test_three_body_em_3d.o: test/test_three_body_em_3d.cpp.o
@@ -1567,7 +1517,7 @@ test/test_three_body_em_3d.o: test/test_three_body_em_3d.cpp.o
 
 # target to build an object file
 test/test_three_body_em_3d.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o
 .PHONY : test/test_three_body_em_3d.cpp.o
 
 test/test_three_body_em_3d.i: test/test_three_body_em_3d.cpp.i
@@ -1575,7 +1525,7 @@ test/test_three_body_em_3d.i: test/test_three_body_em_3d.cpp.i
 
 # target to preprocess a source file
 test/test_three_body_em_3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.i
 .PHONY : test/test_three_body_em_3d.cpp.i
 
 test/test_three_body_em_3d.s: test/test_three_body_em_3d.cpp.s
@@ -1583,15 +1533,87 @@ test/test_three_body_em_3d.s: test/test_three_body_em_3d.cpp.s
 
 # target to generate assembly for a file
 test/test_three_body_em_3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_three_body_em_3d.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.s
 .PHONY : test/test_three_body_em_3d.cpp.s
+
+test/test_trd3d_cpu_only.o: test/test_trd3d_cpu_only.cpp.o
+.PHONY : test/test_trd3d_cpu_only.o
+
+# target to build an object file
+test/test_trd3d_cpu_only.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/test/test_trd3d_cpu_only.cpp.o
+.PHONY : test/test_trd3d_cpu_only.cpp.o
+
+test/test_trd3d_cpu_only.i: test/test_trd3d_cpu_only.cpp.i
+.PHONY : test/test_trd3d_cpu_only.i
+
+# target to preprocess a source file
+test/test_trd3d_cpu_only.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/test/test_trd3d_cpu_only.cpp.i
+.PHONY : test/test_trd3d_cpu_only.cpp.i
+
+test/test_trd3d_cpu_only.s: test/test_trd3d_cpu_only.cpp.s
+.PHONY : test/test_trd3d_cpu_only.s
+
+# target to generate assembly for a file
+test/test_trd3d_cpu_only.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/test/test_trd3d_cpu_only.cpp.s
+.PHONY : test/test_trd3d_cpu_only.cpp.s
+
+test/test_trdcore3d_basic.o: test/test_trdcore3d_basic.cpp.o
+.PHONY : test/test_trdcore3d_basic.o
+
+# target to build an object file
+test/test_trdcore3d_basic.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/test/test_trdcore3d_basic.cpp.o
+.PHONY : test/test_trdcore3d_basic.cpp.o
+
+test/test_trdcore3d_basic.i: test/test_trdcore3d_basic.cpp.i
+.PHONY : test/test_trdcore3d_basic.i
+
+# target to preprocess a source file
+test/test_trdcore3d_basic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/test/test_trdcore3d_basic.cpp.i
+.PHONY : test/test_trdcore3d_basic.cpp.i
+
+test/test_trdcore3d_basic.s: test/test_trdcore3d_basic.cpp.s
+.PHONY : test/test_trdcore3d_basic.s
+
+# target to generate assembly for a file
+test/test_trdcore3d_basic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/test/test_trdcore3d_basic.cpp.s
+.PHONY : test/test_trdcore3d_basic.cpp.s
+
+test/test_trdcore3d_gpu_simple.o: test/test_trdcore3d_gpu_simple.cpp.o
+.PHONY : test/test_trdcore3d_gpu_simple.o
+
+# target to build an object file
+test/test_trdcore3d_gpu_simple.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/test/test_trdcore3d_gpu_simple.cpp.o
+.PHONY : test/test_trdcore3d_gpu_simple.cpp.o
+
+test/test_trdcore3d_gpu_simple.i: test/test_trdcore3d_gpu_simple.cpp.i
+.PHONY : test/test_trdcore3d_gpu_simple.i
+
+# target to preprocess a source file
+test/test_trdcore3d_gpu_simple.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/test/test_trdcore3d_gpu_simple.cpp.i
+.PHONY : test/test_trdcore3d_gpu_simple.cpp.i
+
+test/test_trdcore3d_gpu_simple.s: test/test_trdcore3d_gpu_simple.cpp.s
+.PHONY : test/test_trdcore3d_gpu_simple.s
+
+# target to generate assembly for a file
+test/test_trdcore3d_gpu_simple.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/test/test_trdcore3d_gpu_simple.cpp.s
+.PHONY : test/test_trdcore3d_gpu_simple.cpp.s
 
 test/test_weak_field_3d.o: test/test_weak_field_3d.cpp.o
 .PHONY : test/test_weak_field_3d.o
 
 # target to build an object file
 test/test_weak_field_3d.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o
 .PHONY : test/test_weak_field_3d.cpp.o
 
 test/test_weak_field_3d.i: test/test_weak_field_3d.cpp.i
@@ -1599,7 +1621,7 @@ test/test_weak_field_3d.i: test/test_weak_field_3d.cpp.i
 
 # target to preprocess a source file
 test/test_weak_field_3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.i
 .PHONY : test/test_weak_field_3d.cpp.i
 
 test/test_weak_field_3d.s: test/test_weak_field_3d.cpp.s
@@ -1607,7 +1629,7 @@ test/test_weak_field_3d.s: test/test_weak_field_3d.cpp.s
 
 # target to generate assembly for a file
 test/test_weak_field_3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SMFT.dir/build.make CMakeFiles/SMFT.dir/test/test_weak_field_3d.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.s
 .PHONY : test/test_weak_field_3d.cpp.s
 
 test/test_weak_field_limit.o: test/test_weak_field_limit.cpp.o
@@ -1644,15 +1666,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Nova"
 	@echo "... Physics"
-	@echo "... SMFT"
+	@echo "... TRD"
 	@echo "... imgui"
-	@echo "... test_3d_full_smft"
+	@echo "... test_3d_full_trd"
 	@echo "... test_dirac3d_free"
+	@echo "... test_einstein_field_equations"
 	@echo "... test_geodesic_verification"
 	@echo "... test_maxwell3d_wave"
-	@echo "... test_smft3d_cpu_only"
-	@echo "... test_smftcore3d_basic"
-	@echo "... test_smftcore3d_gpu"
+	@echo "... test_trd3d_cpu_only"
+	@echo "... test_trdcore3d_basic"
+	@echo "... test_trdcore3d_gpu"
 	@echo "... test_weak_field_limit"
 	@echo "... lib/Nova/Core/components/genesis.o"
 	@echo "... lib/Nova/Core/components/genesis.i"
@@ -1732,30 +1755,30 @@ help:
 	@echo "... src/Maxwell3D.o"
 	@echo "... src/Maxwell3D.i"
 	@echo "... src/Maxwell3D.s"
-	@echo "... src/SMFTBufferManager.o"
-	@echo "... src/SMFTBufferManager.i"
-	@echo "... src/SMFTBufferManager.s"
-	@echo "... src/SMFTCompute.o"
-	@echo "... src/SMFTCompute.i"
-	@echo "... src/SMFTCompute.s"
-	@echo "... src/SMFTCore.o"
-	@echo "... src/SMFTCore.i"
-	@echo "... src/SMFTCore.s"
-	@echo "... src/SMFTCore3D.o"
-	@echo "... src/SMFTCore3D.i"
-	@echo "... src/SMFTCore3D.s"
-	@echo "... src/SMFTDescriptorManager.o"
-	@echo "... src/SMFTDescriptorManager.i"
-	@echo "... src/SMFTDescriptorManager.s"
-	@echo "... src/SMFTEngine.o"
-	@echo "... src/SMFTEngine.i"
-	@echo "... src/SMFTEngine.s"
-	@echo "... src/SMFTEngine3D.o"
-	@echo "... src/SMFTEngine3D.i"
-	@echo "... src/SMFTEngine3D.s"
-	@echo "... src/SMFTPipelineFactory.o"
-	@echo "... src/SMFTPipelineFactory.i"
-	@echo "... src/SMFTPipelineFactory.s"
+	@echo "... src/TRDBufferManager.o"
+	@echo "... src/TRDBufferManager.i"
+	@echo "... src/TRDBufferManager.s"
+	@echo "... src/TRDCompute.o"
+	@echo "... src/TRDCompute.i"
+	@echo "... src/TRDCompute.s"
+	@echo "... src/TRDCore.o"
+	@echo "... src/TRDCore.i"
+	@echo "... src/TRDCore.s"
+	@echo "... src/TRDCore3D.o"
+	@echo "... src/TRDCore3D.i"
+	@echo "... src/TRDCore3D.s"
+	@echo "... src/TRDDescriptorManager.o"
+	@echo "... src/TRDDescriptorManager.i"
+	@echo "... src/TRDDescriptorManager.s"
+	@echo "... src/TRDEngine.o"
+	@echo "... src/TRDEngine.i"
+	@echo "... src/TRDEngine.s"
+	@echo "... src/TRDEngine3D.o"
+	@echo "... src/TRDEngine3D.i"
+	@echo "... src/TRDEngine3D.s"
+	@echo "... src/TRDPipelineFactory.o"
+	@echo "... src/TRDPipelineFactory.i"
+	@echo "... src/TRDPipelineFactory.s"
 	@echo "... src/output/OutputManager.o"
 	@echo "... src/output/OutputManager.i"
 	@echo "... src/output/OutputManager.s"
@@ -1765,15 +1788,15 @@ help:
 	@echo "... src/simulations/ObservableComputer.o"
 	@echo "... src/simulations/ObservableComputer.i"
 	@echo "... src/simulations/ObservableComputer.s"
-	@echo "... src/simulations/SMFTTestRunner.o"
-	@echo "... src/simulations/SMFTTestRunner.i"
-	@echo "... src/simulations/SMFTTestRunner.s"
+	@echo "... src/simulations/TRDTestRunner.o"
+	@echo "... src/simulations/TRDTestRunner.i"
+	@echo "... src/simulations/TRDTestRunner.s"
 	@echo "... src/simulations/TestConfig.o"
 	@echo "... src/simulations/TestConfig.i"
 	@echo "... src/simulations/TestConfig.s"
-	@echo "... test/test_3d_full_smft.o"
-	@echo "... test/test_3d_full_smft.i"
-	@echo "... test/test_3d_full_smft.s"
+	@echo "... test/test_3d_full_trd.o"
+	@echo "... test/test_3d_full_trd.i"
+	@echo "... test/test_3d_full_trd.s"
 	@echo "... test/test_dirac3d_free.o"
 	@echo "... test/test_dirac3d_free.i"
 	@echo "... test/test_dirac3d_free.s"
@@ -1795,21 +1818,21 @@ help:
 	@echo "... test/test_maxwell3d_wave.o"
 	@echo "... test/test_maxwell3d_wave.i"
 	@echo "... test/test_maxwell3d_wave.s"
-	@echo "... test/test_smft3d_cpu_only.o"
-	@echo "... test/test_smft3d_cpu_only.i"
-	@echo "... test/test_smft3d_cpu_only.s"
-	@echo "... test/test_smftcore3d_basic.o"
-	@echo "... test/test_smftcore3d_basic.i"
-	@echo "... test/test_smftcore3d_basic.s"
-	@echo "... test/test_smftcore3d_gpu_simple.o"
-	@echo "... test/test_smftcore3d_gpu_simple.i"
-	@echo "... test/test_smftcore3d_gpu_simple.s"
 	@echo "... test/test_stuckelberg_vortex_3d.o"
 	@echo "... test/test_stuckelberg_vortex_3d.i"
 	@echo "... test/test_stuckelberg_vortex_3d.s"
 	@echo "... test/test_three_body_em_3d.o"
 	@echo "... test/test_three_body_em_3d.i"
 	@echo "... test/test_three_body_em_3d.s"
+	@echo "... test/test_trd3d_cpu_only.o"
+	@echo "... test/test_trd3d_cpu_only.i"
+	@echo "... test/test_trd3d_cpu_only.s"
+	@echo "... test/test_trdcore3d_basic.o"
+	@echo "... test/test_trdcore3d_basic.i"
+	@echo "... test/test_trdcore3d_basic.s"
+	@echo "... test/test_trdcore3d_gpu_simple.o"
+	@echo "... test/test_trdcore3d_gpu_simple.i"
+	@echo "... test/test_trdcore3d_gpu_simple.s"
 	@echo "... test/test_weak_field_3d.o"
 	@echo "... test/test_weak_field_3d.i"
 	@echo "... test/test_weak_field_3d.s"

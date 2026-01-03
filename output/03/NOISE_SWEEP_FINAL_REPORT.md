@@ -145,7 +145,7 @@ The GPU "fragility" was an **artifact**, not physics.
 
 ## Physical Implications
 
-### For MSFT Theory
+### For TRD Theory
 
 **Good news:**
 - Synchronization is **robust** to realistic noise
@@ -170,7 +170,7 @@ At Planck scale, typical noise amplitude:
 
 This is **ridiculously smaller** than σ_c ≈ 0.8.
 
-**Conclusion:** MSFT vacuum is stable against any realistic stochastic perturbations.
+**Conclusion:** TRD vacuum is stable against any realistic stochastic perturbations.
 
 ---
 
@@ -239,7 +239,7 @@ This is **ridiculously smaller** than σ_c ≈ 0.8.
 - Fine-tuned initial conditions
 - Purely deterministic dynamics
 
-**The universe can self-organize into MSFT state via stochastic thermalization.**
+**The universe can self-organize into TRD state via stochastic thermalization.**
 
 ---
 
@@ -259,7 +259,7 @@ This is **ridiculously smaller** than σ_c ≈ 0.8.
 1. **Formalize MSR (Martin-Siggia-Rose) action** for stochastic field theory
 2. **Implement stochastic Dirac coupling** with noise amplitude σ_Dirac << σ_c
 3. **Test particle formation** in noisy vacuum
-4. **Proceed to publication:** "Stochastic Synchronization Mass Field Theory"
+4. **Proceed to publication:** "Stochastic Topological Resonance Dynamics"
 
 ### Next Milestone
 

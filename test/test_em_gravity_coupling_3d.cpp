@@ -3,7 +3,7 @@
  *
  * Electromagnetic-Gravity Coupling in 3D
  *
- * Goal: Verify EM field energy curves SMFT spacetime
+ * Goal: Verify EM field energy curves TRD spacetime
  *
  * Physics:
  *   Stress-energy tensor: T^μν from Maxwell fields

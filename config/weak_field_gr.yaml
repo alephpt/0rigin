@@ -1,5 +1,5 @@
 test_name: weak_field_limit_validation
-description: "A2: Weak Field Limit - Verify SMFT reproduces Newtonian gravity in limit R ≈ 1 + h, |h| ≪ 1"
+description: "A2: Weak Field Limit - Verify TRD reproduces Newtonian gravity in limit R ≈ 1 + h, |h| ≪ 1"
 
 # Spatial resolution for tracking R-field and test particle
 grid:
@@ -76,5 +76,5 @@ output:
     - test_particle_velocity      # (v_x(t), v_y(t))
     - test_particle_acceleration  # (a_x(t), a_y(t))
     - newtonian_prediction        # a_Newton(r)
-    - acceleration_error          # |a_SMFT - a_Newton|/|a_Newton|
+    - acceleration_error          # |a_TRD - a_Newton|/|a_Newton|
     - r_field_energy              # Total R-field energy

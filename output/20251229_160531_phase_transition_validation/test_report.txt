@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: phase_transition_validation
 Description: Test 3.3 - Noise-driven phase transition in Kuramoto synchronization
 

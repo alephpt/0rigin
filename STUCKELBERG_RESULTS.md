@@ -193,12 +193,12 @@ Under θ → θ + const:
 
 ### Recommendation
 
-**Proceed to Path B: SMFTCore Integration**
+**Proceed to Path B: TRDCore Integration**
 
 Next steps:
-1. Integrate StuckelbergEM into SMFTCore
+1. Integrate StuckelbergEM into TRDCore
 2. Replace ProcaEM in renderer
-3. Full SMFT+EM simulation with visualization
+3. Full TRD+EM simulation with visualization
 4. Validate EM energy conservation in coupled system
 
 ---

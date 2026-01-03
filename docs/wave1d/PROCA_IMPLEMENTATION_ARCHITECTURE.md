@@ -12,7 +12,7 @@
 
 ### 1.1 Design Principles
 
-**Modularity**: EM theory as plugin to SMFT, not core dependency
+**Modularity**: EM theory as plugin to TRD, not core dependency
 **Abstraction**: GaugeTheory interface supports multiple implementations (Proca, Stückelberg, Maxwell)
 **GPU-first**: All field evolution on GPU via Vulkan compute shaders
 **Type safety**: Strong typing for physical quantities (Vec3, Vec4, FieldTensor)
@@ -22,7 +22,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        SMFTCore                              │
+│                        TRDCore                              │
 │  - Kuramoto evolution (θ, R fields)                         │
 │  - Manages simulation state                                  │
 │  - Optional EM coupling                                      │
@@ -118,7 +118,7 @@ public:
     virtual bool isGaugeInvariant() const = 0;
 
     /**
-     * @brief Get EM-SMFT coupling strength
+     * @brief Get EM-TRD coupling strength
      * @return Dimensionful coupling constant α
      */
     virtual float getCouplingStrength() const = 0;
@@ -149,7 +149,7 @@ public:
 namespace physics {
 
 /**
- * @brief Proca electromagnetic theory with SMFT coupling
+ * @brief Proca electromagnetic theory with TRD coupling
  *
  * Lagrangian:
  *   ℒ = -1/4 F_μν F^μν + 1/2 m_γ²(R) A_μ A^μ + j_μ(θ,R) A^μ
@@ -168,7 +168,7 @@ public:
      * @param gridSize (Nx, Ny, Nz)
      * @param spatialStep (dx, dy, dz)
      * @param photonMassCoupling g (mass scale)
-     * @param currentCoupling α (EM-SMFT coupling)
+     * @param currentCoupling α (EM-TRD coupling)
      */
     ProcaEM(
         VkDevice device,
@@ -305,10 +305,10 @@ struct FieldTensor {
 };
 
 /**
- * @brief Field state containing SMFT + EM fields
+ * @brief Field state containing TRD + EM fields
  */
 struct FieldState {
-    // SMFT fields (host-side metadata, GPU buffers)
+    // TRD fields (host-side metadata, GPU buffers)
     VkBuffer theta_field;   // θ(x,y,z)
     VkBuffer R_field;       // R(x,y,z)
 
@@ -332,7 +332,7 @@ struct FieldState {
 
 ### 3.1 Shader: computeEMCurrent.comp
 
-**Purpose**: Compute j_μ = α ∂_μθ f(R) from SMFT fields
+**Purpose**: Compute j_μ = α ∂_μθ f(R) from TRD fields
 
 **File**: `build/shaders/proca/computeEMCurrent.comp`
 
@@ -343,7 +343,7 @@ struct FieldState {
 #include "../include/precision.glsl"
 
 /**
- * Compute electromagnetic current j_μ from SMFT fields
+ * Compute electromagnetic current j_μ from TRD fields
  *
  * Prescription:
  *   j_μ = α · ∂_μθ · f(R)
@@ -558,16 +558,16 @@ void main() {
 
 ---
 
-## 4. Integration with SMFTCore
+## 4. Integration with TRDCore
 
-### 4.1 Modified SMFTCore Class
+### 4.1 Modified TRDCore Class
 
-**File**: `include/SMFTCore.h` (modifications)
+**File**: `include/TRDCore.h` (modifications)
 
 ```cpp
-class SMFTCore {
+class TRDCore {
 public:
-    // ... existing SMFT methods ...
+    // ... existing TRD methods ...
 
     /**
      * @brief Enable electromagnetic coupling
@@ -576,7 +576,7 @@ public:
     void enableEMCoupling(std::unique_ptr<physics::GaugeTheory> emTheory);
 
     /**
-     * @brief Disable EM coupling (pure SMFT mode)
+     * @brief Disable EM coupling (pure TRD mode)
      */
     void disableEMCoupling();
 
@@ -601,19 +601,19 @@ private:
 
 ### 4.2 Operator Splitting Evolution
 
-**File**: `src/SMFTCore.cpp`
+**File**: `src/TRDCore.cpp`
 
 ```cpp
-void SMFTCore::evolveStepWithEM(float dt) {
+void TRDCore::evolveStepWithEM(float dt) {
     if (!isEMCoupled()) {
-        // Pure SMFT evolution (existing code path)
+        // Pure TRD evolution (existing code path)
         evolveStepPure(dt);
         return;
     }
 
     // Strang splitting: S(dt/2) → EM(dt) → S(dt/2)
 
-    // 1. SMFT half-step (dt/2) without EM backreaction
+    // 1. TRD half-step (dt/2) without EM backreaction
     evolveKuramotoHalfStep(dt / 2.0f);
 
     // 2. EM full step (dt) with current j_μ from θ, R
@@ -632,7 +632,7 @@ void SMFTCore::evolveStepWithEM(float dt) {
     m_em_theory->evolveFields(dt);
     m_em_theory->computeFieldStrengths(state);
 
-    // 3. SMFT half-step (dt/2) WITH EM backreaction (if α ≠ 0)
+    // 3. TRD half-step (dt/2) WITH EM backreaction (if α ≠ 0)
     if (m_em_backreaction_enabled) {
         applyEMBackreaction(state);
     }
@@ -654,11 +654,11 @@ set(PROCA_SOURCES
     src/physics/PhysicsTypes.cpp
 )
 
-# Add to SMFT target
-target_sources(SMFT PRIVATE ${PROCA_SOURCES})
+# Add to TRD target
+target_sources(TRD PRIVATE ${PROCA_SOURCES})
 
 # Include directories
-target_include_directories(SMFT PRIVATE
+target_include_directories(TRD PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/include/physics
 )
@@ -683,7 +683,7 @@ foreach(SHADER ${PROCA_SHADERS})
 endforeach()
 
 add_custom_target(proca_shaders DEPENDS ${PROCA_SHADER_SPIRV})
-add_dependencies(SMFT proca_shaders)
+add_dependencies(TRD proca_shaders)
 ```
 
 ---
@@ -797,22 +797,22 @@ TEST(ProcaEM, BorisTestEmergentBField) {
 - Compute E, B: ~2 GFLOP (gradients)
 - **Total: ~18 GFLOP/step**
 
-**SMFT evolution cost**:
+**TRD evolution cost**:
 - Kuramoto step: ~5 GFLOP
 - Order parameter: ~2 GFLOP
 - **Total: ~7 GFLOP/step**
 
-**Performance ratio**: Proca/SMFT ≈ 2.5×
+**Performance ratio**: Proca/TRD ≈ 2.5×
 
 **Mitigation strategies**:
-1. Adaptive stepping: Only compute EM every N SMFT steps
+1. Adaptive stepping: Only compute EM every N TRD steps
 2. GPU optimization: Fuse kernels, optimize memory access
 3. Conditional EM: Only enable in regions with R > threshold
 
 ### 7.2 Memory Footprint
 
 **Per grid point**:
-- SMFT: θ (4B), R (4B) = 8 bytes
+- TRD: θ (4B), R (4B) = 8 bytes
 - EM: A_μ×3 (48B), j_μ (16B), E (12B), B (12B) = 88 bytes
 - **Total with EM: 96 bytes/point**
 
@@ -831,7 +831,7 @@ TEST(ProcaEM, BorisTestEmergentBField) {
 - ✅ Design complete (this document)
 - Day 1-2: Implement GaugeTheory interface + ProcaEM class skeleton
 - Day 3-4: Write GPU shaders (computeEMCurrent, evolveProcaField)
-- Day 5: Integration with SMFTCore (operator splitting)
+- Day 5: Integration with TRDCore (operator splitting)
 - Day 6-7: **CRITICAL TEST**: Vortex B-field (Test 2)
 
 ### Week 3:
@@ -877,7 +877,7 @@ TEST(ProcaEM, BorisTestEmergentBField) {
 **Key design decisions**:
 1. GaugeTheory interface supports multiple theories (Proca, Stückelberg, Maxwell)
 2. GPU-first implementation (all field evolution on GPU)
-3. Operator splitting (2nd-order Strang) for SMFT-EM coupling
+3. Operator splitting (2nd-order Strang) for TRD-EM coupling
 4. Early testing (vortex B-field Week 2) to detect failures quickly
 
 **Next action**: Begin implementation of GaugeTheory.h and ProcaEM.h

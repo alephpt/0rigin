@@ -32,7 +32,7 @@ struct ComputeContext {
 bool initVulkan(ComputeContext& ctx) {
     VkApplicationInfo appInfo{};
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    appInfo.pApplicationName = "MSFT CPU Noise Sweep";
+    appInfo.pApplicationName = "TRD CPU Noise Sweep";
     appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
     appInfo.apiVersion = VK_API_VERSION_1_2;
 
@@ -199,7 +199,7 @@ float computeLocalization(const std::vector<float>& R_field) {
 }
 
 int main() {
-    std::cout << "=== MSFT Rigorous CPU Noise Sweep ===" << std::endl;
+    std::cout << "=== TRD Rigorous CPU Noise Sweep ===" << std::endl;
     std::cout << "Methodology aligned with immediate.md requirements\n" << std::endl;
 
     ComputeContext ctx{};

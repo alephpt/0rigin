@@ -156,14 +156,14 @@ int main() {
         std::cout << "   Direct φ=θ coupling SUCCESSFUL" << std::endl;
         std::cout << "   Gauge restoration verified" << std::endl;
         std::cout << std::endl;
-        std::cout << "RECOMMENDATION: Proceed to SMFTCore integration" << std::endl;
+        std::cout << "RECOMMENDATION: Proceed to TRDCore integration" << std::endl;
         return 0;
     } else {
         std::cout << "❌ FAIL: B still ~0, EM emergence not working" << std::endl;
         std::cout << "   Stückelberg also insufficient" << std::endl;
         std::cout << std::endl;
         std::cout << "RECOMMENDATION: PIVOT TO OPTION A" << std::endl;
-        std::cout << "   (Phenomenological SMFT→EM with calibrated coupling)" << std::endl;
+        std::cout << "   (Phenomenological TRD→EM with calibrated coupling)" << std::endl;
         return 1;
     }
 }

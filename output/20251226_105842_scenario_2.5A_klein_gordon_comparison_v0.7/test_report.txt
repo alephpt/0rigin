@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: scenario_2.5A_klein_gordon_comparison
 Description: Klein-Gordon vs Dirac comparison at high velocities (Phase 2.5A)
 

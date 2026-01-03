@@ -8,21 +8,21 @@
 
 ## Restoration Summary
 
-Successfully restored the complete GPU-accelerated SMFT system from commit 90d93ce while preserving the working Stückelberg EM implementation.
+Successfully restored the complete GPU-accelerated TRD system from commit 90d93ce while preserving the working Stückelberg EM implementation.
 
 ### Files Restored (15 files total)
 
 **Core GPU Infrastructure:**
-1. `src/SMFTEngine.h` - Main physics compute engine
-2. `src/SMFTEngine.cpp` - Kuramoto + Dirac evolution implementation
-3. `src/SMFTPipelineFactory.h` - Vulkan pipeline factory
-4. `src/SMFTPipelineFactory.cpp` - Shader loading and compilation
-5. `src/SMFTBufferManager.h` - GPU buffer management
-6. `src/SMFTBufferManager.cpp` - Memory allocation utilities
-7. `src/SMFTCompute.h` - Compute dispatch orchestration
-8. `src/SMFTCompute.cpp` - Command buffer management
-9. `src/SMFTDescriptorManager.h` - Descriptor set management
-10. `src/SMFTDescriptorManager.cpp` - Vulkan descriptor utilities
+1. `src/TRDEngine.h` - Main physics compute engine
+2. `src/TRDEngine.cpp` - Kuramoto + Dirac evolution implementation
+3. `src/TRDPipelineFactory.h` - Vulkan pipeline factory
+4. `src/TRDPipelineFactory.cpp` - Shader loading and compilation
+5. `src/TRDBufferManager.h` - GPU buffer management
+6. `src/TRDBufferManager.cpp` - Memory allocation utilities
+7. `src/TRDCompute.h` - Compute dispatch orchestration
+8. `src/TRDCompute.cpp` - Command buffer management
+9. `src/TRDDescriptorManager.h` - Descriptor set management
+10. `src/TRDDescriptorManager.cpp` - Vulkan descriptor utilities
 
 **Physics & Output:**
 11. `src/DiracEvolution.h` - Split-operator Dirac evolution
@@ -40,14 +40,14 @@ Successfully restored the complete GPU-accelerated SMFT system from commit 90d93
 ### Build Success
 ```bash
 $ rm -rf build && cmake -B build && make -C build -j8
-[100%] Built target SMFT
+[100%] Built target TRD
 Build completed successfully
 ```
 
 ### Executables Generated
 ```bash
 $ ls -lh build/bin/
--rwxr-xr-x 1 persist persist 871K Dec 31 19:24 smft
+-rwxr-xr-x 1 persist persist 871K Dec 31 19:24 trd
 -rwxr-xr-x 1 persist persist  36K Dec 31 19:23 test_stuckelberg_vortex_bfield
 ```
 
@@ -69,14 +69,14 @@ $ ./build/bin/test_stuckelberg_vortex_bfield
 ### Hierarchy (Restored)
 ```
 Nova (Vulkan compute engine) - EXISTS in lib/Nova/
-  └─ SMFTEngine (physics compute) - ✅ RESTORED
-      ├─ SMFTPipelineFactory (creates compute pipelines) - ✅ RESTORED
-      ├─ SMFTBufferManager (manages GPU buffers) - ✅ RESTORED
-      ├─ SMFTCompute (dispatch shaders) - ✅ RESTORED
-      └─ SMFTDescriptorManager (descriptor sets) - ✅ RESTORED
+  └─ TRDEngine (physics compute) - ✅ RESTORED
+      ├─ TRDPipelineFactory (creates compute pipelines) - ✅ RESTORED
+      ├─ TRDBufferManager (manages GPU buffers) - ✅ RESTORED
+      ├─ TRDCompute (dispatch shaders) - ✅ RESTORED
+      └─ TRDDescriptorManager (descriptor sets) - ✅ RESTORED
   └─ DiracEvolution (spinor evolution) - ✅ RESTORED
   └─ Physics/StuckelbergEM (EM coupling) - ✅ PRESERVED
-  └─ SMFTTestRunner (yaml test automation) - EXISTS
+  └─ TRDTestRunner (yaml test automation) - EXISTS
       ├─ TestConfig - EXISTS
       ├─ ObservableComputer - EXISTS
       └─ OutputManager - ✅ RESTORED
@@ -105,8 +105,8 @@ add_library(Physics STATIC
     src/physics/StuckelbergEM.cpp
 )
 
-# SMFT executable now links Physics
-target_link_libraries(SMFT PRIVATE
+# TRD executable now links Physics
+target_link_libraries(TRD PRIVATE
     Nova
     imgui
     Physics  # ← Added
@@ -138,14 +138,14 @@ target_link_libraries(SMFT PRIVATE
 - [x] Confirm Stückelberg test still passes
 
 ### Phase 2: Integration (Ready to Start)
-1. **Integrate Stückelberg into SMFTEngine**
-   - Add EM field buffers to SMFTEngine
+1. **Integrate Stückelberg into TRDEngine**
+   - Add EM field buffers to TRDEngine
    - Create EM evolution pipeline
    - Connect θ → φ coupling in step() method
    - Validate EM energy conservation
 
 2. **Test Full Coupling**
-   - Run `test_stuckelberg_vortex_bfield` in SMFTEngine context
+   - Run `test_stuckelberg_vortex_bfield` in TRDEngine context
    - Verify B-field generation from Kuramoto vortices
    - Check energy conservation with EM enabled
 
@@ -159,7 +159,7 @@ target_link_libraries(SMFT PRIVATE
 ## Technical Notes
 
 ### Main.cpp Adaptation
-**Issue**: Old main.cpp called `SMFTCore::manifest()` and `actualize()` methods that don't exist in the current simplified SMFTCore.
+**Issue**: Old main.cpp called `TRDCore::manifest()` and `actualize()` methods that don't exist in the current simplified TRDCore.
 
 **Solution**: Updated `runInteractiveMode()` to show informative message:
 ```cpp
@@ -172,7 +172,7 @@ int runInteractiveMode() {
 ```
 
 ### GPU Safety
-**From restored SMFTPipelineFactory.cpp comments:**
+**From restored TRDPipelineFactory.cpp comments:**
 - ✅ SAFE: Kuramoto (9 transcendentals), Sync (37 transcendentals), Gravity (0 transcendentals)
 - ⚠️ CAUTION: sync_field.comp can timeout with Kahan summation - use sync_field_simple.comp
 - ❌ UNSAFE: Dirac RK4 (3000 FLOPs - 10× budget) - CPU implementation required
@@ -185,8 +185,8 @@ int runInteractiveMode() {
 - `GPU_RESTORATION_REPORT.md` (this document)
 
 ### Files Modified
-- `CMakeLists.txt` - Added Physics library, updated SMFT target
-- `main.cpp` - Fixed runInteractiveMode() for current SMFTCore API
+- `CMakeLists.txt` - Added Physics library, updated TRD target
+- `main.cpp` - Fixed runInteractiveMode() for current TRDCore API
 
 ### Files Restored (from git 90d93ce)
 All 15 files listed in "Files Restored" section above.
@@ -195,7 +195,7 @@ All 15 files listed in "Files Restored" section above.
 - `src/physics/StuckelbergEM.cpp` - EM implementation
 - `include/physics/StuckelbergEM.h` - EM interface
 - `test/test_stuckelberg_vortex_bfield.cpp` - EM validation test
-- All simulation infrastructure (TestConfig, SMFTTestRunner, ObservableComputer)
+- All simulation infrastructure (TestConfig, TRDTestRunner, ObservableComputer)
 
 ---
 
@@ -203,9 +203,9 @@ All 15 files listed in "Files Restored" section above.
 
 **GPU infrastructure fully restored and verified.**
 
-The system is now ready for Phase 2: integrating Stückelberg EM into the GPU-accelerated SMFTEngine. All core components are functional, build succeeds, and the Stückelberg EM test validates that the EM physics implementation is intact.
+The system is now ready for Phase 2: integrating Stückelberg EM into the GPU-accelerated TRDEngine. All core components are functional, build succeeds, and the Stückelberg EM test validates that the EM physics implementation is intact.
 
-**Recommendation**: Proceed to Stückelberg integration into SMFTEngine as outlined in Phase 2.
+**Recommendation**: Proceed to Stückelberg integration into TRDEngine as outlined in Phase 2.
 
 ---
 

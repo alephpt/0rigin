@@ -1,4 +1,4 @@
-#include "MSFT_pipeline.hpp"
+#include "TRD_pipeline.hpp"
 #include <fstream>
 #include <iostream>
 #include <cstring>
@@ -6,13 +6,13 @@
 #include <algorithm>
 
 namespace Nova {
-namespace MSFT {
+namespace TRD {
 
 // ============================================================================
-// MSFTPipeline Implementation
+// TRDPipeline Implementation
 // ============================================================================
 
-MSFTPipeline::MSFTPipeline(
+TRDPipeline::TRDPipeline(
     VkDevice device,
     VkPhysicalDevice physical_device,
     VkCommandPool command_pool,
@@ -37,7 +37,7 @@ MSFTPipeline::MSFTPipeline(
     current_time_(0.0f) {
 }
 
-MSFTPipeline::~MSFTPipeline() {
+TRDPipeline::~TRDPipeline() {
     destroyPipelines();
     destroyBuffers();
 
@@ -54,7 +54,7 @@ MSFTPipeline::~MSFTPipeline() {
     }
 }
 
-void MSFTPipeline::initialize(
+void TRDPipeline::initialize(
     uint32_t grid_x,
     uint32_t grid_y,
     float delta,
@@ -69,12 +69,12 @@ void MSFTPipeline::initialize(
     // Auto-configure operator splitting (Dirac sub-stepping)
     params_.auto_configure_substeps();
 
-    std::cout << "[MSFT] Operator splitting: Dirac sub-steps=" << params_.dirac_substeps
+    std::cout << "[TRD] Operator splitting: Dirac sub-steps=" << params_.dirac_substeps
               << " (dt_dirac=" << (params_.dt / params_.dirac_substeps) << ")" << std::endl;
 
     // Validate timestep
     if (!params_.validate_dt()) {
-        std::cout << "[MSFT] Warning: dt=" << params_.dt
+        std::cout << "[TRD] Warning: dt=" << params_.dt
                   << " may be unsafe for Δ=" << delta
                   << ". Recommended: dt<=" << params_.compute_safe_dt() << std::endl;
     }
@@ -87,11 +87,11 @@ void MSFTPipeline::initialize(
     createPipelines();
     createCommandBuffer();
 
-    std::cout << "[MSFT] Pipeline initialized: " << grid_x << "x" << grid_y
+    std::cout << "[TRD] Pipeline initialized: " << grid_x << "x" << grid_y
               << " grid, Δ=" << delta << ", dt=" << params_.dt << std::endl;
 }
 
-void MSFTPipeline::createBuffers() {
+void TRDPipeline::createBuffers() {
     VkDeviceSize theta_size = params_.N_total * sizeof(float);
     VkDeviceSize R_size = params_.N_total * sizeof(float);
     VkDeviceSize psi_size = params_.N_total * 4 * 2 * sizeof(float);  // 4 components × 2 (complex) × float
@@ -160,20 +160,20 @@ void MSFTPipeline::createBuffers() {
     buffers_.psi_size = psi_size;
     buffers_.density_size = density_size;
 
-    std::cout << "[MSFT] Created buffers: theta=" << theta_size << "B, R=" << R_size
+    std::cout << "[TRD] Created buffers: theta=" << theta_size << "B, R=" << R_size
               << "B, psi=" << psi_size << "B, ρ=" << density_size << "B" << std::endl;
 }
 
-void MSFTPipeline::createShaderModules() {
-    kuramoto_shader_ = loadShaderModule("shaders/MSFT/kuramoto_step.comp.spv");
-    sync_shader_ = loadShaderModule("shaders/MSFT/sync_field.comp.spv");
-    dirac_shader_ = loadShaderModule("shaders/MSFT/dirac_rk4.comp.spv");
-    feedback_shader_ = loadShaderModule("shaders/MSFT/spinor_feedback.comp.spv");
+void TRDPipeline::createShaderModules() {
+    kuramoto_shader_ = loadShaderModule("shaders/TRD/kuramoto_step.comp.spv");
+    sync_shader_ = loadShaderModule("shaders/TRD/sync_field.comp.spv");
+    dirac_shader_ = loadShaderModule("shaders/TRD/dirac_rk4.comp.spv");
+    feedback_shader_ = loadShaderModule("shaders/TRD/spinor_feedback.comp.spv");
 
-    std::cout << "[MSFT] Loaded shader modules" << std::endl;
+    std::cout << "[TRD] Loaded shader modules" << std::endl;
 }
 
-VkShaderModule MSFTPipeline::loadShaderModule(const char* filepath) {
+VkShaderModule TRDPipeline::loadShaderModule(const char* filepath) {
     std::ifstream file(filepath, std::ios::ate | std::ios::binary);
 
     if (!file.is_open()) {
@@ -200,8 +200,8 @@ VkShaderModule MSFTPipeline::loadShaderModule(const char* filepath) {
     return shaderModule;
 }
 
-void MSFTPipeline::createDescriptorSetLayout() {
-    // Descriptor set layout for MSFT pipeline
+void TRDPipeline::createDescriptorSetLayout() {
+    // Descriptor set layout for TRD pipeline
     // All shaders share same layout for consistency
     std::vector<VkDescriptorSetLayoutBinding> bindings = {
         // Binding 0: theta / psi (read/write depending on shader)
@@ -224,7 +224,7 @@ void MSFTPipeline::createDescriptorSetLayout() {
     }
 }
 
-void MSFTPipeline::createDescriptorPool() {
+void TRDPipeline::createDescriptorPool() {
     std::vector<VkDescriptorPoolSize> poolSizes = {
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 16}  // 4 bindings × 4 shaders
     };
@@ -240,7 +240,7 @@ void MSFTPipeline::createDescriptorPool() {
     }
 }
 
-void MSFTPipeline::createDescriptorSet() {
+void TRDPipeline::createDescriptorSet() {
     VkDescriptorSetAllocateInfo allocInfo{};
     allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
     allocInfo.descriptorPool = descriptor_pool_;
@@ -254,7 +254,7 @@ void MSFTPipeline::createDescriptorSet() {
     updateDescriptorSet();
 }
 
-void MSFTPipeline::updateDescriptorSet() {
+void TRDPipeline::updateDescriptorSet() {
     // Update descriptor set with buffer bindings
     std::vector<VkWriteDescriptorSet> descriptorWrites(4);
 
@@ -314,12 +314,12 @@ void MSFTPipeline::updateDescriptorSet() {
                            descriptorWrites.data(), 0, nullptr);
 }
 
-void MSFTPipeline::createPipelines() {
+void TRDPipeline::createPipelines() {
     // Create pipeline layout with push constants
     VkPushConstantRange pushConstantRange{};
     pushConstantRange.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
     pushConstantRange.offset = 0;
-    pushConstantRange.size = sizeof(MSFTParams);
+    pushConstantRange.size = sizeof(TRDParams);
 
     VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
     pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
@@ -355,10 +355,10 @@ void MSFTPipeline::createPipelines() {
     createComputePipeline(dirac_shader_, dirac_pipeline_);
     createComputePipeline(feedback_shader_, feedback_pipeline_);
 
-    std::cout << "[MSFT] Created compute pipelines" << std::endl;
+    std::cout << "[TRD] Created compute pipelines" << std::endl;
 }
 
-void MSFTPipeline::createCommandBuffer() {
+void TRDPipeline::createCommandBuffer() {
     VkCommandBufferAllocateInfo allocInfo{};
     allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
     allocInfo.commandPool = command_pool_;
@@ -370,28 +370,28 @@ void MSFTPipeline::createCommandBuffer() {
     }
 }
 
-void MSFTPipeline::setInitialPhases(const std::vector<float>& theta_data) {
+void TRDPipeline::setInitialPhases(const std::vector<float>& theta_data) {
     if (theta_data.size() != params_.N_total) {
         throw std::runtime_error("Phase data size mismatch");
     }
     copyToBuffer(buffers_.theta, theta_data.data(), buffers_.theta_size);
 }
 
-void MSFTPipeline::setNaturalFrequencies(const std::vector<float>& omega_data) {
+void TRDPipeline::setNaturalFrequencies(const std::vector<float>& omega_data) {
     if (omega_data.size() != params_.N_total) {
         throw std::runtime_error("Omega data size mismatch");
     }
     copyToBuffer(buffers_.omega, omega_data.data(), buffers_.omega_size);
 }
 
-void MSFTPipeline::setInitialSpinorField(const std::vector<float>& psi_data) {
+void TRDPipeline::setInitialSpinorField(const std::vector<float>& psi_data) {
     if (psi_data.size() != params_.N_total * 8) {  // 4 components × 2 (complex)
         throw std::runtime_error("Spinor data size mismatch");
     }
     copyToBuffer(buffers_.psi, psi_data.data(), buffers_.psi_size);
 }
 
-void MSFTPipeline::step(float dt, float coupling, float damping) {
+void TRDPipeline::step(float dt, float coupling, float damping) {
     params_.dt = dt;
     params_.K = coupling;
     params_.damping = damping;
@@ -410,7 +410,7 @@ void MSFTPipeline::step(float dt, float coupling, float damping) {
     current_time_ += dt;
 }
 
-void MSFTPipeline::recordCommandBuffer(float dt, float coupling, float damping) {
+void TRDPipeline::recordCommandBuffer(float dt, float coupling, float damping) {
     vkResetCommandBuffer(command_buffer_, 0);
 
     VkCommandBufferBeginInfo beginInfo{};
@@ -419,8 +419,8 @@ void MSFTPipeline::recordCommandBuffer(float dt, float coupling, float damping) 
 
     vkBeginCommandBuffer(command_buffer_, &beginInfo);
 
-    // Use MSFTMemoryBarriers to record full pipeline with barriers
-    MSFTMemoryBarriers::recordMSFTPipeline(
+    // Use TRDMemoryBarriers to record full pipeline with barriers
+    TRDMemoryBarriers::recordTRDPipeline(
         command_buffer_,
         kuramoto_pipeline_,
         sync_pipeline_,
@@ -437,45 +437,45 @@ void MSFTPipeline::recordCommandBuffer(float dt, float coupling, float damping) 
     vkEndCommandBuffer(command_buffer_);
 }
 
-void MSFTPipeline::evolve(int num_steps, float dt, float coupling, float damping) {
+void TRDPipeline::evolve(int num_steps, float dt, float coupling, float damping) {
     for (int i = 0; i < num_steps; i++) {
         step(dt, coupling, damping);
     }
 }
 
-std::vector<float> MSFTPipeline::getPhases() const {
+std::vector<float> TRDPipeline::getPhases() const {
     std::vector<float> theta_data(params_.N_total);
     copyFromBuffer(buffers_.theta, theta_data.data(), buffers_.theta_size);
     return theta_data;
 }
 
-std::vector<float> MSFTPipeline::getSyncField() const {
+std::vector<float> TRDPipeline::getSyncField() const {
     std::vector<float> R_data(params_.N_total);
     copyFromBuffer(buffers_.R_field, R_data.data(), buffers_.R_size);
     return R_data;
 }
 
-std::vector<float> MSFTPipeline::getSpinorField() const {
+std::vector<float> TRDPipeline::getSpinorField() const {
     std::vector<float> psi_data(params_.N_total * 8);
     copyFromBuffer(buffers_.psi, psi_data.data(), buffers_.psi_size);
     return psi_data;
 }
 
-std::vector<float> MSFTPipeline::getSpinorDensity() const {
+std::vector<float> TRDPipeline::getSpinorDensity() const {
     std::vector<float> density_data(params_.N_total);
     copyFromBuffer(buffers_.spinor_density, density_data.data(), buffers_.density_size);
     return density_data;
 }
 
-void MSFTPipeline::setParams(const MSFTParams& params) {
+void TRDPipeline::setParams(const TRDParams& params) {
     params_ = params;
 }
 
-void MSFTPipeline::reset() {
+void TRDPipeline::reset() {
     current_time_ = 0.0f;
 }
 
-void MSFTPipeline::copyToBuffer(VkBuffer buffer, const void* data, VkDeviceSize size) {
+void TRDPipeline::copyToBuffer(VkBuffer buffer, const void* data, VkDeviceSize size) {
     void* mapped;
     VkDeviceMemory memory;
 
@@ -493,7 +493,7 @@ void MSFTPipeline::copyToBuffer(VkBuffer buffer, const void* data, VkDeviceSize 
     vkUnmapMemory(device_, memory);
 }
 
-void MSFTPipeline::copyFromBuffer(VkBuffer buffer, void* data, VkDeviceSize size) const {
+void TRDPipeline::copyFromBuffer(VkBuffer buffer, void* data, VkDeviceSize size) const {
     void* mapped;
     VkDeviceMemory memory;
 
@@ -510,7 +510,7 @@ void MSFTPipeline::copyFromBuffer(VkBuffer buffer, void* data, VkDeviceSize size
     vkUnmapMemory(device_, memory);
 }
 
-void MSFTPipeline::destroyBuffers() {
+void TRDPipeline::destroyBuffers() {
     auto destroyBuffer = [this](VkBuffer& buffer, VkDeviceMemory& memory) {
         if (buffer != VK_NULL_HANDLE) {
             vkDestroyBuffer(device_, buffer, nullptr);
@@ -530,7 +530,7 @@ void MSFTPipeline::destroyBuffers() {
     destroyBuffer(buffers_.spinor_density, buffers_.density_memory);
 }
 
-void MSFTPipeline::destroyPipelines() {
+void TRDPipeline::destroyPipelines() {
     if (kuramoto_pipeline_ != VK_NULL_HANDLE) {
         vkDestroyPipeline(device_, kuramoto_pipeline_, nullptr);
         kuramoto_pipeline_ = VK_NULL_HANDLE;
@@ -569,5 +569,5 @@ void MSFTPipeline::destroyPipelines() {
     }
 }
 
-} // namespace MSFT
+} // namespace TRD
 } // namespace Nova

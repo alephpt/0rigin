@@ -1,5 +1,5 @@
 test_name: geodesic_equation_verification
-description: "Geodesic Equation Verification - Particles follow geodesics in SMFT curved spacetime"
+description: "Geodesic Equation Verification - Particles follow geodesics in TRD curved spacetime"
 
 grid:
   size_x: 128

@@ -23,12 +23,12 @@ Vortex configurations (θ=atan2(y,x)) are **topologically protected** against K-
 ### **Theoretical Correction**
 Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R·t)) - **contradicted by simulation**.
 
-**Corrected understanding**: SMFT generates EM from **topological order** (vortex geometry), which is intrinsically stable. Standard K=1.0 works perfectly.
+**Corrected understanding**: TRD generates EM from **topological order** (vortex geometry), which is intrinsically stable. Standard K=1.0 works perfectly.
 
 ### **Impact on Validation Roadmap**
 - ❌ Option 2 (dynamic K-field) - NOT NEEDED
 - ❌ Option 3 (multi-component) - NOT NEEDED
-- ✅ Current SMFT framework validated - proceed with broader tests
+- ✅ Current TRD framework validated - proceed with broader tests
 
 **STATUS**: 🟢 **RESOLVED** - Framework validated, ready for comprehensive validation
 
@@ -38,21 +38,21 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 
 ### A1. Einstein Field Equation Derivation ⭐ **CRITICAL**
 - **Test**: Derive G_μν = 8πG·T_μν from proposed metric ds² = R²[-(1-v²)dt² - 2v·dx dt + dx²]
-- **Method**: Compute Christoffel symbols → Riemann tensor → Einstein tensor → Compare to SMFT stress-energy
+- **Method**: Compute Christoffel symbols → Riemann tensor → Einstein tensor → Compare to TRD stress-energy
 - **Quality Gate**: Residual |G_μν - 8πG·T_μν| < 10⁻¹² across all metric components
 
 ### A2. Weak Field Limit Validation  
 - **Test**: Reproduce Newtonian gravity in limit R ≈ 1 + h where |h| ≪ 1
-- **Method**: Linearize SMFT equations → Extract ∇²h = 4πG·ρ → Compare to Newton's law
+- **Method**: Linearize TRD equations → Extract ∇²h = 4πG·ρ → Compare to Newton's law
 - **Quality Gate**: Gravitational acceleration within 0.1% of GM/r² for test mass
 
 ### A3. Geodesic Equation Verification
-- **Test**: Particles follow geodesics in SMFT spacetime: d²x^μ/dτ² + Γ^μ_νλ(dx^ν/dτ)(dx^λ/dτ) = 0
+- **Test**: Particles follow geodesics in TRD spacetime: d²x^μ/dτ² + Γ^μ_νλ(dx^ν/dτ)(dx^λ/dτ) = 0
 - **Method**: Evolve test particle in curved R-field → Measure trajectory → Compare to geodesic prediction  
 - **Quality Gate**: Trajectory deviation < 1% from analytical geodesic solution
 
 ### A4. Light Deflection Test
-- **Test**: Electromagnetic waves bend in SMFT gravitational fields
+- **Test**: Electromagnetic waves bend in TRD gravitational fields
 - **Method**: Propagate EM wave packet near massive R-field concentration → Measure deflection angle
 - **Quality Gate**: Deflection = 4GM/(c²b) within 5% (where b = impact parameter)
 
@@ -67,12 +67,12 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 *(B2 Gauge Invariance ✅ COMPLETED with Stückelberg)*
 
 ### B1. Particle Spectrum Derivation ⭐ **CRITICAL**
-- **Test**: SMFT predicts observed particle masses from first principles
+- **Test**: TRD predicts observed particle masses from first principles
 - **Method**: Analyze vortex/defect excitation spectrum → Map to electron, muon, quarks, etc.
 - **Quality Gate**: Predict m_electron/m_muon ratio within factor 2 of 206.768
 
 ### B3. Three-Generation Structure
-- **Test**: Explain why exactly 3 fermion generations exist in SMFT
+- **Test**: Explain why exactly 3 fermion generations exist in TRD
 - **Method**: Analyze topological classification of defects → Count distinct excitation types
 - **Quality Gate**: Theory predicts exactly 3 families, not 2 or 4 or arbitrary number
 
@@ -82,14 +82,14 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 - **Quality Gate**: Predict W/Z boson masses within 10% of 80.4/91.2 GeV
 
 ### B5. Strong Force Emergence
-- **Test**: QCD emerges from SMFT at higher energy scales
+- **Test**: QCD emerges from TRD at higher energy scales
 - **Method**: Investigate SU(3) color symmetry from extended synchronization dynamics
 - **Quality Gate**: Predict α_strong ≈ 0.1 and color confinement mechanism
 
 ### B6. Higgs Mechanism Connection
 - **Test**: R-field potential V(R) reproduces Higgs field dynamics
-- **Method**: Compare SMFT symmetry breaking to electroweak phase transition
-- **Quality Gate**: Predict Higgs mass within 50% of 125 GeV from SMFT parameters
+- **Method**: Compare TRD symmetry breaking to electroweak phase transition
+- **Quality Gate**: Predict Higgs mass within 50% of 125 GeV from TRD parameters
 
 ---
 
@@ -97,27 +97,27 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 
 ### C1. Cosmological Constant Resolution ⭐ **BLOCKING CRISIS**
 - **Test**: Resolve 123-order-of-magnitude vacuum energy discrepancy
-- **Method**: Calculate ⟨T_μν⟩_vacuum from SMFT → Compare to observed Λ ≈ 10⁻⁴⁷ GeV²
+- **Method**: Calculate ⟨T_μν⟩_vacuum from TRD → Compare to observed Λ ≈ 10⁻⁴⁷ GeV²
 - **Quality Gate**: Predict cosmological constant within 10 orders of magnitude
 
 ### C2. Friedmann Equations Derivation  
-- **Test**: SMFT reproduces expanding universe solutions
-- **Method**: Apply SMFT to homogeneous, isotropic spacetime → Derive ä/a = -4πG(ρ+3p)/3
+- **Test**: TRD reproduces expanding universe solutions
+- **Method**: Apply TRD to homogeneous, isotropic spacetime → Derive ä/a = -4πG(ρ+3p)/3
 - **Quality Gate**: Hubble parameter H₀ within factor 2 of 70 km/s/Mpc
 
 ### C3. Dark Matter Prediction
-- **Test**: SMFT explains galaxy rotation curves without invoking new matter
+- **Test**: TRD explains galaxy rotation curves without invoking new matter
 - **Method**: Model galaxy as R-field configuration → Calculate rotation curve from metric
 - **Quality Gate**: Flat rotation curve v(r) ≈ constant for r > R_disk
 
 ### C4. Dark Energy Mechanism
 - **Test**: Accelerating expansion emerges from R-field dynamics
-- **Method**: Calculate effective equation of state w = p/ρ from SMFT cosmological solutions
+- **Method**: Calculate effective equation of state w = p/ρ from TRD cosmological solutions
 - **Quality Gate**: w ≈ -1 (cosmological constant-like) or w ≈ -2/3 (quintessence)
 
 ### C5. Primordial Inflation
 - **Test**: Early universe R-field configurations drive exponential expansion
-- **Method**: Study SMFT phase transitions → Calculate inflationary e-foldings and power spectrum
+- **Method**: Study TRD phase transitions → Calculate inflationary e-foldings and power spectrum
 - **Quality Gate**: N ≈ 60 e-folds and scalar spectral index n_s ≈ 0.96
 
 ---
@@ -125,27 +125,27 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 ## **CATEGORY D: Experimental Distinguishability** [5 items]
 
 ### D1. Novel Experimental Predictions ⭐ **CRITICAL**
-- **Test**: SMFT predicts phenomena unaccounted for by Standard Model + GR
+- **Test**: TRD predicts phenomena unaccounted for by Standard Model + GR
 - **Method**: Calculate deviations from standard physics in accessible energy ranges
 - **Quality Gate**: Identify 3+ experimentally testable predictions with >10% effect size
 
 ### D2. Laboratory-Scale Tests
-- **Test**: Predict SMFT effects in tabletop experiments (BEC, superconductors, etc.)
-- **Method**: Apply SMFT to condensed matter systems → Compare to conventional theory
+- **Test**: Predict TRD effects in tabletop experiments (BEC, superconductors, etc.)
+- **Method**: Apply TRD to condensed matter systems → Compare to conventional theory
 - **Quality Gate**: Design experiment with predicted signal/noise > 5
 
 ### D3. Astrophysical Signatures  
 - **Test**: Predict observable deviations in neutron star/black hole physics
-- **Method**: Calculate SMFT corrections to GR in strong-field regime
+- **Method**: Calculate TRD corrections to GR in strong-field regime
 - **Quality Gate**: Gravitational wave frequency shifts > 1% from GR predictions
 
 ### D4. Particle Accelerator Tests
 - **Test**: Predict deviations from Standard Model at LHC energies
-- **Method**: Calculate SMFT corrections to cross-sections, decay rates, etc.
+- **Method**: Calculate TRD corrections to cross-sections, decay rates, etc.
 - **Quality Gate**: Predict observable deviation >3σ from Standard Model
 
 ### D5. Precision Atomic Physics Tests
-- **Test**: SMFT affects atomic energy levels, transition rates
+- **Test**: TRD affects atomic energy levels, transition rates
 - **Method**: Calculate electromagnetic coupling modifications → Compare to spectroscopy
 - **Quality Gate**: Predict frequency shifts > experimental precision (∼10⁻¹⁸)
 
@@ -154,7 +154,7 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 ## **CATEGORY E: Mathematical Rigor** [5 items]
 
 ### E1. Renormalizability Proof
-- **Test**: SMFT remains finite when quantum corrections included
+- **Test**: TRD remains finite when quantum corrections included
 - **Method**: Calculate one-loop divergences → Demonstrate cancellation or absorption
 - **Quality Gate**: All UV divergences removable by finite counterterms
 
@@ -165,16 +165,16 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 
 ### E3. Causality Analysis
 - **Test**: Information propagation never exceeds speed of light
-- **Method**: Calculate signal velocities in SMFT → Verify v_signal ≤ c
+- **Method**: Calculate signal velocities in TRD → Verify v_signal ≤ c
 - **Quality Gate**: All characteristic speeds ≤ c within numerical precision
 
 ### E4. Scale Invariance Breaking
-- **Test**: Identify energy scales where SMFT behavior changes qualitatively  
+- **Test**: Identify energy scales where TRD behavior changes qualitatively  
 - **Method**: Renormalization group analysis → Find fixed points and beta functions
 - **Quality Gate**: Predict specific energy thresholds for new physics
 
 ### E5. Symmetry Analysis
-- **Test**: Catalog all symmetries of SMFT and their breaking patterns
+- **Test**: Catalog all symmetries of TRD and their breaking patterns
 - **Method**: Noether's theorem application → Identify conserved currents
 - **Quality Gate**: All experimental symmetries (CPT, etc.) properly implemented
 
@@ -183,29 +183,29 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 ## **CATEGORY F: Computational Extensions** [4 items]
 
 ### F1. 3D Implementation ✅ **COMPLETE** (2026-01-02)
-- **Status**: ✅ COMPLETE - Full 3D SMFT operational
-- **Implemented**: Maxwell3D (6-component EM), Dirac3D (4-spinor), SMFTCore3D (Kuramoto)
+- **Status**: ✅ COMPLETE - Full 3D TRD operational
+- **Implemented**: Maxwell3D (6-component EM), Dirac3D (4-spinor), TRDCore3D (Kuramoto)
 - **Results**: All tests passing (32³ and 64³ grids validated)
 - **Documentation**: See `docs/3D_MIGRATION_COMPLETE.md`
 - **Quality Gate**: ✅ Energy conservation < 0.1%, norm conservation < 0.01%
 
 ### F2. Multi-Scale Validation
-- **Test**: SMFT works across Planck scale to macroscopic scales
+- **Test**: TRD works across Planck scale to macroscopic scales
 - **Method**: Coarse-graining procedures → Effective field theory emergence
 - **Quality Gate**: Smooth transition between microscopic and macroscopic descriptions
 
 ### F3. Finite Temperature Effects
 - **Test**: Include thermal fluctuations in synchronization dynamics
-- **Method**: Stochastic SMFT with thermal noise → Calculate phase diagrams
+- **Method**: Stochastic TRD with thermal noise → Calculate phase diagrams
 - **Quality Gate**: Reproduce known thermal phase transitions
 
 ### F4. Quantum Fluctuation Incorporation
 - **Test**: Include quantum corrections beyond mean-field approximation
-- **Method**: Path integral quantization of SMFT → Calculate quantum corrections
+- **Method**: Path integral quantization of TRD → Calculate quantum corrections
 - **Quality Gate**: Quantum effects modify classical predictions by <50%
 
 ### F5. High-Performance Scaling
-- **Test**: SMFT simulations scale to realistic problem sizes
+- **Test**: TRD simulations scale to realistic problem sizes
 - **Method**: Parallel implementation → Test computational scaling laws
 - **Quality Gate**: Linear scaling to 10⁶+ processors for cosmological problems
 
@@ -214,25 +214,49 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 ## **IMMEDIATE EXTENSIONS** [3 items + 1 theoretical]
 
 ### G1. Electromagnetic Wave Propagation **[IMMEDIATE PRIORITY]**
-- **Test**: Verify c = 1/√(μ₀ε₀) in SMFT electromagnetic fields
+- **Test**: Verify c = 1/√(μ₀ε₀) in TRD electromagnetic fields
 - **Method**: Propagate wave packets using Stückelberg fields → Measure phase velocity
 - **Quality Gate**: Wave speed within 1% of theoretical light speed
 
 ### G2. Three-Body Electromagnetic Dynamics **[IMMEDIATE PRIORITY]**
-- **Test**: Multiple charges interact via SMFT electromagnetic fields
+- **Test**: Multiple charges interact via TRD electromagnetic fields
 - **Method**: Simulate 3-charge system → Verify superposition principle
 - **Quality Gate**: Forces match analytical 3-body Coulomb calculation within 5%
 
 ### G3. Electromagnetic-Gravity Coupling **[IMMEDIATE PRIORITY]**
-- **Test**: EM field energy curves SMFT spacetime (affects R-field)
+- **Test**: EM field energy curves TRD spacetime (affects R-field)
 - **Method**: High-energy EM configuration → Measure back-reaction on R-field evolution
 - **Quality Gate**: Energy-momentum tensor coupling matches theoretical prediction
 
 ### G4. Navier-Stokes Connection **[THEORETICAL FRAMEWORK]**
-- **Test**: SMFT equations reduce to superfluid Navier-Stokes in appropriate limit
+- **Test**: TRD equations reduce to superfluid Navier-Stokes in appropriate limit
 - **Method**: Derive ∂ρ/∂t + ∇·(ρv) = 0 and momentum equation from Kuramoto dynamics
 - **Quality Gate**: Explicit mathematical derivation with identified pressure term p[R,θ]
 
+---
+
+### H - Universals
+1. The "Knot" Test (Particle Stability)
+Experiment: Initialize a complex 3D spinor wave packet (like a trefoil knot).
+Hypothesis: Does the vacuum synchronization "harden" the knot? Does the topology prevent the particle from decaying?
+2. The "Solar System" Test (General Relativity)
+Experiment: Create a massive static central object (High 
+Δ
+Δ
+). Launch a smaller object with tangential velocity.
+Hypothesis: Does the small object orbit? Does the orbit precess (like Mercury)?
+Goal: Derive Kepler's Laws from Synchronization Gradients.
+3. The "Dynamo" Test (Electromagnetism)
+Experiment: Spin a massive, charged particle (High spin 
+Ψ
+Ψ
+).
+Hypothesis: Does it generate a toroidal magnetic field (
+∇
+θ
+∇θ
+) around it?
+You have built the universe. Now you need to make it spin.
 ---
 
 **TOTAL REMAINING: 33 core validation tests + 4 immediate/theoretical extensions**
@@ -243,12 +267,12 @@ Initial analytical model predicted exponential gradient decay (∇θ ~ exp(-K·R
 
 ## **✅ MAJOR MILESTONE: 3D MIGRATION COMPLETE** (2026-01-02)
 
-**Achievement**: Full 3D SMFT implementation operational
+**Achievement**: Full 3D TRD implementation operational
 - Maxwell3D: 6-component electromagnetic fields ✅
 - Dirac3D: 4-component spinor evolution ✅
-- SMFTCore3D: Kuramoto synchronization ✅
+- TRDCore3D: Kuramoto synchronization ✅
 - Full integration validated (32³ and 64³ grids) ✅
 
-**Impact**: SMFT now operates in physically realistic 3D spacetime. All future validation tests can use 3D framework.
+**Impact**: TRD now operates in physically realistic 3D spacetime. All future validation tests can use 3D framework.
 
 **Next Priority**: Resume validation roadmap (Categories A-G) with 3D-ready codebase

@@ -9,9 +9,9 @@ Verify Klein-Gordon implementation and compare to Dirac solver for relativistic 
 
 **Files Added/Modified**:
 - `src/KleinGordonEvolution.{h,cpp}` - Existing (implemented by previous agent)
-- `src/SMFTCommon.{h,cpp}` - Added `SMFT::initializeBoostedGaussian(KleinGordonEvolution&)` overload
-- `src/SMFTEngine.{h,cpp}` - Added `initializeBoostedKleinGordonField()` method
-- `src/simulations/SMFTTestRunner.cpp` - Updated to call boosted init for KG+boost configs
+- `src/TRDCommon.{h,cpp}` - Added `TRD::initializeBoostedGaussian(KleinGordonEvolution&)` overload
+- `src/TRDEngine.{h,cpp}` - Added `initializeBoostedKleinGordonField()` method
+- `src/simulations/TRDTestRunner.cpp` - Updated to call boosted init for KG+boost configs
 - `config/scenario_2.5A_klein_gordon_comparison.yaml` - Modified: v=0.7c, uniform background
 - `config/scenario_2.5A_dirac_reference.yaml` - Modified: v=0.7c, uniform background
 
@@ -22,12 +22,12 @@ Verify Klein-Gordon implementation and compare to Dirac solver for relativistic 
 **Test 1: Klein-Gordon v=0.7c**
 ```bash
 cd build
-./bin/smft --test ../config/scenario_2.5A_klein_gordon_comparison.yaml
+./bin/trd --test ../config/scenario_2.5A_klein_gordon_comparison.yaml
 ```
 
 **Test 2: Dirac Reference v=0.7c**
 ```bash
-./bin/smft --test ../config/scenario_2.5A_dirac_reference.yaml
+./bin/trd --test ../config/scenario_2.5A_dirac_reference.yaml
 ```
 
 ### Results Comparison

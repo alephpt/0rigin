@@ -7,12 +7,12 @@
 
 /**
  * @file dirac_rk4.comp
- * @brief Dirac equation evolution with MSFT mass using RK4 integrator
+ * @brief Dirac equation evolution with TRD mass using RK4 integrator
  *
  * Implements: (iγ^μ∂_μ)Ψ(x) = M(x,t)Ψ(x)
  * where: M(x,t) = Δ·R(x,t)·e^(iθγ⁵)
  *
- * MSFT Mass Operator Expansion:
+ * TRD Mass Operator Expansion:
  * e^(iθγ⁵) = cos(θ) + iγ⁵·sin(θ)
  * M = Δ·R·[cos(θ)·I + iγ⁵·sin(θ)]
  *   = m_S·I + im_P·γ⁵
@@ -44,7 +44,7 @@ layout(push_constant) uniform PushConstants {
     float dt;              // Time step
     float K;               // Coupling strength (not used)
     float damping;         // Damping (not used)
-    float Delta;           // MSFT mass gap
+    float Delta;           // TRD mass gap
     float chiral_angle;    // θ for chiral mass e^(iθγ⁵)
     uint Nx;               // Grid width
     uint Ny;               // Grid height

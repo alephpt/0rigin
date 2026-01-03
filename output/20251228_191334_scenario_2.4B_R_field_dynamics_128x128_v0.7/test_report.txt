@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: scenario_2.4B_R_field_dynamics
 Description: Phase 2 Scenario 2.4B: R-field dynamics study to understand N=1 'mass freeze' phenomenon. Compares spatial R(x,y,t) evolution for N=1 vs N=10 at v=0.5c and v=0.7c. Tests hypothesis: N=1 freezes R-field, preventing mass modulation.
 

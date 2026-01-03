@@ -11,14 +11,14 @@
 Successfully implemented the stochastic Dirac coupling shader based on the MSR formalism design. The implementation includes:
 
 1. **dirac_stochastic.comp** - Stochastic Dirac evolution shader with MSR noise
-2. **MSFTEngine::stepStochastic()** - Orchestration method for stochastic pipeline
+2. **TRDEngine::stepStochastic()** - Orchestration method for stochastic pipeline
 3. **test_stochastic_particle** - Test program for validation
 
 ---
 
 ## Implementation Details
 
-### 1. Stochastic Dirac Shader (`shaders/smft/dirac_stochastic.comp`)
+### 1. Stochastic Dirac Shader (`shaders/trd/dirac_stochastic.comp`)
 
 **Key Features:**
 - Euler-Maruyama integration with proper √(dt) scaling
@@ -37,7 +37,7 @@ for (int i = 0; i < 4; i++) {
 }
 ```
 
-### 2. Engine Integration (`src/MSFTEngine.cpp`)
+### 2. Engine Integration (`src/TRDEngine.cpp`)
 
 **Pipeline Sequence:**
 1. `kuramoto_stochastic` - Evolve phases with noise σ_θ
@@ -80,14 +80,14 @@ From the MSR formalism analysis:
 ## Files Created/Modified
 
 ### Created:
-- `shaders/smft/dirac_stochastic.comp` - Stochastic Dirac shader
-- `shaders/smft/dirac_stochastic.spv` - Compiled SPIR-V
+- `shaders/trd/dirac_stochastic.comp` - Stochastic Dirac shader
+- `shaders/trd/dirac_stochastic.spv` - Compiled SPIR-V
 - `test/test_stochastic_particle.cpp` - Test program
 - `docs/stochastic_implementation.md` - This documentation
 
 ### Modified:
-- `src/MSFTEngine.h` - Added stepStochastic() method and pipeline members
-- `src/MSFTEngine.cpp` - Implemented stepStochastic() orchestration
+- `src/TRDEngine.h` - Added stepStochastic() method and pipeline members
+- `src/TRDEngine.cpp` - Implemented stepStochastic() orchestration
 - `CMakeLists.txt` - Added test_stochastic_particle target
 
 ---
@@ -96,8 +96,8 @@ From the MSR formalism analysis:
 
 ```bash
 # Compile shader
-glslc -fshader-stage=comp shaders/smft/dirac_stochastic.comp \
-      -o shaders/smft/dirac_stochastic.spv -I shaders/
+glslc -fshader-stage=comp shaders/trd/dirac_stochastic.comp \
+      -o shaders/trd/dirac_stochastic.spv -I shaders/
 
 # Build test
 cd build

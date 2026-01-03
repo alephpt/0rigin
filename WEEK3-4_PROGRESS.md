@@ -1,4 +1,4 @@
-# Week 3-4 Progress Report: SMFTEngine3D GPU Infrastructure
+# Week 3-4 Progress Report: TRDEngine3D GPU Infrastructure
 
 **Sprint**: 2-5 (3D Physics Migration)
 **Timeline**: Weeks 3-4 of 8-10 week migration
@@ -9,21 +9,21 @@
 
 ## Executive Summary
 
-Completed foundational GPU infrastructure for 3D SMFT simulation. Created `SMFTEngine3D` class with full Vulkan integration, buffer management, and CPU fallback via `SMFTCore3D`. All 7 core tests passing, validating 3D grid operations and Kuramoto dynamics.
+Completed foundational GPU infrastructure for 3D TRD simulation. Created `TRDEngine3D` class with full Vulkan integration, buffer management, and CPU fallback via `TRDCore3D`. All 7 core tests passing, validating 3D grid operations and Kuramoto dynamics.
 
 ---
 
 ## Deliverables Completed
 
-### 1. SMFTEngine3D Class (`src/SMFTEngine3D.{h,cpp}`)
+### 1. TRDEngine3D Class (`src/TRDEngine3D.{h,cpp}`)
 
 **Architecture**:
-- Parallel to `SMFTEngine` for 3D computations
+- Parallel to `TRDEngine` for 3D computations
 - Integrated with existing Vulkan managers:
-  - `SMFTPipelineFactory` - shader pipeline creation
-  - `SMFTBufferManager` - GPU memory allocation
-  - `SMFTCompute` - compute dispatch
-  - `SMFTDescriptorManager` - descriptor set management
+  - `TRDPipelineFactory` - shader pipeline creation
+  - `TRDBufferManager` - GPU memory allocation
+  - `TRDCompute` - compute dispatch
+  - `TRDDescriptorManager` - descriptor set management
 - Friend class to `Nova` for direct GPU access
 
 **Key Features**:
@@ -39,7 +39,7 @@ Completed foundational GPU infrastructure for 3D SMFT simulation. Created `SMFTE
 
 **API Design**:
 ```cpp
-SMFTEngine3D engine(&nova);
+TRDEngine3D engine(&nova);
 engine.initialize(32, 32, 32, Delta);
 engine.stepKuramoto3D(dt, K, damping);
 engine.computeSyncField3D();
@@ -56,10 +56,10 @@ auto mass = engine.getMassField3D();  // m = Δ·R
 
 ---
 
-### 2. SMFTCore3D Integration
+### 2. TRDCore3D Integration
 
 **CPU Fallback**:
-- Used `SMFTCore3D` for Kuramoto evolution (Week 1-2 deliverable)
+- Used `TRDCore3D` for Kuramoto evolution (Week 1-2 deliverable)
 - GPU shaders exist but dispatch not yet implemented
 - Transparent fallback ensures functionality while GPU code develops
 
@@ -73,7 +73,7 @@ auto mass = engine.getMassField3D();  // m = Δ·R
 
 ### 3. Comprehensive Test Suite
 
-**Test File**: `test/test_smft3d_cpu_only.cpp`
+**Test File**: `test/test_trd3d_cpu_only.cpp`
 
 **7 Tests (All Passing)**:
 
@@ -90,7 +90,7 @@ auto mass = engine.getMassField3D();  // m = Δ·R
 **Test Output**:
 ```
 ========================================
-SMFT 3D CPU-Only Infrastructure Tests
+TRD 3D CPU-Only Infrastructure Tests
 Week 3-4: 3D Grid + Kuramoto Dynamics
 ========================================
 ...
@@ -103,9 +103,9 @@ Week 3-4: 3D Grid + Kuramoto Dynamics
 ### 4. Build System Integration
 
 **CMakeLists.txt Updates**:
-- Added `SMFTEngine3D.cpp` to main SMFT executable
-- Created `test_smft3d_cpu_only` executable (no GPU dependency)
-- Created `test_smftengine3d_basic` executable (GPU-enabled, for future)
+- Added `TRDEngine3D.cpp` to main TRD executable
+- Created `test_trd3d_cpu_only` executable (no GPU dependency)
+- Created `test_trdengine3d_basic` executable (GPU-enabled, for future)
 
 **Compilation**:
 - ✅ Zero warnings
@@ -152,7 +152,7 @@ _theta_memory = theta_pair.second;
 ### 3. Code Quality
 
 **Standards Compliance**:
-- ✅ Files < 500 lines (`SMFTEngine3D.cpp`: 374 lines)
+- ✅ Files < 500 lines (`TRDEngine3D.cpp`: 374 lines)
 - ✅ Functions < 50 lines (largest: 40 lines)
 - ✅ Nesting < 3 levels (max: 2)
 - ✅ Zero hardcoded secrets
@@ -162,7 +162,7 @@ _theta_memory = theta_pair.second;
 **Architecture Principles**:
 - **Early binding**: Grid dimensions, buffer sizes (static after initialization)
 - **Late binding**: Phase evolution, R-field (computed dynamically)
-- **Separation**: Compute (SMFTEngine3D) vs Runtime (SMFTCore3D)
+- **Separation**: Compute (TRDEngine3D) vs Runtime (TRDCore3D)
 
 ---
 
@@ -173,8 +173,8 @@ _theta_memory = theta_pair.second;
 #### 1. Maxwell 3D Evolution
 **Files to Create**:
 - `src/Maxwell3D.{h,cpp}` - 3D Maxwell solver
-- `shaders/smft/maxwell_evolve_E.comp` - Electric field evolution
-- `shaders/smft/maxwell_evolve_B.comp` - Magnetic field evolution
+- `shaders/trd/maxwell_evolve_E.comp` - Electric field evolution
+- `shaders/trd/maxwell_evolve_B.comp` - Magnetic field evolution
 
 **Physics**:
 ```
@@ -189,7 +189,7 @@ _theta_memory = theta_pair.second;
 #### 2. Stückelberg 3D Gauge
 **Files to Create**:
 - `src/Stuckelberg3D.{h,cpp}` - 3D gauge transformation
-- `shaders/smft/gauge_transform3d.comp` - A'μ = Aμ + ∂μφ/e
+- `shaders/trd/gauge_transform3d.comp` - A'μ = Aμ + ∂μφ/e
 
 **Fields**:
 - Scalar: φ(x,y,z)
@@ -228,7 +228,7 @@ _theta_memory = theta_pair.second;
 ## Blockers Resolved
 
 1. ❌ **Nova initialization failing in headless mode**
-   - **Solution**: Created CPU-only test (`test_smft3d_cpu_only.cpp`)
+   - **Solution**: Created CPU-only test (`test_trd3d_cpu_only.cpp`)
    - **Impact**: Enables CI/CD without GPU dependency
 
 2. ❌ **Buffer API mismatch**
@@ -238,7 +238,7 @@ _theta_memory = theta_pair.second;
 
 3. ❌ **Nova private member access**
    - **Problem**: `_architect` is private
-   - **Solution**: Added `friend class SMFTEngine3D` to `Nova.h`
+   - **Solution**: Added `friend class TRDEngine3D` to `Nova.h`
    - **Impact**: Direct Vulkan device access for engine
 
 ---
@@ -246,10 +246,10 @@ _theta_memory = theta_pair.second;
 ## Code Statistics
 
 **New Files**: 4
-- `src/SMFTEngine3D.h` (254 lines)
-- `src/SMFTEngine3D.cpp` (374 lines)
-- `test/test_smft3d_cpu_only.cpp` (226 lines)
-- `test/test_smftengine3d_basic.cpp` (236 lines)
+- `src/TRDEngine3D.h` (254 lines)
+- `src/TRDEngine3D.cpp` (374 lines)
+- `test/test_trd3d_cpu_only.cpp` (226 lines)
+- `test/test_trdengine3d_basic.cpp` (236 lines)
 
 **Modified Files**: 2
 - `CMakeLists.txt` (+20 lines)
@@ -288,7 +288,7 @@ _theta_memory = theta_pair.second;
 **Actual Progress**: ✅ ON TRACK
 
 **Breakdown**:
-- Week 3: SMFTEngine3D architecture ✅
+- Week 3: TRDEngine3D architecture ✅
 - Week 4: Buffer management + tests ✅
 
 **Remaining Work** (Weeks 5-6):
@@ -300,7 +300,7 @@ _theta_memory = theta_pair.second;
 **Risk Assessment**: LOW
 - Core infrastructure solid
 - Shaders already exist (kuramoto3d.comp, sync_field3d.comp)
-- Clear path to GPU dispatch via existing SMFTCompute
+- Clear path to GPU dispatch via existing TRDCompute
 
 ---
 
@@ -308,19 +308,19 @@ _theta_memory = theta_pair.second;
 
 1. **CPU fallback essential**: Nova headless mode issues → CPU-only tests
 2. **API compatibility**: Check return types before implementing
-3. **Friend classes**: Strategic use for tight coupling (SMFTEngine3D ↔ Nova)
+3. **Friend classes**: Strategic use for tight coupling (TRDEngine3D ↔ Nova)
 4. **Test early**: 7 tests caught all boundary conditions
 
 ---
 
 ## Commit Summary
 
-**Main Commit**: `feat: Week 3-4 - SMFTEngine3D GPU infrastructure + 3D Kuramoto`
-- SMFTEngine3D class with Vulkan integration
+**Main Commit**: `feat: Week 3-4 - TRDEngine3D GPU infrastructure + 3D Kuramoto`
+- TRDEngine3D class with Vulkan integration
 - Comprehensive test suite (7 tests, all passing)
 - Build system integration
 
-**Submodule Commit**: `feat: Add SMFTEngine3D as friend class for compute access`
+**Submodule Commit**: `feat: Add TRDEngine3D as friend class for compute access`
 - Updated lib/Nova/Nova.h
 
 ---

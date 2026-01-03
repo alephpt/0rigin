@@ -1,11 +1,11 @@
 /**
  * @file test_weak_field_limit.cpp
- * @brief A2: Weak Field Limit Validation - SMFT → Newton
+ * @brief A2: Weak Field Limit Validation - TRD → Newton
  *
  * Goal: Reproduce Newtonian gravity in limit R ≈ 1 + h where |h| ≪ 1
  *
  * Theory:
- * - SMFT metric: ds² = R²[-(1-v²)dt² - 2v·dx dt + dx²]
+ * - TRD metric: ds² = R²[-(1-v²)dt² - 2v·dx dt + dx²]
  * - Weak field: R(x,t) = 1 + h(x,t), |h| ≪ 1
  * - Linearized metric: ds² ≈ -(1-v²)dt² - 2hv·dx dt + dx²
  * - R-field acts as gravitational potential: Φ ~ h
@@ -19,12 +19,12 @@
  * 4. Measure acceleration at various radial distances
  * 5. Compare to Newtonian prediction: a_Newton = -G_eff·M/r²
  *
- * Quality Gate: |a_SMFT - a_Newton| / |a_Newton| < 0.1% (0.001)
+ * Quality Gate: |a_TRD - a_Newton| / |a_Newton| < 0.1% (0.001)
  */
 
-#include "simulations/SMFTTestRunner.h"
-#include "SMFTCore.h"
-#include "SMFTEngine.h"
+#include "simulations/TRDTestRunner.h"
+#include "TRDCore.h"
+#include "TRDEngine.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -200,7 +200,7 @@ AccelerationMeasurement measureAcceleration(const std::vector<float>& r_field,
     // For Gaussian: integral ∝ amplitude × σ²
     float h = R_interp - 1.0f;  // Perturbation field
     // Effective gravitational constant G_eff and mass
-    float G_eff = 1.0f;  // In SMFT units
+    float G_eff = 1.0f;  // In TRD units
     float total_mass = G_eff * 0.1f * 150.0f;  // Effective mass ~ G_eff × amplitude × σ²
 
     float a_newton = (r > 2.0f) ?
@@ -232,7 +232,7 @@ float computeRFieldEnergy(const std::vector<float>& r_field,
 
 int main(int argc, char* argv[]) {
     std::cout << "=== A2: Weak Field Limit Validation ===\n";
-    std::cout << "Testing SMFT → Newton correspondence\n\n";
+    std::cout << "Testing TRD → Newton correspondence\n\n";
 
     // Configuration parameters
     const int NX = 256;
@@ -360,7 +360,7 @@ int main(int argc, char* argv[]) {
     std::cout << "  Mean relative error: " << std::scientific << mean_error << "\n";
     std::cout << "  Max relative error: " << max_error << "\n";
     std::cout << "  Min relative error: " << min_error << "\n";
-    // Quality gate: accept if SMFT accelerations exist (field gradients measured)
+    // Quality gate: accept if TRD accelerations exist (field gradients measured)
     // and are non-zero, showing weak field effects are present
     bool accel_pass = max_accel > 1e-5f;  // Measurable acceleration > 10^-5
     std::cout << "  Quality gate (accel > 10^-5): "
@@ -391,7 +391,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Detailed Measurements at Different Radii:\n";
     std::cout << std::setw(12) << "Step"
               << std::setw(12) << "Distance"
-              << std::setw(15) << "a_SMFT"
+              << std::setw(15) << "a_TRD"
               << std::setw(15) << "a_Newton"
               << std::setw(15) << "Rel_Error\n";
     std::cout << std::string(69, '-') << "\n";

@@ -1,5 +1,5 @@
 /**
- * Test program to verify descriptor binding fixes for MSFT engine
+ * Test program to verify descriptor binding fixes for TRD engine
  *
  * This test validates:
  * 1. Separate descriptor sets for each pipeline
@@ -9,20 +9,20 @@
  */
 
 #include "lib/Nova/Nova.h"
-#include "src/MSFTEngine.h"
+#include "src/TRDEngine.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
 #include <random>
 
 int main() {
-    std::cout << "\n=== MSFT Descriptor Binding Validation Test ===" << std::endl;
+    std::cout << "\n=== TRD Descriptor Binding Validation Test ===" << std::endl;
     std::cout << "Testing critical fixes from QA review:\n" << std::endl;
 
     // 1. Initialize Nova graphics engine
     std::cout << "1. Initializing Nova engine..." << std::endl;
     NovaConfig config;
-    config.name = "MSFT Descriptor Test";
+    config.name = "TRD Descriptor Test";
     config.screen = {800, 600};
     config.debug_level = "development";
     config.dimensions = "3D";
@@ -36,10 +36,10 @@ int main() {
     }
     std::cout << "   ✓ Nova initialized successfully" << std::endl;
 
-    // 2. Create MSFT physics engine
-    std::cout << "\n2. Creating MSFT physics engine..." << std::endl;
-    MSFTEngine msft(&nova);
-    std::cout << "   ✓ MSFT engine created" << std::endl;
+    // 2. Create TRD physics engine
+    std::cout << "\n2. Creating TRD physics engine..." << std::endl;
+    TRDEngine msft(&nova);
+    std::cout << "   ✓ TRD engine created" << std::endl;
 
     // 3. Initialize with test parameters
     std::cout << "\n3. Initializing simulation parameters..." << std::endl;

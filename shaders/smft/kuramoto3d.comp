@@ -3,7 +3,7 @@
 
 /**
  * @file kuramoto3d.comp
- * @brief 3D Kuramoto oscillator evolution for SMFTCore3D
+ * @brief 3D Kuramoto oscillator evolution for TRDCore3D
  *
  * Implements: dθᵢ/dt = ωᵢ + (K/6)Σⱼsin(θⱼ - θᵢ)
  *

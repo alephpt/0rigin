@@ -1,5 +1,5 @@
 ================================================================================
-RESEARCH A1: EINSTEIN FIELD EQUATION DERIVATION FROM SMFT
+RESEARCH A1: EINSTEIN FIELD EQUATION DERIVATION FROM TRD
 ================================================================================
 
 Research Date: 2026-01-01
@@ -10,10 +10,10 @@ Deliverables: Comprehensive technical report (RESEARCH_A1_EINSTEIN_FIELD_EQUATIO
 RESEARCH OBJECTIVE
 ================================================================================
 
-Derive Einstein Field Equation from SMFT metric:
+Derive Einstein Field Equation from TRD metric:
   G_μν = 8πG·T_μν
 
-Using SMFT metric structure:
+Using TRD metric structure:
   ds² = R²[-(1-v²)dt² - 2v·dx dt + dx²]
 
 where:
@@ -63,7 +63,7 @@ KEY FINDINGS
 7. COUPLING CONSTANT: ✗ Unknown Origin
    - Factor 8π must emerge from derivation
    - Currently unknown how this arises
-   - G appears in SMFT as Δ = ℏc/G
+   - G appears in TRD as Δ = ℏc/G
    - But 8πG factor is unclear
 
 ================================================================================
@@ -99,7 +99,7 @@ IMPACT:
   This is a fundamental physics question, not mathematical
 
 NEXT STEP:
-  Consult SMFT theory developers to clarify field equations
+  Consult TRD theory developers to clarify field equations
 
 
 BLOCKER 2: Metric Singularity at R=0
@@ -153,7 +153,7 @@ NEXT STEP:
 BLOCKER 4: Quantum-Classical Bridge
 ------------------------------------------------------
 THE PROBLEM:
-  SMFT is fundamentally quantum:
+  TRD is fundamentally quantum:
     - Dirac spinor Ψ (quantum fermion)
     - Order parameter R from quantum fluctuations
     - Phase angles θ_i (quantum coherence)
@@ -182,7 +182,7 @@ MATHEMATICAL PATH FORWARD
 ================================================================================
 
 PHASE 1: Physics Clarification (2-3 weeks)
-  Task 1a: Consult SMFT theory developers
+  Task 1a: Consult TRD theory developers
   Task 1b: Establish field equations for R and v
   Task 1c: Determine coupling mechanisms
 
@@ -225,19 +225,19 @@ EXPECTED OUTCOMES
 
 SCENARIO A: Complete Success (Probability ~25%)
   Result: G_μν = 8πG T_μν holds exactly
-  Meaning: SMFT derives GR from first principles
+  Meaning: TRD derives GR from first principles
   Impact: Revolutionary understanding of gravity
   Testability: Would predict new physics at Planck scale
 
 SCENARIO B: Approximate Success (Probability ~40%)
   Result: G_μν ≈ 8πG T_μν with corrections
-  Meaning: SMFT is effective theory underlying GR
+  Meaning: TRD is effective theory underlying GR
   Impact: Explains GR as low-energy limit
   Testability: Deviations at high energy/strong field
 
 SCENARIO C: Modified Gravity (Probability ~25%)
   Result: G_μν = f(R)·T_μν or additional terms
-  Meaning: SMFT predicts modified gravity
+  Meaning: TRD predicts modified gravity
   Impact: Extends Einstein equation
   Testability: Explains dark matter/dark energy
 
@@ -273,7 +273,7 @@ RECOMMENDATIONS
 ================================================================================
 
 IMMEDIATE (This Week):
-  1. Contact SMFT theory developers
+  1. Contact TRD theory developers
   2. Clarify field equations for R(x,t) and v(x,t)
   3. Determine status of stress-energy tensor
 
@@ -290,7 +290,7 @@ PHASE 2 (Weeks 4-16):
   5. Test in limiting cases
 
 PUBLICATION STRATEGY:
-  Paper 1: Mathematical derivation of G_μν from SMFT metric
+  Paper 1: Mathematical derivation of G_μν from TRD metric
   Paper 2: Stress-energy identification and EFE verification
   Paper 3: Physical interpretation and predictions
 
@@ -318,7 +318,7 @@ SUCCESS PROBABILITY: Moderate (40-65% depending on outcomes)
   Low if R and v are geometric artifacts
 
 NEXT ACTION:
-  Engage SMFT theory developers to clarify field equations.
+  Engage TRD theory developers to clarify field equations.
   This is the critical bottleneck.
 
 ================================================================================

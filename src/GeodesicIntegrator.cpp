@@ -1,7 +1,7 @@
 /**
  * GeodesicIntegrator.cpp
  *
- * Implementation of geodesic equation verification in SMFT curved spacetime
+ * Implementation of geodesic equation verification in TRD curved spacetime
  */
 
 #include "GeodesicIntegrator.h"
@@ -35,7 +35,7 @@ GeodesicIntegrator::MetricTensor GeodesicIntegrator::computeMetric(
     // Clamp v to [0, 1)
     v = std::max(0.0, std::min(0.9999, v));
 
-    // SMFT metric: g_μν = R² × diag(-(1-v²), 1, 1, 0)
+    // TRD metric: g_μν = R² × diag(-(1-v²), 1, 1, 0)
     double R2 = R * R;
     double g00_coeff = 1.0 - v * v;
 

@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-Successfully implemented complete A3 task: Geodesic Equation Verification in SMFT curved spacetime. Particles demonstrably follow geodesics with 0.198% maximum deviation from analytical prediction (well under 1% quality gate).
+Successfully implemented complete A3 task: Geodesic Equation Verification in TRD curved spacetime. Particles demonstrably follow geodesics with 0.198% maximum deviation from analytical prediction (well under 1% quality gate).
 
 **Status: COMPLETE AND VERIFIED ✓**
 
@@ -10,7 +10,7 @@ Successfully implemented complete A3 task: Geodesic Equation Verification in SMF
 
 | Goal | Implementation | Status |
 |------|----------------|--------|
-| **1. Compute Christoffel symbols Γ^μ_νλ from SMFT metric** | `GeodesicIntegrator::computeChristoffel()` with finite differences | ✓ |
+| **1. Compute Christoffel symbols Γ^μ_νλ from TRD metric** | `GeodesicIntegrator::computeChristoffel()` with finite differences | ✓ |
 | **2. Derive geodesic equation for test particle** | `computeGeodesicAcceleration()` implements d²x^μ/dτ² + Γ^μ_νλ(dx^ν/dτ)(dx^λ/dτ) = 0 | ✓ |
 | **3. Implement numerical geodesic integrator** | RK4 integration in `integrateGeodesic()` | ✓ |
 | **4. Compare particle trajectory to analytical geodesic** | `compareTrajectories()` with relative deviation metric | ✓ |
@@ -20,7 +20,7 @@ Successfully implemented complete A3 task: Geodesic Equation Verification in SMF
 
 ### Theory Foundation
 
-**SMFT Metric (Curved Spacetime)**:
+**TRD Metric (Curved Spacetime)**:
 ```
 g_μν = R²(x,y) × diag(-(1-v²), 1, 1, 0)
 ```
@@ -122,7 +122,7 @@ a^2 = -Γ^2_11 vx² - 2Γ^2_12 vx·vy - Γ^2_22 vy²
 
 #### 3. Configuration: config/geodesic_test.yaml
 
-Complete YAML configuration for future integration with SMFTTestRunner:
+Complete YAML configuration for future integration with TRDTestRunner:
 - Grid specification (128×128)
 - Physics parameters (delta=2.5, dt=0.001, total_steps=1000)
 - Dirac initialization (Gaussian at center)
@@ -132,7 +132,7 @@ Complete YAML configuration for future integration with SMFTTestRunner:
 #### 4. Build Configuration: CMakeLists.txt
 
 **Changes**:
-1. Added `src/GeodesicIntegrator.cpp` to SMFT_SOURCES (line 132)
+1. Added `src/GeodesicIntegrator.cpp` to TRD_SOURCES (line 132)
 2. Created new test target `test_geodesic_verification` (lines 174-195)
    - Links GeodesicIntegrator, DiracEvolution, fftw3f
    - Output: bin/test_geodesic_verification
@@ -274,7 +274,7 @@ For Gaussian initial state moving with constant velocity:
 - ✓ GeodesicIntegrator fully functional and tested
 - ✓ Standalone test executable working
 - ✓ Test results exceed quality gates
-- ✓ Integration into SMFT main executable begun (sources included)
+- ✓ Integration into TRD main executable begun (sources included)
 
 ### Next Steps for Full Integration
 
@@ -282,7 +282,7 @@ For Gaussian initial state moving with constant velocity:
    - Add geodesic_deviation_tolerance parameter parsing
    - Add fields: geodesic_initial_velocity, geodesic_steps
 
-2. **SMFTTestRunner Integration**
+2. **TRDTestRunner Integration**
    - Add GeodesicVerificationTest as new test type
    - Instantiate GeodesicIntegrator from config
    - Compute geodesic trajectory in parallel with main simulation
@@ -293,7 +293,7 @@ For Gaussian initial state moving with constant velocity:
    - Compute in compute() method for full integration
 
 4. **Unified Execution**
-   - Enable: `./smft --test config/geodesic_test.yaml`
+   - Enable: `./trd --test config/geodesic_test.yaml`
    - Full pipeline: Dirac evolution + Geodesic comparison + Report generation
 
 ## Deliverables Checklist
@@ -311,12 +311,12 @@ For Gaussian initial state moving with constant velocity:
 
 ## Conclusion
 
-A3 implementation is complete, tested, and verified. The system successfully demonstrates that particles in SMFT curved spacetime follow geodesics as predicted by general relativity theory. The <0.2% deviation validates:
+A3 implementation is complete, tested, and verified. The system successfully demonstrates that particles in TRD curved spacetime follow geodesics as predicted by general relativity theory. The <0.2% deviation validates:
 
 1. **Christoffel symbol computation** from metric derivatives
 2. **Geodesic equation implementation** in RK4 integrator
 3. **Dirac wavepacket center tracking** matches classical trajectory
-4. **SMFT curved spacetime formalism** is physically consistent
+4. **TRD curved spacetime formalism** is physically consistent
 
 Quality gate (< 1% deviation) achieved with 5x margin, providing high confidence in the theoretical foundation of the curved spacetime framework.
 

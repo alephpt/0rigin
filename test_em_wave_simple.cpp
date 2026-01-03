@@ -1,5 +1,5 @@
 // test_em_wave_simple.cpp - Standalone EM wave propagation test
-#include "SMFTEngine.h"
+#include "TRDEngine.h"
 #include "Nova.h"
 #include <iostream>
 #include <cmath>
@@ -24,8 +24,8 @@ int main() {
         return 1;
     }
 
-    // Initialize SMFT Engine
-    SMFTEngine engine(&nova);
+    // Initialize TRD Engine
+    TRDEngine engine(&nova);
 
     const int Nx = 256, Ny = 64;
     const float Delta = 0.0f;  // No mass gap

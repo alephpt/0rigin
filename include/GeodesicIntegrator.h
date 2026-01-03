@@ -1,10 +1,10 @@
 /**
  * GeodesicIntegrator.h
  *
- * Geodesic equation verification in SMFT curved spacetime
+ * Geodesic equation verification in TRD curved spacetime
  *
  * Theory:
- * - SMFT metric: g_μν = R²(x,y) × diag(-(1-v²), 1, 1, 0)
+ * - TRD metric: g_μν = R²(x,y) × diag(-(1-v²), 1, 1, 0)
  * - Christoffel symbols: Γ^μ_νλ computed from ∂g_μν
  * - Geodesic equation: d²x^μ/dτ² + Γ^μ_νλ(dx^ν/dτ)(dx^λ/dτ) = 0
  * - Particle trajectory from Dirac wavepacket center should follow geodesics
@@ -27,7 +27,7 @@
 /**
  * GeodesicIntegrator - Christoffel symbol computation and geodesic integration
  *
- * Computes curved spacetime Christoffel symbols from SMFT metric and integrates
+ * Computes curved spacetime Christoffel symbols from TRD metric and integrates
  * particle geodesics for comparison with Dirac wavepacket trajectories.
  */
 class GeodesicIntegrator {

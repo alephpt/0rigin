@@ -7,11 +7,11 @@
 
 /**
  * @file spinor_feedback.comp
- * @brief Compute spinor density ρ = |ψ|² for MSFT bidirectional coupling
+ * @brief Compute spinor density ρ = |ψ|² for TRD bidirectional coupling
  *
  * Implements: ρ(x,y) = Σᵢ |ψᵢ(x,y)|² = Σᵢ (ψᵢ*·ψᵢ)
  *
- * MSFT Backward Coupling (Soliton Handoff):
+ * TRD Backward Coupling (Soliton Handoff):
  * - Input: Ψ(x,y) = (ψ₁, ψ₂, ψ₃, ψ₄) complex 4-spinor field
  * - Output: ρ(x,y) spinor density (real, positive)
  *
@@ -38,7 +38,7 @@ layout(push_constant) uniform PushConstants {
     float dt;              // Time step (not used here)
     float K;               // Coupling strength (not used here)
     float damping;         // Damping (not used here)
-    float Delta;           // MSFT mass gap (not used here)
+    float Delta;           // TRD mass gap (not used here)
     float chiral_angle;    // Chiral angle (not used here)
     uint Nx;               // Grid width
     uint Ny;               // Grid height
@@ -102,7 +102,7 @@ float compute_spinor_density_fast(vec2 spinor[4]) {
  *
  * ε = ⟨ψ|H|ψ⟩ (requires H·ψ from previous computation)
  *
- * Not used in main MSFT loop, but useful for energy conservation checks
+ * Not used in main TRD loop, but useful for energy conservation checks
  */
 float compute_energy_density(vec2 spinor[4], vec2 H_spinor[4]) {
     KahanSum energy = kahan_init();

@@ -9,7 +9,7 @@
 ## Executive Summary
 
 **Context**:
-- 3D infrastructure COMPLETE (Maxwell3D, Dirac3D, SMFTCore3D) ✅
+- 3D infrastructure COMPLETE (Maxwell3D, Dirac3D, TRDCore3D) ✅
 - Multiple 2D validation tests exist but NOT verified in 3D
 - User requires Option A: Full 2D→3D porting of ALL validation tests
 
@@ -27,7 +27,7 @@
 **3D Infrastructure Available**:
 - `Maxwell3D` (6-component EM: Ex, Ey, Ez, Bx, By, Bz)
 - `Dirac3D` (4-spinor evolution with FFTW)
-- `SMFTCore3D` (Kuramoto synchronization in 3D)
+- `TRDCore3D` (Kuramoto synchronization in 3D)
 
 ---
 
@@ -187,13 +187,13 @@
 // File: test/test_weak_field_3d.cpp
 // - Initialize Gaussian R-field perturbation (3D)
 // - Test particle at various radii
-// - Measure acceleration a_SMFT = -∇R
+// - Measure acceleration a_TRD = -∇R
 // - Compare to Newtonian: a_Newton = GM/r²
 // - Verify relative error < 0.1%
 ```
 
 **Quality Gates**:
-- ✅ |a_SMFT - a_Newton| / |a_Newton| < 0.1% (weak field)
+- ✅ |a_TRD - a_Newton| / |a_Newton| < 0.1% (weak field)
 - ✅ Energy conservation < 0.1%
 - ✅ 1/r² falloff verified at multiple radii
 
@@ -266,7 +266,7 @@
 **Deliverables**:
 - `test/test_em_gravity_coupling_3d.cpp`
 - GPU shader: `shaders/em_stress_energy.comp`
-- Extension to `SMFTCore3D` for EM coupling
+- Extension to `TRDCore3D` for EM coupling
 - `config/em_gravity_coupling_3d.yaml`
 
 ---
@@ -417,7 +417,7 @@
 
 **Action 3**: Update CMakeLists.txt
 - Add new test executables
-- Link Maxwell3D, Dirac3D, SMFTCore3D
+- Link Maxwell3D, Dirac3D, TRDCore3D
 
 **Action 4**: Create config files
 - YAML configurations for all new tests

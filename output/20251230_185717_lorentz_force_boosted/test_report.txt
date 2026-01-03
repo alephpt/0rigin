@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: lorentz_force_boosted
 Description: Lorentz force validation with boosted Dirac field generating EM fields
 

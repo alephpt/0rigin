@@ -10,9 +10,9 @@
 
 ## Executive Summary
 
-**Problem Identified**: Current SMFT EM implementation uses A_μ = ∂_μθ, which gives B = ∇×(∇θ) ≡ 0 always. Cannot produce magnetic fields.
+**Problem Identified**: Current TRD EM implementation uses A_μ = ∂_μθ, which gives B = ∇×(∇θ) ≡ 0 always. Cannot produce magnetic fields.
 
-**Solution Designed**: Proca massive photon theory with SMFT coupling:
+**Solution Designed**: Proca massive photon theory with TRD coupling:
 - Lagrangian: ℒ = -1/4 F_μν F^μν + 1/2 m_γ²(R) A_μ A^μ + j_μ A^μ
 - Photon mass: m_γ(R) = g(1-R) emerges from synchronization
 - Current: j_μ = α ∂_μθ (Noether current, rigorously conserved)
@@ -47,7 +47,7 @@
 ### 1. GAUGE_COVARIANT_EM_THEORY.md
 **Lines**: 897
 **Content**:
-- Complete mathematical formulation (Proca Lagrangian + SMFT coupling)
+- Complete mathematical formulation (Proca Lagrangian + TRD coupling)
 - Dimensional analysis and coupling constants
 - 4 validation test cases with success criteria
 - Risk analysis (6 failure modes identified)
@@ -66,7 +66,7 @@
 **Content**:
 - Complete C++ class design (GaugeTheory, ProcaEM)
 - GPU shader specifications (4 shaders)
-- Integration with SMFTCore (operator splitting)
+- Integration with TRDCore (operator splitting)
 - Build system (CMakeLists additions)
 - Test infrastructure (unit + integration tests)
 - Performance analysis (2.5× cost estimate, 12× memory)
@@ -101,7 +101,7 @@
 
 ### Proca Lagrangian (Full)
 ```
-ℒ_total = ℒ_SMFT[θ, R] + ℒ_Proca[A_μ, θ, R]
+ℒ_total = ℒ_TRD[θ, R] + ℒ_Proca[A_μ, θ, R]
 
 ℒ_Proca = -1/4 F_μν F^μν + 1/2 m_γ²(R) A_μ A^μ + α ∂_μθ A^μ
 ```
@@ -157,7 +157,7 @@ Do not wait for Week 3!
 |------|-------------|--------|------------|
 | B = 0 even with Proca | 30% | FATAL | Early test Week 2, pivot to Stückelberg |
 | Uncontrolled gauge violation | 20% | HIGH | Quantify in Test 4, upgrade to Stückelberg |
-| SMFT-EM coupling unstable | 25% | HIGH | Weak α, operator splitting, monitor energy |
+| TRD-EM coupling unstable | 25% | HIGH | Weak α, operator splitting, monitor energy |
 | Performance >3× degradation | 15% | MEDIUM | Optimize shaders, adaptive EM |
 | Current conservation violated | 10% | MEDIUM | Projection method ready |
 
@@ -168,7 +168,7 @@ Do not wait for Week 3!
 ## Architecture Overview
 
 ```
-SMFTCore
+TRDCore
   ↓ has-a (optional)
 GaugeTheory (interface)
   ↓ implements
@@ -205,7 +205,7 @@ GPU Shaders:
 - Compile shaders, integrate with ProcaEM class
 
 ### Day 5: Integration
-- Modify SMFTCore to support optional EM coupling
+- Modify TRDCore to support optional EM coupling
 - Implement operator splitting (Strang, 2nd-order)
 - Wire up buffers and pipelines
 
@@ -264,14 +264,14 @@ GPU Shaders:
 - ❌ FAIL - EM emergence broken
 - Document failure honestly
 - Pivot to Option A (drop EM emergence claim)
-- Focus on pure SMFT + external EM
+- Focus on pure TRD + external EM
 
 ---
 
 ## Comparison with Mission Brief
 
 ### Requirements from Brief
-1. ✅ Mathematical formulation of Proca + SMFT coupling
+1. ✅ Mathematical formulation of Proca + TRD coupling
 2. ✅ Dimensional analysis and coupling constants
 3. ✅ Risk assessment (6 failure modes identified)
 4. ✅ Design document (C++ architecture complete)
@@ -286,7 +286,7 @@ GPU Shaders:
 - ✅ DISCOVERY_PHASE_SUMMARY.md (this document)
 
 ### Week 1 Goals
-- ✅ Define Proca Lagrangian with SMFT coupling
+- ✅ Define Proca Lagrangian with TRD coupling
 - ✅ Dimensional analysis
 - ✅ Validation test cases
 - ✅ Resolve current conservation issue
@@ -321,19 +321,19 @@ GPU Shaders:
 
 ### Medium Confidence (60-80%)
 - ⚠️ θ vortex will generate measurable B field
-- ⚠️ SMFT-EM coupling stable at α = 0.01
+- ⚠️ TRD-EM coupling stable at α = 0.01
 - ⚠️ Gauge violation controlled (<5%)
 - ⚠️ Performance acceptable (<3× degradation)
 
 ### Low Confidence (30-50%)
 - ⚠️ Boris test will show cyclotron motion
-- ⚠️ All existing SMFT tests still pass
+- ⚠️ All existing TRD tests still pass
 - ⚠️ Energy conservation without backreaction
 
 ### Unknowns (Must Test)
 - ❓ Magnitude of B field from vortex
 - ❓ Magnetic flux quantization
-- ❓ Energy exchange SMFT ↔ EM
+- ❓ Energy exchange TRD ↔ EM
 - ❓ Long-time stability (>10,000 steps)
 
 ---
@@ -358,7 +358,7 @@ GPU Shaders:
 ### FAIL (Abort):
 - B = 0 from vortex test
 - Gauge violation >10%
-- SMFT-EM coupling unstable
+- TRD-EM coupling unstable
 - Boris test fails (no cyclotron motion)
 
 ---
@@ -390,7 +390,7 @@ GPU Shaders:
 
 ### What We're Betting On
 
-**Core hypothesis**: SMFT phase field θ can source Proca EM with B ≠ 0
+**Core hypothesis**: TRD phase field θ can source Proca EM with B ≠ 0
 
 **Physical basis**:
 - Proca mass term allows longitudinal polarization

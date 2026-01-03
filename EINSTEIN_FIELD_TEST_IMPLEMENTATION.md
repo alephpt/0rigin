@@ -1,10 +1,10 @@
 # Einstein Field Equation Test Implementation
 
 ## Overview
-Implemented Test A1 from TODO.md - Einstein Field Equation Derivation Test for SMFT.
+Implemented Test A1 from TODO.md - Einstein Field Equation Derivation Test for TRD.
 
-**Objective**: Verify G_μν = 8πG·T_μν from SMFT metric where:
-- SMFT metric: g_μν = R²(x,y,z)·η_μν (conformal scaling of Minkowski)
+**Objective**: Verify G_μν = 8πG·T_μν from TRD metric where:
+- TRD metric: g_μν = R²(x,y,z)·η_μν (conformal scaling of Minkowski)
 - Einstein tensor: G_μν derived from metric via Christoffel symbols and Ricci tensor
 - EM stress-energy: T_μν from Maxwell fields
 
@@ -32,15 +32,15 @@ Implemented Test A1 from TODO.md - Einstein Field Equation Derivation Test for S
    - Forward declaration for runEinsteinFieldEquationsTest()
 
 4. **CMakeLists.txt**
-   - Added test_einstein_field_equations.cpp to SMFT_SOURCES
+   - Added test_einstein_field_equations.cpp to TRD_SOURCES
    - Added Maxwell3D.cpp and Dirac3D.cpp to main executable
 
 ## Test Architecture
 
 Following single executable pattern:
-- Test integrated into main SMFT binary
-- Invoked via: `./smft --test config/einstein_field_equations.yaml`
-- Uses existing Maxwell3D and SMFTCore3D infrastructure
+- Test integrated into main TRD binary
+- Invoked via: `./trd --test config/einstein_field_equations.yaml`
+- Uses existing Maxwell3D and TRDCore3D infrastructure
 - No duplicate code or standalone executables
 
 ## Key Components
@@ -115,7 +115,7 @@ Formula: T_μν = (1/4π)[F_μα F_ν^α - (1/4)g_μν F²]
 
 ## Physics Validation Approach
 
-The test validates that SMFT's emergent spacetime metric (g_μν = R²·η_μν) produces an Einstein tensor that matches the stress-energy content of the electromagnetic field, thus verifying the theory's consistency with general relativity.
+The test validates that TRD's emergent spacetime metric (g_μν = R²·η_μν) produces an Einstein tensor that matches the stress-energy content of the electromagnetic field, thus verifying the theory's consistency with general relativity.
 
 Key insight: The R-field acts as a conformal factor, scaling the Minkowski metric. When electromagnetic energy is present, it should curve this effective spacetime according to Einstein's equations.
 
@@ -131,7 +131,7 @@ Key insight: The R-field acts as a conformal factor, scaling the Minkowski metri
 ## Command to Run
 
 ```bash
-./build/bin/smft --test config/einstein_field_equations.yaml
+./build/bin/trd --test config/einstein_field_equations.yaml
 ```
 
 The test currently reports FAIL due to large residuals, which is expected given the simplified initial implementation. The framework is in place for iterative refinement to achieve the 10⁻¹² precision target.

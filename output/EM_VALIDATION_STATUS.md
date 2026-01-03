@@ -17,7 +17,7 @@ Infrastructure exists for Maxwell equations, Lorentz force, flux quantization, a
 ### Current State
 - **Test Config**: `config/em_verification/maxwell_check.yaml` ✓ EXISTS
 - **Validator Code**: `src/validation/EMValidator.h/.cpp` ✓ EXISTS
-- **Integration**: ❌ **NOT CALLED** in SMFTTestRunner
+- **Integration**: ❌ **NOT CALLED** in TRDTestRunner
 - **Output**: ❌ NO Maxwell residuals computed
 
 ### What Should Be Tested
@@ -269,9 +269,9 @@ E_total = E_Dirac + E_Kuramoto + E_EM + E_interaction
 
 ### Why Validation Isn't Happening
 
-**Problem 1**: EMValidator not integrated into SMFTTestRunner
+**Problem 1**: EMValidator not integrated into TRDTestRunner
 ```cpp
-// SMFTTestRunner.cpp - MISSING:
+// TRDTestRunner.cpp - MISSING:
 // - #include "EMValidator.h"
 // - EMValidator validator(Nx, Ny, dx, dy, dt);
 // - auto maxwell = validator.verifyMaxwellEquations(...);
@@ -290,7 +290,7 @@ Single-particle tests don't create these directories
 ```cpp
 // TestParticle.cpp - EXISTS but not called from test configs
 // - Particle trajectory integration: ✓ IMPLEMENTED
-// - But SMFTTestRunner doesn't create TestParticle instance
+// - But TRDTestRunner doesn't create TestParticle instance
 ```
 
 ### File I/O Issues
@@ -432,7 +432,7 @@ We need:
 ### Immediate Actions (Priority 1)
 
 1. **Fix File I/O**: Create `N_1/` subdirectory in test output
-2. **Integrate EMValidator**: Call `verifyMaxwellEquations()` in SMFTTestRunner
+2. **Integrate EMValidator**: Call `verifyMaxwellEquations()` in TRDTestRunner
 3. **Enable particle tracking**: Instantiate TestParticle for Lorentz test
 4. **Save EM fields**: Write E, B field snapshots to CSV
 

@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: lorentz_force_crossed_fields
 Description: 
 

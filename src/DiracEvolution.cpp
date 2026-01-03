@@ -496,7 +496,7 @@ void DiracEvolution::getMomentumDistribution(std::vector<float>& kx_out,
  *   β = diag(1, 1, -1, -1)
  *
  * Note: m_0 (rest mass) is assumed ~0 in this implementation (massless Dirac limit)
- *       The mass term m(x) comes from SMFT coupling, not intrinsic mass.
+ *       The mass term m(x) comes from TRD coupling, not intrinsic mass.
  *       The EM interaction energy includes both A·j (current coupling) and φ·ρ (charge coupling).
  */
 float DiracEvolution::getEnergy(const std::vector<float>& mass_field,

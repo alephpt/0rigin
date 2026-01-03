@@ -1,5 +1,5 @@
 # Theoretical Issues and Resolutions
-## Addressing Open Questions in Proca-SMFT Coupling
+## Addressing Open Questions in Proca-TRD Coupling
 
 **Author**: Claude Code (Operations Tier 1)
 **Date**: 2025-12-31
@@ -34,7 +34,7 @@ j_μ = α ∂_μθ f(R)
 □θ · f(R) + (df/dR) · ∂^μθ · ∂_μR = 0
 ```
 
-**Problem**: This constraint is **not generally satisfied** by SMFT dynamics!
+**Problem**: This constraint is **not generally satisfied** by TRD dynamics!
 
 ### 1.2 Resolution Option 1: Transverse Projection
 
@@ -69,11 +69,11 @@ where:
 
 ### 1.3 Resolution Option 2: Noether Current (Rigorous)
 
-**Idea**: Derive j_μ from Noether theorem applied to SMFT Lagrangian
+**Idea**: Derive j_μ from Noether theorem applied to TRD Lagrangian
 
-**SMFT Lagrangian** (simplified):
+**TRD Lagrangian** (simplified):
 ```
-ℒ_SMFT = 1/2 (∂_μθ)² - V(R) + L_sync(θ, R)
+ℒ_TRD = 1/2 (∂_μθ)² - V(R) + L_sync(θ, R)
 ```
 
 **U(1) symmetry**: θ → θ + ε (constant shift)
@@ -162,13 +162,13 @@ j_mu = alpha * d_mu_theta;
 
 ---
 
-## 2. Backreaction on SMFT
+## 2. Backreaction on TRD
 
 ### 2.1 The Question
 
-**How does EM energy/momentum affect SMFT dynamics?**
+**How does EM energy/momentum affect TRD dynamics?**
 
-**Full coupling**: Modify SMFT equation of motion
+**Full coupling**: Modify TRD equation of motion
 ```
 ∂θ/∂t = ω + K·R·sin(Ψ-θ) - γ·∂θ/∂t + (EM backreaction) + noise
 ```
@@ -179,21 +179,21 @@ j_mu = alpha * d_mu_theta;
 
 **Total Lagrangian**:
 ```
-ℒ_total = ℒ_SMFT[θ, R] + ℒ_Proca[A_μ, θ, R]
+ℒ_total = ℒ_TRD[θ, R] + ℒ_Proca[A_μ, θ, R]
 ```
 
 **Variation w.r.t. θ**:
 ```
 δℒ/δθ = 0
 
-δℒ_SMFT/δθ + δℒ_Proca/δθ = 0
+δℒ_TRD/δθ + δℒ_Proca/δθ = 0
 
 δℒ_Proca/δθ = δ/δθ(α ∂_μθ A^μ) = α ∂_μ A^μ
 ```
 
 **Modified EOM**:
 ```
-(SMFT equation) = α ∂_μ A^μ
+(TRD equation) = α ∂_μ A^μ
 ```
 
 **Interpretation**: Divergence of EM potential sources θ field
@@ -207,7 +207,7 @@ Backreaction = 0!
 
 ### 2.3 Energy Exchange
 
-**Alternative concern**: EM fields carry energy, should drain SMFT energy
+**Alternative concern**: EM fields carry energy, should drain TRD energy
 
 **EM energy density**:
 ```
@@ -216,7 +216,7 @@ Backreaction = 0!
 
 **Energy conservation**:
 ```
-∂_t (ε_SMFT + ε_EM) = 0
+∂_t (ε_TRD + ε_EM) = 0
 ```
 
 **Implementation**: Monitor total energy, ensure conservation
@@ -320,7 +320,7 @@ For d=3: dt < dx/(c√3) ≈ 0.577 dx
 - dx = 0.1 (Planck units, c=1)
 - dt_max = 0.1 / √3 ≈ 0.058
 
-**Current SMFT timestep**: dt ~ 0.001-0.01
+**Current TRD timestep**: dt ~ 0.001-0.01
 - Well below CFL limit ✓
 
 **Stability**: Leap-frog scheme is 2nd-order accurate, conditionally stable (requires CFL)
@@ -351,7 +351,7 @@ For k=0 (uniform mode): ω = m_γ
 
 ### 4.3 Coupling Instability
 
-**EM-SMFT coupling**: j_μ sources A_μ, A_μ backreacts on θ (if enabled)
+**EM-TRD coupling**: j_μ sources A_μ, A_μ backreacts on θ (if enabled)
 
 **Feedback loop**: θ → j → A → θ (if backreaction ON)
 
@@ -377,13 +377,13 @@ For k=0 (uniform mode): ω = m_γ
 
 **In Standard Model**: Photon is gauge boson of U(1)_EM symmetry
 
-**In SMFT**: "Photon" is collective excitation of synchronization field
+**In TRD**: "Photon" is collective excitation of synchronization field
 
 **Analogy**: Phonons in solid
 - Atoms have positions → sound waves (phonons)
 - Oscillators have phases → EM waves (emergent photons)
 
-**Key difference**: SMFT photon has mass m_γ(R) from synchronization order
+**Key difference**: TRD photon has mass m_γ(R) from synchronization order
 
 **Physical meaning**:
 - R = 1 (synchronized): Massless photon, long-range EM
@@ -410,9 +410,9 @@ For k=0 (uniform mode): ω = m_γ
 
 **This is THE key physics** that makes Proca work
 
-### 5.3 Experimental Signatures (If SMFT Were Real)
+### 5.3 Experimental Signatures (If TRD Were Real)
 
-**Hypothetical scenario**: SMFT describes some real physical system
+**Hypothetical scenario**: TRD describes some real physical system
 
 **Predictions**:
 1. EM interaction range depends on synchronization: λ_EM = 1/m_γ(R)
@@ -426,7 +426,7 @@ For k=0 (uniform mode): ω = m_γ
 - Look for R-dependent screening length
 - Detect vortex-induced B fields
 
-**This is science fiction** (SMFT is theoretical model), but good to articulate!
+**This is science fiction** (TRD is theoretical model), but good to articulate!
 
 ---
 
@@ -443,7 +443,7 @@ For k=0 (uniform mode): ω = m_γ
 
 **Key result**: Massive photon breaks gauge invariance, allowed by experiments (m_γ < 10^-18 eV)
 
-**Our work**: Uses emergent mass from SMFT (not fundamental)
+**Our work**: Uses emergent mass from TRD (not fundamental)
 
 ### 6.2 Stückelberg Mechanism
 
@@ -471,9 +471,9 @@ Under gauge transform: φ → φ + eα
 
 **Common theme**: Microscopic degrees of freedom → collective gauge field
 
-**SMFT analogy**: Phase oscillators → emergent U(1) EM
+**TRD analogy**: Phase oscillators → emergent U(1) EM
 
-**Difference**: Most examples are in equilibrium; SMFT is non-equilibrium dynamics
+**Difference**: Most examples are in equilibrium; TRD is non-equilibrium dynamics
 
 ---
 
@@ -485,7 +485,7 @@ Under gauge transform: φ → φ + eα
 
 **Motivation**: Compare with real QED
 
-**Challenge**: SMFT is classical field theory; quantization non-trivial
+**Challenge**: TRD is classical field theory; quantization non-trivial
 
 **Approach**:
 1. Identify canonical variables (A, Π conjugate momentum)
@@ -515,14 +515,14 @@ Under gauge transform: φ → φ + eα
 
 ### 7.3 Non-Abelian Generalization?
 
-**Question**: Can SMFT support SU(2) or SU(3) emergent gauge theory?
+**Question**: Can TRD support SU(2) or SU(3) emergent gauge theory?
 
 **Motivation**: Closer to Standard Model (W±, Z, gluons)
 
 **Approach**:
 1. Extend θ to multiplet (θ^a, a=1,2,3 for SU(2))
 2. Define field strength F_μν^a = ∂_μ A_ν^a - ∂_ν A_μ^a + g f^abc A_μ^b A_ν^c
-3. Couple to SMFT order parameter
+3. Couple to TRD order parameter
 
 **Challenge**: Vastly more complex (8 gluons for SU(3))
 
@@ -575,7 +575,7 @@ Under gauge transform: φ → φ + eα
 
 ### Remaining Concerns:
 - ⚠️ Verify current conservation numerically (∂_μ j^μ ~ 10^-6)
-- ⚠️ Monitor total energy (ε_SMFT + ε_EM) conservation
+- ⚠️ Monitor total energy (ε_TRD + ε_EM) conservation
 - ⚠️ Check gauge condition violation (should be ~10^-6 after projection)
 
 ### Tests to Implement:

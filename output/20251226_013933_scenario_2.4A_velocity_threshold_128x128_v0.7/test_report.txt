@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: scenario_2.4A_velocity_threshold
 Description: Phase 2 Scenario 2.4A: Fine-grained velocity sweep to identify exact breakdown threshold. Tests v=[0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70] to find where γ factor error exceeds 5%.
 

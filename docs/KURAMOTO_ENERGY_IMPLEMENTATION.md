@@ -18,7 +18,7 @@ EM energy conservation tests showed catastrophic drift (354%) even with best reg
    - Proper boundary handling with forward/backward differences
    - Volume element integration (dx·dy)
 
-2. **Modified SMFTTestRunner**
+2. **Modified TRDTestRunner**
    - Always computes Kuramoto energy (fundamental system component)
    - Includes in initial energy E0 for proper baseline
    - Separates EM energy (optional) from Kuramoto energy (required)
@@ -123,7 +123,7 @@ However, with 99.99% of the drift eliminated, the system is now usable for physi
 
 - `src/simulations/ObservableComputer.h` - Updated method signature
 - `src/simulations/ObservableComputer.cpp` - Implemented proper energy computation
-- `src/simulations/SMFTTestRunner.cpp` - Always compute Kuramoto energy
+- `src/simulations/TRDTestRunner.cpp` - Always compute Kuramoto energy
 
 ## Testing
 

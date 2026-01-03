@@ -131,7 +131,7 @@ bool TestConfig::saveToYAML(const std::string& yaml_path) const {
 TestConfig TestConfig::createDefault(const std::string& test_name) {
     TestConfig config;
     config.test_name = test_name;
-    config.description = "Default SMFT test configuration";
+    config.description = "Default TRD test configuration";
 
     // Defaults already set in struct definitions
     return config;

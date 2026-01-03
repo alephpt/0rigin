@@ -1,16 +1,16 @@
-# Stückelberg EM Integration into SMFTEngine - COMPLETE
+# Stückelberg EM Integration into TRDEngine - COMPLETE
 
 ## Date: 2025-12-31
 
 ## Status: ✅ INTEGRATED
 
-The proven Stückelberg EM mechanism has been successfully integrated into the SMFTEngine core.
+The proven Stückelberg EM mechanism has been successfully integrated into the TRDEngine core.
 
 ---
 
 ## Changes Made
 
-### 1. SMFTEngine.h
+### 1. TRDEngine.h
 **Added:**
 - Forward declaration for `physics::StuckelbergEM`
 - Member variable: `physics::StuckelbergEM* _stuckelberg_em`
@@ -22,9 +22,9 @@ The proven Stückelberg EM mechanism has been successfully integrated into the S
   - `const std::vector<float>& getEM_Bz() const` - Access magnetic field
   - `float getEM_Energy() const` - Get EM field energy
 
-**Location:** `/home/persist/neotec/0rigin/src/SMFTEngine.h`
+**Location:** `/home/persist/neotec/0rigin/src/TRDEngine.h`
 
-### 2. SMFTEngine.cpp
+### 2. TRDEngine.cpp
 **Added:**
 - `#include "physics/StuckelbergEM.h"` - Include EM implementation
 - Constructor initialization: `_stuckelberg_em(nullptr)`
@@ -55,7 +55,7 @@ The proven Stückelberg EM mechanism has been successfully integrated into the S
   ```
 - `getEM_Energy()` implementation: Delegates to `_stuckelberg_em->computeFieldEnergy()`
 
-**Location:** `/home/persist/neotec/0rigin/src/SMFTEngine.cpp`
+**Location:** `/home/persist/neotec/0rigin/src/TRDEngine.cpp`
 
 ---
 
@@ -98,11 +98,11 @@ The Stückelberg scalar field φ is **directly coupled** to the Kuramoto phase f
 ## Verification
 
 ### Build Status
-✅ **COMPILES**: SMFTEngine with StuckelbergEM integration builds successfully
+✅ **COMPILES**: TRDEngine with StuckelbergEM integration builds successfully
 ```bash
 cd /home/persist/neotec/0rigin/build
-make SMFT -j4
-# Result: [100%] Built target SMFT
+make TRD -j4
+# Result: [100%] Built target TRD
 ```
 
 ### Test Status
@@ -113,8 +113,8 @@ make SMFT -j4
 ```
 
 ### Integration Test
-**Created**: `/home/persist/neotec/0rigin/test/test_smft_em_integration.cpp`
-- Verifies EM field generation in SMFTEngine
+**Created**: `/home/persist/neotec/0rigin/test/test_trd_em_integration.cpp`
+- Verifies EM field generation in TRDEngine
 - Checks Dirac norm preservation with EM coupling
 - Validates EM energy computation
 - **Note**: Requires windowing environment (Nova graphics) - deferred to full system test
@@ -154,7 +154,7 @@ float total_energy = dirac->getEnergy(mass_field, KE, PE,
 ## Next Steps
 
 ### Immediate (Working)
-1. ✅ StuckelbergEM integrated into SMFTEngine
+1. ✅ StuckelbergEM integrated into TRDEngine
 2. ✅ Direct φ=θ coupling verified (B_max = 1.555192)
 3. ✅ Dirac evolution includes EM minimal coupling
 4. ✅ Build system compiles successfully
@@ -178,7 +178,7 @@ float total_energy = dirac->getEnergy(mass_field, KE, PE,
 - **Dirac spinor**: Ψ(x,y,t) with minimal EM coupling
 
 ### What It Means
-The emergent electromagnetic field is now **fully integrated** into the SMFT framework:
+The emergent electromagnetic field is now **fully integrated** into the TRD framework:
 1. Phase synchronization → EM field generation (via Stückelberg)
 2. EM fields → Dirac particle dynamics (via minimal coupling)
 3. Dirac density → Phase feedback (quantum-classical coupling)
@@ -211,7 +211,7 @@ This completes the **Kuramoto-Dirac-EM** unified system.
 
 ✅ **INTEGRATION COMPLETE**
 
-The Stückelberg gauge-restored electromagnetic mechanism is now fully integrated into SMFTEngine. The proven direct φ=θ coupling generates substantial magnetic fields (B_max ~ 1.55) which couple to Dirac spinor dynamics via minimal coupling.
+The Stückelberg gauge-restored electromagnetic mechanism is now fully integrated into TRDEngine. The proven direct φ=θ coupling generates substantial magnetic fields (B_max ~ 1.55) which couple to Dirac spinor dynamics via minimal coupling.
 
 **Key Achievement**: We have moved from **separate validation** to **unified integration**.
 

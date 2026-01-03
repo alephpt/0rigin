@@ -1,9 +1,9 @@
 # einstein_field_equations.yaml
 # Configuration for Einstein Field Equation Derivation Test
 #
-# Objective: Verify G_μν = 8πG·T_μν from SMFT metric
+# Objective: Verify G_μν = 8πG·T_μν from TRD metric
 #
-# Test validates that the Einstein tensor derived from the SMFT metric
+# Test validates that the Einstein tensor derived from the TRD metric
 # (g_μν = R²·η_μν) matches the stress-energy tensor from Maxwell fields
 # to within numerical precision (residual < 10^-12)
 

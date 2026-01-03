@@ -31,7 +31,7 @@ Different compute rings each time (comp_1.1.1, comp_1.2.0, comp_1.3.0), suggesti
 ## Critical Code Analysis
 
 ### The Infinite Wait
-**File:** `src/MSFTEngine.cpp:463`
+**File:** `src/TRDEngine.cpp:463`
 ```cpp
 vkWaitForFences(device, 1, &fence, VK_TRUE, UINT64_MAX);
 ```
@@ -169,7 +169,7 @@ engine.setNaturalFrequencies(frequencies);
 ## Recommended Fix (Without Running Code)
 
 ### Option 1: Add Timeout
-**File:** `src/MSFTEngine.cpp:463`
+**File:** `src/TRDEngine.cpp:463`
 ```cpp
 // OLD:
 vkWaitForFences(device, 1, &fence, VK_TRUE, UINT64_MAX);
@@ -190,7 +190,7 @@ if (result == VK_TIMEOUT) {
 This prevents system hang, allows error reporting.
 
 ### Option 2: Validate Buffer Upload
-**File:** `src/MSFTEngine.cpp:1140-1145`
+**File:** `src/TRDEngine.cpp:1140-1145`
 ```cpp
 // After uploading theta:
 if (_theta_memory != VK_NULL_HANDLE && !_theta_data.empty()) {
@@ -213,7 +213,7 @@ if (_theta_memory != VK_NULL_HANDLE && !_theta_data.empty()) {
 This catches NaN before GPU dispatch.
 
 ### Option 3: Simplify Shader for Testing
-**File:** `shaders/smft/sync_field.comp`
+**File:** `shaders/trd/sync_field.comp`
 
 Create minimal version:
 ```glsl
@@ -239,7 +239,7 @@ If this works → Kahan summation or complex math problem.
 Clear GPU state completely. This is non-negotiable.
 
 ### Step 2: Apply Option 1 (Timeout)
-Edit `src/MSFTEngine.cpp:463` to add 5-second timeout.
+Edit `src/TRDEngine.cpp:463` to add 5-second timeout.
 
 This prevents GPU hang from crashing system.
 

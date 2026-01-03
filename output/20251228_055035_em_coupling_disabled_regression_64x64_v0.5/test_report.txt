@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: em_coupling_disabled_regression
 Description: Phase 6.1: Regression test - verify that when EM coupling is disabled, behavior matches Phase 2.3 (relativistic mass) baseline. Critical test to ensure EM integration does not break existing physics when disabled.
 

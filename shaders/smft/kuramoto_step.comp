@@ -7,11 +7,11 @@
 
 /**
  * @file kuramoto_step.comp
- * @brief Kuramoto oscillator evolution with MSFT spinor feedback
+ * @brief Kuramoto oscillator evolution with TRD spinor feedback
  *
  * Implements: dθᵢ/dt = ωᵢ + (K/N)Σⱼsin(θⱼ - θᵢ) + spinor_feedback(x,y)
  *
- * MSFT Bidirectional Coupling:
+ * TRD Bidirectional Coupling:
  * - Forward: θ → R → m → ψ
  * - Backward: |ψ|² → θ (soliton handoff)
  *
@@ -26,7 +26,7 @@ layout(push_constant) uniform PushConstants {
     float dt;              // Time step
     float K;               // Coupling strength
     float damping;         // Phase damping γ
-    float Delta;           // MSFT mass gap
+    float Delta;           // TRD mass gap
     float chiral_angle;    // θ for chiral mass
     uint Nx;               // Grid width
     uint Ny;               // Grid height

@@ -3,10 +3,10 @@
  *
  * Einstein Field Equation Derivation Test
  *
- * Goal: Verify G_μν = 8πG·T_μν from SMFT metric
+ * Goal: Verify G_μν = 8πG·T_μν from TRD metric
  *
  * Physics:
- *   - SMFT metric: g_μν = R²(x,y,z)·η_μν where η_μν is Minkowski
+ *   - TRD metric: g_μν = R²(x,y,z)·η_μν where η_μν is Minkowski
  *   - Christoffel symbols: Γ^λ_μν = (1/2)g^λρ(∂_μ g_νρ + ∂_ν g_ρμ - ∂_ρ g_μν)
  *   - Riemann tensor: R^ρ_σμν = ∂_μ Γ^ρ_νσ - ∂_ν Γ^ρ_μσ + Γ^ρ_μλ Γ^λ_νσ - Γ^ρ_νλ Γ^λ_μσ
  *   - Ricci tensor: R_μν = R^λ_μλν
@@ -17,7 +17,7 @@
  */
 
 #include "Maxwell3D.h"
-#include "SMFTCore3D.h"
+#include "TRDCore3D.h"
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -198,7 +198,7 @@ std::array<std::array<double, 4>, 4> calculateEinsteinTensor(
  * where F² = F_μν F^μν
  *
  * IMPORTANT: Fields must be properly normalized for natural units
- * In SMFT grid units, we need to scale appropriately
+ * In TRD grid units, we need to scale appropriately
  */
 std::array<std::array<double, 4>, 4> calculateEMStressEnergy(
     double Ex, double Ey, double Ez,
@@ -360,9 +360,9 @@ int runEinsteinFieldEquationsTest() {
     std::cout << "Evolution steps: " << evolution_steps << "\n";
     std::cout << "Sample points: " << sample_points << "\n\n";
 
-    // Initialize 3D SMFT and Maxwell
-    SMFTCore3D core;
-    SMFTCore3D::Config config;
+    // Initialize 3D TRD and Maxwell
+    TRDCore3D core;
+    TRDCore3D::Config config;
     config.Nx = Nx;
     config.Ny = Ny;
     config.Nz = Nz;
@@ -405,7 +405,7 @@ int runEinsteinFieldEquationsTest() {
 
     maxwell.initialize(Ex, Ey, Ez, Bx, By, Bz);
 
-    // Initialize SMFT with random phase to generate non-trivial R-field
+    // Initialize TRD with random phase to generate non-trivial R-field
     core.initializeRandom(42);
 
     // Evolve system to steady state WITH EM→R coupling
@@ -416,7 +416,7 @@ int runEinsteinFieldEquationsTest() {
     const double em_coupling_epsilon = 1.0;    // Much stronger EM→R coupling
 
     for (int step = 0; step < evolution_steps; ++step) {
-        // Evolve SMFT Kuramoto dynamics
+        // Evolve TRD Kuramoto dynamics
         core.evolveKuramotoCPU(static_cast<float>(dt));
         core.computeRField();  // Computes R_kuramoto (target field)
 
@@ -494,7 +494,7 @@ int runEinsteinFieldEquationsTest() {
         metric.scaleByRField(R);
 
         // Calculate metric derivatives
-        // For SMFT metric, only spatial derivatives of R matter
+        // For TRD metric, only spatial derivatives of R matter
         // ∂_μ g_νρ = 2R·∂_μR·η_νρ for spatial components
         std::array<std::array<std::array<double, 4>, 4>, 4> dg;
         for (int alpha = 0; alpha < 4; ++alpha) {
@@ -683,7 +683,7 @@ int runEinsteinFieldEquationsTest() {
 
 // Standalone main function for direct execution
 // Only compiled when building the standalone test executable
-#ifndef SMFT_MAIN_EXECUTABLE
+#ifndef TRD_MAIN_EXECUTABLE
 int main() {
     return runEinsteinFieldEquationsTest();
 }

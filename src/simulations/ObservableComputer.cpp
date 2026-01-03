@@ -1,5 +1,5 @@
 #include "simulations/ObservableComputer.h"
-#include "SMFTEngine.h"
+#include "TRDEngine.h"
 #include <cmath>
 #include <numeric>
 #include <algorithm>
@@ -20,7 +20,7 @@ void ObservableComputer::compute(
     double E0,
     double norm_tolerance,
     double energy_tolerance,
-    const SMFTEngine* engine) {
+    const TRDEngine* engine) {
 
     // Use g_result_hack (set by caller) if available, otherwise use result parameter
     Observables* actual_result = (g_result_hack != nullptr) ? g_result_hack : result;

@@ -55,7 +55,7 @@ Key metrics:
 ✅ Build completes successfully with `make -C build`
 ✅ All targets compile:
   - Physics library: Built
-  - SMFT executable: Built
+  - TRD executable: Built
   - test_weak_field_limit: Built
   - test_geodesic_verification: Built
 
@@ -134,7 +134,7 @@ Category A (GR Connection) implementations pass all quality gates:
 - No critical issues or blockers
 - Minor warnings do not affect functionality
 
-The geodesic verification and weak field limit tests demonstrate correct implementation of GR connections in SMFT, with particles following geodesics to within 0.2% accuracy and proper weak field correspondence.
+The geodesic verification and weak field limit tests demonstrate correct implementation of GR connections in TRD, with particles following geodesics to within 0.2% accuracy and proper weak field correspondence.
 
 ---
 Generated: 2026-01-01

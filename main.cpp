@@ -1,5 +1,5 @@
 /**
- * main.cpp - Unified SMFT Application Entry Point
+ * main.cpp - Unified TRD Application Entry Point
  *
  * Usage:
  *   ./smft                              - Run interactive visualization
@@ -7,14 +7,14 @@
  *   ./smft --help                       - Show help
  */
 
-#include "SMFTCore.h"
-#include "simulations/SMFTTestRunner.h"
+#include "TRDCore.h"
+#include "simulations/TRDTestRunner.h"
 #include <iostream>
 #include <string>
 #include <cstring>
 
 void printUsage(const char* program_name) {
-    std::cout << "\n===== SMFT - Synchronization Mass Field Theory =====" << std::endl;
+    std::cout << "\n===== TRD - Topological Resonance Dynamics =====" << std::endl;
     std::cout << "\nUsage:" << std::endl;
     std::cout << "  " << program_name << "                         - Run interactive visualization" << std::endl;
     std::cout << "  " << program_name << " --test <config.yaml>    - Run test simulation" << std::endl;
@@ -22,7 +22,7 @@ void printUsage(const char* program_name) {
 
     std::cout << "\nModes:" << std::endl;
     std::cout << "  Interactive Mode:" << std::endl;
-    std::cout << "    Launches the full SMFT visualization with GPU rendering" << std::endl;
+    std::cout << "    Launches the full TRD visualization with GPU rendering" << std::endl;
     std::cout << "    Supports real-time parameter tuning and visual analysis" << std::endl;
 
     std::cout << "\n  Test Mode:" << std::endl;
@@ -56,7 +56,7 @@ int runEMGravityCoupling3DTest();
 int runEinsteinFieldEquationsTest();
 
 int runTestMode(const std::string& config_path) {
-    std::cout << "\n===== SMFT Test Mode =====" << std::endl;
+    std::cout << "\n===== TRD Test Mode =====" << std::endl;
     std::cout << "Configuration: " << config_path << std::endl;
 
     // Detect test type from config path
@@ -77,9 +77,9 @@ int runTestMode(const std::string& config_path) {
         return runEinsteinFieldEquationsTest();
     }
 
-    // Default: SMFT field theory test (timesync, etc.)
+    // Default: TRD field theory test (timesync, etc.)
     // Create test runner
-    SMFTTestRunner runner(config_path);
+    TRDTestRunner runner(config_path);
 
     // Initialize
     std::cout << "\n[1/3] Initializing..." << std::endl;
@@ -114,7 +114,7 @@ int runTestMode(const std::string& config_path) {
 }
 
 int runInteractiveMode() {
-    std::cout << "\n===== SMFT Interactive Mode =====" << std::endl;
+    std::cout << "\n===== TRD Interactive Mode =====" << std::endl;
     std::cout << "Interactive visualization mode is currently under development.\n" << std::endl;
     std::cout << "GPU-accelerated Kuramoto dynamics are fully restored!" << std::endl;
     std::cout << "Use --test mode to run physics simulations with test framework.\n" << std::endl;
@@ -122,7 +122,7 @@ int runInteractiveMode() {
     std::cout << "  ./smft --test config/timesync_validation.yaml" << std::endl;
     std::cout << "  ./smft --test config/quick_validation.yaml" << std::endl;
 
-    // TODO: Integrate Nova visualization once SMFTEngine is connected
+    // TODO: Integrate Nova visualization once TRDEngine is connected
     // This will show real-time Kuramoto phase evolution + Dirac wavepacket motion
 
     return 0;

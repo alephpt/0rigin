@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: vacuum_energy
 Description: Phase 3 Test 3.2: Vacuum Energy Density Scaling - ρ(R) ∝ R^n
 

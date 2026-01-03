@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: em_coupling_weak_field
 Description: Phase 6.1: Weak field limit - verify that EM coupling behavior approaches first-order perturbation theory in the weak-field limit (small coupling_strength). Tests convergence toward perturbative predictions.
 

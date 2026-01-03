@@ -1,8 +1,8 @@
 /**
- * Test Program for MSFT GPU Pipeline
+ * Test Program for TRD GPU Pipeline
  *
  * Validates that the GPU compute pipelines are working correctly:
- * 1. Creates MSFTEngine instance
+ * 1. Creates TRDEngine instance
  * 2. Initializes small grid (32x32)
  * 3. Sets initial phases (random)
  * 4. Runs one simulation step on GPU
@@ -13,16 +13,16 @@
 #include <vector>
 #include <random>
 #include <cmath>
-#include "src/MSFTEngine.h"
-// NovaConfig is already included via MSFTEngine.h -> Nova.h -> config.h
+#include "src/TRDEngine.h"
+// NovaConfig is already included via TRDEngine.h -> Nova.h -> config.h
 
 int main() {
-    std::cout << "MSFT GPU Pipeline Test\n";
+    std::cout << "TRD GPU Pipeline Test\n";
     std::cout << "======================\n\n";
 
     // Initialize Nova engine (minimal setup for compute)
     NovaConfig config = {
-        .name = "MSFT GPU Test",
+        .name = "TRD GPU Test",
         .screen = {800, 600},
         .debug_level = "info",
         .dimensions = "2D",
@@ -33,8 +33,8 @@ int main() {
     Nova nova(config);
     nova.initialized = true;
 
-    // Create MSFT engine
-    MSFTEngine engine(&nova);
+    // Create TRD engine
+    TRDEngine engine(&nova);
 
     // Initialize small test grid
     const uint32_t Nx = 32;

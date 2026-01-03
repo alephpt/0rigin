@@ -1,6 +1,6 @@
 # EM-Gravity Coupling 3D Configuration
 #
-# Test: EM field energy curves SMFT spacetime
+# Test: EM field energy curves TRD spacetime
 # Physics: T^μν(EM) → R-field evolution, ∂R/∂t ~ -ε·ρ_EM
 #
 # Quality Gates:

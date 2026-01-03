@@ -6,7 +6,7 @@
 #include <yaml-cpp/yaml.h>
 
 /**
- * TestConfig - YAML-driven test configuration for unified SMFT testing
+ * TestConfig - YAML-driven test configuration for unified TRD testing
  *
  * Supports loading test parameters, initial conditions, validation tolerances,
  * and output specifications from YAML files.

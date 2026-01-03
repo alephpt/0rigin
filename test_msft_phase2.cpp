@@ -9,17 +9,17 @@
  */
 
 #include "lib/Nova/Nova.h"
-#include "src/MSFTEngine.h"
+#include "src/TRDEngine.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
 
 int main() {
-    std::cout << "=== MSFT Phase 2: GPU Buffer Test ===" << std::endl;
+    std::cout << "=== TRD Phase 2: GPU Buffer Test ===" << std::endl;
 
     // Create Nova configuration
     NovaConfig config;
-    config.name = "MSFT Phase 2 Test";
+    config.name = "TRD Phase 2 Test";
     config.screen = {800, 600};
     config.debug_level = "debug";  // Enable validation layers for debugging
     config.dimensions = "2D";
@@ -31,9 +31,9 @@ int main() {
     Nova nova(config);
     nova.initialized = true;  // Mark as initialized (normally done by illuminate())
 
-    // Create MSFT engine
-    std::cout << "Creating MSFTEngine..." << std::endl;
-    MSFTEngine engine(&nova);
+    // Create TRD engine
+    std::cout << "Creating TRDEngine..." << std::endl;
+    TRDEngine engine(&nova);
 
     // Initialize with small grid for testing
     uint32_t Nx = 64;

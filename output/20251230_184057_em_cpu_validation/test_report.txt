@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: em_cpu_validation
 Description: CPU-only EM validation - Maxwell equations + flux quantization
 

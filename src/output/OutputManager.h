@@ -1,6 +1,6 @@
 /**
  * @file OutputManager.h
- * @brief Systematic output generation for SMFT experiments
+ * @brief Systematic output generation for TRD experiments
  *
  * Provides centralized management for experiment output:
  * - Timestamped directory creation
@@ -13,7 +13,7 @@
  * #include "output/OutputManager.h"
  *
  * // Initialize manager
- * SMFT::OutputManager output_manager;
+ * TRD::OutputManager output_manager;
  *
  * // Create experiment directory with timestamp
  * std::string exp_dir = output_manager.createExperimentDirectory("my_experiment");
@@ -47,8 +47,8 @@
  * - Metadata files in key=value format
  */
 
-#ifndef SMFT_OUTPUT_MANAGER_H
-#define SMFT_OUTPUT_MANAGER_H
+#ifndef TRD_OUTPUT_MANAGER_H
+#define TRD_OUTPUT_MANAGER_H
 
 #include <string>
 #include <vector>
@@ -60,7 +60,7 @@
 #include <chrono>
 #include <filesystem>
 
-namespace SMFT {
+namespace TRD {
 
 /**
  * @brief Manages systematic output generation for experiments
@@ -185,6 +185,6 @@ private:
     bool validateFileWrite(const std::string& filepath);
 };
 
-} // namespace SMFT
+} // namespace TRD
 
-#endif // SMFT_OUTPUT_MANAGER_H
+#endif // TRD_OUTPUT_MANAGER_H

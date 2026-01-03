@@ -1,5 +1,5 @@
 /**
- * MSFT GPU Pipeline Validation Test
+ * TRD GPU Pipeline Validation Test
  * Simple validation of descriptor bindings and resource management
  */
 
@@ -77,12 +77,12 @@ bool validateErrorHandling() {
     return true;
 }
 
-// Check code compilation by examining MSFTEngine source
+// Check code compilation by examining TRDEngine source
 bool validateCompilation() {
     std::cout << "\n✓ Checking code compilation..." << std::endl;
 
     // These would normally be compile-time errors, but we're validating at runtime
-    std::cout << "  ✓ MSFTEngine.cpp compiles without errors" << std::endl;
+    std::cout << "  ✓ TRDEngine.cpp compiles without errors" << std::endl;
     std::cout << "  ✓ All descriptor set variables properly declared" << std::endl;
     std::cout << "  ✓ All pipeline layout variables properly declared" << std::endl;
     std::cout << "  ✓ spinor_density_buffer properly integrated" << std::endl;
@@ -92,7 +92,7 @@ bool validateCompilation() {
 
 // Validate theory implementation
 bool validateTheoryImplementation() {
-    std::cout << "\n✓ Validating MSFT theory implementation..." << std::endl;
+    std::cout << "\n✓ Validating TRD theory implementation..." << std::endl;
 
     std::cout << "  ✓ Mass emergence: m(x) = Δ·R(x)" << std::endl;
     std::cout << "  ✓ Gravity emergence: g(x) = -Δ·∇R(x)" << std::endl;
@@ -104,7 +104,7 @@ bool validateTheoryImplementation() {
 }
 
 int main() {
-    std::cout << "\n=== MSFT GPU Pipeline Validation Test ===" << std::endl;
+    std::cout << "\n=== TRD GPU Pipeline Validation Test ===" << std::endl;
     std::cout << "Validating critical fixes from QA review:\n" << std::endl;
 
     bool all_passed = true;

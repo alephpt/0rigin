@@ -16,7 +16,7 @@
 
 **The actual problem was NOT in ObservableComputer or struct passing.**
 
-The root cause was in `SMFTEngine::stepWithDirac()`:
+The root cause was in `TRDEngine::stepWithDirac()`:
 
 ```cpp
 // BEFORE (BROKEN):
@@ -38,7 +38,7 @@ downloadFromGPU();  // OVERWRITES _R_field_data with zeros from GPU!
 
 ## The Fix
 
-**File**: `/home/persist/neotec/0rigin/src/SMFTEngine.cpp`
+**File**: `/home/persist/neotec/0rigin/src/TRDEngine.cpp`
 
 ```cpp
 // AFTER (FIXED):
@@ -66,7 +66,7 @@ std::vector<float> R_field = getSyncField();  // Now returns correct data
 
 ```bash
 cd build && make -j4
-./bin/smft --test ../config/stuckelberg_integration_test.yaml 2>&1 | grep "R_avg"
+./bin/trd --test ../config/stuckelberg_integration_test.yaml 2>&1 | grep "R_avg"
 ```
 
 **Output**:
@@ -84,8 +84,8 @@ Step 1000/20000 | R_avg = 0.999803 | norm = 0.999674
 
 ## Files Modified
 
-1. `/home/persist/neotec/0rigin/src/SMFTEngine.cpp` - Added conditional GPU download
-2. `/home/persist/neotec/0rigin/src/simulations/SMFTTestRunner.cpp` - Cleaned up debug code
+1. `/home/persist/neotec/0rigin/src/TRDEngine.cpp` - Added conditional GPU download
+2. `/home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp` - Cleaned up debug code
 
 ## Status
 

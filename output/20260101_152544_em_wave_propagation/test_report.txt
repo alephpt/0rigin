@@ -1,4 +1,4 @@
-===== SMFT Test Report =====
+===== TRD Test Report =====
 Test: em_wave_propagation
 Description: Electromagnetic Wave Propagation Test - Verify c = 1/√(μ₀ε₀)
 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_einstein_field_equations.dir/link.d CMakeFiles/test_einstein_field_equations.dir/test/test_einstein_field_equations.cpp.o CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.o CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.o -o bin/test_einstein_field_equations  -lm

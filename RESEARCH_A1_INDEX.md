@@ -1,4 +1,4 @@
-# Research A1: Einstein Field Equation Derivation from SMFT
+# Research A1: Einstein Field Equation Derivation from TRD
 
 ## Research Completion Report
 
@@ -47,14 +47,14 @@
 ## Key Findings at a Glance
 
 ### What We Know (✓ Confirmed)
-1. SMFT metric is well-defined as conformal metric g_μν = R²h_μν
+1. TRD metric is well-defined as conformal metric g_μν = R²h_μν
 2. Metric structure is Lorentzian signature (-,+,+,+)
 3. 4×4 matrix form is explicitly computable
 4. Mathematical pathway from metric to Einstein tensor is clear
 5. All required computational tools exist (SymPy, Mathematica, GRTensorII)
 
 ### What Blocks Us (⚠ Physics Questions)
-1. Field equations for R(x,t) not specified in SMFT literature
+1. Field equations for R(x,t) not specified in TRD literature
 2. Nature and dynamics of v(x,t) unclear
 3. Stress-energy tensor for synchronization field has no established formalism
 4. Coupling constant 8πG emergence mechanism unknown
@@ -72,9 +72,9 @@
 ## Critical Blockers Hierarchy
 
 ### Priority 1: Field Equations (MUST RESOLVE)
-**Status**: Not specified in available SMFT literature  
+**Status**: Not specified in available TRD literature  
 **Impact**: Blocks all subsequent computations  
-**Action**: Contact SMFT theory developers immediately  
+**Action**: Contact TRD theory developers immediately  
 
 The entire derivation depends on knowing:
 - How does R(x,t) evolve dynamically?
@@ -105,7 +105,7 @@ The factor 8π may be:
 - Related to spacetime dimension
 
 ### Priority 4: Quantum-Classical Bridge (NICE TO HAVE)
-**Status**: Not clear how SMFT→GR limit works  
+**Status**: Not clear how TRD→GR limit works  
 **Impact**: Affects interpretation but not mathematical validity  
 **Action**: Develop semi-classical formulation  
 
@@ -119,7 +119,7 @@ Clarify:
 ## Research Scope & Methodology
 
 ### What Was Done
-1. ✓ Analyzed SMFT metric structure from literature
+1. ✓ Analyzed TRD metric structure from literature
 2. ✓ Derived metric tensor in explicit 4×4 component form
 3. ✓ Identified mathematical requirements for tensor derivations
 4. ✓ Mapped computational pathway (Γ → R → G_μν)
@@ -144,7 +144,7 @@ This is intentional—the research phase identified blockers, not attempted brut
 ### For Project Leadership
 - Read **SUMMARY** for executive overview (15 min)
 - Check **Success Probability** section (25-40% likely success)
-- Review **Next Action** (engage SMFT developers)
+- Review **Next Action** (engage TRD developers)
 
 ### For Theoretical Physicists
 - Read **Main Report Part 1-6** for technical setup (1-2 hours)
@@ -168,7 +168,7 @@ This is intentional—the research phase identified blockers, not attempted brut
 ### Week 1 (This Week)
 **Priority**: Resolve Blocker 1 (Field Equations)
 
-1. Identify and contact SMFT theory developers
+1. Identify and contact TRD theory developers
 2. Present 3 key questions:
    - What is the PDE for ∂_t R(x,t)?
    - What is v(x,t) and how does it evolve?
@@ -220,7 +220,7 @@ This is intentional—the research phase identified blockers, not attempted brut
 If research proceeds to success, recommend 3-paper series:
 
 **Paper 1**: Mathematical derivation (12-15 pages)
-- SMFT metric structure
+- TRD metric structure
 - Christoffel symbols explicit forms
 - Ricci tensor computation
 - Einstein tensor structure
@@ -232,8 +232,8 @@ If research proceeds to success, recommend 3-paper series:
 - Comparison with standard GR
 
 **Paper 3**: Interpretation and predictions (15-20 pages)
-- What does SMFT→GR derivation reveal?
-- New physics predictions from SMFT?
+- What does TRD→GR derivation reveal?
+- New physics predictions from TRD?
 - Cosmological implications
 - Open questions and future work
 
@@ -263,7 +263,7 @@ If research proceeds to success, recommend 3-paper series:
 
 ---
 
-## Questions for SMFT Developers
+## Questions for TRD Developers
 
 To facilitate next phase, ask:
 
@@ -280,7 +280,7 @@ To facilitate next phase, ask:
    - Can v be eliminated through gauge transformation?
 
 3. **On Stress-Energy**:
-   - What is T_μν in SMFT theory?
+   - What is T_μν in TRD theory?
    - Is there an action principle?
    - How does order parameter contribute?
    - Is there regularization prescription?
@@ -289,7 +289,7 @@ To facilitate next phase, ask:
    - Do R and v couple through field equations?
    - Are there conservation laws (E, p)?
    - What is the vacuum structure (⟨R⟩, etc.)?
-   - How does SMFT relate to standard field theory?
+   - How does TRD relate to standard field theory?
 
 ---
 
@@ -304,7 +304,7 @@ This research phase successfully:
 
 The derivation is **mathematically tractable but physics-limited**. The gaps are fundamental questions about field dynamics, not mathematical impossibilities.
 
-**Next Phase**: Physics clarification with SMFT developers.  
+**Next Phase**: Physics clarification with TRD developers.  
 **Timeline**: 3-4 months to resolution with full engagement.  
 **Impact**: If successful, would provide fundamental understanding of gravity's origin.
 

@@ -17,7 +17,7 @@
  * - Momentum density: g_EM = T^0i = (E × B)_i (Poynting vector)
  * - Stress: T^ij = -E_i E_j - B_i B_j + (1/2)δ_ij(E² + B²)
  *
- * SMFT Coupling:
+ * TRD Coupling:
  * - R-field evolution influenced by ∇·T^(EM)
  * - High EM energy → R-field perturbation
  * - Coupling: ∂R/∂t ~ -ε·∇·(E×B) - ε·ρ_EM
@@ -40,7 +40,7 @@ layout(push_constant) uniform PushConstants {
     float dt;              // Time step
     float K;               // Coupling strength (not used)
     float damping;         // Damping (not used)
-    float Delta;           // MSFT mass gap
+    float Delta;           // TRD mass gap
     float chiral_angle;    // Chiral angle (not used)
     uint Nx;               // Grid width
     uint Ny;               // Grid height

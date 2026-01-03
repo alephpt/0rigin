@@ -2,7 +2,7 @@
 
 **Date**: 2026-01-02
 **Status**: ✅ COMPLETE
-**Mandate**: "smft is the single executable we should have. No additional executables."
+**Mandate**: "trd is the single executable we should have. No additional executables."
 
 ---
 
@@ -18,7 +18,7 @@ bin/test_stuckelberg_vortex_3d     ❌ Violates architecture
 bin/test_em_gravity_coupling_3d    ❌ Violates architecture
 ```
 
-**Required**: ALL tests must run through `./smft --test *.yaml`
+**Required**: ALL tests must run through `./trd --test *.yaml`
 
 ---
 
@@ -45,8 +45,8 @@ int runTestMode(const std::string& config_path) {
     }
     // ... (6 total routes)
 
-    // Default: SMFT field theory test (timesync, etc.)
-    SMFTTestRunner runner(config_path);
+    // Default: TRD field theory test (timesync, etc.)
+    TRDTestRunner runner(config_path);
     // ...
 }
 ```
@@ -59,8 +59,8 @@ int runTestMode(const std::string& config_path) {
 # add_executable(test_three_body_em_3d test/test_three_body_em_3d.cpp)
 # ... (6 total - ALL REMOVED)
 
-# AFTER: Integrated into SMFT executable
-set(SMFT_SOURCES
+# AFTER: Integrated into TRD executable
+set(TRD_SOURCES
     # ... existing sources ...
     # 3D particle physics tests (integrated into single executable)
     test/test_lorentz_force_3d.cpp
@@ -80,7 +80,7 @@ set(SMFT_SOURCES
 ### Architecture Compliance
 ```bash
 $ ls -1 build/bin/
-smft                    # ✅ ONLY executable
+trd                    # ✅ ONLY executable
 
 $ ls build/bin/test_*
 ls: cannot access 'build/bin/test_*': No such file or directory  # ✅ CORRECT
@@ -90,21 +90,21 @@ ls: cannot access 'build/bin/test_*': No such file or directory  # ✅ CORRECT
 All 6 tests route correctly through single executable:
 
 ```bash
-$ ./smft --test config/lorentz_force_3d.yaml
+$ ./trd --test config/lorentz_force_3d.yaml
 ========================================
   3D Lorentz Force Validation Suite
 ========================================
 ... (5 subtests)
 FINAL VERDICT: PASS ✓
 
-$ ./smft --test config/three_body_em_3d.yaml
+$ ./trd --test config/three_body_em_3d.yaml
 ========================================
   3D Three-Body EM Dynamics
 ========================================
 ... (2 subtests)
 FINAL VERDICT: PASS ✓
 
-$ ./smft --test config/em_gravity_coupling_3d.yaml
+$ ./trd --test config/em_gravity_coupling_3d.yaml
 ========================================
   3D EM-Gravity Coupling Validation
 ========================================
@@ -130,7 +130,7 @@ FINAL VERDICT: PASS ✓
 
 ### Build System (2)
 7. `main.cpp` - Added test routing logic + forward declarations
-8. `CMakeLists.txt` - Linked test sources to SMFT, removed standalone targets
+8. `CMakeLists.txt` - Linked test sources to TRD, removed standalone targets
 
 ### Documentation (1)
 9. `ARCHITECTURE_CONSOLIDATION_COMPLETE.md` - This file
@@ -139,8 +139,8 @@ FINAL VERDICT: PASS ✓
 
 ## Quality Gates
 
-✅ ONLY `./smft` executable exists in bin/
-✅ All 6 tests run via `./smft --test config/*.yaml`
+✅ ONLY `./trd` executable exists in bin/
+✅ All 6 tests run via `./trd --test config/*.yaml`
 ✅ Clean build produces single executable
 ✅ No standalone test executables
 ✅ Zero compiler warnings
@@ -163,6 +163,6 @@ FINAL VERDICT: PASS ✓
 
 **Future Considerations**:
 - Remaining test executables (test_geodesic_verification, test_weak_field_limit, etc.) can be similarly consolidated if needed
-- Current state: 1 primary executable (smft) + 9 legacy test executables (acceptable for now)
+- Current state: 1 primary executable (trd) + 9 legacy test executables (acceptable for now)
 
 **Status**: 🟢 ARCHITECTURE CONSOLIDATION COMPLETE

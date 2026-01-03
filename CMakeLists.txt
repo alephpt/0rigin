@@ -117,26 +117,26 @@ target_include_directories(imgui PUBLIC
 )
 
 # ============================================================================
-# SMFT APPLICATION (GPU-accelerated + Stückelberg EM)
+# TRD APPLICATION (GPU-accelerated + Stückelberg EM)
 # ============================================================================
 
-# SMFT sources - unified executable with interactive and test modes
-set(SMFT_SOURCES
-    src/SMFTCore.cpp
-    src/SMFTCore3D.cpp
+# TRD sources - unified executable with interactive and test modes
+set(TRD_SOURCES
+    src/TRDCore.cpp
+    src/TRDCore3D.cpp
     src/Maxwell3D.cpp
     src/Dirac3D.cpp
-    src/SMFTEngine.cpp
-    src/SMFTEngine3D.cpp
-    src/SMFTPipelineFactory.cpp
-    src/SMFTBufferManager.cpp
-    src/SMFTCompute.cpp
-    src/SMFTDescriptorManager.cpp
+    src/TRDEngine.cpp
+    src/TRDEngine3D.cpp
+    src/TRDPipelineFactory.cpp
+    src/TRDBufferManager.cpp
+    src/TRDCompute.cpp
+    src/TRDDescriptorManager.cpp
     src/DiracEvolution.cpp
     src/GeodesicIntegrator.cpp
     src/output/OutputManager.cpp
     src/simulations/TestConfig.cpp
-    src/simulations/SMFTTestRunner.cpp
+    src/simulations/TRDTestRunner.cpp
     src/simulations/ObservableComputer.cpp
     # 3D particle physics tests (integrated into single executable)
     test/test_lorentz_force_3d.cpp
@@ -149,11 +149,11 @@ set(SMFT_SOURCES
     main.cpp
 )
 
-add_executable(SMFT ${SMFT_SOURCES})
+add_executable(TRD ${TRD_SOURCES})
 
-target_compile_definitions(SMFT PRIVATE SMFT_MAIN_EXECUTABLE)
+target_compile_definitions(TRD PRIVATE TRD_MAIN_EXECUTABLE)
 
-target_include_directories(SMFT PRIVATE
+target_include_directories(TRD PRIVATE
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/lib
@@ -162,7 +162,7 @@ target_include_directories(SMFT PRIVATE
     ${SDL2_INCLUDE_DIRS}
 )
 
-target_link_libraries(SMFT PRIVATE
+target_link_libraries(TRD PRIVATE
     Nova
     imgui
     Physics
@@ -176,9 +176,9 @@ target_link_libraries(SMFT PRIVATE
 )
 
 # Set output directory and binary name
-set_target_properties(SMFT PROPERTIES
+set_target_properties(TRD PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    OUTPUT_NAME "smft"
+    OUTPUT_NAME "trd"
 )
 
 # ============================================================================
@@ -211,7 +211,7 @@ set_target_properties(test_geodesic_verification PROPERTIES
 # A1: Einstein Field Equations Test
 add_executable(test_einstein_field_equations
     test/test_einstein_field_equations.cpp
-    src/SMFTCore3D.cpp
+    src/TRDCore3D.cpp
     src/Maxwell3D.cpp
 )
 target_include_directories(test_einstein_field_equations PRIVATE
@@ -229,15 +229,15 @@ set_target_properties(test_einstein_field_equations PROPERTIES
 # A2: Weak Field Limit Validation Test
 add_executable(test_weak_field_limit
     test/test_weak_field_limit.cpp
-    src/simulations/SMFTTestRunner.cpp
+    src/simulations/TRDTestRunner.cpp
     src/simulations/TestConfig.cpp
     src/simulations/ObservableComputer.cpp
-    src/SMFTCore.cpp
-    src/SMFTEngine.cpp
-    src/SMFTPipelineFactory.cpp
-    src/SMFTBufferManager.cpp
-    src/SMFTCompute.cpp
-    src/SMFTDescriptorManager.cpp
+    src/TRDCore.cpp
+    src/TRDEngine.cpp
+    src/TRDPipelineFactory.cpp
+    src/TRDBufferManager.cpp
+    src/TRDCompute.cpp
+    src/TRDDescriptorManager.cpp
     src/DiracEvolution.cpp
     src/GeodesicIntegrator.cpp
     src/output/OutputManager.cpp
@@ -266,35 +266,35 @@ set_target_properties(test_weak_field_limit PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
-# SMFTCore3D Basic Test
-add_executable(test_smftcore3d_basic
-    test/test_smftcore3d_basic.cpp
-    src/SMFTCore3D.cpp
+# TRDCore3D Basic Test
+add_executable(test_trdcore3d_basic
+    test/test_trdcore3d_basic.cpp
+    src/TRDCore3D.cpp
 )
 
-target_include_directories(test_smftcore3d_basic PRIVATE
+target_include_directories(test_trdcore3d_basic PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/lib
     ${Vulkan_INCLUDE_DIRS}
 )
 
-target_link_libraries(test_smftcore3d_basic PRIVATE
+target_link_libraries(test_trdcore3d_basic PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
 )
 
-set_target_properties(test_smftcore3d_basic PROPERTIES
+set_target_properties(test_trdcore3d_basic PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
-# SMFTCore3D GPU Test (Simplified)
-add_executable(test_smftcore3d_gpu
-    test/test_smftcore3d_gpu_simple.cpp
-    src/SMFTCore3D.cpp
+# TRDCore3D GPU Test (Simplified)
+add_executable(test_trdcore3d_gpu
+    test/test_trdcore3d_gpu_simple.cpp
+    src/TRDCore3D.cpp
 )
 
-target_include_directories(test_smftcore3d_gpu PRIVATE
+target_include_directories(test_trdcore3d_gpu PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/lib
@@ -302,34 +302,34 @@ target_include_directories(test_smftcore3d_gpu PRIVATE
     ${Vulkan_INCLUDE_DIRS}
 )
 
-target_link_libraries(test_smftcore3d_gpu PRIVATE
+target_link_libraries(test_trdcore3d_gpu PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
 )
 
-set_target_properties(test_smftcore3d_gpu PROPERTIES
+set_target_properties(test_trdcore3d_gpu PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
-# SMFT 3D CPU-Only Test (no GPU dependency)
-add_executable(test_smft3d_cpu_only
-    test/test_smft3d_cpu_only.cpp
-    src/SMFTCore3D.cpp
+# TRD 3D CPU-Only Test (no GPU dependency)
+add_executable(test_trd3d_cpu_only
+    test/test_trd3d_cpu_only.cpp
+    src/TRDCore3D.cpp
 )
 
-target_include_directories(test_smft3d_cpu_only PRIVATE
+target_include_directories(test_trd3d_cpu_only PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${Vulkan_INCLUDE_DIRS}
 )
 
-target_link_libraries(test_smft3d_cpu_only PRIVATE
+target_link_libraries(test_trd3d_cpu_only PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
 )
 
-set_target_properties(test_smft3d_cpu_only PROPERTIES
+set_target_properties(test_trd3d_cpu_only PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
@@ -356,16 +356,16 @@ set_target_properties(test_maxwell3d_wave PROPERTIES
 # 2D→3D VALIDATION MIGRATION TEST SUITE
 # ============================================================================
 #
-# CONSOLIDATED: All 3D particle physics tests now run through single ./smft executable
-#   Usage: ./smft --test config/<test_name>_3d.yaml
+# CONSOLIDATED: All 3D particle physics tests now run through single ./trd executable
+#   Usage: ./trd --test config/<test_name>_3d.yaml
 #
 # Integrated tests:
-#   - Lorentz Force 3D        → ./smft --test config/lorentz_force_3d.yaml
-#   - Stückelberg Vortex 3D   → ./smft --test config/stuckelberg_vortex_3d.yaml
-#   - Geodesic 3D             → ./smft --test config/geodesic_3d.yaml
-#   - Weak Field 3D           → ./smft --test config/weak_field_3d.yaml
-#   - Three-Body EM 3D        → ./smft --test config/three_body_em_3d.yaml
-#   - EM-Gravity Coupling 3D  → ./smft --test config/em_gravity_coupling_3d.yaml
+#   - Lorentz Force 3D        → ./trd --test config/lorentz_force_3d.yaml
+#   - Stückelberg Vortex 3D   → ./trd --test config/stuckelberg_vortex_3d.yaml
+#   - Geodesic 3D             → ./trd --test config/geodesic_3d.yaml
+#   - Weak Field 3D           → ./trd --test config/weak_field_3d.yaml
+#   - Three-Body EM 3D        → ./trd --test config/three_body_em_3d.yaml
+#   - EM-Gravity Coupling 3D  → ./trd --test config/em_gravity_coupling_3d.yaml
 #
 # REMOVED standalone test executables (architecture violation - single executable only)
 
@@ -389,42 +389,42 @@ set_target_properties(test_dirac3d_free PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
-# Full 3D SMFT Integration Test (Week 9-10)
-add_executable(test_3d_full_smft
-    test/test_3d_full_smft.cpp
-    src/SMFTCore3D.cpp
+# Full 3D TRD Integration Test (Week 9-10)
+add_executable(test_3d_full_trd
+    test/test_3d_full_trd.cpp
+    src/TRDCore3D.cpp
     src/Maxwell3D.cpp
     src/Dirac3D.cpp
 )
 
-target_include_directories(test_3d_full_smft PRIVATE
+target_include_directories(test_3d_full_trd PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${Vulkan_INCLUDE_DIRS}
 )
 
-target_link_libraries(test_3d_full_smft PRIVATE
+target_link_libraries(test_3d_full_trd PRIVATE
     ${Vulkan_LIBRARIES}
     fftw3f
     pthread
     m
 )
 
-set_target_properties(test_3d_full_smft PROPERTIES
+set_target_properties(test_3d_full_trd PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
 # ============================================================================
 # LEGACY TEST BINARIES REMOVED
 # ============================================================================
-# All tests now run through unified smft binary via YAML configs:
-#   ./smft --test config/stuckelberg_integration_test.yaml
+# All tests now run through unified trd binary via YAML configs:
+#   ./trd --test config/stuckelberg_integration_test.yaml
 #
 # Removed binaries:
 # - test_stuckelberg_vortex_bfield → config/stuckelberg_integration_test.yaml
-# - test_smft_em_integration → integrated into smft
-# - test_dirac_em_coupling → integrated into smft
+# - test_trd_em_integration → integrated into trd
+# - test_dirac_em_coupling → integrated into trd
 #
-# Single source of truth: ./smft
+# Single source of truth: ./trd
 
 # ============================================================================
 # SUMMARY
@@ -432,7 +432,7 @@ set_target_properties(test_3d_full_smft PROPERTIES
 
 message(STATUS "")
 message(STATUS "===============================================")
-message(STATUS " 0rigin: GPU-Accelerated SMFT + Stückelberg EM")
+message(STATUS " 0rigin: GPU-Accelerated TRD + Stückelberg EM")
 message(STATUS "===============================================")
 message(STATUS "")
 message(STATUS "  Build type: ${CMAKE_BUILD_TYPE}")
@@ -443,7 +443,7 @@ message(STATUS "    • Nova (Vulkan compute engine)")
 message(STATUS "    • ImGui (UI framework)")
 message(STATUS "")
 message(STATUS "  Targets:")
-message(STATUS "    • smft (main executable)")
+message(STATUS "    • trd (main executable)")
 message(STATUS "       - GPU-accelerated Kuramoto dynamics")
 message(STATUS "       - CPU Dirac evolution (split-operator)")
 message(STATUS "       - Stückelberg EM coupling (ready to integrate)")

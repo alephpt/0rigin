@@ -1,6 +1,6 @@
 # Weak Field Limit 3D Validation Configuration
 #
-# Test: SMFT reproduces Newtonian gravity in weak field limit
+# Test: TRD reproduces Newtonian gravity in weak field limit
 # Physics: R ≈ 1 + ε, |ε| ≪ 1 → ∇²φ = 4πG·ρ
 #
 # Quality Gates:
