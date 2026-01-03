@@ -62,6 +62,7 @@ int runTimeDilation3DTest();
 int runCosmologicalConstantTest();
 int runFriedmannEquationsTest();
 int runDarkMatterTest();
+// int runExperimentalPredictionsTest();  // Compiled as separate executable
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -95,6 +96,8 @@ int runTestMode(const std::string& config_path) {
         return runFriedmannEquationsTest();
     } else if (config_path.find("dark_matter") != std::string::npos) {
         return runDarkMatterTest();
+    // } else if (config_path.find("experimental_predictions") != std::string::npos) {
+    //     return runExperimentalPredictionsTest();  // Compiled as separate executable
     }
 
     // Default: TRD field theory test (timesync, etc.)
