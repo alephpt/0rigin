@@ -1,0 +1,192 @@
+# H3: The Dynamo - Spin Creates Magnetism
+#
+# Test: Can spin angular momentum generate magnetic dipole moments in TRD?
+# Hypothesis: Rotating phase field θ(r,t) = ωt + f(r) creates ∇×(R·∇θ) ~ magnetic field
+# Prediction: g-factor ≈ 2.0 (electron anomalous magnetic moment)
+#
+# Observable: Magnetic moment μ from rotating phase field
+# Quality Gates:
+#   1. B-field proportional to ω (spin frequency)
+#   2. Dipole structure: B ~ (3(μ·r)r - μ)/r³
+#   3. g-factor within 20% of 2.0
+
+test_name: "H3_Spin_Magnetism"
+description: "TRD prediction - spin angular momentum generates magnetic dipole moments"
+
+# Framework
+validation:
+  framework: "H3 - Spin-Magnetism Coupling"
+  test_file: "test/test_spin_magnetism.cpp"
+  executable: "trd"
+
+# TRD Physics Parameters
+physics:
+  golden_key_calibration: 246.0  # GeV per TRD unit
+
+  # Grid configuration
+  grid_size_x: 64
+  grid_size_y: 64
+  grid_size_z: 64
+  dx: 1.0  # Spatial step (TRD units)
+  dt: 0.01  # Time step (TRD units)
+
+  # Spin configuration
+  spin_frequency: 1.0  # Angular velocity ω (TRD units)
+  coupling_strength: 1.0  # Kuramoto coupling K
+  mass_gap: 1.0  # R-field mass parameter
+
+  # Physical constants (SI units for reference)
+  hbar: 1.054571817e-34  # J·s
+  electron_charge: 1.602176634e-19  # C
+  electron_mass: 9.1093837015e-31  # kg
+  bohr_magneton: 9.2740100783e-24  # J/T
+
+# Test Scenarios
+test_scenarios:
+  - name: "Static_Field"
+    description: "No rotation (ω=0) → no magnetic field"
+    parameters:
+      spin_omega: 0.0
+      grid_size: 32
+
+    expected:
+      max_current_density: 0.0
+      tolerance: 0.01
+
+    quality_gate:
+      metric: "Current density"
+      requirement: "J_max < 0.01 (no rotation → no current)"
+
+  - name: "Slow_Spin"
+    description: "Slow rotation (ω=0.1) → weak magnetic dipole"
+    parameters:
+      spin_omega: 0.1
+      grid_size: 32
+
+    expected:
+      dipole_structure: true
+      magnetic_moment_min: 0.01
+
+    quality_gate:
+      metric: "Magnetic dipole moment"
+      requirement: "|μ| > 0.01 (rotation generates dipole)"
+
+  - name: "Fast_Spin"
+    description: "Fast rotation (ω=1.0) → strong dipole, measure g-factor"
+    parameters:
+      spin_omega: 1.0
+      grid_size: 64  # Higher resolution for accuracy
+
+    expected:
+      g_factor: 2.0
+      tolerance: 0.4  # 20% (1.6 ≤ g ≤ 2.4)
+
+    quality_gate:
+      metric: "g-factor"
+      requirement: "g = 2.0 ± 20% (electron anomalous magnetic moment)"
+      physics_note: "QED predicts g = 2.00231930436256(35)"
+      trd_target: "g ≈ 2.0 at tree level"
+
+  - name: "Linearity_Test"
+    description: "Verify μ ∝ ω (linear response)"
+    parameters:
+      omega_values: [0.1, 0.5, 1.0, 2.0]
+      grid_size: 32
+
+    expected:
+      linearity: true
+      max_deviation: 0.15  # 15%
+
+    quality_gate:
+      metric: "Linearity"
+      requirement: "μ(ω) = μ(ω₀)·(ω/ω₀) within 15%"
+
+# Quality Metrics
+quality_metrics:
+  - metric: "Magnetic dipole moment"
+    formula: "μ = (1/2)∫(r × J)d³r"
+    requirement: "μ ∝ ω (linear in spin frequency)"
+    physics_basis: "Quantum mechanics: μ = gμ_B·L"
+
+  - metric: "g-factor"
+    formula: "g = μ/(μ_B·L)"
+    requirement: "g = 2.0 ± 0.4 (20% tolerance)"
+    physics_basis: "Electron: g = 2.00231930436256 (QED)"
+    trd_prediction: "Tree-level g ≈ 2.0"
+
+  - metric: "Field structure"
+    formula: "B(r) ~ (3(μ·r̂)r̂ - μ)/r³"
+    requirement: "Magnetic dipole field pattern"
+    quality_gate: "Visual inspection + symmetry"
+
+  - metric: "Current density"
+    formula: "J = R·∇θ"
+    requirement: "J proportional to ω·R"
+    validation: "Numerical gradient check"
+
+# Expected Results
+expected_results:
+  success_criteria:
+    - "Static field produces no current (J_max < 0.01)"
+    - "Rotating field generates magnetic dipole (|μ| > 0)"
+    - "g-factor within 20% of 2.0 (1.6 ≤ g ≤ 2.4)"
+    - "Linear response: μ ∝ ω (deviation < 15%)"
+
+  physics_interpretation:
+    - "TRD rotating phase fields behave like quantum spin"
+    - "Magnetic moment generation consistent with Dirac equation"
+    - "g-factor ≈ 2.0 validates gyromagnetic ratio"
+    - "Spin-magnetism coupling emerges naturally from TRD"
+
+  implications:
+    - "TRD can model electron magnetic moment"
+    - "Spin = topological charge of rotating phase field"
+    - "g-factor corrections require loop-level calculations"
+    - "Validates TRD as candidate for fermion dynamics"
+
+# Experimental Connections
+experimental_relevance:
+  - experiment: "Electron g-factor measurement"
+    method: "Penning trap spectroscopy"
+    precision: "g/2 = 1.00115965218091(26)"
+    trd_prediction: "Tree level g ≈ 2.0, corrections from interactions"
+
+  - experiment: "Stern-Gerlach experiment"
+    observable: "Magnetic moment of spin-1/2 particles"
+    prediction: "Two distinct deflections (spin up/down)"
+    trd_analog: "Two topological winding modes (±1)"
+
+  - experiment: "Zeeman effect"
+    observable: "Energy splitting in magnetic field: ΔE = μ·B"
+    prediction: "Linear in B-field strength"
+    trd_test: "Measure energy shift vs B-field"
+
+# Computational Notes
+computation:
+  grid_resolution:
+    development: "32³ grid (32,768 points)"
+    production: "64³ grid (262,144 points)"
+    high_accuracy: "128³ grid (2,097,152 points)"
+
+  performance:
+    expected_runtime: "< 5 minutes on CPU"
+    memory_usage: "~20 MB for 64³ grid"
+    parallelization: "OpenMP for grid operations"
+
+  numerical_methods:
+    gradient: "Central difference (2nd order)"
+    curl: "Finite difference stencil"
+    integral: "Trapezoidal rule (3D)"
+
+  validation_checks:
+    - "Periodic boundary conditions maintained"
+    - "Numerical stability (no NaN/Inf)"
+    - "Grid convergence (compare 32³ vs 64³)"
+    - "Symmetry preservation (rotation in x-y plane)"
+
+# References
+references:
+  - "Dirac, P.A.M. (1928). The quantum theory of the electron. Proc. R. Soc. Lond. A 117, 610–624."
+  - "Schwinger, J. (1948). On quantum-electrodynamics and the magnetic moment of the electron. Phys. Rev. 73, 416–417."
+  - "Hanneke, D. et al. (2008). New measurement of the electron magnetic moment and the fine structure constant. Phys. Rev. Lett. 100, 120801."
+  - "TRD Theory: Golden Key Calibration (1 TRD unit = 246 GeV)"

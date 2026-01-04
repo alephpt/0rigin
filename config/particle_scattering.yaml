@@ -1,0 +1,180 @@
+validation:
+  framework: "D4 - Particle Scattering (Soliton Integrity)"
+  test_file: "test/test_particle_scattering.cpp"
+  description: >
+    Tests whether TRD solitons (vortex excitations) scatter elastically
+    while maintaining topological integrity. In field theory, solitons
+    should bounce off each other elastically if topologically stable.
+    This validates the particle-like nature of TRD vortices.
+
+physics:
+  grid_size: 128
+  coupling_strength: 1.0
+  mass_gap: 1.0
+  time_step: 0.01
+  evolution_steps: 5000
+  calibration: "1 TRD unit = 246 GeV (Golden Key)"
+
+collision_scenarios:
+  - name: "Head_On_Slow"
+    description: "Low energy head-on collision (v=0.1c)"
+    initial_separation: 40.0  # TRD units
+    velocity: 0.1             # In units of c
+    impact_parameter: 0.0     # Head-on collision
+    expected:
+      topology_conserved: true
+      energy_drift_max: 0.01  # 1% tolerance
+      momentum_conserved: true
+      solitons_survive: true
+      vortex_count_final: 2
+    physics_notes: >
+      Low energy collision should produce clean elastic scattering.
+      Vortices pass through each other with minimal distortion.
+      E_cm ~ 50 GeV for v=0.1c and m_eff=0.5 TRD units.
+
+  - name: "Head_On_Medium"
+    description: "Medium energy collision (v=0.3c)"
+    initial_separation: 40.0
+    velocity: 0.3
+    impact_parameter: 0.0
+    expected:
+      topology_conserved: true
+      energy_drift_max: 0.01
+      solitons_survive: true
+    physics_notes: >
+      Higher energy collision tests soliton stability at relativistic
+      speeds. γ ≈ 1.05, E_cm ~ 155 GeV. Vortices may deform during
+      close approach but should emerge intact.
+
+  - name: "Head_On_Fast"
+    description: "High energy collision (v=0.5c)"
+    initial_separation: 40.0
+    velocity: 0.5
+    impact_parameter: 0.0
+    expected:
+      topology_conserved: true
+      energy_drift_max: 0.02  # Slightly relaxed for high energy
+      solitons_survive: true
+    physics_notes: >
+      Relativistic collision: γ ≈ 1.15, E_cm ~ 284 GeV. Tests whether
+      topological protection holds at high energies. May produce
+      radiation (spin waves) but cores should remain intact.
+
+  - name: "Glancing_Low"
+    description: "Non-central collision (b=10, v=0.1c)"
+    initial_separation: 40.0
+    velocity: 0.1
+    impact_parameter: 10.0  # Non-zero impact parameter
+    expected:
+      topology_conserved: true
+      scattering_angle_nonzero: true
+      energy_drift_max: 0.01
+      solitons_survive: true
+    physics_notes: >
+      Glancing collision tests angular momentum conservation and
+      scattering cross-section. Vortices should deflect at non-zero
+      angle. Impact parameter b=10 is ~1/4 of initial separation.
+
+  - name: "Glancing_High"
+    description: "High energy glancing collision (b=5, v=0.5c)"
+    initial_separation: 40.0
+    velocity: 0.5
+    impact_parameter: 5.0
+    expected:
+      topology_conserved: true
+      scattering_angle_nonzero: true
+      energy_drift_max: 0.02
+      solitons_survive: true
+    physics_notes: >
+      High energy + close approach tests maximum stress on topological
+      stability. Small impact parameter increases interaction strength.
+      Should still scatter elastically if solitons are stable.
+
+quality_metrics:
+  - metric: "Topological charge conservation"
+    requirement: "Q_before = Q_after (ΔQ < 0.1)"
+    critical: true
+    rationale: >
+      Topological charge is a conserved quantum number. Any change
+      indicates annihilation or creation of vortices, which would
+      violate topological protection.
+
+  - metric: "Energy conservation"
+    requirement: "|ΔE/E| < 1% (low energy), < 2% (high energy)"
+    critical: true
+    rationale: >
+      Energy conservation is fundamental. Small deviations allowed
+      for numerical discretization, but large drift indicates
+      non-conservative dynamics or numerical instability.
+
+  - metric: "Momentum conservation"
+    requirement: "|Δp/p| < 5%"
+    critical: true
+    rationale: >
+      Total momentum must be conserved in isolated system. Periodic
+      boundary conditions ensure no momentum leakage. Larger tolerance
+      than energy due to phase gradient measurement noise.
+
+  - metric: "Soliton survival"
+    requirement: "Vortex count = 2 post-collision"
+    critical: true
+    rationale: >
+      True solitons survive collisions intact. Annihilation or merging
+      would indicate instability. Core deformation allowed, but
+      topological structure must persist.
+
+  - metric: "Cross-section scaling"
+    requirement: "σ ~ 1/s (Regge theory, within 20%)"
+    critical: false
+    rationale: >
+      Regge theory predicts σ ∝ 1/s at high energies for elastic
+      scattering. This tests whether TRD solitons follow expected
+      QFT scattering behavior. Non-critical (model-dependent).
+
+regge_theory:
+  description: >
+    Regge theory describes high-energy scattering via complex angular
+    momentum. For elastic scattering of solitons, predicts:
+      σ_total ~ 1/s  (s = E_cm²)
+    This is softer than hard-sphere σ ~ constant, indicating
+    extended/soft interaction region.
+
+  cross_section_formula: "σ = π·b_max² where b_max is max impact parameter"
+
+  expected_scaling: >
+    Low energy (v=0.1c, s~2500): σ ~ 0.001
+    High energy (v=0.5c, s~80000): σ ~ 0.00003
+    Ratio σ_low/σ_high ~ 30 ≈ s_high/s_low (validates 1/s scaling)
+
+output:
+  csv_file: "particle_scattering_results.csv"
+  fields:
+    - time
+    - topological_charge
+    - field_energy
+    - momentum_x
+    - momentum_y
+    - momentum_z
+    - vortex_count
+
+  plots:
+    - type: "energy_vs_time"
+      title: "Energy Conservation During Collision"
+
+    - type: "charge_vs_time"
+      title: "Topological Charge Stability"
+
+    - type: "phase_field_snapshots"
+      title: "Vortex Evolution: Before, During, After Collision"
+      times: [0, 25, 50]  # Time steps for snapshots
+
+golden_key_calibration:
+  trd_unit_gev: 246
+  notes: >
+    With 1 TRD unit = 246 GeV, collision energies are:
+      v=0.1c: E_cm ~ 50 GeV (below electroweak scale)
+      v=0.3c: E_cm ~ 155 GeV (near Higgs mass)
+      v=0.5c: E_cm ~ 284 GeV (above electroweak, below top)
+
+    These energies probe whether TRD soliton stability holds
+    across different energy scales relevant to particle physics.

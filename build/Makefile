@@ -1738,6 +1738,30 @@ test/test_inflation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_inflation.cpp.s
 .PHONY : test/test_inflation.cpp.s
 
+test/test_josephson_junction.o: test/test_josephson_junction.cpp.o
+.PHONY : test/test_josephson_junction.o
+
+# target to build an object file
+test/test_josephson_junction.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o
+.PHONY : test/test_josephson_junction.cpp.o
+
+test/test_josephson_junction.i: test/test_josephson_junction.cpp.i
+.PHONY : test/test_josephson_junction.i
+
+# target to preprocess a source file
+test/test_josephson_junction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.i
+.PHONY : test/test_josephson_junction.cpp.i
+
+test/test_josephson_junction.s: test/test_josephson_junction.cpp.s
+.PHONY : test/test_josephson_junction.s
+
+# target to generate assembly for a file
+test/test_josephson_junction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.s
+.PHONY : test/test_josephson_junction.cpp.s
+
 test/test_light_deflection_3d.o: test/test_light_deflection_3d.cpp.o
 .PHONY : test/test_light_deflection_3d.o
 
@@ -1810,6 +1834,30 @@ test/test_maxwell3d_wave.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.s
 .PHONY : test/test_maxwell3d_wave.cpp.s
 
+test/test_particle_scattering.o: test/test_particle_scattering.cpp.o
+.PHONY : test/test_particle_scattering.o
+
+# target to build an object file
+test/test_particle_scattering.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o
+.PHONY : test/test_particle_scattering.cpp.o
+
+test/test_particle_scattering.i: test/test_particle_scattering.cpp.i
+.PHONY : test/test_particle_scattering.i
+
+# target to preprocess a source file
+test/test_particle_scattering.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.i
+.PHONY : test/test_particle_scattering.cpp.i
+
+test/test_particle_scattering.s: test/test_particle_scattering.cpp.s
+.PHONY : test/test_particle_scattering.s
+
+# target to generate assembly for a file
+test/test_particle_scattering.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.s
+.PHONY : test/test_particle_scattering.cpp.s
+
 test/test_particle_spectrum_unified.o: test/test_particle_spectrum_unified.cpp.o
 .PHONY : test/test_particle_spectrum_unified.o
 
@@ -1881,6 +1929,30 @@ test/test_scale_invariance.s: test/test_scale_invariance.cpp.s
 test/test_scale_invariance.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.s
 .PHONY : test/test_scale_invariance.cpp.s
+
+test/test_spin_magnetism.o: test/test_spin_magnetism.cpp.o
+.PHONY : test/test_spin_magnetism.o
+
+# target to build an object file
+test/test_spin_magnetism.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o
+.PHONY : test/test_spin_magnetism.cpp.o
+
+test/test_spin_magnetism.i: test/test_spin_magnetism.cpp.i
+.PHONY : test/test_spin_magnetism.i
+
+# target to preprocess a source file
+test/test_spin_magnetism.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.i
+.PHONY : test/test_spin_magnetism.cpp.i
+
+test/test_spin_magnetism.s: test/test_spin_magnetism.cpp.s
+.PHONY : test/test_spin_magnetism.s
+
+# target to generate assembly for a file
+test/test_spin_magnetism.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.s
+.PHONY : test/test_spin_magnetism.cpp.s
 
 test/test_strong_force.o: test/test_strong_force.cpp.o
 .PHONY : test/test_strong_force.o
@@ -2360,6 +2432,9 @@ help:
 	@echo "... test/test_inflation.o"
 	@echo "... test/test_inflation.i"
 	@echo "... test/test_inflation.s"
+	@echo "... test/test_josephson_junction.o"
+	@echo "... test/test_josephson_junction.i"
+	@echo "... test/test_josephson_junction.s"
 	@echo "... test/test_light_deflection_3d.o"
 	@echo "... test/test_light_deflection_3d.i"
 	@echo "... test/test_light_deflection_3d.s"
@@ -2369,6 +2444,9 @@ help:
 	@echo "... test/test_maxwell3d_wave.o"
 	@echo "... test/test_maxwell3d_wave.i"
 	@echo "... test/test_maxwell3d_wave.s"
+	@echo "... test/test_particle_scattering.o"
+	@echo "... test/test_particle_scattering.i"
+	@echo "... test/test_particle_scattering.s"
 	@echo "... test/test_particle_spectrum_unified.o"
 	@echo "... test/test_particle_spectrum_unified.i"
 	@echo "... test/test_particle_spectrum_unified.s"
@@ -2378,6 +2456,9 @@ help:
 	@echo "... test/test_scale_invariance.o"
 	@echo "... test/test_scale_invariance.i"
 	@echo "... test/test_scale_invariance.s"
+	@echo "... test/test_spin_magnetism.o"
+	@echo "... test/test_spin_magnetism.i"
+	@echo "... test/test_spin_magnetism.s"
 	@echo "... test/test_strong_force.o"
 	@echo "... test/test_strong_force.i"
 	@echo "... test/test_strong_force.s"

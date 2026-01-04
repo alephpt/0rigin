@@ -1,0 +1,44 @@
+validation:
+  framework: "D4 - Particle Scattering (Soliton Integrity) - Minimal Test"
+  test_file: "test/test_particle_scattering.cpp"
+  description: >
+    Minimal validation test for TRD soliton elastic scattering.
+    Bare minimum grid and steps for proof of concept.
+
+physics:
+  grid_size: 32          # Minimal viable grid
+  coupling_strength: 1.0
+  mass_gap: 1.0
+  time_step: 0.02        # Larger time step
+  evolution_steps: 100   # Just enough to see collision
+  calibration: "1 TRD unit = 246 GeV (Golden Key)"
+
+collision_scenarios:
+  - name: "Head_On_Minimal"
+    description: "Minimal head-on collision test (v=0.1c)"
+    initial_separation: 8.0  # Small enough to collide quickly
+    velocity: 0.1
+    impact_parameter: 0.0
+    expected:
+      topology_conserved: true
+      energy_drift_max: 0.05  # Relaxed for minimal test
+      solitons_survive: true
+
+quality_metrics:
+  - metric: "Topological charge conservation"
+    requirement: "Q_before = Q_after (ΔQ < 0.5)"
+    critical: true
+
+  - metric: "Energy conservation"
+    requirement: "|ΔE/E| < 5%"
+    critical: true
+
+  - metric: "Soliton survival"
+    requirement: "Vortex count >= 1 post-collision"
+    critical: true
+
+output:
+  csv_file: "particle_scattering_minimal_results.csv"
+
+golden_key_calibration:
+  trd_unit_gev: 246

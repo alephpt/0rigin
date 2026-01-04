@@ -604,10 +604,52 @@ CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_higgs_connection.cpp -o CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.s
 
+CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o: /home/persist/neotec/0rigin/test/test_josephson_junction.cpp
+CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o -MF CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o.d -o CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o -c /home/persist/neotec/0rigin/test/test_josephson_junction.cpp
+
+CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_josephson_junction.cpp > CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.i
+
+CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_josephson_junction.cpp -o CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.s
+
+CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o: /home/persist/neotec/0rigin/test/test_particle_scattering.cpp
+CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o -MF CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o.d -o CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_scattering.cpp
+
+CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_particle_scattering.cpp > CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.i
+
+CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_particle_scattering.cpp -o CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.s
+
+CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o: /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp
+CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o -MF CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o.d -o CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o -c /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp
+
+CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp > CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.i
+
+CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp -o CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.s
+
 CMakeFiles/TRD.dir/main.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/main.cpp.o: /home/persist/neotec/0rigin/main.cpp
 CMakeFiles/TRD.dir/main.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/TRD.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/TRD.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/main.cpp.o -MF CMakeFiles/TRD.dir/main.cpp.o.d -o CMakeFiles/TRD.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp
 
 CMakeFiles/TRD.dir/main.cpp.i: cmake_force
@@ -658,6 +700,9 @@ TRD_OBJECTS = \
 "CMakeFiles/TRD.dir/test/test_electroweak.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_strong_force.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o" \
 "CMakeFiles/TRD.dir/main.cpp.o"
 
 # External object files for target TRD
@@ -701,6 +746,9 @@ bin/trd: CMakeFiles/TRD.dir/test/test_three_generations.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_electroweak.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_strong_force.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o
 bin/trd: CMakeFiles/TRD.dir/main.cpp.o
 bin/trd: CMakeFiles/TRD.dir/build.make
 bin/trd: CMakeFiles/TRD.dir/compiler_depend.ts
@@ -711,7 +759,7 @@ bin/trd: /lib/libvulkan.so
 bin/trd: /usr/lib/libSDL2main.a
 bin/trd: /usr/lib/libSDL2-2.0.so.0.3200.60
 bin/trd: CMakeFiles/TRD.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Linking CXX executable bin/trd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Linking CXX executable bin/trd"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TRD.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

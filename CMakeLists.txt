@@ -162,6 +162,12 @@ set(TRD_SOURCES
     test/test_electroweak.cpp
     test/test_strong_force.cpp
     test/test_higgs_connection.cpp
+    # D2 Hardware experimental tests
+    test/test_josephson_junction.cpp
+    # D4 Particle scattering test
+    test/test_particle_scattering.cpp
+    # H3 Spin-Magnetism test
+    test/test_spin_magnetism.cpp
     main.cpp
 )
 

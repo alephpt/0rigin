@@ -42,6 +42,7 @@ void printUsage(const char* program_name) {
     std::cout << "  config/electroweak.yaml         - B4 W/Z boson masses" << std::endl;
     std::cout << "  config/strong_force.yaml        - B5 QCD emergence and confinement" << std::endl;
     std::cout << "  config/higgs_connection.yaml    - B6 Higgs mechanism via R-field" << std::endl;
+    std::cout << "  config/josephson_junction.yaml  - D2 AC/DC Josephson effects" << std::endl;
 
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  " << program_name << std::endl;
@@ -84,6 +85,15 @@ int runThreeGenerationsTest();
 int runElectroweakTest();
 int runStrongForceTest();
 int runHiggsConnectionTest();
+
+// H3 Spin-Magnetism test
+int runSpinMagnetismTest();
+
+// D4: Particle scattering test
+int runParticleScatteringTest();
+
+// D2 Hardware experimental tests
+int runJosephsonJunctionTest();
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -141,6 +151,12 @@ int runTestMode(const std::string& config_path) {
         return runStrongForceTest();
     } else if (config_path.find("higgs_connection") != std::string::npos) {
         return runHiggsConnectionTest();
+    } else if (config_path.find("particle_scattering") != std::string::npos) {
+        return runParticleScatteringTest();
+    } else if (config_path.find("josephson_junction") != std::string::npos) {
+        return runJosephsonJunctionTest();
+    } else if (config_path.find("spin_magnetism") != std::string::npos) {
+        return runSpinMagnetismTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)
