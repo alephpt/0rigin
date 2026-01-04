@@ -38,6 +38,10 @@ void printUsage(const char* program_name) {
     std::cout << "  config/dark_energy.yaml         - C4 dark energy mechanism test" << std::endl;
     std::cout << "  config/inflation.yaml           - C5 primordial inflation test" << std::endl;
     std::cout << "  config/weak_field_3d.yaml       - Weak field gravity validation" << std::endl;
+    std::cout << "  config/three_generations.yaml   - B3 fermion generation structure" << std::endl;
+    std::cout << "  config/electroweak.yaml         - B4 W/Z boson masses" << std::endl;
+    std::cout << "  config/strong_force.yaml        - B5 QCD emergence and confinement" << std::endl;
+    std::cout << "  config/higgs_connection.yaml    - B6 Higgs mechanism via R-field" << std::endl;
 
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  " << program_name << std::endl;
@@ -63,7 +67,7 @@ int runThreeBodyEM3DTest();
 int runEMGravityCoupling3DTest();
 int runEinsteinFieldEquationsTest();
 int runLightDeflection3DTest();
-int runParticleSpectrumUnifiedTest();
+int runParticleSpectrumTest(int argc, char* argv[]);
 int runTimeDilation3DTest();
 int runCosmologicalConstantTest();
 int runFriedmannEquationsTest();
@@ -74,6 +78,12 @@ int runSymmetryAnalysisTest();
 int runDarkEnergyTest();
 int runInflationTest();
 // int runExperimentalPredictionsTest();  // Compiled as separate executable
+
+// B3-B6 Standard Model tests
+int runThreeGenerationsTest();
+int runElectroweakTest();
+int runStrongForceTest();
+int runHiggsConnectionTest();
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -100,7 +110,11 @@ int runTestMode(const std::string& config_path) {
     } else if (config_path.find("light_deflection_3d") != std::string::npos) {
         return runLightDeflection3DTest();
     } else if (config_path.find("particle_spectrum") != std::string::npos) {
-        return runParticleSpectrumUnifiedTest();
+        // Create argv array with config path for particle spectrum test
+        char* ps_argv[2];
+        ps_argv[0] = const_cast<char*>("trd");
+        ps_argv[1] = const_cast<char*>(config_path.c_str());
+        return runParticleSpectrumTest(2, ps_argv);
     } else if (config_path.find("cosmological_constant") != std::string::npos) {
         return runCosmologicalConstantTest();
     } else if (config_path.find("friedmann_equations") != std::string::npos) {
@@ -119,6 +133,14 @@ int runTestMode(const std::string& config_path) {
         return runSymmetryAnalysisTest();
     // } else if (config_path.find("experimental_predictions") != std::string::npos) {
     //     return runExperimentalPredictionsTest();  // Compiled as separate executable
+    } else if (config_path.find("three_generations") != std::string::npos) {
+        return runThreeGenerationsTest();
+    } else if (config_path.find("electroweak") != std::string::npos) {
+        return runElectroweakTest();
+    } else if (config_path.find("strong_force") != std::string::npos) {
+        return runStrongForceTest();
+    } else if (config_path.find("higgs_connection") != std::string::npos) {
+        return runHiggsConnectionTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)
