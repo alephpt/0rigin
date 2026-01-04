@@ -1,0 +1,102 @@
+# Primordial Inflation Test Configuration
+# C5 Cosmological Validation
+#
+# Tests whether TRD's R-field dynamics can produce the exponential expansion
+# needed to explain CMB observations and solve horizon/flatness problems.
+
+validation:
+  framework: "C5 - Primordial Inflation"
+  test_file: "test/test_inflation.cpp"
+  description: |
+    Verifies that R-field in false vacuum state produces sufficient
+    e-foldings (N ≈ 60) with correct spectral index (n_s ≈ 0.96).
+
+inflation:
+  initial_R: 2.0          # False vacuum state (R > 1, further from minimum)
+  potential_type: "polynomial"  # V = V₀(1-R)²
+  V0: 0.01                # Inflationary energy scale (reduced for slower roll)
+  evolution_time: 100.0   # Time to evolve (in Planck units, extended)
+
+test_scenarios:
+  - name: "e_Foldings"
+    description: "Verify sufficient expansion (N ≈ 60)"
+    expected:
+      N_min: 50           # Minimum e-foldings
+      N_max: 70           # Maximum e-foldings
+    physics: |
+      N = ln(a_end/a_start) = ∫H dt
+      CMB requires N ≈ 50-60 to solve horizon problem
+
+  - name: "Slow_Roll"
+    description: "Check slow-roll condition (ε ≪ 1)"
+    expected:
+      epsilon_max: 0.01   # Maximum slow-roll parameter
+      slow_roll: true
+    physics: |
+      ε = -(Ḣ/H²) = (M_p²/2)(V'/V)²
+      Slow-roll requires ε < 1, ideally ε ≪ 1
+
+  - name: "Spectral_Index"
+    description: "Match Planck measurement (n_s ≈ 0.96)"
+    expected:
+      n_s: 0.96          # Planck central value
+      tolerance: 0.02    # 5σ range from Planck
+    physics: |
+      n_s = 1 - 6ε + 2η
+      Planck 2018: n_s = 0.9649 ± 0.0042
+
+quality_metrics:
+  - metric: "e-foldings"
+    description: "Total expansion during inflation"
+    requirement: "50 < N < 70"
+    importance: "Solves horizon and flatness problems"
+
+  - metric: "Slow-roll parameters"
+    description: "ε and η must be small"
+    requirement: "ε < 0.01, |η| < 0.1"
+    importance: "Ensures quasi-exponential expansion"
+
+  - metric: "Spectral index"
+    description: "Primordial power spectrum tilt"
+    requirement: "n_s = 0.96 ± 0.02"
+    importance: "Must match CMB observations"
+
+  - metric: "Graceful exit"
+    description: "Inflation ends when ε = 1"
+    requirement: "Smooth transition to radiation era"
+
+physics_notes:
+  potential: "V(R) = V₀(1 - R)²"
+  false_vacuum: "R > 1 initially (high potential energy)"
+  true_vacuum: "R → 1 (minimum of potential)"
+
+  slow_roll_approximation: |
+    3H·(dR/dt) ≈ -dV/dR  (friction-dominated)
+    H² ≈ V/(3M_p²)       (potential-dominated)
+
+  observables:
+    e_foldings: "N = ln(a_end/a_start)"
+    spectral_index: "n_s = 1 - 6ε + 2η"
+    tensor_to_scalar: "r = 16ε"
+
+  significance: |
+    Inflation solves major cosmological puzzles:
+    1. Horizon problem - why is CMB uniform?
+    2. Flatness problem - why Ω ≈ 1?
+    3. Monopole problem - why no magnetic monopoles?
+
+    TRD provides natural inflation mechanism via R-field dynamics,
+    no need for separate inflaton field.
+
+CMB_constraints:
+  Planck_2018:
+    n_s: "0.9649 ± 0.0042"
+    r: "< 0.056 (95% CL)"
+
+  TRD_predictions:
+    n_s: "≈ 0.96 (depends on V(R) shape)"
+    r: "≈ 0.001 (small field inflation)"
+
+expected_outputs:
+  - "inflation_evolution.csv"
+  - "inflation_results.yaml"

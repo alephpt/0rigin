@@ -27,10 +27,15 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o \
   CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o \
-  CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o \
+  CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o \
   CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o \
   CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o \
   CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o \
+  CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o \
+  CMakeFiles/TRD.dir/test/test_inflation.cpp.o \
+  CMakeFiles/TRD.dir/test/test_unitarity.cpp.o \
+  CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o \
+  CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o \
   CMakeFiles/TRD.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
@@ -126,13 +131,23 @@ CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o:
 
-CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o:
+CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_inflation.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_unitarity.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o:
 
 CMakeFiles/TRD.dir/main.cpp.o:
 

@@ -4,6 +4,8 @@
 /home/persist/neotec/0rigin/build/CMakeFiles/TRD.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_experimental_predictions.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_geodesic_verification.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_renormalizability.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_causality.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_einstein_field_equations.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_weak_field_limit.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_trdcore3d_basic.dir

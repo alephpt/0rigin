@@ -152,7 +152,11 @@ set(TRD_SOURCES
     test/test_cosmological_constant.cpp
     test/test_friedmann_equations.cpp
     test/test_dark_matter.cpp
+    test/test_dark_energy.cpp
+    test/test_inflation.cpp
     test/test_unitarity.cpp
+    test/test_scale_invariance.cpp
+    test/test_symmetry_analysis.cpp
     main.cpp
 )
 

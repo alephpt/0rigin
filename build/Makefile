@@ -195,6 +195,32 @@ test_geodesic_verification/fast:
 .PHONY : test_geodesic_verification/fast
 
 #=============================================================================
+# Target rules for targets named test_renormalizability
+
+# Build rule for target.
+test_renormalizability: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_renormalizability
+.PHONY : test_renormalizability
+
+# fast build rule for target.
+test_renormalizability/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_renormalizability.dir/build.make CMakeFiles/test_renormalizability.dir/build
+.PHONY : test_renormalizability/fast
+
+#=============================================================================
+# Target rules for targets named test_causality
+
+# Build rule for target.
+test_causality: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_causality
+.PHONY : test_causality
+
+# fast build rule for target.
+test_causality/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_causality.dir/build.make CMakeFiles/test_causality.dir/build
+.PHONY : test_causality/fast
+
+#=============================================================================
 # Target rules for targets named test_einstein_field_equations
 
 # Build rule for target.
@@ -1052,6 +1078,7 @@ src/TRDCore3D.o: src/TRDCore3D.cpp.o
 # target to build an object file
 src/TRDCore3D.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_causality.dir/build.make CMakeFiles/test_causality.dir/src/TRDCore3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.o
@@ -1065,6 +1092,7 @@ src/TRDCore3D.i: src/TRDCore3D.cpp.i
 # target to preprocess a source file
 src/TRDCore3D.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_causality.dir/build.make CMakeFiles/test_causality.dir/src/TRDCore3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.i
@@ -1078,6 +1106,7 @@ src/TRDCore3D.s: src/TRDCore3D.cpp.s
 # target to generate assembly for a file
 src/TRDCore3D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_causality.dir/build.make CMakeFiles/test_causality.dir/src/TRDCore3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.s
@@ -1346,6 +1375,30 @@ test/test_3d_full_trd.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/test/test_3d_full_trd.cpp.s
 .PHONY : test/test_3d_full_trd.cpp.s
 
+test/test_causality.o: test/test_causality.cpp.o
+.PHONY : test/test_causality.o
+
+# target to build an object file
+test/test_causality.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_causality.dir/build.make CMakeFiles/test_causality.dir/test/test_causality.cpp.o
+.PHONY : test/test_causality.cpp.o
+
+test/test_causality.i: test/test_causality.cpp.i
+.PHONY : test/test_causality.i
+
+# target to preprocess a source file
+test/test_causality.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_causality.dir/build.make CMakeFiles/test_causality.dir/test/test_causality.cpp.i
+.PHONY : test/test_causality.cpp.i
+
+test/test_causality.s: test/test_causality.cpp.s
+.PHONY : test/test_causality.s
+
+# target to generate assembly for a file
+test/test_causality.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_causality.dir/build.make CMakeFiles/test_causality.dir/test/test_causality.cpp.s
+.PHONY : test/test_causality.cpp.s
+
 test/test_cosmological_constant.o: test/test_cosmological_constant.cpp.o
 .PHONY : test/test_cosmological_constant.o
 
@@ -1369,6 +1422,30 @@ test/test_cosmological_constant.s: test/test_cosmological_constant.cpp.s
 test/test_cosmological_constant.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.s
 .PHONY : test/test_cosmological_constant.cpp.s
+
+test/test_dark_energy.o: test/test_dark_energy.cpp.o
+.PHONY : test/test_dark_energy.o
+
+# target to build an object file
+test/test_dark_energy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o
+.PHONY : test/test_dark_energy.cpp.o
+
+test/test_dark_energy.i: test/test_dark_energy.cpp.i
+.PHONY : test/test_dark_energy.i
+
+# target to preprocess a source file
+test/test_dark_energy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_dark_energy.cpp.i
+.PHONY : test/test_dark_energy.cpp.i
+
+test/test_dark_energy.s: test/test_dark_energy.cpp.s
+.PHONY : test/test_dark_energy.s
+
+# target to generate assembly for a file
+test/test_dark_energy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_dark_energy.cpp.s
+.PHONY : test/test_dark_energy.cpp.s
 
 test/test_dark_matter.o: test/test_dark_matter.cpp.o
 .PHONY : test/test_dark_matter.o
@@ -1589,6 +1666,30 @@ test/test_geodesic_verification.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.s
 .PHONY : test/test_geodesic_verification.cpp.s
 
+test/test_inflation.o: test/test_inflation.cpp.o
+.PHONY : test/test_inflation.o
+
+# target to build an object file
+test/test_inflation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_inflation.cpp.o
+.PHONY : test/test_inflation.cpp.o
+
+test/test_inflation.i: test/test_inflation.cpp.i
+.PHONY : test/test_inflation.i
+
+# target to preprocess a source file
+test/test_inflation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_inflation.cpp.i
+.PHONY : test/test_inflation.cpp.i
+
+test/test_inflation.s: test/test_inflation.cpp.s
+.PHONY : test/test_inflation.s
+
+# target to generate assembly for a file
+test/test_inflation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_inflation.cpp.s
+.PHONY : test/test_inflation.cpp.s
+
 test/test_light_deflection_3d.o: test/test_light_deflection_3d.cpp.o
 .PHONY : test/test_light_deflection_3d.o
 
@@ -1661,29 +1762,77 @@ test/test_maxwell3d_wave.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.s
 .PHONY : test/test_maxwell3d_wave.cpp.s
 
-test/test_particle_spectrum_3d.o: test/test_particle_spectrum_3d.cpp.o
-.PHONY : test/test_particle_spectrum_3d.o
+test/test_particle_spectrum_unified.o: test/test_particle_spectrum_unified.cpp.o
+.PHONY : test/test_particle_spectrum_unified.o
 
 # target to build an object file
-test/test_particle_spectrum_3d.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o
-.PHONY : test/test_particle_spectrum_3d.cpp.o
+test/test_particle_spectrum_unified.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o
+.PHONY : test/test_particle_spectrum_unified.cpp.o
 
-test/test_particle_spectrum_3d.i: test/test_particle_spectrum_3d.cpp.i
-.PHONY : test/test_particle_spectrum_3d.i
+test/test_particle_spectrum_unified.i: test/test_particle_spectrum_unified.cpp.i
+.PHONY : test/test_particle_spectrum_unified.i
 
 # target to preprocess a source file
-test/test_particle_spectrum_3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.i
-.PHONY : test/test_particle_spectrum_3d.cpp.i
+test/test_particle_spectrum_unified.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.i
+.PHONY : test/test_particle_spectrum_unified.cpp.i
 
-test/test_particle_spectrum_3d.s: test/test_particle_spectrum_3d.cpp.s
-.PHONY : test/test_particle_spectrum_3d.s
+test/test_particle_spectrum_unified.s: test/test_particle_spectrum_unified.cpp.s
+.PHONY : test/test_particle_spectrum_unified.s
 
 # target to generate assembly for a file
-test/test_particle_spectrum_3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.s
-.PHONY : test/test_particle_spectrum_3d.cpp.s
+test/test_particle_spectrum_unified.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.s
+.PHONY : test/test_particle_spectrum_unified.cpp.s
+
+test/test_renormalizability.o: test/test_renormalizability.cpp.o
+.PHONY : test/test_renormalizability.o
+
+# target to build an object file
+test/test_renormalizability.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_renormalizability.dir/build.make CMakeFiles/test_renormalizability.dir/test/test_renormalizability.cpp.o
+.PHONY : test/test_renormalizability.cpp.o
+
+test/test_renormalizability.i: test/test_renormalizability.cpp.i
+.PHONY : test/test_renormalizability.i
+
+# target to preprocess a source file
+test/test_renormalizability.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_renormalizability.dir/build.make CMakeFiles/test_renormalizability.dir/test/test_renormalizability.cpp.i
+.PHONY : test/test_renormalizability.cpp.i
+
+test/test_renormalizability.s: test/test_renormalizability.cpp.s
+.PHONY : test/test_renormalizability.s
+
+# target to generate assembly for a file
+test/test_renormalizability.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_renormalizability.dir/build.make CMakeFiles/test_renormalizability.dir/test/test_renormalizability.cpp.s
+.PHONY : test/test_renormalizability.cpp.s
+
+test/test_scale_invariance.o: test/test_scale_invariance.cpp.o
+.PHONY : test/test_scale_invariance.o
+
+# target to build an object file
+test/test_scale_invariance.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o
+.PHONY : test/test_scale_invariance.cpp.o
+
+test/test_scale_invariance.i: test/test_scale_invariance.cpp.i
+.PHONY : test/test_scale_invariance.i
+
+# target to preprocess a source file
+test/test_scale_invariance.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.i
+.PHONY : test/test_scale_invariance.cpp.i
+
+test/test_scale_invariance.s: test/test_scale_invariance.cpp.s
+.PHONY : test/test_scale_invariance.s
+
+# target to generate assembly for a file
+test/test_scale_invariance.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.s
+.PHONY : test/test_scale_invariance.cpp.s
 
 test/test_stuckelberg_vortex_3d.o: test/test_stuckelberg_vortex_3d.cpp.o
 .PHONY : test/test_stuckelberg_vortex_3d.o
@@ -1708,6 +1857,30 @@ test/test_stuckelberg_vortex_3d.s: test/test_stuckelberg_vortex_3d.cpp.s
 test/test_stuckelberg_vortex_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.s
 .PHONY : test/test_stuckelberg_vortex_3d.cpp.s
+
+test/test_symmetry_analysis.o: test/test_symmetry_analysis.cpp.o
+.PHONY : test/test_symmetry_analysis.o
+
+# target to build an object file
+test/test_symmetry_analysis.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o
+.PHONY : test/test_symmetry_analysis.cpp.o
+
+test/test_symmetry_analysis.i: test/test_symmetry_analysis.cpp.i
+.PHONY : test/test_symmetry_analysis.i
+
+# target to preprocess a source file
+test/test_symmetry_analysis.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.i
+.PHONY : test/test_symmetry_analysis.cpp.i
+
+test/test_symmetry_analysis.s: test/test_symmetry_analysis.cpp.s
+.PHONY : test/test_symmetry_analysis.s
+
+# target to generate assembly for a file
+test/test_symmetry_analysis.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.s
+.PHONY : test/test_symmetry_analysis.cpp.s
 
 test/test_three_body_em_3d.o: test/test_three_body_em_3d.cpp.o
 .PHONY : test/test_three_body_em_3d.o
@@ -1829,6 +2002,30 @@ test/test_trdcore3d_gpu_simple.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/test/test_trdcore3d_gpu_simple.cpp.s
 .PHONY : test/test_trdcore3d_gpu_simple.cpp.s
 
+test/test_unitarity.o: test/test_unitarity.cpp.o
+.PHONY : test/test_unitarity.o
+
+# target to build an object file
+test/test_unitarity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_unitarity.cpp.o
+.PHONY : test/test_unitarity.cpp.o
+
+test/test_unitarity.i: test/test_unitarity.cpp.i
+.PHONY : test/test_unitarity.i
+
+# target to preprocess a source file
+test/test_unitarity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_unitarity.cpp.i
+.PHONY : test/test_unitarity.cpp.i
+
+test/test_unitarity.s: test/test_unitarity.cpp.s
+.PHONY : test/test_unitarity.s
+
+# target to generate assembly for a file
+test/test_unitarity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_unitarity.cpp.s
+.PHONY : test/test_unitarity.cpp.s
+
 test/test_weak_field_3d.o: test/test_weak_field_3d.cpp.o
 .PHONY : test/test_weak_field_3d.o
 
@@ -1890,12 +2087,14 @@ help:
 	@echo "... TRD"
 	@echo "... imgui"
 	@echo "... test_3d_full_trd"
+	@echo "... test_causality"
 	@echo "... test_dirac3d_free"
 	@echo "... test_einstein_field_equations"
 	@echo "... test_em_wave_propagation_3d"
 	@echo "... test_experimental_predictions"
 	@echo "... test_geodesic_verification"
 	@echo "... test_maxwell3d_wave"
+	@echo "... test_renormalizability"
 	@echo "... test_trd3d_cpu_only"
 	@echo "... test_trdcore3d_basic"
 	@echo "... test_trdcore3d_gpu"
@@ -2020,9 +2219,15 @@ help:
 	@echo "... test/test_3d_full_trd.o"
 	@echo "... test/test_3d_full_trd.i"
 	@echo "... test/test_3d_full_trd.s"
+	@echo "... test/test_causality.o"
+	@echo "... test/test_causality.i"
+	@echo "... test/test_causality.s"
 	@echo "... test/test_cosmological_constant.o"
 	@echo "... test/test_cosmological_constant.i"
 	@echo "... test/test_cosmological_constant.s"
+	@echo "... test/test_dark_energy.o"
+	@echo "... test/test_dark_energy.i"
+	@echo "... test/test_dark_energy.s"
 	@echo "... test/test_dark_matter.o"
 	@echo "... test/test_dark_matter.i"
 	@echo "... test/test_dark_matter.s"
@@ -2050,6 +2255,9 @@ help:
 	@echo "... test/test_geodesic_verification.o"
 	@echo "... test/test_geodesic_verification.i"
 	@echo "... test/test_geodesic_verification.s"
+	@echo "... test/test_inflation.o"
+	@echo "... test/test_inflation.i"
+	@echo "... test/test_inflation.s"
 	@echo "... test/test_light_deflection_3d.o"
 	@echo "... test/test_light_deflection_3d.i"
 	@echo "... test/test_light_deflection_3d.s"
@@ -2059,12 +2267,21 @@ help:
 	@echo "... test/test_maxwell3d_wave.o"
 	@echo "... test/test_maxwell3d_wave.i"
 	@echo "... test/test_maxwell3d_wave.s"
-	@echo "... test/test_particle_spectrum_3d.o"
-	@echo "... test/test_particle_spectrum_3d.i"
-	@echo "... test/test_particle_spectrum_3d.s"
+	@echo "... test/test_particle_spectrum_unified.o"
+	@echo "... test/test_particle_spectrum_unified.i"
+	@echo "... test/test_particle_spectrum_unified.s"
+	@echo "... test/test_renormalizability.o"
+	@echo "... test/test_renormalizability.i"
+	@echo "... test/test_renormalizability.s"
+	@echo "... test/test_scale_invariance.o"
+	@echo "... test/test_scale_invariance.i"
+	@echo "... test/test_scale_invariance.s"
 	@echo "... test/test_stuckelberg_vortex_3d.o"
 	@echo "... test/test_stuckelberg_vortex_3d.i"
 	@echo "... test/test_stuckelberg_vortex_3d.s"
+	@echo "... test/test_symmetry_analysis.o"
+	@echo "... test/test_symmetry_analysis.i"
+	@echo "... test/test_symmetry_analysis.s"
 	@echo "... test/test_three_body_em_3d.o"
 	@echo "... test/test_three_body_em_3d.i"
 	@echo "... test/test_three_body_em_3d.s"
@@ -2080,6 +2297,9 @@ help:
 	@echo "... test/test_trdcore3d_gpu_simple.o"
 	@echo "... test/test_trdcore3d_gpu_simple.i"
 	@echo "... test/test_trdcore3d_gpu_simple.s"
+	@echo "... test/test_unitarity.o"
+	@echo "... test/test_unitarity.i"
+	@echo "... test/test_unitarity.s"
 	@echo "... test/test_weak_field_3d.o"
 	@echo "... test/test_weak_field_3d.i"
 	@echo "... test/test_weak_field_3d.s"

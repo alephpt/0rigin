@@ -1,0 +1,69 @@
+# E4: Scale Invariance Breaking Configuration
+#
+# Test: Analyze how TRD breaks conformal symmetry through mass scales
+# Physics: β-function β(K) = μ·∂K/∂μ quantifies scale dependence
+#
+# Quality Gates:
+#   - β-function nonzero: |β(K)| > 0.01
+#   - Conformal anomaly present: T^μ_μ ≠ 0
+#   - Scale transformation consistency verified
+
+validation:
+  framework: "E4 - Scale Invariance Breaking"
+  test_file: "test/test_scale_invariance.cpp"
+  description: "Analyze conformal symmetry breaking via β-function"
+
+physics:
+  coupling_strength: 2.0
+  mass_gap: 1.0
+  scale_factors: [0.5, 1.0, 2.0, 5.0]  # λ values for x → λx transformation
+
+grid:
+  nx: 32
+  ny: 32
+  nz: 32
+  dx: 1.0
+  dy: 1.0
+  dz: 1.0
+
+integration:
+  time_step: 0.01
+  evolution_steps: 100  # Steps to evolve after scale transformation
+
+initial_conditions:
+  type: "gaussian"
+  sigma: 5.0  # Width in grid units
+  center: [0.5, 0.5, 0.5]  # Normalized coordinates
+
+test_scenarios:
+  - name: "Conformal_Anomaly"
+    description: "Measure β-function from scale-dependent coupling"
+    expected:
+      beta_function_nonzero: true
+      beta_magnitude: 0.01  # Minimum |β(K)|
+      conformal_anomaly: 1.0e-6  # Minimum |T^μ_μ|
+
+  - name: "Scale_Transformation"
+    description: "Verify correlation functions under scaling"
+    measurements:
+      - correlation_length_extraction
+      - effective_coupling_scaling
+      - anomalous_dimensions
+
+quality_metrics:
+  - "β-function calculation from K_eff(λ)"
+  - "Conformal anomaly T^μ_μ measurement"
+  - "Scale transformation consistency"
+  - "Correlation function decay analysis"
+
+expected_results:
+  beta_function:
+    value: ">0.01"
+    interpretation: "UV relevant coupling (scale invariance broken)"
+  conformal_anomaly:
+    value: ">1e-6"
+    interpretation: "Mass scale breaks conformal symmetry"
+  physical_meaning: |
+    TRD is not a conformal field theory due to mass scales
+    introduced by the R-field potential V(R) and Kuramoto coupling K.
+    The β-function quantifies how the coupling runs with energy scale.

@@ -422,19 +422,19 @@ CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_light_deflection_3d.cpp -o CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.s
 
-CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
-CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o: /home/persist/neotec/0rigin/test/test_particle_spectrum_3d.cpp
-CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_spectrum_3d.cpp
+CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o: /home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp
+CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o -MF CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o.d -o CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp
 
-CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_particle_spectrum_3d.cpp > CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.i
+CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp > CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.i
 
-CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_particle_spectrum_3d.cpp -o CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.s
+CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp -o CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.s
 
 CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o: /home/persist/neotec/0rigin/test/test_cosmological_constant.cpp
@@ -478,10 +478,80 @@ CMakeFiles/TRD.dir/test/test_dark_matter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_dark_matter.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_dark_matter.cpp -o CMakeFiles/TRD.dir/test/test_dark_matter.cpp.s
 
+CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o: /home/persist/neotec/0rigin/test/test_dark_energy.cpp
+CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o -MF CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o.d -o CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o -c /home/persist/neotec/0rigin/test/test_dark_energy.cpp
+
+CMakeFiles/TRD.dir/test/test_dark_energy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_dark_energy.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_dark_energy.cpp > CMakeFiles/TRD.dir/test/test_dark_energy.cpp.i
+
+CMakeFiles/TRD.dir/test/test_dark_energy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_dark_energy.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_dark_energy.cpp -o CMakeFiles/TRD.dir/test/test_dark_energy.cpp.s
+
+CMakeFiles/TRD.dir/test/test_inflation.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_inflation.cpp.o: /home/persist/neotec/0rigin/test/test_inflation.cpp
+CMakeFiles/TRD.dir/test/test_inflation.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/TRD.dir/test/test_inflation.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_inflation.cpp.o -MF CMakeFiles/TRD.dir/test/test_inflation.cpp.o.d -o CMakeFiles/TRD.dir/test/test_inflation.cpp.o -c /home/persist/neotec/0rigin/test/test_inflation.cpp
+
+CMakeFiles/TRD.dir/test/test_inflation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_inflation.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_inflation.cpp > CMakeFiles/TRD.dir/test/test_inflation.cpp.i
+
+CMakeFiles/TRD.dir/test/test_inflation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_inflation.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_inflation.cpp -o CMakeFiles/TRD.dir/test/test_inflation.cpp.s
+
+CMakeFiles/TRD.dir/test/test_unitarity.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_unitarity.cpp.o: /home/persist/neotec/0rigin/test/test_unitarity.cpp
+CMakeFiles/TRD.dir/test/test_unitarity.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/TRD.dir/test/test_unitarity.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_unitarity.cpp.o -MF CMakeFiles/TRD.dir/test/test_unitarity.cpp.o.d -o CMakeFiles/TRD.dir/test/test_unitarity.cpp.o -c /home/persist/neotec/0rigin/test/test_unitarity.cpp
+
+CMakeFiles/TRD.dir/test/test_unitarity.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_unitarity.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_unitarity.cpp > CMakeFiles/TRD.dir/test/test_unitarity.cpp.i
+
+CMakeFiles/TRD.dir/test/test_unitarity.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_unitarity.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_unitarity.cpp -o CMakeFiles/TRD.dir/test/test_unitarity.cpp.s
+
+CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o: /home/persist/neotec/0rigin/test/test_scale_invariance.cpp
+CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o -MF CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o.d -o CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o -c /home/persist/neotec/0rigin/test/test_scale_invariance.cpp
+
+CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_scale_invariance.cpp > CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.i
+
+CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_scale_invariance.cpp -o CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.s
+
+CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o: /home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp
+CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o -MF CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o.d -o CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o -c /home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp
+
+CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp > CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.i
+
+CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp -o CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.s
+
 CMakeFiles/TRD.dir/main.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/main.cpp.o: /home/persist/neotec/0rigin/main.cpp
 CMakeFiles/TRD.dir/main.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/TRD.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/TRD.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/main.cpp.o -MF CMakeFiles/TRD.dir/main.cpp.o.d -o CMakeFiles/TRD.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp
 
 CMakeFiles/TRD.dir/main.cpp.i: cmake_force
@@ -519,10 +589,15 @@ TRD_OBJECTS = \
 "CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o" \
-"CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_inflation.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_unitarity.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o" \
 "CMakeFiles/TRD.dir/main.cpp.o"
 
 # External object files for target TRD
@@ -553,10 +628,15 @@ bin/trd: CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o
-bin/trd: CMakeFiles/TRD.dir/test/test_particle_spectrum_3d.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_inflation.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_unitarity.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o
 bin/trd: CMakeFiles/TRD.dir/main.cpp.o
 bin/trd: CMakeFiles/TRD.dir/build.make
 bin/trd: CMakeFiles/TRD.dir/compiler_depend.ts
@@ -567,7 +647,7 @@ bin/trd: /lib/libvulkan.so
 bin/trd: /usr/lib/libSDL2main.a
 bin/trd: /usr/lib/libSDL2-2.0.so.0.3200.60
 bin/trd: CMakeFiles/TRD.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Linking CXX executable bin/trd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Linking CXX executable bin/trd"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TRD.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

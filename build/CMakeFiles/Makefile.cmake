@@ -64,6 +64,8 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/TRD.dir/DependInfo.cmake"
   "CMakeFiles/test_experimental_predictions.dir/DependInfo.cmake"
   "CMakeFiles/test_geodesic_verification.dir/DependInfo.cmake"
+  "CMakeFiles/test_renormalizability.dir/DependInfo.cmake"
+  "CMakeFiles/test_causality.dir/DependInfo.cmake"
   "CMakeFiles/test_einstein_field_equations.dir/DependInfo.cmake"
   "CMakeFiles/test_weak_field_limit.dir/DependInfo.cmake"
   "CMakeFiles/test_trdcore3d_basic.dir/DependInfo.cmake"

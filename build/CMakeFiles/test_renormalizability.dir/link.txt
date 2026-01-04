@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_renormalizability.dir/link.d CMakeFiles/test_renormalizability.dir/test/test_renormalizability.cpp.o -o bin/test_renormalizability  -lm

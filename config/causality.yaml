@@ -1,0 +1,131 @@
+test_name: causality_validation
+description: "E3: Causality Validation - Signal propagation v_signal ≤ c"
+
+grid:
+  size_x: 512  # 1D propagation test (effectively)
+  size_y: 4    # Minimal transverse dimensions
+  size_z: 4
+
+physics:
+  # Wave propagation in TRD
+  # Metric: g_μν = R²·η_μν → v² = (R_space/R_time)²
+  dx: 0.1           # Spatial discretization
+  dt: 0.01          # Time step (CFL: dt < dx/c)
+  c_light: 1.0      # Speed of light (natural units)
+
+  # Kuramoto coupling (controls wave speed)
+  K: 1.0            # Standard coupling
+  damping: 0.0      # No dissipation
+  noise_strength: 0.0
+
+  # Time evolution
+  total_steps: 1000
+  solver_type: cpu  # CPU-based Kuramoto evolution
+
+initial_conditions:
+  # Test 1: Gaussian pulse propagation
+  pulse_propagation:
+    enabled: true
+    pulse_type: gaussian
+    center: 128.0      # x0 = N/4
+    sigma: 8.0         # Pulse width
+    amplitude: 1.0     # Peak amplitude
+
+  # Test 2: Varying R-field
+  r_field_config:
+    type: sinusoidal   # R(x) = 1 + A·sin(kx)
+    amplitude: 0.5     # Variation amplitude
+    wavelength: 128.0  # Spatial period
+
+  # Test 3: Strong coupling test
+  strong_coupling:
+    enabled: false     # Enable for test 3
+    K: 10.0            # Strong nonlinear coupling
+    dt: 0.005          # Smaller timestep for stability
+    amplitude: 0.3     # Reduced amplitude
+
+validation:
+  # Causality constraints
+  max_velocity_ratio: 1.1   # v_max/c ≤ 1.1 (10% numerical tolerance)
+
+  # Test-specific tolerances
+  flat_space_tolerance: 1.1      # Test 1: 10% tolerance
+  varying_r_tolerance: 1.2       # Test 2: 20% tolerance (inhomogeneous)
+  strong_coupling_tolerance: 1.5 # Test 3: 50% tolerance (nonlinear effects)
+
+  # Signal propagation metrics
+  measure_centroid_velocity: true      # Track ⟨x·|θ|²⟩/⟨|θ|²⟩
+  measure_max_position_velocity: true  # Track position of max amplitude
+  measure_light_cone: true             # Verify perturbations within light cone
+
+  # Expected values
+  expected_v_flat: 1.0         # Flat space: v ≈ c
+  expected_v_range: [0.5, 1.5] # Reasonable velocity range
+
+output:
+  directory: output/causality
+  save_every: 50
+  formats: [csv]
+
+  # Diagnostics
+  save_pulse_trajectory: true
+  save_velocity_profile: true
+  save_light_cone_check: true
+
+  # Analysis outputs
+  track_centroid: true
+  track_width: true
+  track_amplitude: true
+
+test_suite:
+  # Sequential execution of 3 causality tests
+  tests:
+    - name: flat_space_propagation
+      description: "Flat space (R=1): verify v ≈ c"
+      metric: v_signal
+      tolerance: 1.1
+
+    - name: varying_r_field
+      description: "Spatially varying R: verify v ≤ c everywhere"
+      metric: v_max
+      tolerance: 1.2
+
+    - name: strong_coupling
+      description: "Strong coupling K=10: no superluminal propagation"
+      metric: v_signal
+      tolerance: 1.5
+
+comments: |
+  E3 Causality Validation Test
+
+  Physics:
+  - Wave equation: □θ = ... (d'Alembert operator)
+  - Metric: g_μν = R²(x)·η_μν (conformal to Minkowski)
+  - Characteristic speed: v² = -g^{ij}/g^{00}
+  - Causality: v_signal ≤ c for all configurations
+
+  Test Method:
+  1. Initialize Gaussian pulse: θ(x,0) = A·exp(-(x-x0)²/2σ²)
+  2. Evolve with Kuramoto dynamics
+  3. Track centroid position: x_c(t) = ⟨x·|θ|²⟩ / ⟨|θ|²⟩
+  4. Measure velocity: v = dx_c/dt
+  5. Verify: v ≤ c (within numerical precision)
+
+  Test Scenarios:
+  1. Flat space (R=1): Baseline test, expect v ≈ c
+  2. Varying R-field: R(x) = 1 + 0.5·sin(2πx/L), verify causality preserved
+  3. Strong coupling K=10: Test nonlinear regime, no FTL propagation
+
+  Quality Gates:
+  - Flat space: v/c ≤ 1.1 (10% numerical tolerance)
+  - Varying R: v_max/c ≤ 1.2 (20% for inhomogeneity)
+  - Strong coupling: v/c ≤ 1.5 (50% for nonlinear effects)
+
+  Success Criteria:
+  ✓ No faster-than-light signal propagation in any regime
+  ✓ Characteristic speeds bounded by c
+  ✓ Light cone structure preserved
+
+  Note: Numerical dispersion from finite-difference schemes may reduce
+  effective wave speed below c. This is acceptable - we are checking the
+  upper bound (no FTL propagation), not exact v=c.

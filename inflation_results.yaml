@@ -1,0 +1,9 @@
+test: C5_Primordial_Inflation
+timestamp: 1767491867
+scenarios:
+  e_Foldings:
+    passed: false
+  Slow_Roll:
+    passed: false
+  Spectral_Index:
+    passed: false

@@ -182,6 +182,21 @@ public:
     const std::vector<float>& getRField() const { return _R_field_data; }
 
     /**
+     * Convenience methods for test compatibility
+     */
+    void setPhaseField(const float* data) {
+        std::copy(data, data + _N_total, _theta_data.begin());
+    }
+
+    void getPhaseField(float* data) const {
+        std::copy(_theta_data.begin(), _theta_data.end(), data);
+    }
+
+    void getRField(float* data) const {
+        std::copy(_R_field_data.begin(), _R_field_data.end(), data);
+    }
+
+    /**
      * Enable GPU compute (Week 2)
      */
     void enableGPU();

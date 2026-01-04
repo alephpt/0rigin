@@ -1,0 +1,63 @@
+# Dark Energy Mechanism Test Configuration
+# C4 Cosmological Validation
+#
+# Tests whether TRD's R-field dynamics produce accelerating cosmic expansion
+# through negative pressure (dark energy behavior).
+
+validation:
+  framework: "C4 - Dark Energy Mechanism"
+  test_file: "test/test_dark_energy.cpp"
+  description: |
+    Verifies that R-field potential V(R) creates effective dark energy
+    with equation of state w = p/ρ < -1/3 for accelerating expansion.
+
+cosmology:
+  initial_R: 1.2          # Initial R-field value (away from equilibrium)
+  potential_type: "harmonic"  # V(R) = (1/2)γ(R-1)²
+  gamma: 0.1              # Potential strength parameter (reduced for slow-roll)
+  evolution_time: 100.0   # Evolution time in Hubble units
+
+test_scenarios:
+  - name: "Cosmological_Constant"
+    description: "Static R-field mimics cosmological constant (w ≈ -1)"
+    initial_dR_dt: 0.0    # Zero initial velocity (static field)
+    expected:
+      w: -1.0             # Expected equation of state
+      tolerance: 0.1      # Allowed deviation
+      accelerating: true  # Must have w < -1/3
+
+  - name: "Quintessence"
+    description: "Slow-rolling R-field produces quintessence-like behavior"
+    initial_dR_dt: 0.1    # Small initial velocity (slow-roll)
+    expected:
+      w_range: [-0.8, -0.5]  # Quintessence range
+      accelerating: true     # Must have w < -1/3
+
+quality_metrics:
+  - metric: "Equation of state"
+    description: "w = p/ρ determines expansion dynamics"
+    requirement: "w < -1/3 for acceleration"
+
+  - metric: "Cosmological constant behavior"
+    description: "w ≈ -1 matches observed dark energy"
+    requirement: "|w + 1| < 0.1"
+
+  - metric: "Tracking solution"
+    description: "R-field evolution tracks background cosmology"
+    requirement: "Stable w(t) evolution"
+
+physics_notes:
+  energy_density: "ρ = (∂R/∂t)² + V(R)"
+  pressure: "p = (∂R/∂t)² - V(R)"
+  equation_of_state: "w = p/ρ"
+  acceleration_condition: "ä/a > 0 requires w < -1/3"
+
+  significance: |
+    Dark energy comprises ~68% of the universe's energy content.
+    TRD explanation: R-field potential energy drives acceleration.
+    Unlike ad-hoc Λ, emerges naturally from field dynamics.
+
+expected_outputs:
+  - "dark_energy_Cosmological_Constant.csv"
+  - "dark_energy_Quintessence.csv"
+  - "dark_energy_results.yaml"

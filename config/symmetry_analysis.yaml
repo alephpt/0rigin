@@ -1,0 +1,90 @@
+# E5: Symmetry Analysis (Noether's Theorem) Configuration
+#
+# Test: Identify and verify conserved quantities from TRD symmetries
+# Physics: Noether's theorem - each continuous symmetry yields a conserved quantity
+#
+# Quality Gates:
+#   - Energy conservation: |ΔE/E₀| < 1%
+#   - Momentum conservation: |ΔP/P₀| < 1%
+#   - Phase charge conservation: |ΔQ/Q₀| < 1%
+
+validation:
+  framework: "E5 - Symmetry Analysis (Noether)"
+  test_file: "test/test_symmetry_analysis.cpp"
+  description: "Verify conservation laws from symmetries via Noether's theorem"
+
+physics:
+  coupling_strength: 2.0
+  evolution_time: 10.0  # Total time to test conservation
+
+grid:
+  nx: 32
+  ny: 32
+  nz: 32
+  dx: 1.0
+  dy: 1.0
+  dz: 1.0
+
+integration:
+  time_step: 0.001  # Small timestep for accurate conservation
+  num_steps: 10000  # 10 time units with dt=0.001
+  measure_interval: 100  # Check conservation every 100 steps
+
+initial_conditions:
+  type: "gaussian_wavepacket"
+  sigma: 3.0  # Width in grid units
+  wavevector: [0.5, 0.3, 0.2]  # Nonzero momentum
+  center: [0.5, 0.5, 0.5]  # Normalized coordinates
+
+conserved_quantities:
+  - name: "Energy"
+    symmetry: "Time translation invariance"
+    formula: "∫[(∂θ/∂t)² + (∇θ)² + V(R)] d³x"
+    tolerance: 0.01  # 1% drift maximum
+    noether_current: "T⁰ᵢ (energy flux)"
+
+  - name: "Momentum"
+    symmetry: "Space translation invariance"
+    formula: "∫(∂θ/∂t)(∇θ) d³x"
+    tolerance: 0.01  # 1% drift maximum
+    noether_current: "Tⁱⱼ (momentum density)"
+
+  - name: "Phase_Charge"
+    symmetry: "U(1) phase rotation: θ → θ + α"
+    formula: "∫|∇θ|² d³x"
+    tolerance: 0.01  # 1% drift maximum
+    noether_current: "J^μ (U(1) current)"
+
+  - name: "Angular_Momentum"
+    symmetry: "Spatial rotation invariance"
+    formula: "∫(r × p) d³x"
+    tolerance: 0.05  # 5% drift (less critical)
+    noether_current: "M^μνρ (angular momentum tensor)"
+
+test_scenarios:
+  - name: "Long_Evolution"
+    description: "Verify conservation over extended time evolution"
+    evolution_time: 100.0
+    expected_drift: "<1%"
+
+  - name: "Continuity_Equation"
+    description: "Verify ∂ρ/∂t + ∇·J = 0 for each conserved current"
+    max_violation: 1.0e-6
+
+quality_metrics:
+  - "Energy conservation (time translation symmetry)"
+  - "Momentum conservation (space translation symmetry)"
+  - "Phase charge conservation (U(1) symmetry)"
+  - "Angular momentum conservation (rotation symmetry)"
+  - "Continuity equation validation for Noether currents"
+
+expected_results:
+  conservation_status:
+    energy: "<1% drift over 10 time units"
+    momentum: "<1% drift (all 3 components)"
+    phase_charge: "<1% drift"
+    angular_momentum: "<5% drift"
+  physical_interpretation: |
+    TRD respects fundamental symmetries and their associated conservation laws.
+    Noether's theorem is validated: each continuous symmetry produces a
+    conserved quantity that remains constant during time evolution.

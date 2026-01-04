@@ -35,6 +35,8 @@ void printUsage(const char* program_name) {
     std::cout << "  config/timesync_validation.yaml - Full validation (N=1,10,100, 64x64 grid)" << std::endl;
     std::cout << "  config/quick_validation.yaml    - Quick test (N=1,10, 32x32 grid)" << std::endl;
     std::cout << "  config/dark_matter.yaml         - C3 dark matter prediction test" << std::endl;
+    std::cout << "  config/dark_energy.yaml         - C4 dark energy mechanism test" << std::endl;
+    std::cout << "  config/inflation.yaml           - C5 primordial inflation test" << std::endl;
     std::cout << "  config/weak_field_3d.yaml       - Weak field gravity validation" << std::endl;
 
     std::cout << "\nExamples:" << std::endl;
@@ -42,6 +44,10 @@ void printUsage(const char* program_name) {
     std::cout << "      → Launch interactive visualization" << std::endl;
     std::cout << "\n  " << program_name << " --test config/dark_matter.yaml" << std::endl;
     std::cout << "      → Test if TRD explains flat galaxy rotation curves" << std::endl;
+    std::cout << "\n  " << program_name << " --test config/dark_energy.yaml" << std::endl;
+    std::cout << "      → Test dark energy mechanism (accelerating expansion)" << std::endl;
+    std::cout << "\n  " << program_name << " --test config/inflation.yaml" << std::endl;
+    std::cout << "      → Validate primordial inflation (e-foldings, spectral index)" << std::endl;
     std::cout << "\n  " << program_name << " --test config/weak_field_3d.yaml" << std::endl;
     std::cout << "      → Validate weak field gravity (Newton's law)" << std::endl;
 
@@ -63,6 +69,10 @@ int runCosmologicalConstantTest();
 int runFriedmannEquationsTest();
 int runDarkMatterTest();
 int runUnitarityTest();
+int runScaleInvarianceTest();
+int runSymmetryAnalysisTest();
+int runDarkEnergyTest();
+int runInflationTest();
 // int runExperimentalPredictionsTest();  // Compiled as separate executable
 
 int runTestMode(const std::string& config_path) {
@@ -97,8 +107,16 @@ int runTestMode(const std::string& config_path) {
         return runFriedmannEquationsTest();
     } else if (config_path.find("dark_matter") != std::string::npos) {
         return runDarkMatterTest();
+    } else if (config_path.find("dark_energy") != std::string::npos) {
+        return runDarkEnergyTest();
+    } else if (config_path.find("inflation") != std::string::npos) {
+        return runInflationTest();
     } else if (config_path.find("unitarity") != std::string::npos) {
         return runUnitarityTest();
+    } else if (config_path.find("scale_invariance") != std::string::npos) {
+        return runScaleInvarianceTest();
+    } else if (config_path.find("symmetry_analysis") != std::string::npos) {
+        return runSymmetryAnalysisTest();
     // } else if (config_path.find("experimental_predictions") != std::string::npos) {
     //     return runExperimentalPredictionsTest();  // Compiled as separate executable
     }
