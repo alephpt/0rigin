@@ -1,0 +1,124 @@
+# Multi-Scale Validation Configuration
+#
+# F2: Renormalization Group Flow Test
+#
+# Test: Does TRD physics exhibit correct scale invariance and RG flow
+#       between coarse and fine grid resolutions?
+#
+# Physics:
+#   - Coarse grid: 32³, spacing Δx = 1.0
+#   - Fine grid: 64³, spacing Δx = 0.5 (scale factor λ = 2)
+#   - Renormalization: Block averaging fine → coarse
+#   - RG flow: β(K) = ∂K/∂(ln μ) where μ = 1/Δx
+#
+# Quality Gates:
+#   1. Field agreement: |θ_coarse - θ_fine_renorm| < 20%
+#   2. Energy scaling: E_fine/E_coarse ~ λ (dimensional analysis)
+#   3. β-function: R-field consistent across scales (< 15% variation)
+#
+# Golden Key: 1 TRD unit = 246 GeV
+#   Testing UV (fine) → IR (coarse) renormalization
+
+validation:
+  framework: "F2 - Multi-Scale Validation"
+  test_file: "test/test_multiscale.cpp"
+  date: "2026-01-04"
+
+physics:
+  coarse_grid_size: 32
+  fine_grid_size: 64
+  scale_factor: 2
+
+  coarse_spacing: 1.0
+  fine_spacing: 0.5
+
+  coarse_timestep: 0.01
+  fine_timestep: 0.005
+
+  coupling_strength: 1.0
+  evolution_steps: 200
+
+  calibration:
+    unit_conversion: "1 TRD unit = 246 GeV"
+    scale_range: "UV (fine, ~500 GeV) → IR (coarse, ~250 GeV)"
+
+test_scenarios:
+  - name: "Block_Averaging"
+    description: "Fine grid → coarse via block averaging (renormalization)"
+    method: "Average λ³ fine cells → 1 coarse cell"
+    expected:
+      field_agreement: 0.15  # 15% tolerance for initial state
+      quality_gate: "Discretization error only"
+
+  - name: "Independent_Evolution"
+    description: "Evolve coarse and fine grids independently"
+    physics: "Same coupling K, same physical time"
+    expected:
+      evolution_time: "Same physical time (different step counts)"
+
+  - name: "Field_Comparison"
+    description: "Compare coarse evolution vs renormalized fine evolution"
+    expected:
+      field_agreement: 0.20  # 20% tolerance (includes evolution error)
+      quality_gate: "Scale-invariant dynamics validated"
+
+  - name: "Energy_Scaling"
+    description: "Test energy scaling with resolution"
+    physics: "E ~ ∫(∇θ)² d³x"
+    expected:
+      energy_ratio: "E_fine/E_coarse ~ λ (scale factor)"
+      tolerance: 0.50  # 50% (dimensional analysis approximate)
+      reason: "Better gradient resolution on fine grid"
+
+  - name: "Beta_Function"
+    description: "RG flow consistency via R-field"
+    physics: "β(K) = ∂K/∂(ln μ), μ = 1/Δx"
+    expected:
+      R_difference: 0.15  # 15% tolerance
+      interpretation: "Marginal coupling in 3D (weak RG flow)"
+      quality_gate: "Fixed point or marginal flow identified"
+
+quality_metrics:
+  - metric: "Block averaging accuracy"
+    requirement: "RMS difference < 15% (initial state)"
+
+  - metric: "Field matching after evolution"
+    requirement: "|θ_coarse - θ_fine_renorm| < 20%"
+
+  - metric: "Energy scaling"
+    requirement: "E_fine/E_coarse within factor 2 of λ"
+
+  - metric: "β-function continuity"
+    requirement: "R-field variation < 15% across scales"
+
+physics_implications:
+  success:
+    - "TRD exhibits correct scale invariance"
+    - "UV → IR renormalization flow validated"
+    - "Consistent with QFT renormalization group"
+    - "Fixed points or marginal flow identified"
+
+  failure:
+    - "Scale-dependent artifacts present"
+    - "Renormalization flow inconsistent"
+    - "May indicate discretization issues"
+
+notes:
+  - "Test uses CPU-only evolution (TRDCore3D)"
+  - "Vortex initial condition: topologically nontrivial"
+  - "Scale factor λ=2 chosen for computational efficiency"
+  - "Larger λ would provide stronger RG test but higher memory cost"
+  - "3D Kuramoto model: marginal dimension d=3, expect weak RG flow"
+
+computational_cost:
+  coarse_grid: "32³ = 32,768 points (~130 KB)"
+  fine_grid: "64³ = 262,144 points (~1 MB)"
+  total_memory: "~1.2 MB (negligible)"
+  evolution_time: "~10 seconds (200 steps coarse, 400 steps fine)"
+
+future_enhancements:
+  - "Test larger scale factors (λ=4, λ=8)"
+  - "Multiple renormalization steps (cascade)"
+  - "Test critical phenomena near phase transitions"
+  - "Measure scaling exponents (critical exponents)"
+  - "Compare with analytical RG predictions"

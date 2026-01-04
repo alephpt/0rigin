@@ -367,6 +367,12 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o -c /home/persist/neotec/0rigin/test/test_binary_merger.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_binary_merger.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_scattering.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_particle_scattering.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o"
@@ -376,6 +382,18 @@
   "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o -c /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_spin_magnetism.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o -c /home/persist/neotec/0rigin/test/test_knot_topology.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_knot_topology.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_multiscale.cpp.o -c /home/persist/neotec/0rigin/test/test_multiscale.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_multiscale.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_multiscale.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",

@@ -1,0 +1,124 @@
+# knot_topology.yaml
+# H1: The Knot - 3D Topological Excitations
+#
+# Tests whether TRD supports stable knotted phase field configurations
+# via Hopf fibration and linking number conservation.
+
+validation:
+  framework: "H1 - Knot Topology (3D Excitations)"
+  test_file: "test/test_knot_topology.cpp"
+  description: |
+    Tests whether TRD can support topologically non-trivial phase field
+    configurations (knots, links) that are stable under evolution.
+    Uses Hopf fibration as a model system with topological charge L = 1.
+
+physics:
+  grid_size: 64           # 64³ grid for 3D topology
+  spatial_step: 1.0       # Spatial discretization dx
+  time_step: 0.01         # Time step dt
+  coupling_strength: 1.0  # Kuramoto coupling K
+  mass_gap: 1.0           # Topological soliton mass
+  evolution_steps: 100    # Number of time steps
+
+test_scenarios:
+  - name: "Hopf_Link_L1"
+    description: "L=1 Hopf fibration (single link)"
+    configuration: "Hopf fibration with linking number L=1"
+    expected:
+      linking_number: 1
+      linking_deviation: 0.2      # |L - 1| < 0.2
+      charge_conserved: true
+      charge_drift: 0.1           # ΔL < 0.1 over evolution
+      energy_finite: true
+      energy_stable: true
+      energy_drift: 0.1           # ΔE/E < 0.1 (10%)
+
+quality_metrics:
+  - metric: "Topological charge (linking number)"
+    requirement: "L = integer ± 0.2"
+    description: |
+      The linking number L is a topological invariant computed via
+      Chern-Simons integral. Must be close to an integer value.
+      Formula: L = (1/4π²) ∫ ε_{ijk} A_i ∂_j A_k d³x
+
+  - metric: "Charge conservation"
+    requirement: "ΔL < 0.1 over evolution"
+    description: |
+      Topological charge must be conserved under time evolution.
+      This tests the topological protection of the knot configuration.
+
+  - metric: "Energy stability"
+    requirement: "ΔE/E < 0.1 (10% drift allowed)"
+    description: |
+      The topological soliton should be approximately stable.
+      Energy: E = ∫ (|∇θ|² + m²·R²) d³x
+
+  - metric: "Energy finite"
+    requirement: "E < ∞ (no divergences)"
+    description: |
+      The knot configuration must have finite energy to be physical.
+
+golden_key:
+  calibration: "1 TRD unit = 246 GeV"
+  interpretation: |
+    Topological soliton mass: M = E / c²
+    If L=1 configuration is stable with E ~ 10³ TRD units,
+    then M ~ 246 TeV (exotic heavy particle).
+
+physics_notes: |
+  Hopf Fibration:
+    - Map S³ → S² via stereographic projection
+    - Fibers are linked circles (S¹) in S³
+    - Linking number L counts how fibers are linked
+
+  Topological Charge:
+    - L = (1/4π²) ∫ ε_{ijk} A_i ∂_j A_k d³x (Chern-Simons integral)
+    - Integer valued (topological invariant)
+    - Protected by topology (cannot change continuously)
+
+  Physical Relevance:
+    - Skyrmions: 3D topological textures (nuclear physics)
+    - Hopfions: Localized linked field configurations
+    - Exotic particles: If TRD supports stable knots, they could
+      represent new particle states with topological quantum numbers
+
+  TRD Implementation:
+    - Phase field θ(x,y,z) from Hopf map
+    - Vector potential A = ∇θ
+    - Linking number via discrete Chern-Simons integral
+    - R-field provides soliton localization (sech² profile)
+
+expected_outcomes:
+  pass: |
+    ✓ Linking number L ≈ 1 (integer)
+    ✓ Charge conserved (ΔL < 0.1)
+    ✓ Energy stable (ΔE/E < 0.1)
+    ✓ Energy finite
+    → TRD supports topological excitations
+    → Knot configurations are stable
+    → Potential for exotic particle states
+
+  fail: |
+    ✗ Linking number non-integer or not conserved
+    ✗ Energy diverges or unstable
+    → TRD cannot support knot topology
+    → Phase field too simple for topological solitons
+    → Need additional terms (gauge fields, etc.)
+
+references:
+  - title: "Topological Solitons"
+    authors: "N. Manton, P. Sutcliffe"
+    year: 2004
+    notes: "Comprehensive treatment of topological field configurations"
+
+  - title: "Über die Abbildungen der dreidimensionalen Sphäre"
+    authors: "H. Hopf"
+    journal: "Math. Ann."
+    year: 1931
+    notes: "Original paper on Hopf fibration"
+
+  - title: "Stable Knot-like Structures in Classical Field Theory"
+    authors: "L. Faddeev, A. Niemi"
+    journal: "Nature"
+    year: 1997
+    notes: "Hopfions in classical field theory"

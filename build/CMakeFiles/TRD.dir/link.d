@@ -41,8 +41,11 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_strong_force.cpp.o \
   CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o \
   CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o \
+  CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o \
   CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o \
   CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o \
+  CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o \
+  CMakeFiles/TRD.dir/test/test_multiscale.cpp.o \
   CMakeFiles/TRD.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
@@ -166,9 +169,15 @@ CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o:
 
+CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o:
+
 CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_multiscale.cpp.o:
 
 CMakeFiles/TRD.dir/main.cpp.o:
 

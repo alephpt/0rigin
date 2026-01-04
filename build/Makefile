@@ -1375,6 +1375,30 @@ test/test_3d_full_trd.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/test/test_3d_full_trd.cpp.s
 .PHONY : test/test_3d_full_trd.cpp.s
 
+test/test_binary_merger.o: test/test_binary_merger.cpp.o
+.PHONY : test/test_binary_merger.o
+
+# target to build an object file
+test/test_binary_merger.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o
+.PHONY : test/test_binary_merger.cpp.o
+
+test/test_binary_merger.i: test/test_binary_merger.cpp.i
+.PHONY : test/test_binary_merger.i
+
+# target to preprocess a source file
+test/test_binary_merger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_binary_merger.cpp.i
+.PHONY : test/test_binary_merger.cpp.i
+
+test/test_binary_merger.s: test/test_binary_merger.cpp.s
+.PHONY : test/test_binary_merger.s
+
+# target to generate assembly for a file
+test/test_binary_merger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_binary_merger.cpp.s
+.PHONY : test/test_binary_merger.cpp.s
+
 test/test_causality.o: test/test_causality.cpp.o
 .PHONY : test/test_causality.o
 
@@ -1762,6 +1786,30 @@ test/test_josephson_junction.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.s
 .PHONY : test/test_josephson_junction.cpp.s
 
+test/test_knot_topology.o: test/test_knot_topology.cpp.o
+.PHONY : test/test_knot_topology.o
+
+# target to build an object file
+test/test_knot_topology.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o
+.PHONY : test/test_knot_topology.cpp.o
+
+test/test_knot_topology.i: test/test_knot_topology.cpp.i
+.PHONY : test/test_knot_topology.i
+
+# target to preprocess a source file
+test/test_knot_topology.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_knot_topology.cpp.i
+.PHONY : test/test_knot_topology.cpp.i
+
+test/test_knot_topology.s: test/test_knot_topology.cpp.s
+.PHONY : test/test_knot_topology.s
+
+# target to generate assembly for a file
+test/test_knot_topology.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_knot_topology.cpp.s
+.PHONY : test/test_knot_topology.cpp.s
+
 test/test_light_deflection_3d.o: test/test_light_deflection_3d.cpp.o
 .PHONY : test/test_light_deflection_3d.o
 
@@ -1833,6 +1881,30 @@ test/test_maxwell3d_wave.s: test/test_maxwell3d_wave.cpp.s
 test/test_maxwell3d_wave.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_maxwell3d_wave.dir/build.make CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.s
 .PHONY : test/test_maxwell3d_wave.cpp.s
+
+test/test_multiscale.o: test/test_multiscale.cpp.o
+.PHONY : test/test_multiscale.o
+
+# target to build an object file
+test/test_multiscale.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_multiscale.cpp.o
+.PHONY : test/test_multiscale.cpp.o
+
+test/test_multiscale.i: test/test_multiscale.cpp.i
+.PHONY : test/test_multiscale.i
+
+# target to preprocess a source file
+test/test_multiscale.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_multiscale.cpp.i
+.PHONY : test/test_multiscale.cpp.i
+
+test/test_multiscale.s: test/test_multiscale.cpp.s
+.PHONY : test/test_multiscale.s
+
+# target to generate assembly for a file
+test/test_multiscale.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_multiscale.cpp.s
+.PHONY : test/test_multiscale.cpp.s
 
 test/test_particle_scattering.o: test/test_particle_scattering.cpp.o
 .PHONY : test/test_particle_scattering.o
@@ -2387,6 +2459,9 @@ help:
 	@echo "... test/test_3d_full_trd.o"
 	@echo "... test/test_3d_full_trd.i"
 	@echo "... test/test_3d_full_trd.s"
+	@echo "... test/test_binary_merger.o"
+	@echo "... test/test_binary_merger.i"
+	@echo "... test/test_binary_merger.s"
 	@echo "... test/test_causality.o"
 	@echo "... test/test_causality.i"
 	@echo "... test/test_causality.s"
@@ -2435,6 +2510,9 @@ help:
 	@echo "... test/test_josephson_junction.o"
 	@echo "... test/test_josephson_junction.i"
 	@echo "... test/test_josephson_junction.s"
+	@echo "... test/test_knot_topology.o"
+	@echo "... test/test_knot_topology.i"
+	@echo "... test/test_knot_topology.s"
 	@echo "... test/test_light_deflection_3d.o"
 	@echo "... test/test_light_deflection_3d.i"
 	@echo "... test/test_light_deflection_3d.s"
@@ -2444,6 +2522,9 @@ help:
 	@echo "... test/test_maxwell3d_wave.o"
 	@echo "... test/test_maxwell3d_wave.i"
 	@echo "... test/test_maxwell3d_wave.s"
+	@echo "... test/test_multiscale.o"
+	@echo "... test/test_multiscale.i"
+	@echo "... test/test_multiscale.s"
 	@echo "... test/test_particle_scattering.o"
 	@echo "... test/test_particle_scattering.i"
 	@echo "... test/test_particle_scattering.s"
