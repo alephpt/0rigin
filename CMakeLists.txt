@@ -164,10 +164,16 @@ set(TRD_SOURCES
     test/test_higgs_connection.cpp
     # D2 Hardware experimental tests
     test/test_josephson_junction.cpp
+    # D3 Gravitational wave tests
+    test/test_binary_merger.cpp
     # D4 Particle scattering test
     test/test_particle_scattering.cpp
     # H3 Spin-Magnetism test
     test/test_spin_magnetism.cpp
+    # H1 Knot Topology test
+    test/test_knot_topology.cpp
+    # F2 Multi-Scale Validation test
+    test/test_multiscale.cpp
     main.cpp
 )
 

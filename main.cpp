@@ -43,6 +43,10 @@ void printUsage(const char* program_name) {
     std::cout << "  config/strong_force.yaml        - B5 QCD emergence and confinement" << std::endl;
     std::cout << "  config/higgs_connection.yaml    - B6 Higgs mechanism via R-field" << std::endl;
     std::cout << "  config/josephson_junction.yaml  - D2 AC/DC Josephson effects" << std::endl;
+    std::cout << "  config/binary_merger.yaml       - D3 Gravitational wave emission" << std::endl;
+    std::cout << "  config/spin_magnetism.yaml      - H3 Spin-magnetism connection" << std::endl;
+    std::cout << "  config/knot_topology.yaml       - H1 Topological excitations (knots)" << std::endl;
+    std::cout << "  config/multiscale.yaml          - F2 Multi-scale RG flow validation" << std::endl;
 
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  " << program_name << std::endl;
@@ -89,11 +93,20 @@ int runHiggsConnectionTest();
 // H3 Spin-Magnetism test
 int runSpinMagnetismTest();
 
+// H1 Knot Topology test
+int runKnotTopologyTest();
+
 // D4: Particle scattering test
 int runParticleScatteringTest();
 
 // D2 Hardware experimental tests
 int runJosephsonJunctionTest();
+
+// D3 Gravitational wave tests
+int runBinaryMergerTest();
+
+// F2: Multi-Scale Validation test
+int runMultiScaleTest();
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -155,8 +168,14 @@ int runTestMode(const std::string& config_path) {
         return runParticleScatteringTest();
     } else if (config_path.find("josephson_junction") != std::string::npos) {
         return runJosephsonJunctionTest();
+    } else if (config_path.find("binary_merger") != std::string::npos) {
+        return runBinaryMergerTest();
     } else if (config_path.find("spin_magnetism") != std::string::npos) {
         return runSpinMagnetismTest();
+    } else if (config_path.find("knot_topology") != std::string::npos) {
+        return runKnotTopologyTest();
+    } else if (config_path.find("multiscale") != std::string::npos) {
+        return runMultiScaleTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)

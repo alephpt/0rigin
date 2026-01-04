@@ -1,0 +1,259 @@
+# Binary Merger Validation Configuration
+#
+# Test: D3 - Binary Merger (Gravitational Wave Emission)
+# Physics: GW from merging massive R-field concentrations
+# Implementation: Two R-field minima on inspiral trajectory
+#
+# Quality Gates:
+#   - Chirp signal: df/dt > 0 throughout inspiral
+#   - Frequency increases monotonically
+#   - Amplitude peaks at merger
+#   - Strain h ~ 10⁻²¹ for astrophysical parameters (after calibration)
+
+validation:
+  framework: "D3 - Binary Merger (Gravitational Waves)"
+  test_file: "test/test_binary_merger.cpp"
+  date: "2026-01-04"
+  golden_key: "1 TRD unit = 246 GeV"
+
+physics:
+  description: |
+    Binary black hole/neutron star mergers emit gravitational waves
+    with characteristic "chirp" waveform:
+      - Frequency increases as objects spiral inward
+      - Amplitude peaks at merger
+      - LIGO/Virgo detection: h ~ 10⁻²¹ strain
+
+    TRD Analog:
+      - Two massive R-field concentrations (R << 1)
+      - Metric perturbation: h_μν ~ ∂²(R-1)/∂t²
+      - Expected waveform: h(t) ~ A(t)·cos(ω(t)·t) where ω increases
+
+  grid_size: 128        # Phase 1: Development grid
+  grid_y: 128
+  grid_z: 32            # Thinner z (orbit in x-y plane)
+
+  coupling_strength: 1.0
+  mass_gap: 1.0
+  time_step: 0.01
+  evolution_steps: 5000
+  output_interval: 50
+
+binary_system:
+  mass_1:
+    R_min: 0.5          # Deep R-field well (massive)
+    sigma: 5.0          # Gaussian width (grid units)
+    description: "Massive object 1 (e.g., 10 M_sun black hole)"
+
+  mass_2:
+    R_min: 0.5          # Equal mass binary
+    sigma: 5.0
+    description: "Massive object 2 (equal mass)"
+
+  initial_orbit:
+    semi_major_axis: 50.0    # Grid units
+    eccentricity: 0.0        # Circular orbit
+    inclination: 0.0         # Edge-on (maximal h_+)
+    description: "Circular orbit in x-y plane"
+
+  observer:
+    distance: 200.0          # Grid units (far from system)
+    location: "x-axis"       # Observer on +x axis
+
+test_scenarios:
+  - name: "Equal_Mass_Inspiral"
+    description: "10+10 M_sun binary black hole merger"
+    type: "chirp_detection"
+
+    parameters:
+      mass_ratio: 1.0
+      initial_separation: 50.0
+      total_mass: 1.0  # TRD units
+
+    expected:
+      chirp_detected: true
+      frequency_increases: true
+      separation_decreases: true
+      strain_amplitude_positive: true
+
+  - name: "Waveform_Analysis"
+    description: "Extract h_+(t) and h_×(t) polarizations"
+    type: "strain_measurement"
+
+    quality_metrics:
+      - "Chirp mass M_chirp = (m₁·m₂)³/⁵/(m₁+m₂)¹/⁵"
+      - "Strain scaling h ~ (GM_chirp)⁵/³·(πf)²/³/r"
+      - "GW frequency f_GW = 2·f_orbit (quadrupole)"
+
+quality_metrics:
+  - metric: "Chirp signal"
+    requirement: "df/dt > 0 throughout inspiral"
+    validation: "Frequency increases monotonically"
+
+  - metric: "Strain amplitude"
+    requirement: "h ~ (GM_chirp)⁵/³·(πf)²/³/r"
+    validation: "Amplitude scaling matches post-Newtonian prediction"
+
+  - metric: "Merger event"
+    requirement: "h_max coincides with r_min"
+    validation: "Peak strain at closest approach"
+
+  - metric: "Waveform polarization"
+    requirement: "h_+ and h_× orthogonal polarizations"
+    validation: "Phase difference 90° for circular orbit"
+
+calibration:
+  trd_energy_scale: 246  # GeV per TRD unit
+
+  astrophysical_masses:
+    solar_mass_gev: 1.1e57
+    solar_mass_trd: 4.5e56
+    typical_bbh: "10-100 M_sun"
+    typical_bns: "1.4 M_sun each"
+
+  gravitational_wave_scales:
+    ligo_strain_sensitivity: 1.0e-21
+    gw150914_strain: ~1.0e-21  # First LIGO detection
+    gw_frequency_range: "10 Hz - 1 kHz"
+
+  note: |
+    In natural units (ℏ = c = 1, G = 1):
+      Strain: h ~ (GM_chirp)⁵/³·(πf)²/³/r
+      Chirp mass: M_chirp = (m₁·m₂)³/⁵/(m₁+m₂)¹/⁵
+      Orbital decay: dr/dt ~ -64/5·G³·m₁·m₂·(m₁+m₂)/r³
+
+    With 1 TRD unit = 246 GeV, we can calibrate mass/distance
+    scales to match LIGO/Virgo observations.
+
+gravitational_wave_physics:
+  quadrupole_formula: |
+    Gravitational waves from binary system:
+      h_+ = (4G/c⁴r)·μ·ω²·a²·(1+cos²ι)/2·cos(2ωt)
+      h_× = (4G/c⁴r)·μ·ω²·a²·cosι·sin(2ωt)
+
+    where:
+      μ = m₁·m₂/(m₁+m₂) = reduced mass
+      ω = orbital frequency
+      a = semi-major axis
+      ι = inclination angle
+      r = distance to observer
+
+  energy_loss: |
+    Power radiated in GW:
+      P_GW = (32/5)·G⁴·m₁²·m₂²·(m₁+m₂)/r⁵
+
+    Orbital decay rate:
+      dr/dt = -64/5·G³·m₁·m₂·(m₁+m₂)/r³
+
+  chirp_signal: |
+    Frequency evolution:
+      f(t) ∝ (t_c - t)⁻³/⁸
+      where t_c = coalescence time
+
+    Characteristic "chirp" waveform:
+      - Frequency increases
+      - Amplitude increases
+      - Phase accumulates rapidly near merger
+
+trd_implementation:
+  r_field_masses: |
+    Massive objects have R < 1 (low synchronization)
+    R(r) = R_min + (1 - R_min)·exp(-r²/σ²)
+
+    Mass parameter: R_min ~ 0.5 (deep well)
+    Width parameter: σ ~ 5 grid units (compact object)
+
+  metric_perturbation: |
+    Gravitational wave strain from R-field:
+      h_μν ~ ∂²(R - 1)/∂t²
+
+    In TRD, massive objects create R < 1 regions
+    Time-varying R → metric oscillations → GW emission
+
+  orbital_dynamics: |
+    Evolve binary under Newtonian gravity:
+      F = -GMm/r²
+
+    Update R-field at each step with new mass positions
+    Extract h(t) at distant observer location
+
+computational_details:
+  phase_1_development:
+    grid: "128³ (128×128×32)"
+    memory: "~64 MB"
+    runtime: "~10 minutes"
+    purpose: "Proof of concept, chirp detection"
+
+  phase_2_production:
+    grid: "256³ (256×256×64)"
+    memory: "~256 MB"
+    runtime: "~1 hour"
+    evolution_steps: 10000
+    purpose: "High-resolution waveform, GW amplitude"
+
+  performance_notes: |
+    - Orbit in x-y plane → thin z-direction saves memory
+    - Observer in far field → only track strain at one location
+    - Output interval: 50 steps (Nyquist sampling of orbit)
+
+experimental_context:
+  ligo_virgo_detections:
+    gw150914: "36+29 M_sun BBH, z=0.09, h~1e-21"
+    gw170817: "1.4+1.4 M_sun BNS, z=0.01, h~1e-22"
+    gw_catalog: ">90 detections (GWTC-3)"
+
+  observables:
+    - "Chirp mass M_chirp (from early inspiral)"
+    - "Total mass (from merger/ringdown)"
+    - "Luminosity distance (from amplitude)"
+    - "Sky location (from detector network)"
+
+  future_detectors:
+    lisa: "Space-based, mHz band, SMBH mergers"
+    einstein_telescope: "Underground, 10× sensitivity"
+    cosmic_explorer: "40 km arms, z>100 BBH"
+
+trd_predictions:
+  mechanism: |
+    Gravitational waves emerge from TRD dynamics:
+      1. Massive objects: R-field minima (R << 1)
+      2. Orbital motion: Time-varying R-field configuration
+      3. Metric perturbation: h ~ ∂²(R-1)/∂t²
+      4. Quadrupole radiation: f_GW = 2·f_orbit
+      5. Chirp waveform: Frequency increases as r decreases
+
+  key_insight: |
+    TRD provides microscopic mechanism for GW emission:
+      - R-field = synchronization measure
+      - R < 1 → mass concentration → spacetime curvature
+      - Time-varying R → oscillating metric → GW
+
+    This validates TRD's gravitational sector:
+      Metric g_μν derived from R-field dynamics
+      GW = metric perturbation = R-field oscillation
+
+  falsifiable_prediction: |
+    If TRD is correct, GW waveform should match:
+      h(t) ~ ∂²(R-1)/∂t²
+
+    Testable signatures:
+      1. Chirp rate matches post-Newtonian prediction
+      2. Strain amplitude scales as h ~ M_chirp⁵/³·f²/³/r
+      3. Polarization decomposition (h_+, h_×) consistent
+
+next_steps:
+  - name: "Phase 2: High-resolution waveform"
+    description: "256³ grid, 10,000 steps, full merger"
+    status: "pending Phase 1 success"
+
+  - name: "D4: Unequal mass ratio"
+    description: "Test m₁/m₂ = 2, 5, 10 (asymmetric mergers)"
+
+  - name: "D5: Eccentric orbits"
+    description: "Non-zero eccentricity, perihelion precession"
+
+  - name: "D6: Spin effects"
+    description: "Spinning black holes, precession, kick velocities"
+
+  - name: "Calibration to LIGO data"
+    description: "Match TRD waveform to GW150914 observation"
