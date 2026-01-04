@@ -1,0 +1,230 @@
+{
+  "parameters": {
+    "alpha_R": 0.25,
+    "B_critical_T": 1000000000.0,
+    "R_vacuum": 1.0
+  },
+  "predictions": {
+    "mass_variation": [
+      {
+        "name": "Laboratory (100 T)",
+        "B_field_T": 100,
+        "R_field": 1.00000000000001,
+        "linear_model": {
+          "m_eff_kg": 9.109000000000022e-31,
+          "delta_m_percent": 2.499846310822075e-13
+        },
+        "exponential_model": {
+          "m_eff_kg": 9.109000000000022e-31,
+          "delta_m_percent": 2.499846310822075e-13
+        }
+      },
+      {
+        "name": "Laser plasma (10\u2074 T)",
+        "B_field_T": 10000.0,
+        "R_field": 1.0000000001,
+        "linear_model": {
+          "m_eff_kg": 9.109000000227724e-31,
+          "delta_m_percent": 2.5000001475181257e-09
+        },
+        "exponential_model": {
+          "m_eff_kg": 9.109000000227724e-31,
+          "delta_m_percent": 2.5000001475181257e-09
+        }
+      },
+      {
+        "name": "White dwarf (10\u2076 T)",
+        "B_field_T": 1000000.0,
+        "R_field": 1.000001,
+        "linear_model": {
+          "m_eff_kg": 9.109002277249999e-31,
+          "delta_m_percent": 2.4999999994503056e-05
+        },
+        "exponential_model": {
+          "m_eff_kg": 9.109002277250283e-31,
+          "delta_m_percent": 2.500000310969615e-05
+        }
+      },
+      {
+        "name": "Neutron star (10\u2078 T)",
+        "B_field_T": 100000000.0,
+        "R_field": 1.01,
+        "linear_model": {
+          "m_eff_kg": 9.131772499999998e-31,
+          "delta_m_percent": 0.24999999999998868
+        },
+        "exponential_model": {
+          "m_eff_kg": 9.131800989361186e-31,
+          "delta_m_percent": 0.25031276057950547
+        }
+      },
+      {
+        "name": "Magnetar (10\u00b9\u00b9 T)",
+        "B_field_T": 100000000000.0,
+        "R_field": 10001.0,
+        "linear_model": {
+          "m_eff_kg": 2.2781609e-27,
+          "delta_m_percent": 250000.0
+        },
+        "exponential_model": {
+          "m_eff_kg": Infinity,
+          "delta_m_percent": Infinity
+        }
+      }
+    ],
+    "coherence_gravity": [
+      {
+        "name": "Thermal atoms",
+        "R_coherence": 0.1,
+        "logarithmic_model": {
+          "g_eff_ms2": 10.043748215970107,
+          "delta_g_percent": 2.382754495108115
+        },
+        "quadratic_model": {
+          "g_eff_ms2": 9.834525,
+          "delta_g_percent": 0.24999999999998773
+        }
+      },
+      {
+        "name": "Laser cooled",
+        "R_coherence": 0.5,
+        "logarithmic_model": {
+          "g_eff_ms2": 10.804403177635274,
+          "delta_g_percent": 10.136627702704114
+        },
+        "quadratic_model": {
+          "g_eff_ms2": 10.423125,
+          "delta_g_percent": 6.250000000000002
+        }
+      },
+      {
+        "name": "BEC",
+        "R_coherence": 0.95,
+        "logarithmic_model": {
+          "g_eff_ms2": 11.447851536241794,
+          "delta_g_percent": 16.695734314391373
+        },
+        "quadratic_model": {
+          "g_eff_ms2": 12.02338125,
+          "delta_g_percent": 22.562499999999993
+        }
+      },
+      {
+        "name": "Superfluid He",
+        "R_coherence": 0.99,
+        "logarithmic_model": {
+          "g_eff_ms2": 11.497650201501024,
+          "delta_g_percent": 17.203365968410026
+        },
+        "quadratic_model": {
+          "g_eff_ms2": 12.21369525,
+          "delta_g_percent": 24.502499999999998
+        }
+      }
+    ],
+    "em_curvature": [
+      {
+        "name": "Tokamak",
+        "B_field_T": 10,
+        "path_length_m": 10,
+        "R_field": 1.0,
+        "deflection_rad": 5.562970376960225e-33,
+        "deflection_arcsec": 1.1474460848037008e-27,
+        "gr_deflection_arcsec": 170596.96341060815,
+        "trd_gr_ratio": 6.726063945475537e-33,
+        "effect_size_percent": 100.0
+      },
+      {
+        "name": "Laser facility",
+        "B_field_T": 1000000.0,
+        "path_length_m": 0.001,
+        "R_field": 1.000001,
+        "deflection_rad": 5.562970376960224e-27,
+        "deflection_arcsec": 1.1474460848037006e-21,
+        "gr_deflection_arcsec": 170596.96341060815,
+        "trd_gr_ratio": 6.726063945475535e-27,
+        "effect_size_percent": 100.0
+      },
+      {
+        "name": "Pulsar magnetosphere",
+        "B_field_T": 100000000.0,
+        "path_length_m": 1000000.0,
+        "R_field": 1.01,
+        "deflection_rad": 5.562970376960225e-14,
+        "deflection_arcsec": 1.1474460848037007e-08,
+        "gr_deflection_arcsec": 170596.96341060815,
+        "trd_gr_ratio": 6.726063945475537e-14,
+        "effect_size_percent": 99.99999999999328
+      },
+      {
+        "name": "Magnetar near field",
+        "B_field_T": 100000000000.0,
+        "path_length_m": 10000.0,
+        "R_field": 10001.0,
+        "deflection_rad": 5.562970376960224e-10,
+        "deflection_arcsec": 0.00011474460848037005,
+        "gr_deflection_arcsec": 170596.96341060815,
+        "trd_gr_ratio": 6.726063945475535e-10,
+        "effect_size_percent": 99.99999993273936
+      },
+      {
+        "name": "FRB source",
+        "B_field_T": 10000000000.0,
+        "path_length_m": 1e+20,
+        "R_field": 101.0,
+        "deflection_rad": 55629.70376960224,
+        "deflection_arcsec": 11474460848.037006,
+        "gr_deflection_arcsec": 170596.96341060815,
+        "trd_gr_ratio": 67260.63945475535,
+        "effect_size_percent": 6725963.9454755355
+      }
+    ],
+    "atomic_clock": [
+      {
+        "name": "Earth field",
+        "B_field_T": 5e-05,
+        "gradient_T_per_m": 0,
+        "f_nominal_Hz": 429000000000000.0,
+        "delta_f_Hz": 2.6812500000000003e-13,
+        "delta_f_over_f": 6.250000000000001e-28,
+        "delta_f_percent": 6.250000000000001e-26
+      },
+      {
+        "name": "MRI scanner",
+        "B_field_T": 3,
+        "gradient_T_per_m": 0,
+        "f_nominal_Hz": 429000000000000.0,
+        "delta_f_Hz": 0.00096525,
+        "delta_f_over_f": 2.25e-18,
+        "delta_f_percent": 2.25e-16
+      },
+      {
+        "name": "High field magnet",
+        "B_field_T": 45,
+        "gradient_T_per_m": 0,
+        "f_nominal_Hz": 429000000000000.0,
+        "delta_f_Hz": 0.21718125,
+        "delta_f_over_f": 5.0625e-16,
+        "delta_f_percent": 5.0625e-14
+      },
+      {
+        "name": "Pulsed field",
+        "B_field_T": 100,
+        "gradient_T_per_m": 0,
+        "f_nominal_Hz": 429000000000000.0,
+        "delta_f_Hz": 1.0724999999999998,
+        "delta_f_over_f": 2.4999999999999996e-15,
+        "delta_f_percent": 2.4999999999999994e-13
+      },
+      {
+        "name": "Magnetic trap",
+        "B_field_T": 0.01,
+        "gradient_T_per_m": 1000,
+        "f_nominal_Hz": 429000000000000.0,
+        "delta_f_Hz": 6.413342396038471e-06,
+        "delta_f_over_f": 1.494951607468175e-20,
+        "delta_f_percent": 1.4949516074681748e-18
+      }
+    ]
+  }
+}
