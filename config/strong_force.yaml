@@ -1,0 +1,70 @@
+# Configuration for B5 Strong Force Emergence Test
+#
+# Tests SU(3) color synchronization → QCD with confinement
+# Explores color confinement and running coupling
+
+test_type: "strong_force_emergence"
+
+# Grid configuration
+grid:
+  Nx: 32
+  Ny: 32
+  Nz: 32
+
+# Physics parameters
+physics:
+  dt: 0.01
+  coupling: 2.0  # Strong coupling for color interactions
+
+  # Gauge group
+  gauge_group: "SU(3)"
+  color_charges: 3  # Red, Green, Blue
+
+  # QCD parameters
+  Lambda_QCD: 0.2  # GeV
+  N_flavors: 6     # Number of quark flavors
+
+  # Evolution parameters
+  evolution_steps: 200
+
+# Test configurations
+tests:
+  - name: "Running_Coupling"
+    description: "Test asymptotic freedom"
+    scales_GeV: [1.0, 2.0, 5.0, 10.0, 91.0]
+    expected_alpha_s: [0.30, 0.20, 0.12, 0.10, 0.05]
+    tolerance: 0.1
+
+  - name: "Confinement"
+    description: "Test linear potential at large distances"
+    potential_type: "linear"  # V(r) ~ σ·r
+    wilson_loop_sizes: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    time_extent: 10
+
+  - name: "Color_Singlet"
+    description: "Test color singlet formation"
+    configurations:
+      - "random"          # Random color distribution
+      - "quark_antiquark" # qq̄ pair (meson)
+      - "three_quarks"    # qqq (baryon)
+    singlet_threshold: 0.8  # 80% should be color singlets
+
+# Expected results
+expected:
+  alpha_s_10GeV: 0.1     # Strong coupling at 10 GeV
+  alpha_s_tolerance: 0.05
+  confinement: true
+  string_tension: 0.4    # GeV/fm (rough estimate)
+
+# Quality gates
+validation:
+  coupling_within_tolerance: true
+  confinement_observed: true
+  singlets_dominate: true
+
+# Output settings
+output:
+  save_color_fields: true
+  plot_wilson_loops: true
+  plot_potential: true
+  verbose: true

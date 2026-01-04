@@ -1,0 +1,58 @@
+# Configuration for B4 Electroweak Unification Test
+#
+# Tests SU(2)×U(1) gauge structure → W±, Z⁰, γ bosons with correct masses
+# Uses R-field as Higgs mechanism for spontaneous symmetry breaking
+
+test_type: "electroweak_unification"
+
+# Grid configuration
+grid:
+  Nx: 32
+  Ny: 32
+  Nz: 32
+
+# Physics parameters
+physics:
+  dt: 0.01
+  coupling: 1.0
+
+  # Gauge group structure
+  gauge_group: "SU(2)xU(1)"
+
+  # Symmetry breaking parameters
+  symmetry_breaking: true
+  R_vacuum: 1.0  # Vacuum expectation value in TRD units
+
+  # Coupling constants
+  g_SU2: 0.65      # SU(2) gauge coupling
+  g_U1: 0.36       # U(1) hypercharge coupling
+
+  # Evolution parameters
+  evolution_steps: 200
+
+  # TRD to GeV conversion (to be calibrated)
+  TRD_to_GeV: 100.0
+
+# Experimental values (for comparison)
+experimental:
+  m_W_GeV: 80.4     # W boson mass
+  m_Z_GeV: 91.2     # Z boson mass
+  m_photon_GeV: 0.0 # Photon mass (must be zero)
+  theta_W_deg: 28.7 # Weinberg angle in degrees
+
+# Predictions tolerance
+predictions:
+  tolerance_factor: 2.0  # Accept predictions within factor of 2
+
+# Quality gates
+validation:
+  W_mass_tolerance: 2.0
+  Z_mass_tolerance: 2.0
+  photon_massless_threshold: 0.01
+  weinberg_angle_tolerance: 10.0  # degrees
+
+# Output settings
+output:
+  save_gauge_fields: true
+  plot_symmetry_breaking: true
+  verbose: true

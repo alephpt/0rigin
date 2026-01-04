@@ -1,0 +1,96 @@
+# B1 Saturation Check: 256³ Grid Extension
+# Test linear scaling continuation to d=150-200
+#
+# PHYSICS CONTEXT:
+#   Phase 5 linear fit: m₂/m₁ = 0.8083·d - 13.985 (R²=0.998, d∈[30,100])
+#   Extrapolation to muon mass: d ≈ 273 requires 683³ grid
+#   CRITICAL TEST: Does linear scaling continue or saturate?
+#
+# SATURATION HYPOTHESIS:
+#   Standard field theories show Yukawa screening at long range
+#   If vortex interactions screen: m₂/m₁ curve will bend down
+#   Detection: Compare observed vs linear prediction at d=150-200
+
+simulation:
+  grid_size_x: 256  # DOUBLED from Phase 5 (128³)
+  grid_size_y: 256  # Safe d_max = 0.4 × 256 ≈ 102.4
+  grid_size_z: 32   # Keep z-dimension (vortices are 2D structures)
+  spacing: 1.0
+  dt: 0.01
+
+parameter_scan:
+  type: "vortex_separation"
+  values: [100, 120, 140, 160, 180, 200]  # Bridge from Phase 5 max to target range
+
+physics:
+  coupling_strength: 10.0  # Optimal K from Phase 4
+  mass_gap: 5.0            # Optimal Δ from Phase 4
+
+relaxation:
+  num_steps: 500           # Proven convergence in Phase 5
+  convergence_check: true
+  output_frequency: 100
+
+vortex_configurations:
+  single_vortex:
+    topology: "point_vortex"
+    winding_number: 1
+    position: [0.0, 0.0]
+
+  double_vortex:
+    topology: "double_vortex"
+    winding_number: 2
+    # separation set by parameter_scan
+
+  triple_vortex:
+    topology: "triple_vortex"
+    winding_number: 3
+    # radius = 0.75 * separation
+
+analysis:
+  export_csv: true
+  output_file: "analysis/b1_saturation_check_256.csv"
+  compute_gradients: true
+  compute_energy: false  # Skip for speed
+  saturation_test: true  # Enable linearity deviation detection
+
+quality_targets:
+  baseline: 67.44        # Phase 5 result at d=100
+  target: 206.768        # Muon/electron mass ratio
+
+# LINEAR EXTRAPOLATION PREDICTIONS (from Phase 5 fit):
+#   m₂/m₁ = 0.8083·d - 13.985
+#
+#   d=100: m₂/m₁ = 67.4 (measured in Phase 5)
+#   d=120: m₂/m₁ = 83.0 (predicted)
+#   d=140: m₂/m₁ = 98.7 (predicted)
+#   d=160: m₂/m₁ = 114.4 (predicted)
+#   d=180: m₂/m₁ = 130.1 (predicted)
+#   d=200: m₂/m₁ = 145.8 (predicted)
+#
+# SATURATION DETECTION:
+#   Compute residuals: Δ = (observed - predicted) / predicted
+#   If |Δ| > 10% at d=200: SATURATION CONFIRMED → pivot to alternative physics
+#   If |Δ| < 5% at d=200: LINEAR CONTINUES → proceed to 512³ grid (d=220-273)
+#
+# DECISION TREE:
+#   LINEAR → Muon mass achievable via pure vortex separation (groundbreaking)
+#   SATURATION → Need additional physics (gauge fields, environmental effects)
+#
+# GRID SCALING PATH:
+#   128³ (Phase 5): d_max ≈ 51, tested to d=100
+#   256³ (this run): d_max ≈ 102, testing d=100-200
+#   512³ (if linear): d_max ≈ 205, testing d=220-273
+#   683³ (final): d_max ≈ 273, reaching muon mass target
+
+hypothesis:
+  - "Linear scaling continues if vortex R-field coupling is long-range"
+  - "Saturation occurs if ∇R interaction has finite correlation length ξ"
+  - "Critical test: Does m₂/m₁ vs d remain linear beyond d=100?"
+
+notes:
+  - "Grid size doubled to 256³ for safe d_max ≈ 102.4"
+  - "Separation range: d=100-200 (1.95× extension from Phase 5)"
+  - "Memory: 256³ × 4 fields × 4 bytes ≈ 256 MB (reasonable)"
+  - "Execution time: ~2-4 hours (6 separations × 3 topologies × 500 steps)"
+  - "Background run recommended: ./trd --test config/particle_spectrum_saturation_check.yaml &"

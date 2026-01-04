@@ -1125,8 +1125,9 @@ int runParticleSpectrumTest(int argc, char* argv[]) {
     if (argc >= 2) {
         std::string config_file(argv[1]);
 
-        // Check if it's the extended separation scan
-        if (config_file.find("separation_extended") != std::string::npos) {
+        // Check if it's the extended separation scan or saturation check
+        if (config_file.find("separation_extended") != std::string::npos ||
+            config_file.find("saturation_check") != std::string::npos) {
             return runExtendedSeparationScan(config_file);
         }
     }

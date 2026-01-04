@@ -157,6 +157,11 @@ set(TRD_SOURCES
     test/test_unitarity.cpp
     test/test_scale_invariance.cpp
     test/test_symmetry_analysis.cpp
+    # B3-B6 Standard Model tests
+    test/test_three_generations.cpp
+    test/test_electroweak.cpp
+    test/test_strong_force.cpp
+    test/test_higgs_connection.cpp
     main.cpp
 )
 

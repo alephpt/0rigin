@@ -1,0 +1,63 @@
+# Configuration for B3 Three-Generation Structure Test
+#
+# Tests whether topological defects in 3D TRD yield exactly 3 fermion families
+# Explores point defects (0D), line defects (1D), surface defects (2D)
+
+test_type: "topological_classification"
+
+# Grid configuration
+grid:
+  Nx: 32
+  Ny: 32
+  Nz: 32
+
+# Physics parameters
+physics:
+  dimension: 3
+  dt: 0.01
+  coupling: 1.0
+
+  # Defect types to test
+  defect_types:
+    - "point"     # 0D: Point vortices with winding Q
+    - "line"      # 1D: Flux tubes along axis
+    - "surface"   # 2D: Domain walls
+
+  # Winding numbers to test
+  winding_numbers: [1, 2, 3, 4, 5]
+
+  # Evolution parameters
+  evolution_steps: 100
+
+  # Stability criteria
+  stability_threshold: 0.5  # R-field strength for stable configuration
+
+# Expected results (hypothesis)
+expected:
+  family_count: 3
+  explanation: "Topological invariants in 3D space"
+
+  # Possible mappings to fermion families
+  electron_family:
+    defect_type: "point"
+    winding: 1
+
+  muon_family:
+    defect_type: "point"
+    winding: 2
+
+  tau_family:
+    defect_type: "point"
+    winding: 3
+
+# Quality gates
+validation:
+  require_exactly_three: true
+  min_stability: 0.5
+  max_energy_per_family: 10.0
+
+# Output settings
+output:
+  save_classifications: true
+  plot_stable_configs: true
+  verbose: true

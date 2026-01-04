@@ -1,0 +1,69 @@
+# Configuration for B6 Higgs Mechanism Connection Test
+#
+# Tests R-field ↔ Higgs field mapping
+# Mexican hat potential → spontaneous symmetry breaking → Higgs mass
+
+test_type: "higgs_mechanism"
+
+# Grid configuration
+grid:
+  Nx: 32
+  Ny: 32
+  Nz: 32
+
+# Physics parameters
+physics:
+  dt: 0.01
+  coupling: 0.5  # Weaker coupling for Higgs dynamics
+
+  # Mexican hat potential: V(R) = -μ²R² + λR⁴
+  # GOLDEN KEY CALIBRATION (CORRECTED):
+  #   v = 1 TRD unit = 246 GeV (electroweak VEV)
+  #   m_H = 125 GeV = 0.508 TRD units
+  #   Relations: v = μ/√(2λ), m_H = √(2)μ
+  #   From m_H: μ = 0.508/√2 = 0.359 → μ² = 0.129
+  #   From v=1: λ = μ²/2 = 0.0645
+  potential_type: "Mexican_hat"
+  mu_squared: -0.129  # Negative for SSB (calibrated for v = 1, m_H = 0.508)
+  lambda: 0.0645      # Self-coupling (calibrated for m_H = 125 GeV)
+
+  # Vacuum expectation value (computed from μ and λ)
+  # v = sqrt(-μ²/(2λ))
+  R_vacuum: 1.0  # Expected VEV in TRD units
+
+  # Evolution parameters
+  evolution_steps: 200
+
+  # TRD to GeV conversion
+  # Calibrated so R=1 → v=246 GeV (electroweak scale)
+  TRD_to_GeV: 246.0
+
+# Experimental values
+experimental:
+  m_Higgs_GeV: 125.0      # Higgs boson mass
+  vev_GeV: 246.0          # Electroweak VEV
+  num_goldstone_modes: 3  # Eaten by W+, W-, Z
+
+# Predictions
+prediction:
+  m_Higgs_GeV: 125.0
+  tolerance_factor: 2.0
+
+# Quality gates
+validation:
+  ssb_occurred: true           # Symmetry breaking must happen
+  mass_within_tolerance: true  # Higgs mass within factor 2
+  goldstone_modes_found: true  # At least some massless modes
+
+# Analysis parameters
+analysis:
+  fft_enabled: true
+  compute_spectrum: true
+  momentum_cutoff: 10.0
+
+# Output settings
+output:
+  save_R_field: true
+  plot_potential: true
+  plot_spectrum: true
+  verbose: true

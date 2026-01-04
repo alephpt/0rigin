@@ -36,6 +36,10 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_unitarity.cpp.o \
   CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o \
   CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o \
+  CMakeFiles/TRD.dir/test/test_three_generations.cpp.o \
+  CMakeFiles/TRD.dir/test/test_electroweak.cpp.o \
+  CMakeFiles/TRD.dir/test/test_strong_force.cpp.o \
+  CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o \
   CMakeFiles/TRD.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
@@ -148,6 +152,14 @@ CMakeFiles/TRD.dir/test/test_unitarity.cpp.o:
 CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_three_generations.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_electroweak.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_strong_force.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o:
 
 CMakeFiles/TRD.dir/main.cpp.o:
 

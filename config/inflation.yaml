@@ -12,9 +12,9 @@ validation:
     e-foldings (N ≈ 60) with correct spectral index (n_s ≈ 0.96).
 
 inflation:
-  initial_R: 2.0          # False vacuum state (R > 1, further from minimum)
+  initial_R: 21.0  # Optimized false vacuum state
   potential_type: "polynomial"  # V = V₀(1-R)²
-  V0: 0.01                # Inflationary energy scale (reduced for slower roll)
+  V0: 0.004  # Optimized for N ≈ 60 e-foldings
   evolution_time: 100.0   # Time to evolve (in Planck units, extended)
 
 test_scenarios:

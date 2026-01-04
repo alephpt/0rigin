@@ -1522,6 +1522,30 @@ test/test_einstein_field_equations.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/test/test_einstein_field_equations.cpp.s
 .PHONY : test/test_einstein_field_equations.cpp.s
 
+test/test_electroweak.o: test/test_electroweak.cpp.o
+.PHONY : test/test_electroweak.o
+
+# target to build an object file
+test/test_electroweak.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_electroweak.cpp.o
+.PHONY : test/test_electroweak.cpp.o
+
+test/test_electroweak.i: test/test_electroweak.cpp.i
+.PHONY : test/test_electroweak.i
+
+# target to preprocess a source file
+test/test_electroweak.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_electroweak.cpp.i
+.PHONY : test/test_electroweak.cpp.i
+
+test/test_electroweak.s: test/test_electroweak.cpp.s
+.PHONY : test/test_electroweak.s
+
+# target to generate assembly for a file
+test/test_electroweak.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_electroweak.cpp.s
+.PHONY : test/test_electroweak.cpp.s
+
 test/test_em_gravity_coupling_3d.o: test/test_em_gravity_coupling_3d.cpp.o
 .PHONY : test/test_em_gravity_coupling_3d.o
 
@@ -1665,6 +1689,30 @@ test/test_geodesic_verification.s: test/test_geodesic_verification.cpp.s
 test/test_geodesic_verification.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_geodesic_verification.dir/build.make CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.s
 .PHONY : test/test_geodesic_verification.cpp.s
+
+test/test_higgs_connection.o: test/test_higgs_connection.cpp.o
+.PHONY : test/test_higgs_connection.o
+
+# target to build an object file
+test/test_higgs_connection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o
+.PHONY : test/test_higgs_connection.cpp.o
+
+test/test_higgs_connection.i: test/test_higgs_connection.cpp.i
+.PHONY : test/test_higgs_connection.i
+
+# target to preprocess a source file
+test/test_higgs_connection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.i
+.PHONY : test/test_higgs_connection.cpp.i
+
+test/test_higgs_connection.s: test/test_higgs_connection.cpp.s
+.PHONY : test/test_higgs_connection.s
+
+# target to generate assembly for a file
+test/test_higgs_connection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.s
+.PHONY : test/test_higgs_connection.cpp.s
 
 test/test_inflation.o: test/test_inflation.cpp.o
 .PHONY : test/test_inflation.o
@@ -1834,6 +1882,30 @@ test/test_scale_invariance.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.s
 .PHONY : test/test_scale_invariance.cpp.s
 
+test/test_strong_force.o: test/test_strong_force.cpp.o
+.PHONY : test/test_strong_force.o
+
+# target to build an object file
+test/test_strong_force.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_strong_force.cpp.o
+.PHONY : test/test_strong_force.cpp.o
+
+test/test_strong_force.i: test/test_strong_force.cpp.i
+.PHONY : test/test_strong_force.i
+
+# target to preprocess a source file
+test/test_strong_force.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_strong_force.cpp.i
+.PHONY : test/test_strong_force.cpp.i
+
+test/test_strong_force.s: test/test_strong_force.cpp.s
+.PHONY : test/test_strong_force.s
+
+# target to generate assembly for a file
+test/test_strong_force.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_strong_force.cpp.s
+.PHONY : test/test_strong_force.cpp.s
+
 test/test_stuckelberg_vortex_3d.o: test/test_stuckelberg_vortex_3d.cpp.o
 .PHONY : test/test_stuckelberg_vortex_3d.o
 
@@ -1905,6 +1977,30 @@ test/test_three_body_em_3d.s: test/test_three_body_em_3d.cpp.s
 test/test_three_body_em_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.s
 .PHONY : test/test_three_body_em_3d.cpp.s
+
+test/test_three_generations.o: test/test_three_generations.cpp.o
+.PHONY : test/test_three_generations.o
+
+# target to build an object file
+test/test_three_generations.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_three_generations.cpp.o
+.PHONY : test/test_three_generations.cpp.o
+
+test/test_three_generations.i: test/test_three_generations.cpp.i
+.PHONY : test/test_three_generations.i
+
+# target to preprocess a source file
+test/test_three_generations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_three_generations.cpp.i
+.PHONY : test/test_three_generations.cpp.i
+
+test/test_three_generations.s: test/test_three_generations.cpp.s
+.PHONY : test/test_three_generations.s
+
+# target to generate assembly for a file
+test/test_three_generations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_three_generations.cpp.s
+.PHONY : test/test_three_generations.cpp.s
 
 test/test_time_dilation_3d.o: test/test_time_dilation_3d.cpp.o
 .PHONY : test/test_time_dilation_3d.o
@@ -2237,6 +2333,9 @@ help:
 	@echo "... test/test_einstein_field_equations.o"
 	@echo "... test/test_einstein_field_equations.i"
 	@echo "... test/test_einstein_field_equations.s"
+	@echo "... test/test_electroweak.o"
+	@echo "... test/test_electroweak.i"
+	@echo "... test/test_electroweak.s"
 	@echo "... test/test_em_gravity_coupling_3d.o"
 	@echo "... test/test_em_gravity_coupling_3d.i"
 	@echo "... test/test_em_gravity_coupling_3d.s"
@@ -2255,6 +2354,9 @@ help:
 	@echo "... test/test_geodesic_verification.o"
 	@echo "... test/test_geodesic_verification.i"
 	@echo "... test/test_geodesic_verification.s"
+	@echo "... test/test_higgs_connection.o"
+	@echo "... test/test_higgs_connection.i"
+	@echo "... test/test_higgs_connection.s"
 	@echo "... test/test_inflation.o"
 	@echo "... test/test_inflation.i"
 	@echo "... test/test_inflation.s"
@@ -2276,6 +2378,9 @@ help:
 	@echo "... test/test_scale_invariance.o"
 	@echo "... test/test_scale_invariance.i"
 	@echo "... test/test_scale_invariance.s"
+	@echo "... test/test_strong_force.o"
+	@echo "... test/test_strong_force.i"
+	@echo "... test/test_strong_force.s"
 	@echo "... test/test_stuckelberg_vortex_3d.o"
 	@echo "... test/test_stuckelberg_vortex_3d.i"
 	@echo "... test/test_stuckelberg_vortex_3d.s"
@@ -2285,6 +2390,9 @@ help:
 	@echo "... test/test_three_body_em_3d.o"
 	@echo "... test/test_three_body_em_3d.i"
 	@echo "... test/test_three_body_em_3d.s"
+	@echo "... test/test_three_generations.o"
+	@echo "... test/test_three_generations.i"
+	@echo "... test/test_three_generations.s"
 	@echo "... test/test_time_dilation_3d.o"
 	@echo "... test/test_time_dilation_3d.i"
 	@echo "... test/test_time_dilation_3d.s"

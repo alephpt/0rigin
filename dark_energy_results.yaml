@@ -1,27 +1,27 @@
 test: C4_Dark_Energy
-timestamp: 1767491862
+timestamp: 1767508510
 scenarios:
   Cosmological_Constant:
     equation_of_state:
-      average: 0.16426121238805513
+      average: -1
       min: -1
-      max: 0.99999999547606444
-    accelerating: false
-    cosmological_constant_like: false
+      max: -1
+    accelerating: true
+    cosmological_constant_like: true
     quintessence_like: false
     scale_factor:
       initial: 1
-      final: 228.50739278938428
-      expansion_factor: 228.50739278938428
+      final: 1.0007084607865857
+      expansion_factor: 1.0007084607865857
   Quintessence:
     equation_of_state:
-      average: 0.17387818922573137
-      min: -0.99999984405680442
-      max: 0.99999998305095206
+      average: 0.99665381407739828
+      min: 0.98996530453570042
+      max: 0.99999998999999995
     accelerating: false
     cosmological_constant_like: false
     quintessence_like: false
     scale_factor:
       initial: 1
-      final: 26261.473538503426
-      expansion_factor: 26261.473538503426
+      final: 21821.607166548187
+      expansion_factor: 21821.607166548187
