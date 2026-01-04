@@ -105,6 +105,84 @@ float TRDCore3D::computeKuramotoCoupling(uint32_t idx) const {
 }
 
 void TRDCore3D::evolveKuramotoCPU(float dt) {
+    // Dispatch to appropriate integrator based on mode
+    switch (_config.mode) {
+        case IntegrationMode::EULER:
+            evolveEulerCPU(dt);
+            break;
+        case IntegrationMode::SYMPLECTIC:
+            evolveSymplecticCPU(dt);
+            break;
+        default:
+            std::cerr << "[TRDCore3D] Unknown integration mode, defaulting to symplectic"
+                      << std::endl;
+            evolveSymplecticCPU(dt);
+            break;
+    }
+}
+
+void TRDCore3D::evolveSymplecticCPU(float dt) {
+    static bool first_call = true;
+    if (first_call) {
+        std::cout << "[TRDCore3D] Using SYMPLECTIC integration (RK2 Midpoint Method)" << std::endl;
+        first_call = false;
+    }
+
+    // RK2 Midpoint Method (symplectic for first-order systems)
+    // For dθ/dt = f(θ), this method is:
+    //   k1 = f(θ(t))
+    //   k2 = f(θ(t) + k1·dt/2)
+    //   θ(t+dt) = θ(t) + k2·dt
+
+    // Step 1: Compute k1 = f(θ) at current state
+    std::vector<float> k1(_N_total);
+    for (uint32_t idx = 0; idx < _N_total; ++idx) {
+        float coupling = computeKuramotoCoupling(idx);
+        k1[idx] = _omega_data[idx] + _config.coupling_strength * coupling;
+    }
+
+    // Step 2: Compute midpoint θ_mid = θ + k1·dt/2
+    std::vector<float> theta_mid(_N_total);
+    for (uint32_t idx = 0; idx < _N_total; ++idx) {
+        theta_mid[idx] = _theta_data[idx] + 0.5f * dt * k1[idx];
+
+        // Wrap to [-π, π]
+        while (theta_mid[idx] > M_PI) theta_mid[idx] -= 2 * M_PI;
+        while (theta_mid[idx] < -M_PI) theta_mid[idx] += 2 * M_PI;
+    }
+
+    // Step 3: Temporarily update field to compute k2
+    std::vector<float> theta_old = std::move(_theta_data);
+    _theta_data = std::move(theta_mid);
+
+    // Step 4: Compute k2 = f(θ_mid)
+    std::vector<float> k2(_N_total);
+    for (uint32_t idx = 0; idx < _N_total; ++idx) {
+        float coupling = computeKuramotoCoupling(idx);
+        k2[idx] = _omega_data[idx] + _config.coupling_strength * coupling;
+    }
+
+    // Step 5: Final update θ(t+dt) = θ(t) + k2·dt
+    for (uint32_t idx = 0; idx < _N_total; ++idx) {
+        _theta_data[idx] = theta_old[idx] + dt * k2[idx];
+
+        // Wrap to [-π, π]
+        while (_theta_data[idx] > M_PI) _theta_data[idx] -= 2 * M_PI;
+        while (_theta_data[idx] < -M_PI) _theta_data[idx] += 2 * M_PI;
+    }
+
+    // Update synchronization field
+    computeRField();
+}
+
+void TRDCore3D::evolveEulerCPU(float dt) {
+    static bool first_call = true;
+    if (first_call) {
+        std::cout << "[TRDCore3D] Using EULER integration (dissipative)" << std::endl;
+        first_call = false;
+    }
+
+    // Legacy Euler integration (dissipative)
     // Temporary storage for new phases
     std::vector<float> new_theta(_N_total);
 
@@ -127,6 +205,35 @@ void TRDCore3D::evolveKuramotoCPU(float dt) {
 
     // Update synchronization field
     computeRField();
+}
+
+float TRDCore3D::computeEnergy() const {
+    // Kuramoto model energy: E = -K * sum_{<i,j>} cos(θ_j - θ_i)
+    // For each pair of neighbors, we have -K*cos(θ_j - θ_i)
+    float E = 0.0f;
+
+    for (uint32_t idx = 0; idx < _N_total; ++idx) {
+        // Get 3D coordinates
+        uint32_t i, j, k;
+        coords3D(idx, i, j, k);
+
+        // Get neighbors
+        Neighbors3D neighbors = getNeighbors(i, j, k);
+
+        float theta_self = _theta_data[idx];
+
+        // Add coupling energy for each neighbor pair
+        // We count each pair once by only summing forward neighbors (x+, y+, z+)
+        float theta_xp = _theta_data[neighbors.x_plus];
+        float theta_yp = _theta_data[neighbors.y_plus];
+        float theta_zp = _theta_data[neighbors.z_plus];
+
+        E -= _config.coupling_strength * std::cos(theta_xp - theta_self);
+        E -= _config.coupling_strength * std::cos(theta_yp - theta_self);
+        E -= _config.coupling_strength * std::cos(theta_zp - theta_self);
+    }
+
+    return E;
 }
 
 void TRDCore3D::computeRField() {

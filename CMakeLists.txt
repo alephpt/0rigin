@@ -133,6 +133,7 @@ set(TRD_SOURCES
     src/TRDCompute.cpp
     src/TRDDescriptorManager.cpp
     src/DiracEvolution.cpp
+    src/FieldEvolution.cpp
     src/GeodesicIntegrator.cpp
     src/output/OutputManager.cpp
     src/simulations/TestConfig.cpp
@@ -396,6 +397,28 @@ set_target_properties(test_trdcore3d_gpu PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# TRDCore3D Symplectic Integration Test
+add_executable(test_trdcore3d_symplectic
+    test/test_trdcore3d_symplectic.cpp
+    src/TRDCore3D.cpp
+)
+
+target_include_directories(test_trdcore3d_symplectic PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/lib
+    ${Vulkan_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_trdcore3d_symplectic PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+
+set_target_properties(test_trdcore3d_symplectic PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # TRD 3D CPU-Only Test (no GPU dependency)
 add_executable(test_trd3d_cpu_only
     test/test_trd3d_cpu_only.cpp
@@ -513,6 +536,25 @@ target_link_libraries(test_3d_full_trd PRIVATE
 )
 
 set_target_properties(test_3d_full_trd PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# FieldEvolution - Symplectic Integrators Test
+add_executable(test_field_evolution
+    test/test_field_evolution.cpp
+    src/FieldEvolution.cpp
+)
+
+target_include_directories(test_field_evolution PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_field_evolution PRIVATE
+    pthread
+    m
+)
+
+set_target_properties(test_field_evolution PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
