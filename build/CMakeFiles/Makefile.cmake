@@ -70,9 +70,11 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/test_weak_field_limit.dir/DependInfo.cmake"
   "CMakeFiles/test_trdcore3d_basic.dir/DependInfo.cmake"
   "CMakeFiles/test_trdcore3d_gpu.dir/DependInfo.cmake"
+  "CMakeFiles/test_trdcore3d_symplectic.dir/DependInfo.cmake"
   "CMakeFiles/test_trd3d_cpu_only.dir/DependInfo.cmake"
   "CMakeFiles/test_maxwell3d_wave.dir/DependInfo.cmake"
   "CMakeFiles/test_em_wave_propagation_3d.dir/DependInfo.cmake"
   "CMakeFiles/test_dirac3d_free.dir/DependInfo.cmake"
   "CMakeFiles/test_3d_full_trd.dir/DependInfo.cmake"
+  "CMakeFiles/test_field_evolution.dir/DependInfo.cmake"
   )

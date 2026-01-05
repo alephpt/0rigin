@@ -1,131 +1,117 @@
-test_name: causality_validation
-description: "E3: Causality Validation - Signal propagation v_signal ≤ c"
-
-grid:
-  size_x: 512  # 1D propagation test (effectively)
-  size_y: 4    # Minimal transverse dimensions
-  size_z: 4
-
-physics:
-  # Wave propagation in TRD
-  # Metric: g_μν = R²·η_μν → v² = (R_space/R_time)²
-  dx: 0.1           # Spatial discretization
-  dt: 0.01          # Time step (CFL: dt < dx/c)
-  c_light: 1.0      # Speed of light (natural units)
-
-  # Kuramoto coupling (controls wave speed)
-  K: 1.0            # Standard coupling
-  damping: 0.0      # No dissipation
-  noise_strength: 0.0
-
-  # Time evolution
-  total_steps: 1000
-  solver_type: cpu  # CPU-based Kuramoto evolution
-
-initial_conditions:
-  # Test 1: Gaussian pulse propagation
-  pulse_propagation:
-    enabled: true
-    pulse_type: gaussian
-    center: 128.0      # x0 = N/4
-    sigma: 8.0         # Pulse width
-    amplitude: 1.0     # Peak amplitude
-
-  # Test 2: Varying R-field
-  r_field_config:
-    type: sinusoidal   # R(x) = 1 + A·sin(kx)
-    amplitude: 0.5     # Variation amplitude
-    wavelength: 128.0  # Spatial period
-
-  # Test 3: Strong coupling test
-  strong_coupling:
-    enabled: false     # Enable for test 3
-    K: 10.0            # Strong nonlinear coupling
-    dt: 0.005          # Smaller timestep for stability
-    amplitude: 0.3     # Reduced amplitude
+test_name: "E3_Causality"
+description: "Signal velocity analysis for all TRD field modes - CRITICAL GO/NO-GO gate"
 
 validation:
-  # Causality constraints
-  max_velocity_ratio: 1.1   # v_max/c ≤ 1.1 (10% numerical tolerance)
+  framework: "E3 - Mathematical Rigor"
+  test_file: "test/test_causality.cpp"
+  date: "2026-01-04"
+  golden_key: 246.0  # GeV
 
-  # Test-specific tolerances
-  flat_space_tolerance: 1.1      # Test 1: 10% tolerance
-  varying_r_tolerance: 1.2       # Test 2: 20% tolerance (inhomogeneous)
-  strong_coupling_tolerance: 1.5 # Test 3: 50% tolerance (nonlinear effects)
+physics:
+  grid_size: 128  # High resolution for wave propagation
+  dx: 0.1  # Spatial step (natural units)
+  dt: 0.01  # Time step (must satisfy CFL condition: dt < dx/c)
 
-  # Signal propagation metrics
-  measure_centroid_velocity: true      # Track ⟨x·|θ|²⟩/⟨|θ|²⟩
-  measure_max_position_velocity: true  # Track position of max amplitude
-  measure_light_cone: true             # Verify perturbations within light cone
+  # TRD parameters
+  coupling_K: 1.0  # Kuramoto coupling strength
+  mass_gap_delta: 1.0  # Mass gap parameter
 
-  # Expected values
-  expected_v_flat: 1.0         # Flat space: v ≈ c
-  expected_v_range: [0.5, 1.5] # Reasonable velocity range
+  # Initial perturbation for signal propagation
+  perturbation_type: "gaussian_pulse"
+  perturbation_center: [64, 64, 64]  # Grid center
+  perturbation_width: 5.0  # Gaussian width
+  perturbation_amplitude: 0.01  # Small amplitude (linear regime)
 
+  # Simulation parameters
+  total_time: 10.0  # Total simulation time
+  sample_interval: 0.1  # Time between snapshots
+
+  # CFL stability check
+  cfl_limit: 1.0  # Maximum CFL number (dx/dt must be >= c)
+
+test_scenarios:
+  - name: "R_Field_Propagation"
+    description: "Measure R-field (order parameter) wave speed"
+    field: "R"
+    expected:
+      v_signal_max: 1.0  # Speed of light in natural units
+      tolerance: 0.01
+      measurement_method: "wavefront_tracking"
+
+  - name: "Phase_Gradient_Propagation"
+    description: "Measure θ-field gradient wave speed"
+    field: "theta_gradient"
+    expected:
+      v_signal_max: 1.0
+      tolerance: 0.01
+      measurement_method: "gradient_propagation"
+
+  - name: "Coupled_Mode_Analysis"
+    description: "Check coupled R-θ modes for superluminal propagation"
+    field: "coupled"
+    expected:
+      all_modes_subluminal: true
+      measurement_method: "fourier_dispersion"
+
+  - name: "Light_Cone_Constraint"
+    description: "Verify no information outside light cone"
+    field: "all"
+    expected:
+      light_cone_respected: true
+      measurement_method: "causality_cone"
+
+quality_gates:
+  - metric: "Maximum signal velocity"
+    requirement: "v_max ≤ 1.0 (speed of light)"
+    physics_note: "Causality requires all signals v ≤ c"
+    critical: true  # STOP gate if failed
+
+  - metric: "Wavefront analysis"
+    requirement: "No information outside light cone"
+    physics_note: "Signal must be zero for |x - x₀| > c(t - t₀)"
+    critical: true
+
+  - metric: "Group velocity"
+    requirement: "v_group ≤ c for all frequencies"
+    physics_note: "Dispersion relation: ω² = k² + Δ² → v_g = k/ω ≤ 1"
+    critical: true
+
+  - metric: "Phase velocity"
+    requirement: "v_phase may exceed c (non-physical)"
+    physics_note: "Phase velocity ω/k can exceed c but carries no information"
+    critical: false
+
+  - metric: "Energy conservation"
+    requirement: "Energy drift < 0.01% over simulation"
+    physics_note: "Symplectic integration ensures numerical stability"
+    critical: false  # Important but not a causality test
+
+# Output configuration
 output:
-  directory: output/causality
-  save_every: 50
-  formats: [csv]
-
-  # Diagnostics
-  save_pulse_trajectory: true
+  save_snapshots: true
+  snapshot_dir: "output/causality/"
+  save_dispersion: true
   save_velocity_profile: true
-  save_light_cone_check: true
+  save_light_cone: true
 
-  # Analysis outputs
-  track_centroid: true
-  track_width: true
-  track_amplitude: true
+# Analysis methods
+analysis:
+  wavefront_threshold: 0.001  # Amplitude threshold for wavefront detection
+  fourier_resolution: 256  # FFT size for dispersion analysis
+  velocity_measurement_points: 10  # Number of points for velocity tracking
 
-test_suite:
-  # Sequential execution of 3 causality tests
-  tests:
-    - name: flat_space_propagation
-      description: "Flat space (R=1): verify v ≈ c"
-      metric: v_signal
-      tolerance: 1.1
+# Expected physics from TRD theory
+theoretical_predictions:
+  dispersion_relation: "ω² = k² + Δ²"  # Massive Klein-Gordon type
+  group_velocity: "v_g = k/√(k² + Δ²)"  # Always ≤ 1
+  phase_velocity: "v_p = ω/k = √(1 + Δ²/k²)"  # Can exceed 1 for small k
+  light_speed: 1.0  # Natural units (c = ħ = 1)
 
-    - name: varying_r_field
-      description: "Spatially varying R: verify v ≤ c everywhere"
-      metric: v_max
-      tolerance: 1.2
-
-    - name: strong_coupling
-      description: "Strong coupling K=10: no superluminal propagation"
-      metric: v_signal
-      tolerance: 1.5
-
-comments: |
-  E3 Causality Validation Test
-
-  Physics:
-  - Wave equation: □θ = ... (d'Alembert operator)
-  - Metric: g_μν = R²(x)·η_μν (conformal to Minkowski)
-  - Characteristic speed: v² = -g^{ij}/g^{00}
-  - Causality: v_signal ≤ c for all configurations
-
-  Test Method:
-  1. Initialize Gaussian pulse: θ(x,0) = A·exp(-(x-x0)²/2σ²)
-  2. Evolve with Kuramoto dynamics
-  3. Track centroid position: x_c(t) = ⟨x·|θ|²⟩ / ⟨|θ|²⟩
-  4. Measure velocity: v = dx_c/dt
-  5. Verify: v ≤ c (within numerical precision)
-
-  Test Scenarios:
-  1. Flat space (R=1): Baseline test, expect v ≈ c
-  2. Varying R-field: R(x) = 1 + 0.5·sin(2πx/L), verify causality preserved
-  3. Strong coupling K=10: Test nonlinear regime, no FTL propagation
-
-  Quality Gates:
-  - Flat space: v/c ≤ 1.1 (10% numerical tolerance)
-  - Varying R: v_max/c ≤ 1.2 (20% for inhomogeneity)
-  - Strong coupling: v/c ≤ 1.5 (50% for nonlinear effects)
-
-  Success Criteria:
-  ✓ No faster-than-light signal propagation in any regime
-  ✓ Characteristic speeds bounded by c
-  ✓ Light cone structure preserved
-
-  Note: Numerical dispersion from finite-difference schemes may reduce
-  effective wave speed below c. This is acceptable - we are checking the
-  upper bound (no FTL propagation), not exact v=c.
+# Test verdict criteria
+verdict:
+  GO: "All signal velocities ≤ c within tolerance"
+  NO_GO: "Any signal velocity exceeds c"
+  criteria:
+    - "max(v_signal) ≤ 1.0 + tolerance"
+    - "Light cone constraint satisfied"
+    - "No superluminal energy transport"

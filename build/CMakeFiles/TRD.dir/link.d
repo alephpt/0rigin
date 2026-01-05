@@ -13,6 +13,7 @@ bin/trd: \
   CMakeFiles/TRD.dir/src/TRDCompute.cpp.o \
   CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o \
   CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o \
+  CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o \
   CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o \
   CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o \
   CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o \
@@ -112,6 +113,8 @@ CMakeFiles/TRD.dir/src/TRDCompute.cpp.o:
 CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o:
 
 CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o:
+
+CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o:
 
 CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o:
 

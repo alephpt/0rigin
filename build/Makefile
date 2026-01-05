@@ -273,6 +273,19 @@ test_trdcore3d_gpu/fast:
 .PHONY : test_trdcore3d_gpu/fast
 
 #=============================================================================
+# Target rules for targets named test_trdcore3d_symplectic
+
+# Build rule for target.
+test_trdcore3d_symplectic: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_trdcore3d_symplectic
+.PHONY : test_trdcore3d_symplectic
+
+# fast build rule for target.
+test_trdcore3d_symplectic/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/build
+.PHONY : test_trdcore3d_symplectic/fast
+
+#=============================================================================
 # Target rules for targets named test_trd3d_cpu_only
 
 # Build rule for target.
@@ -336,6 +349,19 @@ test_3d_full_trd: cmake_check_build_system
 test_3d_full_trd/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/build
 .PHONY : test_3d_full_trd/fast
+
+#=============================================================================
+# Target rules for targets named test_field_evolution
+
+# Build rule for target.
+test_field_evolution: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_field_evolution
+.PHONY : test_field_evolution
+
+# fast build rule for target.
+test_field_evolution/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_evolution.dir/build.make CMakeFiles/test_field_evolution.dir/build
+.PHONY : test_field_evolution/fast
 
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
@@ -925,6 +951,33 @@ src/DiracEvolution.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_weak_field_limit.dir/build.make CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.s
 .PHONY : src/DiracEvolution.cpp.s
 
+src/FieldEvolution.o: src/FieldEvolution.cpp.o
+.PHONY : src/FieldEvolution.o
+
+# target to build an object file
+src/FieldEvolution.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_evolution.dir/build.make CMakeFiles/test_field_evolution.dir/src/FieldEvolution.cpp.o
+.PHONY : src/FieldEvolution.cpp.o
+
+src/FieldEvolution.i: src/FieldEvolution.cpp.i
+.PHONY : src/FieldEvolution.i
+
+# target to preprocess a source file
+src/FieldEvolution.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/FieldEvolution.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_evolution.dir/build.make CMakeFiles/test_field_evolution.dir/src/FieldEvolution.cpp.i
+.PHONY : src/FieldEvolution.cpp.i
+
+src/FieldEvolution.s: src/FieldEvolution.cpp.s
+.PHONY : src/FieldEvolution.s
+
+# target to generate assembly for a file
+src/FieldEvolution.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/FieldEvolution.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_evolution.dir/build.make CMakeFiles/test_field_evolution.dir/src/FieldEvolution.cpp.s
+.PHONY : src/FieldEvolution.cpp.s
+
 src/GeodesicIntegrator.o: src/GeodesicIntegrator.cpp.o
 .PHONY : src/GeodesicIntegrator.o
 
@@ -1082,6 +1135,7 @@ src/TRDCore3D.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/TRDCore3D.cpp.o
 .PHONY : src/TRDCore3D.cpp.o
@@ -1096,6 +1150,7 @@ src/TRDCore3D.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/TRDCore3D.cpp.i
 .PHONY : src/TRDCore3D.cpp.i
@@ -1110,6 +1165,7 @@ src/TRDCore3D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_einstein_field_equations.dir/build.make CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trd3d_cpu_only.dir/build.make CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_3d_full_trd.dir/build.make CMakeFiles/test_3d_full_trd.dir/src/TRDCore3D.cpp.s
 .PHONY : src/TRDCore3D.cpp.s
@@ -1641,6 +1697,30 @@ test/test_experimental_predictions.s: test/test_experimental_predictions.cpp.s
 test/test_experimental_predictions.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_experimental_predictions.dir/build.make CMakeFiles/test_experimental_predictions.dir/test/test_experimental_predictions.cpp.s
 .PHONY : test/test_experimental_predictions.cpp.s
+
+test/test_field_evolution.o: test/test_field_evolution.cpp.o
+.PHONY : test/test_field_evolution.o
+
+# target to build an object file
+test/test_field_evolution.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_evolution.dir/build.make CMakeFiles/test_field_evolution.dir/test/test_field_evolution.cpp.o
+.PHONY : test/test_field_evolution.cpp.o
+
+test/test_field_evolution.i: test/test_field_evolution.cpp.i
+.PHONY : test/test_field_evolution.i
+
+# target to preprocess a source file
+test/test_field_evolution.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_evolution.dir/build.make CMakeFiles/test_field_evolution.dir/test/test_field_evolution.cpp.i
+.PHONY : test/test_field_evolution.cpp.i
+
+test/test_field_evolution.s: test/test_field_evolution.cpp.s
+.PHONY : test/test_field_evolution.s
+
+# target to generate assembly for a file
+test/test_field_evolution.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_evolution.dir/build.make CMakeFiles/test_field_evolution.dir/test/test_field_evolution.cpp.s
+.PHONY : test/test_field_evolution.cpp.s
 
 test/test_friedmann_equations.o: test/test_friedmann_equations.cpp.o
 .PHONY : test/test_friedmann_equations.o
@@ -2242,6 +2322,30 @@ test/test_trdcore3d_gpu_simple.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_gpu.dir/build.make CMakeFiles/test_trdcore3d_gpu.dir/test/test_trdcore3d_gpu_simple.cpp.s
 .PHONY : test/test_trdcore3d_gpu_simple.cpp.s
 
+test/test_trdcore3d_symplectic.o: test/test_trdcore3d_symplectic.cpp.o
+.PHONY : test/test_trdcore3d_symplectic.o
+
+# target to build an object file
+test/test_trdcore3d_symplectic.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.o
+.PHONY : test/test_trdcore3d_symplectic.cpp.o
+
+test/test_trdcore3d_symplectic.i: test/test_trdcore3d_symplectic.cpp.i
+.PHONY : test/test_trdcore3d_symplectic.i
+
+# target to preprocess a source file
+test/test_trdcore3d_symplectic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.i
+.PHONY : test/test_trdcore3d_symplectic.cpp.i
+
+test/test_trdcore3d_symplectic.s: test/test_trdcore3d_symplectic.cpp.s
+.PHONY : test/test_trdcore3d_symplectic.s
+
+# target to generate assembly for a file
+test/test_trdcore3d_symplectic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.s
+.PHONY : test/test_trdcore3d_symplectic.cpp.s
+
 test/test_unitarity.o: test/test_unitarity.cpp.o
 .PHONY : test/test_unitarity.o
 
@@ -2332,12 +2436,14 @@ help:
 	@echo "... test_einstein_field_equations"
 	@echo "... test_em_wave_propagation_3d"
 	@echo "... test_experimental_predictions"
+	@echo "... test_field_evolution"
 	@echo "... test_geodesic_verification"
 	@echo "... test_maxwell3d_wave"
 	@echo "... test_renormalizability"
 	@echo "... test_trd3d_cpu_only"
 	@echo "... test_trdcore3d_basic"
 	@echo "... test_trdcore3d_gpu"
+	@echo "... test_trdcore3d_symplectic"
 	@echo "... test_weak_field_limit"
 	@echo "... lib/Nova/Core/components/genesis.o"
 	@echo "... lib/Nova/Core/components/genesis.i"
@@ -2411,6 +2517,9 @@ help:
 	@echo "... src/DiracEvolution.o"
 	@echo "... src/DiracEvolution.i"
 	@echo "... src/DiracEvolution.s"
+	@echo "... src/FieldEvolution.o"
+	@echo "... src/FieldEvolution.i"
+	@echo "... src/FieldEvolution.s"
 	@echo "... src/GeodesicIntegrator.o"
 	@echo "... src/GeodesicIntegrator.i"
 	@echo "... src/GeodesicIntegrator.s"
@@ -2492,6 +2601,9 @@ help:
 	@echo "... test/test_experimental_predictions.o"
 	@echo "... test/test_experimental_predictions.i"
 	@echo "... test/test_experimental_predictions.s"
+	@echo "... test/test_field_evolution.o"
+	@echo "... test/test_field_evolution.i"
+	@echo "... test/test_field_evolution.s"
 	@echo "... test/test_friedmann_equations.o"
 	@echo "... test/test_friedmann_equations.i"
 	@echo "... test/test_friedmann_equations.s"
@@ -2567,6 +2679,9 @@ help:
 	@echo "... test/test_trdcore3d_gpu_simple.o"
 	@echo "... test/test_trdcore3d_gpu_simple.i"
 	@echo "... test/test_trdcore3d_gpu_simple.s"
+	@echo "... test/test_trdcore3d_symplectic.o"
+	@echo "... test/test_trdcore3d_symplectic.i"
+	@echo "... test/test_trdcore3d_symplectic.s"
 	@echo "... test/test_unitarity.o"
 	@echo "... test/test_unitarity.i"
 	@echo "... test/test_unitarity.s"

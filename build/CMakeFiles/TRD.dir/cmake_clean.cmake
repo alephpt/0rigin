@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TRD.dir/src/Dirac3D.cpp.o.d"
   "CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o"
   "CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o.d"
+  "CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o"
+  "CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o.d"
   "CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o"
   "CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o.d"
   "CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o"

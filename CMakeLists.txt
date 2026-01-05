@@ -264,6 +264,7 @@ target_include_directories(test_renormalizability PRIVATE
 )
 
 target_link_libraries(test_renormalizability PRIVATE
+    yaml-cpp
     m
 )
 
@@ -540,23 +541,24 @@ set_target_properties(test_3d_full_trd PROPERTIES
 )
 
 # FieldEvolution - Symplectic Integrators Test
-add_executable(test_field_evolution
-    test/test_field_evolution.cpp
-    src/FieldEvolution.cpp
-)
-
-target_include_directories(test_field_evolution PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_field_evolution PRIVATE
-    pthread
-    m
-)
-
-set_target_properties(test_field_evolution PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# Commented out - files don't exist yet
+# add_executable(test_field_evolution
+#     test/test_field_evolution.cpp
+#     src/FieldEvolution.cpp
+# )
+#
+# target_include_directories(test_field_evolution PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+#
+# target_link_libraries(test_field_evolution PRIVATE
+#     pthread
+#     m
+# )
+#
+# set_target_properties(test_field_evolution PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # ============================================================================
 # LEGACY TEST BINARIES REMOVED

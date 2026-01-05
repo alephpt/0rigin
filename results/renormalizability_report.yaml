@@ -1,0 +1,29 @@
+test_name: E1_Renormalizability
+execution_date: 2026-01-04
+test_passed: true
+divergences:
+  self_energy:
+    type: logarithmic
+    degree: 1
+    coefficient: 0.006332573977646111
+    absorbable: true
+  vacuum_energy:
+    type: quadratic
+    degree: 2
+    coefficient: 0.0015831434944115277
+    absorbable: true
+  vertex_correction:
+    type: logarithmic
+    degree: 1
+    coefficient: 0.012665147955292222
+    absorbable: true
+counterterms:
+  Z_K: 1.0874877426472596
+  Z_R: 0.95625612867637022
+  Z_theta: 0.95625612867637022
+  delta_Lambda: 1583143494.4115276
+  delta_mass: 0.043743871323629828
+beta_function:
+  one_loop_coefficient: 0.012665147955292222
+  sign: positive
+go_no_go_decision: GO

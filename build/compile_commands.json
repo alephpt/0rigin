@@ -199,6 +199,12 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o -c /home/persist/neotec/0rigin/src/FieldEvolution.cpp",
+  "file": "/home/persist/neotec/0rigin/src/FieldEvolution.cpp",
+  "output": "CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
   "file": "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
   "output": "CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o"
@@ -565,6 +571,18 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.o -c /home/persist/neotec/0rigin/test/test_trdcore3d_symplectic.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_trdcore3d_symplectic.cpp",
+  "output": "CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
+  "output": "CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trd3d_cpu_only.dir/test/test_trd3d_cpu_only.cpp.o -c /home/persist/neotec/0rigin/test/test_trd3d_cpu_only.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_trd3d_cpu_only.cpp",
   "output": "CMakeFiles/test_trd3d_cpu_only.dir/test/test_trd3d_cpu_only.cpp.o"
@@ -634,5 +652,17 @@
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_trd.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
   "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
   "output": "CMakeFiles/test_3d_full_trd.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_field_evolution.dir/test/test_field_evolution.cpp.o -c /home/persist/neotec/0rigin/test/test_field_evolution.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_field_evolution.cpp",
+  "output": "CMakeFiles/test_field_evolution.dir/test/test_field_evolution.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_field_evolution.dir/src/FieldEvolution.cpp.o -c /home/persist/neotec/0rigin/src/FieldEvolution.cpp",
+  "file": "/home/persist/neotec/0rigin/src/FieldEvolution.cpp",
+  "output": "CMakeFiles/test_field_evolution.dir/src/FieldEvolution.cpp.o"
 }
 ]

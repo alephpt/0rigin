@@ -226,10 +226,24 @@ CMakeFiles/TRD.dir/src/DiracEvolution.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/src/DiracEvolution.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/DiracEvolution.cpp -o CMakeFiles/TRD.dir/src/DiracEvolution.cpp.s
 
+CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o: /home/persist/neotec/0rigin/src/FieldEvolution.cpp
+CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o -MF CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o.d -o CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o -c /home/persist/neotec/0rigin/src/FieldEvolution.cpp
+
+CMakeFiles/TRD.dir/src/FieldEvolution.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/src/FieldEvolution.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/src/FieldEvolution.cpp > CMakeFiles/TRD.dir/src/FieldEvolution.cpp.i
+
+CMakeFiles/TRD.dir/src/FieldEvolution.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/src/FieldEvolution.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/src/FieldEvolution.cpp -o CMakeFiles/TRD.dir/src/FieldEvolution.cpp.s
+
 CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o: /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp
 CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o -MF CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o.d -o CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp
 
 CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.i: cmake_force
@@ -243,7 +257,7 @@ CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.s: cmake_force
 CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o: /home/persist/neotec/0rigin/src/output/OutputManager.cpp
 CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o -MF CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o.d -o CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp
 
 CMakeFiles/TRD.dir/src/output/OutputManager.cpp.i: cmake_force
@@ -257,7 +271,7 @@ CMakeFiles/TRD.dir/src/output/OutputManager.cpp.s: cmake_force
 CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o: /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp
 CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o -MF CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o.d -o CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp
 
 CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.i: cmake_force
@@ -271,7 +285,7 @@ CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.s: cmake_force
 CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o: /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp
 CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o -MF CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o.d -o CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp
 
 CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.i: cmake_force
@@ -285,7 +299,7 @@ CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.s: cmake_force
 CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o: /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp
 CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o -MF CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o.d -o CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o -c /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp
 
 CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.i: cmake_force
@@ -299,7 +313,7 @@ CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o: /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp
 CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp
 
 CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.i: cmake_force
@@ -313,7 +327,7 @@ CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o: /home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp
 CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp
 
 CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.i: cmake_force
@@ -327,7 +341,7 @@ CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o: /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp
 CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp
 
 CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.i: cmake_force
@@ -341,7 +355,7 @@ CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o: /home/persist/neotec/0rigin/test/test_geodesic_3d.cpp
 CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_geodesic_3d.cpp
 
 CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.i: cmake_force
@@ -355,7 +369,7 @@ CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o: /home/persist/neotec/0rigin/test/test_weak_field_3d.cpp
 CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_weak_field_3d.cpp
 
 CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.i: cmake_force
@@ -369,7 +383,7 @@ CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o: /home/persist/neotec/0rigin/test/test_time_dilation_3d.cpp
 CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_time_dilation_3d.cpp
 
 CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.i: cmake_force
@@ -383,7 +397,7 @@ CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o: /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp
 CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp
 
 CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.i: cmake_force
@@ -397,7 +411,7 @@ CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o: /home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp
 CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o -MF CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o.d -o CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp
 
 CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.i: cmake_force
@@ -411,7 +425,7 @@ CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o: /home/persist/neotec/0rigin/test/test_light_deflection_3d.cpp
 CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o -MF CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o.d -o CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_light_deflection_3d.cpp
 
 CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.i: cmake_force
@@ -425,7 +439,7 @@ CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o: /home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp
 CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o -MF CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o.d -o CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp
 
 CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.i: cmake_force
@@ -439,7 +453,7 @@ CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o: /home/persist/neotec/0rigin/test/test_cosmological_constant.cpp
 CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o -MF CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o.d -o CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o -c /home/persist/neotec/0rigin/test/test_cosmological_constant.cpp
 
 CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.i: cmake_force
@@ -453,7 +467,7 @@ CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o: /home/persist/neotec/0rigin/test/test_friedmann_equations.cpp
 CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o -MF CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o.d -o CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_friedmann_equations.cpp
 
 CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.i: cmake_force
@@ -467,7 +481,7 @@ CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o: /home/persist/neotec/0rigin/test/test_dark_matter.cpp
 CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o -MF CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o.d -o CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o -c /home/persist/neotec/0rigin/test/test_dark_matter.cpp
 
 CMakeFiles/TRD.dir/test/test_dark_matter.cpp.i: cmake_force
@@ -481,7 +495,7 @@ CMakeFiles/TRD.dir/test/test_dark_matter.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o: /home/persist/neotec/0rigin/test/test_dark_energy.cpp
 CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o -MF CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o.d -o CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o -c /home/persist/neotec/0rigin/test/test_dark_energy.cpp
 
 CMakeFiles/TRD.dir/test/test_dark_energy.cpp.i: cmake_force
@@ -495,7 +509,7 @@ CMakeFiles/TRD.dir/test/test_dark_energy.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_inflation.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_inflation.cpp.o: /home/persist/neotec/0rigin/test/test_inflation.cpp
 CMakeFiles/TRD.dir/test/test_inflation.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/TRD.dir/test/test_inflation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/TRD.dir/test/test_inflation.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_inflation.cpp.o -MF CMakeFiles/TRD.dir/test/test_inflation.cpp.o.d -o CMakeFiles/TRD.dir/test/test_inflation.cpp.o -c /home/persist/neotec/0rigin/test/test_inflation.cpp
 
 CMakeFiles/TRD.dir/test/test_inflation.cpp.i: cmake_force
@@ -509,7 +523,7 @@ CMakeFiles/TRD.dir/test/test_inflation.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_unitarity.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_unitarity.cpp.o: /home/persist/neotec/0rigin/test/test_unitarity.cpp
 CMakeFiles/TRD.dir/test/test_unitarity.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/TRD.dir/test/test_unitarity.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/TRD.dir/test/test_unitarity.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_unitarity.cpp.o -MF CMakeFiles/TRD.dir/test/test_unitarity.cpp.o.d -o CMakeFiles/TRD.dir/test/test_unitarity.cpp.o -c /home/persist/neotec/0rigin/test/test_unitarity.cpp
 
 CMakeFiles/TRD.dir/test/test_unitarity.cpp.i: cmake_force
@@ -523,7 +537,7 @@ CMakeFiles/TRD.dir/test/test_unitarity.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o: /home/persist/neotec/0rigin/test/test_scale_invariance.cpp
 CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o -MF CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o.d -o CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o -c /home/persist/neotec/0rigin/test/test_scale_invariance.cpp
 
 CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.i: cmake_force
@@ -537,7 +551,7 @@ CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o: /home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp
 CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o -MF CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o.d -o CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o -c /home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp
 
 CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.i: cmake_force
@@ -551,7 +565,7 @@ CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_three_generations.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_three_generations.cpp.o: /home/persist/neotec/0rigin/test/test_three_generations.cpp
 CMakeFiles/TRD.dir/test/test_three_generations.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/TRD.dir/test/test_three_generations.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/TRD.dir/test/test_three_generations.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_three_generations.cpp.o -MF CMakeFiles/TRD.dir/test/test_three_generations.cpp.o.d -o CMakeFiles/TRD.dir/test/test_three_generations.cpp.o -c /home/persist/neotec/0rigin/test/test_three_generations.cpp
 
 CMakeFiles/TRD.dir/test/test_three_generations.cpp.i: cmake_force
@@ -565,7 +579,7 @@ CMakeFiles/TRD.dir/test/test_three_generations.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_electroweak.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_electroweak.cpp.o: /home/persist/neotec/0rigin/test/test_electroweak.cpp
 CMakeFiles/TRD.dir/test/test_electroweak.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/TRD.dir/test/test_electroweak.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/TRD.dir/test/test_electroweak.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_electroweak.cpp.o -MF CMakeFiles/TRD.dir/test/test_electroweak.cpp.o.d -o CMakeFiles/TRD.dir/test/test_electroweak.cpp.o -c /home/persist/neotec/0rigin/test/test_electroweak.cpp
 
 CMakeFiles/TRD.dir/test/test_electroweak.cpp.i: cmake_force
@@ -579,7 +593,7 @@ CMakeFiles/TRD.dir/test/test_electroweak.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_strong_force.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_strong_force.cpp.o: /home/persist/neotec/0rigin/test/test_strong_force.cpp
 CMakeFiles/TRD.dir/test/test_strong_force.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/TRD.dir/test/test_strong_force.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/TRD.dir/test/test_strong_force.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_strong_force.cpp.o -MF CMakeFiles/TRD.dir/test/test_strong_force.cpp.o.d -o CMakeFiles/TRD.dir/test/test_strong_force.cpp.o -c /home/persist/neotec/0rigin/test/test_strong_force.cpp
 
 CMakeFiles/TRD.dir/test/test_strong_force.cpp.i: cmake_force
@@ -593,7 +607,7 @@ CMakeFiles/TRD.dir/test/test_strong_force.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o: /home/persist/neotec/0rigin/test/test_higgs_connection.cpp
 CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o -MF CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o.d -o CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o -c /home/persist/neotec/0rigin/test/test_higgs_connection.cpp
 
 CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.i: cmake_force
@@ -607,7 +621,7 @@ CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o: /home/persist/neotec/0rigin/test/test_josephson_junction.cpp
 CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o -MF CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o.d -o CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o -c /home/persist/neotec/0rigin/test/test_josephson_junction.cpp
 
 CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.i: cmake_force
@@ -621,7 +635,7 @@ CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o: /home/persist/neotec/0rigin/test/test_binary_merger.cpp
 CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o -MF CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o.d -o CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o -c /home/persist/neotec/0rigin/test/test_binary_merger.cpp
 
 CMakeFiles/TRD.dir/test/test_binary_merger.cpp.i: cmake_force
@@ -635,7 +649,7 @@ CMakeFiles/TRD.dir/test/test_binary_merger.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o: /home/persist/neotec/0rigin/test/test_particle_scattering.cpp
 CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o -MF CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o.d -o CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_scattering.cpp
 
 CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.i: cmake_force
@@ -649,7 +663,7 @@ CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o: /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp
 CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o -MF CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o.d -o CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o -c /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp
 
 CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.i: cmake_force
@@ -663,7 +677,7 @@ CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o: /home/persist/neotec/0rigin/test/test_knot_topology.cpp
 CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o -MF CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o.d -o CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o -c /home/persist/neotec/0rigin/test/test_knot_topology.cpp
 
 CMakeFiles/TRD.dir/test/test_knot_topology.cpp.i: cmake_force
@@ -677,7 +691,7 @@ CMakeFiles/TRD.dir/test/test_knot_topology.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_multiscale.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_multiscale.cpp.o: /home/persist/neotec/0rigin/test/test_multiscale.cpp
 CMakeFiles/TRD.dir/test/test_multiscale.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/TRD.dir/test/test_multiscale.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/TRD.dir/test/test_multiscale.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_multiscale.cpp.o -MF CMakeFiles/TRD.dir/test/test_multiscale.cpp.o.d -o CMakeFiles/TRD.dir/test/test_multiscale.cpp.o -c /home/persist/neotec/0rigin/test/test_multiscale.cpp
 
 CMakeFiles/TRD.dir/test/test_multiscale.cpp.i: cmake_force
@@ -691,7 +705,7 @@ CMakeFiles/TRD.dir/test/test_multiscale.cpp.s: cmake_force
 CMakeFiles/TRD.dir/main.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/main.cpp.o: /home/persist/neotec/0rigin/main.cpp
 CMakeFiles/TRD.dir/main.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/TRD.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/TRD.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/main.cpp.o -MF CMakeFiles/TRD.dir/main.cpp.o.d -o CMakeFiles/TRD.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp
 
 CMakeFiles/TRD.dir/main.cpp.i: cmake_force
@@ -715,6 +729,7 @@ TRD_OBJECTS = \
 "CMakeFiles/TRD.dir/src/TRDCompute.cpp.o" \
 "CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o" \
 "CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o" \
+"CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o" \
 "CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o" \
 "CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o" \
 "CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o" \
@@ -764,6 +779,7 @@ bin/trd: CMakeFiles/TRD.dir/src/TRDBufferManager.cpp.o
 bin/trd: CMakeFiles/TRD.dir/src/TRDCompute.cpp.o
 bin/trd: CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o
 bin/trd: CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o
+bin/trd: CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o
 bin/trd: CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o
 bin/trd: CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o
 bin/trd: CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o
@@ -807,7 +823,7 @@ bin/trd: /lib/libvulkan.so
 bin/trd: /usr/lib/libSDL2main.a
 bin/trd: /usr/lib/libSDL2-2.0.so.0.3200.60
 bin/trd: CMakeFiles/TRD.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Linking CXX executable bin/trd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Linking CXX executable bin/trd"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TRD.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

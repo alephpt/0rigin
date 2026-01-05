@@ -1,90 +1,203 @@
 # E5: Symmetry Analysis (Noether's Theorem) Configuration
 #
-# Test: Identify and verify conserved quantities from TRD symmetries
-# Physics: Noether's theorem - each continuous symmetry yields a conserved quantity
+# Test: Verify TRD has correct symmetry structure via Noether's theorem
+# Physics: Identify all conserved currents and verify experimental symmetries (CPT, Lorentz)
 #
 # Quality Gates:
-#   - Energy conservation: |ΔE/E₀| < 1%
-#   - Momentum conservation: |ΔP/P₀| < 1%
-#   - Phase charge conservation: |ΔQ/Q₀| < 1%
+#   - Energy conservation: <0.01% drift
+#   - All experimental symmetries (CPT, Lorentz) properly implemented
+#   - All Noether currents identified and validated
+
+test_name: "E5_Symmetry_Analysis"
+description: "Noether current identification and symmetry verification"
 
 validation:
-  framework: "E5 - Symmetry Analysis (Noether)"
+  framework: "E5 - Mathematical Rigor"
   test_file: "test/test_symmetry_analysis.cpp"
-  description: "Verify conservation laws from symmetries via Noether's theorem"
+  date: "2026-01-04"
+  golden_key: 246.0
 
 physics:
-  coupling_strength: 2.0
-  evolution_time: 10.0  # Total time to test conservation
+  grid_size: 64
+  coupling_K: 1.0
+  mass_gap_delta: 1.0
 
 grid:
-  nx: 32
-  ny: 32
-  nz: 32
+  nx: 64
+  ny: 64
+  nz: 64
   dx: 1.0
   dy: 1.0
   dz: 1.0
 
 integration:
-  time_step: 0.001  # Small timestep for accurate conservation
-  num_steps: 10000  # 10 time units with dt=0.001
-  measure_interval: 100  # Check conservation every 100 steps
+  time_step: 0.0001  # Ultra-small timestep for <0.01% energy drift
+  num_steps: 10000   # 1 time unit with dt=0.0001
+  measure_interval: 100
+  integration_mode: "symplectic"  # Energy-conserving integrator
 
 initial_conditions:
   type: "gaussian_wavepacket"
-  sigma: 3.0  # Width in grid units
-  wavevector: [0.5, 0.3, 0.2]  # Nonzero momentum
+  sigma: 4.0  # Width in grid units
+  wavevector: [0.5, 0.3, 0.2]  # Nonzero momentum for testing
   center: [0.5, 0.5, 0.5]  # Normalized coordinates
 
-conserved_quantities:
-  - name: "Energy"
-    symmetry: "Time translation invariance"
-    formula: "∫[(∂θ/∂t)² + (∇θ)² + V(R)] d³x"
-    tolerance: 0.01  # 1% drift maximum
-    noether_current: "T⁰ᵢ (energy flux)"
-
-  - name: "Momentum"
-    symmetry: "Space translation invariance"
-    formula: "∫(∂θ/∂t)(∇θ) d³x"
-    tolerance: 0.01  # 1% drift maximum
-    noether_current: "Tⁱⱼ (momentum density)"
-
-  - name: "Phase_Charge"
-    symmetry: "U(1) phase rotation: θ → θ + α"
-    formula: "∫|∇θ|² d³x"
-    tolerance: 0.01  # 1% drift maximum
-    noether_current: "J^μ (U(1) current)"
-
-  - name: "Angular_Momentum"
-    symmetry: "Spatial rotation invariance"
-    formula: "∫(r × p) d³x"
-    tolerance: 0.05  # 5% drift (less critical)
-    noether_current: "M^μνρ (angular momentum tensor)"
-
 test_scenarios:
-  - name: "Long_Evolution"
-    description: "Verify conservation over extended time evolution"
-    evolution_time: 100.0
-    expected_drift: "<1%"
+  - name: "Energy_Momentum_Conservation"
+    description: "Verify T^μν conservation from translation invariance"
+    expected:
+      energy_drift: 0.0001  # <0.01%
+      momentum_conservation: true
 
-  - name: "Continuity_Equation"
-    description: "Verify ∂ρ/∂t + ∇·J = 0 for each conserved current"
-    max_violation: 1.0e-6
+  - name: "Phase_Rotation_Symmetry"
+    description: "U(1) global phase rotation θ → θ + α"
+    expected:
+      conserved_charge: "topological winding number"
+      charge_drift: 0.0001
 
-quality_metrics:
-  - "Energy conservation (time translation symmetry)"
-  - "Momentum conservation (space translation symmetry)"
-  - "Phase charge conservation (U(1) symmetry)"
-  - "Angular momentum conservation (rotation symmetry)"
-  - "Continuity equation validation for Noether currents"
+  - name: "CPT_Symmetry"
+    description: "Charge-Parity-Time reversal symmetry"
+    expected:
+      c_symmetry: true  # R → R, θ → -θ
+      p_symmetry: true  # (x,y,z) → -(x,y,z)
+      t_symmetry: true  # Time reversal (already tested in symplectic)
+      cpt_invariant: true  # Combined CPT must be preserved
+
+  - name: "Lorentz_Invariance"
+    description: "SO(3,1) Lorentz symmetry in continuum limit"
+    expected:
+      boost_invariance: true
+      rotation_invariance: true
+      dispersion_relation: "E² = p²c² + m²c⁴"
+
+  - name: "Discrete_Symmetries"
+    description: "Additional discrete symmetries of TRD"
+    expected:
+      z2_symmetry: true  # θ → θ + π periodicity
+      reflection_symmetry: true  # Mirror symmetry in each axis
+
+conserved_quantities:
+  - name: "Energy_Momentum_Tensor"
+    symmetry: "Spacetime translation invariance"
+    formula: "T^μν = ∂L/∂(∂_μφ) ∂^νφ - η^μν L"
+    components:
+      T00: "Energy density"
+      T0i: "Momentum density"
+      Tij: "Stress tensor"
+    tolerance: 0.0001  # <0.01% drift
+    noether_current: "T^μν"
+
+  - name: "U1_Current"
+    symmetry: "U(1) phase rotation: θ → θ + α"
+    formula: "j^μ = R² ∂^μθ"
+    conservation_law: "∂_μ j^μ = 0"
+    tolerance: 0.0001
+    noether_current: "J^μ (topological current)"
+
+  - name: "Angular_Momentum_Tensor"
+    symmetry: "Lorentz rotation invariance"
+    formula: "M^μνλ = x^ν T^μλ - x^λ T^μν"
+    conservation_law: "∂_μ M^μνλ = 0"
+    tolerance: 0.001  # Slightly relaxed for numerical reasons
+    noether_current: "M^μνλ"
+
+  - name: "Chiral_Current"
+    symmetry: "Chiral symmetry (if applicable)"
+    formula: "j^μ_5 = ψ̄γ^μγ^5ψ"
+    conservation_law: "∂_μ j^μ_5 = 2m ψ̄γ^5ψ"
+    tolerance: 0.001
+    noether_current: "J^μ_5 (axial current)"
+
+symmetry_catalog:
+  continuous_symmetries:
+    - name: "Time Translation"
+      generator: "Hamiltonian H"
+      conserved: "Energy"
+
+    - name: "Space Translation"
+      generator: "Momentum P_i"
+      conserved: "Linear momentum"
+
+    - name: "Spatial Rotation"
+      generator: "Angular momentum L_ij"
+      conserved: "Angular momentum"
+
+    - name: "U(1) Phase"
+      generator: "Number operator N"
+      conserved: "Topological charge"
+
+    - name: "Lorentz Boost"
+      generator: "Boost operator K_i"
+      conserved: "Center of energy motion"
+
+  discrete_symmetries:
+    - name: "Charge Conjugation C"
+      transformation: "θ → -θ, R → R"
+      preserved: true
+
+    - name: "Parity P"
+      transformation: "(x,y,z) → -(x,y,z)"
+      preserved: true
+
+    - name: "Time Reversal T"
+      transformation: "t → -t, θ̇ → -θ̇"
+      preserved: true
+
+    - name: "CPT Combined"
+      transformation: "Full CPT transformation"
+      preserved: true  # CPT theorem must hold
+
+  broken_symmetries:
+    - name: "Conformal Symmetry"
+      reason: "Mass term breaks scale invariance"
+
+    - name: "Supersymmetry"
+      reason: "No fermionic partners in basic TRD"
+
+quality_gates:
+  - metric: "Energy-momentum conservation"
+    requirement: "∂_μ T^μν = 0 within numerical precision"
+    tolerance: 1.0e-6
+
+  - metric: "U(1) charge conservation"
+    requirement: "Q = ∫ j⁰ d³x constant in time"
+    tolerance: 1.0e-6
+
+  - metric: "CPT theorem"
+    requirement: "All physical observables CPT invariant"
+    tolerance: 1.0e-6
+
+  - metric: "Lorentz invariance"
+    requirement: "Dispersion relation preserved under boosts"
+    tolerance: 1.0e-5
+
+  - metric: "Energy drift"
+    requirement: "Total energy conservation <0.01%"
+    tolerance: 1.0e-4
 
 expected_results:
   conservation_status:
-    energy: "<1% drift over 10 time units"
-    momentum: "<1% drift (all 3 components)"
-    phase_charge: "<1% drift"
-    angular_momentum: "<5% drift"
+    energy: "<0.01% drift over evolution"
+    momentum: "<0.01% drift (all 3 components)"
+    phase_charge: "<0.01% drift"
+    angular_momentum: "<0.1% drift"
+
+  symmetry_verification:
+    cpt_symmetry: "Preserved"
+    lorentz_invariance: "Preserved in continuum limit"
+    u1_symmetry: "Exact conservation"
+
   physical_interpretation: |
-    TRD respects fundamental symmetries and their associated conservation laws.
-    Noether's theorem is validated: each continuous symmetry produces a
-    conserved quantity that remains constant during time evolution.
+    TRD respects all fundamental symmetries required by experimental physics:
+    - CPT theorem is satisfied (required by quantum field theory)
+    - Lorentz invariance preserved (required by special relativity)
+    - Energy-momentum conservation (required by general relativity)
+    - U(1) gauge symmetry (topological protection)
+
+    The complete Noether current catalog confirms TRD's mathematical consistency
+    and physical validity as a fundamental theory.
+
+output:
+  symmetry_catalog: "symmetry_catalog.txt"
+  conservation_report: "conservation_analysis.csv"
+  cpt_verification: "cpt_test_results.txt"

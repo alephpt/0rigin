@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_trdcore3d_symplectic.dir/link.d CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.o CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.o -o bin/test_trdcore3d_symplectic  /lib/libvulkan.so -lpthread -lm
