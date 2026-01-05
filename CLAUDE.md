@@ -9,7 +9,7 @@
 - NO standalone test binaries (no test_*, no separate executables per test)
 - All physics tests integrated into single TRD executable via test harness
 - Legacy smft binary deprecated - all work uses trd
-- Verify with: `ls build/bin/` should only show `trd` executable
+- Target state: `ls build/bin/trd` is primary executable. Legacy test_* binaries being phased out.
 
 ### 2. Core Framework Integration
 - **MANDATORY**: All tests MUST use TRDCore3D/TRDEngine3D infrastructure
@@ -67,6 +67,7 @@
 
 ### 8. Migration Protocol
 - Legacy tests on smft binary MUST migrate to trd executable
+- Note: smft→trd migration complete. Current focus: test_* executables → trd --test
 - Verify zero standalone binaries: `find build/ -type f -executable | grep -v trd` should be empty
 - Check CMakeLists.txt for test_* executables (should be removed)
 - All new tests: implement via TRD test harness + YAML config
@@ -92,7 +93,7 @@
 - Architecture failures documented: B1_ARCHITECTURAL_FAILURE_ANALYSIS.md
 - Symplectic methods documented: SYMPLECTIC_INVESTIGATION_REPORT.md
 - Update TODO.md validation status after test completion
-- Maintain EM_INTEGRATION_REPORT.md for electromagnetic validations
+- Maintain VALIDATION_INTEGRATION_COMPLETE.md for electromagnetic validations
 
 ### 11. Validation Hierarchy
 - **Level 1**: Energy conservation < 0.01% (mandatory)
@@ -113,3 +114,5 @@
   - TODO.md item being addressed
 
 **Rationale**: These standards emerged from systematic validation failures where tests bypassing the core framework showed 670× worse energy conservation. The unified TRD executable with mandatory framework integration ensures all physics simulations benefit from proven symplectic integrators and validated numerical methods. The 0.01% energy conservation threshold is our GO/NO-GO criterion for theoretical validity.
+
+NOTE: Migration from standalone test binaries to unified executable is ongoing. New tests MUST use ./trd --test; legacy test_* being consolidated.
