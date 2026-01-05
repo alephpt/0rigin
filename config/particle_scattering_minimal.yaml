@@ -9,8 +9,8 @@ physics:
   grid_size: 32          # Minimal viable grid
   coupling_strength: 1.0
   mass_gap: 1.0
-  time_step: 0.02        # Larger time step
-  evolution_steps: 100   # Just enough to see collision
+  time_step: 0.05        # Larger time step for speed
+  evolution_steps: 200   # Just enough to see collision
   calibration: "1 TRD unit = 246 GeV (Golden Key)"
 
 collision_scenarios:

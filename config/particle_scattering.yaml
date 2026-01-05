@@ -6,6 +6,8 @@ validation:
     while maintaining topological integrity. In field theory, solitons
     should bounce off each other elastically if topologically stable.
     This validates the particle-like nature of TRD vortices.
+    Uses conservative Sine-Gordon equation (∂²θ/∂t² = ∇²θ - sin(θ))
+    with symplectic Velocity Verlet integrator for energy conservation.
 
 physics:
   grid_size: 128
@@ -100,12 +102,12 @@ quality_metrics:
       violate topological protection.
 
   - metric: "Energy conservation"
-    requirement: "|ΔE/E| < 1% (low energy), < 2% (high energy)"
+    requirement: "|ΔE/E| < 1% (all energies, conservative Sine-Gordon)"
     critical: true
     rationale: >
-      Energy conservation is fundamental. Small deviations allowed
-      for numerical discretization, but large drift indicates
-      non-conservative dynamics or numerical instability.
+      Energy conservation is fundamental. Sine-Gordon with Velocity Verlet
+      is symplectic and should conserve energy to < 1% (vs 85% loss in
+      dissipative diffusion). Validates conservative dynamics.
 
   - metric: "Momentum conservation"
     requirement: "|Δp/p| < 5%"

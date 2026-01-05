@@ -129,6 +129,17 @@ void initVortex(Grid3D& grid, float x0, float y0, float z0,
                 float theta_boost = k_x * (x - x0) + k_y * (y - y0) + k_z * (z - z0);
 
                 grid.at(ix, iy, iz) = theta_vortex + theta_boost;
+
+                // Initialize velocity field: ∂θ/∂t = v·∇θ (Lorentz boost)
+                // For moving vortex: ∂θ/∂t from the boosted frame
+                float r = std::sqrt((x - x0)*(x - x0) + (y - y0)*(y - y0)) + 1e-6f;
+
+                // Gradient of theta_vortex (azimuthal phase)
+                float dtheta_dx = -(y - y0) / (r * r);
+                float dtheta_dy = (x - x0) / (r * r);
+
+                // ∂θ/∂t from boost: v·∇θ
+                grid.dot(ix, iy, iz) = vx * (dtheta_dx + k_x) + vy * (dtheta_dy + k_y) + vz * k_z;
             }
         }
     }
@@ -146,6 +157,7 @@ void initCollisionScenario(Grid3D& grid, float separation, float velocity) {
     // Clear grid
     for (int i = 0; i < N*N*N; ++i) {
         grid.at(i/N/N, (i/N)%N, i%N) = 0.0f;
+        grid.dot(i/N/N, (i/N)%N, i%N) = 0.0f;
     }
 
     // Vortex 1: left side, moving right
@@ -157,15 +169,18 @@ void initCollisionScenario(Grid3D& grid, float separation, float velocity) {
     Grid3D temp(N, dx);
     initVortex(temp, separation, 0.0f, 0.0f, -velocity, 0.0f, 0.0f);
 
-    // Add phases (modulo 2π)
+    // Add phases and velocities
     for (int ix = 0; ix < N; ++ix) {
         for (int iy = 0; iy < N; ++iy) {
             for (int iz = 0; iz < N; ++iz) {
+                // Phase (wrap to [-π, π])
                 float theta_sum = grid.at(ix, iy, iz) + temp.at(ix, iy, iz);
-                // Wrap to [-π, π]
                 while (theta_sum > PI) theta_sum -= 2.0f * PI;
                 while (theta_sum < -PI) theta_sum += 2.0f * PI;
                 grid.at(ix, iy, iz) = theta_sum;
+
+                // Velocity field (linear superposition)
+                grid.dot(ix, iy, iz) += temp.dot(ix, iy, iz);
             }
         }
     }
@@ -223,8 +238,8 @@ float computeTopologicalCharge(const Grid3D& grid) {
 
 /**
  * Compute total field energy
- * E = ∫ (1/2)[(∇θ)² + V(θ)] dV
- * For TRD: V = 0 (massless phase field)
+ * E = ∫ [(1/2)(∂θ/∂t)² + (1/2)(∇θ)² + (1-cos(θ))] dV
+ * Sine-Gordon energy: kinetic + gradient + potential
  */
 float computeFieldEnergy(const Grid3D& grid) {
     const int N = grid.getSize();
@@ -236,7 +251,11 @@ float computeFieldEnergy(const Grid3D& grid) {
     for (int ix = 1; ix < N-1; ++ix) {
         for (int iy = 1; iy < N-1; ++iy) {
             for (int iz = 1; iz < N-1; ++iz) {
-                // Gradient energy (kinetic)
+                // Kinetic energy (time derivative)
+                float theta_dot_c = grid.dot(ix, iy, iz);
+                float E_kinetic = 0.5f * theta_dot_c * theta_dot_c;
+
+                // Gradient energy (spatial)
                 float theta_c = grid.at(ix, iy, iz);
                 float theta_xp = grid.at(ix+1, iy, iz);
                 float theta_xm = grid.at(ix-1, iy, iz);
@@ -250,8 +269,12 @@ float computeFieldEnergy(const Grid3D& grid) {
                 float grad_z = (theta_zp - theta_zm) / (2.0f * dx);
 
                 float grad_squared = grad_x*grad_x + grad_y*grad_y + grad_z*grad_z;
+                float E_gradient = 0.5f * grad_squared;
 
-                E_total += 0.5f * grad_squared * dV;
+                // Potential energy (Sine-Gordon)
+                float E_potential = 1.0f - std::cos(theta_c);
+
+                E_total += (E_kinetic + E_gradient + E_potential) * dV;
             }
         }
     }
@@ -262,7 +285,7 @@ float computeFieldEnergy(const Grid3D& grid) {
 /**
  * Compute total momentum
  * P = ∫ (∂θ/∂t)·∇θ dV
- * For field with velocity: P_i ~ ∫ (∂θ/∂x_i) dV
+ * Field momentum density: π_i = (∂θ/∂t)·(∂θ/∂x_i)
  */
 std::array<float, 3> computeFieldMomentum(const Grid3D& grid) {
     const int N = grid.getSize();
@@ -274,6 +297,8 @@ std::array<float, 3> computeFieldMomentum(const Grid3D& grid) {
     for (int ix = 1; ix < N-1; ++ix) {
         for (int iy = 1; iy < N-1; ++iy) {
             for (int iz = 1; iz < N-1; ++iz) {
+                float theta_dot = grid.dot(ix, iy, iz);
+
                 float theta_xp = grid.at(ix+1, iy, iz);
                 float theta_xm = grid.at(ix-1, iy, iz);
                 float theta_yp = grid.at(ix, iy+1, iz);
@@ -281,9 +306,13 @@ std::array<float, 3> computeFieldMomentum(const Grid3D& grid) {
                 float theta_zp = grid.at(ix, iy, iz+1);
                 float theta_zm = grid.at(ix, iy, iz-1);
 
-                P[0] += (theta_xp - theta_xm) / (2.0f * dx) * dV;
-                P[1] += (theta_yp - theta_ym) / (2.0f * dx) * dV;
-                P[2] += (theta_zp - theta_zm) / (2.0f * dx) * dV;
+                float grad_x = (theta_xp - theta_xm) / (2.0f * dx);
+                float grad_y = (theta_yp - theta_ym) / (2.0f * dx);
+                float grad_z = (theta_zp - theta_zm) / (2.0f * dx);
+
+                P[0] += theta_dot * grad_x * dV;
+                P[1] += theta_dot * grad_y * dV;
+                P[2] += theta_dot * grad_z * dV;
             }
         }
     }
@@ -332,15 +361,18 @@ int countVortices(const Grid3D& grid) {
 }
 
 /**
- * Evolve field using simple Kuramoto-like dynamics
- * ∂θ/∂t = K·∇²θ (diffusion-like, smooths phase)
+ * Evolve Sine-Gordon equation using Velocity Verlet (symplectic)
+ * Equation: ∂²θ/∂t² = ∇²θ - sin(θ)
+ *
+ * Energy: E = ∫[(∂θ/∂t)² + (∇θ)² + (1-cos(θ))]dV
+ * Conserves energy and topological charge
  */
-void evolveField(Grid3D& grid, float dt, float coupling = 1.0f) {
+void evolveSineGordon(Grid3D& grid, float dt) {
     const int N = grid.getSize();
     const float dx = grid.getSpacing();
 
-    std::vector<float> theta_new(N*N*N);
-
+    // Compute initial forces: F = ∇²θ - sin(θ)
+    std::vector<float> force(N*N*N);
     for (int ix = 0; ix < N; ++ix) {
         for (int iy = 0; iy < N; ++iy) {
             for (int iz = 0; iz < N; ++iz) {
@@ -360,17 +392,66 @@ void evolveField(Grid3D& grid, float dt, float coupling = 1.0f) {
                 ) / (dx * dx);
 
                 int idx = grid.index(ix, iy, iz);
-                theta_new[idx] = theta_c + dt * coupling * laplacian;
+                force[idx] = laplacian - std::sin(theta_c);
             }
         }
     }
 
-    // Update grid
+    // Half-step velocity
     for (int ix = 0; ix < N; ++ix) {
         for (int iy = 0; iy < N; ++iy) {
             for (int iz = 0; iz < N; ++iz) {
                 int idx = grid.index(ix, iy, iz);
-                grid.at(ix, iy, iz) = theta_new[idx];
+                grid.dot(ix, iy, iz) += 0.5f * dt * force[idx];
+            }
+        }
+    }
+
+    // Full-step position
+    for (int ix = 0; ix < N; ++ix) {
+        for (int iy = 0; iy < N; ++iy) {
+            for (int iz = 0; iz < N; ++iz) {
+                grid.at(ix, iy, iz) += dt * grid.dot(ix, iy, iz);
+
+                // Wrap to [-π, π]
+                float& theta = grid.at(ix, iy, iz);
+                while (theta > PI) theta -= 2.0f * PI;
+                while (theta < -PI) theta += 2.0f * PI;
+            }
+        }
+    }
+
+    // Recompute forces at new positions
+    for (int ix = 0; ix < N; ++ix) {
+        for (int iy = 0; iy < N; ++iy) {
+            for (int iz = 0; iz < N; ++iz) {
+                int ixp = (ix + 1) % N;
+                int ixm = (ix - 1 + N) % N;
+                int iyp = (iy + 1) % N;
+                int iym = (iy - 1 + N) % N;
+                int izp = (iz + 1) % N;
+                int izm = (iz - 1 + N) % N;
+
+                float theta_c = grid.at(ix, iy, iz);
+                float laplacian = (
+                    grid.at(ixp, iy, iz) + grid.at(ixm, iy, iz) +
+                    grid.at(ix, iyp, iz) + grid.at(ix, iym, iz) +
+                    grid.at(ix, iy, izp) + grid.at(ix, iy, izm) -
+                    6.0f * theta_c
+                ) / (dx * dx);
+
+                int idx = grid.index(ix, iy, iz);
+                force[idx] = laplacian - std::sin(theta_c);
+            }
+        }
+    }
+
+    // Half-step velocity (complete)
+    for (int ix = 0; ix < N; ++ix) {
+        for (int iy = 0; iy < N; ++iy) {
+            for (int iz = 0; iz < N; ++iz) {
+                int idx = grid.index(ix, iy, iz);
+                grid.dot(ix, iy, iz) += 0.5f * dt * force[idx];
             }
         }
     }
@@ -438,7 +519,7 @@ bool testElasticScattering(const YAML::Node& scenario) {
     // Time evolution
     std::cout << "Evolving collision (" << max_steps << " steps)...\n" << std::flush;
     for (int step = 0; step < max_steps; ++step) {
-        evolveField(grid, dt, 1.0f);
+        evolveSineGordon(grid, dt);
 
         if (step % 100 == 0) {
             float E = computeFieldEnergy(grid);
