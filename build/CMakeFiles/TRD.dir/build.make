@@ -730,10 +730,24 @@ CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_hpc_scaling.cpp -o CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.s
 
+CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o: CMakeFiles/TRD.dir/flags.make
+CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o: /home/persist/neotec/0rigin/test/test_fine_structure_constant.cpp
+CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o -MF CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o.d -o CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o -c /home/persist/neotec/0rigin/test/test_fine_structure_constant.cpp
+
+CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/persist/neotec/0rigin/test/test_fine_structure_constant.cpp > CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.i
+
+CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/persist/neotec/0rigin/test/test_fine_structure_constant.cpp -o CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.s
+
 CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o: /home/persist/neotec/0rigin/test/test_renormalizability.cpp
 CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o -MF CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o.d -o CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o -c /home/persist/neotec/0rigin/test/test_renormalizability.cpp
 
 CMakeFiles/TRD.dir/test/test_renormalizability.cpp.i: cmake_force
@@ -747,7 +761,7 @@ CMakeFiles/TRD.dir/test/test_renormalizability.cpp.s: cmake_force
 CMakeFiles/TRD.dir/test/test_causality.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/test/test_causality.cpp.o: /home/persist/neotec/0rigin/test/test_causality.cpp
 CMakeFiles/TRD.dir/test/test_causality.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/TRD.dir/test/test_causality.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/TRD.dir/test/test_causality.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/test/test_causality.cpp.o -MF CMakeFiles/TRD.dir/test/test_causality.cpp.o.d -o CMakeFiles/TRD.dir/test/test_causality.cpp.o -c /home/persist/neotec/0rigin/test/test_causality.cpp
 
 CMakeFiles/TRD.dir/test/test_causality.cpp.i: cmake_force
@@ -761,7 +775,7 @@ CMakeFiles/TRD.dir/test/test_causality.cpp.s: cmake_force
 CMakeFiles/TRD.dir/main.cpp.o: CMakeFiles/TRD.dir/flags.make
 CMakeFiles/TRD.dir/main.cpp.o: /home/persist/neotec/0rigin/main.cpp
 CMakeFiles/TRD.dir/main.cpp.o: CMakeFiles/TRD.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/TRD.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/TRD.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TRD.dir/main.cpp.o -MF CMakeFiles/TRD.dir/main.cpp.o.d -o CMakeFiles/TRD.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp
 
 CMakeFiles/TRD.dir/main.cpp.i: cmake_force
@@ -821,6 +835,7 @@ TRD_OBJECTS = \
 "CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o" \
+"CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o" \
 "CMakeFiles/TRD.dir/test/test_causality.cpp.o" \
 "CMakeFiles/TRD.dir/main.cpp.o"
@@ -875,6 +890,7 @@ bin/trd: CMakeFiles/TRD.dir/test/test_multiscale.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o
+bin/trd: CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o
 bin/trd: CMakeFiles/TRD.dir/test/test_causality.cpp.o
 bin/trd: CMakeFiles/TRD.dir/main.cpp.o
@@ -889,7 +905,7 @@ bin/trd: /usr/lib/libSDL2-2.0.so.0.3200.60
 bin/trd: /usr/lib/libgomp.so
 bin/trd: /usr/lib/libpthread.a
 bin/trd: CMakeFiles/TRD.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Linking CXX executable bin/trd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Linking CXX executable bin/trd"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TRD.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

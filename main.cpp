@@ -52,6 +52,7 @@ void printUsage(const char* program_name) {
     std::cout << "  config/renormalizability.yaml   - E1 Renormalizability analysis" << std::endl;
     std::cout << "  config/causality.yaml           - E3 Causality validation" << std::endl;
     std::cout << "  config/symmetry_analysis.yaml   - E5 Symmetry analysis (Noether)" << std::endl;
+    std::cout << "  config/fine_structure_constant.yaml - B2 Fine structure constant (α ≈ 1/137)" << std::endl;
 
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  " << program_name << std::endl;
@@ -125,6 +126,9 @@ int runFiniteTemperatureTest();
 
 // F5: High-Performance Computing Scaling test
 int runHPCScalingTest();
+
+// B2: Fine Structure Constant test
+int runFineStructureConstantTest();
 
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -208,6 +212,8 @@ int runTestMode(const std::string& config_path) {
         return runFiniteTemperatureTest();
     } else if (config_path.find("hpc_scaling") != std::string::npos) {
         return runHPCScalingTest();
+    } else if (config_path.find("fine_structure_constant") != std::string::npos) {
+        return runFineStructureConstantTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)

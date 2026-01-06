@@ -49,6 +49,7 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o \
   CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o \
   CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o \
+  CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o \
   CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o \
   CMakeFiles/TRD.dir/test/test_causality.cpp.o \
   CMakeFiles/TRD.dir/main.cpp.o \
@@ -191,6 +192,8 @@ CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o:
 CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o:
 

@@ -33,6 +33,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp" "CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o" "gcc" "CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_electroweak.cpp" "CMakeFiles/TRD.dir/test/test_electroweak.cpp.o" "gcc" "CMakeFiles/TRD.dir/test/test_electroweak.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp" "CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o" "gcc" "CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o.d"
+  "/home/persist/neotec/0rigin/test/test_fine_structure_constant.cpp" "CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o" "gcc" "CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_finite_temperature.cpp" "CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o" "gcc" "CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_friedmann_equations.cpp" "CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o" "gcc" "CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o.d"
   "/home/persist/neotec/0rigin/test/test_geodesic_3d.cpp" "CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o" "gcc" "CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o.d"

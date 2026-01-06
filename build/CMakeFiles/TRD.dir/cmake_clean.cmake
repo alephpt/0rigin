@@ -50,6 +50,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TRD.dir/test/test_electroweak.cpp.o.d"
   "CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o"
   "CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o.d"
+  "CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o"
+  "CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o.d"
   "CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o"
   "CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o.d"
   "CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o"

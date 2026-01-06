@@ -189,6 +189,8 @@ set(TRD_SOURCES
     test/test_quantum_fluctuations.cpp
     # F5 High-Performance Computing Scaling test
     test/test_hpc_scaling.cpp
+    # B2 Fine Structure Constant test
+    test/test_fine_structure_constant.cpp
     # E1/E3/E5 Wave 1 Mathematical Rigor tests
     test/test_renormalizability.cpp
     test/test_causality.cpp

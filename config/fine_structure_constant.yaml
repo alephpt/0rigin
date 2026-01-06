@@ -1,0 +1,294 @@
+# B2: Fine Structure Constant Derivation from TRD First Principles
+#
+# Goal: Derive α = e²/(4πε₀ℏc) ≈ 1/137.036 from topological dynamics
+#
+# Physics Hypothesis:
+#   α emerges from ratio of:
+#   1. Electromagnetic energy (gradient term ∇θ)
+#   2. Vacuum synchronization energy (K·R²)
+#   3. Topological flux quantization (winding number Q)
+#
+# TRD Prediction:
+#   α_TRD ~ (E_EM / E_vac) × (ξ/L)² × K
+#
+# Quality Gates:
+#   - Predicted α within factor of 2 of 1/137.036
+#   - Dimensional analysis correct (dimensionless)
+#   - Energy conservation < 0.01%
+#   - Physical mechanism documented
+
+test_file: test/test_fine_structure_constant.cpp
+golden_key: 246  # 1 TRD unit = 246 GeV
+
+grid:
+  nx: 64
+  ny: 64
+  nz: 32
+  dx: 1.0
+  dy: 1.0
+  dz: 1.0
+  boundary_conditions: "periodic"
+
+initial_conditions:
+  type: "unit_vortex"
+  topology:
+    winding_number: 1       # Q = 1 (unit topological charge)
+    vortex_type: "abelian"  # U(1) gauge theory
+    vortex_axis: "z"        # Vortex along z-direction
+  position:
+    x_center: 32.0          # Grid center
+    y_center: 32.0
+    z_center: 16.0
+  core_structure:
+    radius: 3.0             # Vortex core radius (grid units)
+    R_profile: "tanh"       # R = tanh(r/r_core)
+    theta_profile: "atan2"  # θ = atan2(y-y₀, x-x₀)
+
+physics_params:
+  kuramoto:
+    K: 1.0                  # Coupling strength (sets vacuum energy scale)
+    omega: 0.0              # Natural frequency (homogeneous)
+    gamma: 1.0              # Relaxation rate
+
+  electromagnetic:
+    prescription: "A_mu = nabla_theta"  # EM from phase gradient
+    gauge: "coulomb"                    # ∇·A = 0
+    c: 1.0                              # Speed of light (natural units)
+
+  vacuum:
+    R_equilibrium: 1.0      # Fully synchronized vacuum
+    coherence_length: null  # Measured from simulation
+    energy_density: null    # E_vac = K·(1-R)²/2
+
+integration:
+  method: "symplectic_midpoint"  # TRDCore3D default (RK2)
+  time_step: 0.01
+  num_steps: 1000
+  equilibration_steps: 500       # Allow vortex to settle
+
+validation:
+  measurements:
+    - name: "topological_charge"
+      method: "winding_number"
+      expected: 1
+      tolerance: 0.1
+
+    - name: "energy_conservation"
+      method: "gradient_energy_drift"
+      threshold: 0.0001  # 0.01%
+
+    - name: "em_energy"
+      method: "integrate_EM_field"
+      formula: "E_EM = ∫(E² + B²)/(2μ₀) dV"
+
+    - name: "vacuum_energy"
+      method: "integrate_kuramoto"
+      formula: "E_vac = ∫K·(1-R)²/2 dV"
+
+    - name: "coherence_length"
+      method: "correlation_function"
+      formula: "ξ = ∫r·C(r)dr / ∫C(r)dr"
+
+    - name: "magnetic_flux"
+      method: "integrate_Bz"
+      formula: "Φ = ∫B·dA"
+      expected: 1.0  # Φ₀ = h/2e for Q=1 vortex
+
+  alpha_methods:
+    - name: "energy_ratio"
+      formula: "α = E_EM / E_vac"
+      physical_meaning: "Ratio of EM to vacuum energy"
+
+    - name: "coupling_strength"
+      formula: "α = (ξ/L)² × K"
+      physical_meaning: "Coherence length squared × coupling"
+
+    - name: "flux_quantization"
+      formula: "α = 1/Φ²"
+      physical_meaning: "Inverse square flux quantum"
+
+    - name: "geometric_mean"
+      formula: "α = (α₁ × α₂ × α₃)^(1/3)"
+      physical_meaning: "Average over three methods"
+
+quality_gates:
+  topological_charge:
+    Q_expected: 1
+    Q_tolerance: 0
+    status: null
+
+  energy_conservation:
+    threshold: 0.0001  # 0.01%
+    status: null
+
+  alpha_prediction:
+    alpha_QED: 0.0072973525693  # 1/137.036
+    factor_2_range: [0.00365, 0.01459]
+    order_magnitude_range: [0.000730, 0.07297]
+    status: null
+
+  dimensionality:
+    alpha_units: "dimensionless"
+    check: "all methods produce dimensionless α"
+    status: null
+
+expected_results:
+  alpha_energy:
+    value: null
+    method: "E_EM / E_vac"
+
+  alpha_coupling:
+    value: null
+    method: "(ξ/L)² × K"
+
+  alpha_flux:
+    value: null
+    method: "1/Φ²"
+
+  alpha_geometric_mean:
+    value: null
+    method: "geometric average"
+
+  ratio_to_QED:
+    value: null
+    pass_threshold: [0.5, 2.0]  # Within factor of 2
+
+physics_interpretation:
+  topological_origin:
+    description: "Charge quantization from winding number Q=1"
+    mechanism: "∮∇θ·dl = 2πQ → e = Q·e₀"
+
+  coherence_scale:
+    description: "Coupling range set by synchronization length ξ"
+    mechanism: "C(r) = ⟨R(x)R(x+r)⟩ → ξ from decay length"
+
+  energy_hierarchy:
+    description: "α as ratio of electromagnetic to vacuum energy"
+    mechanism: "α = (∇θ)² / (K·R²) ~ coupling strength"
+
+  flux_quantization:
+    description: "Dirac condition: Φ = n·(h/2e)"
+    mechanism: "∫B·dA = Q·Φ₀ → α ~ 1/Φ²"
+
+predictions:
+  if_alpha_matches:
+    conclusion: "EM coupling is topological in origin"
+    implications:
+      - "Charge quantization from winding numbers"
+      - "Fine structure from vacuum synchronization"
+      - "No need for separate QED sector"
+
+  if_alpha_differs:
+    next_steps:
+      - "Multi-scale analysis (UV → IR renormalization)"
+      - "Include running coupling α(μ)"
+      - "Check screening effects (R-field feedback)"
+      - "Refine K-parameter interpretation"
+
+documentation:
+  references:
+    - title: "Topological gauge theory from synchronization"
+      note: "A_μ = ∂_μθ prescription"
+
+    - title: "Flux quantization in superconductors"
+      note: "Φ = n·(h/2e) analog"
+
+    - title: "Fine structure from topology"
+      note: "α ~ (topological charge)² / (coherence length)²"
+
+  dimensional_analysis:
+    E_EM: "[M L² T⁻²]"
+    E_vac: "[M L² T⁻²]"
+    ratio: "dimensionless ✓"
+    xi: "[L]"
+    L: "[L]"
+    xi_over_L: "dimensionless ✓"
+    K: "dimensionless"
+    alpha: "dimensionless ✓"
+
+output:
+  csv_file: "output/fine_structure_constant_results.csv"
+  fields:
+    - "Method"
+    - "Alpha_Measured"
+    - "Alpha_QED"
+    - "Ratio"
+
+  plots:
+    - "R_field_profile.png"
+    - "theta_field_vortex.png"
+    - "magnetic_field_Bz.png"
+    - "correlation_function.png"
+
+# Test Results (to be filled after execution)
+test_results:
+  timestamp: null
+  status: null
+
+  measurements:
+    topological_charge:
+      Q_measured: null
+      Q_expected: 1
+      status: null
+
+    energy_conservation:
+      drift_percent: null
+      threshold: 0.01
+      status: null
+
+    coherence_length:
+      xi_measured: null
+      xi_normalized: null
+
+    energies:
+      E_EM: null
+      E_vac: null
+      E_grad: null
+
+    magnetic_flux:
+      Phi_measured: null
+      Phi_expected: 1.0
+
+  alpha_predictions:
+    alpha_energy: null
+    alpha_coupling: null
+    alpha_flux: null
+    alpha_geometric_mean: null
+
+    ratio_to_QED: null
+    within_factor_2: null
+    within_order_magnitude: null
+
+  quality_gates:
+    Q_equals_1: null
+    energy_conserved: null
+    alpha_factor_2: null
+    alpha_order_magnitude: null
+
+  overall_verdict: null
+
+# Validation Metadata
+validation:
+  category: "B - Standard Model Connection"
+  test_id: "B2"
+  test_name: "Fine Structure Constant Derivation"
+  priority: "high"
+
+  dependencies:
+    - "B1: Particle Spectrum (topological charges validated)"
+    - "G1: EM Wave Propagation (Maxwell equations verified)"
+    - "TRDCore3D: Symplectic evolution (energy conservation)"
+
+  completion_criteria:
+    - "α_TRD within factor 2 of α_QED = 1/137.036"
+    - "Dimensional analysis correct (all methods dimensionless)"
+    - "Physical mechanism documented (topological origin)"
+    - "Energy conservation < 0.01%"
+
+  timeline:
+    estimated: "2-4 hours"
+    breakdown:
+      implementation: "1 hour"
+      testing: "1 hour"
+      analysis: "1 hour"
+      documentation: "1 hour"

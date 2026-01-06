@@ -147,7 +147,11 @@ SymmetryBreaking computeBosonMasses(TRDCore3D& core, const GaugeFields& gauge) {
     field_strength_U1 /= total_points;
 
     // Map to coupling constants (with TRD → GeV conversion)
-    const float TRD_to_GeV = 100.0f;  // Conversion factor (to be calibrated)
+    // NOTE: TRD_to_GeV = 100 is PLACEHOLDER - fundamental scale TBD
+    // Current results: v = 2.4 GeV (need 246 GeV for Higgs VEV)
+    // Fix: TRD_to_GeV ≈ 10,250 OR derive from Bekenstein-Hawking scale
+    // See: B4_ELECTROWEAK_VALIDATION_REPORT.md for calibration analysis
+    const float TRD_to_GeV = 100.0f;  // CALIBRATION NEEDED (placeholder)
     result.g = 0.65f;        // Typical SU(2) coupling at weak scale
     result.g_prime = 0.36f;  // Typical U(1) coupling at weak scale
 

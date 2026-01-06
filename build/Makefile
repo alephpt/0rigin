@@ -1341,6 +1341,30 @@ test/test_em_gravity_coupling_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.s
 .PHONY : test/test_em_gravity_coupling_3d.cpp.s
 
+test/test_fine_structure_constant.o: test/test_fine_structure_constant.cpp.o
+.PHONY : test/test_fine_structure_constant.o
+
+# target to build an object file
+test/test_fine_structure_constant.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o
+.PHONY : test/test_fine_structure_constant.cpp.o
+
+test/test_fine_structure_constant.i: test/test_fine_structure_constant.cpp.i
+.PHONY : test/test_fine_structure_constant.i
+
+# target to preprocess a source file
+test/test_fine_structure_constant.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.i
+.PHONY : test/test_fine_structure_constant.cpp.i
+
+test/test_fine_structure_constant.s: test/test_fine_structure_constant.cpp.s
+.PHONY : test/test_fine_structure_constant.s
+
+# target to generate assembly for a file
+test/test_fine_structure_constant.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.s
+.PHONY : test/test_fine_structure_constant.cpp.s
+
 test/test_finite_temperature.o: test/test_finite_temperature.cpp.o
 .PHONY : test/test_finite_temperature.o
 
@@ -2145,6 +2169,9 @@ help:
 	@echo "... test/test_em_gravity_coupling_3d.o"
 	@echo "... test/test_em_gravity_coupling_3d.i"
 	@echo "... test/test_em_gravity_coupling_3d.s"
+	@echo "... test/test_fine_structure_constant.o"
+	@echo "... test/test_fine_structure_constant.i"
+	@echo "... test/test_fine_structure_constant.s"
 	@echo "... test/test_finite_temperature.o"
 	@echo "... test/test_finite_temperature.i"
 	@echo "... test/test_finite_temperature.s"
