@@ -125,6 +125,9 @@ void TRDCore3D::evolveSymplecticCPU(float dt) {
     static bool first_call = true;
     if (first_call) {
         std::cout << "[TRDCore3D] Using SYMPLECTIC integration (RK2 Midpoint Method)" << std::endl;
+        #ifdef _OPENMP
+        std::cout << "[TRDCore3D] OpenMP parallelization enabled" << std::endl;
+        #endif
         first_call = false;
     }
 
@@ -136,6 +139,9 @@ void TRDCore3D::evolveSymplecticCPU(float dt) {
 
     // Step 1: Compute k1 = f(θ) at current state
     std::vector<float> k1(_N_total);
+    #ifdef _OPENMP
+    #pragma omp parallel for
+    #endif
     for (uint32_t idx = 0; idx < _N_total; ++idx) {
         float coupling = computeKuramotoCoupling(idx);
         k1[idx] = _omega_data[idx] + _config.coupling_strength * coupling;
@@ -143,6 +149,9 @@ void TRDCore3D::evolveSymplecticCPU(float dt) {
 
     // Step 2: Compute midpoint θ_mid = θ + k1·dt/2
     std::vector<float> theta_mid(_N_total);
+    #ifdef _OPENMP
+    #pragma omp parallel for
+    #endif
     for (uint32_t idx = 0; idx < _N_total; ++idx) {
         theta_mid[idx] = _theta_data[idx] + 0.5f * dt * k1[idx];
 
@@ -157,12 +166,18 @@ void TRDCore3D::evolveSymplecticCPU(float dt) {
 
     // Step 4: Compute k2 = f(θ_mid)
     std::vector<float> k2(_N_total);
+    #ifdef _OPENMP
+    #pragma omp parallel for
+    #endif
     for (uint32_t idx = 0; idx < _N_total; ++idx) {
         float coupling = computeKuramotoCoupling(idx);
         k2[idx] = _omega_data[idx] + _config.coupling_strength * coupling;
     }
 
     // Step 5: Final update θ(t+dt) = θ(t) + k2·dt
+    #ifdef _OPENMP
+    #pragma omp parallel for
+    #endif
     for (uint32_t idx = 0; idx < _N_total; ++idx) {
         _theta_data[idx] = theta_old[idx] + dt * k2[idx];
 

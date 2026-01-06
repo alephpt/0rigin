@@ -1,0 +1,132 @@
+# Finite Temperature Effects Validation Configuration
+#
+# Test: F3 - Finite Temperature Effects
+# Physics: Thermal phase transitions in stochastic TRD
+# Implementation: Langevin dynamics with temperature sweep
+#
+# Quality Gates:
+#   - Critical temperature T_c within 20% of expected value
+#   - Phase transition sharpness ΔR/R > 50%
+#   - Ordered state at low T: R > 0.8
+#   - Disordered state at high T: R < 0.3
+
+validation:
+  framework: "F3 - Finite Temperature Effects"
+  test_file: "test/test_finite_temperature.cpp"
+  date: "2026-01-05"
+  golden_key: "1 TRD unit = 246 GeV"
+
+physics:
+  description: |
+    Thermal phase transitions in TRD via stochastic Langevin dynamics
+
+    Evolution equation:
+      dθ/dt = f(θ) + sqrt(2γkT)·η(t)
+
+    where:
+      f(θ): Kuramoto coupling (deterministic part)
+      γ: Damping coefficient
+      T: Temperature
+      η(t): Gaussian white noise
+
+    Order parameter:
+      R = |<e^(iθ)>|
+      R ≈ 1: Synchronized (ordered, low T)
+      R ≈ 0: Desynchronized (disordered, high T)
+
+    Phase transition:
+      Critical temperature T_c where R drops sharply
+      Kuramoto model: T_c ≈ K/2 (for uniform frequency distribution)
+
+  # Grid configuration (keep moderate for thermal averaging)
+  grid_size: 32
+  spatial_step: 1.0
+  time_step: 0.01
+
+  # TRD coupling
+  coupling_strength: 1.0
+
+  # Thermal bath configuration
+  thermal_bath:
+    temperatures: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.2, 1.5, 2.0, 3.0, 5.0]
+    noise_type: "Gaussian white noise"
+    damping: 1.0  # Damping coefficient γ
+    fluctuation_dissipation: true  # Enforce <noise²> = 2γkT
+
+  # Phase transition expectations
+  phase_transitions:
+    - type: "Synchronization-desynchronization transition"
+      critical_temperature_expected: 0.5  # T_c ≈ K/2 for K=1.0
+      order_parameter: "R-field magnitude"
+      description: "Kuramoto transition from ordered to disordered phase"
+
+simulation:
+  equilibration_steps: 50000  # Steps to reach equilibrium at each T (10× increase for proper thermal relaxation)
+  random_seed: 42
+
+  output_directory: "output/finite_temperature"
+  output_files:
+    - "phase_diagram.csv"
+
+quality_metrics:
+  - metric: "Critical temperature accuracy"
+    requirement: "|T_c - T_c_expected|/T_c_expected < 20%"
+    expected_value: 0.5
+    tolerance: 0.20
+
+  - metric: "Phase transition sharpness"
+    requirement: "ΔR/R > 50%"
+    description: "Order parameter must drop by >50% across transition"
+
+  - metric: "Ordered state (low temperature)"
+    requirement: "R(T=0.1) > 0.8"
+    description: "Strong synchronization at low temperature"
+
+  - metric: "Disordered state (high temperature)"
+    requirement: "R(T=5.0) < 0.3"
+    description: "Weak synchronization at high temperature"
+
+  - metric: "Fluctuation-dissipation theorem"
+    requirement: "<noise²> = 2γkT"
+    description: "Thermal noise variance matches F-D theorem"
+
+theoretical_background:
+  kuramoto_model: |
+    The Kuramoto model exhibits a phase transition at:
+      T_c ≈ K·g(0) / 2
+    where g(ω) is the frequency distribution.
+
+    For uniform distribution: g(0) ≈ constant → T_c ≈ K/2
+
+  order_parameter: |
+    R = |N⁻¹ Σ exp(iθ_j)|
+      = sqrt(<cos θ>² + <sin θ>²)
+
+    R = 1: Perfect synchronization (all phases aligned)
+    R = 0: Complete disorder (random phases)
+
+  langevin_dynamics: |
+    Stochastic differential equation:
+      dθ_i/dt = ω_i + (K/N) Σ_j sin(θ_j - θ_i) + sqrt(2γkT)·η_i(t)
+
+    Noise autocorrelation:
+      <η_i(t)η_j(t')> = δ_ij·δ(t-t')
+
+    Fluctuation-dissipation theorem ensures thermal equilibrium
+
+references:
+  - "Kuramoto, Y. (1984). Chemical Oscillations, Waves, and Turbulence"
+  - "Strogatz, S. H. (2000). From Kuramoto to Crawford: exploring the onset of synchronization"
+  - "Acebrón et al. (2005). The Kuramoto model: A simple paradigm for synchronization phenomena"
+
+notes: |
+  This test validates TRD's ability to reproduce statistical mechanics
+  phenomena through stochastic field dynamics.
+
+  The phase transition is fundamental to understanding:
+    - Thermodynamic properties of TRD
+    - Temperature-dependent symmetry breaking
+    - Finite-T corrections to vacuum structure
+    - Thermal history in cosmology (reheating, baryogenesis)
+
+  TRD units: T=1 corresponds to ~246 GeV (electroweak scale)

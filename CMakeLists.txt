@@ -43,6 +43,14 @@ if(NOT FFTW3_FOUND)
     message(FATAL_ERROR "FFTW3 not found")
 endif()
 
+# OpenMP (optional, for HPC scaling tests)
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+    message(STATUS "OpenMP found: ${OpenMP_CXX_VERSION}")
+else()
+    message(STATUS "OpenMP not found - HPC scaling tests will run single-threaded")
+endif()
+
 # ============================================================================
 # PHYSICS LIBRARY (Stückelberg EM)
 # ============================================================================
@@ -133,7 +141,7 @@ set(TRD_SOURCES
     src/TRDCompute.cpp
     src/TRDDescriptorManager.cpp
     src/DiracEvolution.cpp
-    src/FieldEvolution.cpp
+    # src/FieldEvolution.cpp  # Commented out - file doesn't exist yet
     src/GeodesicIntegrator.cpp
     src/output/OutputManager.cpp
     src/simulations/TestConfig.cpp
@@ -175,6 +183,15 @@ set(TRD_SOURCES
     test/test_knot_topology.cpp
     # F2 Multi-Scale Validation test
     test/test_multiscale.cpp
+    # F3 Finite Temperature Effects test
+    test/test_finite_temperature.cpp
+    # F4 Quantum Fluctuation Incorporation test
+    test/test_quantum_fluctuations.cpp
+    # F5 High-Performance Computing Scaling test
+    test/test_hpc_scaling.cpp
+    # E1/E3/E5 Wave 1 Mathematical Rigor tests
+    test/test_renormalizability.cpp
+    test/test_causality.cpp
     main.cpp
 )
 
@@ -204,6 +221,11 @@ target_link_libraries(TRD PRIVATE
     m
 )
 
+# Link OpenMP if available
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(TRD PRIVATE OpenMP::OpenMP_CXX)
+endif()
+
 # Set output directory and binary name
 set_target_properties(TRD PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
@@ -211,146 +233,190 @@ set_target_properties(TRD PROPERTIES
 )
 
 # ============================================================================
+# SHADER COMPILATION (SPIR-V from GLSL)
+# ============================================================================
+
+find_program(GLSLC glslc)
+if(NOT GLSLC)
+    message(WARNING "glslc not found. Shader compilation will be skipped.")
+    message(WARNING "Install glslc: sudo apt-get install glslang-tools")
+else()
+    message(STATUS "Found glslc: ${GLSLC}")
+
+    # Find all GLSL compute shaders
+    file(GLOB_RECURSE SHADER_SOURCES
+        "${CMAKE_SOURCE_DIR}/shaders/smft/*.comp"
+    )
+
+    set(COMPILED_SHADERS "")
+
+    # Compile each shader to SPIR-V
+    foreach(SHADER_SOURCE ${SHADER_SOURCES})
+        get_filename_component(SHADER_NAME ${SHADER_SOURCE} NAME)
+        get_filename_component(SHADER_DIR ${SHADER_SOURCE} DIRECTORY)
+        set(SHADER_OUTPUT "${SHADER_DIR}/${SHADER_NAME}.spv")
+
+        add_custom_command(
+            OUTPUT ${SHADER_OUTPUT}
+            COMMAND ${GLSLC} ${SHADER_SOURCE} -o ${SHADER_OUTPUT}
+            DEPENDS ${SHADER_SOURCE}
+            COMMENT "Compiling shader: ${SHADER_NAME} -> ${SHADER_NAME}.spv"
+            VERBATIM
+        )
+
+        list(APPEND COMPILED_SHADERS ${SHADER_OUTPUT})
+    endforeach()
+
+    # Create shader compilation target
+    if(COMPILED_SHADERS)
+        add_custom_target(CompileShaders ALL DEPENDS ${COMPILED_SHADERS})
+
+        # Ensure shaders compile before TRD binary
+        add_dependencies(TRD CompileShaders)
+
+        list(LENGTH COMPILED_SHADERS SHADER_COUNT)
+        message(STATUS "Shader compilation configured: ${SHADER_COUNT} shaders from ${CMAKE_SOURCE_DIR}/shaders/")
+    endif()
+endif()
+
+# ============================================================================
 # TEST EXECUTABLES
+# ============================================================================
+# IMPORTANT: CLAUDE.md ABSOLUTE RULE - Only ./trd --test <config.yaml> allowed
+# Most tests have been migrated to unified TRD executable
+# Only unit tests for core infrastructure remain as standalone binaries
 # ============================================================================
 
 # D1: Experimental Predictions Test (Falsifiability)
-add_executable(test_experimental_predictions
-    test/test_experimental_predictions.cpp
-)
-
-target_include_directories(test_experimental_predictions PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_experimental_predictions PRIVATE
-    m
-)
-
-set_target_properties(test_experimental_predictions PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test config/experimental_predictions.yaml
+# add_executable(test_experimental_predictions
+#     test/test_experimental_predictions.cpp
+# )
+# target_include_directories(test_experimental_predictions PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+# target_link_libraries(test_experimental_predictions PRIVATE
+#     m
+# )
+# set_target_properties(test_experimental_predictions PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Geodesic Equation Verification Test
-add_executable(test_geodesic_verification
-    test/test_geodesic_verification.cpp
-    src/GeodesicIntegrator.cpp
-    src/DiracEvolution.cpp
-)
-
-target_include_directories(test_geodesic_verification PRIVATE
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/lib
-)
-
-target_link_libraries(test_geodesic_verification PRIVATE
-    fftw3f
-    pthread
-    m
-)
-
-set_target_properties(test_geodesic_verification PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test config/geodesic_3d.yaml
+# add_executable(test_geodesic_verification
+#     test/test_geodesic_verification.cpp
+#     src/GeodesicIntegrator.cpp
+#     src/DiracEvolution.cpp
+# )
+# target_include_directories(test_geodesic_verification PRIVATE
+#     ${CMAKE_SOURCE_DIR}/src
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${CMAKE_SOURCE_DIR}/lib
+# )
+# target_link_libraries(test_geodesic_verification PRIVATE
+#     fftw3f
+#     pthread
+#     m
+# )
+# set_target_properties(test_geodesic_verification PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # E1: Renormalizability Analysis Test (Mathematical Rigor)
-add_executable(test_renormalizability
-    test/test_renormalizability.cpp
-)
-
-target_include_directories(test_renormalizability PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_renormalizability PRIVATE
-    yaml-cpp
-    m
-)
-
-set_target_properties(test_renormalizability PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# REMOVED - Integrated into unified trd executable
+# Use: ./trd --test config/renormalizability.yaml
+# add_executable(test_renormalizability
+#     test/test_renormalizability.cpp
+# )
+# target_include_directories(test_renormalizability PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+# target_link_libraries(test_renormalizability PRIVATE
+#     yaml-cpp
+#     m
+# )
+# set_target_properties(test_renormalizability PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # E3: Causality Validation Test
-add_executable(test_causality
-    test/test_causality.cpp
-    src/TRDCore3D.cpp
-)
-
-target_include_directories(test_causality PRIVATE
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-
-target_link_libraries(test_causality PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-)
-
-set_target_properties(test_causality PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# REMOVED - Integrated into unified trd executable
+# Use: ./trd --test config/causality.yaml
+# add_executable(test_causality
+#     test/test_causality.cpp
+#     src/TRDCore3D.cpp
+# )
+# target_include_directories(test_causality PRIVATE
+#     ${CMAKE_SOURCE_DIR}/src
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_causality PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+# )
+# set_target_properties(test_causality PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # A1: Einstein Field Equations Test
-add_executable(test_einstein_field_equations
-    test/test_einstein_field_equations.cpp
-    src/TRDCore3D.cpp
-    src/Maxwell3D.cpp
-)
-target_include_directories(test_einstein_field_equations PRIVATE
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/include
-)
-target_link_libraries(test_einstein_field_equations PRIVATE
-    ${CMAKE_THREAD_LIBS_INIT}
-    m
-)
-set_target_properties(test_einstein_field_equations PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test (integrated into main.cpp)
+# add_executable(test_einstein_field_equations
+#     test/test_einstein_field_equations.cpp
+#     src/TRDCore3D.cpp
+#     src/Maxwell3D.cpp
+# )
+# target_include_directories(test_einstein_field_equations PRIVATE
+#     ${CMAKE_SOURCE_DIR}/src
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+# target_link_libraries(test_einstein_field_equations PRIVATE
+#     ${CMAKE_THREAD_LIBS_INIT}
+#     m
+# )
+# set_target_properties(test_einstein_field_equations PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # A2: Weak Field Limit Validation Test
-add_executable(test_weak_field_limit
-    test/test_weak_field_limit.cpp
-    src/simulations/TRDTestRunner.cpp
-    src/simulations/TestConfig.cpp
-    src/simulations/ObservableComputer.cpp
-    src/TRDCore.cpp
-    src/TRDEngine.cpp
-    src/TRDPipelineFactory.cpp
-    src/TRDBufferManager.cpp
-    src/TRDCompute.cpp
-    src/TRDDescriptorManager.cpp
-    src/DiracEvolution.cpp
-    src/GeodesicIntegrator.cpp
-    src/output/OutputManager.cpp
-)
-
-target_include_directories(test_weak_field_limit PRIVATE
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/lib
-    ${CMAKE_SOURCE_DIR}/lib/Nova
-    ${Vulkan_INCLUDE_DIRS}
-    ${SDL2_INCLUDE_DIRS}
-)
-
-target_link_libraries(test_weak_field_limit PRIVATE
-    Nova
-    Physics
-    fftw3f
-    yaml-cpp
-    pthread
-    m
-    ${Vulkan_LIBRARIES}
-)
-
-set_target_properties(test_weak_field_limit PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test config/weak_field_3d.yaml
+# add_executable(test_weak_field_limit
+#     test/test_weak_field_limit.cpp
+#     src/simulations/TRDTestRunner.cpp
+#     src/simulations/TestConfig.cpp
+#     src/simulations/ObservableComputer.cpp
+#     src/TRDCore.cpp
+#     src/TRDEngine.cpp
+#     src/TRDPipelineFactory.cpp
+#     src/TRDBufferManager.cpp
+#     src/TRDCompute.cpp
+#     src/TRDDescriptorManager.cpp
+#     src/DiracEvolution.cpp
+#     src/GeodesicIntegrator.cpp
+#     src/output/OutputManager.cpp
+# )
+# target_include_directories(test_weak_field_limit PRIVATE
+#     ${CMAKE_SOURCE_DIR}/src
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${CMAKE_SOURCE_DIR}/lib
+#     ${CMAKE_SOURCE_DIR}/lib/Nova
+#     ${Vulkan_INCLUDE_DIRS}
+#     ${SDL2_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_weak_field_limit PRIVATE
+#     Nova
+#     Physics
+#     fftw3f
+#     yaml-cpp
+#     pthread
+#     m
+#     ${Vulkan_LIBRARIES}
+# )
+# set_target_properties(test_weak_field_limit PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # TRDCore3D Basic Test
 add_executable(test_trdcore3d_basic
@@ -375,28 +441,26 @@ set_target_properties(test_trdcore3d_basic PROPERTIES
 )
 
 # TRDCore3D GPU Test (Simplified)
-add_executable(test_trdcore3d_gpu
-    test/test_trdcore3d_gpu_simple.cpp
-    src/TRDCore3D.cpp
-)
-
-target_include_directories(test_trdcore3d_gpu PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/lib
-    ${CMAKE_SOURCE_DIR}/lib/Nova
-    ${Vulkan_INCLUDE_DIRS}
-)
-
-target_link_libraries(test_trdcore3d_gpu PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-)
-
-set_target_properties(test_trdcore3d_gpu PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test (GPU functionality tested in main executable)
+# add_executable(test_trdcore3d_gpu
+#     test/test_trdcore3d_gpu_simple.cpp
+#     src/TRDCore3D.cpp
+# )
+# target_include_directories(test_trdcore3d_gpu PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${CMAKE_SOURCE_DIR}/src
+#     ${CMAKE_SOURCE_DIR}/lib
+#     ${CMAKE_SOURCE_DIR}/lib/Nova
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_trdcore3d_gpu PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+# )
+# set_target_properties(test_trdcore3d_gpu PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # TRDCore3D Symplectic Integration Test
 add_executable(test_trdcore3d_symplectic
@@ -421,63 +485,57 @@ set_target_properties(test_trdcore3d_symplectic PROPERTIES
 )
 
 # TRD 3D CPU-Only Test (no GPU dependency)
-add_executable(test_trd3d_cpu_only
-    test/test_trd3d_cpu_only.cpp
-    src/TRDCore3D.cpp
-)
-
-target_include_directories(test_trd3d_cpu_only PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-
-target_link_libraries(test_trd3d_cpu_only PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-)
-
-set_target_properties(test_trd3d_cpu_only PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test (CPU mode available in main executable)
+# add_executable(test_trd3d_cpu_only
+#     test/test_trd3d_cpu_only.cpp
+#     src/TRDCore3D.cpp
+# )
+# target_include_directories(test_trd3d_cpu_only PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_trd3d_cpu_only PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+# )
+# set_target_properties(test_trd3d_cpu_only PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Maxwell3D Wave Propagation Test (Week 5-6)
-add_executable(test_maxwell3d_wave
-    test/test_maxwell3d_wave.cpp
-    src/Maxwell3D.cpp
-)
-
-target_include_directories(test_maxwell3d_wave PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_maxwell3d_wave PRIVATE
-    pthread
-    m
-)
-
-set_target_properties(test_maxwell3d_wave PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test (Maxwell3D integrated into main)
+# add_executable(test_maxwell3d_wave
+#     test/test_maxwell3d_wave.cpp
+#     src/Maxwell3D.cpp
+# )
+# target_include_directories(test_maxwell3d_wave PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+# target_link_libraries(test_maxwell3d_wave PRIVATE
+#     pthread
+#     m
+# )
+# set_target_properties(test_maxwell3d_wave PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # G1: EM Wave Propagation 3D Test (comprehensive wave velocity validation)
-add_executable(test_em_wave_propagation_3d
-    test/test_em_wave_propagation_3d.cpp
-    src/Maxwell3D.cpp
-)
-
-target_include_directories(test_em_wave_propagation_3d PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_em_wave_propagation_3d PRIVATE
-    pthread
-    m
-)
-
-set_target_properties(test_em_wave_propagation_3d PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test (EM wave tests integrated)
+# add_executable(test_em_wave_propagation_3d
+#     test/test_em_wave_propagation_3d.cpp
+#     src/Maxwell3D.cpp
+# )
+# target_include_directories(test_em_wave_propagation_3d PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+# target_link_libraries(test_em_wave_propagation_3d PRIVATE
+#     pthread
+#     m
+# )
+# set_target_properties(test_em_wave_propagation_3d PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # ============================================================================
 # 2D→3D VALIDATION MIGRATION TEST SUITE
@@ -497,48 +555,44 @@ set_target_properties(test_em_wave_propagation_3d PROPERTIES
 # REMOVED standalone test executables (architecture violation - single executable only)
 
 # Dirac3D Free Particle Test (Week 7-8)
-add_executable(test_dirac3d_free
-    test/test_dirac3d_free.cpp
-    src/Dirac3D.cpp
-)
-
-target_include_directories(test_dirac3d_free PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_dirac3d_free PRIVATE
-    fftw3f
-    pthread
-    m
-)
-
-set_target_properties(test_dirac3d_free PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test (Dirac3D integrated into main)
+# add_executable(test_dirac3d_free
+#     test/test_dirac3d_free.cpp
+#     src/Dirac3D.cpp
+# )
+# target_include_directories(test_dirac3d_free PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+# target_link_libraries(test_dirac3d_free PRIVATE
+#     fftw3f
+#     pthread
+#     m
+# )
+# set_target_properties(test_dirac3d_free PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Full 3D TRD Integration Test (Week 9-10)
-add_executable(test_3d_full_trd
-    test/test_3d_full_trd.cpp
-    src/TRDCore3D.cpp
-    src/Maxwell3D.cpp
-    src/Dirac3D.cpp
-)
-
-target_include_directories(test_3d_full_trd PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-
-target_link_libraries(test_3d_full_trd PRIVATE
-    ${Vulkan_LIBRARIES}
-    fftw3f
-    pthread
-    m
-)
-
-set_target_properties(test_3d_full_trd PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test (full 3D integration in main executable)
+# add_executable(test_3d_full_trd
+#     test/test_3d_full_trd.cpp
+#     src/TRDCore3D.cpp
+#     src/Maxwell3D.cpp
+#     src/Dirac3D.cpp
+# )
+# target_include_directories(test_3d_full_trd PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_3d_full_trd PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     fftw3f
+#     pthread
+#     m
+# )
+# set_target_properties(test_3d_full_trd PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # FieldEvolution - Symplectic Integrators Test
 # Commented out - files don't exist yet

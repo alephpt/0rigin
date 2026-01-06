@@ -575,6 +575,9 @@ bool testElasticScattering(const YAML::Node& scenario) {
 // Global config (set by main test runner)
 YAML::Node g_config;
 
+// External global config path set by main.cpp
+extern std::string g_test_config_path;
+
 /**
  * Main test runner
  */
@@ -586,10 +589,14 @@ int runParticleScatteringTest() {
     std::cout << "\nGoal: Validate elastic scattering of TRD vortex solitons\n";
     std::cout << "Golden Key: 1 TRD unit = 246 GeV\n\n";
 
-    // Load configuration
+    // Load configuration from global path
     YAML::Node config;
+    std::string config_file = g_test_config_path.empty() ?
+                              "config/particle_scattering.yaml" :
+                              g_test_config_path;
     try {
-        config = YAML::LoadFile("config/particle_scattering.yaml");
+        std::cout << "Loading config: " << config_file << "\n";
+        config = YAML::LoadFile(config_file);
         g_config = config;  // Store globally for scenario functions
     } catch (const std::exception& e) {
         std::cerr << "Error loading config: " << e.what() << std::endl;

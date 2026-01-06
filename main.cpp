@@ -47,6 +47,11 @@ void printUsage(const char* program_name) {
     std::cout << "  config/spin_magnetism.yaml      - H3 Spin-magnetism connection" << std::endl;
     std::cout << "  config/knot_topology.yaml       - H1 Topological excitations (knots)" << std::endl;
     std::cout << "  config/multiscale.yaml          - F2 Multi-scale RG flow validation" << std::endl;
+    std::cout << "  config/finite_temperature.yaml  - F3 Finite temperature effects" << std::endl;
+    std::cout << "  config/hpc_scaling.yaml         - F5 HPC scaling (OpenMP parallelization)" << std::endl;
+    std::cout << "  config/renormalizability.yaml   - E1 Renormalizability analysis" << std::endl;
+    std::cout << "  config/causality.yaml           - E3 Causality validation" << std::endl;
+    std::cout << "  config/symmetry_analysis.yaml   - E5 Symmetry analysis (Noether)" << std::endl;
 
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  " << program_name << std::endl;
@@ -81,6 +86,10 @@ int runUnitarityTest();
 int runScaleInvarianceTest();
 int runSymmetryAnalysisTest();
 int runDarkEnergyTest();
+
+// E1/E3/E5 Wave 1 Mathematical Rigor tests
+int runRenormalizabilityTest();
+int runCausalityTest();
 int runInflationTest();
 // int runExperimentalPredictionsTest();  // Compiled as separate executable
 
@@ -108,9 +117,22 @@ int runBinaryMergerTest();
 // F2: Multi-Scale Validation test
 int runMultiScaleTest();
 
+// F4: Quantum Fluctuation Incorporation test
+int runQuantumFluctuationsTest();
+
+// F3: Finite Temperature Effects test
+int runFiniteTemperatureTest();
+
+// F5: High-Performance Computing Scaling test
+int runHPCScalingTest();
+
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
     std::cout << "Configuration: " << config_path << std::endl;
+
+    // Set global config path for test functions
+    extern std::string g_test_config_path;
+    g_test_config_path = config_path;
 
     // Detect test type from config path
     std::string test_type;
@@ -154,6 +176,10 @@ int runTestMode(const std::string& config_path) {
         return runScaleInvarianceTest();
     } else if (config_path.find("symmetry_analysis") != std::string::npos) {
         return runSymmetryAnalysisTest();
+    } else if (config_path.find("renormalizability") != std::string::npos) {
+        return runRenormalizabilityTest();
+    } else if (config_path.find("causality") != std::string::npos) {
+        return runCausalityTest();
     // } else if (config_path.find("experimental_predictions") != std::string::npos) {
     //     return runExperimentalPredictionsTest();  // Compiled as separate executable
     } else if (config_path.find("three_generations") != std::string::npos) {
@@ -176,6 +202,12 @@ int runTestMode(const std::string& config_path) {
         return runKnotTopologyTest();
     } else if (config_path.find("multiscale") != std::string::npos) {
         return runMultiScaleTest();
+    } else if (config_path.find("quantum_fluctuations") != std::string::npos) {
+        return runQuantumFluctuationsTest();
+    } else if (config_path.find("finite_temperature") != std::string::npos) {
+        return runFiniteTemperatureTest();
+    } else if (config_path.find("hpc_scaling") != std::string::npos) {
+        return runHPCScalingTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)
@@ -213,6 +245,9 @@ int runTestMode(const std::string& config_path) {
         return 1;
     }
 }
+
+// Global configuration path for test functions
+std::string g_test_config_path;
 
 int runInteractiveMode() {
     std::cout << "\n===== TRD Interactive Mode =====" << std::endl;

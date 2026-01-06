@@ -1,0 +1,15 @@
+# Hashes of file build rules.
+ae0d486bc69b6abb25eaae8b3d705a11 /home/persist/neotec/0rigin/shaders/smft/accumulate.comp.spv
+ecdadfdb3092847f478c8cb28d7414b0 /home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp.spv
+66d2ca292afe948f9c23bdbcda844c62 /home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp.spv
+5a997df8d330bae2bd5e44f0192f1459 /home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp.spv
+5fd34efc51432bbb24b1d01cc3178563 /home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp.spv
+610e5b1bf971df8d896ce1fb41399144 /home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv
+9064a80f2ad6817d0bfbab13c6592368 /home/persist/neotec/0rigin/shaders/smft/kuramoto3d.comp.spv
+79f305528ad598408455db979e8e9584 /home/persist/neotec/0rigin/shaders/smft/kuramoto_step.comp.spv
+07967b659bea64889a66b70c7ee7cbf6 /home/persist/neotec/0rigin/shaders/smft/kuramoto_stochastic.comp.spv
+9fabe5fa849882d8bc196dfc57d0c4aa /home/persist/neotec/0rigin/shaders/smft/r_field_evolution.comp.spv
+d6fc345d82994f50e5e90cb3bc7ba330 /home/persist/neotec/0rigin/shaders/smft/spinor_feedback.comp.spv
+a56f567d18de9f26ab856649da584406 /home/persist/neotec/0rigin/shaders/smft/sync_field.comp.spv
+4fb728c0b75c382e8946dfcdda56234c /home/persist/neotec/0rigin/shaders/smft/sync_field3d.comp.spv
+e5a914648f64036de984d2f72bb22ec2 CMakeFiles/CompileShaders

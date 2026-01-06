@@ -13,7 +13,6 @@ bin/trd: \
   CMakeFiles/TRD.dir/src/TRDCompute.cpp.o \
   CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o \
   CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o \
-  CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o \
   CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o \
   CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o \
   CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o \
@@ -47,6 +46,11 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o \
   CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o \
   CMakeFiles/TRD.dir/test/test_multiscale.cpp.o \
+  CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o \
+  CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o \
+  CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o \
+  CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o \
+  CMakeFiles/TRD.dir/test/test_causality.cpp.o \
   CMakeFiles/TRD.dir/main.cpp.o \
   libNova.a \
   libimgui.a \
@@ -58,6 +62,8 @@ bin/trd: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libyaml-cpp.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libdl.a \
+  /usr/lib/libgomp.so \
+  /usr/lib/libpthread.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libm.so \
@@ -113,8 +119,6 @@ CMakeFiles/TRD.dir/src/TRDCompute.cpp.o:
 CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o:
 
 CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o:
-
-CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o:
 
 CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o:
 
@@ -182,6 +186,16 @@ CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_multiscale.cpp.o:
 
+CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_causality.cpp.o:
+
 CMakeFiles/TRD.dir/main.cpp.o:
 
 libNova.a:
@@ -203,6 +217,10 @@ libPhysics.a:
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libdl.a:
+
+/usr/lib/libgomp.so:
+
+/usr/lib/libpthread.a:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so:
 

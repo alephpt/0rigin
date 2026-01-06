@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_geodesic_verification.dir/link.d CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.o CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.o CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.o -o bin/test_geodesic_verification  -lfftw3f -lpthread -lm

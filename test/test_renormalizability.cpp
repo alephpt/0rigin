@@ -416,17 +416,11 @@ public:
 };
 
 /**
- * Main test execution
+ * Test execution wrapper for unified TRD executable
  */
-int main(int argc, char* argv[]) {
-    // Check for config file argument
-    if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <config_file.yaml>" << std::endl;
-        return 1;
-    }
-
+int runRenormalizabilityTest() {
     // Load configuration
-    YAML::Node config = YAML::LoadFile(argv[1]);
+    YAML::Node config = YAML::LoadFile("config/renormalizability.yaml");
 
     std::cout << "========================================" << std::endl;
     std::cout << "   E1: TRD RENORMALIZABILITY TEST      " << std::endl;

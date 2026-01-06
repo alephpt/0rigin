@@ -1,0 +1,211 @@
+# HPC Scaling Configuration
+#
+# F5: High-Performance Computing Scaling
+#
+# Test: Does TRD simulation scale efficiently to large processor counts
+#       suitable for cosmological problems (10^6+ cells)?
+#
+# Physics:
+#   - OpenMP thread-level parallelism (shared memory)
+#   - Domain decomposition: Each thread handles grid subset
+#   - Strong scaling: Fixed problem size, vary processors
+#   - Weak scaling: Problem size scales with processors
+#
+# Quality Gates:
+#   1. Strong scaling efficiency: E(N) = T(1)/(N·T(N)) > 0.75 for N ≤ 32
+#   2. Weak scaling: Time variation < 30% as N increases
+#   3. Load balancing: Max/min thread time < 1.2
+#   4. Energy conservation: ΔE/E < 0.01% at all processor counts
+#
+# Golden Key: 1 TRD unit = 246 GeV
+#   Validates scaling for cosmological simulations
+
+validation:
+  framework: "F5 - High-Performance Computing Scaling"
+  test_file: "test/test_hpc_scaling.cpp"
+  date: "2026-01-05"
+  golden_key: "1 TRD unit = 246 GeV"
+
+physics:
+  coupling_strength: 1.0
+  timestep: 0.005
+  evolution_steps: 100  # Reduced for benchmarking speed
+
+  calibration:
+    unit_conversion: "1 TRD unit = 246 GeV"
+    application: "Cosmological simulations at galactic scale"
+    target_scale: "10^6+ grid points (realistic galaxy model)"
+
+parallel_configuration:
+  backend: "OpenMP"
+  description: "Thread-level shared-memory parallelism"
+
+  thread_counts: [1, 2, 4, 8]  # Scale up to available cores
+
+  strong_scaling:
+    description: "Fixed problem size, vary processors"
+    grid_size: 64  # 64³ = 262,144 points
+    expectation: "Speedup(N) ≈ N, Efficiency > 0.75"
+    quality_gate: "Parallel efficiency E(N) > 0.75 for N ≤ 32"
+
+    physics_implications:
+      - "Cache effects may reduce efficiency at high N"
+      - "Communication overhead (memory bandwidth) limits"
+      - "Amdahl's law: Sequential portions limit speedup"
+
+  weak_scaling:
+    description: "Problem size scales with processors"
+    grid_per_thread: 32  # Each thread handles 32³ cells
+    expectation: "Time approximately constant"
+    quality_gate: "Time variation < 30% as N increases"
+
+    physics_implications:
+      - "Tests communication vs computation balance"
+      - "Validates scalability to massive problems"
+      - "32³ per thread = 32,768 cells/thread"
+
+test_scenarios:
+  - name: "Strong_Scaling"
+    description: "Fixed 64³ grid, thread sweep {1,2,4,8}"
+    method: "Measure wall-clock time for fixed problem"
+    metrics:
+      - "Speedup: S(N) = T(1) / T(N)"
+      - "Efficiency: E(N) = S(N) / N"
+      - "Ideal: E(N) = 1.0 (linear scaling)"
+      - "Realistic: E(N) > 0.75 (acceptable scaling)"
+    expected:
+      speedup_2: "~1.9x (95% efficiency)"
+      speedup_4: "~3.6x (90% efficiency)"
+      speedup_8: "~6.4x (80% efficiency)"
+
+  - name: "Weak_Scaling"
+    description: "Grid scales as N^(1/3) with thread count"
+    method: "Maintain ~32,768 cells per thread"
+    grid_scaling:
+      threads_1: "32³ = 32,768 cells"
+      threads_2: "40³ = 64,000 cells"
+      threads_4: "51³ = 132,651 cells"
+      threads_8: "64³ = 262,144 cells"
+    expected:
+      time_variation: "<20% (ideal constant time)"
+      reason: "Communication overhead grows slower than computation"
+
+  - name: "Load_Balancing"
+    description: "Measure per-thread execution time"
+    metric: "Load imbalance factor = max_time / min_time"
+    quality_gate: "Imbalance < 1.2 (20% variation)"
+    expected:
+      uniform_grid: "Perfect balance (1.0)"
+      cache_effects: "Small imbalance (1.05-1.15)"
+
+  - name: "Energy_Conservation"
+    description: "Verify physics correctness at all thread counts"
+    quality_gate: "ΔE/E < 0.01% for all N"
+    expected:
+      conservation: "Independent of parallelization"
+      reason: "Symplectic integrator preserves energy"
+      failure_mode: "Race conditions or numerical errors"
+
+  - name: "Deterministic_Results"
+    description: "Verify identical output across thread counts"
+    method: "Compare final field states"
+    expected:
+      bitwise_identical: "Yes (if reduction order identical)"
+      roundoff_tolerance: "<1e-6 (acceptable floating-point error)"
+
+quality_metrics:
+  - metric: "Strong scaling efficiency"
+    requirement: "E(N) > 0.75 for N ∈ {2,4,8}"
+    formula: "E(N) = T(1) / (N * T(N))"
+
+  - metric: "Weak scaling time variation"
+    requirement: "T(N) / T(1) < 1.30"
+    interpretation: "Time grows by <30% as problem scales"
+
+  - metric: "Load balancing"
+    requirement: "max_thread_time / min_thread_time < 1.2"
+    interpretation: "Uniform work distribution"
+
+  - metric: "Energy conservation"
+    requirement: "ΔE/E < 0.01% for all N"
+    interpretation: "Symplectic integration maintained"
+
+parallel_bottlenecks:
+  identified:
+    - bottleneck: "Memory bandwidth saturation"
+      occurs_at: "N > 8-16 cores (system dependent)"
+      mitigation: "Cache-friendly data layout, NUMA awareness"
+
+    - bottleneck: "False sharing"
+      description: "Multiple threads write adjacent memory"
+      mitigation: "Padding, thread-local arrays"
+
+    - bottleneck: "Reduction operations"
+      description: "Energy computation requires global sum"
+      impact: "Limited by memory bandwidth"
+      mitigation: "Hierarchical reduction, SIMD"
+
+future_enhancements:
+  - description: "MPI for distributed memory scaling"
+    target: "Multi-node clusters (10^6+ processors)"
+    physics: "Cosmological simulations at universal scale"
+
+  - description: "GPU acceleration with CUDA/Vulkan compute"
+    target: "10^9+ grid points on single GPU"
+    advantage: "Massive parallelism (1000s of cores)"
+
+  - description: "Hybrid MPI+OpenMP+GPU"
+    target: "Exascale computing (10^18 FLOPS)"
+    application: "Full universe simulation"
+
+  - description: "Adaptive mesh refinement (AMR)"
+    target: "Multi-scale problems (galaxies → cosmos)"
+    advantage: "Focus resolution where needed"
+
+computational_cost:
+  strong_scaling:
+    grid: "64³ = 262,144 points"
+    memory: "~1 MB per field × 6 fields = ~6 MB"
+    time_1_thread: "~10-20 seconds (100 steps)"
+    time_8_threads: "~1.5-3 seconds (expected)"
+
+  weak_scaling:
+    memory_per_thread: "32³ × 4 bytes × 6 fields = ~0.8 MB"
+    scaling: "Linear with thread count"
+    time_expected: "~10-20 seconds (all thread counts)"
+
+physics_implications:
+  success:
+    - "TRD simulations scale to cosmological problems"
+    - "Linear scaling to 32+ processors validated"
+    - "Energy conservation maintained in parallel"
+    - "Ready for 10^6+ cell galaxy simulations"
+
+  failure:
+    - "Parallelization overhead excessive"
+    - "Energy conservation broken (race conditions)"
+    - "Load imbalance indicates algorithm issues"
+    - "May require algorithmic redesign"
+
+notes:
+  - "OpenMP requires compilation with -fopenmp flag"
+  - "Test uses symplectic Velocity Verlet integration"
+  - "Energy conservation is critical quality gate"
+  - "Vortex initial condition provides nontrivial test"
+  - "Thread counts limited by available hardware cores"
+  - "Future: Extend to MPI for distributed memory"
+  - "Future: GPU compute shaders for massive parallelism"
+
+expected_results:
+  strong_scaling_efficiency:
+    threads_2: ">0.90 (excellent)"
+    threads_4: ">0.85 (very good)"
+    threads_8: ">0.75 (acceptable)"
+
+  weak_scaling_overhead:
+    threads_2: "<10% time increase"
+    threads_4: "<20% time increase"
+    threads_8: "<30% time increase"
+
+  energy_conservation:
+    all_threads: "<0.01% drift (GO/NO-GO criterion)"

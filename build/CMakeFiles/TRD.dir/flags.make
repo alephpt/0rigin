@@ -6,5 +6,5 @@ CXX_DEFINES = -DTRD_MAIN_EXECUTABLE
 
 CXX_INCLUDES = -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2
 
-CXX_FLAGS = -O3 -DNDEBUG -std=c++20
+CXX_FLAGS = -O3 -DNDEBUG -std=c++20 -fopenmp
 

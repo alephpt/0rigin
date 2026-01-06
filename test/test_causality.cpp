@@ -537,7 +537,10 @@ private:
     }
 };
 
-int main(int argc, char* argv[]) {
+/**
+ * Test execution wrapper for unified TRD executable
+ */
+int runCausalityTest() {
     std::cout << "\n╔══════════════════════════════════════════════════════════╗" << std::endl;
     std::cout << "║     E3 CAUSALITY TEST - TRD THEORY VALIDATION             ║" << std::endl;
     std::cout << "║     CRITICAL GO/NO-GO GATE FOR PHYSICAL VIABILITY         ║" << std::endl;

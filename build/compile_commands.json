@@ -133,417 +133,303 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/TRDCore.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/TRDCore.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDCore.cpp",
   "output": "CMakeFiles/TRD.dir/src/TRDCore.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
   "output": "CMakeFiles/TRD.dir/src/TRDCore3D.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
   "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
   "output": "CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
   "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
   "output": "CMakeFiles/TRD.dir/src/Dirac3D.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/TRDEngine.cpp.o -c /home/persist/neotec/0rigin/src/TRDEngine.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/TRDEngine.cpp.o -c /home/persist/neotec/0rigin/src/TRDEngine.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDEngine.cpp",
   "output": "CMakeFiles/TRD.dir/src/TRDEngine.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/TRDEngine3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDEngine3D.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/TRDEngine3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDEngine3D.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDEngine3D.cpp",
   "output": "CMakeFiles/TRD.dir/src/TRDEngine3D.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/TRDPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/TRDPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp",
   "output": "CMakeFiles/TRD.dir/src/TRDPipelineFactory.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/TRDBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/TRDBufferManager.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/TRDBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/TRDBufferManager.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDBufferManager.cpp",
   "output": "CMakeFiles/TRD.dir/src/TRDBufferManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/TRDCompute.cpp.o -c /home/persist/neotec/0rigin/src/TRDCompute.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/TRDCompute.cpp.o -c /home/persist/neotec/0rigin/src/TRDCompute.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDCompute.cpp",
   "output": "CMakeFiles/TRD.dir/src/TRDCompute.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp",
   "output": "CMakeFiles/TRD.dir/src/TRDDescriptorManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
   "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
   "output": "CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o -c /home/persist/neotec/0rigin/src/FieldEvolution.cpp",
-  "file": "/home/persist/neotec/0rigin/src/FieldEvolution.cpp",
-  "output": "CMakeFiles/TRD.dir/src/FieldEvolution.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
   "file": "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
   "output": "CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp",
   "file": "/home/persist/neotec/0rigin/src/output/OutputManager.cpp",
   "output": "CMakeFiles/TRD.dir/src/output/OutputManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp",
   "file": "/home/persist/neotec/0rigin/src/simulations/TestConfig.cpp",
   "output": "CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp",
   "file": "/home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp",
   "output": "CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o -c /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o -c /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp",
   "file": "/home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp",
   "output": "CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_three_body_em_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_stuckelberg_vortex_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_geodesic_3d.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_geodesic_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_geodesic_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_weak_field_3d.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_weak_field_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_weak_field_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_time_dilation_3d.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_time_dilation_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_time_dilation_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_em_gravity_coupling_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_light_deflection_3d.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_light_deflection_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_light_deflection_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_particle_spectrum_unified.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_particle_spectrum_unified.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o -c /home/persist/neotec/0rigin/test/test_cosmological_constant.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o -c /home/persist/neotec/0rigin/test/test_cosmological_constant.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_cosmological_constant.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_cosmological_constant.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_friedmann_equations.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_friedmann_equations.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_friedmann_equations.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_friedmann_equations.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o -c /home/persist/neotec/0rigin/test/test_dark_matter.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o -c /home/persist/neotec/0rigin/test/test_dark_matter.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_dark_matter.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_dark_matter.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o -c /home/persist/neotec/0rigin/test/test_dark_energy.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o -c /home/persist/neotec/0rigin/test/test_dark_energy.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_dark_energy.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_dark_energy.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_inflation.cpp.o -c /home/persist/neotec/0rigin/test/test_inflation.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_inflation.cpp.o -c /home/persist/neotec/0rigin/test/test_inflation.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_inflation.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_inflation.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_unitarity.cpp.o -c /home/persist/neotec/0rigin/test/test_unitarity.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_unitarity.cpp.o -c /home/persist/neotec/0rigin/test/test_unitarity.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_unitarity.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_unitarity.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o -c /home/persist/neotec/0rigin/test/test_scale_invariance.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o -c /home/persist/neotec/0rigin/test/test_scale_invariance.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_scale_invariance.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o -c /home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o -c /home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_symmetry_analysis.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_symmetry_analysis.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_three_generations.cpp.o -c /home/persist/neotec/0rigin/test/test_three_generations.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_three_generations.cpp.o -c /home/persist/neotec/0rigin/test/test_three_generations.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_three_generations.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_three_generations.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_electroweak.cpp.o -c /home/persist/neotec/0rigin/test/test_electroweak.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_electroweak.cpp.o -c /home/persist/neotec/0rigin/test/test_electroweak.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_electroweak.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_electroweak.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_strong_force.cpp.o -c /home/persist/neotec/0rigin/test/test_strong_force.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_strong_force.cpp.o -c /home/persist/neotec/0rigin/test/test_strong_force.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_strong_force.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_strong_force.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o -c /home/persist/neotec/0rigin/test/test_higgs_connection.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o -c /home/persist/neotec/0rigin/test/test_higgs_connection.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_higgs_connection.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o -c /home/persist/neotec/0rigin/test/test_josephson_junction.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o -c /home/persist/neotec/0rigin/test/test_josephson_junction.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_josephson_junction.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o -c /home/persist/neotec/0rigin/test/test_binary_merger.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o -c /home/persist/neotec/0rigin/test/test_binary_merger.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_binary_merger.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_scattering.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o -c /home/persist/neotec/0rigin/test/test_particle_scattering.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_particle_scattering.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o -c /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o -c /home/persist/neotec/0rigin/test/test_spin_magnetism.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_spin_magnetism.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o -c /home/persist/neotec/0rigin/test/test_knot_topology.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o -c /home/persist/neotec/0rigin/test/test_knot_topology.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_knot_topology.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/test/test_multiscale.cpp.o -c /home/persist/neotec/0rigin/test/test_multiscale.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_multiscale.cpp.o -c /home/persist/neotec/0rigin/test/test_multiscale.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_multiscale.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_multiscale.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/TRD.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o -c /home/persist/neotec/0rigin/test/test_finite_temperature.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_finite_temperature.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o -c /home/persist/neotec/0rigin/test/test_quantum_fluctuations.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_quantum_fluctuations.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o -c /home/persist/neotec/0rigin/test/test_hpc_scaling.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_hpc_scaling.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o -c /home/persist/neotec/0rigin/test/test_renormalizability.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_renormalizability.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_causality.cpp.o -c /home/persist/neotec/0rigin/test/test_causality.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_causality.cpp",
+  "output": "CMakeFiles/TRD.dir/test/test_causality.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/main.cpp.o -c /home/persist/neotec/0rigin/main.cpp",
   "file": "/home/persist/neotec/0rigin/main.cpp",
   "output": "CMakeFiles/TRD.dir/main.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_experimental_predictions.dir/test/test_experimental_predictions.cpp.o -c /home/persist/neotec/0rigin/test/test_experimental_predictions.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_experimental_predictions.cpp",
-  "output": "CMakeFiles/test_experimental_predictions.dir/test/test_experimental_predictions.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.o -c /home/persist/neotec/0rigin/test/test_geodesic_verification.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_geodesic_verification.cpp",
-  "output": "CMakeFiles/test_geodesic_verification.dir/test/test_geodesic_verification.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
-  "file": "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
-  "output": "CMakeFiles/test_geodesic_verification.dir/src/GeodesicIntegrator.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
-  "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
-  "output": "CMakeFiles/test_geodesic_verification.dir/src/DiracEvolution.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_renormalizability.dir/test/test_renormalizability.cpp.o -c /home/persist/neotec/0rigin/test/test_renormalizability.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_renormalizability.cpp",
-  "output": "CMakeFiles/test_renormalizability.dir/test/test_renormalizability.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_causality.dir/test/test_causality.cpp.o -c /home/persist/neotec/0rigin/test/test_causality.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_causality.cpp",
-  "output": "CMakeFiles/test_causality.dir/test/test_causality.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_causality.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "output": "CMakeFiles/test_causality.dir/src/TRDCore3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_einstein_field_equations.dir/test/test_einstein_field_equations.cpp.o -c /home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_einstein_field_equations.cpp",
-  "output": "CMakeFiles/test_einstein_field_equations.dir/test/test_einstein_field_equations.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "output": "CMakeFiles/test_einstein_field_equations.dir/src/TRDCore3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
-  "output": "CMakeFiles/test_einstein_field_equations.dir/src/Maxwell3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.o -c /home/persist/neotec/0rigin/test/test_weak_field_limit.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_weak_field_limit.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/test/test_weak_field_limit.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp",
-  "file": "/home/persist/neotec/0rigin/src/simulations/TRDTestRunner.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/simulations/TRDTestRunner.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o -c /home/persist/neotec/0rigin/src/simulations/TestConfig.cpp",
-  "file": "/home/persist/neotec/0rigin/src/simulations/TestConfig.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/simulations/TestConfig.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.o -c /home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp",
-  "file": "/home/persist/neotec/0rigin/src/simulations/ObservableComputer.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/simulations/ObservableComputer.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDCore.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/TRDCore.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o -c /home/persist/neotec/0rigin/src/TRDEngine.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDEngine.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/TRDEngine.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o -c /home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDPipelineFactory.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/TRDPipelineFactory.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o -c /home/persist/neotec/0rigin/src/TRDBufferManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDBufferManager.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/TRDBufferManager.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o -c /home/persist/neotec/0rigin/src/TRDCompute.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDCompute.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/TRDCompute.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o -c /home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDDescriptorManager.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/TRDDescriptorManager.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o -c /home/persist/neotec/0rigin/src/DiracEvolution.cpp",
-  "file": "/home/persist/neotec/0rigin/src/DiracEvolution.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/DiracEvolution.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.o -c /home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
-  "file": "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/GeodesicIntegrator.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.o -c /home/persist/neotec/0rigin/src/output/OutputManager.cpp",
-  "file": "/home/persist/neotec/0rigin/src/output/OutputManager.cpp",
-  "output": "CMakeFiles/test_weak_field_limit.dir/src/output/OutputManager.cpp.o"
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
@@ -559,18 +445,6 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trdcore3d_gpu.dir/test/test_trdcore3d_gpu_simple.cpp.o -c /home/persist/neotec/0rigin/test/test_trdcore3d_gpu_simple.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_trdcore3d_gpu_simple.cpp",
-  "output": "CMakeFiles/test_trdcore3d_gpu.dir/test/test_trdcore3d_gpu_simple.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "output": "CMakeFiles/test_trdcore3d_gpu.dir/src/TRDCore3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.o -c /home/persist/neotec/0rigin/test/test_trdcore3d_symplectic.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_trdcore3d_symplectic.cpp",
   "output": "CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.o"
@@ -580,89 +454,5 @@
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
   "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
   "output": "CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trd3d_cpu_only.dir/test/test_trd3d_cpu_only.cpp.o -c /home/persist/neotec/0rigin/test/test_trd3d_cpu_only.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_trd3d_cpu_only.cpp",
-  "output": "CMakeFiles/test_trd3d_cpu_only.dir/test/test_trd3d_cpu_only.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "output": "CMakeFiles/test_trd3d_cpu_only.dir/src/TRDCore3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.o -c /home/persist/neotec/0rigin/test/test_maxwell3d_wave.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_maxwell3d_wave.cpp",
-  "output": "CMakeFiles/test_maxwell3d_wave.dir/test/test_maxwell3d_wave.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
-  "output": "CMakeFiles/test_maxwell3d_wave.dir/src/Maxwell3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_em_wave_propagation_3d.dir/test/test_em_wave_propagation_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_em_wave_propagation_3d.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_em_wave_propagation_3d.cpp",
-  "output": "CMakeFiles/test_em_wave_propagation_3d.dir/test/test_em_wave_propagation_3d.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_em_wave_propagation_3d.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
-  "output": "CMakeFiles/test_em_wave_propagation_3d.dir/src/Maxwell3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac3d_free.dir/test/test_dirac3d_free.cpp.o -c /home/persist/neotec/0rigin/test/test_dirac3d_free.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_dirac3d_free.cpp",
-  "output": "CMakeFiles/test_dirac3d_free.dir/test/test_dirac3d_free.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
-  "output": "CMakeFiles/test_dirac3d_free.dir/src/Dirac3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_trd.dir/test/test_3d_full_trd.cpp.o -c /home/persist/neotec/0rigin/test/test_3d_full_trd.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_3d_full_trd.cpp",
-  "output": "CMakeFiles/test_3d_full_trd.dir/test/test_3d_full_trd.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_trd.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
-  "output": "CMakeFiles/test_3d_full_trd.dir/src/TRDCore3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_trd.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
-  "output": "CMakeFiles/test_3d_full_trd.dir/src/Maxwell3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_3d_full_trd.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
-  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
-  "output": "CMakeFiles/test_3d_full_trd.dir/src/Dirac3D.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_field_evolution.dir/test/test_field_evolution.cpp.o -c /home/persist/neotec/0rigin/test/test_field_evolution.cpp",
-  "file": "/home/persist/neotec/0rigin/test/test_field_evolution.cpp",
-  "output": "CMakeFiles/test_field_evolution.dir/test/test_field_evolution.cpp.o"
-},
-{
-  "directory": "/home/persist/neotec/0rigin/build",
-  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_field_evolution.dir/src/FieldEvolution.cpp.o -c /home/persist/neotec/0rigin/src/FieldEvolution.cpp",
-  "file": "/home/persist/neotec/0rigin/src/FieldEvolution.cpp",
-  "output": "CMakeFiles/test_field_evolution.dir/src/FieldEvolution.cpp.o"
 }
 ]
