@@ -130,6 +130,9 @@ int runHPCScalingTest();
 // B2: Fine Structure Constant test
 int runFineStructureConstantTest();
 
+// D4: LHC Predictions test
+int runLHCPredictionsTest();
+
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
     std::cout << "Configuration: " << config_path << std::endl;
@@ -214,6 +217,10 @@ int runTestMode(const std::string& config_path) {
         return runHPCScalingTest();
     } else if (config_path.find("fine_structure_constant") != std::string::npos) {
         return runFineStructureConstantTest();
+    } else if (config_path.find("lhc_predictions") != std::string::npos) {
+    } else if (config_path.find("astrophysical_observations") != std::string::npos) {
+        return runAstrophysicalObservationsTest();
+        return runLHCPredictionsTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)

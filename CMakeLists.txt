@@ -154,6 +154,7 @@ set(TRD_SOURCES
     test/test_geodesic_3d.cpp
     test/test_weak_field_3d.cpp
     test/test_time_dilation_3d.cpp
+    test/test_gravitational_waves.cpp
     test/test_em_gravity_coupling_3d.cpp
     test/test_einstein_field_equations.cpp
     test/test_light_deflection_3d.cpp
@@ -179,8 +180,13 @@ set(TRD_SOURCES
     test/test_particle_scattering.cpp
     # H3 Spin-Magnetism test
     test/test_spin_magnetism.cpp
+    # H3 Magnetic Dynamo test
+    test/test_magnetic_dynamo.cpp
     # H1 Knot Topology test
     test/test_knot_topology.cpp
+    test/test_knot_stability.cpp
+    # H2 Solar System Orbital Dynamics test
+    test/test_solar_system.cpp
     # F2 Multi-Scale Validation test
     test/test_multiscale.cpp
     # F3 Finite Temperature Effects test
@@ -191,9 +197,19 @@ set(TRD_SOURCES
     test/test_hpc_scaling.cpp
     # B2 Fine Structure Constant test
     test/test_fine_structure_constant.cpp
+    # D3 Astrophysical Observations test
+    test/test_astrophysical_observations.cpp
+    # D4 LHC Predictions test
+    test/test_lhc_predictions.cpp
+    # G4 Navier-Stokes Fluid Dynamics test
+    test/test_navier_stokes.cpp
     # E1/E3/E5 Wave 1 Mathematical Rigor tests
     test/test_renormalizability.cpp
     test/test_causality.cpp
+    # D1 Solar System test
+    test/test_solar_system.cpp
+    # H3 Magnetic Dynamo test
+    test/test_magnetic_dynamo.cpp
     main.cpp
 )
 
@@ -615,6 +631,23 @@ set_target_properties(test_trdcore3d_symplectic PROPERTIES
 # set_target_properties(test_field_evolution PROPERTIES
 #     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 # )
+
+# Field Initializers Validation - Verify TRDFieldInitializers.h
+add_executable(test_field_initializers_validation
+    test/test_field_initializers_validation.cpp
+)
+
+target_include_directories(test_field_initializers_validation PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_field_initializers_validation PRIVATE
+    m
+)
+
+set_target_properties(test_field_initializers_validation PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
 
 # ============================================================================
 # LEGACY TEST BINARIES REMOVED

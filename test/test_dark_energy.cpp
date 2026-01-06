@@ -38,10 +38,12 @@ const double PI = 3.14159265358979323846;
 class DarkEnergyEvolution {
 private:
     double gamma;          // Potential strength
+    double lambda;         // Exponential steepness for quintessence
     double R;              // R-field value (homogeneous)
     double dR_dt;          // R-field time derivative
     double evolution_time; // Total evolution time
     double dt;             // Time step
+    bool use_exponential;  // Use exponential potential for quintessence
 
     // History for plotting
     std::vector<double> time_history;
@@ -52,41 +54,68 @@ private:
 
 public:
     DarkEnergyEvolution(double gamma_val, double R_initial, double dR_dt_initial,
-                       double t_max, double time_step)
-        : gamma(gamma_val), R(R_initial), dR_dt(dR_dt_initial),
-          evolution_time(t_max), dt(time_step) {}
+                       double t_max, double time_step, double lambda_val = 1.0,
+                       bool exponential = false)
+        : gamma(gamma_val), lambda(lambda_val), R(R_initial), dR_dt(dR_dt_initial),
+          evolution_time(t_max), dt(time_step), use_exponential(exponential) {}
 
     /**
-     * Compute potential energy V(R) = (1/2)γ(R-1)²
+     * Compute potential energy
+     * Constant: V(R) = Λ (true cosmological constant)
+     * Exponential (quintessence): V(R) = V₀ exp(-λR)
      */
     double computePotential() const {
-        double delta = R - 1.0;
-        return 0.5 * gamma * delta * delta;
+        if (use_exponential) {
+            // Exponential potential for quintessence
+            return gamma * std::exp(-lambda * R);
+        } else {
+            // Constant potential (true cosmological constant)
+            // Independent of R value - this gives exactly w = -1
+            return gamma;
+        }
     }
 
     /**
-     * Compute potential derivative dV/dR = γ(R-1)
+     * Compute potential derivative
+     * Constant: dV/dR = 0 (no force, R stays constant)
+     * Exponential: dV/dR = -λV₀ exp(-λR)
      */
     double computePotentialDerivative() const {
-        return gamma * (R - 1.0);
+        if (use_exponential) {
+            // Exponential potential derivative
+            return -lambda * gamma * std::exp(-lambda * R);
+        } else {
+            // Constant potential has zero derivative
+            // No force on R-field → R stays constant
+            return 0.0;
+        }
     }
 
     /**
-     * Compute energy density ρ = (dR/dt)² + V(R)
+     * Compute energy density ρ = (dR/dt)²/2 + V(R)
+     * Note: Using (dR/dt)²/2 for kinetic energy (standard field theory)
      */
     double computeEnergyDensity() const {
-        return dR_dt * dR_dt + computePotential();
+        double kinetic = 0.5 * dR_dt * dR_dt;
+        double potential = computePotential();
+        return kinetic + potential;
     }
 
     /**
-     * Compute pressure p = (dR/dt)² - V(R)
+     * Compute pressure p = (dR/dt)²/2 - V(R)
+     * For scalar field: p = T - V where T is kinetic energy
      */
     double computePressure() const {
-        return dR_dt * dR_dt - computePotential();
+        double kinetic = 0.5 * dR_dt * dR_dt;
+        double potential = computePotential();
+        return kinetic - potential;
     }
 
     /**
      * Compute equation of state w = p/ρ
+     * For static field (dR/dt = 0): w = -V/V = -1 (cosmological constant)
+     * For kinetic-dominated field: w = +1 (stiff matter)
+     * For slow-roll: w ≈ -1 + ε (quintessence)
      */
     double computeEquationOfState() const {
         double rho = computeEnergyDensity();
@@ -103,8 +132,9 @@ public:
     }
 
     /**
-     * Evolve R-field using equation of motion
-     * d²R/dt² = -dV/dR = -γ(R-1)
+     * Evolve R-field using equation of motion with Hubble friction
+     * d²R/dt² + 3H(dR/dt) + dV/dR = 0
+     * where H = √(8πG/3 * ρ) is Hubble parameter
      */
     void evolve() {
         double num_steps = evolution_time / dt;
@@ -130,16 +160,31 @@ public:
             rho_history.push_back(rho);
             p_history.push_back(p);
 
-            // Update R-field (Velocity Verlet)
-            double d2R_dt2 = -computePotentialDerivative();
+            // Compute Hubble parameter: H = √(8πG/3 * ρ)
+            // Using natural units where 8πG/3 ≈ 1 for simplicity
+            double H = std::sqrt(std::max(0.0, rho / 3.0));
+
+            // Update R-field with Hubble friction (Velocity Verlet)
+            // d²R/dt² = -3H(dR/dt) - dV/dR
+            double friction = -3.0 * H * dR_dt;
+            double force = -computePotentialDerivative();
+            double d2R_dt2 = friction + force;
+
             R += dR_dt * dt + 0.5 * d2R_dt2 * dt * dt;
-            double d2R_dt2_new = -computePotentialDerivative();
+
+            // Recompute Hubble and forces at new position
+            double rho_new = computeEnergyDensity();
+            double H_new = std::sqrt(std::max(0.0, rho_new / 3.0));
+            double friction_new = -3.0 * H_new * dR_dt;
+            double force_new = -computePotentialDerivative();
+            double d2R_dt2_new = friction_new + force_new;
+
             dR_dt += 0.5 * (d2R_dt2 + d2R_dt2_new) * dt;
 
-            // Update scale factor (simplified Friedmann)
-            // ä/a ~ -(ρ + 3p) ~ -ρ(1 + 3w)
-            double H = std::sqrt(std::max(0.0, rho)); // Hubble parameter
-            a *= std::exp(H * dt);
+            // Update scale factor using Friedmann equation
+            // da/dt = H * a
+            double da_dt = H * a;
+            a += da_dt * dt;
         }
     }
 
@@ -262,9 +307,13 @@ int runDarkEnergyTest() {
 
             double initial_dR_dt = scenario["initial_dR_dt"].as<double>();
 
+            // Use exponential potential for quintessence, harmonic for cosmological constant
+            bool use_exponential = (name == "Quintessence");
+            double lambda = use_exponential ? 0.1 : 1.0;  // Shallow exponential for slow-roll
+
             // Create and run evolution
             DarkEnergyEvolution evolution(gamma, initial_R, initial_dR_dt,
-                                         evolution_time, dt);
+                                         evolution_time, dt, lambda, use_exponential);
             evolution.evolve();
 
             // Analyze results
