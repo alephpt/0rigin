@@ -197,6 +197,8 @@ set(TRD_SOURCES
     test/test_hpc_scaling.cpp
     # B2 Fine Structure Constant test
     test/test_fine_structure_constant.cpp
+    # D5 Atomic Physics and Precision Spectroscopy test
+    test/test_atomic_physics.cpp
     # D3 Astrophysical Observations test
     test/test_astrophysical_observations.cpp
     # D4 LHC Predictions test

@@ -44,6 +44,7 @@ void printUsage(const char* program_name) {
     std::cout << "  config/higgs_connection.yaml    - B6 Higgs mechanism via R-field" << std::endl;
     std::cout << "  config/josephson_junction.yaml  - D2 AC/DC Josephson effects" << std::endl;
     std::cout << "  config/binary_merger.yaml       - D3 Gravitational wave emission" << std::endl;
+    std::cout << "  config/atomic_physics.yaml      - D5 Atomic physics and spectroscopy" << std::endl;
     std::cout << "  config/spin_magnetism.yaml      - H3 Spin-magnetism connection" << std::endl;
     std::cout << "  config/knot_topology.yaml       - H1 Topological excitations (knots)" << std::endl;
     std::cout << "  config/multiscale.yaml          - F2 Multi-scale RG flow validation" << std::endl;
@@ -133,6 +134,11 @@ int runFineStructureConstantTest();
 // D4: LHC Predictions test
 int runLHCPredictionsTest();
 
+// D3: Astrophysical Observations test
+int runAstrophysicalObservationsTest();
+
+// D5: Atomic Physics and Precision Spectroscopy test
+int runAtomicPhysicsTest();
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
     std::cout << "Configuration: " << config_path << std::endl;
@@ -217,10 +223,12 @@ int runTestMode(const std::string& config_path) {
         return runHPCScalingTest();
     } else if (config_path.find("fine_structure_constant") != std::string::npos) {
         return runFineStructureConstantTest();
+    } else if (config_path.find("atomic_physics") != std::string::npos) {
+        return runAtomicPhysicsTest();
     } else if (config_path.find("lhc_predictions") != std::string::npos) {
+        return runLHCPredictionsTest();
     } else if (config_path.find("astrophysical_observations") != std::string::npos) {
         return runAstrophysicalObservationsTest();
-        return runLHCPredictionsTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)

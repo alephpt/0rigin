@@ -1,0 +1,288 @@
+# D5: Atomic Physics and Precision Spectroscopy
+#
+# Goal: Validate TRD reproduces atomic energy levels, fine structure,
+# hyperfine splitting, and Lamb shift with precision matching spectroscopy
+#
+# Physics Hypothesis:
+#   Atomic observables emerge from TRD topological dynamics:
+#   1. Energy levels: E_n = -K/(2n²) from topological quantization
+#   2. Fine structure: Spin-orbit coupling from B-field (H3 magnetic dynamo)
+#   3. Hyperfine: Nuclear spin coupling (topological winding)
+#   4. Lamb shift: Vacuum fluctuations in R-field
+#
+# Precision Targets:
+#   - Rydberg constant: R_∞ = 10,973,731.568 m⁻¹ (12 significant figures)
+#   - Balmer series: λ within 0.1%
+#   - Fine structure: ν within 10%
+#   - 21cm line: ν = 1420.405 MHz (hyperfine splitting)
+#   - Lamb shift: Δν = 1057.8 MHz (2S₁/₂ - 2P₁/₂)
+#
+# Quality Gates:
+#   - Rydberg constant within 0.01% (11 significant figures)
+#   - Balmer series wavelengths within 0.1%
+#   - Fine structure splitting within 10%
+#   - Hyperfine 21cm within 0.01%
+#   - Lamb shift within 10%
+
+test_file: test/test_atomic_physics.cpp
+golden_key: 246  # 1 TRD unit = 246 GeV
+
+# Atomic parameters
+atom:
+  element: "Hydrogen"
+  Z: 1              # Atomic number
+  n_max: 10         # Maximum principal quantum number to compute
+
+# TRD mapping to atomic physics
+trd_mapping:
+  coupling_K: 1.0
+  coherence_xi: 0.529  # Angstroms (Bohr radius a₀)
+  energy_scale: 13.6   # eV (Rydberg energy)
+
+# Physical constants (for reference)
+constants:
+  alpha_fine: 0.007297352693      # Fine structure constant (1/137.036)
+  rydberg_constant: 10973731.568  # m⁻¹
+  rydberg_energy: 13.605693123    # eV
+  bohr_radius: 0.529177210903     # Angstroms
+  electron_mass: 9.1093837015e-31 # kg
+  proton_mass: 1.67262192369e-27  # kg
+  g_proton: 5.5856946893          # Nuclear g-factor
+  planck_h: 6.62607015e-34        # J·s
+  speed_of_light: 299792458       # m/s
+
+# Spectroscopic observables
+observables:
+  rydberg:
+    expected_m_inv: 10973731.568
+    precision_digits: 12
+    tolerance_percent: 0.01
+
+  balmer_series:
+    transitions:
+      - {n_upper: 3, n_lower: 2, name: "H-alpha", lambda_nm: 656.281}
+      - {n_upper: 4, n_lower: 2, name: "H-beta", lambda_nm: 486.135}
+      - {n_upper: 5, n_lower: 2, name: "H-gamma", lambda_nm: 434.047}
+      - {n_upper: 6, n_lower: 2, name: "H-delta", lambda_nm: 410.175}
+      - {n_upper: 7, n_lower: 2, name: "H-epsilon", lambda_nm: 397.008}
+    tolerance_percent: 0.1
+
+  fine_structure:
+    - transition: "2P_3/2 - 2P_1/2"
+      n: 2
+      l: 1
+      j_values: [1.5, 0.5]
+      expected_nu_GHz: 10.97
+      tolerance_percent: 10.0
+
+  hyperfine:
+    - transition: "1S F=1 - F=0"
+      n: 1
+      l: 0
+      expected_nu_MHz: 1420.405751
+      wavelength_cm: 21.106
+      astronomy_line: true
+      tolerance_percent: 0.01
+
+  lamb_shift:
+    - transition: "2S_1/2 - 2P_1/2"
+      n_upper: 2
+      l_upper: 0
+      n_lower: 2
+      l_lower: 1
+      expected_nu_MHz: 1057.8
+      qed_correction: true
+      tolerance_percent: 10.0
+
+# Lyman series (n → 1 transitions)
+lyman_series:
+  transitions:
+    - {n_upper: 2, n_lower: 1, name: "Lyman-alpha", lambda_nm: 121.567}
+    - {n_upper: 3, n_lower: 1, name: "Lyman-beta", lambda_nm: 102.573}
+    - {n_upper: 4, n_lower: 1, name: "Lyman-gamma", lambda_nm: 97.254}
+
+# Paschen series (n → 3 transitions)
+paschen_series:
+  transitions:
+    - {n_upper: 4, n_lower: 3, name: "Paschen-alpha", lambda_nm: 1875.1}
+    - {n_upper: 5, n_lower: 3, name: "Paschen-beta", lambda_nm: 1281.8}
+    - {n_upper: 6, n_lower: 3, name: "Paschen-gamma", lambda_nm: 1093.8}
+
+# TRD theoretical framework
+trd_theory:
+  energy_levels:
+    formula: "E_n = -Z²·R_∞·hc/n²"
+    trd_origin: "Topological quantization of phase winding"
+    mechanism: "Kuramoto synchronization → discrete energy states"
+
+  fine_structure:
+    formula: "ΔE_fs = α²·|E_n|/(n³) × [j(j+1) - l(l+1) - 3/4]"
+    trd_origin: "Magnetic dynamo field (H3) couples to spin"
+    mechanism: "B-field from phase gradients → spin-orbit coupling"
+
+  hyperfine:
+    formula: "ΔE_hfs = (8/3)α²·g_p·(m_e/m_p)·|E_n|/n³"
+    trd_origin: "Nuclear topological winding couples to electron"
+    mechanism: "Proton vortex → electron phase modulation"
+
+  lamb_shift:
+    formula: "ΔE_Lamb ~ α⁵·|E_n|·ln(1/α²)/(π·n³)"
+    trd_origin: "Vacuum fluctuations in R-field"
+    mechanism: "Coherence field fluctuations → energy shift"
+
+# Quality gates
+quality_gates:
+  precision_hierarchy:
+    - level: "Energy levels"
+      precision: "0.01%"
+      reason: "Limited by TRD→eV calibration"
+
+    - level: "Fine structure"
+      precision: "1%"
+      reason: "α² dependence (small correction)"
+
+    - level: "Hyperfine"
+      precision: "0.01%"
+      reason: "Most precise test (21cm astronomical standard)"
+
+    - level: "Lamb shift"
+      precision: "10%"
+      reason: "α⁵ very small correction, QED approximation"
+
+  pass_criteria:
+    rydberg_constant: "< 0.01% error (11 significant figures)"
+    balmer_series: "All wavelengths < 0.1% error"
+    fine_structure: "Splitting < 10% error"
+    hyperfine_21cm: "< 0.01% error"
+    lamb_shift: "< 10% error"
+
+# Expected results
+expected_results:
+  test_1_rydberg:
+    R_infinity_TRD: null
+    R_infinity_exp: 10973731.568
+    error_percent: null
+    status: null
+
+  test_2_balmer:
+    lines_tested: 5
+    all_within_0.1_percent: null
+    status: null
+
+  test_3_fine_structure:
+    nu_2P_splitting_GHz: null
+    nu_exp_GHz: 10.97
+    error_percent: null
+    status: null
+
+  test_4_hyperfine:
+    nu_21cm_MHz: null
+    nu_exp_MHz: 1420.405751
+    error_percent: null
+    status: null
+
+  test_5_lamb_shift:
+    nu_lamb_MHz: null
+    nu_exp_MHz: 1057.8
+    error_percent: null
+    status: null
+
+# Physics interpretation
+physics_interpretation:
+  if_all_pass:
+    conclusion: "TRD successfully reproduces atomic physics at Å and eV scales"
+    implications:
+      - "Energy quantization emerges from topological winding"
+      - "Fine structure from emergent magnetic fields (H3)"
+      - "Hyperfine from nuclear topological coupling"
+      - "QED corrections from R-field vacuum fluctuations"
+      - "Seamless quantum-classical connection demonstrated"
+
+  critical_importance:
+    precision_validation: "11-digit agreement validates TRD at atomic scales"
+    quantum_classical: "Bridges quantum (eV, Å) and classical (GeV, fm) physics"
+    predictive_power: "Atomic spectroscopy predictions testable immediately"
+    theoretical_depth: "QED radiative corrections emerge from topology"
+
+# Output configuration
+output:
+  csv_files:
+    - "rydberg_constant.csv"
+    - "balmer_series.csv"
+    - "fine_structure.csv"
+    - "hyperfine_21cm.csv"
+    - "lamb_shift.csv"
+    - "energy_levels.csv"
+
+  plots_suggested:
+    - "energy_level_diagram.png"
+    - "balmer_series_spectrum.png"
+    - "fine_structure_splitting.png"
+    - "hyperfine_transitions.png"
+    - "lamb_shift_diagram.png"
+
+# Test results (to be filled after execution)
+test_results:
+  timestamp: null
+  status: null
+  git_commit: null
+
+  measurements:
+    rydberg_constant:
+      R_TRD_m_inv: null
+      R_exp_m_inv: 10973731.568
+      error_percent: null
+      pass: null
+
+    balmer_series:
+      H_alpha_error: null
+      H_beta_error: null
+      H_gamma_error: null
+      H_delta_error: null
+      H_epsilon_error: null
+      all_pass: null
+
+    fine_structure:
+      nu_2P_GHz: null
+      error_percent: null
+      pass: null
+
+    hyperfine_21cm:
+      nu_MHz: null
+      error_percent: null
+      pass: null
+
+    lamb_shift:
+      nu_MHz: null
+      error_percent: null
+      pass: null
+
+  overall_verdict: null
+
+# Validation metadata
+validation:
+  category: "D - Experimental Predictions"
+  test_id: "D5"
+  test_name: "Atomic Physics and Precision Spectroscopy"
+  priority: "high"
+  roi: 0.8
+
+  dependencies:
+    - "B2: Fine Structure Constant (α validated)"
+    - "H3: Spin-Magnetism Connection (B-field mechanism)"
+    - "TRDCore3D: Symplectic evolution (energy conservation)"
+
+  completion_criteria:
+    - "Rydberg constant within 0.01% (11 significant figures)"
+    - "Balmer series wavelengths within 0.1%"
+    - "Fine structure splitting within 10%"
+    - "Hyperfine 21cm within 0.01%"
+    - "Lamb shift within 10%"
+
+  timeline:
+    estimated: "3-4 hours"
+    breakdown:
+      implementation: "1.5 hours"
+      testing: "1 hour"
+      analysis: "1 hour"
+      documentation: "0.5 hours"
