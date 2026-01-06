@@ -1,0 +1,272 @@
+# H3: Magnetic Dynamo Mechanism
+#
+# Test: Can TRD spin currents (∇×∇θ) generate magnetic fields via dynamo mechanism?
+# Hypothesis: Topological vortices create quantized magnetic flux
+# Prediction: Φ = n·Φ₀ (flux quantization), dynamo growth γ > 0
+#
+# Physics: J_spin = ∇×∇θ → B = μ₀·J_spin → ∂B/∂t = ∇×(v×B) + η∇²B
+# Critical: Validates both E (∂θ/∂t) and B (∇×∇θ) from TRD topology
+#
+# Quality Gates:
+#   1. Flux quantization: Φ/Φ₀ - 1 < 30% (numerical approximation)
+#   2. Field persistence: B_residual > 0.01 after vortex moves
+#   3. Dynamo growth: γ = αΩ - η > 0.01
+#   4. Topological memory: Multi-vortex total flux ≈ 0
+
+test_name: "H3_MagneticDynamo"
+description: "Validates magnetic field generation from TRD spin currents"
+
+# Framework
+validation:
+  framework: "H3 - Magnetic Dynamo Mechanism"
+  test_file: "test/test_magnetic_dynamo.cpp"
+  executable: "trd"
+  date_implemented: "2026-01-05"
+
+# TRD Physics Parameters
+physics:
+  golden_key_calibration: 246.0  # GeV per TRD unit
+
+  # Grid configuration (vortex tests)
+  grid_size_x: 64
+  grid_size_y: 64
+  grid_size_z: 8   # Thin in z (vortices are 2D in x-y plane)
+  dx: 1.0  # Spatial step (TRD units)
+  dt: 0.01  # Time step (TRD units)
+
+  # TRD coupling
+  coupling_strength: 1.0  # Kuramoto coupling K
+  integration_mode: "symplectic"  # RK2 Midpoint Method
+
+  # Vortex parameters
+  vortex_winding: 1  # Topological charge Q
+  core_radius: 5.0   # Vortex core size (grid units)
+
+  # Dynamo parameters
+  differential_rotation: 0.5  # Ω (rotation rate)
+  helicity_alpha: 0.2         # α (helical turbulence)
+  magnetic_diffusivity: 0.1   # η (resistivity)
+
+  # Physical constants
+  flux_quantum: 1.0  # Φ₀ = h/2e (natural units)
+
+# Test Scenarios
+test_scenarios:
+  - name: "Vortex_Dynamo"
+    description: "Topological vortex generates quantized magnetic flux"
+    parameters:
+      vortex_position: [32, 32, 4]  # Grid center
+      winding_number: 1
+      core_radius: 5.0
+
+    expected:
+      magnetic_flux: 1.0  # Φ = Q·Φ₀
+      quantization_tolerance: 0.3  # 30%
+
+    quality_gate:
+      metric: "Flux quantization"
+      requirement: "Φ/Φ₀ = 1.0 ± 30%"
+      physics: "Topological invariant: ∫B·dA = n·Φ₀"
+
+  - name: "Field_Persistence"
+    description: "Magnetic field persists after vortex moves (frozen-in flux)"
+    parameters:
+      grid_size_x: 128
+      initial_position: 32   # x-coordinate
+      final_position: 96     # x-coordinate (moved)
+
+    expected:
+      residual_field_min: 0.01  # Non-zero after vortex moves
+      topological_memory: true
+
+    quality_gate:
+      metric: "Field persistence"
+      requirement: "B_residual > 0.01 (topological memory)"
+      physics: "Frozen-in flux: B·L = constant"
+
+  - name: "Alpha_Omega_Dynamo"
+    description: "Differential rotation + helicity → exponential field growth"
+    parameters:
+      grid_size_z: 32
+      seed_field: 1.0e-3  # Weak initial field
+      omega: 0.5          # Differential rotation
+      alpha: 0.2          # Helicity
+      eta: 0.1            # Diffusivity
+      evolution_steps: 100
+
+    expected:
+      growth_rate: 0.05   # γ = αΩ - η > 0
+      growth_factor: 1.5  # E_final / E_initial
+
+    quality_gate:
+      metric: "Dynamo growth"
+      requirement: "γ = αΩ - η > 0.01 (field amplification)"
+      physics: "Solar/stellar dynamo mechanism"
+
+  - name: "Multi_Vortex_Flux"
+    description: "Vortex-antivortex pair has zero total flux"
+    parameters:
+      separation: 20.0
+      total_winding: 0  # Q_total = +1 + (-1) = 0
+
+    expected:
+      total_flux: 0.0
+      tolerance: 0.5
+
+    quality_gate:
+      metric: "Topological conservation"
+      requirement: "Φ_total ≈ 0 for dipole configuration"
+      physics: "∮∇θ·dl = 2πQ (winding number conserved)"
+
+# Quality Metrics
+quality_metrics:
+  - metric: "Spin current density"
+    formula: "J_spin = ∇×∇θ"
+    requirement: "Concentrated at vortex core"
+    validation: "Mixed second derivatives ∂²θ/∂x∂y"
+
+  - metric: "Magnetic flux quantization"
+    formula: "Φ = ∫B·dA = n·Φ₀"
+    requirement: "Φ/Φ₀ = 1.0 ± 30%"
+    physics_basis: "Topological invariant (winding number)"
+
+  - metric: "Field persistence"
+    formula: "B_residual / B_initial"
+    requirement: "Non-zero after vortex motion"
+    physics_basis: "Frozen-in flux theorem (ideal MHD)"
+
+  - metric: "Dynamo growth rate"
+    formula: "γ = αΩ - η"
+    requirement: "γ > 0.01 (positive growth)"
+    physics_basis: "α-Ω dynamo theory (Parker 1955)"
+
+  - metric: "Topological memory"
+    formula: "Q_total = Σᵢ Qᵢ"
+    requirement: "Total winding conserved"
+    physics_basis: "Topological charge conservation"
+
+# Expected Results
+expected_results:
+  success_criteria:
+    - "Vortex generates quantized flux (Φ ≈ Φ₀ within 30%)"
+    - "Field persists after vortex motion (B_residual > 0.01)"
+    - "Dynamo produces field growth (γ > 0.01)"
+    - "Multi-vortex conserves total flux (Φ_total ≈ 0 for Q=0)"
+
+  physics_interpretation:
+    - "Magnetic field emerges from TRD phase topology"
+    - "Spin current J = ∇×∇θ is topological vorticity"
+    - "Flux quantization validates topological origin"
+    - "Both E (∂θ/∂t) and B (∇×∇θ) from TRD phase field"
+
+  implications:
+    - "TRD provides complete electromagnetic theory"
+    - "Magnetism is emergent (not fundamental)"
+    - "Planetary/stellar dynamos from topological currents"
+    - "Earth's magnetic field: B ~ 0.5 G from core turbulence"
+
+# Experimental Connections
+experimental_relevance:
+  - experiment: "Josephson junctions"
+    observable: "Quantized flux: Φ = nΦ₀"
+    measured: "Φ₀ = 2.067833848...×10⁻¹⁵ Wb (2019 SI)"
+    trd_prediction: "Φ₀ = 1.0 (natural units)"
+
+  - experiment: "Superconducting vortices"
+    observable: "Abrikosov vortex lattice"
+    measured: "Flux quantization in type-II superconductors"
+    trd_analog: "TRD vortex = topological defect with Q=1"
+
+  - experiment: "Solar dynamo"
+    observable: "11-year sunspot cycle"
+    mechanism: "α-Ω dynamo (differential rotation + helicity)"
+    trd_prediction: "Growth rate γ = αΩ - η > 0"
+
+  - experiment: "Earth's magnetic field"
+    observable: "B ~ 0.5 Gauss at surface"
+    mechanism: "Geodynamo in liquid iron core"
+    trd_model: "Topological currents from phase turbulence"
+
+# Dynamo Theory Background
+dynamo_theory:
+  alpha_effect:
+    description: "Helical turbulence creates poloidal field from toroidal"
+    formula: "E = α·B (mean-field electromotive force)"
+    physical_origin: "Coriolis force + convection"
+
+  omega_effect:
+    description: "Differential rotation creates toroidal field from poloidal"
+    formula: "∂B_toroidal/∂t = Ω·∇B_poloidal"
+    physical_origin: "Rotation rate varies with latitude"
+
+  growth_rate:
+    formula: "γ = αΩ - η"
+    condition: "Dynamo operates when γ > 0"
+    critical_dynamo_number: "D = αΩL²/η > D_crit ~ 10"
+
+  field_reversals:
+    earth: "Every ~500,000 years"
+    sun: "Every 11 years (sunspot cycle)"
+    mechanism: "Chaotic dynamics of α-Ω feedback"
+
+# Topological Properties
+topology:
+  winding_number:
+    definition: "Q = (1/2π)·∮∇θ·dl"
+    property: "Integer-valued topological invariant"
+    conservation: "Q cannot change continuously"
+
+  flux_quantization:
+    formula: "Φ = ∫B·dA = n·Φ₀"
+    quantum: "Φ₀ = h/2e (single Cooper pair)"
+    measurement: "SQUIDs measure 10⁻¹⁵ T sensitivity"
+
+  frozen_in_flux:
+    ideal_mhd: "∂B/∂t = ∇×(v×B) (infinite conductivity)"
+    consequence: "B·L = constant (flux through loop conserved)"
+    breaking: "Finite resistivity η allows flux diffusion"
+
+# Computational Notes
+computation:
+  numerical_methods:
+    gradient: "Central difference (2nd order)"
+    mixed_derivatives: "4-point stencil for ∂²θ/∂x∂y"
+    flux_integral: "Trapezoidal rule over surface"
+
+  grid_requirements:
+    vortex_core: "Core radius > 5·dx (resolved)"
+    boundary: "Periodic (consistent with topology)"
+    z_extent: "Thin (8 layers) for 2D vortex"
+
+  performance:
+    expected_runtime: "< 2 minutes on CPU"
+    memory_usage: "~15 MB for 64×64×8 grid"
+    parallelization: "OpenMP for field operations"
+
+  validation_checks:
+    - "Numerical stability (no NaN/Inf)"
+    - "Flux conservation (within tolerance)"
+    - "Grid convergence (compare resolutions)"
+    - "Topological invariants (winding number)"
+
+# References
+references:
+  - "Parker, E.N. (1955). Hydromagnetic dynamo models. Astrophys. J. 122, 293–314."
+  - "Moffatt, H.K. (1978). Magnetic Field Generation in Electrically Conducting Fluids. Cambridge."
+  - "Abrikosov, A.A. (1957). The magnetic properties of superconducting alloys. Sov. Phys. JETP 5, 1174–1182."
+  - "London, F. (1950). Superfluids Vol. I: Macroscopic Theory of Superconductivity. Wiley."
+  - "TRD Theory: Golden Key Calibration (1 TRD unit = 246 GeV)"
+
+# Future Extensions
+next_steps:
+  - name: "Full MHD evolution"
+    description: "Solve ∂B/∂t = ∇×(v×B) + η∇²B with TRD velocity field"
+
+  - name: "3D vortex rings"
+    description: "Magnetic flux tubes (tokamak physics)"
+
+  - name: "Turbulent dynamo"
+    description: "Statistical properties of field amplification"
+
+  - name: "Planetary/stellar applications"
+    description: "Match Earth/Sun magnetic field observations"

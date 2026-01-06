@@ -207,6 +207,19 @@ test_trdcore3d_symplectic/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/build
 .PHONY : test_trdcore3d_symplectic/fast
 
+#=============================================================================
+# Target rules for targets named test_field_initializers_validation
+
+# Build rule for target.
+test_field_initializers_validation: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_field_initializers_validation
+.PHONY : test_field_initializers_validation
+
+# fast build rule for target.
+test_field_initializers_validation/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/build
+.PHONY : test_field_initializers_validation/fast
+
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
 
@@ -1149,6 +1162,54 @@ src/simulations/TestConfig.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.s
 .PHONY : src/simulations/TestConfig.cpp.s
 
+test/test_astrophysical_observations.o: test/test_astrophysical_observations.cpp.o
+.PHONY : test/test_astrophysical_observations.o
+
+# target to build an object file
+test/test_astrophysical_observations.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_astrophysical_observations.cpp.o
+.PHONY : test/test_astrophysical_observations.cpp.o
+
+test/test_astrophysical_observations.i: test/test_astrophysical_observations.cpp.i
+.PHONY : test/test_astrophysical_observations.i
+
+# target to preprocess a source file
+test/test_astrophysical_observations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_astrophysical_observations.cpp.i
+.PHONY : test/test_astrophysical_observations.cpp.i
+
+test/test_astrophysical_observations.s: test/test_astrophysical_observations.cpp.s
+.PHONY : test/test_astrophysical_observations.s
+
+# target to generate assembly for a file
+test/test_astrophysical_observations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_astrophysical_observations.cpp.s
+.PHONY : test/test_astrophysical_observations.cpp.s
+
+test/test_atomic_physics.o: test/test_atomic_physics.cpp.o
+.PHONY : test/test_atomic_physics.o
+
+# target to build an object file
+test/test_atomic_physics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_atomic_physics.cpp.o
+.PHONY : test/test_atomic_physics.cpp.o
+
+test/test_atomic_physics.i: test/test_atomic_physics.cpp.i
+.PHONY : test/test_atomic_physics.i
+
+# target to preprocess a source file
+test/test_atomic_physics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_atomic_physics.cpp.i
+.PHONY : test/test_atomic_physics.cpp.i
+
+test/test_atomic_physics.s: test/test_atomic_physics.cpp.s
+.PHONY : test/test_atomic_physics.s
+
+# target to generate assembly for a file
+test/test_atomic_physics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_atomic_physics.cpp.s
+.PHONY : test/test_atomic_physics.cpp.s
+
 test/test_binary_merger.o: test/test_binary_merger.cpp.o
 .PHONY : test/test_binary_merger.o
 
@@ -1341,6 +1402,30 @@ test/test_em_gravity_coupling_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.s
 .PHONY : test/test_em_gravity_coupling_3d.cpp.s
 
+test/test_field_initializers_validation.o: test/test_field_initializers_validation.cpp.o
+.PHONY : test/test_field_initializers_validation.o
+
+# target to build an object file
+test/test_field_initializers_validation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.o
+.PHONY : test/test_field_initializers_validation.cpp.o
+
+test/test_field_initializers_validation.i: test/test_field_initializers_validation.cpp.i
+.PHONY : test/test_field_initializers_validation.i
+
+# target to preprocess a source file
+test/test_field_initializers_validation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.i
+.PHONY : test/test_field_initializers_validation.cpp.i
+
+test/test_field_initializers_validation.s: test/test_field_initializers_validation.cpp.s
+.PHONY : test/test_field_initializers_validation.s
+
+# target to generate assembly for a file
+test/test_field_initializers_validation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.s
+.PHONY : test/test_field_initializers_validation.cpp.s
+
 test/test_fine_structure_constant.o: test/test_fine_structure_constant.cpp.o
 .PHONY : test/test_fine_structure_constant.o
 
@@ -1436,6 +1521,30 @@ test/test_geodesic_3d.s: test/test_geodesic_3d.cpp.s
 test/test_geodesic_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.s
 .PHONY : test/test_geodesic_3d.cpp.s
+
+test/test_gravitational_waves.o: test/test_gravitational_waves.cpp.o
+.PHONY : test/test_gravitational_waves.o
+
+# target to build an object file
+test/test_gravitational_waves.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_gravitational_waves.cpp.o
+.PHONY : test/test_gravitational_waves.cpp.o
+
+test/test_gravitational_waves.i: test/test_gravitational_waves.cpp.i
+.PHONY : test/test_gravitational_waves.i
+
+# target to preprocess a source file
+test/test_gravitational_waves.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_gravitational_waves.cpp.i
+.PHONY : test/test_gravitational_waves.cpp.i
+
+test/test_gravitational_waves.s: test/test_gravitational_waves.cpp.s
+.PHONY : test/test_gravitational_waves.s
+
+# target to generate assembly for a file
+test/test_gravitational_waves.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_gravitational_waves.cpp.s
+.PHONY : test/test_gravitational_waves.cpp.s
 
 test/test_higgs_connection.o: test/test_higgs_connection.cpp.o
 .PHONY : test/test_higgs_connection.o
@@ -1533,6 +1642,30 @@ test/test_josephson_junction.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.s
 .PHONY : test/test_josephson_junction.cpp.s
 
+test/test_knot_stability.o: test/test_knot_stability.cpp.o
+.PHONY : test/test_knot_stability.o
+
+# target to build an object file
+test/test_knot_stability.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_knot_stability.cpp.o
+.PHONY : test/test_knot_stability.cpp.o
+
+test/test_knot_stability.i: test/test_knot_stability.cpp.i
+.PHONY : test/test_knot_stability.i
+
+# target to preprocess a source file
+test/test_knot_stability.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_knot_stability.cpp.i
+.PHONY : test/test_knot_stability.cpp.i
+
+test/test_knot_stability.s: test/test_knot_stability.cpp.s
+.PHONY : test/test_knot_stability.s
+
+# target to generate assembly for a file
+test/test_knot_stability.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_knot_stability.cpp.s
+.PHONY : test/test_knot_stability.cpp.s
+
 test/test_knot_topology.o: test/test_knot_topology.cpp.o
 .PHONY : test/test_knot_topology.o
 
@@ -1556,6 +1689,54 @@ test/test_knot_topology.s: test/test_knot_topology.cpp.s
 test/test_knot_topology.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_knot_topology.cpp.s
 .PHONY : test/test_knot_topology.cpp.s
+
+test/test_laboratory_scale.o: test/test_laboratory_scale.cpp.o
+.PHONY : test/test_laboratory_scale.o
+
+# target to build an object file
+test/test_laboratory_scale.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_laboratory_scale.cpp.o
+.PHONY : test/test_laboratory_scale.cpp.o
+
+test/test_laboratory_scale.i: test/test_laboratory_scale.cpp.i
+.PHONY : test/test_laboratory_scale.i
+
+# target to preprocess a source file
+test/test_laboratory_scale.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_laboratory_scale.cpp.i
+.PHONY : test/test_laboratory_scale.cpp.i
+
+test/test_laboratory_scale.s: test/test_laboratory_scale.cpp.s
+.PHONY : test/test_laboratory_scale.s
+
+# target to generate assembly for a file
+test/test_laboratory_scale.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_laboratory_scale.cpp.s
+.PHONY : test/test_laboratory_scale.cpp.s
+
+test/test_lhc_predictions.o: test/test_lhc_predictions.cpp.o
+.PHONY : test/test_lhc_predictions.o
+
+# target to build an object file
+test/test_lhc_predictions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_lhc_predictions.cpp.o
+.PHONY : test/test_lhc_predictions.cpp.o
+
+test/test_lhc_predictions.i: test/test_lhc_predictions.cpp.i
+.PHONY : test/test_lhc_predictions.i
+
+# target to preprocess a source file
+test/test_lhc_predictions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_lhc_predictions.cpp.i
+.PHONY : test/test_lhc_predictions.cpp.i
+
+test/test_lhc_predictions.s: test/test_lhc_predictions.cpp.s
+.PHONY : test/test_lhc_predictions.s
+
+# target to generate assembly for a file
+test/test_lhc_predictions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_lhc_predictions.cpp.s
+.PHONY : test/test_lhc_predictions.cpp.s
 
 test/test_light_deflection_3d.o: test/test_light_deflection_3d.cpp.o
 .PHONY : test/test_light_deflection_3d.o
@@ -1605,6 +1786,30 @@ test/test_lorentz_force_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.s
 .PHONY : test/test_lorentz_force_3d.cpp.s
 
+test/test_magnetic_dynamo.o: test/test_magnetic_dynamo.cpp.o
+.PHONY : test/test_magnetic_dynamo.o
+
+# target to build an object file
+test/test_magnetic_dynamo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_magnetic_dynamo.cpp.o
+.PHONY : test/test_magnetic_dynamo.cpp.o
+
+test/test_magnetic_dynamo.i: test/test_magnetic_dynamo.cpp.i
+.PHONY : test/test_magnetic_dynamo.i
+
+# target to preprocess a source file
+test/test_magnetic_dynamo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_magnetic_dynamo.cpp.i
+.PHONY : test/test_magnetic_dynamo.cpp.i
+
+test/test_magnetic_dynamo.s: test/test_magnetic_dynamo.cpp.s
+.PHONY : test/test_magnetic_dynamo.s
+
+# target to generate assembly for a file
+test/test_magnetic_dynamo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_magnetic_dynamo.cpp.s
+.PHONY : test/test_magnetic_dynamo.cpp.s
+
 test/test_multiscale.o: test/test_multiscale.cpp.o
 .PHONY : test/test_multiscale.o
 
@@ -1628,6 +1833,30 @@ test/test_multiscale.s: test/test_multiscale.cpp.s
 test/test_multiscale.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_multiscale.cpp.s
 .PHONY : test/test_multiscale.cpp.s
+
+test/test_navier_stokes.o: test/test_navier_stokes.cpp.o
+.PHONY : test/test_navier_stokes.o
+
+# target to build an object file
+test/test_navier_stokes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_navier_stokes.cpp.o
+.PHONY : test/test_navier_stokes.cpp.o
+
+test/test_navier_stokes.i: test/test_navier_stokes.cpp.i
+.PHONY : test/test_navier_stokes.i
+
+# target to preprocess a source file
+test/test_navier_stokes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_navier_stokes.cpp.i
+.PHONY : test/test_navier_stokes.cpp.i
+
+test/test_navier_stokes.s: test/test_navier_stokes.cpp.s
+.PHONY : test/test_navier_stokes.s
+
+# target to generate assembly for a file
+test/test_navier_stokes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_navier_stokes.cpp.s
+.PHONY : test/test_navier_stokes.cpp.s
 
 test/test_particle_scattering.o: test/test_particle_scattering.cpp.o
 .PHONY : test/test_particle_scattering.o
@@ -1748,6 +1977,30 @@ test/test_scale_invariance.s: test/test_scale_invariance.cpp.s
 test/test_scale_invariance.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_scale_invariance.cpp.s
 .PHONY : test/test_scale_invariance.cpp.s
+
+test/test_solar_system.o: test/test_solar_system.cpp.o
+.PHONY : test/test_solar_system.o
+
+# target to build an object file
+test/test_solar_system.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_solar_system.cpp.o
+.PHONY : test/test_solar_system.cpp.o
+
+test/test_solar_system.i: test/test_solar_system.cpp.i
+.PHONY : test/test_solar_system.i
+
+# target to preprocess a source file
+test/test_solar_system.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_solar_system.cpp.i
+.PHONY : test/test_solar_system.cpp.i
+
+test/test_solar_system.s: test/test_solar_system.cpp.s
+.PHONY : test/test_solar_system.s
+
+# target to generate assembly for a file
+test/test_solar_system.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_solar_system.cpp.s
+.PHONY : test/test_solar_system.cpp.s
 
 test/test_spin_magnetism.o: test/test_spin_magnetism.cpp.o
 .PHONY : test/test_spin_magnetism.o
@@ -2026,6 +2279,7 @@ help:
 	@echo "... Physics"
 	@echo "... TRD"
 	@echo "... imgui"
+	@echo "... test_field_initializers_validation"
 	@echo "... test_trdcore3d_basic"
 	@echo "... test_trdcore3d_symplectic"
 	@echo "... lib/Nova/Core/components/genesis.o"
@@ -2145,6 +2399,12 @@ help:
 	@echo "... src/simulations/TestConfig.o"
 	@echo "... src/simulations/TestConfig.i"
 	@echo "... src/simulations/TestConfig.s"
+	@echo "... test/test_astrophysical_observations.o"
+	@echo "... test/test_astrophysical_observations.i"
+	@echo "... test/test_astrophysical_observations.s"
+	@echo "... test/test_atomic_physics.o"
+	@echo "... test/test_atomic_physics.i"
+	@echo "... test/test_atomic_physics.s"
 	@echo "... test/test_binary_merger.o"
 	@echo "... test/test_binary_merger.i"
 	@echo "... test/test_binary_merger.s"
@@ -2169,6 +2429,9 @@ help:
 	@echo "... test/test_em_gravity_coupling_3d.o"
 	@echo "... test/test_em_gravity_coupling_3d.i"
 	@echo "... test/test_em_gravity_coupling_3d.s"
+	@echo "... test/test_field_initializers_validation.o"
+	@echo "... test/test_field_initializers_validation.i"
+	@echo "... test/test_field_initializers_validation.s"
 	@echo "... test/test_fine_structure_constant.o"
 	@echo "... test/test_fine_structure_constant.i"
 	@echo "... test/test_fine_structure_constant.s"
@@ -2181,6 +2444,9 @@ help:
 	@echo "... test/test_geodesic_3d.o"
 	@echo "... test/test_geodesic_3d.i"
 	@echo "... test/test_geodesic_3d.s"
+	@echo "... test/test_gravitational_waves.o"
+	@echo "... test/test_gravitational_waves.i"
+	@echo "... test/test_gravitational_waves.s"
 	@echo "... test/test_higgs_connection.o"
 	@echo "... test/test_higgs_connection.i"
 	@echo "... test/test_higgs_connection.s"
@@ -2193,18 +2459,33 @@ help:
 	@echo "... test/test_josephson_junction.o"
 	@echo "... test/test_josephson_junction.i"
 	@echo "... test/test_josephson_junction.s"
+	@echo "... test/test_knot_stability.o"
+	@echo "... test/test_knot_stability.i"
+	@echo "... test/test_knot_stability.s"
 	@echo "... test/test_knot_topology.o"
 	@echo "... test/test_knot_topology.i"
 	@echo "... test/test_knot_topology.s"
+	@echo "... test/test_laboratory_scale.o"
+	@echo "... test/test_laboratory_scale.i"
+	@echo "... test/test_laboratory_scale.s"
+	@echo "... test/test_lhc_predictions.o"
+	@echo "... test/test_lhc_predictions.i"
+	@echo "... test/test_lhc_predictions.s"
 	@echo "... test/test_light_deflection_3d.o"
 	@echo "... test/test_light_deflection_3d.i"
 	@echo "... test/test_light_deflection_3d.s"
 	@echo "... test/test_lorentz_force_3d.o"
 	@echo "... test/test_lorentz_force_3d.i"
 	@echo "... test/test_lorentz_force_3d.s"
+	@echo "... test/test_magnetic_dynamo.o"
+	@echo "... test/test_magnetic_dynamo.i"
+	@echo "... test/test_magnetic_dynamo.s"
 	@echo "... test/test_multiscale.o"
 	@echo "... test/test_multiscale.i"
 	@echo "... test/test_multiscale.s"
+	@echo "... test/test_navier_stokes.o"
+	@echo "... test/test_navier_stokes.i"
+	@echo "... test/test_navier_stokes.s"
 	@echo "... test/test_particle_scattering.o"
 	@echo "... test/test_particle_scattering.i"
 	@echo "... test/test_particle_scattering.s"
@@ -2220,6 +2501,9 @@ help:
 	@echo "... test/test_scale_invariance.o"
 	@echo "... test/test_scale_invariance.i"
 	@echo "... test/test_scale_invariance.s"
+	@echo "... test/test_solar_system.o"
+	@echo "... test/test_solar_system.i"
+	@echo "... test/test_solar_system.s"
 	@echo "... test/test_spin_magnetism.o"
 	@echo "... test/test_spin_magnetism.i"
 	@echo "... test/test_spin_magnetism.s"

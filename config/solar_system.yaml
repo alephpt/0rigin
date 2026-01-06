@@ -1,0 +1,198 @@
+# H2: Solar System Orbital Dynamics Validation
+# Test Configuration
+
+test_name: "H2_SolarSystem"
+test_file: "test_solar_system.cpp"
+category: "H: Topological Phenomena"
+priority: "High"
+roi: 2.1
+
+description: |
+  Validate that TRD gravity (from R-field gradients) correctly predicts
+  planetary orbits in our solar system, testing both Newtonian limit and
+  GR corrections (Mercury perihelion precession).
+
+  Critical Gate: If orbital dynamics fail → TRD gravity wrong → A1-A5 tests invalid
+
+  ROI: 2.1 - Validates gravity framework, unlocks astrophysical tests (H3, D3)
+
+physics_background:
+  trd_gravity_potential: "Φ = -GM/r × (1 + corrections)"
+  metric: "g_μν = R²·η_μν where R ≈ 1 + ε"
+  newtonian_limit: "|ε| ≪ 1"
+  gr_correction: "Perihelion advance Δφ = 6πGM/(c²a(1-e²))"
+
+golden_key: 246  # GeV reference energy
+
+# Physical Constants (SI Units for reference)
+constants:
+  G_SI: 6.67430e-11      # m³/kg·s²
+  c_SI: 2.99792458e8     # m/s
+  M_sun_SI: 1.98892e30   # kg
+  AU_SI: 1.495978707e11  # meters
+  year_SI: 3.15576e7     # seconds
+
+# Natural Units (used in simulation)
+# G = 1, c = 1, mass in M_sun, distance in AU, time in years
+natural_units:
+  G: 1.0
+  c: 1.0
+  M_sun: 1.0
+
+# Planets to Simulate
+planets:
+  - name: "Mercury"
+    mass_kg: 3.3011e23
+    semi_major_axis_AU: 0.387098
+    eccentricity: 0.205630
+    period_years: 0.240846
+    notes: "High eccentricity, significant GR precession (43 arcsec/century)"
+
+  - name: "Earth"
+    mass_kg: 5.97237e24
+    semi_major_axis_AU: 1.000001
+    eccentricity: 0.016709
+    period_years: 1.000017
+    notes: "Circular reference orbit"
+
+  - name: "Mars"
+    mass_kg: 6.4171e23
+    semi_major_axis_AU: 1.523679
+    eccentricity: 0.093400
+    period_years: 1.880816
+    notes: "Moderate eccentricity, Jupiter perturbation"
+
+  - name: "Jupiter"
+    mass_kg: 1.8982e27
+    semi_major_axis_AU: 5.204267
+    eccentricity: 0.048498
+    period_years: 11.862615
+    notes: "Massive perturber"
+
+# Integration Parameters
+integration:
+  time_step_years: 0.0001  # ~0.9 hours (ensures stability for Mercury)
+  method: "Symplectic Velocity Verlet"
+  description: "Kick-drift-kick pattern for conservative forces"
+  orbits_to_simulate: 2
+  record_interval: 100  # Record every 100 steps
+
+# Quality Gates (Pass/Fail Criteria)
+quality_gates:
+  kepler_T2_a3_error_percent: 1.0        # T² ∝ a³ within 1%
+  angular_momentum_drift_percent: 0.1    # L conservation <0.1%
+  energy_conservation_percent: 0.1       # E conservation <0.1%
+  mercury_precession_arcsec_per_century: 43  # GR prediction
+  mercury_precession_tolerance: 10       # ±10 arcsec/century
+
+# Expected Results
+expected_results:
+  all_orbits_stable: true
+  kepler_laws_obeyed: true
+  symplectic_integration_verified: true
+  mercury_precession_framework_validated: true
+
+  # Individual planet expectations
+  Mercury:
+    period_years: 0.240846
+    period_tolerance_percent: 1.0
+    L_conservation_percent: 0.1
+    E_conservation_percent: 0.1
+
+  Earth:
+    period_years: 1.000017
+    period_tolerance_percent: 1.0
+    L_conservation_percent: 0.1
+    E_conservation_percent: 0.1
+
+  Mars:
+    period_years: 1.880816
+    period_tolerance_percent: 1.0
+    L_conservation_percent: 0.1
+    E_conservation_percent: 0.1
+
+  Jupiter:
+    period_years: 11.862615
+    period_tolerance_percent: 1.0
+    L_conservation_percent: 0.1
+    E_conservation_percent: 0.1
+
+# Test Scenarios
+test_scenarios:
+  1_kepler_third_law:
+    description: "Verify T² ∝ a³ for all planets"
+    validation: "T²/a³ = 4π²/(GM) = constant"
+    quality_gate: "<1% deviation"
+
+  2_angular_momentum_conservation:
+    description: "Verify L = r × mv = constant"
+    validation: "No external torque in central force field"
+    quality_gate: "<0.1% drift over 1 orbit"
+
+  3_energy_conservation:
+    description: "Verify E = KE + PE = constant"
+    validation: "Symplectic integrator preserves phase space volume"
+    quality_gate: "<0.1% drift over 1 orbit"
+
+  4_mercury_precession:
+    description: "Measure perihelion advance for Mercury"
+    validation: "GR prediction: 43 arcsec/century"
+    quality_gate: "Framework validated (full GR pending)"
+    note: "Full GR requires post-Newtonian R-field evolution"
+
+# Output Files
+output:
+  directory: "output/H2_SolarSystem"
+  files:
+    - "orbital_summary_YYYYMMDD_HHMMSS.csv"
+    - "trajectory_Mercury_YYYYMMDD_HHMMSS.csv"
+    - "trajectory_Earth_YYYYMMDD_HHMMSS.csv"
+    - "trajectory_Mars_YYYYMMDD_HHMMSS.csv"
+    - "trajectory_Jupiter_YYYYMMDD_HHMMSS.csv"
+
+# Report Template
+report:
+  title: "H2: Solar System Orbital Dynamics Validation Report"
+  sections:
+    - "Executive Summary"
+    - "Physics Background"
+    - "Test Results"
+    - "Kepler's Laws Validation"
+    - "Conservation Laws"
+    - "Mercury Precession Analysis"
+    - "Trajectory Plots"
+    - "Conclusions"
+    - "Next Steps"
+
+# Dependencies
+depends_on:
+  - "A2: Weak Field Limit (TRD gravity → Newtonian limit)"
+  - "TRDParticleIntegrator.h (Velocity Verlet)"
+  - "TRDCSVWriter.h (Data export)"
+
+unlocks:
+  - "H3: Spin-Magnetism Connection (astrophysical magnetic fields)"
+  - "D3: Gravitational Wave Emission (binary systems)"
+  - "C3: Dark Matter (galaxy rotation curves)"
+
+# Notes
+notes: |
+  - This test validates TRD gravity at astrophysical scales (10⁻⁹ to 10 AU)
+  - Connects weak field limit (A2) to real observational data
+  - Symplectic integration ensures energy conservation (ΔE/E < 0.01%)
+  - Mercury precession requires post-Newtonian corrections (future work)
+  - Initial conditions: All planets start at perihelion
+  - Coordinate system: Sun at origin, orbits in xy-plane
+  - Time step: 0.0001 years (~0.9 hours) for numerical stability
+
+# Validation History
+validation_runs:
+  # Results will be appended here after test execution
+  # Format:
+  # - timestamp: "2026-01-05T23:45:00"
+  #   commit: "abc1234"
+  #   status: "PASS/FAIL"
+  #   kepler_error_percent: 0.5
+  #   L_conservation_percent: 0.05
+  #   E_conservation_percent: 0.08
+  #   notes: "All quality gates passed"

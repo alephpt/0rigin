@@ -1,0 +1,255 @@
+# ============================================================================
+# A5: Gravitational Wave Emission and Propagation Validation
+# ============================================================================
+#
+# Test Name: A5_GravitationalWaves
+# Category: A - Gravity Foundation
+# Priority: Critical (ROI: 2.0)
+#
+# Objective:
+#   Validate that TRD produces gravitational waves from binary systems,
+#   matching GR predictions for waveform, polarization, and energy loss
+#
+# Physics Background:
+#   - Binary systems lose energy via gravitational wave radiation
+#   - Orbital separation decreases → frequency increases (chirp)
+#   - GW strain: h ~ (G/c²r) × (quadrupole moment acceleration)
+#   - Quadrupole formula: dE/dt = (G/5c⁵)<d³Q_ij/dt³>²
+#   - Peters-Mathews: dE/dt = -(32/5)(G⁴/c⁵)(M₁M₂)²(M₁+M₂)/a⁵
+#
+# Critical Gate:
+#   If GW predictions fail → LIGO/Virgo observations unexplained → GR wins
+#
+# References:
+#   - Peters & Mathews, Phys. Rev. 131, 435 (1963)
+#   - LIGO Collaboration, Phys. Rev. Lett. 116, 061102 (2016) - GW150914
+#   - Maggiore, "Gravitational Waves Vol 1" (2008)
+#
+# ============================================================================
+
+test_name: "A5_GravitationalWaves"
+test_file: "test_gravitational_waves.cpp"
+golden_key: 246  # GeV reference energy scale
+
+# ============================================================================
+# Physics Parameters
+# ============================================================================
+
+physics_params:
+  # Binary system (equal mass, circular orbit)
+  mass_1: 1.0          # Solar mass units (scaled for numerics)
+  mass_2: 1.0          # Solar mass units
+  separation: 10.0     # Initial orbital separation (natural units)
+  eccentricity: 0.0    # Circular orbit
+
+  # Evolution parameters
+  dt: 0.01             # Time step (must resolve orbital period)
+  num_steps: 10000     # Total evolution steps
+  output_interval: 100 # Save data every N steps
+
+  # GW detection
+  detector_distance: 100.0  # Distance to "detector" (natural units)
+
+  # Numerical stability
+  regularization: 0.01  # Softening length near masses
+
+# ============================================================================
+# Test Scenarios
+# ============================================================================
+
+test_scenarios:
+  - name: "orbital_decay"
+    description: "Binary separation decreases due to GW energy loss"
+    expected: "separation_final < 0.95 × separation_initial"
+
+  - name: "chirp_signal"
+    description: "GW frequency increases as binary inspirals"
+    expected: "df_gw/dt > 0 (frequency sweep)"
+
+  - name: "polarization"
+    description: "h₊ and h× amplitudes match quadrupole formula"
+    expected: "|h₊|/|h×| ≈ 1 for face-on binary"
+
+  - name: "energy_conservation"
+    description: "E_total = E_orbital + E_radiated = constant"
+    expected: "ΔE_total/E_initial < 1%"
+
+# ============================================================================
+# Quality Gates
+# ============================================================================
+
+quality_gates:
+  orbital_decay:
+    threshold: 0.05        # Minimum 5% decay
+    metric: "(a_initial - a_final) / a_initial"
+    pass_criteria: "> 0.05"
+
+  chirp_signal:
+    threshold: 0.0         # Positive chirp rate
+    metric: "df_gw/dt"
+    pass_criteria: "> 0.0"
+
+  polarization_ratio:
+    threshold: 0.1         # Within 10% of unity
+    metric: "|h₊_max/h×_max - 1.0|"
+    pass_criteria: "< 0.1"
+
+  energy_conservation:
+    threshold: 0.01        # <1% drift
+    metric: "|E_final - E_initial| / |E_initial|"
+    pass_criteria: "< 0.01"
+
+# ============================================================================
+# Expected Results (GR Predictions)
+# ============================================================================
+
+expected_results:
+  GW_detected: true
+  matches_GR: true
+
+  # Quadrupole formula predictions
+  quadrupole_radiation:
+    frequency_gw: "2 × f_orbital"  # GW at twice orbital frequency
+    strain_amplitude: "h ~ (G/c²r) μ a² ω²"
+    polarizations: "h₊, h× (+ and × modes)"
+
+  # Peters-Mathews energy loss
+  energy_loss:
+    luminosity: "dE/dt = (32/5)(G⁴/c⁵)(M₁M₂)²(M₁+M₂)/a⁵"
+    decay_timescale: "τ = (5/256)(c⁵/G³)a⁴/(M₁M₂(M₁+M₂))"
+
+  # Chirp characteristics
+  chirp_signal:
+    frequency_evolution: "f(t) ∝ (τ - t)^(-3/8)"
+    amplitude_growth: "h(t) ∝ (τ - t)^(-1/4)"
+
+  # LIGO GW150914 comparison (for context)
+  ligo_gw150914:
+    masses: "36 M_☉ + 29 M_☉"
+    chirp_range: "35 Hz → 250 Hz"
+    energy_radiated: "3 M_☉ c²"
+    distance: "410 Mpc"
+    strain: "h ~ 10⁻²¹"
+
+# ============================================================================
+# Validation Criteria
+# ============================================================================
+
+validation_criteria:
+  # Test 1: Orbital Decay
+  test_1_orbital_decay:
+    pass: "separation decreases by >5%"
+    fail: "separation constant or increases"
+    physics_check: "GW radiation removes energy → orbit shrinks"
+
+  # Test 2: Chirp Signal
+  test_2_chirp:
+    pass: "frequency increases monotonically"
+    fail: "frequency decreases or constant"
+    physics_check: "smaller orbit → faster orbital motion → higher f_gw"
+
+  # Test 3: Polarization
+  test_3_polarization:
+    pass: "h₊/h× ratio within 10% of GR prediction"
+    fail: "polarization ratio deviates significantly"
+    physics_check: "quadrupole radiation produces + and × modes"
+
+  # Test 4: Energy Conservation
+  test_4_energy:
+    pass: "E_total drift <1%"
+    fail: "E_total drift >1%"
+    physics_check: "symplectic integration conserves total energy"
+
+# ============================================================================
+# Integration Requirements
+# ============================================================================
+
+integration:
+  main_cpp:
+    forward_declaration: "int runGravitationalWavesTest();"
+    dispatcher_code: |
+      else if (config_path.find("gravitational_waves") != std::string::npos) {
+          return runGravitationalWavesTest();
+      }
+
+  cmake:
+    source_files:
+      - "test/test_gravitational_waves.cpp"
+    dependencies:
+      - "TRDParticleIntegrator.h"
+      - "TRDCSVWriter.h"
+
+# ============================================================================
+# Output Files
+# ============================================================================
+
+output:
+  csv_files:
+    - "output/A5_GravitationalWaves/orbital_decay_<timestamp>.csv"
+    - "output/A5_GravitationalWaves/chirp_signal_<timestamp>.csv"
+    - "output/A5_GravitationalWaves/polarization_<timestamp>.csv"
+    - "output/A5_GravitationalWaves/energy_conservation_<timestamp>.csv"
+
+  report:
+    file: "A5_GRAVITATIONAL_WAVES_REPORT.md"
+    sections:
+      - "Executive Summary"
+      - "Physics Background"
+      - "Test Results"
+      - "Waveform Analysis"
+      - "Energy Budget"
+      - "Comparison to GR"
+      - "Validation Status"
+
+# ============================================================================
+# Success Criteria
+# ============================================================================
+
+success_criteria:
+  all_tests_pass: true
+  orbital_decay_confirmed: true
+  chirp_signal_detected: true
+  polarization_matches_GR: true
+  energy_conserved: true
+
+  deliverables:
+    - "test/test_gravitational_waves.cpp (implemented)"
+    - "config/gravitational_waves.yaml (this file)"
+    - "A5_GRAVITATIONAL_WAVES_REPORT.md (comprehensive report)"
+    - "CSV output files (waveforms, energetics)"
+    - "Integration complete (main.cpp, CMakeLists.txt)"
+
+# ============================================================================
+# Critical Importance
+# ============================================================================
+
+importance:
+  theoretical:
+    - "Validates TRD gravity at dynamical scales"
+    - "Connects weak field (A2) to strong field (GW emission)"
+    - "Enables comparison with LIGO/Virgo observations"
+
+  experimental:
+    - "GW150914: first direct GW detection (2015)"
+    - "GW170817: neutron star merger + EM counterpart"
+    - "Ongoing: LIGO/Virgo/KAGRA observing runs"
+
+  strategic:
+    - "ROI: 2.0 (unlocks D3 astrophysical predictions)"
+    - "GO/NO-GO criterion for gravity framework"
+    - "Foundation for A-series validation suite"
+
+# ============================================================================
+# Test Execution Log (to be filled after run)
+# ============================================================================
+
+execution_log:
+  # Will be populated after test run
+  timestamp: ""
+  status: ""
+  results:
+    test_1_orbital_decay: ""
+    test_2_chirp_signal: ""
+    test_3_polarization: ""
+    test_4_energy_conservation: ""
+  notes: ""

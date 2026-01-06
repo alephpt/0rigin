@@ -38,6 +38,16 @@ physics:
   # Calibrated so R=1 → v=246 GeV (electroweak scale)
   TRD_to_GeV: 246.0
 
+  # Gauge couplings (from B4 electroweak test)
+  SU2_coupling_g: 0.65        # SU(2)_L weak coupling
+  U1_coupling_g_prime: 0.36   # U(1)_Y hypercharge coupling
+
+  # Yukawa couplings (fermion-Higgs)
+  # Standard Model values: y_f = √2·m_f/v
+  yukawa_top: 1.0       # y_t ≈ 1.0 (m_t ≈ 173 GeV)
+  yukawa_bottom: 0.02   # y_b ≈ 0.02 (m_b ≈ 4.2 GeV)
+  yukawa_electron: 0.00003  # y_e ≈ 3×10⁻⁵ (m_e ≈ 0.511 MeV)
+
 # Experimental values
 experimental:
   m_Higgs_GeV: 125.0      # Higgs boson mass

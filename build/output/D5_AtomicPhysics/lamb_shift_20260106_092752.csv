@@ -1,0 +1,9 @@
+# Test: D5_AtomicPhysics
+# Date: 2026-01-06T09:27:52
+# Git: b1f1668 (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: category=Lamb_Shift, mechanism=QED_radiative_corrections, test=D5_AtomicPhysics
+#
+Transition,Delta_E_eV,Nu_predicted_MHz,Nu_exp_MHz,Error_%
+2S_1/2-2P_1/2,2.755904e-11,0.006664,1057.800000,99.999370

@@ -1,0 +1,11 @@
+# Test: CSV_Writer_Test
+# Date: 2026-01-05T23:27:43
+# Git: 090b6de (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: test_type=type_conversions
+#
+Int,Long,Float,Double,String
+42,9876543210,3.141590,2.718282,mixed
+-100,-9999999999,-1.500000e-10,1.234568e-20,scientific
+0,0,0.000000,0.000000,zeros

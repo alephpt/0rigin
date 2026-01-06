@@ -53,6 +53,7 @@
 
 #include "TRDCore3D.h"
 #include "Maxwell3D.h"
+#include "TRDCSVWriter.h"
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -558,15 +559,26 @@ int runFineStructureConstantTest() {
     std::cout << "  → Refinement required (K-parameter, R-field dynamics)" << std::endl;
 
     // === EXPORT RESULTS ===
-    std::ofstream results_file("output/fine_structure_constant_results.csv");
-    results_file << "Method,Alpha_Measured,Alpha_QED,Ratio\n";
-    results_file << "Energy," << alpha_energy << "," << ALPHA_QED << "," << (alpha_energy/ALPHA_QED) << "\n";
-    results_file << "Coupling," << alpha_coupling << "," << ALPHA_QED << "," << (alpha_coupling/ALPHA_QED) << "\n";
-    results_file << "Flux," << alpha_flux << "," << ALPHA_QED << "," << (alpha_flux/ALPHA_QED) << "\n";
-    results_file << "GeometricMean," << alpha_geometric_mean << "," << ALPHA_QED << "," << ratio << "\n";
-    results_file.close();
+    TRD::CSVWriter csv("fine_structure_constant_results", "B2_FineStructure", false);
 
-    std::cout << "\nResults exported to: output/fine_structure_constant_results.csv" << std::endl;
+    csv.writeMetadata({
+        {"K_coupling", std::to_string(K_coupling)},
+        {"grid_size", std::to_string(nx) + "x" + std::to_string(ny) + "x" + std::to_string(nz)},
+        {"evolution_steps", std::to_string(num_steps)},
+        {"dt", std::to_string(dt)},
+        {"vortex_core_radius", std::to_string(vortex_core_radius)}
+    });
+
+    csv.writeHeader({"Method", "Alpha_Measured", "Alpha_QED", "Ratio"});
+
+    csv.writeRow("Energy", alpha_energy, ALPHA_QED, alpha_energy/ALPHA_QED);
+    csv.writeRow("Coupling", alpha_coupling, ALPHA_QED, alpha_coupling/ALPHA_QED);
+    csv.writeRow("Flux", alpha_flux, ALPHA_QED, alpha_flux/ALPHA_QED);
+    csv.writeRow("GeometricMean", alpha_geometric_mean, ALPHA_QED, ratio);
+
+    csv.close();
+
+    std::cout << "\nResults exported to: " << csv.getFilePath() << std::endl;
 
     // === FINAL VERDICT ===
     std::cout << "\n===== FINAL VERDICT =====" << std::endl;

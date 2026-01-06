@@ -1,0 +1,160 @@
+# D3: Astrophysical Observations and Fast Radio Bursts
+# Category: Experimental Predictions (Category D)
+# ROI: 1.7 - Observational validation beyond lab experiments
+
+test_name: "D3_AstrophysicalObservations"
+test_file: "test/test_astrophysical_observations.cpp"
+golden_key: 246  # GeV (electroweak VEV scale)
+
+# Physics Background:
+# Fast Radio Bursts (FRBs) are millisecond-duration radio transients with energies 10³⁸-10⁴⁰ erg.
+# TRD explains FRBs as vortex-antivortex annihilation events in neutron star interiors.
+#
+# Mechanism:
+#   1. Neutron star contains vortex lattice (quantized superfluid)
+#   2. Stress accumulation → vortex pairs approach
+#   3. Critical separation d < 2ξ → annihilation
+#   4. Energy release: ΔE ~ K·ξ³·ΔR²
+#   5. Coherent EM burst: τ ~ ξ/c
+#
+# Scaling Law:
+#   E ~ τ⁻² (Goldstone mode emission)
+
+physics_params:
+  # Neutron star parameters (phenomenological)
+  radius_km: 10                   # km (typical neutron star)
+  mass_solar: 1.4                 # Solar masses
+  B_field_gauss: 1.0e12          # Surface magnetic field (magnetar)
+
+  # TRD vortex parameters
+  coherence_length_xi: 3.0        # grid units (vortex core size)
+  coupling_K: 1.0                 # Kuramoto coupling strength
+
+  # Simulation grid
+  grid: [64, 64, 32]              # Nx × Ny × Nz
+  dx: 1.0                         # Spatial discretization (grid units)
+  dt: 0.01                        # Time step (TRD units)
+
+  # Unit conversions (phenomenological calibration)
+  TRD_to_erg: 1.0e40             # Energy scale
+  TRD_to_cm: 1.0e5               # Length scale (100 km/unit)
+  TRD_to_sec: 1.0e-3             # Time scale (1 ms/step)
+
+  # Vortex annihilation
+  vortex_separation_initial: 20   # grid units
+  annihilation_threshold: 6.0     # d < 2ξ (critical separation)
+  max_evolution_steps: 10000      # Maximum simulation duration
+
+  # Pulsar glitch
+  rotation_frequency_hz: 30       # Typical pulsar rotation
+  glitch_threshold: 0.05          # 5% R-field change
+
+  # Magnetar flare
+  twist_angle_rad: 3.14159        # π radians (twisted flux tube)
+
+quality_gates:
+  # Fast Radio Burst
+  FRB_energy_min_erg: 1.0e38     # Minimum observed FRB energy
+  FRB_energy_max_erg: 1.0e40     # Maximum observed FRB energy
+  FRB_duration_min_sec: 1.0e-4   # 0.1 ms (short bursts)
+  FRB_duration_max_sec: 1.0e-1   # 100 ms (long bursts)
+  FRB_duration_target_sec: 1.0e-3  # 1 ms (typical)
+
+  # Energy-duration scaling
+  scaling_slope_expected: -2.0    # E ~ τ⁻²
+  scaling_tolerance: 1.0          # |slope + 2| < 1 (within 50%)
+  min_bursts_for_scaling: 3       # Minimum data points
+
+  # Pulsar glitch
+  glitch_min: 1.0e-9             # Smallest observed glitches
+  glitch_max: 1.0e-4             # Largest observed glitches
+  glitch_typical: 1.0e-6         # Δν/ν ~ 10⁻⁶
+
+  # Magnetar flare
+  flare_energy_min_erg: 1.0e42   # Small flares
+  flare_energy_max_erg: 1.0e47   # Giant flares
+  flare_energy_typical_erg: 1.0e44  # Typical magnetar burst
+
+  # Energy conservation (all simulations)
+  energy_conservation_threshold: 0.001  # 0.1% maximum drift
+
+expected_results:
+  FRB_explained: true                    # Vortex annihilation mechanism
+  pulsar_glitch_mechanism: true         # R-field avalanche
+  magnetar_flare_reproduced: true       # B-field reconnection
+  energy_duration_scaling: "E ~ τ⁻²"   # Goldstone emission
+  repetition_mechanism: "stable_vortex_configs"  # Some FRBs repeat
+
+  # Observational predictions
+  FRB_rate_per_day_all_sky: 10000      # ~10⁴ FRBs/day (CHIME observations)
+  pulsar_glitch_rate_per_year: 0.1     # Per pulsar
+  magnetar_flare_rate_per_year: 1      # Per magnetar
+
+  # TRD signatures
+  dispersion_measure_pc_cm3: 500        # Typical DM (electron column density)
+  polarization: "linear"                # Goldstone modes → linear polarization
+  spectral_index: -1.5                  # Power-law spectrum
+
+theoretical_foundations:
+  - "Vortex annihilation: Topological charge conservation Q₁ + Q₂ = 0"
+  - "Energy release: E ~ K·ξ³·ΔR² (coherence volume × order parameter jump)"
+  - "Burst duration: τ ~ ξ/c (sound crossing time of coherence length)"
+  - "Goldstone emission: E ~ τ⁻² scaling (massless mode radiation)"
+  - "Pulsar glitch: Vortex unpinning → R-field avalanche → Δν/ν jump"
+  - "Magnetar flare: Twisted B-field → topological reconnection → energy release"
+
+observational_tests:
+  - test: "FRB repetition statistics"
+    prediction: "Stable vortex lattices repeat, unstable annihilate once"
+    data_source: "CHIME/FRB catalog"
+    status: "testable_now"
+
+  - test: "FRB energy-duration correlation"
+    prediction: "E ~ τ⁻² power law"
+    data_source: "ARECIBO, Parkes, FAST observations"
+    status: "testable_now"
+
+  - test: "Pulsar glitch recovery timescale"
+    prediction: "τ_recovery ~ ξ²/(D·c) (vortex diffusion)"
+    data_source: "Vela, Crab timing data"
+    status: "testable_now"
+
+  - test: "Magnetar burst energetics"
+    prediction: "E_flare ~ B²·V_reconnection (topological energy)"
+    data_source: "Swift, Fermi/GBM observations"
+    status: "testable_now"
+
+dependencies:
+  - "A5: Gravitational waves (vortex dynamics → GW emission)"
+  - "H3: Magnetic dynamo (B-field topology for magnetar flares)"
+  - "TRDCore3D: Symplectic integration (energy conservation)"
+  - "TRDFieldInitializers: Vortex initialization"
+
+critical_importance: |
+  This test validates TRD at astrophysical scales (neutron stars, magnetars), providing
+  observational verification beyond laboratory experiments. Success means TRD explains
+  mysterious Fast Radio Bursts from first principles, connecting microscopic vortex
+  dynamics to macroscopic cosmic phenomena.
+
+  FRBs are one of the most enigmatic astrophysical discoveries of the 21st century.
+  If TRD can explain them via topological phase transitions, it would be a major
+  validation of the theory's applicability across 30+ orders of magnitude in energy
+  (from condensed matter to neutron stars).
+
+validation_status:
+  implementation: "complete"
+  integration: "pending"
+  results: "pending"
+  documentation: "pending"
+
+# Results will be documented here after test execution
+# results:
+#   timestamp: "YYYY-MM-DD HH:MM:SS"
+#   FRB_energy_measured_erg:
+#   FRB_duration_measured_sec:
+#   energy_duration_slope:
+#   pulsar_glitch_delta_nu:
+#   magnetar_flare_energy_erg:
+#   tests_passed:
+#   tests_total: 4
+#   overall_status: "PASS/FAIL"

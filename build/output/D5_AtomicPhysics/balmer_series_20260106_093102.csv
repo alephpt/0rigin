@@ -1,0 +1,13 @@
+# Test: D5_AtomicPhysics
+# Date: 2026-01-06T09:31:02
+# Git: b1f1668 (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: category=Balmer_Series, test=D5_AtomicPhysics, transitions=n->2
+#
+Line,n_upper,n_lower,Lambda_predicted_nm,Lambda_exp_nm,Error_%
+Balmer-3->2,3,2,656.112276,656.281000,0.025709
+Balmer-4->2,4,2,486.009094,486.135000,0.025899
+Balmer-5->2,5,2,433.936691,434.047000,0.025414
+Balmer-6->2,6,2,410.070173,410.175000,0.025557
+Balmer-7->2,7,2,396.907426,397.008000,0.025333

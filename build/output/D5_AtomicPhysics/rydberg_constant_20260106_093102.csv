@@ -1,0 +1,9 @@
+# Test: D5_AtomicPhysics
+# Date: 2026-01-06T09:31:02
+# Git: b1f1668 (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: category=Rydberg_Constant, precision=12_digits, test=D5_AtomicPhysics
+#
+Method,R_infinity_m^-1,R_exp_m^-1,Error_%
+TRD,1.097373e+07,1.097373e+07,2.379510e-08

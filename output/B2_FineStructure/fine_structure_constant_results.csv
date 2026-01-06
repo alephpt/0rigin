@@ -1,0 +1,12 @@
+# Test: B2_FineStructure
+# Date: 2026-01-05T23:27:43
+# Git: 090b6de (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: K_coupling=1.0, dt=0.01, evolution_steps=1000, golden_key=246 GeV, grid_size=64x64x32
+#
+Method,Alpha_Measured,Alpha_QED,Ratio
+Energy,0.003540,0.007297,0.485084
+Coupling,2.441410e-04,0.007297,0.033456
+Flux,0.001826,0.007297,0.250192
+GeometricMean,0.001356,0.007297,0.185878

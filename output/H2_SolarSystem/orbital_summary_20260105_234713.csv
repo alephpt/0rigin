@@ -1,0 +1,12 @@
+# Test: H2_SolarSystem
+# Date: 2026-01-05T23:47:13
+# Git: 090b6de (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: description=Orbital dynamics validation, status=PASS, test=H2_SolarSystem
+#
+Planet,Mass_kg,a_AU,e,T_obs_yr,T_meas_yr,L_initial,L_final,E_initial,E_final,Period_Error_%,L_Drift_%,E_Drift_%
+Mercury,3.301100e+23,0.387098,0.205630,0.240846,0.240822,6.349537e-07,6.349537e-07,-8.463980e-06,-8.463980e-06,0.009894,5.336029e-13,9.118836e-11
+Earth,5.972370e+24,1.000001,0.016709,1.000017,0.999954,1.886436e-05,1.886436e-05,-5.927514e-05,-5.927514e-05,0.006344,2.514469e-13,5.487303e-13
+Mars,6.417100e+23,1.523679,0.093400,1.880816,1.880694,2.491377e-06,2.491377e-06,-4.179963e-06,-4.179963e-06,0.006469,1.053956e-12,2.593808e-12
+Jupiter,1.898200e+27,5.204267,0.048498,11.862615,11.904960,0.013675,0.013675,-0.003613,-0.003613,0.356962,3.069826e-12,9.265847e-12

@@ -42,6 +42,7 @@ void printUsage(const char* program_name) {
     std::cout << "  config/electroweak.yaml         - B4 W/Z boson masses" << std::endl;
     std::cout << "  config/strong_force.yaml        - B5 QCD emergence and confinement" << std::endl;
     std::cout << "  config/higgs_connection.yaml    - B6 Higgs mechanism via R-field" << std::endl;
+    std::cout << "  config/laboratory_scale.yaml    - D2 Laboratory-scale tests (BEC, atomic clocks, superfluid, decoherence)" << std::endl;
     std::cout << "  config/josephson_junction.yaml  - D2 AC/DC Josephson effects" << std::endl;
     std::cout << "  config/binary_merger.yaml       - D3 Gravitational wave emission" << std::endl;
     std::cout << "  config/atomic_physics.yaml      - D5 Atomic physics and spectroscopy" << std::endl;
@@ -139,6 +140,10 @@ int runAstrophysicalObservationsTest();
 
 // D5: Atomic Physics and Precision Spectroscopy test
 int runAtomicPhysicsTest();
+
+// D2: Laboratory-Scale Tests
+int runLaboratoryScaleTest();
+
 int runTestMode(const std::string& config_path) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
     std::cout << "Configuration: " << config_path << std::endl;
@@ -229,6 +234,8 @@ int runTestMode(const std::string& config_path) {
         return runLHCPredictionsTest();
     } else if (config_path.find("astrophysical_observations") != std::string::npos) {
         return runAstrophysicalObservationsTest();
+    } else if (config_path.find("laboratory_scale") != std::string::npos) {
+        return runLaboratoryScaleTest();
     }
 
     // Default: TRD field theory test (timesync, etc.)

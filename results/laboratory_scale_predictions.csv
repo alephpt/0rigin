@@ -1,0 +1,5 @@
+Experiment,TRD_Prediction,SM_Prediction,Effect_Size,Signal,Noise,Signal_to_Noise,Quality_Gate,Feasibility,Interpretation
+BEC Gravity Anomaly,2.6487,0,0.27,2.6487,0.01,264.87,PASS,1-2 years (drop tower experiments at Stanford/Bremen ZARM),"TRD predicts BEC falls faster than thermal atoms by 27.000000% - VIOLATES EQUIVALENCE PRINCIPLE if confirmed!"
+Atomic Clock Magnetic Gradient,0.1,0,1e+19,0.1,1e-19,1e+18,PASS,6 months (existing Sr clocks at JILA/NIST + gradient coils),"TRD predicts gradient-induced time dilation: δf/f = 0.100000 - Standard Model predicts zero effect!"
+Superfluid Helium Gravity Enhancement,2.76642,0,0.297,2.76642,0.1,27.6642,PASS,1-2 years (dilution refrigerator + precision gravimeter),"TRD predicts 29.700000% gravity enhancement below T_λ = 2.170000 K - macroscopic quantum effect!"
+Quantum Decoherence m³ Scaling,6.51473e-56,5.15513e+09,-1,5.15513e+09,1,5.15513e+09,PASS,1-2 years (Vienna/MIT/Basel matter-wave interferometry),"TRD predicts Γ ∝ m³ (exponent n=3) vs SM Γ ∝ m (n=1) - -1.000000× stronger decoherence for massive particles!"

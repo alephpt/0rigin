@@ -1,0 +1,171 @@
+# B1 Bekenstein-Hawking Refinement Configuration
+#
+# This configuration implements the missing physics from TODO.md:
+# 1. Bekenstein-Hawking energy scale (Δ = √(ℏc/G))
+# 2. Radial mode quantum numbers (n,l,m)
+# 3. R-field feedback coupling
+#
+# Goal: Achieve m₂/m₁ = 206.768 ± 10% (muon/electron ratio)
+
+test_name: "B1 Bekenstein-Hawking Refinement"
+test_file: "test/test_particle_spectrum_unified.cpp"
+golden_key: 246  # GeV (electroweak VEV - fundamental TRD energy scale)
+
+simulation:
+  grid_size_x: 128
+  grid_size_y: 128
+  grid_size_z: 32
+  spacing: 1.0
+  dt: 0.01
+  coupling_strength: 10.0  # Optimized from B1 Phase 1
+
+physics:
+  # Bekenstein-Hawking fundamental scale
+  bekenstein_hawking:
+    enabled: true
+    formula: "Δ = √(ℏc/G)"  # Planck Mass (0.md Step 7)
+    description: "Vacuum capacity from holographic principle"
+    hbar: 1.0  # Natural units
+    c_light: 1.0
+    G_newton: 1.0
+
+  # Mass formula
+  mass_formula: "m_eff = Δ_BH · R(x,y,z)"
+  R_definition: "R = |⟨e^{iθ}⟩| (local synchronization order parameter)"
+  mechanism: "Bekenstein-Hawking scale + R-field localization"
+
+  # Radial modes (hydrogen-like quantum numbers)
+  radial_modes:
+    enabled: true
+    principal_n: [1, 2, 3]  # n=1 (electron), n=2 (muon), n=3 (tau)
+    angular_l: [0, 0, 0]    # S-states (no angular momentum)
+    angular_m: [0, 0, 0]
+    energy_scaling: "E_n ~ 1/(n+l)²"  # Hydrogen-like
+
+  # R-field feedback coupling
+  feedback:
+    enabled: true
+    coupling_alpha: 0.5
+    formula: "E_feedback = α · ∫ R² |∇θ|² d³x"
+    description: "Energy cost of gradients in synchronized background"
+
+  # Energy calibration
+  calibration:
+    method: "electron_mass"
+    reference: 0.511  # MeV (electron rest mass)
+    description: "Calibrate Δ_BH (TRD) → GeV using measured R_electron"
+
+vortex_configurations:
+  electron:
+    name: "Q=1 - Electron (ground state)"
+    topology: "single_vortex"
+    quantum_numbers: {n: 1, l: 0, m: 0}
+    position: [0.0, 0.0]
+    experimental_mass: 0.511  # MeV
+
+  muon:
+    name: "Q=2 - Muon (radial excitation?)"
+    topology: "double_vortex"
+    quantum_numbers: {n: 2, l: 0, m: 0}
+    separation_scan: [50, 100, 150, 200]  # Grid units
+    experimental_mass: 105.7  # MeV
+
+  tau:
+    name: "Q=3 - Tau (second radial excitation?)"
+    topology: "triple_vortex"
+    quantum_numbers: {n: 3, l: 0, m: 0}
+    radius: 150
+    experimental_mass: 1776.9  # MeV
+    exploratory: true
+
+relaxation:
+  num_steps: 500
+  convergence_threshold: 1.0e-6
+  output_frequency: 100
+
+mass_ratios:
+  electron_muon:
+    experimental: 206.768
+    current_best: 130.4  # From Phase 5 (d=200, no BH scale)
+    target_error: 10.0  # percent
+    quality_gate: "Within factor 2"
+
+  electron_tau:
+    experimental: 3477.0
+    exploratory: true
+    requires: "Higher topological charges or radial modes"
+
+quality_targets:
+  critical:
+    - "m₂/m₁ within factor 2 of 206.768 (>103.4)"
+    - "Bekenstein-Hawking scale implemented"
+    - "Energy calibration to electron mass"
+
+  stretch:
+    - "m₂/m₁ within 10% of 206.768 (186-228)"
+    - "Predict muon mass in MeV (105.7 ± 10%)"
+    - "R-field feedback correction quantified"
+
+analysis:
+  outputs:
+    - "Δ_BH (TRD units)"
+    - "TRD → GeV calibration factor"
+    - "R_electron, R_muon (average synchronization)"
+    - "Feedback correction ratio"
+    - "Mass predictions in MeV"
+    - "m₂/m₁ ratio comparison to experiment"
+
+  export_csv: false  # This test focuses on theoretical derivation
+
+validation:
+  framework: "B1 Bekenstein-Hawking Refinement"
+  references:
+    - "0.md Step 7 (Holographic Constraint)"
+    - "B4 Electroweak (VEV calibration)"
+    - "C1 Cosmological Constant (Δ·R formula)"
+
+  physics_alignment:
+    - "Fundamental energy scale from Bekenstein-Hawking"
+    - "R-field determines mass hierarchy (same as C1)"
+    - "Topological vortices map to particle families"
+    - "Calibration via experimental electron mass"
+
+  success_criteria:
+    minimum:
+      - "Bekenstein-Hawking scale computed: Δ = √(ℏc/G)"
+      - "TRD → GeV calibration established"
+      - "Mass ratio improves over Phase 5 (>130.4)"
+
+    target:
+      - "m₂/m₁ within factor 2 of 206.768"
+      - "Muon mass predicted within 50% (53-158 MeV)"
+      - "Feedback correction < 20% (perturbative)"
+
+    stretch:
+      - "m₂/m₁ within 10% of 206.768"
+      - "Muon mass within 10% of 105.7 MeV"
+      - "Identify path to tau mass (3477× ratio)"
+
+next_steps:
+  if_success:
+    - "Apply to B4 electroweak unification (unified calibration)"
+    - "Test tau mass prediction (Q=3 vortex)"
+    - "Explore quark masses (different topologies)"
+
+  if_partial:
+    - "Implement full radial eigenstate solver"
+    - "Add angular momentum (l,m) quantum numbers"
+    - "Test dynamic vortex evolution (breathers)"
+
+  if_failure:
+    - "Re-examine topological hypothesis (knots, braids)"
+    - "Consider multi-component fields"
+    - "Environmental coupling (cosmological effects)"
+
+notes:
+  - "First test to implement Bekenstein-Hawking scale from 0.md Step 7"
+  - "Resolves universal TRD energy scale calibration problem"
+  - "Unifies B1 (particle masses) with B4 (electroweak VEV)"
+  - "Critical for validating TRD as fundamental theory vs phenomenology"
+  - "Success → TRD predicts Standard Model from first principles"
+  - "Failure → TRD requires additional structure (higher dimensions, gauge fields)"

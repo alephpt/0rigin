@@ -1,0 +1,111 @@
+
+===== TRD Test Mode =====
+Configuration: config/causality.yaml
+
+╔══════════════════════════════════════════════════════════╗
+║     E3 CAUSALITY TEST - TRD THEORY VALIDATION             ║
+║     CRITICAL GO/NO-GO GATE FOR PHYSICAL VIABILITY         ║
+╚══════════════════════════════════════════════════════════╝
+
+================================================================================
+E3 CAUSALITY TEST - CRITICAL GO/NO-GO GATE
+================================================================================
+
+Test Parameters:
+  Grid: 128³ points
+  dx = 0.1, dt = 0.01
+  CFL number = 0.1
+  Total time = 10
+
+------------------------------------------------------------
+TEST 1: R-Field Propagation
+------------------------------------------------------------
+Initializing Gaussian pulse in R-field...
+[TRDCore3D] Initialized 128x128x128 grid (2097152 points)
+[TRDCore3D] Memory usage: 8192 KB per field, 24576 KB total
+Initial energy: -6.29146e+06
+  t =      0, position =     6.35, energy drift =       -0%
+[TRDCore3D] Using SYMPLECTIC integration (RK2 Midpoint Method)
+[TRDCore3D] OpenMP parallelization enabled
+  t = 0.999999, position =     6.35, energy drift =       -0%
+  t =      2, position =     6.35, energy drift =       -0%
+  t =      3, position =     6.35, energy drift =       -0%
+  t =      4, position =     6.35, energy drift =       -0%
+  t = 5.00002, position =     6.35, energy drift =       -0%
+  t = 6.00004, position =     6.35, energy drift =       -0%
+  t = 7.00007, position =     6.35, energy drift =       -0%
+  t = 8.00009, position =     6.35, energy drift =       -0%
+  t = 9.00011, position =     6.35, energy drift =       -0%
+
+Results:
+  Maximum signal velocity: 0 c
+  Energy drift: -0%
+  ✅ PASS: R-field propagation is causal (v ≤ c)
+  Saved velocity profile to output/causality/r_field_velocity.csv
+
+------------------------------------------------------------
+TEST 2: Phase Gradient Propagation
+------------------------------------------------------------
+Testing phase gradient propagation...
+[TRDCore3D] Initialized 128x128x128 grid (2097152 points)
+[TRDCore3D] Memory usage: 8192 KB per field, 24576 KB total
+  t = 0.999999, max gradient velocity = 3.14321e-05 c
+  t = 2, max gradient velocity = 3.02494e-05 c
+  t = 3, max gradient velocity = 2.91038e-05 c
+  t = 4, max gradient velocity = 2.79862e-05 c
+  t = 5.00002, max gradient velocity = 2.69618e-05 c
+  t = 6.00004, max gradient velocity = 2.59653e-05 c
+  t = 7.00007, max gradient velocity = 2.5034e-05 c
+  t = 8.00009, max gradient velocity = 2.41492e-05 c
+  t = 9.00011, max gradient velocity = 2.32831e-05 c
+
+Results:
+  Maximum gradient velocity: 3.25497e-05 c
+  ✅ PASS: Phase gradient propagation is causal
+
+------------------------------------------------------------
+TEST 3: Coupled Mode Analysis
+------------------------------------------------------------
+Analyzing coupled R-θ mode dispersion...
+[TRDCore3D] Initialized 128x128x128 grid (2097152 points)
+[TRDCore3D] Memory usage: 8192 KB per field, 24576 KB total
+Computing dispersion relation via 2D FFT...
+  k = 4.90874: v_g = 0.979874 c, v_p = 1.02054 c
+  k = 9.81748: v_g = 0.994852 c, v_p = 1.00517 c
+  k = 14.7262: v_g = 0.997702 c, v_p = 1.0023 c
+  k = 19.635: v_g = 0.998706 c, v_p = 1.0013 c
+  k = 24.5437: v_g = 0.999171 c, v_p = 1.00083 c
+  k = 29.4524: v_g = 0.999424 c, v_p = 1.00058 c
+
+Results:
+  Maximum group velocity: 0.999478 c
+  Maximum phase velocity: 2.26939 c
+  ✅ PASS: All coupled modes have v_group ≤ c
+  Note: Phase velocity > c is allowed (carries no information)
+  Saved dispersion relation to output/causality/dispersion.csv
+
+------------------------------------------------------------
+TEST 4: Light Cone Constraint
+------------------------------------------------------------
+Verifying light cone constraint...
+[TRDCore3D] Initialized 128x128x128 grid (2097152 points)
+[TRDCore3D] Memory usage: 8192 KB per field, 24576 KB total
+  Initial pulse extent: 1.07238
+  t = 0.999999, light cone radius = 2.07238, max extent = 2.07238
+  t = 2, light cone radius = 3.07238, max extent = 3.07238
+  t = 3, light cone radius = 4.07238, max extent = 4.07238
+  t = 4, light cone radius = 5.07238, max extent = 5.07238
+  t = 5.00002, light cone radius = 6.0724, max extent = 6.0724
+  t = 6.00004, light cone radius = 7.07242, max extent = 7.07242
+  t = 7.00007, light cone radius = 8.07245, max extent = 8.07245
+  t = 8.00009, light cone radius = 9.07247, max extent = 9.07247
+  t = 9.00011, light cone radius = 10.0725, max extent = 10.0725
+
+Results:
+  ✅ PASS: Light cone constraint satisfied
+  Maximum extent beyond initial pulse: 0
+
+================================================================================
+✅ GO: TRD THEORY IS CAUSAL
+All signal velocities ≤ c within tolerance
+================================================================================

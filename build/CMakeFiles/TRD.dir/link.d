@@ -24,6 +24,7 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_geodesic_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o \
+  CMakeFiles/TRD.dir/test/test_gravitational_waves.cpp.o \
   CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o \
   CMakeFiles/TRD.dir/test/test_light_deflection_3d.cpp.o \
@@ -40,16 +41,24 @@ bin/trd: \
   CMakeFiles/TRD.dir/test/test_electroweak.cpp.o \
   CMakeFiles/TRD.dir/test/test_strong_force.cpp.o \
   CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o \
+  CMakeFiles/TRD.dir/test/test_laboratory_scale.cpp.o \
   CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o \
   CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o \
   CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o \
   CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o \
+  CMakeFiles/TRD.dir/test/test_magnetic_dynamo.cpp.o \
   CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o \
+  CMakeFiles/TRD.dir/test/test_knot_stability.cpp.o \
+  CMakeFiles/TRD.dir/test/test_solar_system.cpp.o \
   CMakeFiles/TRD.dir/test/test_multiscale.cpp.o \
   CMakeFiles/TRD.dir/test/test_finite_temperature.cpp.o \
   CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o \
   CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o \
   CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o \
+  CMakeFiles/TRD.dir/test/test_atomic_physics.cpp.o \
+  CMakeFiles/TRD.dir/test/test_astrophysical_observations.cpp.o \
+  CMakeFiles/TRD.dir/test/test_lhc_predictions.cpp.o \
+  CMakeFiles/TRD.dir/test/test_navier_stokes.cpp.o \
   CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o \
   CMakeFiles/TRD.dir/test/test_causality.cpp.o \
   CMakeFiles/TRD.dir/main.cpp.o \
@@ -143,6 +152,8 @@ CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.o:
 
+CMakeFiles/TRD.dir/test/test_gravitational_waves.cpp.o:
+
 CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_einstein_field_equations.cpp.o:
@@ -175,6 +186,8 @@ CMakeFiles/TRD.dir/test/test_strong_force.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_higgs_connection.cpp.o:
 
+CMakeFiles/TRD.dir/test/test_laboratory_scale.cpp.o:
+
 CMakeFiles/TRD.dir/test/test_josephson_junction.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_binary_merger.cpp.o:
@@ -183,7 +196,13 @@ CMakeFiles/TRD.dir/test/test_particle_scattering.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_spin_magnetism.cpp.o:
 
+CMakeFiles/TRD.dir/test/test_magnetic_dynamo.cpp.o:
+
 CMakeFiles/TRD.dir/test/test_knot_topology.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_knot_stability.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_solar_system.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_multiscale.cpp.o:
 
@@ -194,6 +213,14 @@ CMakeFiles/TRD.dir/test/test_quantum_fluctuations.cpp.o:
 CMakeFiles/TRD.dir/test/test_hpc_scaling.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_fine_structure_constant.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_atomic_physics.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_astrophysical_observations.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_lhc_predictions.cpp.o:
+
+CMakeFiles/TRD.dir/test/test_navier_stokes.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_renormalizability.cpp.o:
 

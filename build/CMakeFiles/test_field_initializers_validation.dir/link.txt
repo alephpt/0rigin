@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_field_initializers_validation.dir/link.d CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.o -o bin/test_field_initializers_validation  -lm

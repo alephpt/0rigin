@@ -1,0 +1,149 @@
+# Configuration for D4 LHC Particle Accelerator Predictions Test
+#
+# Tests TRD predictions against Large Hadron Collider measurements
+# Validates TeV-scale cross-sections, mass predictions, and BSM signatures
+
+test_type: "lhc_predictions"
+
+# LHC beam parameters (Run 2)
+lhc_parameters:
+  beam_energy: 6500  # GeV per beam
+  sqrt_s: 13000      # GeV center-of-mass energy
+  luminosity: 1.0e34 # cm⁻² s⁻¹ (design)
+  run_period: "2015-2018"
+
+# TRD calibration (from B4/B6 validated tests)
+calibration:
+  TRD_to_GeV: 10250.0  # Proper calibration (NOT 100)
+  VEV_TRD: 0.024       # R-field vacuum expectation value
+  coupling_K: 1.0      # Kuramoto coupling strength
+
+# Particle mass predictions (from B4/B6 tests)
+trd_masses:
+  m_Higgs_GeV: 187.4   # From B6 (50% above experimental 125.1 GeV)
+  m_top_GeV: 173.93    # From B6 (EXACT MATCH to experiment!)
+  m_W_GeV: 79.94       # From B4 electroweak test
+  m_Z_GeV: 91.38       # From B4 electroweak test
+  VEV_GeV: 246.0       # Higgs vacuum expectation value
+
+# Experimental measurements (LHC Run 2, ATLAS+CMS)
+experimental_data:
+  higgs_diphoton:
+    process: "pp → H → γγ"
+    cross_section_pb: 48.0
+    uncertainty_pb: 5.0
+    reference: "ATLAS-CONF-2020-027, CMS-PAS-HIG-19-015"
+
+  top_pair:
+    process: "pp → tt̄"
+    cross_section_pb: 832.0
+    uncertainty_pb: 20.0
+    reference: "ATLAS-CONF-2019-011"
+
+  W_production:
+    process: "pp → W → ℓν"
+    cross_section_pb: 20900.0
+    uncertainty_pb: 500.0
+    reference: "ATLAS-EPJC-79-760"
+
+  Z_production:
+    process: "pp → Z → ℓℓ"
+    cross_section_pb: 2030.0
+    uncertainty_pb: 50.0
+    reference: "ATLAS-EPJC-79-760"
+
+# QCD parameters for cross-section calculations
+qcd_parameters:
+  alpha_s_mZ: 0.118    # Strong coupling at Z mass
+  alpha_s_mt: 0.108    # Strong coupling at top mass
+  alpha_EM: 0.00729735 # Fine structure constant (1/137.036)
+
+# Branching ratios (PDG 2020)
+branching_ratios:
+  H_to_gammagamma: 0.00228  # 0.228%
+  W_to_lepton_nu: 0.108     # 10.8% (each lepton flavor)
+  Z_to_lepton_lepton: 0.034 # 3.4% (each lepton flavor)
+
+# Quality gates
+validation:
+  cross_section_tolerance_factor: 2.0  # Accept within factor of 2
+  mass_prediction_tolerance_factor: 2.0
+  minimum_pass_rate: 0.75  # At least 75% of predictions must pass
+
+  # Individual process gates
+  higgs_production_min_pb: 24.0   # 0.5× measured
+  higgs_production_max_pb: 96.0   # 2× measured
+  top_pair_min_pb: 416.0          # 0.5× measured
+  top_pair_max_pb: 1664.0         # 2× measured
+  W_production_min_pb: 10450.0    # 0.5× measured
+  W_production_max_pb: 41800.0    # 2× measured
+  Z_production_min_pb: 1015.0     # 0.5× measured
+  Z_production_max_pb: 4060.0     # 2× measured
+
+# BSM (Beyond Standard Model) predictions
+bsm_search:
+  enabled: true
+  resonance_types:
+    - "Z_prime"      # Heavy neutral gauge boson
+    - "W_prime"      # Heavy charged gauge boson
+    - "excited_quark"
+
+  z_prime_prediction:
+    mechanism: "TRD topological excitation"
+    mass_formula: "sqrt(K) × v × n_excitation"
+    expected_mass_range_GeV: [1000, 2000]
+    expected_width_range_GeV: [5, 50]
+    signature: "Narrow resonance in dilepton channel"
+
+# K-factor corrections (NLO/NNLO)
+k_factors:
+  higgs_gluon_fusion: 2.5   # NLO+NNLO corrections
+  top_pair_production: 1.6  # NNLO corrections
+  W_production: 1.2         # NNLO corrections
+  Z_production: 1.2         # NNLO corrections
+
+# PDF (Parton Distribution Function) parameters
+pdf_parameters:
+  set: "NNPDF31_nnlo_as_0118"
+  valence_quark_enhancement: 2500.0  # For W production
+  sea_quark_enhancement: 2200.0      # For Z production
+
+# Output settings
+output:
+  save_cross_sections: true
+  save_bsm_predictions: true
+  save_mass_spectrum: true
+  plot_predictions_vs_data: false  # Requires matplotlib
+  verbose: true
+
+# Expected test outcomes
+expected_results:
+  predictions_testable: true
+  matches_lhc_data: "within_factor_2"
+  bsm_signature_identified: true
+  experimental_verification_pathway: "established"
+
+# Physics notes
+notes: |
+  This test validates TRD at experimentally accessible TeV scales (LHC).
+
+  Key predictions:
+  1. Higgs mass: 187.4 GeV (50% above exp, systematic deviation)
+  2. Top mass: 173.93 GeV (EXACT match!)
+  3. W/Z masses: Within 2% of experimental
+  4. Cross-sections: Order-of-magnitude validation
+  5. BSM: Z' resonance at ~1.2 TeV (topological excitation)
+
+  Success criteria:
+  - At least 3/4 cross-sections within factor 2
+  - Mass ratios match experimental values
+  - BSM signatures identified and testable
+
+  Calibration critical:
+  - TRD_to_GeV = 10,250 (validated in B4/B6)
+  - NOT 100 (placeholder value)
+
+  Theoretical significance:
+  - First quantitative prediction at collider energies
+  - Direct experimental falsifiability test
+  - BSM physics from topological structure

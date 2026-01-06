@@ -172,7 +172,8 @@ set(TRD_SOURCES
     test/test_electroweak.cpp
     test/test_strong_force.cpp
     test/test_higgs_connection.cpp
-    # D2 Hardware experimental tests
+    # D2 Laboratory-scale tests
+    test/test_laboratory_scale.cpp
     test/test_josephson_junction.cpp
     # D3 Gravitational wave tests
     test/test_binary_merger.cpp

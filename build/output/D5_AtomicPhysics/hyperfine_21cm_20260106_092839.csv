@@ -1,0 +1,9 @@
+# Test: D5_AtomicPhysics
+# Date: 2026-01-06T09:28:39
+# Git: b1f1668 (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: category=Hyperfine_Structure, line=21cm_astronomical, test=D5_AtomicPhysics
+#
+Transition,Delta_E_eV,Nu_predicted_MHz,Nu_exp_MHz,Error_%
+1S_F=1-F=0,5.877443e-06,1421.159510,1420.405751,0.053066

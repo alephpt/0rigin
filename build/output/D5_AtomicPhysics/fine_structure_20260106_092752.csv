@@ -1,0 +1,9 @@
+# Test: D5_AtomicPhysics
+# Date: 2026-01-06T09:27:52
+# Git: b1f1668 (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: category=Fine_Structure, mechanism=spin_orbit_coupling, test=D5_AtomicPhysics
+#
+Transition,Delta_E_eV,Nu_predicted_GHz,Nu_exp_GHz,Error_%
+2P_3/2-2P_1/2,6.792390e-05,16.423925,10.970000,49.716732

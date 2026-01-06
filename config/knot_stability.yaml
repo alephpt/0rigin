@@ -1,0 +1,209 @@
+# knot_stability.yaml
+# H1: Knot Stability and Persistence - Topological Particle Interpretation
+#
+# Validates that topological knots (Q≠0 configurations) remain stable under
+# TRD evolution, providing the foundation for particle interpretation in TRD theory.
+#
+# Critical Gate: If knots decay → particles cannot exist in TRD → theory fails
+
+test_name: "H1_KnotStability"
+test_file: "test/test_knot_stability.cpp"
+golden_key: 246  # GeV reference (1 TRD unit = 246 GeV)
+
+physics_params:
+  coupling_K: 1.0
+  grid: [64, 64, 64]  # 3D grid for topological knots
+  dx: 1.0
+  dt: 0.01
+  evolution_steps: 10000
+  sample_interval: 100  # Sample observables every 100 steps
+
+  # Test 3 knot configurations
+  knots:
+    - type: "hopf_link"
+      description: "Two linked vortex rings in perpendicular planes"
+      ring_radius: 10.0
+      core_radius: 3.0
+      expected_Q: 1
+
+    - type: "trefoil"
+      description: "Single knotted loop (trefoil knot)"
+      knot_scale: 8.0
+      core_radius: 3.0
+      expected_Q: 1
+
+    - type: "vortex_ring"
+      description: "Toroidal vortex configuration"
+      ring_major_radius: 10.0
+      ring_minor_radius: 3.0
+      expected_Q: 1
+
+quality_gates:
+  charge_integer: 0.1         # |Q - round(Q)| < 0.1
+  charge_conservation: 0.01   # |ΔQ/Q| < 1%
+  energy_bounded: 10.0        # E_final/E_initial < 10
+  energy_finite: true         # No divergences
+  topology_preserved: true    # Linking number constant
+
+validation_criteria:
+  topological_charge:
+    requirement: "Q is integer-valued within 10% tolerance"
+    formula: "Q = (1/8π²)∫ εᵢⱼₖ ∂ᵢθ ∂ⱼθ ∂ₖR dV"
+    physics: "3D winding number - topological invariant"
+
+  charge_conservation:
+    requirement: "Q constant over 10,000 timesteps (drift < 1%)"
+    formula: "dQ/dt = 0"
+    physics: "Topology protected by homotopy group Π₃(S²) = ℤ"
+
+  energy_stability:
+    requirement: "Energy doesn't diverge (growth < 10×)"
+    formula: "E = ∫[(∇θ)² + (∇R)² + K(1-R)²]/2 dV"
+    physics: "Topological soliton should be meta-stable"
+
+  topology_preserved:
+    requirement: "Knot doesn't untie (linking number conserved)"
+    method: "Check Q conservation + visual inspection"
+    physics: "Linking number is topological invariant"
+
+physics_background:
+  topological_charge:
+    definition: "Q = (1/8π²)∫ εᵢⱼₖ ∂ᵢθ ∂ⱼθ ∂ₖR dV"
+    properties:
+      - "Integer-valued (Q ∈ ℤ)"
+      - "Topologically conserved (dQ/dt = 0)"
+      - "Protected by Π₃(S²) = ℤ homotopy group"
+
+  knot_types:
+    hopf_link:
+      description: "Two linked circles in perpendicular planes"
+      topology: "Linking number L = 1"
+      physics: "Models particle-antiparticle pairs"
+
+    trefoil_knot:
+      description: "Single knotted loop (simplest non-trivial knot)"
+      topology: "Knot invariant (trefoil group)"
+      physics: "Models exotic topological particles"
+
+    vortex_ring:
+      description: "Toroidal vortex (smoke ring)"
+      topology: "Winding number Q = 1"
+      physics: "Models quantized magnetic flux tubes"
+
+  stability_criteria:
+    topological_protection: "Q cannot change continuously (homotopy invariant)"
+    energy_barrier: "Finite energy cost to change topology"
+    core_stability: "Vortex core radius bounded (no collapse)"
+
+expected_results:
+  all_knots_stable: true
+  charge_drift_percent: "< 1%"
+  energy_bounded: true
+  topology_preserved: true
+
+  physical_interpretation:
+    - "Stable knots → TRD can support particle interpretation"
+    - "Topological charge Q → quantum number (baryon number, etc.)"
+    - "Knot mass M = E/c² ~ 246 GeV × (Q-dependent factor)"
+    - "Different knot types → different particle species"
+
+success_criteria:
+  pass_conditions:
+    - "All 3 knot types remain stable over 10,000 steps"
+    - "Topological charge Q conserved to <1%"
+    - "Energy bounded (no runaway growth)"
+    - "Topology preserved (knots don't untie)"
+
+  implications_if_pass:
+    - "✓ TRD topological defects can represent stable particles"
+    - "✓ Particle interpretation VALIDATED"
+    - "✓ Different topologies → different particle species"
+    - "✓ Quantum numbers emerge from topology"
+
+  implications_if_fail:
+    - "✗ Knots decay → particles cannot exist in TRD"
+    - "✗ Theory fails for particle physics program"
+    - "✗ Need additional stabilization mechanism (gauge fields?)"
+
+roi_analysis:
+  priority: "CRITICAL (ROI = 2.5 - highest in Wave 1)"
+  impact: "Unlocks entire particle interpretation framework"
+  dependencies:
+    - "Foundation for B-series (Standard Model)"
+    - "Prerequisite for H3 (spin-magnetism)"
+    - "Enables topological quantum numbers"
+
+  failure_consequences:
+    - "Invalidates particle physics program"
+    - "Requires fundamental theory revision"
+    - "May need additional fields (gauge, Higgs, etc.)"
+
+references:
+  - title: "Topological Solitons"
+    authors: "N. Manton, P. Sutcliffe"
+    year: 2004
+    notes: "Comprehensive treatment of topological field theory"
+
+  - title: "Stable Knot-like Structures in Classical Field Theory"
+    authors: "L. Faddeev, A. Niemi"
+    journal: "Nature"
+    volume: 387
+    pages: 58
+    year: 1997
+    notes: "Hopfions - stable knotted field configurations"
+
+  - title: "Über die Abbildungen der dreidimensionalen Sphäre"
+    authors: "H. Hopf"
+    journal: "Math. Ann."
+    volume: 104
+    year: 1931
+    notes: "Original Hopf fibration paper"
+
+  - title: "Elements of Homotopy Theory"
+    authors: "G. Whitehead"
+    publisher: "Springer"
+    year: 1978
+    notes: "Mathematical foundations of topological invariants"
+
+# Expected output files
+output:
+  csv_file: "output/H1_KnotStability/knot_stability_results_*.csv"
+  columns:
+    - "KnotType"
+    - "Step"
+    - "Time"
+    - "Q_Topological"
+    - "Energy"
+    - "CoreRadius"
+    - "Q_Drift"
+    - "E_Drift"
+
+  report_file: "H1_KNOT_STABILITY_REPORT.md"
+
+# Test results (to be filled after execution)
+results:
+  status: "PENDING"
+  timestamp: null
+  hopf_link:
+    Q_initial: null
+    Q_final: null
+    Q_drift_percent: null
+    energy_stable: null
+    topology_preserved: null
+
+  trefoil_knot:
+    Q_initial: null
+    Q_final: null
+    Q_drift_percent: null
+    energy_stable: null
+    topology_preserved: null
+
+  vortex_ring:
+    Q_initial: null
+    Q_final: null
+    Q_drift_percent: null
+    energy_stable: null
+    topology_preserved: null
+
+  overall_pass: null
+  particle_interpretation_valid: null

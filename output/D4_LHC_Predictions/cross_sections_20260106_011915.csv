@@ -1,0 +1,12 @@
+# Test: D4_LHC_Predictions
+# Date: 2026-01-06T01:19:15
+# Git: f8b8868 (main branch)
+# TRD Version: v3D Unified
+# Golden Key: 246 GeV
+# Parameters: TRD_to_GeV=10250.000000, m_Higgs=187.400000, m_W=79.940000, m_Z=91.380000, m_top=173.930000, sqrt_s=13000 GeV
+#
+Process,TRD_Prediction_pb,LHC_Measured_pb,Uncertainty_pb,Ratio_TRD_LHC,Status
+H→γγ,8.238305,48.000000,5.000000,0.171631,FAIL
+tt̄,0.060037,832.000000,20.000000,7.216012e-05,FAIL
+W→ℓν,2201.803343,20900.000000,500.000000,0.105349,FAIL
+Z→ℓℓ,233.406177,2030.000000,50.000000,0.114978,FAIL
