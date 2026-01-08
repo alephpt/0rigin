@@ -132,6 +132,7 @@ target_include_directories(imgui PUBLIC
 set(TRD_SOURCES
     src/TRDCore.cpp
     src/TRDCore3D.cpp
+    src/ConservativeSolver.cpp  # ADDED: Dual-solver architecture (particle dynamics)
     src/Maxwell3D.cpp
     src/Dirac3D.cpp
     src/TRDEngine.cpp
@@ -502,6 +503,132 @@ target_link_libraries(test_trdcore3d_symplectic PRIVATE
 )
 
 set_target_properties(test_trdcore3d_symplectic PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Strang Splitting Validation Test (ConservativeSolver)
+add_executable(test_strang_validation
+    test_strang_validation.cpp
+    src/ConservativeSolver.cpp
+)
+target_include_directories(test_strang_validation PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+target_link_libraries(test_strang_validation PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(test_strang_validation PRIVATE OpenMP::OpenMP_CXX)
+endif()
+set_target_properties(test_strang_validation PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Integrator Comparison Test
+add_executable(test_integrator_comparison
+    test_integrator_comparison.cpp
+    src/ConservativeSolver.cpp
+)
+target_include_directories(test_integrator_comparison PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+target_link_libraries(test_integrator_comparison PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(test_integrator_comparison PRIVATE OpenMP::OpenMP_CXX)
+endif()
+set_target_properties(test_integrator_comparison PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Spatial Order Comparison Test (2nd vs 4th order stencils)
+add_executable(test_spatial_order_comparison
+    test_spatial_order_comparison.cpp
+    src/ConservativeSolver.cpp
+)
+target_include_directories(test_spatial_order_comparison PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+target_link_libraries(test_spatial_order_comparison PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(test_spatial_order_comparison PRIVATE OpenMP::OpenMP_CXX)
+endif()
+set_target_properties(test_spatial_order_comparison PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Spatial Order + Timestep Sweep Test
+add_executable(test_spatial_order_timestep
+    test_spatial_order_timestep.cpp
+    src/ConservativeSolver.cpp
+)
+target_include_directories(test_spatial_order_timestep PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+target_link_libraries(test_spatial_order_timestep PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(test_spatial_order_timestep PRIVATE OpenMP::OpenMP_CXX)
+endif()
+set_target_properties(test_spatial_order_timestep PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Laplacian Accuracy Test (verify 4th-order stencil)
+add_executable(test_laplacian_accuracy
+    test_laplacian_accuracy.cpp
+    src/ConservativeSolver.cpp
+)
+target_include_directories(test_laplacian_accuracy PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+target_link_libraries(test_laplacian_accuracy PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(test_laplacian_accuracy PRIVATE OpenMP::OpenMP_CXX)
+endif()
+set_target_properties(test_laplacian_accuracy PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Grid Resolution Test (verify dx² scaling)
+add_executable(test_grid_resolution
+    test_grid_resolution.cpp
+    src/ConservativeSolver.cpp
+)
+target_include_directories(test_grid_resolution PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+target_link_libraries(test_grid_resolution PRIVATE
+    ${Vulkan_LIBRARIES}
+    pthread
+    m
+)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(test_grid_resolution PRIVATE OpenMP::OpenMP_CXX)
+endif()
+set_target_properties(test_grid_resolution PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
