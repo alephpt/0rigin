@@ -4,6 +4,10 @@
 #include <vector>
 #include <cstdint>
 #include <string>
+#include <memory>
+
+// Forward declaration
+class Dirac3D;
 
 /**
  * ConservativeSolver - Conservative/Unitary Particle Dynamics
@@ -74,9 +78,9 @@ public:
     ConservativeSolver();
 
     /**
-     * Destructor
+     * Destructor (defined in .cpp to handle unique_ptr with forward declaration)
      */
-    ~ConservativeSolver() = default;
+    ~ConservativeSolver();
 
     /**
      * Initialize grid with configuration
@@ -99,10 +103,17 @@ public:
     /**
      * Dirac evolution: i∂_t Ψ = (α·∇ + β·m)Ψ
      *
+     * Updated for chiral mass coupling with vacuum fields:
+     * - Uses split-step integrator with Dirac3D
+     * - Applies kinetic half-step, chiral mass step, kinetic half-step
+     *
      * @param dt Time step
-     * @param mass Dirac mass (can be spatially dependent from SMFT)
+     * @param R_field Vacuum R(x) field from TRDCore3D
+     * @param theta_field Vacuum θ(x) field from TRDCore3D
+     * @param Delta Coupling strength
      */
-    void evolveDirac(float dt, float mass = 1.0f);
+    void evolveDirac(float dt, const std::vector<float>& R_field,
+                    const std::vector<float>& theta_field, float Delta);
 
     /**
      * Initialize vortex with proper velocity field
@@ -224,6 +235,9 @@ private:
     // Energy tracking
     float initial_energy_;
     float dirac_mass_;
+
+    // Dirac solver for particle dynamics
+    std::unique_ptr<Dirac3D> dirac3d_;
 
     // Helper methods
 

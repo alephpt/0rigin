@@ -5,6 +5,14 @@
 /home/persist/neotec/0rigin/build/CMakeFiles/CompileShaders.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_trdcore3d_basic.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_trdcore3d_symplectic.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_strang_validation.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_integrator_comparison.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_spatial_order_comparison.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_spatial_order_timestep.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_laplacian_accuracy.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_grid_resolution.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/test_field_initializers_validation.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_dirac_vacuum_chiral_coupling.dir
+/home/persist/neotec/0rigin/build/CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/edit_cache.dir
 /home/persist/neotec/0rigin/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/link.d CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/test/test_dirac_vacuum_chiral_coupling_simple.cpp.o CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/src/Dirac3D.cpp.o -o bin/test_dirac_vacuum_chiral_coupling_simple  -lfftw3f -lpthread -lm

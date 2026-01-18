@@ -1,0 +1,87 @@
+# config/coupled_vacuum_particle.yaml
+# Coupled Vacuum-Particle Dynamics (HYBRID: Dissipative + Conservative)
+
+test_name: "Coupled Vacuum-Particle - Dirac with SMFT Mass"
+test_file: "test/test_coupled_dynamics.cpp"
+
+# CRITICAL: Physics model routing
+physics_model: "coupled_vacuum_particle"  # Uses BOTH TRDCore3D AND ConservativeSolver
+
+# Grid configuration
+physics_params:
+  nx: 64
+  ny: 64
+  nz: 64
+  dx: 1.0
+  dt: 0.005  # Conservative timestep for Dirac stability
+  num_steps: 1000
+
+  # Vacuum (Kuramoto) parameters
+  coupling_K: 1.0
+  damping: 0.1
+  vacuum_mass_gap: 246.0  # GeV (golden key reference)
+
+  # Particle (Dirac) parameters
+  dirac_integration: "rk2_symplectic"
+  mass_coupling: "dynamic"  # m(x,y,z) = Δ·R(x,y,z) from vacuum
+
+  # Initial conditions
+  vacuum_initial: "vortex"  # Vortex in vacuum creates mass concentration
+  vortex_center: [32.0, 32.0, 32.0]
+  vortex_charge: 1
+
+  particle_initial: "gaussian_wavepacket"
+  wavepacket_center: [32.0, 32.0, 32.0]
+  wavepacket_sigma: 5.0
+  wavepacket_momentum: [0.5, 0.0, 0.0]
+
+# Quality gates (BOTH dissipative AND conservative)
+quality_gates:
+  # Vacuum quality gates
+  vacuum_synchronization: 0.7  # R > 0.7 (vacuum should synchronize)
+
+  # Particle quality gates
+  particle_energy_conservation: 0.01  # ΔE/E < 1% (conservative Dirac)
+  particle_probability_conservation: 0.001  # ∫|Ψ|² conserved
+
+  # Coupling validation
+  mass_field_consistency: true  # m(x,y,z) = Δ·R(x,y,z) enforced
+  feedback_stability: true      # Particle→vacuum feedback stable
+
+# Output configuration
+output:
+  save_fields: true
+  save_interval: 50
+  output_dir: "output/coupled_dynamics"
+
+  fields:
+    # Vacuum fields
+    - "theta"      # Vacuum phase
+    - "R_field"    # Synchronization
+    - "mass"       # Effective mass field m(x,y,z)
+
+    # Particle fields
+    - "psi_real"   # Dirac spinor (real part)
+    - "psi_imag"   # Dirac spinor (imaginary part)
+    - "probability_density"  # |Ψ|²
+    - "current_density"      # j^μ = Ψ̄γ^μΨ
+
+# Validation history
+results:
+  date: "2026-01-08"
+  status: "TO_BE_IMPLEMENTED"
+  notes: |
+    HYBRID SYSTEM: Demonstrates dual-solver architecture
+    1. Vacuum (TRDCore3D): Dissipative Kuramoto → generates mass field m(x,y,z)
+    2. Particle (ConservativeSolver): Conservative Dirac → couples to m(x,y,z)
+    3. Feedback: Particle current sources vacuum evolution (advanced feature)
+
+    This is the FULL TRD theory:
+    - Vacuum = thermodynamic (dissipative, synchronization)
+    - Particle = quantum mechanical (conservative, unitary)
+    - Coupling = mass field m(x,y,z) = Δ·R(x,y,z)
+
+    Quality gates validate BOTH aspects:
+    - Vacuum: Synchronization achieved
+    - Particle: Energy/probability conserved
+    - Coupling: Consistent mass field

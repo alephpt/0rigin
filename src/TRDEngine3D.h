@@ -5,10 +5,12 @@
 #include "TRDCompute.h"
 #include "TRDDescriptorManager.h"
 #include "TRDCore3D.h"
+#include "ConservativeSolver.h"
 #include <vulkan/vulkan.h>
 #include <vector>
 #include <complex>
 #include <memory>
+#include <string>
 
 /**
  * TRDEngine3D - 3D Topological Resonance Dynamics GPU Compute Engine
@@ -156,12 +158,41 @@ public:
      */
     bool isGPUReady() const { return _gpu_ready; }
 
+    /**
+     * Set physics model (dual-solver routing)
+     * @param model "vacuum_kuramoto" | "particle_sine_gordon" | "particle_dirac" | "coupled_vacuum_particle"
+     */
+    void setPhysicsModel(const std::string& model);
+
+    /**
+     * Configure ConservativeSolver integration method
+     * @param method "velocity_verlet" | "rk2_symplectic" | "strang_splitting"
+     */
+    void setIntegrationMethod(const std::string& method);
+
+    /**
+     * Get current physics model
+     */
+    std::string getPhysicsModel() const { return _physics_model; }
+
+    /**
+     * Unified simulation step (routes to appropriate solver)
+     * @param dt Time step
+     */
+    void runSimulation(float dt);
+
 private:
     // Nova graphics engine
     Nova* _nova;
 
-    // Core 3D grid infrastructure
+    // DUAL SOLVER ARCHITECTURE
+    // - TRDCore3D: Vacuum (dissipative/thermodynamic Kuramoto)
+    // - ConservativeSolver: Particle (conservative/unitary Sine-Gordon/Dirac)
     std::unique_ptr<TRDCore3D> _core3d;
+    std::unique_ptr<ConservativeSolver> _conservative_solver;
+
+    // Physics model selection
+    std::string _physics_model;  // "vacuum_kuramoto" | "particle_sine_gordon" | etc.
 
     // Vulkan resource managers
     std::unique_ptr<TRDPipelineFactory> _pipelineFactory;

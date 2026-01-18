@@ -1,0 +1,98 @@
+# Test configuration for Strang + Velocity Verlet chiral integration
+test_name: "Chiral VV Integration Test"
+test_file: "test_strang_vv_energy_conservation"
+physics_model: "coupled_vacuum_particle"
+
+physics_params:
+  # Chiral mass scale (246 GeV equivalent in lattice units)
+  Delta: 2.5
+
+  # Grid parameters
+  Nx: 32
+  Ny: 32
+  Nz: 32
+
+  # Time integration
+  dt: 0.01
+  num_steps: 1000
+
+  # Integration method (Strang + Velocity Verlet hybrid)
+  integration_method: "strang_velocity_verlet"
+
+  # Spatial discretization
+  spatial_order: 2  # 2nd-order finite differences
+
+  # Chiral coupling parameters
+  enable_scalar_mass: true      # m_S = Δ·R·cos(θ)
+  enable_pseudoscalar_mass: true # m_P = Δ·R·sin(θ)
+
+  # Initial conditions
+  initial_condition:
+    type: "gaussian_packet"
+    center: [16, 16, 16]
+    width: 3.0
+    momentum: [0.1, 0.0, 0.0]
+
+  # Vacuum field configuration
+  vacuum_config:
+    R_field:
+      type: "soliton"
+      amplitude: 1.0
+      width: 10.0
+    theta_field:
+      type: "vortex"
+      charge: 1
+      center: [16, 16]
+
+quality_gates:
+  # GO/NO-GO criteria from CLAUDE.md
+  energy_conservation: 0.0001  # 0.01% threshold
+  norm_conservation: 1.0e-6    # Unitarity check
+  time_reversibility: 1.0e-4   # Symplectic property
+
+  # Chiral validation
+  chiral_asymmetry_min: 0.01   # Minimum detectable m_L ≠ m_R
+  theta_dependence: true        # Must show θ-dependent behavior
+
+expected_results:
+  # Based on GPU shader reference (dirac_velocity_verlet.comp)
+  energy_drift_percent: 0.005   # Target: <0.01%
+  norm_drift: 1.0e-7            # Target: <1e-6
+
+  # Comparison to previous methods
+  improvement_over_rk4: 1000    # RK4 had 9.38% drift
+  improvement_over_scalar: 10   # Scalar approximation had 0.0375% drift
+
+test_outputs:
+  save_energy_history: true
+  save_norm_history: true
+  save_chirality_profile: true
+  output_dir: "results/chiral_vv/"
+
+validation_status:
+  # TO BE FILLED BY TEST RESULTS
+  timestamp: null
+  energy_conservation_achieved: null
+  norm_conservation_achieved: null
+  chiral_asymmetry_detected: null
+  theta_dependence_verified: null
+  time_reversibility_verified: null
+  overall_pass: null
+
+# Test execution notes
+notes: |
+  This test validates the hybrid Strang + Velocity Verlet implementation
+  for the full chiral mass coupling including both scalar (m_S) and
+  pseudoscalar (m_P) components.
+
+  The implementation combines:
+  - Outer loop: Strang splitting (T/2 - M - T/2) for kinetic evolution
+  - Inner loop: Velocity Verlet for mass evolution with FULL chiral coupling
+
+  Key improvements over previous implementations:
+  1. Full chiral mass (not just scalar approximation)
+  2. Symplectic integration (energy conserving)
+  3. Norm preserving (unitary evolution)
+  4. Time reversible (characteristic of symplectic methods)
+
+  Reference implementation: shaders/smft/dirac_velocity_verlet.comp

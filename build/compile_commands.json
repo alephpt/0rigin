@@ -145,6 +145,12 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o -c /home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "file": "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "output": "CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o -c /home/persist/neotec/0rigin/src/Maxwell3D.cpp",
   "file": "/home/persist/neotec/0rigin/src/Maxwell3D.cpp",
   "output": "CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o"
@@ -517,8 +523,152 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_strang_validation.dir/test_strang_validation.cpp.o -c /home/persist/neotec/0rigin/test_strang_validation.cpp",
+  "file": "/home/persist/neotec/0rigin/test_strang_validation.cpp",
+  "output": "CMakeFiles/test_strang_validation.dir/test_strang_validation.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_strang_validation.dir/src/ConservativeSolver.cpp.o -c /home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "file": "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "output": "CMakeFiles/test_strang_validation.dir/src/ConservativeSolver.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_strang_validation.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_strang_validation.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_integrator_comparison.dir/test_integrator_comparison.cpp.o -c /home/persist/neotec/0rigin/test_integrator_comparison.cpp",
+  "file": "/home/persist/neotec/0rigin/test_integrator_comparison.cpp",
+  "output": "CMakeFiles/test_integrator_comparison.dir/test_integrator_comparison.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_integrator_comparison.dir/src/ConservativeSolver.cpp.o -c /home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "file": "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "output": "CMakeFiles/test_integrator_comparison.dir/src/ConservativeSolver.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_integrator_comparison.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_integrator_comparison.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_spatial_order_comparison.dir/test_spatial_order_comparison.cpp.o -c /home/persist/neotec/0rigin/test_spatial_order_comparison.cpp",
+  "file": "/home/persist/neotec/0rigin/test_spatial_order_comparison.cpp",
+  "output": "CMakeFiles/test_spatial_order_comparison.dir/test_spatial_order_comparison.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_spatial_order_comparison.dir/src/ConservativeSolver.cpp.o -c /home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "file": "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "output": "CMakeFiles/test_spatial_order_comparison.dir/src/ConservativeSolver.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_spatial_order_comparison.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_spatial_order_comparison.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_spatial_order_timestep.dir/test_spatial_order_timestep.cpp.o -c /home/persist/neotec/0rigin/test_spatial_order_timestep.cpp",
+  "file": "/home/persist/neotec/0rigin/test_spatial_order_timestep.cpp",
+  "output": "CMakeFiles/test_spatial_order_timestep.dir/test_spatial_order_timestep.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_spatial_order_timestep.dir/src/ConservativeSolver.cpp.o -c /home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "file": "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "output": "CMakeFiles/test_spatial_order_timestep.dir/src/ConservativeSolver.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_spatial_order_timestep.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_spatial_order_timestep.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_laplacian_accuracy.dir/test_laplacian_accuracy.cpp.o -c /home/persist/neotec/0rigin/test_laplacian_accuracy.cpp",
+  "file": "/home/persist/neotec/0rigin/test_laplacian_accuracy.cpp",
+  "output": "CMakeFiles/test_laplacian_accuracy.dir/test_laplacian_accuracy.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_laplacian_accuracy.dir/src/ConservativeSolver.cpp.o -c /home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "file": "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "output": "CMakeFiles/test_laplacian_accuracy.dir/src/ConservativeSolver.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_laplacian_accuracy.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_laplacian_accuracy.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_grid_resolution.dir/test_grid_resolution.cpp.o -c /home/persist/neotec/0rigin/test_grid_resolution.cpp",
+  "file": "/home/persist/neotec/0rigin/test_grid_resolution.cpp",
+  "output": "CMakeFiles/test_grid_resolution.dir/test_grid_resolution.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_grid_resolution.dir/src/ConservativeSolver.cpp.o -c /home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "file": "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "output": "CMakeFiles/test_grid_resolution.dir/src/ConservativeSolver.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/test_grid_resolution.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_grid_resolution.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.o -c /home/persist/neotec/0rigin/test/test_field_initializers_validation.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_field_initializers_validation.cpp",
   "output": "CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/test/test_dirac_vacuum_chiral_coupling.cpp.o -c /home/persist/neotec/0rigin/test/test_dirac_vacuum_chiral_coupling.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_dirac_vacuum_chiral_coupling.cpp",
+  "output": "CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/test/test_dirac_vacuum_chiral_coupling.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/ConservativeSolver.cpp.o -c /home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "file": "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp",
+  "output": "CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/ConservativeSolver.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/TRDCore3D.cpp.o -c /home/persist/neotec/0rigin/src/TRDCore3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/TRDCore3D.cpp",
+  "output": "CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/TRDCore3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/Dirac3D.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/test/test_dirac_vacuum_chiral_coupling_simple.cpp.o -c /home/persist/neotec/0rigin/test/test_dirac_vacuum_chiral_coupling_simple.cpp",
+  "file": "/home/persist/neotec/0rigin/test/test_dirac_vacuum_chiral_coupling_simple.cpp",
+  "output": "CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/test/test_dirac_vacuum_chiral_coupling_simple.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++  -I/home/persist/neotec/0rigin/include -O3 -DNDEBUG -std=c++20 -o CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/src/Dirac3D.cpp.o -c /home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "file": "/home/persist/neotec/0rigin/src/Dirac3D.cpp",
+  "output": "CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/src/Dirac3D.cpp.o"
 }
 ]

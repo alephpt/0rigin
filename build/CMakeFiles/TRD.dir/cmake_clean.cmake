@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TRD.dir/link.d"
   "CMakeFiles/TRD.dir/main.cpp.o"
   "CMakeFiles/TRD.dir/main.cpp.o.d"
+  "CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o"
+  "CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o.d"
   "CMakeFiles/TRD.dir/src/Dirac3D.cpp.o"
   "CMakeFiles/TRD.dir/src/Dirac3D.cpp.o.d"
   "CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o"

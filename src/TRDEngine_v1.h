@@ -176,7 +176,7 @@ private:
 
     // Stochastic pipelines for MSR formalism
     VkPipeline _kuramoto_stochastic_pipeline;  // Stochastic phase evolution
-    VkPipeline _dirac_stochastic_pipeline;     // Stochastic Dirac evolution
+    VkPipeline _dirac_stochastic_pipeline;     // DEPRECATED - removed (non-symplectic)
     VkDescriptorSet _dirac_descriptor_set;     // Descriptor set for Dirac shader
     VkDescriptorSetLayout _dirac_descriptor_layout; // Layout for Dirac descriptors
     VkPipelineLayout _dirac_pipeline_layout;   // Pipeline layout for Dirac

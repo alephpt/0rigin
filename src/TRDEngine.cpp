@@ -583,8 +583,8 @@ void TRDEngine::stepStochastic(float dt, float K, float damping,
     // Memory barrier
     _compute->insertMemoryBarrier();
 
-    // Step 3: Stochastic Dirac evolution (if available)
-    if (_dirac_stochastic_pipeline) {
+    // Step 3: Stochastic Dirac evolution (removed - deprecated)
+    if (false) {  // Disabled - stochastic pipeline removed
         struct DiracPush {
             float dt;
             float K;
@@ -919,9 +919,11 @@ void TRDEngine::createPipelines() {
 
         vkCreatePipelineLayout(_nova->_architect->logical_device, &layoutInfo, nullptr, &_dirac_pipeline_layout);
 
-        _dirac_stochastic_pipeline = _pipelineFactory->createDiracStochasticPipeline("shaders/smft/dirac_stochastic.comp.spv", _dirac_pipeline_layout);
+        // NOTE: dirac_stochastic_pipeline removed - deprecated/unused
+        // Only velocity_verlet integrator remains (symplectic)
+        _dirac_stochastic_pipeline = VK_NULL_HANDLE;
 
-        if (_dirac_stochastic_pipeline) {
+        if (false) {  // Disabled - stochastic pipeline removed
             // Allocate and update descriptor set
             _dirac_descriptor_set = _descriptorManager->allocateDescriptorSet(_descriptor_pool, _dirac_descriptor_layout);
 
@@ -997,7 +999,7 @@ void TRDEngine::createPipelines() {
         if (_sync_pipeline) std::cout << "  ✓ Sync field pipeline" << std::endl;
         if (_gravity_pipeline) std::cout << "  ✓ Gravity field pipeline" << std::endl;
         if (_kuramoto_stochastic_pipeline) std::cout << "  ✓ Stochastic Kuramoto pipeline" << std::endl;
-        if (_dirac_stochastic_pipeline) std::cout << "  ✓ Stochastic Dirac pipeline" << std::endl;
+        // NOTE: Stochastic Dirac pipeline removed (deprecated)
         if (_accumulation_pipeline) std::cout << "  ✓ Accumulation pipeline (operator splitting)" << std::endl;
     }
 }

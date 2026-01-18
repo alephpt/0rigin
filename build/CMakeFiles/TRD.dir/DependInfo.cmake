@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/persist/neotec/0rigin/main.cpp" "CMakeFiles/TRD.dir/main.cpp.o" "gcc" "CMakeFiles/TRD.dir/main.cpp.o.d"
+  "/home/persist/neotec/0rigin/src/ConservativeSolver.cpp" "CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o" "gcc" "CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o.d"
   "/home/persist/neotec/0rigin/src/Dirac3D.cpp" "CMakeFiles/TRD.dir/src/Dirac3D.cpp.o" "gcc" "CMakeFiles/TRD.dir/src/Dirac3D.cpp.o.d"
   "/home/persist/neotec/0rigin/src/DiracEvolution.cpp" "CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o" "gcc" "CMakeFiles/TRD.dir/src/DiracEvolution.cpp.o.d"
   "/home/persist/neotec/0rigin/src/GeodesicIntegrator.cpp" "CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o" "gcc" "CMakeFiles/TRD.dir/src/GeodesicIntegrator.cpp.o.d"

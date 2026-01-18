@@ -67,8 +67,6 @@ include CMakeFiles/CompileShaders.dir/compiler_depend.make
 include CMakeFiles/CompileShaders.dir/progress.make
 
 CMakeFiles/CompileShaders: /home/persist/neotec/0rigin/shaders/smft/accumulate.comp.spv
-CMakeFiles/CompileShaders: /home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp.spv
-CMakeFiles/CompileShaders: /home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp.spv
 CMakeFiles/CompileShaders: /home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp.spv
 CMakeFiles/CompileShaders: /home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp.spv
 CMakeFiles/CompileShaders: /home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv
@@ -84,52 +82,44 @@ CMakeFiles/CompileShaders: /home/persist/neotec/0rigin/shaders/smft/sync_field3d
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Compiling shader: accumulate.comp -> accumulate.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/accumulate.comp -o /home/persist/neotec/0rigin/shaders/smft/accumulate.comp.spv
 
-/home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp.spv: /home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Compiling shader: dirac_rk4.comp -> dirac_rk4.comp.spv"
-	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp -o /home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp.spv
-
-/home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp.spv: /home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Compiling shader: dirac_stochastic.comp -> dirac_stochastic.comp.spv"
-	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp -o /home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp.spv
-
 /home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp.spv: /home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Compiling shader: dirac_velocity_verlet.comp -> dirac_velocity_verlet.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Compiling shader: dirac_velocity_verlet.comp -> dirac_velocity_verlet.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp -o /home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp.spv: /home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Compiling shader: em_stress_energy.comp -> em_stress_energy.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Compiling shader: em_stress_energy.comp -> em_stress_energy.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp -o /home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv: /home/persist/neotec/0rigin/shaders/smft/gravity_field.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Compiling shader: gravity_field.comp -> gravity_field.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Compiling shader: gravity_field.comp -> gravity_field.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/gravity_field.comp -o /home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/kuramoto3d.comp.spv: /home/persist/neotec/0rigin/shaders/smft/kuramoto3d.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Compiling shader: kuramoto3d.comp -> kuramoto3d.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Compiling shader: kuramoto3d.comp -> kuramoto3d.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/kuramoto3d.comp -o /home/persist/neotec/0rigin/shaders/smft/kuramoto3d.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/kuramoto_step.comp.spv: /home/persist/neotec/0rigin/shaders/smft/kuramoto_step.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Compiling shader: kuramoto_step.comp -> kuramoto_step.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Compiling shader: kuramoto_step.comp -> kuramoto_step.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/kuramoto_step.comp -o /home/persist/neotec/0rigin/shaders/smft/kuramoto_step.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/kuramoto_stochastic.comp.spv: /home/persist/neotec/0rigin/shaders/smft/kuramoto_stochastic.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Compiling shader: kuramoto_stochastic.comp -> kuramoto_stochastic.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Compiling shader: kuramoto_stochastic.comp -> kuramoto_stochastic.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/kuramoto_stochastic.comp -o /home/persist/neotec/0rigin/shaders/smft/kuramoto_stochastic.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/r_field_evolution.comp.spv: /home/persist/neotec/0rigin/shaders/smft/r_field_evolution.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Compiling shader: r_field_evolution.comp -> r_field_evolution.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Compiling shader: r_field_evolution.comp -> r_field_evolution.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/r_field_evolution.comp -o /home/persist/neotec/0rigin/shaders/smft/r_field_evolution.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/spinor_feedback.comp.spv: /home/persist/neotec/0rigin/shaders/smft/spinor_feedback.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Compiling shader: spinor_feedback.comp -> spinor_feedback.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Compiling shader: spinor_feedback.comp -> spinor_feedback.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/spinor_feedback.comp -o /home/persist/neotec/0rigin/shaders/smft/spinor_feedback.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/sync_field.comp.spv: /home/persist/neotec/0rigin/shaders/smft/sync_field.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Compiling shader: sync_field.comp -> sync_field.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Compiling shader: sync_field.comp -> sync_field.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/sync_field.comp -o /home/persist/neotec/0rigin/shaders/smft/sync_field.comp.spv
 
 /home/persist/neotec/0rigin/shaders/smft/sync_field3d.comp.spv: /home/persist/neotec/0rigin/shaders/smft/sync_field3d.comp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Compiling shader: sync_field3d.comp -> sync_field3d.comp.spv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Compiling shader: sync_field3d.comp -> sync_field3d.comp.spv"
 	/usr/bin/glslc /home/persist/neotec/0rigin/shaders/smft/sync_field3d.comp -o /home/persist/neotec/0rigin/shaders/smft/sync_field3d.comp.spv
 
 CMakeFiles/CompileShaders.dir/codegen:
@@ -137,8 +127,6 @@ CMakeFiles/CompileShaders.dir/codegen:
 
 CompileShaders: CMakeFiles/CompileShaders
 CompileShaders: /home/persist/neotec/0rigin/shaders/smft/accumulate.comp.spv
-CompileShaders: /home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp.spv
-CompileShaders: /home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp.spv
 CompileShaders: /home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp.spv
 CompileShaders: /home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp.spv
 CompileShaders: /home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv

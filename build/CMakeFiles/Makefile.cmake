@@ -67,5 +67,13 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/CompileShaders.dir/DependInfo.cmake"
   "CMakeFiles/test_trdcore3d_basic.dir/DependInfo.cmake"
   "CMakeFiles/test_trdcore3d_symplectic.dir/DependInfo.cmake"
+  "CMakeFiles/test_strang_validation.dir/DependInfo.cmake"
+  "CMakeFiles/test_integrator_comparison.dir/DependInfo.cmake"
+  "CMakeFiles/test_spatial_order_comparison.dir/DependInfo.cmake"
+  "CMakeFiles/test_spatial_order_timestep.dir/DependInfo.cmake"
+  "CMakeFiles/test_laplacian_accuracy.dir/DependInfo.cmake"
+  "CMakeFiles/test_grid_resolution.dir/DependInfo.cmake"
   "CMakeFiles/test_field_initializers_validation.dir/DependInfo.cmake"
+  "CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/DependInfo.cmake"
+  "CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/DependInfo.cmake"
   )

@@ -63,6 +63,17 @@ public:
     void step(const std::vector<float>& mass_field, float dt);
 
     /**
+     * Split-operator evolution step with chiral mass coupling
+     * @param R_field Vacuum R(x) field
+     * @param theta_field Vacuum θ(x) field
+     * @param Delta Coupling strength
+     * @param dt Time step
+     */
+    void stepWithChiralMass(const std::vector<float>& R_field,
+                           const std::vector<float>& theta_field,
+                           float Delta, float dt);
+
+    /**
      * Get spinor density |ψ|² at each point
      * ρ = Σ_α |ψ_α|²
      */
@@ -131,11 +142,27 @@ private:
     // Split-operator sub-steps
     void applyKineticHalfStep(float dt_half);
     void applyMassStep(const std::vector<float>& mass_field, float dt);
+    // NOTE: applyChiralMassStep() removed - obsolete scalar approximation
+    // Use stepWithChiralMass() for production with correct eigenvalue decomposition
 
     // Apply Dirac kinetic operator in momentum space
     void applyDiracKineticMatrix(std::complex<float> psi_k[4],
                                  float kx, float ky, float kz,
                                  float dt);
+
+    // Velocity Verlet for mass evolution with full chiral coupling
+    void applyMassVelocityVerlet(
+        const std::vector<float>& R_field,
+        const std::vector<float>& theta_field,
+        float Delta, float dt);
+
+    // Compute mass derivative: dΨ/dt = -i·β·M·Ψ
+    void computeMassDerivative(
+        const std::vector<float>& R_field,
+        const std::vector<float>& theta_field,
+        float Delta,
+        const std::vector<std::complex<float>> psi_in[4],
+        std::vector<std::complex<float>> dpsi_dt[4]);
 
     // Dirac alpha matrices (4×4 complex, stored as flat arrays)
     // α^i are the spatial Dirac matrices
@@ -145,4 +172,7 @@ private:
 
     // Dirac beta matrix (4×4 complex)
     static const std::array<std::complex<float>, 16> beta;
+
+    // Dirac gamma5 matrix (4×4 complex)
+    static const std::array<std::complex<float>, 16> gamma5;
 };

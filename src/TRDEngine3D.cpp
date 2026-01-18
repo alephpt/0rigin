@@ -86,7 +86,13 @@ TRDEngine3D::TRDEngine3D(Nova* nova)
     // Initialize descriptor manager
     _descriptorManager = std::make_unique<TRDDescriptorManager>(nova->_architect->logical_device);
 
-    std::cout << "[TRDEngine3D] Initialized GPU compute engine" << std::endl;
+    // Initialize ConservativeSolver for particle dynamics
+    _conservative_solver = std::make_unique<ConservativeSolver>();
+
+    // Default physics model: vacuum Kuramoto
+    _physics_model = "vacuum_kuramoto";
+
+    std::cout << "[TRDEngine3D] Initialized GPU compute engine (dual-solver architecture)" << std::endl;
 }
 
 TRDEngine3D::~TRDEngine3D() {
@@ -327,6 +333,132 @@ void TRDEngine3D::downloadFieldData(VkBuffer buffer, std::vector<float>& data) c
     if (memory != VK_NULL_HANDLE) {
         size_t size = data.size() * sizeof(float);
         _bufferManager->downloadData(memory, data.data(), size);
+    }
+}
+
+void TRDEngine3D::setPhysicsModel(const std::string& model) {
+    _physics_model = model;
+    std::cout << "[TRDEngine3D] Physics model set to: " << model << std::endl;
+
+    // Initialize conservative solver if needed
+    if (model == "particle_sine_gordon" || model == "particle_dirac" || model == "coupled_vacuum_particle") {
+        if (!_conservative_solver) {
+            _conservative_solver = std::make_unique<ConservativeSolver>();
+        }
+
+        // Initialize with current grid dimensions
+        ConservativeSolver::Config config;
+        config.nx = _Nx;
+        config.ny = _Ny;
+        config.nz = _Nz;
+        config.dx = 1.0f;
+        config.dt = 0.005f;  // Smaller timestep for stability
+        config.method = ConservativeSolver::IntegrationMethod::STRANG_SPLITTING;  // Default to Strang (superior for nonlinear PDE)
+
+        _conservative_solver->initialize(config);
+        std::cout << "[TRDEngine3D] ConservativeSolver initialized for particle dynamics" << std::endl;
+    }
+}
+
+void TRDEngine3D::setIntegrationMethod(const std::string& method) {
+    if (!_conservative_solver) {
+        std::cerr << "[TRDEngine3D] Error: ConservativeSolver not initialized" << std::endl;
+        return;
+    }
+
+    // Parse string to enum
+    ConservativeSolver::IntegrationMethod integration_method;
+    if (method == "velocity_verlet") {
+        integration_method = ConservativeSolver::IntegrationMethod::VELOCITY_VERLET;
+    } else if (method == "rk2_symplectic") {
+        integration_method = ConservativeSolver::IntegrationMethod::RK2_SYMPLECTIC;
+    } else if (method == "strang_splitting") {
+        integration_method = ConservativeSolver::IntegrationMethod::STRANG_SPLITTING;
+    } else if (method == "half_strang") {
+        integration_method = ConservativeSolver::IntegrationMethod::HALF_STRANG;
+    } else {
+        std::cerr << "[TRDEngine3D] Unknown integration method: " << method
+                  << ", defaulting to strang_splitting" << std::endl;
+        integration_method = ConservativeSolver::IntegrationMethod::STRANG_SPLITTING;
+    }
+
+    // Re-initialize with new method
+    ConservativeSolver::Config config;
+    config.nx = _Nx;
+    config.ny = _Ny;
+    config.nz = _Nz;
+    config.dx = 1.0f;
+    config.dt = 0.005f;
+    config.method = integration_method;
+
+    _conservative_solver->initialize(config);
+    std::cout << "[TRDEngine3D] Integration method set to: " << method << std::endl;
+}
+
+void TRDEngine3D::runSimulation(float dt) {
+    // DUAL-SOLVER ROUTING
+    // Routes physics evolution to appropriate solver based on model
+
+    if (_physics_model == "vacuum_kuramoto") {
+        // DISSIPATIVE/THERMODYNAMIC (Kuramoto gradient flow)
+        // - Vacuum synchronization dynamics
+        // - R-field evolution toward equilibrium
+        // - Energy NOT conserved (expected for dissipative system)
+        _core3d->evolveKuramotoCPU(dt);
+        std::cout << "[TRDEngine3D] Vacuum Kuramoto step (R = " << _core3d->getAverageR() << ")" << std::endl;
+
+    } else if (_physics_model == "particle_sine_gordon") {
+        // CONSERVATIVE/UNITARY (Sine-Gordon solitons)
+        // - Particle scattering, vortex dynamics
+        // - Energy conserved <0.01% (GO/NO-GO gate)
+        // - Symplectic Velocity Verlet integration
+        if (!_conservative_solver) {
+            std::cerr << "[TRDEngine3D] Error: ConservativeSolver not initialized for particle_sine_gordon" << std::endl;
+            return;
+        }
+
+        _conservative_solver->evolveSineGordon(dt);
+
+        // Validate energy conservation (GO/NO-GO criterion)
+        if (!_conservative_solver->validateEnergyConservation(0.0001f)) {
+            std::cerr << "[TRDEngine3D] WARNING: Energy conservation violated in Sine-Gordon evolution" << std::endl;
+        }
+
+    } else if (_physics_model == "particle_dirac") {
+        // CONSERVATIVE/UNITARY (Dirac fermion)
+        // For standalone Dirac without vacuum coupling, use uniform fields
+        if (!_conservative_solver) {
+            std::cerr << "[TRDEngine3D] Error: ConservativeSolver not initialized for particle_dirac" << std::endl;
+            return;
+        }
+
+        // Create uniform fields for standalone Dirac (no vacuum coupling)
+        uint32_t total_points = _Nx * _Ny * _Nz;
+        std::vector<float> uniform_R(total_points, 1.0f);  // Uniform R = 1
+        std::vector<float> uniform_theta(total_points, 0.0f);  // Uniform θ = 0
+
+        _conservative_solver->evolveDirac(dt, uniform_R, uniform_theta, _Delta);
+
+    } else if (_physics_model == "coupled_vacuum_particle") {
+        // HYBRID - BOTH dissipative AND conservative
+        // 1. Evolve vacuum (Kuramoto/dissipative)
+        _core3d->evolveKuramotoCPU(dt);
+
+        // 2. Get vacuum fields for chiral mass coupling
+        auto R_field = _core3d->getRField();
+        auto theta_field = _core3d->getTheta();  // Get theta field for chiral coupling
+        float avg_R = _core3d->getAverageR();
+
+        // 3. Evolve particle (Dirac/conservative) with chiral mass from vacuum fields
+        if (_conservative_solver) {
+            _conservative_solver->evolveDirac(dt, R_field, theta_field, _Delta);
+        }
+
+        std::cout << "[TRDEngine3D] Coupled evolution: R=" << avg_R
+                  << ", Delta=" << _Delta << std::endl;
+
+    } else {
+        std::cerr << "[TRDEngine3D] Unknown physics model: " << _physics_model << std::endl;
     }
 }
 

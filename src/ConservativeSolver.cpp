@@ -1,5 +1,6 @@
 // src/ConservativeSolver.cpp
 #include "ConservativeSolver.h"
+#include "Dirac3D.h"
 #include <iostream>
 #include <cmath>
 #include <algorithm>
@@ -8,6 +9,10 @@
 ConservativeSolver::ConservativeSolver()
     : nx_(0), ny_(0), nz_(0), dx_(1.0f), dt_(0.005f),
       initial_energy_(0.0f), dirac_mass_(1.0f) {
+}
+
+ConservativeSolver::~ConservativeSolver() {
+    // Destructor defined here to handle unique_ptr<Dirac3D> with forward declaration
 }
 
 void ConservativeSolver::initialize(const Config& config) {
@@ -27,6 +32,10 @@ void ConservativeSolver::initialize(const Config& config) {
     // Allocate Dirac spinor fields (4 components × 2 real/imag)
     psi_real_.resize(4 * total_points, 0.0f);
     psi_imag_.resize(4 * total_points, 0.0f);
+
+    // Initialize Dirac3D solver for particle dynamics
+    dirac3d_ = std::make_unique<Dirac3D>(nx_, ny_, nz_);
+    std::cout << "[ConservativeSolver] Dirac3D solver initialized for chiral mass coupling" << std::endl;
 
     std::cout << "[ConservativeSolver] Initialized " << nx_ << "×" << ny_ << "×" << nz_
               << " grid (" << total_points << " points)" << std::endl;
@@ -314,13 +323,33 @@ void ConservativeSolver::strangSplittingStep(float dt) {
     // }
 }
 
-void ConservativeSolver::evolveDirac(float dt, float mass) {
-    // Placeholder for Dirac evolution
-    // i∂_t Ψ = (α·∇ + β·m)Ψ
+void ConservativeSolver::evolveDirac(float dt, const std::vector<float>& R_field,
+                                     const std::vector<float>& theta_field, float Delta) {
+    // Dirac evolution with chiral mass coupling
+    // Uses split-step integrator pattern:
+    //   1. Half-step kinetic evolution
+    //   2. Full-step chiral mass interaction
+    //   3. Half-step kinetic evolution
 
-    std::cerr << "[ConservativeSolver] Dirac evolution not yet implemented" << std::endl;
-    // TODO: Implement 4-component Dirac spinor evolution
-    // Will need alpha/beta Dirac matrices and spatial derivatives
+    if (!dirac3d_) {
+        std::cerr << "[ConservativeSolver] ERROR: Dirac3D not initialized" << std::endl;
+        return;
+    }
+
+    // Validate field sizes
+    uint32_t expected_size = nx_ * ny_ * nz_;
+    if (R_field.size() != expected_size || theta_field.size() != expected_size) {
+        std::cerr << "[ConservativeSolver] ERROR: Field size mismatch. Expected: "
+                  << expected_size << ", R_field: " << R_field.size()
+                  << ", theta_field: " << theta_field.size() << std::endl;
+        return;
+    }
+
+    // Use public split-step integrator with chiral mass coupling
+    dirac3d_->stepWithChiralMass(R_field, theta_field, Delta, dt);
+
+    std::cout << "[ConservativeSolver] Dirac evolution with chiral mass coupling completed (dt="
+              << dt << ", Delta=" << Delta << ")" << std::endl;
 }
 
 void ConservativeSolver::initializeVortexWithProperVelocity(float x0, float y0, float z0, int charge) {

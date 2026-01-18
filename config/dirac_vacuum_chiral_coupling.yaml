@@ -1,0 +1,124 @@
+# Dirac-Vacuum Chiral Coupling Validation Configuration
+#
+# Test: Dirac3D chiral mass coupling with vacuum fields
+# Implementation: applyChiralMassStep() + ConservativeSolver::evolveDirac()
+# Quality Gates:
+#   - Energy conservation: ΔE/E < 0.01% (GO/NO-GO criterion)
+#   - Norm conservation: ΔN/N < 1e-6
+#   - Chiral asymmetry: |m_L - m_R| > 0.1
+#   - Particle localization: Density peaks in high-R regions
+
+validation:
+  framework: "Dirac-Vacuum Chiral Coupling"
+  test_file: "test/test_dirac_vacuum_chiral_coupling.cpp"
+  test_date: "2026-01-08"
+  golden_key: 246  # GeV standard
+
+physics_model: "coupled_vacuum_particle"
+
+physics_params:
+  description: |
+    Tests chiral mass generation from vacuum topology
+
+    Mechanism:
+      - Vacuum with topological vortex creates θ(x) variation
+      - θ(x) gradient generates R-field suppression
+      - Chiral coupling: m_L/R = Δ(1 ± R·cos(θ))
+      - Fermion experiences position-dependent chiral mass
+
+    Expected behavior:
+      - Particle localizes near high-R regions (low gradient)
+      - Left/right chiralities experience different masses
+      - Total energy conserved via symplectic integration
+      - Norm preserved (unitary evolution)
+
+  grid:
+    Nx: 32
+    Ny: 32
+    Nz: 32
+    dx: 1.0
+
+  time_integration:
+    dt: 0.01
+    steps: 1000
+    method: "split-step symplectic"
+
+  chiral_parameters:
+    Delta: 2.5        # Chiral mass scale
+    vortex_charge: 1  # Topological charge
+
+  initial_conditions:
+    dirac_type: "gaussian_wavepacket"
+    sigma: 4.0
+    position: [0.0, 0.0, 0.0]  # At vortex core
+
+    vacuum_type: "topological_vortex"
+    vortex_center: [16.0, 16.0]  # Grid center for 32x32
+
+quality_gates:
+  energy_conservation: 0.0001   # <0.01% drift (GO/NO-GO)
+  norm_conservation: 1.0e-6     # Unitary evolution
+  chiral_asymmetry: 0.1         # Minimum |m_L - m_R|
+  localization_threshold: 0.5   # R-field value for localization
+
+expected_outputs:
+  - energy_drift < 0.01%
+  - norm_drift < 1e-6
+  - chiral_masses_differ
+  - particle_localizes_in_high_R
+
+test_results:
+  # Results from test execution on 2026-01-08
+  timestamp: "2026-01-08T15:30:00Z"
+
+  full_physics_test:
+    energy_conservation:
+      initial: 2.500e+00
+      final: 7.911e+35
+      drift_percent: 3.165e+35
+      pass: false  # CRITICAL FAILURE
+
+    norm_conservation:
+      initial: 1.000e+00
+      final: 4.724e+19
+      drift: 4.724e+19
+      pass: false  # CRITICAL FAILURE
+
+    chiral_asymmetry:
+      m_L: 2.921
+      m_R: 2.079
+      difference: 0.842
+      pass: true
+
+    localization:
+      max_density_position: [16, 1, 16]
+      R_field_at_max: 0.996
+      pass: true
+
+  simplified_test:
+    parameters:
+      grid: "16^3"
+      dt: 0.001
+      Delta: 0.5
+    norm_drift_percent: 0.447
+    pass: true  # Marginally stable with smaller dt
+
+  overall_status: "FAILED - Numerical instability violates TRD standards"
+
+  critical_issues:
+    - "Energy drift 10^37x worse than 0.01% requirement"
+    - "Exponential growth indicates non-unitary evolution"
+    - "Requires dt < 0.001 for marginal stability"
+
+  recommendation: "DO NOT DEPLOY - Requires immediate stability fixes"
+
+notes: |
+  This test validates the new chiral coupling implementation
+  added by @developer and @integration agents. It verifies:
+
+  1. CPU implementation of applyChiralMassStep()
+  2. Integration with ConservativeSolver::evolveDirac()
+  3. TRDEngine3D routing for coupled_vacuum_particle mode
+
+  The 0.01% energy conservation requirement is our GO/NO-GO
+  criterion for theoretical validity per TRD standards.

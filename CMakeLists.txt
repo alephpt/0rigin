@@ -510,6 +510,7 @@ set_target_properties(test_trdcore3d_symplectic PROPERTIES
 add_executable(test_strang_validation
     test_strang_validation.cpp
     src/ConservativeSolver.cpp
+    src/Dirac3D.cpp
 )
 target_include_directories(test_strang_validation PRIVATE
     ${CMAKE_SOURCE_DIR}/include
@@ -519,6 +520,7 @@ target_link_libraries(test_strang_validation PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
+    fftw3f
 )
 if(OpenMP_CXX_FOUND)
     target_link_libraries(test_strang_validation PRIVATE OpenMP::OpenMP_CXX)
@@ -531,6 +533,7 @@ set_target_properties(test_strang_validation PROPERTIES
 add_executable(test_integrator_comparison
     test_integrator_comparison.cpp
     src/ConservativeSolver.cpp
+    src/Dirac3D.cpp
 )
 target_include_directories(test_integrator_comparison PRIVATE
     ${CMAKE_SOURCE_DIR}/include
@@ -540,6 +543,7 @@ target_link_libraries(test_integrator_comparison PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
+    fftw3f
 )
 if(OpenMP_CXX_FOUND)
     target_link_libraries(test_integrator_comparison PRIVATE OpenMP::OpenMP_CXX)
@@ -552,6 +556,7 @@ set_target_properties(test_integrator_comparison PROPERTIES
 add_executable(test_spatial_order_comparison
     test_spatial_order_comparison.cpp
     src/ConservativeSolver.cpp
+    src/Dirac3D.cpp
 )
 target_include_directories(test_spatial_order_comparison PRIVATE
     ${CMAKE_SOURCE_DIR}/include
@@ -561,6 +566,7 @@ target_link_libraries(test_spatial_order_comparison PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
+    fftw3f
 )
 if(OpenMP_CXX_FOUND)
     target_link_libraries(test_spatial_order_comparison PRIVATE OpenMP::OpenMP_CXX)
@@ -573,6 +579,7 @@ set_target_properties(test_spatial_order_comparison PROPERTIES
 add_executable(test_spatial_order_timestep
     test_spatial_order_timestep.cpp
     src/ConservativeSolver.cpp
+    src/Dirac3D.cpp
 )
 target_include_directories(test_spatial_order_timestep PRIVATE
     ${CMAKE_SOURCE_DIR}/include
@@ -582,6 +589,7 @@ target_link_libraries(test_spatial_order_timestep PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
+    fftw3f
 )
 if(OpenMP_CXX_FOUND)
     target_link_libraries(test_spatial_order_timestep PRIVATE OpenMP::OpenMP_CXX)
@@ -594,6 +602,7 @@ set_target_properties(test_spatial_order_timestep PROPERTIES
 add_executable(test_laplacian_accuracy
     test_laplacian_accuracy.cpp
     src/ConservativeSolver.cpp
+    src/Dirac3D.cpp
 )
 target_include_directories(test_laplacian_accuracy PRIVATE
     ${CMAKE_SOURCE_DIR}/include
@@ -603,6 +612,7 @@ target_link_libraries(test_laplacian_accuracy PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
+    fftw3f
 )
 if(OpenMP_CXX_FOUND)
     target_link_libraries(test_laplacian_accuracy PRIVATE OpenMP::OpenMP_CXX)
@@ -615,6 +625,7 @@ set_target_properties(test_laplacian_accuracy PROPERTIES
 add_executable(test_grid_resolution
     test_grid_resolution.cpp
     src/ConservativeSolver.cpp
+    src/Dirac3D.cpp
 )
 target_include_directories(test_grid_resolution PRIVATE
     ${CMAKE_SOURCE_DIR}/include
@@ -624,6 +635,7 @@ target_link_libraries(test_grid_resolution PRIVATE
     ${Vulkan_LIBRARIES}
     pthread
     m
+    fftw3f
 )
 if(OpenMP_CXX_FOUND)
     target_link_libraries(test_grid_resolution PRIVATE OpenMP::OpenMP_CXX)
@@ -776,6 +788,50 @@ target_link_libraries(test_field_initializers_validation PRIVATE
 )
 
 set_target_properties(test_field_initializers_validation PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Dirac-Vacuum Chiral Coupling Validation
+add_executable(test_dirac_vacuum_chiral_coupling
+    test/test_dirac_vacuum_chiral_coupling.cpp
+    src/ConservativeSolver.cpp
+    src/TRDCore3D.cpp
+    src/Dirac3D.cpp
+)
+
+target_include_directories(test_dirac_vacuum_chiral_coupling PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${Vulkan_INCLUDE_DIRS}
+)
+
+target_link_libraries(test_dirac_vacuum_chiral_coupling PRIVATE
+    ${Vulkan_LIBRARIES}
+    fftw3f
+    pthread
+    m
+)
+
+set_target_properties(test_dirac_vacuum_chiral_coupling PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Simplified Dirac Chiral Coupling Test
+add_executable(test_dirac_vacuum_chiral_coupling_simple
+    test/test_dirac_vacuum_chiral_coupling_simple.cpp
+    src/Dirac3D.cpp
+)
+
+target_include_directories(test_dirac_vacuum_chiral_coupling_simple PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_dirac_vacuum_chiral_coupling_simple PRIVATE
+    fftw3f
+    pthread
+    m
+)
+
+set_target_properties(test_dirac_vacuum_chiral_coupling_simple PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 

@@ -4,6 +4,7 @@ bin/trd: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/TRD.dir/src/TRDCore.cpp.o \
   CMakeFiles/TRD.dir/src/TRDCore3D.cpp.o \
+  CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o \
   CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o \
   CMakeFiles/TRD.dir/src/Dirac3D.cpp.o \
   CMakeFiles/TRD.dir/src/TRDEngine.cpp.o \
@@ -111,6 +112,8 @@ bin/trd: \
 CMakeFiles/TRD.dir/src/TRDCore.cpp.o:
 
 CMakeFiles/TRD.dir/src/TRDCore3D.cpp.o:
+
+CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o:
 
 CMakeFiles/TRD.dir/src/Maxwell3D.cpp.o:
 

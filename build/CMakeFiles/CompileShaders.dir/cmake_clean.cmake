@@ -1,7 +1,5 @@
 file(REMOVE_RECURSE
   "/home/persist/neotec/0rigin/shaders/smft/accumulate.comp.spv"
-  "/home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp.spv"
-  "/home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp.spv"
   "/home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp.spv"
   "/home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp.spv"
   "/home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv"

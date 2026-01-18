@@ -404,6 +404,7 @@ CMakeFiles/TRD.dir/src/TRDEngine3D.cpp.o: \
  /usr/include/c++/15.2.1/pstl/execution_defs.h \
  /home/persist/neotec/0rigin/src/TRDDescriptorManager.h \
  /home/persist/neotec/0rigin/include/TRDCore3D.h \
+ /home/persist/neotec/0rigin/include/ConservativeSolver.h \
  /usr/include/c++/15.2.1/complex /usr/include/c++/15.2.1/sstream \
  /usr/include/c++/15.2.1/istream /usr/include/c++/15.2.1/ostream \
  /usr/include/c++/15.2.1/bits/ostream.tcc \

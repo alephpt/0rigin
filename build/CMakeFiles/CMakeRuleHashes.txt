@@ -1,7 +1,5 @@
 # Hashes of file build rules.
 ae0d486bc69b6abb25eaae8b3d705a11 /home/persist/neotec/0rigin/shaders/smft/accumulate.comp.spv
-ecdadfdb3092847f478c8cb28d7414b0 /home/persist/neotec/0rigin/shaders/smft/dirac_rk4.comp.spv
-66d2ca292afe948f9c23bdbcda844c62 /home/persist/neotec/0rigin/shaders/smft/dirac_stochastic.comp.spv
 5a997df8d330bae2bd5e44f0192f1459 /home/persist/neotec/0rigin/shaders/smft/dirac_velocity_verlet.comp.spv
 5fd34efc51432bbb24b1d01cc3178563 /home/persist/neotec/0rigin/shaders/smft/em_stress_energy.comp.spv
 610e5b1bf971df8d896ce1fb41399144 /home/persist/neotec/0rigin/shaders/smft/gravity_field.comp.spv
