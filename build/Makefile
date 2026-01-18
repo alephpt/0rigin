@@ -181,149 +181,6 @@ CompileShaders/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CompileShaders.dir/build.make CMakeFiles/CompileShaders.dir/build
 .PHONY : CompileShaders/fast
 
-#=============================================================================
-# Target rules for targets named test_trdcore3d_basic
-
-# Build rule for target.
-test_trdcore3d_basic: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_trdcore3d_basic
-.PHONY : test_trdcore3d_basic
-
-# fast build rule for target.
-test_trdcore3d_basic/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/build
-.PHONY : test_trdcore3d_basic/fast
-
-#=============================================================================
-# Target rules for targets named test_trdcore3d_symplectic
-
-# Build rule for target.
-test_trdcore3d_symplectic: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_trdcore3d_symplectic
-.PHONY : test_trdcore3d_symplectic
-
-# fast build rule for target.
-test_trdcore3d_symplectic/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/build
-.PHONY : test_trdcore3d_symplectic/fast
-
-#=============================================================================
-# Target rules for targets named test_strang_validation
-
-# Build rule for target.
-test_strang_validation: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_strang_validation
-.PHONY : test_strang_validation
-
-# fast build rule for target.
-test_strang_validation/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/build
-.PHONY : test_strang_validation/fast
-
-#=============================================================================
-# Target rules for targets named test_integrator_comparison
-
-# Build rule for target.
-test_integrator_comparison: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_integrator_comparison
-.PHONY : test_integrator_comparison
-
-# fast build rule for target.
-test_integrator_comparison/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/build
-.PHONY : test_integrator_comparison/fast
-
-#=============================================================================
-# Target rules for targets named test_spatial_order_comparison
-
-# Build rule for target.
-test_spatial_order_comparison: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_spatial_order_comparison
-.PHONY : test_spatial_order_comparison
-
-# fast build rule for target.
-test_spatial_order_comparison/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/build
-.PHONY : test_spatial_order_comparison/fast
-
-#=============================================================================
-# Target rules for targets named test_spatial_order_timestep
-
-# Build rule for target.
-test_spatial_order_timestep: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_spatial_order_timestep
-.PHONY : test_spatial_order_timestep
-
-# fast build rule for target.
-test_spatial_order_timestep/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/build
-.PHONY : test_spatial_order_timestep/fast
-
-#=============================================================================
-# Target rules for targets named test_laplacian_accuracy
-
-# Build rule for target.
-test_laplacian_accuracy: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_laplacian_accuracy
-.PHONY : test_laplacian_accuracy
-
-# fast build rule for target.
-test_laplacian_accuracy/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/build
-.PHONY : test_laplacian_accuracy/fast
-
-#=============================================================================
-# Target rules for targets named test_grid_resolution
-
-# Build rule for target.
-test_grid_resolution: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_grid_resolution
-.PHONY : test_grid_resolution
-
-# fast build rule for target.
-test_grid_resolution/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/build
-.PHONY : test_grid_resolution/fast
-
-#=============================================================================
-# Target rules for targets named test_field_initializers_validation
-
-# Build rule for target.
-test_field_initializers_validation: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_field_initializers_validation
-.PHONY : test_field_initializers_validation
-
-# fast build rule for target.
-test_field_initializers_validation/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/build
-.PHONY : test_field_initializers_validation/fast
-
-#=============================================================================
-# Target rules for targets named test_dirac_vacuum_chiral_coupling
-
-# Build rule for target.
-test_dirac_vacuum_chiral_coupling: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_dirac_vacuum_chiral_coupling
-.PHONY : test_dirac_vacuum_chiral_coupling
-
-# fast build rule for target.
-test_dirac_vacuum_chiral_coupling/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build
-.PHONY : test_dirac_vacuum_chiral_coupling/fast
-
-#=============================================================================
-# Target rules for targets named test_dirac_vacuum_chiral_coupling_simple
-
-# Build rule for target.
-test_dirac_vacuum_chiral_coupling_simple: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_dirac_vacuum_chiral_coupling_simple
-.PHONY : test_dirac_vacuum_chiral_coupling_simple
-
-# fast build rule for target.
-test_dirac_vacuum_chiral_coupling_simple/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build
-.PHONY : test_dirac_vacuum_chiral_coupling_simple/fast
-
 lib/Nova/Core/components/genesis.o: lib/Nova/Core/components/genesis.cpp.o
 .PHONY : lib/Nova/Core/components/genesis.o
 
@@ -858,13 +715,6 @@ src/ConservativeSolver.o: src/ConservativeSolver.cpp.o
 # target to build an object file
 src/ConservativeSolver.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/src/ConservativeSolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/src/ConservativeSolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/src/ConservativeSolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/src/ConservativeSolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/src/ConservativeSolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/src/ConservativeSolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/ConservativeSolver.cpp.o
 .PHONY : src/ConservativeSolver.cpp.o
 
 src/ConservativeSolver.i: src/ConservativeSolver.cpp.i
@@ -873,13 +723,6 @@ src/ConservativeSolver.i: src/ConservativeSolver.cpp.i
 # target to preprocess a source file
 src/ConservativeSolver.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/src/ConservativeSolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/src/ConservativeSolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/src/ConservativeSolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/src/ConservativeSolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/src/ConservativeSolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/src/ConservativeSolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/ConservativeSolver.cpp.i
 .PHONY : src/ConservativeSolver.cpp.i
 
 src/ConservativeSolver.s: src/ConservativeSolver.cpp.s
@@ -888,13 +731,6 @@ src/ConservativeSolver.s: src/ConservativeSolver.cpp.s
 # target to generate assembly for a file
 src/ConservativeSolver.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/ConservativeSolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/src/ConservativeSolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/src/ConservativeSolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/src/ConservativeSolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/src/ConservativeSolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/src/ConservativeSolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/src/ConservativeSolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/ConservativeSolver.cpp.s
 .PHONY : src/ConservativeSolver.cpp.s
 
 src/Dirac3D.o: src/Dirac3D.cpp.o
@@ -903,14 +739,6 @@ src/Dirac3D.o: src/Dirac3D.cpp.o
 # target to build an object file
 src/Dirac3D.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/Dirac3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/src/Dirac3D.cpp.o
 .PHONY : src/Dirac3D.cpp.o
 
 src/Dirac3D.i: src/Dirac3D.cpp.i
@@ -919,14 +747,6 @@ src/Dirac3D.i: src/Dirac3D.cpp.i
 # target to preprocess a source file
 src/Dirac3D.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/Dirac3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/src/Dirac3D.cpp.i
 .PHONY : src/Dirac3D.cpp.i
 
 src/Dirac3D.s: src/Dirac3D.cpp.s
@@ -935,14 +755,6 @@ src/Dirac3D.s: src/Dirac3D.cpp.s
 # target to generate assembly for a file
 src/Dirac3D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/Dirac3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/src/Dirac3D.cpp.s
 .PHONY : src/Dirac3D.cpp.s
 
 src/DiracEvolution.o: src/DiracEvolution.cpp.o
@@ -1095,9 +907,6 @@ src/TRDCore3D.o: src/TRDCore3D.cpp.o
 # target to build an object file
 src/TRDCore3D.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/TRDCore3D.cpp.o
 .PHONY : src/TRDCore3D.cpp.o
 
 src/TRDCore3D.i: src/TRDCore3D.cpp.i
@@ -1106,9 +915,6 @@ src/TRDCore3D.i: src/TRDCore3D.cpp.i
 # target to preprocess a source file
 src/TRDCore3D.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/TRDCore3D.cpp.i
 .PHONY : src/TRDCore3D.cpp.i
 
 src/TRDCore3D.s: src/TRDCore3D.cpp.s
@@ -1117,9 +923,6 @@ src/TRDCore3D.s: src/TRDCore3D.cpp.s
 # target to generate assembly for a file
 src/TRDCore3D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/TRDCore3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/src/TRDCore3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/src/TRDCore3D.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/src/TRDCore3D.cpp.s
 .PHONY : src/TRDCore3D.cpp.s
 
 src/TRDDescriptorManager.o: src/TRDDescriptorManager.cpp.o
@@ -1506,54 +1309,6 @@ test/test_dark_matter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_dark_matter.cpp.s
 .PHONY : test/test_dark_matter.cpp.s
 
-test/test_dirac_vacuum_chiral_coupling.o: test/test_dirac_vacuum_chiral_coupling.cpp.o
-.PHONY : test/test_dirac_vacuum_chiral_coupling.o
-
-# target to build an object file
-test/test_dirac_vacuum_chiral_coupling.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/test/test_dirac_vacuum_chiral_coupling.cpp.o
-.PHONY : test/test_dirac_vacuum_chiral_coupling.cpp.o
-
-test/test_dirac_vacuum_chiral_coupling.i: test/test_dirac_vacuum_chiral_coupling.cpp.i
-.PHONY : test/test_dirac_vacuum_chiral_coupling.i
-
-# target to preprocess a source file
-test/test_dirac_vacuum_chiral_coupling.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/test/test_dirac_vacuum_chiral_coupling.cpp.i
-.PHONY : test/test_dirac_vacuum_chiral_coupling.cpp.i
-
-test/test_dirac_vacuum_chiral_coupling.s: test/test_dirac_vacuum_chiral_coupling.cpp.s
-.PHONY : test/test_dirac_vacuum_chiral_coupling.s
-
-# target to generate assembly for a file
-test/test_dirac_vacuum_chiral_coupling.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/test/test_dirac_vacuum_chiral_coupling.cpp.s
-.PHONY : test/test_dirac_vacuum_chiral_coupling.cpp.s
-
-test/test_dirac_vacuum_chiral_coupling_simple.o: test/test_dirac_vacuum_chiral_coupling_simple.cpp.o
-.PHONY : test/test_dirac_vacuum_chiral_coupling_simple.o
-
-# target to build an object file
-test/test_dirac_vacuum_chiral_coupling_simple.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/test/test_dirac_vacuum_chiral_coupling_simple.cpp.o
-.PHONY : test/test_dirac_vacuum_chiral_coupling_simple.cpp.o
-
-test/test_dirac_vacuum_chiral_coupling_simple.i: test/test_dirac_vacuum_chiral_coupling_simple.cpp.i
-.PHONY : test/test_dirac_vacuum_chiral_coupling_simple.i
-
-# target to preprocess a source file
-test/test_dirac_vacuum_chiral_coupling_simple.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/test/test_dirac_vacuum_chiral_coupling_simple.cpp.i
-.PHONY : test/test_dirac_vacuum_chiral_coupling_simple.cpp.i
-
-test/test_dirac_vacuum_chiral_coupling_simple.s: test/test_dirac_vacuum_chiral_coupling_simple.cpp.s
-.PHONY : test/test_dirac_vacuum_chiral_coupling_simple.s
-
-# target to generate assembly for a file
-test/test_dirac_vacuum_chiral_coupling_simple.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/test/test_dirac_vacuum_chiral_coupling_simple.cpp.s
-.PHONY : test/test_dirac_vacuum_chiral_coupling_simple.cpp.s
-
 test/test_einstein_field_equations.o: test/test_einstein_field_equations.cpp.o
 .PHONY : test/test_einstein_field_equations.o
 
@@ -1625,30 +1380,6 @@ test/test_em_gravity_coupling_3d.s: test/test_em_gravity_coupling_3d.cpp.s
 test/test_em_gravity_coupling_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_em_gravity_coupling_3d.cpp.s
 .PHONY : test/test_em_gravity_coupling_3d.cpp.s
-
-test/test_field_initializers_validation.o: test/test_field_initializers_validation.cpp.o
-.PHONY : test/test_field_initializers_validation.o
-
-# target to build an object file
-test/test_field_initializers_validation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.o
-.PHONY : test/test_field_initializers_validation.cpp.o
-
-test/test_field_initializers_validation.i: test/test_field_initializers_validation.cpp.i
-.PHONY : test/test_field_initializers_validation.i
-
-# target to preprocess a source file
-test/test_field_initializers_validation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.i
-.PHONY : test/test_field_initializers_validation.cpp.i
-
-test/test_field_initializers_validation.s: test/test_field_initializers_validation.cpp.s
-.PHONY : test/test_field_initializers_validation.s
-
-# target to generate assembly for a file
-test/test_field_initializers_validation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/test/test_field_initializers_validation.cpp.s
-.PHONY : test/test_field_initializers_validation.cpp.s
 
 test/test_fine_structure_constant.o: test/test_fine_structure_constant.cpp.o
 .PHONY : test/test_fine_structure_constant.o
@@ -2394,54 +2125,6 @@ test/test_time_dilation_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_time_dilation_3d.cpp.s
 .PHONY : test/test_time_dilation_3d.cpp.s
 
-test/test_trdcore3d_basic.o: test/test_trdcore3d_basic.cpp.o
-.PHONY : test/test_trdcore3d_basic.o
-
-# target to build an object file
-test/test_trdcore3d_basic.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/test/test_trdcore3d_basic.cpp.o
-.PHONY : test/test_trdcore3d_basic.cpp.o
-
-test/test_trdcore3d_basic.i: test/test_trdcore3d_basic.cpp.i
-.PHONY : test/test_trdcore3d_basic.i
-
-# target to preprocess a source file
-test/test_trdcore3d_basic.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/test/test_trdcore3d_basic.cpp.i
-.PHONY : test/test_trdcore3d_basic.cpp.i
-
-test/test_trdcore3d_basic.s: test/test_trdcore3d_basic.cpp.s
-.PHONY : test/test_trdcore3d_basic.s
-
-# target to generate assembly for a file
-test/test_trdcore3d_basic.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/test/test_trdcore3d_basic.cpp.s
-.PHONY : test/test_trdcore3d_basic.cpp.s
-
-test/test_trdcore3d_symplectic.o: test/test_trdcore3d_symplectic.cpp.o
-.PHONY : test/test_trdcore3d_symplectic.o
-
-# target to build an object file
-test/test_trdcore3d_symplectic.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.o
-.PHONY : test/test_trdcore3d_symplectic.cpp.o
-
-test/test_trdcore3d_symplectic.i: test/test_trdcore3d_symplectic.cpp.i
-.PHONY : test/test_trdcore3d_symplectic.i
-
-# target to preprocess a source file
-test/test_trdcore3d_symplectic.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.i
-.PHONY : test/test_trdcore3d_symplectic.cpp.i
-
-test/test_trdcore3d_symplectic.s: test/test_trdcore3d_symplectic.cpp.s
-.PHONY : test/test_trdcore3d_symplectic.s
-
-# target to generate assembly for a file
-test/test_trdcore3d_symplectic.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/test/test_trdcore3d_symplectic.cpp.s
-.PHONY : test/test_trdcore3d_symplectic.cpp.s
-
 test/test_unitarity.o: test/test_unitarity.cpp.o
 .PHONY : test/test_unitarity.o
 
@@ -2490,150 +2173,6 @@ test/test_weak_field_3d.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/test/test_weak_field_3d.cpp.s
 .PHONY : test/test_weak_field_3d.cpp.s
 
-test_grid_resolution.o: test_grid_resolution.cpp.o
-.PHONY : test_grid_resolution.o
-
-# target to build an object file
-test_grid_resolution.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/test_grid_resolution.cpp.o
-.PHONY : test_grid_resolution.cpp.o
-
-test_grid_resolution.i: test_grid_resolution.cpp.i
-.PHONY : test_grid_resolution.i
-
-# target to preprocess a source file
-test_grid_resolution.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/test_grid_resolution.cpp.i
-.PHONY : test_grid_resolution.cpp.i
-
-test_grid_resolution.s: test_grid_resolution.cpp.s
-.PHONY : test_grid_resolution.s
-
-# target to generate assembly for a file
-test_grid_resolution.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/test_grid_resolution.cpp.s
-.PHONY : test_grid_resolution.cpp.s
-
-test_integrator_comparison.o: test_integrator_comparison.cpp.o
-.PHONY : test_integrator_comparison.o
-
-# target to build an object file
-test_integrator_comparison.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/test_integrator_comparison.cpp.o
-.PHONY : test_integrator_comparison.cpp.o
-
-test_integrator_comparison.i: test_integrator_comparison.cpp.i
-.PHONY : test_integrator_comparison.i
-
-# target to preprocess a source file
-test_integrator_comparison.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/test_integrator_comparison.cpp.i
-.PHONY : test_integrator_comparison.cpp.i
-
-test_integrator_comparison.s: test_integrator_comparison.cpp.s
-.PHONY : test_integrator_comparison.s
-
-# target to generate assembly for a file
-test_integrator_comparison.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/test_integrator_comparison.cpp.s
-.PHONY : test_integrator_comparison.cpp.s
-
-test_laplacian_accuracy.o: test_laplacian_accuracy.cpp.o
-.PHONY : test_laplacian_accuracy.o
-
-# target to build an object file
-test_laplacian_accuracy.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/test_laplacian_accuracy.cpp.o
-.PHONY : test_laplacian_accuracy.cpp.o
-
-test_laplacian_accuracy.i: test_laplacian_accuracy.cpp.i
-.PHONY : test_laplacian_accuracy.i
-
-# target to preprocess a source file
-test_laplacian_accuracy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/test_laplacian_accuracy.cpp.i
-.PHONY : test_laplacian_accuracy.cpp.i
-
-test_laplacian_accuracy.s: test_laplacian_accuracy.cpp.s
-.PHONY : test_laplacian_accuracy.s
-
-# target to generate assembly for a file
-test_laplacian_accuracy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/test_laplacian_accuracy.cpp.s
-.PHONY : test_laplacian_accuracy.cpp.s
-
-test_spatial_order_comparison.o: test_spatial_order_comparison.cpp.o
-.PHONY : test_spatial_order_comparison.o
-
-# target to build an object file
-test_spatial_order_comparison.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/test_spatial_order_comparison.cpp.o
-.PHONY : test_spatial_order_comparison.cpp.o
-
-test_spatial_order_comparison.i: test_spatial_order_comparison.cpp.i
-.PHONY : test_spatial_order_comparison.i
-
-# target to preprocess a source file
-test_spatial_order_comparison.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/test_spatial_order_comparison.cpp.i
-.PHONY : test_spatial_order_comparison.cpp.i
-
-test_spatial_order_comparison.s: test_spatial_order_comparison.cpp.s
-.PHONY : test_spatial_order_comparison.s
-
-# target to generate assembly for a file
-test_spatial_order_comparison.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/test_spatial_order_comparison.cpp.s
-.PHONY : test_spatial_order_comparison.cpp.s
-
-test_spatial_order_timestep.o: test_spatial_order_timestep.cpp.o
-.PHONY : test_spatial_order_timestep.o
-
-# target to build an object file
-test_spatial_order_timestep.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/test_spatial_order_timestep.cpp.o
-.PHONY : test_spatial_order_timestep.cpp.o
-
-test_spatial_order_timestep.i: test_spatial_order_timestep.cpp.i
-.PHONY : test_spatial_order_timestep.i
-
-# target to preprocess a source file
-test_spatial_order_timestep.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/test_spatial_order_timestep.cpp.i
-.PHONY : test_spatial_order_timestep.cpp.i
-
-test_spatial_order_timestep.s: test_spatial_order_timestep.cpp.s
-.PHONY : test_spatial_order_timestep.s
-
-# target to generate assembly for a file
-test_spatial_order_timestep.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/test_spatial_order_timestep.cpp.s
-.PHONY : test_spatial_order_timestep.cpp.s
-
-test_strang_validation.o: test_strang_validation.cpp.o
-.PHONY : test_strang_validation.o
-
-# target to build an object file
-test_strang_validation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/test_strang_validation.cpp.o
-.PHONY : test_strang_validation.cpp.o
-
-test_strang_validation.i: test_strang_validation.cpp.i
-.PHONY : test_strang_validation.i
-
-# target to preprocess a source file
-test_strang_validation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/test_strang_validation.cpp.i
-.PHONY : test_strang_validation.cpp.i
-
-test_strang_validation.s: test_strang_validation.cpp.s
-.PHONY : test_strang_validation.s
-
-# target to generate assembly for a file
-test_strang_validation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/test_strang_validation.cpp.s
-.PHONY : test_strang_validation.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -2647,17 +2186,6 @@ help:
 	@echo "... Physics"
 	@echo "... TRD"
 	@echo "... imgui"
-	@echo "... test_dirac_vacuum_chiral_coupling"
-	@echo "... test_dirac_vacuum_chiral_coupling_simple"
-	@echo "... test_field_initializers_validation"
-	@echo "... test_grid_resolution"
-	@echo "... test_integrator_comparison"
-	@echo "... test_laplacian_accuracy"
-	@echo "... test_spatial_order_comparison"
-	@echo "... test_spatial_order_timestep"
-	@echo "... test_strang_validation"
-	@echo "... test_trdcore3d_basic"
-	@echo "... test_trdcore3d_symplectic"
 	@echo "... lib/Nova/Core/components/genesis.o"
 	@echo "... lib/Nova/Core/components/genesis.i"
 	@echo "... lib/Nova/Core/components/genesis.s"
@@ -2799,12 +2327,6 @@ help:
 	@echo "... test/test_dark_matter.o"
 	@echo "... test/test_dark_matter.i"
 	@echo "... test/test_dark_matter.s"
-	@echo "... test/test_dirac_vacuum_chiral_coupling.o"
-	@echo "... test/test_dirac_vacuum_chiral_coupling.i"
-	@echo "... test/test_dirac_vacuum_chiral_coupling.s"
-	@echo "... test/test_dirac_vacuum_chiral_coupling_simple.o"
-	@echo "... test/test_dirac_vacuum_chiral_coupling_simple.i"
-	@echo "... test/test_dirac_vacuum_chiral_coupling_simple.s"
 	@echo "... test/test_einstein_field_equations.o"
 	@echo "... test/test_einstein_field_equations.i"
 	@echo "... test/test_einstein_field_equations.s"
@@ -2814,9 +2336,6 @@ help:
 	@echo "... test/test_em_gravity_coupling_3d.o"
 	@echo "... test/test_em_gravity_coupling_3d.i"
 	@echo "... test/test_em_gravity_coupling_3d.s"
-	@echo "... test/test_field_initializers_validation.o"
-	@echo "... test/test_field_initializers_validation.i"
-	@echo "... test/test_field_initializers_validation.s"
 	@echo "... test/test_fine_structure_constant.o"
 	@echo "... test/test_fine_structure_constant.i"
 	@echo "... test/test_fine_structure_constant.s"
@@ -2910,36 +2429,12 @@ help:
 	@echo "... test/test_time_dilation_3d.o"
 	@echo "... test/test_time_dilation_3d.i"
 	@echo "... test/test_time_dilation_3d.s"
-	@echo "... test/test_trdcore3d_basic.o"
-	@echo "... test/test_trdcore3d_basic.i"
-	@echo "... test/test_trdcore3d_basic.s"
-	@echo "... test/test_trdcore3d_symplectic.o"
-	@echo "... test/test_trdcore3d_symplectic.i"
-	@echo "... test/test_trdcore3d_symplectic.s"
 	@echo "... test/test_unitarity.o"
 	@echo "... test/test_unitarity.i"
 	@echo "... test/test_unitarity.s"
 	@echo "... test/test_weak_field_3d.o"
 	@echo "... test/test_weak_field_3d.i"
 	@echo "... test/test_weak_field_3d.s"
-	@echo "... test_grid_resolution.o"
-	@echo "... test_grid_resolution.i"
-	@echo "... test_grid_resolution.s"
-	@echo "... test_integrator_comparison.o"
-	@echo "... test_integrator_comparison.i"
-	@echo "... test_integrator_comparison.s"
-	@echo "... test_laplacian_accuracy.o"
-	@echo "... test_laplacian_accuracy.i"
-	@echo "... test_laplacian_accuracy.s"
-	@echo "... test_spatial_order_comparison.o"
-	@echo "... test_spatial_order_comparison.i"
-	@echo "... test_spatial_order_comparison.s"
-	@echo "... test_spatial_order_timestep.o"
-	@echo "... test_spatial_order_timestep.i"
-	@echo "... test_spatial_order_timestep.s"
-	@echo "... test_strang_validation.o"
-	@echo "... test_strang_validation.i"
-	@echo "... test_strang_validation.s"
 .PHONY : help
 
 

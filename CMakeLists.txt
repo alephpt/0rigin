@@ -441,26 +441,27 @@ endif()
 # )
 
 # TRDCore3D Basic Test
-add_executable(test_trdcore3d_basic
-    test/test_trdcore3d_basic.cpp
-    src/TRDCore3D.cpp
-)
-
-target_include_directories(test_trdcore3d_basic PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/lib
-    ${Vulkan_INCLUDE_DIRS}
-)
-
-target_link_libraries(test_trdcore3d_basic PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-)
-
-set_target_properties(test_trdcore3d_basic PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test framework
+# add_executable(test_trdcore3d_basic
+#     test/test_trdcore3d_basic.cpp
+#     src/TRDCore3D.cpp
+# )
+#
+# target_include_directories(test_trdcore3d_basic PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${CMAKE_SOURCE_DIR}/lib
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+#
+# target_link_libraries(test_trdcore3d_basic PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+# )
+#
+# set_target_properties(test_trdcore3d_basic PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # TRDCore3D GPU Test (Simplified)
 # MIGRATED to ./trd --test (GPU functionality tested in main executable)
@@ -485,164 +486,171 @@ set_target_properties(test_trdcore3d_basic PROPERTIES
 # )
 
 # TRDCore3D Symplectic Integration Test
-add_executable(test_trdcore3d_symplectic
-    test/test_trdcore3d_symplectic.cpp
-    src/TRDCore3D.cpp
-)
-
-target_include_directories(test_trdcore3d_symplectic PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/lib
-    ${Vulkan_INCLUDE_DIRS}
-)
-
-target_link_libraries(test_trdcore3d_symplectic PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-)
-
-set_target_properties(test_trdcore3d_symplectic PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test framework
+# add_executable(test_trdcore3d_symplectic
+#     test/test_trdcore3d_symplectic.cpp
+#     src/TRDCore3D.cpp
+# )
+#
+# target_include_directories(test_trdcore3d_symplectic PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${CMAKE_SOURCE_DIR}/lib
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+#
+# target_link_libraries(test_trdcore3d_symplectic PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+# )
+#
+# set_target_properties(test_trdcore3d_symplectic PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Strang Splitting Validation Test (ConservativeSolver)
-add_executable(test_strang_validation
-    test_strang_validation.cpp
-    src/ConservativeSolver.cpp
-    src/Dirac3D.cpp
-)
-target_include_directories(test_strang_validation PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-target_link_libraries(test_strang_validation PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-    fftw3f
-)
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(test_strang_validation PRIVATE OpenMP::OpenMP_CXX)
-endif()
-set_target_properties(test_strang_validation PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# # MIGRATED to ./trd --test framework
+# add_executable(test_strang_validation
+#     test_strang_validation.cpp
+#     src/ConservativeSolver.cpp
+#     src/Dirac3D.cpp
+# )
+# target_include_directories(test_strang_validation PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_strang_validation PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+#     fftw3f
+# )
+# if(OpenMP_CXX_FOUND)
+#     target_link_libraries(test_strang_validation PRIVATE OpenMP::OpenMP_CXX)
+# endif()
+# set_target_properties(test_strang_validation PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Integrator Comparison Test
-add_executable(test_integrator_comparison
-    test_integrator_comparison.cpp
-    src/ConservativeSolver.cpp
-    src/Dirac3D.cpp
-)
-target_include_directories(test_integrator_comparison PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-target_link_libraries(test_integrator_comparison PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-    fftw3f
-)
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(test_integrator_comparison PRIVATE OpenMP::OpenMP_CXX)
-endif()
-set_target_properties(test_integrator_comparison PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# # MIGRATED to ./trd --test framework
+# add_executable(test_integrator_comparison
+#     test_integrator_comparison.cpp
+#     src/ConservativeSolver.cpp
+#     src/Dirac3D.cpp
+# )
+# target_include_directories(test_integrator_comparison PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_integrator_comparison PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+#     fftw3f
+# )
+# if(OpenMP_CXX_FOUND)
+#     target_link_libraries(test_integrator_comparison PRIVATE OpenMP::OpenMP_CXX)
+# endif()
+# set_target_properties(test_integrator_comparison PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Spatial Order Comparison Test (2nd vs 4th order stencils)
-add_executable(test_spatial_order_comparison
-    test_spatial_order_comparison.cpp
-    src/ConservativeSolver.cpp
-    src/Dirac3D.cpp
-)
-target_include_directories(test_spatial_order_comparison PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-target_link_libraries(test_spatial_order_comparison PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-    fftw3f
-)
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(test_spatial_order_comparison PRIVATE OpenMP::OpenMP_CXX)
-endif()
-set_target_properties(test_spatial_order_comparison PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# # MIGRATED to ./trd --test framework
+# add_executable(test_spatial_order_comparison
+#     test_spatial_order_comparison.cpp
+#     src/ConservativeSolver.cpp
+#     src/Dirac3D.cpp
+# )
+# target_include_directories(test_spatial_order_comparison PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_spatial_order_comparison PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+#     fftw3f
+# )
+# if(OpenMP_CXX_FOUND)
+#     target_link_libraries(test_spatial_order_comparison PRIVATE OpenMP::OpenMP_CXX)
+# endif()
+# set_target_properties(test_spatial_order_comparison PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Spatial Order + Timestep Sweep Test
-add_executable(test_spatial_order_timestep
-    test_spatial_order_timestep.cpp
-    src/ConservativeSolver.cpp
-    src/Dirac3D.cpp
-)
-target_include_directories(test_spatial_order_timestep PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-target_link_libraries(test_spatial_order_timestep PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-    fftw3f
-)
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(test_spatial_order_timestep PRIVATE OpenMP::OpenMP_CXX)
-endif()
-set_target_properties(test_spatial_order_timestep PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# # MIGRATED to ./trd --test framework
+# add_executable(test_spatial_order_timestep
+#     test_spatial_order_timestep.cpp
+#     src/ConservativeSolver.cpp
+#     src/Dirac3D.cpp
+# )
+# target_include_directories(test_spatial_order_timestep PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_spatial_order_timestep PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+#     fftw3f
+# )
+# if(OpenMP_CXX_FOUND)
+#     target_link_libraries(test_spatial_order_timestep PRIVATE OpenMP::OpenMP_CXX)
+# endif()
+# set_target_properties(test_spatial_order_timestep PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Laplacian Accuracy Test (verify 4th-order stencil)
-add_executable(test_laplacian_accuracy
-    test_laplacian_accuracy.cpp
-    src/ConservativeSolver.cpp
-    src/Dirac3D.cpp
-)
-target_include_directories(test_laplacian_accuracy PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-target_link_libraries(test_laplacian_accuracy PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-    fftw3f
-)
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(test_laplacian_accuracy PRIVATE OpenMP::OpenMP_CXX)
-endif()
-set_target_properties(test_laplacian_accuracy PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# # MIGRATED to ./trd --test framework
+# add_executable(test_laplacian_accuracy
+#     test_laplacian_accuracy.cpp
+#     src/ConservativeSolver.cpp
+#     src/Dirac3D.cpp
+# )
+# target_include_directories(test_laplacian_accuracy PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_laplacian_accuracy PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+#     fftw3f
+# )
+# if(OpenMP_CXX_FOUND)
+#     target_link_libraries(test_laplacian_accuracy PRIVATE OpenMP::OpenMP_CXX)
+# endif()
+# set_target_properties(test_laplacian_accuracy PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Grid Resolution Test (verify dx² scaling)
-add_executable(test_grid_resolution
-    test_grid_resolution.cpp
-    src/ConservativeSolver.cpp
-    src/Dirac3D.cpp
-)
-target_include_directories(test_grid_resolution PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-target_link_libraries(test_grid_resolution PRIVATE
-    ${Vulkan_LIBRARIES}
-    pthread
-    m
-    fftw3f
-)
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(test_grid_resolution PRIVATE OpenMP::OpenMP_CXX)
-endif()
-set_target_properties(test_grid_resolution PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# # MIGRATED to ./trd --test framework
+# add_executable(test_grid_resolution
+#     test_grid_resolution.cpp
+#     src/ConservativeSolver.cpp
+#     src/Dirac3D.cpp
+# )
+# target_include_directories(test_grid_resolution PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+# target_link_libraries(test_grid_resolution PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     pthread
+#     m
+#     fftw3f
+# )
+# if(OpenMP_CXX_FOUND)
+#     target_link_libraries(test_grid_resolution PRIVATE OpenMP::OpenMP_CXX)
+# endif()
+# set_target_properties(test_grid_resolution PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # TRD 3D CPU-Only Test (no GPU dependency)
 # MIGRATED to ./trd --test (CPU mode available in main executable)
@@ -775,65 +783,68 @@ set_target_properties(test_grid_resolution PROPERTIES
 # )
 
 # Field Initializers Validation - Verify TRDFieldInitializers.h
-add_executable(test_field_initializers_validation
-    test/test_field_initializers_validation.cpp
-)
-
-target_include_directories(test_field_initializers_validation PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_field_initializers_validation PRIVATE
-    m
-)
-
-set_target_properties(test_field_initializers_validation PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# # MIGRATED to ./trd --test framework
+# add_executable(test_field_initializers_validation
+#     test/test_field_initializers_validation.cpp
+# )
+# 
+# target_include_directories(test_field_initializers_validation PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+# 
+# target_link_libraries(test_field_initializers_validation PRIVATE
+#     m
+# )
+# 
+# set_target_properties(test_field_initializers_validation PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Dirac-Vacuum Chiral Coupling Validation
-add_executable(test_dirac_vacuum_chiral_coupling
-    test/test_dirac_vacuum_chiral_coupling.cpp
-    src/ConservativeSolver.cpp
-    src/TRDCore3D.cpp
-    src/Dirac3D.cpp
-)
-
-target_include_directories(test_dirac_vacuum_chiral_coupling PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-    ${Vulkan_INCLUDE_DIRS}
-)
-
-target_link_libraries(test_dirac_vacuum_chiral_coupling PRIVATE
-    ${Vulkan_LIBRARIES}
-    fftw3f
-    pthread
-    m
-)
-
-set_target_properties(test_dirac_vacuum_chiral_coupling PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# MIGRATED to ./trd --test framework
+# add_executable(test_dirac_vacuum_chiral_coupling
+#     test/test_dirac_vacuum_chiral_coupling.cpp
+#     src/ConservativeSolver.cpp
+#     src/TRDCore3D.cpp
+#     src/Dirac3D.cpp
+# )
+#
+# target_include_directories(test_dirac_vacuum_chiral_coupling PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+#     ${Vulkan_INCLUDE_DIRS}
+# )
+#
+# target_link_libraries(test_dirac_vacuum_chiral_coupling PRIVATE
+#     ${Vulkan_LIBRARIES}
+#     fftw3f
+#     pthread
+#     m
+# )
+#
+# set_target_properties(test_dirac_vacuum_chiral_coupling PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # Simplified Dirac Chiral Coupling Test
-add_executable(test_dirac_vacuum_chiral_coupling_simple
-    test/test_dirac_vacuum_chiral_coupling_simple.cpp
-    src/Dirac3D.cpp
-)
-
-target_include_directories(test_dirac_vacuum_chiral_coupling_simple PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(test_dirac_vacuum_chiral_coupling_simple PRIVATE
-    fftw3f
-    pthread
-    m
-)
-
-set_target_properties(test_dirac_vacuum_chiral_coupling_simple PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# # MIGRATED to ./trd --test framework
+# add_executable(test_dirac_vacuum_chiral_coupling_simple
+#     test/test_dirac_vacuum_chiral_coupling_simple.cpp
+#     src/Dirac3D.cpp
+# )
+# 
+# target_include_directories(test_dirac_vacuum_chiral_coupling_simple PRIVATE
+#     ${CMAKE_SOURCE_DIR}/include
+# )
+# 
+# target_link_libraries(test_dirac_vacuum_chiral_coupling_simple PRIVATE
+#     fftw3f
+#     pthread
+#     m
+# )
+# 
+# set_target_properties(test_dirac_vacuum_chiral_coupling_simple PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+# )
 
 # ============================================================================
 # LEGACY TEST BINARIES REMOVED

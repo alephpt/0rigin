@@ -68,17 +68,6 @@ all: CMakeFiles/Nova.dir/all
 all: CMakeFiles/imgui.dir/all
 all: CMakeFiles/TRD.dir/all
 all: CMakeFiles/CompileShaders.dir/all
-all: CMakeFiles/test_trdcore3d_basic.dir/all
-all: CMakeFiles/test_trdcore3d_symplectic.dir/all
-all: CMakeFiles/test_strang_validation.dir/all
-all: CMakeFiles/test_integrator_comparison.dir/all
-all: CMakeFiles/test_spatial_order_comparison.dir/all
-all: CMakeFiles/test_spatial_order_timestep.dir/all
-all: CMakeFiles/test_laplacian_accuracy.dir/all
-all: CMakeFiles/test_grid_resolution.dir/all
-all: CMakeFiles/test_field_initializers_validation.dir/all
-all: CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/all
-all: CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
@@ -87,17 +76,6 @@ codegen: CMakeFiles/Nova.dir/codegen
 codegen: CMakeFiles/imgui.dir/codegen
 codegen: CMakeFiles/TRD.dir/codegen
 codegen: CMakeFiles/CompileShaders.dir/codegen
-codegen: CMakeFiles/test_trdcore3d_basic.dir/codegen
-codegen: CMakeFiles/test_trdcore3d_symplectic.dir/codegen
-codegen: CMakeFiles/test_strang_validation.dir/codegen
-codegen: CMakeFiles/test_integrator_comparison.dir/codegen
-codegen: CMakeFiles/test_spatial_order_comparison.dir/codegen
-codegen: CMakeFiles/test_spatial_order_timestep.dir/codegen
-codegen: CMakeFiles/test_laplacian_accuracy.dir/codegen
-codegen: CMakeFiles/test_grid_resolution.dir/codegen
-codegen: CMakeFiles/test_field_initializers_validation.dir/codegen
-codegen: CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/codegen
-codegen: CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -110,17 +88,6 @@ clean: CMakeFiles/Nova.dir/clean
 clean: CMakeFiles/imgui.dir/clean
 clean: CMakeFiles/TRD.dir/clean
 clean: CMakeFiles/CompileShaders.dir/clean
-clean: CMakeFiles/test_trdcore3d_basic.dir/clean
-clean: CMakeFiles/test_trdcore3d_symplectic.dir/clean
-clean: CMakeFiles/test_strang_validation.dir/clean
-clean: CMakeFiles/test_integrator_comparison.dir/clean
-clean: CMakeFiles/test_spatial_order_comparison.dir/clean
-clean: CMakeFiles/test_spatial_order_timestep.dir/clean
-clean: CMakeFiles/test_laplacian_accuracy.dir/clean
-clean: CMakeFiles/test_grid_resolution.dir/clean
-clean: CMakeFiles/test_field_initializers_validation.dir/clean
-clean: CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/clean
-clean: CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -130,7 +97,7 @@ clean: CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/clean
 CMakeFiles/Physics.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=19,20 "Built target Physics"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=27,28 "Built target Physics"
 .PHONY : CMakeFiles/Physics.dir/all
 
 # Build rule for subdir invocation for target.
@@ -147,7 +114,7 @@ Physics: CMakeFiles/Physics.dir/rule
 # codegen rule for target.
 CMakeFiles/Physics.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=19,20 "Finished codegen for target Physics"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=27,28 "Finished codegen for target Physics"
 .PHONY : CMakeFiles/Physics.dir/codegen
 
 # clean rule for target.
@@ -162,12 +129,12 @@ CMakeFiles/Physics.dir/clean:
 CMakeFiles/Nova.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=8,9,10,11,12,13,14,15,16,17,18 "Built target Nova"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23,24,25,26 "Built target Nova"
 .PHONY : CMakeFiles/Nova.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Nova.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 15
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Nova.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : CMakeFiles/Nova.dir/rule
@@ -179,7 +146,7 @@ Nova: CMakeFiles/Nova.dir/rule
 # codegen rule for target.
 CMakeFiles/Nova.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Nova.dir/build.make CMakeFiles/Nova.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=8,9,10,11,12,13,14,15,16,17,18 "Finished codegen for target Nova"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23,24,25,26 "Finished codegen for target Nova"
 .PHONY : CMakeFiles/Nova.dir/codegen
 
 # clean rule for target.
@@ -194,12 +161,12 @@ CMakeFiles/Nova.dir/clean:
 CMakeFiles/imgui.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=66,67,68,69,70,71 "Built target imgui"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=91,92,93,94,95,96,97,98 "Built target imgui"
 .PHONY : CMakeFiles/imgui.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/imgui.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/imgui.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : CMakeFiles/imgui.dir/rule
@@ -211,7 +178,7 @@ imgui: CMakeFiles/imgui.dir/rule
 # codegen rule for target.
 CMakeFiles/imgui.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=66,67,68,69,70,71 "Finished codegen for target imgui"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=91,92,93,94,95,96,97,98 "Finished codegen for target imgui"
 .PHONY : CMakeFiles/imgui.dir/codegen
 
 # clean rule for target.
@@ -229,12 +196,12 @@ CMakeFiles/TRD.dir/all: CMakeFiles/imgui.dir/all
 CMakeFiles/TRD.dir/all: CMakeFiles/CompileShaders.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65 "Built target TRD"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 "Built target TRD"
 .PHONY : CMakeFiles/TRD.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TRD.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 71
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 98
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TRD.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : CMakeFiles/TRD.dir/rule
@@ -246,7 +213,7 @@ TRD: CMakeFiles/TRD.dir/rule
 # codegen rule for target.
 CMakeFiles/TRD.dir/codegen: CMakeFiles/CompileShaders.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65 "Finished codegen for target TRD"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 "Finished codegen for target TRD"
 .PHONY : CMakeFiles/TRD.dir/codegen
 
 # clean rule for target.
@@ -261,12 +228,12 @@ CMakeFiles/TRD.dir/clean:
 CMakeFiles/CompileShaders.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CompileShaders.dir/build.make CMakeFiles/CompileShaders.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CompileShaders.dir/build.make CMakeFiles/CompileShaders.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target CompileShaders"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target CompileShaders"
 .PHONY : CMakeFiles/CompileShaders.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/CompileShaders.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/CompileShaders.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
 .PHONY : CMakeFiles/CompileShaders.dir/rule
@@ -278,365 +245,13 @@ CompileShaders: CMakeFiles/CompileShaders.dir/rule
 # codegen rule for target.
 CMakeFiles/CompileShaders.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CompileShaders.dir/build.make CMakeFiles/CompileShaders.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Finished codegen for target CompileShaders"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Finished codegen for target CompileShaders"
 .PHONY : CMakeFiles/CompileShaders.dir/codegen
 
 # clean rule for target.
 CMakeFiles/CompileShaders.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CompileShaders.dir/build.make CMakeFiles/CompileShaders.dir/clean
 .PHONY : CMakeFiles/CompileShaders.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_trdcore3d_basic.dir
-
-# All Build rule for target.
-CMakeFiles/test_trdcore3d_basic.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=96,97 "Built target test_trdcore3d_basic"
-.PHONY : CMakeFiles/test_trdcore3d_basic.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_trdcore3d_basic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_trdcore3d_basic.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_trdcore3d_basic.dir/rule
-
-# Convenience name for target.
-test_trdcore3d_basic: CMakeFiles/test_trdcore3d_basic.dir/rule
-.PHONY : test_trdcore3d_basic
-
-# codegen rule for target.
-CMakeFiles/test_trdcore3d_basic.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=96,97 "Finished codegen for target test_trdcore3d_basic"
-.PHONY : CMakeFiles/test_trdcore3d_basic.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_trdcore3d_basic.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_basic.dir/build.make CMakeFiles/test_trdcore3d_basic.dir/clean
-.PHONY : CMakeFiles/test_trdcore3d_basic.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_trdcore3d_symplectic.dir
-
-# All Build rule for target.
-CMakeFiles/test_trdcore3d_symplectic.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=98,99,100 "Built target test_trdcore3d_symplectic"
-.PHONY : CMakeFiles/test_trdcore3d_symplectic.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_trdcore3d_symplectic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_trdcore3d_symplectic.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_trdcore3d_symplectic.dir/rule
-
-# Convenience name for target.
-test_trdcore3d_symplectic: CMakeFiles/test_trdcore3d_symplectic.dir/rule
-.PHONY : test_trdcore3d_symplectic
-
-# codegen rule for target.
-CMakeFiles/test_trdcore3d_symplectic.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=98,99,100 "Finished codegen for target test_trdcore3d_symplectic"
-.PHONY : CMakeFiles/test_trdcore3d_symplectic.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_trdcore3d_symplectic.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_trdcore3d_symplectic.dir/build.make CMakeFiles/test_trdcore3d_symplectic.dir/clean
-.PHONY : CMakeFiles/test_trdcore3d_symplectic.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_strang_validation.dir
-
-# All Build rule for target.
-CMakeFiles/test_strang_validation.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=93,94,95 "Built target test_strang_validation"
-.PHONY : CMakeFiles/test_strang_validation.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_strang_validation.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_strang_validation.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_strang_validation.dir/rule
-
-# Convenience name for target.
-test_strang_validation: CMakeFiles/test_strang_validation.dir/rule
-.PHONY : test_strang_validation
-
-# codegen rule for target.
-CMakeFiles/test_strang_validation.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=93,94,95 "Finished codegen for target test_strang_validation"
-.PHONY : CMakeFiles/test_strang_validation.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_strang_validation.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_strang_validation.dir/build.make CMakeFiles/test_strang_validation.dir/clean
-.PHONY : CMakeFiles/test_strang_validation.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_integrator_comparison.dir
-
-# All Build rule for target.
-CMakeFiles/test_integrator_comparison.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=82,83,84 "Built target test_integrator_comparison"
-.PHONY : CMakeFiles/test_integrator_comparison.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_integrator_comparison.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_integrator_comparison.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_integrator_comparison.dir/rule
-
-# Convenience name for target.
-test_integrator_comparison: CMakeFiles/test_integrator_comparison.dir/rule
-.PHONY : test_integrator_comparison
-
-# codegen rule for target.
-CMakeFiles/test_integrator_comparison.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=82,83,84 "Finished codegen for target test_integrator_comparison"
-.PHONY : CMakeFiles/test_integrator_comparison.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_integrator_comparison.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_integrator_comparison.dir/build.make CMakeFiles/test_integrator_comparison.dir/clean
-.PHONY : CMakeFiles/test_integrator_comparison.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_spatial_order_comparison.dir
-
-# All Build rule for target.
-CMakeFiles/test_spatial_order_comparison.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=87,88,89 "Built target test_spatial_order_comparison"
-.PHONY : CMakeFiles/test_spatial_order_comparison.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_spatial_order_comparison.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_spatial_order_comparison.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_spatial_order_comparison.dir/rule
-
-# Convenience name for target.
-test_spatial_order_comparison: CMakeFiles/test_spatial_order_comparison.dir/rule
-.PHONY : test_spatial_order_comparison
-
-# codegen rule for target.
-CMakeFiles/test_spatial_order_comparison.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=87,88,89 "Finished codegen for target test_spatial_order_comparison"
-.PHONY : CMakeFiles/test_spatial_order_comparison.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_spatial_order_comparison.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_comparison.dir/build.make CMakeFiles/test_spatial_order_comparison.dir/clean
-.PHONY : CMakeFiles/test_spatial_order_comparison.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_spatial_order_timestep.dir
-
-# All Build rule for target.
-CMakeFiles/test_spatial_order_timestep.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=90,91,92 "Built target test_spatial_order_timestep"
-.PHONY : CMakeFiles/test_spatial_order_timestep.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_spatial_order_timestep.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_spatial_order_timestep.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_spatial_order_timestep.dir/rule
-
-# Convenience name for target.
-test_spatial_order_timestep: CMakeFiles/test_spatial_order_timestep.dir/rule
-.PHONY : test_spatial_order_timestep
-
-# codegen rule for target.
-CMakeFiles/test_spatial_order_timestep.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=90,91,92 "Finished codegen for target test_spatial_order_timestep"
-.PHONY : CMakeFiles/test_spatial_order_timestep.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_spatial_order_timestep.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_spatial_order_timestep.dir/build.make CMakeFiles/test_spatial_order_timestep.dir/clean
-.PHONY : CMakeFiles/test_spatial_order_timestep.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_laplacian_accuracy.dir
-
-# All Build rule for target.
-CMakeFiles/test_laplacian_accuracy.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=85,86 "Built target test_laplacian_accuracy"
-.PHONY : CMakeFiles/test_laplacian_accuracy.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_laplacian_accuracy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_laplacian_accuracy.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_laplacian_accuracy.dir/rule
-
-# Convenience name for target.
-test_laplacian_accuracy: CMakeFiles/test_laplacian_accuracy.dir/rule
-.PHONY : test_laplacian_accuracy
-
-# codegen rule for target.
-CMakeFiles/test_laplacian_accuracy.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=85,86 "Finished codegen for target test_laplacian_accuracy"
-.PHONY : CMakeFiles/test_laplacian_accuracy.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_laplacian_accuracy.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_laplacian_accuracy.dir/build.make CMakeFiles/test_laplacian_accuracy.dir/clean
-.PHONY : CMakeFiles/test_laplacian_accuracy.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_grid_resolution.dir
-
-# All Build rule for target.
-CMakeFiles/test_grid_resolution.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=79,80,81 "Built target test_grid_resolution"
-.PHONY : CMakeFiles/test_grid_resolution.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_grid_resolution.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_grid_resolution.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_grid_resolution.dir/rule
-
-# Convenience name for target.
-test_grid_resolution: CMakeFiles/test_grid_resolution.dir/rule
-.PHONY : test_grid_resolution
-
-# codegen rule for target.
-CMakeFiles/test_grid_resolution.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=79,80,81 "Finished codegen for target test_grid_resolution"
-.PHONY : CMakeFiles/test_grid_resolution.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_grid_resolution.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_grid_resolution.dir/build.make CMakeFiles/test_grid_resolution.dir/clean
-.PHONY : CMakeFiles/test_grid_resolution.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_field_initializers_validation.dir
-
-# All Build rule for target.
-CMakeFiles/test_field_initializers_validation.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=77,78 "Built target test_field_initializers_validation"
-.PHONY : CMakeFiles/test_field_initializers_validation.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_field_initializers_validation.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_field_initializers_validation.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_field_initializers_validation.dir/rule
-
-# Convenience name for target.
-test_field_initializers_validation: CMakeFiles/test_field_initializers_validation.dir/rule
-.PHONY : test_field_initializers_validation
-
-# codegen rule for target.
-CMakeFiles/test_field_initializers_validation.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=77,78 "Finished codegen for target test_field_initializers_validation"
-.PHONY : CMakeFiles/test_field_initializers_validation.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_field_initializers_validation.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_field_initializers_validation.dir/build.make CMakeFiles/test_field_initializers_validation.dir/clean
-.PHONY : CMakeFiles/test_field_initializers_validation.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_dirac_vacuum_chiral_coupling.dir
-
-# All Build rule for target.
-CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=72,73,74 "Built target test_dirac_vacuum_chiral_coupling"
-.PHONY : CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/rule
-
-# Convenience name for target.
-test_dirac_vacuum_chiral_coupling: CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/rule
-.PHONY : test_dirac_vacuum_chiral_coupling
-
-# codegen rule for target.
-CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=72,73,74 "Finished codegen for target test_dirac_vacuum_chiral_coupling"
-.PHONY : CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/clean
-.PHONY : CMakeFiles/test_dirac_vacuum_chiral_coupling.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir
-
-# All Build rule for target.
-CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=75,76 "Built target test_dirac_vacuum_chiral_coupling_simple"
-.PHONY : CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/persist/neotec/0rigin/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/rule
-
-# Convenience name for target.
-test_dirac_vacuum_chiral_coupling_simple: CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/rule
-.PHONY : test_dirac_vacuum_chiral_coupling_simple
-
-# codegen rule for target.
-CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/persist/neotec/0rigin/build/CMakeFiles --progress-num=75,76 "Finished codegen for target test_dirac_vacuum_chiral_coupling_simple"
-.PHONY : CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/codegen
-
-# clean rule for target.
-CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/build.make CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/clean
-.PHONY : CMakeFiles/test_dirac_vacuum_chiral_coupling_simple.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
