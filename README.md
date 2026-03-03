@@ -13,11 +13,7 @@
 | Single Executable | 🟢 ./trd unified | All tests via harness |
 | Documentation | 🟢 Professional set | 150+ reports archived |
 
-**Key Achievements**:
-- **Dirac-Vacuum Chiral Coupling**: M = Δ·R·e^(iθγ⁵) eigenvalue decomposition working
-- **4th-Order Spatial Discretization**: 18× improvement in energy conservation
-- **Symplectic Integration**: Velocity Verlet for wave equations, RK2 for fields
-- **Conservative Solver**: Dual-path architecture for vacuum + particle dynamics
+**Central Result**: Mass arises from topological phase synchronization of vacuum fields. The chiral mass operator **M = Δ·R·e^(iθγ⁵)** connects quantum mechanics, general relativity, electromagnetism, and cosmology through one mechanism. See **[ACHIEVEMENTS.md](./ACHIEVEMENTS.md)** for the complete set of validated equations and results.
 
 **Last Updated**: 2026-03-03
 
@@ -241,6 +237,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
 
 ## Documentation
 
+- **[ACHIEVEMENTS.md](./ACHIEVEMENTS.md)**: Validated equations, numerical results, and theoretical significance
 - **ARCHITECTURE.md**: System design and TRDCore3D framework
 - **CONTRIBUTING.md**: Development standards and contribution guidelines
 - **docs/API.md**: Comprehensive API reference for all public classes
