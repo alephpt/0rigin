@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/home/persist/neotec/0rigin/CMakeLists.txt"
-  "CMakeFiles/4.2.1/CMakeCXXCompiler.cmake"
-  "CMakeFiles/4.2.1/CMakeSystem.cmake"
+  "CMakeFiles/4.2.3/CMakeCXXCompiler.cmake"
+  "CMakeFiles/4.2.3/CMakeSystem.cmake"
   "/usr/lib/cmake/SDL2/SDL2Config.cmake"
   "/usr/lib/cmake/SDL2/SDL2ConfigVersion.cmake"
   "/usr/lib/cmake/SDL2/SDL2Targets-none.cmake"

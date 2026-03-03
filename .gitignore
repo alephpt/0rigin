@@ -1,8 +1,40 @@
+# Build artifacts
+build/
+*.o
+*.obj
+*.exe
 
-# Large output files
-output/primitive/
-archive/archive/
+# Output and simulation data
+output/
 
-# Large log files
-output/primitive/*/noise_sweep*.log
-archive/archive/*.tar.gz
+# Archive (preserved locally, not tracked)
+archive/
+
+# Lean proof build cache
+docs/gip/.lake/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+compile_commands.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python virtual environments
+venv/
+.venv/
+__pycache__/
+
+# Scanner and tool caches
+scanner_cache/
+.shamash/
+.cache/
+
+# Project tool configuration
+.claude/
+docs/gip/

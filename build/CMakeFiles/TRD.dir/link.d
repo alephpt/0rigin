@@ -68,7 +68,7 @@ bin/trd: \
   libPhysics.a \
   /lib/libvulkan.so \
   /usr/lib/libSDL2main.a \
-  /usr/lib/libSDL2-2.0.so.0.3200.60 \
+  /usr/lib/libSDL2-2.0.so.0.3200.62 \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libyaml-cpp.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libpthread.a \
@@ -241,7 +241,7 @@ libPhysics.a:
 
 /usr/lib/libSDL2main.a:
 
-/usr/lib/libSDL2-2.0.so.0.3200.60:
+/usr/lib/libSDL2-2.0.so.0.3200.62:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libfftw3f.so:
 

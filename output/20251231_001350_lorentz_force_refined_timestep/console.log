@@ -1,8 +1,0 @@
-[Logging] Console output for 64x64 writing to: /home/persist/neotec/0rigin/output/20251231_001350_lorentz_force_refined_timestep/console.log
-  Dirac initialization (grid-independent):
-    Position: (50, 50) ℓ_P
-    Width: 3 ℓ_P
-    Grid coordinates: (32, 32) grid units
-    Grid width: 1.92 grid units
-  Using Dirac solver (spinor field)
-[DiracEvolution] Initialized 64x64 4-component spinor field (particle, β=1)

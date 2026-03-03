@@ -1061,7 +1061,7 @@ bin/trd: libimgui.a
 bin/trd: libPhysics.a
 bin/trd: /lib/libvulkan.so
 bin/trd: /usr/lib/libSDL2main.a
-bin/trd: /usr/lib/libSDL2-2.0.so.0.3200.60
+bin/trd: /usr/lib/libSDL2-2.0.so.0.3200.62
 bin/trd: /usr/lib/libgomp.so
 bin/trd: /usr/lib/libpthread.a
 bin/trd: CMakeFiles/TRD.dir/link.txt

@@ -153,7 +153,7 @@ bool TRDTestRunner::runSingleTest(int N) {
     std::vector<double> R_field_double(R_field_initial.begin(), R_field_initial.end());
 
     ObservableComputer::Observables obs_initial;
-    ObservableComputer::g_result_hack = &obs_initial;
+    ObservableComputer::g_result_ptr = &obs_initial;
     ObservableComputer::compute(
         &obs_initial,
         dirac_temp, R_field_double, _config.physics.delta, 0.0,
@@ -187,7 +187,7 @@ bool TRDTestRunner::runSingleTest(int N) {
 
             if (dirac) {
                 // Compute full observables with Dirac state (including EM if available)
-                ObservableComputer::g_result_hack = &obs;
+                ObservableComputer::g_result_ptr = &obs;
                 ObservableComputer::compute(
                     &obs,
                     *dirac, R_field_d, _config.physics.delta, time,

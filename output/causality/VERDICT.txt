@@ -1,8 +1,0 @@
-E3 CAUSALITY TEST VERDICT
-========================
-
-GO: TRD THEORY IS CAUSAL
-All signal velocities ≤ c within tolerance
-Theory satisfies special relativity constraints
-
-Test completed: Jan  5 2026 23:40:50

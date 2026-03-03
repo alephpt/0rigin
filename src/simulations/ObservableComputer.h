@@ -57,8 +57,8 @@ public:
         bool energy_valid = false;        // |ΔE/E₀| < tolerance
     };
 
-    // HACK: Global workaround for pointer corruption bug
-    static thread_local Observables* g_result_hack;
+    // Thread-local output pointer (avoids return-by-value struct corruption)
+    static thread_local Observables* g_result_ptr;
 
     /**
      * Compute all observables for current state

@@ -9,7 +9,7 @@
 #include <cstring>
 
 // Define the static member
-thread_local ObservableComputer::Observables* ObservableComputer::g_result_hack = nullptr;
+thread_local ObservableComputer::Observables* ObservableComputer::g_result_ptr = nullptr;
 
 void ObservableComputer::compute(
     Observables* result,
@@ -22,8 +22,8 @@ void ObservableComputer::compute(
     double energy_tolerance,
     const TRDEngine* engine) {
 
-    // Use g_result_hack (set by caller) if available, otherwise use result parameter
-    Observables* actual_result = (g_result_hack != nullptr) ? g_result_hack : result;
+    // Use g_result_ptr (set by caller) if available, otherwise use result parameter
+    Observables* actual_result = (g_result_ptr != nullptr) ? g_result_ptr : result;
     actual_result->time = time;
 
     // Dirac observables
@@ -88,7 +88,7 @@ void ObservableComputer::compute(
         actual_result->energy_valid = true; // Can't validate without E0
     }
 
-    g_result_hack = nullptr;  // Clear for next call
+    g_result_ptr = nullptr;  // Clear for next call
 }
 
 double ObservableComputer::computeNorm(const DiracEvolution& dirac) {

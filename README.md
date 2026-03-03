@@ -1,4 +1,4 @@
-# TRD Engine - Topological Relativistic Dynamics
+# TRD Engine - Topological Resonance Dynamics
 
 ## Status
 
@@ -19,7 +19,7 @@
 - **Symplectic Integration**: Velocity Verlet for wave equations, RK2 for fields
 - **Conservative Solver**: Dual-path architecture for vacuum + particle dynamics
 
-**Last Updated**: 2026-01-17
+**Last Updated**: 2026-03-03
 
 ---
 
@@ -40,11 +40,14 @@ TRD Engine is a theoretical physics simulation framework exploring topological f
 ## Installation
 
 ### Prerequisites
-- C++17 compiler (gcc 9+, clang 10+)
+- C++20 compiler (gcc 9+, clang 10+)
 - CMake 3.20+
 - Vulkan SDK 1.3+
+- SDL2 (window management)
 - YAML-cpp library
+- FFTW3 (single-precision: fftw3f)
 - GLM (OpenGL Mathematics)
+- OpenMP (optional, for HPC scaling)
 
 ### Build
 ```bash
@@ -88,16 +91,23 @@ output/YYYYMMDD_HHMMSS_test_name/
 
 ### Creating New Tests
 
-1. **Write test implementation** (use TRDCore3D framework):
+1. **Write test implementation** (use ConservativeSolver/TRDCore3D framework):
 ```cpp
-// test/my_physics_test.cpp
-#include "TRDEngine3D.h"
+// test/test_my_physics.cpp
+#include "ConservativeSolver.h"
 
 void runMyPhysicsTest() {
-    TRDEngine3D engine;
-    engine.loadConfig("config/my_physics_test.yaml");
-    engine.initialize();
-    engine.runSimulation();  // Uses validated symplectic integration
+    ConservativeSolver solver;
+    ConservativeSolver::Config config;
+    config.nx = 64; config.ny = 64; config.nz = 64;
+    config.method = ConservativeSolver::IntegrationMethod::STRANG_SPLITTING;
+    config.spatial_order = ConservativeSolver::SpatialOrder::FOURTH_ORDER;
+    solver.initialize(config);
+    solver.initializeGaussian(32.0f, 32.0f, 32.0f, 5.0f, 1.0f);
+
+    float E0 = solver.computeTotalEnergy();
+    for (int i = 0; i < 1000; i++) solver.evolveSineGordon(0.01f);
+    assert(solver.measureEnergyDrift(E0) < 0.0001f);  // <0.01%
 }
 ```
 
@@ -105,15 +115,14 @@ void runMyPhysicsTest() {
 ```yaml
 # config/my_physics_test.yaml
 test_name: "My Physics Test"
-test_file: "test/my_physics_test.cpp"
-golden_key: 246.0  # GeV (electroweak VEV)
+validation:
+  test_file: "test/test_my_physics.cpp"
+  golden_key: "1 TRD unit = 246 GeV"
 
-physics_params:
-  nx: 64
-  ny: 64
-  nz: 64
+physics:
+  grid_size: 64
   dt: 0.01
-  num_steps: 1000
+  total_steps: 1000
 
 quality_gates:
   energy_conservation_threshold: 0.01  # <0.01% required
@@ -233,10 +242,12 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
 ## Documentation
 
 - **ARCHITECTURE.md**: System design and TRDCore3D framework
-- **CONTRIBUTING.md**: Development standards and guidelines
+- **CONTRIBUTING.md**: Development standards and contribution guidelines
+- **docs/API.md**: Comprehensive API reference for all public classes
+- **docs/PHYSICS.md**: Physics theory, numerical methods, and validation results
+- **docs/DEVELOPER_GUIDE.md**: Developer workflow, build system, and debugging
 - **docs/reports/validation/**: Wave A-H validation reports (125+ archived reports)
 - **docs/reports/analysis/**: Technical analysis and audits
-- **CLAUDE.md**: Project-specific development standards
 
 ---
 

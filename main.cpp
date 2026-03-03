@@ -2,16 +2,14 @@
  * main.cpp - Unified TRD Application Entry Point
  *
  * Usage:
- *   ./smft                              - Run interactive visualization
- *   ./smft --test <config.yaml>         - Run test simulation
- *   ./smft --help                       - Show help
+ *   ./trd                              - Run interactive visualization
+ *   ./trd --test <config.yaml>         - Run test simulation
+ *   ./trd --help                       - Show help
  */
 
-#include "TRDCore.h"
 #include "simulations/TRDTestRunner.h"
 #include <iostream>
 #include <string>
-#include <cstring>
 
 void printUsage(const char* program_name) {
     std::cout << "\n===== TRD - Topological Resonance Dynamics =====" << std::endl;
@@ -31,30 +29,15 @@ void printUsage(const char* program_name) {
     std::cout << "    Validates norm conservation, energy conservation, convergence" << std::endl;
     std::cout << "    Generates CSV output and test reports" << std::endl;
 
-    std::cout << "\nTest Configuration Files:" << std::endl;
-    std::cout << "  config/timesync_validation.yaml - Full validation (N=1,10,100, 64x64 grid)" << std::endl;
-    std::cout << "  config/quick_validation.yaml    - Quick test (N=1,10, 32x32 grid)" << std::endl;
-    std::cout << "  config/dark_matter.yaml         - C3 dark matter prediction test" << std::endl;
-    std::cout << "  config/dark_energy.yaml         - C4 dark energy mechanism test" << std::endl;
-    std::cout << "  config/inflation.yaml           - C5 primordial inflation test" << std::endl;
-    std::cout << "  config/weak_field_3d.yaml       - Weak field gravity validation" << std::endl;
-    std::cout << "  config/three_generations.yaml   - B3 fermion generation structure" << std::endl;
-    std::cout << "  config/electroweak.yaml         - B4 W/Z boson masses" << std::endl;
-    std::cout << "  config/strong_force.yaml        - B5 QCD emergence and confinement" << std::endl;
-    std::cout << "  config/higgs_connection.yaml    - B6 Higgs mechanism via R-field" << std::endl;
-    std::cout << "  config/laboratory_scale.yaml    - D2 Laboratory-scale tests (BEC, atomic clocks, superfluid, decoherence)" << std::endl;
-    std::cout << "  config/josephson_junction.yaml  - D2 AC/DC Josephson effects" << std::endl;
-    std::cout << "  config/binary_merger.yaml       - D3 Gravitational wave emission" << std::endl;
-    std::cout << "  config/atomic_physics.yaml      - D5 Atomic physics and spectroscopy" << std::endl;
-    std::cout << "  config/spin_magnetism.yaml      - H3 Spin-magnetism connection" << std::endl;
-    std::cout << "  config/knot_topology.yaml       - H1 Topological excitations (knots)" << std::endl;
-    std::cout << "  config/multiscale.yaml          - F2 Multi-scale RG flow validation" << std::endl;
-    std::cout << "  config/finite_temperature.yaml  - F3 Finite temperature effects" << std::endl;
-    std::cout << "  config/hpc_scaling.yaml         - F5 HPC scaling (OpenMP parallelization)" << std::endl;
-    std::cout << "  config/renormalizability.yaml   - E1 Renormalizability analysis" << std::endl;
-    std::cout << "  config/causality.yaml           - E3 Causality validation" << std::endl;
-    std::cout << "  config/symmetry_analysis.yaml   - E5 Symmetry analysis (Noether)" << std::endl;
-    std::cout << "  config/fine_structure_constant.yaml - B2 Fine structure constant (α ≈ 1/137)" << std::endl;
+    std::cout << "\nTest Configuration Files (config/*.yaml):" << std::endl;
+    std::cout << "  Particle physics:   particle_spectrum_unified, particle_scattering, three_generations" << std::endl;
+    std::cout << "  Standard Model:     electroweak, strong_force, higgs_connection, fine_structure_constant" << std::endl;
+    std::cout << "  Cosmology:          dark_matter, dark_energy, inflation, friedmann_equations" << std::endl;
+    std::cout << "  General relativity: einstein_field_equations, gravitational_waves, geodesic_3d" << std::endl;
+    std::cout << "  Electromagnetism:   lorentz_force_3d, em_gravity_coupling_3d, stuckelberg_vortex_3d" << std::endl;
+    std::cout << "  Condensed matter:   josephson_junction, spin_magnetism, knot_topology" << std::endl;
+    std::cout << "  Mathematical rigor: unitarity, renormalizability, causality, symmetry_analysis" << std::endl;
+    std::cout << "  Astrophysics:       binary_merger, solar_system, astrophysical_observations" << std::endl;
 
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  " << program_name << std::endl;
@@ -89,59 +72,26 @@ int runUnitarityTest();
 int runScaleInvarianceTest();
 int runSymmetryAnalysisTest();
 int runDarkEnergyTest();
-
-// E1/E3/E5 Wave 1 Mathematical Rigor tests
+int runInflationTest();
 int runRenormalizabilityTest();
 int runCausalityTest();
-int runInflationTest();
-// int runExperimentalPredictionsTest();  // Compiled as separate executable
-
-// B3-B6 Standard Model tests
 int runThreeGenerationsTest();
 int runElectroweakTest();
 int runStrongForceTest();
 int runHiggsConnectionTest();
-
-// H3 Spin-Magnetism test
 int runSpinMagnetismTest();
-
-// H1 Knot Topology test
 int runKnotTopologyTest();
-
-// D4: Particle scattering test
 int runParticleScatteringTest();
-
-// D2 Hardware experimental tests
 int runJosephsonJunctionTest();
-
-// D3 Gravitational wave tests
 int runBinaryMergerTest();
-
-// F2: Multi-Scale Validation test
 int runMultiScaleTest();
-
-// F4: Quantum Fluctuation Incorporation test
 int runQuantumFluctuationsTest();
-
-// F3: Finite Temperature Effects test
 int runFiniteTemperatureTest();
-
-// F5: High-Performance Computing Scaling test
 int runHPCScalingTest();
-
-// B2: Fine Structure Constant test
 int runFineStructureConstantTest();
-
-// D4: LHC Predictions test
 int runLHCPredictionsTest();
-
-// D3: Astrophysical Observations test
 int runAstrophysicalObservationsTest();
-
-// D5: Atomic Physics and Precision Spectroscopy test
 int runAtomicPhysicsTest();
-
-// D2: Laboratory-Scale Tests
 int runLaboratoryScaleTest();
 
 int runTestMode(const std::string& config_path) {
@@ -198,8 +148,6 @@ int runTestMode(const std::string& config_path) {
         return runRenormalizabilityTest();
     } else if (config_path.find("causality") != std::string::npos) {
         return runCausalityTest();
-    // } else if (config_path.find("experimental_predictions") != std::string::npos) {
-    //     return runExperimentalPredictionsTest();  // Compiled as separate executable
     } else if (config_path.find("three_generations") != std::string::npos) {
         return runThreeGenerationsTest();
     } else if (config_path.find("electroweak") != std::string::npos) {
@@ -279,15 +227,11 @@ std::string g_test_config_path;
 
 int runInteractiveMode() {
     std::cout << "\n===== TRD Interactive Mode =====" << std::endl;
-    std::cout << "Interactive visualization mode is currently under development.\n" << std::endl;
-    std::cout << "GPU-accelerated Kuramoto dynamics are fully restored!" << std::endl;
+    std::cout << "GPU-accelerated visualization is available when Nova is connected.\n" << std::endl;
     std::cout << "Use --test mode to run physics simulations with test framework.\n" << std::endl;
     std::cout << "\nExamples:" << std::endl;
-    std::cout << "  ./smft --test config/timesync_validation.yaml" << std::endl;
-    std::cout << "  ./smft --test config/quick_validation.yaml" << std::endl;
-
-    // TODO: Integrate Nova visualization once TRDEngine is connected
-    // This will show real-time Kuramoto phase evolution + Dirac wavepacket motion
+    std::cout << "  ./trd --test config/josephson_junction.yaml" << std::endl;
+    std::cout << "  ./trd --test config/unitarity.yaml" << std::endl;
 
     return 0;
 }

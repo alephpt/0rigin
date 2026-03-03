@@ -2,7 +2,7 @@
 
 ## System Overview
 
-TRD (Topological Relativistic Dynamics) Engine is a research framework for simulating topological field theories, exploring mass generation via synchronization, and validating relativistic dynamics with energy conservation <0.01%.
+TRD (Topological Resonance Dynamics) Engine is a research framework for simulating topological field theories, exploring mass generation via synchronization, and validating relativistic dynamics with energy conservation <0.01%.
 
 **Design Philosophy**:
 - **Framework-first**: All physics through validated TRDCore3D (no custom integrators)
@@ -317,10 +317,16 @@ quality_gates:
 ## GPU Architecture (Vulkan)
 
 **Compute Shaders**:
-- `shaders/trd/kuramoto.comp`: Phase dynamics
-- `shaders/trd/sine_gordon.comp`: Soliton evolution
-- `shaders/trd/maxwell_3d.comp`: EM field evolution
-- `shaders/trd/dirac_3d.comp`: Spinor dynamics
+- `shaders/smft/kuramoto3d.comp`: 3D Kuramoto phase evolution
+- `shaders/smft/kuramoto_step.comp`: Single-step Kuramoto dynamics
+- `shaders/smft/kuramoto_stochastic.comp`: Stochastic Kuramoto model
+- `shaders/smft/sync_field3d.comp`: 3D synchronization R-field computation
+- `shaders/smft/r_field_evolution.comp`: R-field evolution
+- `shaders/smft/dirac_velocity_verlet.comp`: Dirac spinor dynamics (Velocity Verlet)
+- `shaders/smft/gravity_field.comp`: Gravitational field computation
+- `shaders/smft/em_stress_energy.comp`: EM stress-energy tensor
+- `shaders/smft/spinor_feedback.comp`: Spinor field feedback
+- `shaders/smft/accumulate.comp`: Field accumulation operations
 
 **Pipeline**:
 1. Host allocates Vulkan buffers
@@ -461,8 +467,8 @@ quality_gates:
 │   ├── *.yaml                # Test configurations
 │   └── ...
 ├── shaders/
-│   └── trd/
-│       ├── kuramoto.comp     # GPU compute shaders
+│   └── smft/
+│       ├── kuramoto3d.comp   # GPU compute shaders
 │       └── ...
 ├── docs/
 │   ├── reports/
