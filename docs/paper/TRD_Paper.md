@@ -250,7 +250,7 @@ The conformal metric g_{mu nu} = R^2 eta_{mu nu} produces the Einstein tensor G_
 
 Results: Of the 10 independent components of the symmetric Einstein tensor, 7 satisfy the threshold comfortably (G_00, G_01, G_02, G_03, G_12, G_13, G_23, G_33 all below 1.0). However, the diagonal spatial components G_11 and G_22 show residuals near the threshold (~8-9, threshold = 10). This suggests that the spatial stress components of the TRD stress-energy mapping need refinement. The right panel of the visualization shows the Ricci scalar R as a function of the R-field amplitude, exhibiting the expected curvature behavior with R changing sign near R-field = 1.0 (the VEV). The order-of-magnitude agreement across all components demonstrates that TRD's conformal ansatz captures the essential structure of Einstein gravity, while the elevated spatial-diagonal residuals indicate directions for improvement.
 
-![A4 Einstein Field Equations](../../build/output/einstein_field_equations/einstein_field_equations_plot.png)
+![A4 Einstein Field Equations](../images/einstein_field_equations_plot.png)
 *Figure 1: Left: Einstein equation residuals |G_μν - 8πG·T_μν| for all 10 independent components (blue = below threshold, red = near threshold). Right: Ricci scalar as a function of R-field amplitude.*
 
 ### 4.2 Weak-Field Limit
@@ -265,7 +265,7 @@ The induced gravitational acceleration is:
 
 reproducing Newtonian gravity. The gravitational potential is phi(r) = -GM/r. Numerical validation achieves < 0.01% error for acceleration magnitude, < 1% for acceleration direction (99%+ radial alignment), and correct 1/r potential profile.
 
-![A2 Weak-Field Gravity](../../build/output/weak_field_3d/weak_field_plot.png)
+![A2 Weak-Field Gravity](../images/weak_field_plot.png)
 *Figure 2: Left: Gravitational acceleration vs radius showing 1/r^2 falloff. Right: Gravitational potential showing -1/r profile.*
 
 ### 4.3 Geodesic Motion
@@ -291,10 +291,10 @@ A binary system of equal masses (M_1 = M_2 = 1.0) at initial separation a_0 = 10
 
 The inspiral dynamics qualitatively reproduce the chirp signature observed in LIGO events.
 
-![A5 Gravitational Waves](../../build/output/gravitational_waves/gravitational_waves_plot.png)
+![A5 Gravitational Waves](../images/gravitational_waves_plot.png)
 *Figure 3: Left: R-field wave propagation at successive times. Center: GW polarizations h+ and h× in quadrature. Right: Dispersion relation ω = k (massless graviton).*
 
-![A6 Binary Vortex Merger](../../build/output/binary_merger/binary_merger_plot.png)
+![A6 Binary Vortex Merger](../images/binary_merger_plot.png)
 *Figure 4: Left: Inspiral trajectory of two vortices. Center: Gravitational waveform showing characteristic chirp (increasing frequency and amplitude). Right: Energy and angular momentum conservation with radiation burst at merger.*
 
 ---
@@ -313,7 +313,7 @@ Mass ratios emerge from the topological structure of vacuum defects. Vortex conf
 
 The electron mass is reproduced well, and the muon is within a factor of 5 on 64^3 grids. The tau mass is significantly underestimated, indicating that higher topological charges require larger lattice volumes to resolve the radial mode eigenstates. The mass hierarchy m_mu/m_e from topology currently gives a ratio of ~10-20 versus the experimental 206.77. A linear scaling law m_2/m_1 = 0.81 d - 14.0 (R^2 = 0.998) relates the mass ratio to vortex separation d, suggesting the full experimental ratio requires d ~ 291 lattice units (computationally accessible on 728^3 grids but not yet validated).
 
-![B7 Particle Mass Spectrum](../../build/output/particle_spectrum_unified/particle_spectrum_plot.png)
+![B7 Particle Mass Spectrum](../images/particle_spectrum_plot.png)
 *Figure 5: Left: Lepton mass spectrum comparison (log scale). Electron matches; muon within factor 5; tau severely underestimated. Right: Mass ratio m_μ/m_e vs vortex separation, showing the gap to the experimental value of 206.77.*
 
 ### 5.2 Fine Structure Constant
@@ -329,7 +329,7 @@ The fine structure constant alpha is derived from the ratio of electromagnetic t
 
 The energy method is closest, yielding alpha approximately half the QED value. The flux method produces a catastrophically wrong result, and the coupling method is too small by a factor of 30. This is an honest failure: no extraction method currently reproduces alpha = 1/137 from the TRD vacuum. The energy method's factor-of-two discrepancy suggests the correct physics may be present but the extraction procedure requires refinement -- possibly through proper scale matching of the electromagnetic coupling between lattice and continuum, or identification of the correct observable combination. This remains an open problem.
 
-![B2 Fine Structure Constant](../../build/output/fine_structure_constant/fine_structure_plot.png)
+![B2 Fine Structure Constant](../images/fine_structure_plot.png)
 *Figure 6: Left: Four extraction methods on log scale with QED reference (dashed red). Right: Ratio to QED value -- none achieve ratio = 1.*
 
 ### 5.3 Electroweak Structure
@@ -346,7 +346,7 @@ The synchronization field naturally produces the SU(2) x U(1) gauge structure of
 
 The key result is the Weinberg angle: the dimensionless ratio m_W/m_Z = 0.904 matches experiment (0.881) to 2.6%, demonstrating that TRD correctly captures the electroweak mixing structure. The absolute mass scale discrepancy (~80x) reflects that the simulation runs in natural units without calibration to the electroweak VEV for these particular observables. Three Goldstone modes are confirmed, corresponding to the longitudinal degrees of freedom eaten by W+, W-, and Z.
 
-![B4 Electroweak Symmetry Breaking](../../build/output/electroweak/electroweak_plot.png)
+![B4 Electroweak Symmetry Breaking](../images/electroweak_plot.png)
 *Figure 7: Left: Mass spectrum on log scale (blue = experiment, orange = TRD uncalibrated). Right: Weinberg angle m_W/m_Z comparison -- TRD gives 0.904 vs experimental 0.881 (2.6% error).*
 
 ### 5.4 Strong Force
@@ -363,7 +363,7 @@ The topological structure of the vacuum produces asymptotic freedom -- the defin
 
 The qualitative behavior is correct: alpha_s decreases monotonically with energy, demonstrating asymptotic freedom. Quantitatively, TRD consistently underestimates alpha_s by approximately 40% across all scales. The logarithmic shape of the running is reproduced, but the overall normalization needs adjustment. At M_Z = 91.2 GeV, the experimental value is alpha_s = 0.1179 +/- 0.0010 (PDG 2024); TRD gives approximately 0.07, which is the correct order of magnitude but systematically low.
 
-![B5 Strong Force Running Coupling](../../build/output/strong_force/strong_force_plot.png)
+![B5 Strong Force Running Coupling](../images/strong_force_plot.png)
 *Figure 8: Running coupling α_s(Q²) vs energy scale Q on log-log axes. The monotonic decrease demonstrates asymptotic freedom.*
 
 ### 5.5 Higgs Mechanism
@@ -375,7 +375,7 @@ The R-field fluctuations correspond to the Higgs boson. In TRD:
 
 The connection m = Delta R v with the golden key v = 246 GeV yields mass generation consistent with the Standard Model Higgs mechanism. Three Goldstone modes (phase fluctuations in theta) correspond to the longitudinal degrees of freedom of the W and Z bosons.
 
-![B6 Higgs Connection](../../build/output/higgs_connection/higgs_connection_plot.png)
+![B6 Higgs Connection](../images/higgs_connection_plot.png)
 *Figure 9: Left: Mexican hat potential with VEV = 1.00. Center: Mass spectrum comparison (experiment vs TRD). Right: Three Goldstone modes in phase space, eaten by W+, W-, Z.*
 
 ### 5.6 Three Generations
@@ -388,7 +388,7 @@ The framework attempts to derive three fermion generations from topological defe
 
 This is an identified limitation. The fundamental group pi_1(S^1) = Z provides infinitely many topological sectors, and the simulation does not yet produce a natural cutoff at exactly three. The energy spectrum shows a suggestive hierarchy across defect types, but the generation structure remains incomplete. Higher-dimensional extensions or alternative topological classification schemes may be needed.
 
-![B3 Three-Generation Structure](../../build/output/three_generations/three_generations_plot.png)
+![B3 Three-Generation Structure](../images/three_generations_plot.png)
 *Figure 10: Left: Topological defect stability by type and charge. Surface (2D) defects at Q=3,4 exceed threshold, but only 2 stable states found. Right: Energy spectrum of topological defects.*
 
 ---
@@ -407,7 +407,7 @@ The Hubble parameter is:
 
 This lies within the experimental range of 67.4-73.0 km/s/Mpc (3.9% error), remarkably between the Planck CMB measurement (67.4 +/- 0.5) and the SH0ES distance-ladder measurement (73.0 +/- 1.0).
 
-![C2 Friedmann Equations](../../build/output/friedmann_equations/friedmann_plot.png)
+![C2 Friedmann Equations](../images/friedmann_plot.png)
 *Figure 11: Left: Scale factor a(t) showing linear expansion. Right: Hubble parameter H(t) decreasing over time, consistent with matter/dark-energy dominated evolution.*
 
 ### 6.2 Dark Matter
@@ -419,7 +419,7 @@ Galaxy rotation curves are computed from the R-field profile around an exponenti
 
 The flatness criterion sigma_TRD < 0.5 sigma_Newton is satisfied. No exotic dark matter particles are required; the "dark matter" effect is a consequence of vacuum synchronization gradients in the R-field.
 
-![C3 Dark Matter Rotation Curve](../../build/output/dark_matter/dark_matter_plot.png)
+![C3 Dark Matter Rotation Curve](../images/dark_matter_plot.png)
 *Figure 12: Galaxy rotation curves. TRD (solid blue) maintains flat/rising velocity at large radius, matching observed galaxy rotation curves. Newtonian prediction (dashed orange) shows the expected Keplerian decline.*
 
 ### 6.3 Dark Energy
@@ -431,7 +431,7 @@ The equation of state w = P/rho is computed from the vacuum synchronization dyna
 
 Both satisfy the acceleration condition w < -1/3.
 
-![C4 Dark Energy Equation of State](../../build/output/dark_energy/dark_energy_plot.png)
+![C4 Dark Energy Equation of State](../images/dark_energy_plot.png)
 *Figure 13: Dark energy equation of state w(z) vs redshift. TRD (blue) gives w ≈ -0.9967, within 0.3% of the cosmological constant w = -1 (dashed red). The slight deviation represents a testable quintessence-like prediction.*
 
 ### 6.4 Inflation
@@ -445,7 +445,7 @@ The R-field in a false vacuum state drives primordial inflation:
 
 No separate inflaton field is required; inflation is driven by the same vacuum synchronization field that generates particle mass.
 
-![C5 Inflation](../../build/output/inflation/inflation_plot.png)
+![C5 Inflation](../images/inflation_plot.png)
 *Figure 14: Left: e-folding evolution reaching ~60 (sufficient for horizon/flatness problem resolution). Right: Slow-roll parameter ε ≈ 0.01, remaining well below the inflation-ending threshold ε = 1.*
 
 ### 6.5 Cosmological Constant
@@ -473,7 +473,7 @@ The Lorentz force F = q(E + v x B) is derived from the Stueckelberg gauge mechan
 
 Energy conservation in all electromagnetic tests: < 0.01%.
 
-![D1 Lorentz Force Cyclotron Orbit](../../build/output/lorentz_force_3d/lorentz_force_plot.png)
+![D1 Lorentz Force Cyclotron Orbit](../images/lorentz_force_plot.png)
 *Figure 15: Cyclotron orbit of a charged particle in a uniform magnetic field. The orbit closes perfectly, demonstrating energy conservation and correct Lorentz force implementation.*
 
 ### 7.2 Stueckelberg Mechanism
@@ -499,7 +499,7 @@ The DC and AC Josephson effects are reproduced:
 
 The AC effect linearity is the stronger result; the DC curve shape warrants further investigation to determine whether the deviation from sin(Delta theta) is a physical prediction of extended-body effects or a numerical artifact.
 
-![D2 Josephson Junction](../../build/output/josephson_junction/josephson_plot.png)
+![D2 Josephson Junction](../images/josephson_plot.png)
 *Figure 16: Left: DC Josephson effect -- supercurrent vs phase difference. Right: AC Josephson effect -- frequency linear in voltage (3 data points).*
 
 ### 7.4 Spin-Magnetism Connection
@@ -511,7 +511,7 @@ The coupling between spin angular momentum and magnetic moment is tested for TRD
 3. **Dipole field**: The magnetic field pattern matches the standard dipole topology.
 4. **Energy conservation**: Kinetic and magnetic energies oscillate in antiphase with the total energy remaining constant.
 
-![D6 Spin-Magnetism Connection](../../build/output/spin_magnetism/spin_magnetism_plot.png)
+![D6 Spin-Magnetism Connection](../images/spin_magnetism_plot.png)
 *Figure 17: Top-left: Linear μ ∝ ω relationship. Top-right: g-factor comparison across classical to quantum regimes -- TRD matches extended body (g≈0.5). Bottom-left: Magnetic dipole field lines. Bottom-right: Energy conservation with kinetic/magnetic oscillation.*
 
 ### 7.5 Atomic Physics
@@ -540,7 +540,7 @@ All five lines agree with experiment to better than 0.026%.
 
 **Lamb Shift**: The 2S_{1/2} - 2P_{1/2} splitting is predicted at 955.3 MHz versus the experimental 1057.8 MHz (9.7% error). This is the least accurate result and reflects the challenge of capturing QED radiative corrections (vacuum polarization, electron self-energy) within the TRD framework. The Lamb shift is a purely quantum-electrodynamic effect requiring loop-level corrections that are not yet fully implemented.
 
-![D5 Atomic Physics](../../build/output/D5_AtomicPhysics/d5_atomic_physics_plot.png)
+![D5 Atomic Physics](../images/d5_atomic_physics_plot.png)
 *Figure 18: Hydrogen atomic physics from TRD. Top row: Energy levels matching Bohr model; Balmer series wavelengths vs experiment; all errors below 0.026%. Bottom row: QED corrections (fine structure, Lamb shift, 21cm); Rydberg constant precision (0.24 ppb); validation scorecard.*
 
 ---
@@ -559,14 +559,14 @@ The S-matrix satisfies S^dagger S = 1. Spinor norm conservation is verified:
 
 Unitarity is preserved to machine precision (< 10^{-10}), independent of timestep size.
 
-![E2 Unitarity](../../build/output/unitarity/unitarity_plot.png)
+![E2 Unitarity](../images/unitarity_plot.png)
 *Figure 19: Left: Normalized ||Ψ||² over 1000 time steps -- perfectly flat at 1.0. Right: Fractional norm drift showing 0.00 ppm maximum deviation.*
 
 ### 8.2 Causality
 
 All field propagation speeds are verified to satisfy v <= c. The light cone structure is tested by initializing a localized perturbation and verifying that no signal propagates beyond the causal horizon. The dispersion relation ω² = k² + m² produces group velocity v_g = k/ω < c for all wavenumbers, with a maximum measured v_g = 0.995c. Phase velocity v_phase = ω/k exceeds c at low wavenumbers, which is expected and does not violate causality (phase velocity does not carry information). Zero superluminal signal propagation is detected across all test configurations.
 
-![E1 Causality](../../build/output/causality/causality_plot.png)
+![E1 Causality](../images/causality_plot.png)
 *Figure 20: Left: Dispersion relation showing group velocity (blue) always below c and phase velocity (orange) exceeding c at low k. Right: Group velocity approaching but never exceeding the speed of light (max v_g = 0.995c).*
 
 ### 8.3 Ultraviolet Structure
@@ -602,7 +602,7 @@ Knotted field configurations are tested for topological stability under evolutio
 
 The winding number decay indicates that topological protection is approximate rather than exact on the lattice, likely due to finite lattice spacing allowing tunneling between topological sectors. The linear mass-charge scaling is encouraging for the particle spectrum program.
 
-![E3 Knot Topology](../../build/output/knot_topology/knot_topology_plot.png)
+![E3 Knot Topology](../images/knot_topology_plot.png)
 *Figure 21: Left: Winding number W vs evolution steps (decays, not perfectly conserved). Center: Energy stability (6.8% drift). Right: Soliton mass scaling linearly with topological charge Q.*
 
 ---

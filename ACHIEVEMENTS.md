@@ -66,10 +66,10 @@ The synchronization field R acts as a conformal factor on flat spacetime. Christ
 | Gravitational waves (A5) | Wave propagation, polarization, dispersion | h+/hx quadrature, massless omega = k | PASS |
 | Binary vortex merger (A6) | Inspiral, chirp waveform, energy conservation | Correct chirp morphology | PASS |
 
-![A4 Einstein Field Equations](build/output/einstein_field_equations/einstein_field_equations_plot.png)
-![A2 Weak-Field Gravity](build/output/weak_field_3d/weak_field_plot.png)
-![A5 Gravitational Waves](build/output/gravitational_waves/gravitational_waves_plot.png)
-![A6 Binary Vortex Merger](build/output/binary_merger/binary_merger_plot.png)
+![A4 Einstein Field Equations](docs/images/einstein_field_equations_plot.png)
+![A2 Weak-Field Gravity](docs/images/weak_field_plot.png)
+![A5 Gravitational Waves](docs/images/gravitational_waves_plot.png)
+![A6 Binary Vortex Merger](docs/images/binary_merger_plot.png)
 
 ### B. Standard Model
 
@@ -82,12 +82,12 @@ The synchronization field R acts as a conformal factor on flat spacetime. Christ
 | Higgs connection (B6) | VEV, 3 Goldstone modes, mass generation | VEV = 1.00, 3 Goldstone modes confirmed | PASS |
 | Fine structure constant (B2) | alpha from multiple methods | Best: 0.00354 (factor 2 low); other methods fail | FAIL |
 
-![B7 Particle Spectrum](build/output/particle_spectrum_unified/particle_spectrum_plot.png)
-![B4 Electroweak](build/output/electroweak/electroweak_plot.png)
-![B5 Strong Force](build/output/strong_force/strong_force_plot.png)
-![B6 Higgs Connection](build/output/higgs_connection/higgs_connection_plot.png)
-![B2 Fine Structure](build/output/fine_structure_constant/fine_structure_plot.png)
-![B3 Three Generations](build/output/three_generations/three_generations_plot.png)
+![B7 Particle Spectrum](docs/images/particle_spectrum_plot.png)
+![B4 Electroweak](docs/images/electroweak_plot.png)
+![B5 Strong Force](docs/images/strong_force_plot.png)
+![B6 Higgs Connection](docs/images/higgs_connection_plot.png)
+![B2 Fine Structure](docs/images/fine_structure_plot.png)
+![B3 Three Generations](docs/images/three_generations_plot.png)
 
 ### C. Cosmology
 
@@ -98,10 +98,10 @@ The synchronization field R acts as a conformal factor on flat spacetime. Christ
 | Dark energy (C4) | Equation of state w(z) | w = -0.9967 (0.3% from Lambda CDM) | PASS |
 | Inflation (C5) | Primordial e-foldings and slow-roll | N = 59.70, epsilon ~ 0.01 | PASS |
 
-![C2 Friedmann](build/output/friedmann_equations/friedmann_plot.png)
-![C3 Dark Matter](build/output/dark_matter/dark_matter_plot.png)
-![C4 Dark Energy](build/output/dark_energy/dark_energy_plot.png)
-![C5 Inflation](build/output/inflation/inflation_plot.png)
+![C2 Friedmann](docs/images/friedmann_plot.png)
+![C3 Dark Matter](docs/images/dark_matter_plot.png)
+![C4 Dark Energy](docs/images/dark_energy_plot.png)
+![C5 Inflation](docs/images/inflation_plot.png)
 
 ### D. Electromagnetism and Experiments
 
@@ -113,10 +113,10 @@ The synchronization field R acts as a conformal factor on flat spacetime. Christ
 | Atomic physics (D5) | Lamb shift | 955 MHz vs 1058 MHz (9.7% error) | PARTIAL |
 | Spin-magnetism (D6) | mu vs omega, g-factor, dipole field | Linear mu-omega; g-factor matches extended body | PASS |
 
-![D1 Lorentz Force](build/output/lorentz_force_3d/lorentz_force_plot.png)
-![D2 Josephson Junction](build/output/josephson_junction/josephson_plot.png)
-![D5 Atomic Physics](build/output/D5_AtomicPhysics/d5_atomic_physics_plot.png)
-![D6 Spin-Magnetism](build/output/spin_magnetism/spin_magnetism_plot.png)
+![D1 Lorentz Force](docs/images/lorentz_force_plot.png)
+![D2 Josephson Junction](docs/images/josephson_plot.png)
+![D5 Atomic Physics](docs/images/d5_atomic_physics_plot.png)
+![D6 Spin-Magnetism](docs/images/spin_magnetism_plot.png)
 
 ### E. Mathematical Rigor
 
@@ -126,9 +126,9 @@ The synchronization field R acts as a conformal factor on flat spacetime. Christ
 | Causality (E1) | Signal velocity <= c | max v_g = 0.995c (never exceeds c) | PASS |
 | Knot topology (E3) | Topological protection | Winding number drift 0.0059; energy 6.8% | PARTIAL |
 
-![E2 Unitarity](build/output/unitarity/unitarity_plot.png)
-![E1 Causality](build/output/causality/causality_plot.png)
-![E3 Knot Topology](build/output/knot_topology/knot_topology_plot.png)
+![E2 Unitarity](docs/images/unitarity_plot.png)
+![E1 Causality](docs/images/causality_plot.png)
+![E3 Knot Topology](docs/images/knot_topology_plot.png)
 
 ### F. Numerical Methods
 
