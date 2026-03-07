@@ -147,6 +147,9 @@ set(TRD_SOURCES
     src/simulations/TestConfig.cpp
     src/simulations/TRDTestRunner.cpp
     src/simulations/ObservableComputer.cpp
+    src/simulations/VisualizationGenerator.cpp
+    src/simulations/VisualizationPlots.cpp
+    src/simulations/VisualizationPlotsExtra.cpp
     test/test_lorentz_force_3d.cpp
     test/test_three_body_em_3d.cpp
     test/test_stuckelberg_vortex_3d.cpp

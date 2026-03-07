@@ -32,6 +32,7 @@
 #include <vector>
 #include <fstream>
 #include <array>
+#include "simulations/VisualizationGenerator.h"
 
 // Physical constants (natural units: c = 1)
 const float PI = 3.14159265358979323846f;
@@ -194,6 +195,7 @@ bool testCyclotronMotion_Bz() {
     // Evolve
     for (int step = 0; step < num_steps; ++step) {
         p.recordState();
+        VisualizationGenerator::addDataPoint("orbit", p.x, p.y);
         borisStep(p, 0.0f, 0.0f, 0.0f,  // E-field = 0
                   0.0f, 0.0f, B_z,       // B-field = (0, 0, B_z)
                   dt);

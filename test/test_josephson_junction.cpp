@@ -38,6 +38,7 @@
 #include <vector>
 #include <fstream>
 #include <numeric>
+#include "simulations/VisualizationGenerator.h"
 
 // Physical constants
 const float PI = 3.14159265358979323846f;
@@ -213,6 +214,8 @@ bool testDCJosephson(const JosephsonConfig& config) {
         float current = CurrentCalculator::computeCurrent(core, config);
         measured_currents.push_back(current);
 
+        VisualizationGenerator::addDataPoint("dc_josephson", delta_theta, current);
+
         std::cout << "Δθ = " << std::setw(8) << delta_theta
                   << " → I = " << std::setw(10) << current << "\n";
     }
@@ -287,6 +290,8 @@ bool testACJosephson(const JosephsonConfig& config) {
         float measured_K_J = frequency / voltage;
 
         float error = std::abs(measured_K_J - JOSEPHSON_CONSTANT) / JOSEPHSON_CONSTANT;
+
+        VisualizationGenerator::addDataPoint("ac_josephson", voltage, frequency);
 
         std::cout << "  ω = " << std::setw(6) << omega
                   << " → f = " << std::setw(8) << frequency

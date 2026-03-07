@@ -235,6 +235,24 @@
 },
 {
   "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/simulations/VisualizationGenerator.cpp.o -c /home/persist/neotec/0rigin/src/simulations/VisualizationGenerator.cpp",
+  "file": "/home/persist/neotec/0rigin/src/simulations/VisualizationGenerator.cpp",
+  "output": "CMakeFiles/TRD.dir/src/simulations/VisualizationGenerator.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/simulations/VisualizationPlots.cpp.o -c /home/persist/neotec/0rigin/src/simulations/VisualizationPlots.cpp",
+  "file": "/home/persist/neotec/0rigin/src/simulations/VisualizationPlots.cpp",
+  "output": "CMakeFiles/TRD.dir/src/simulations/VisualizationPlots.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
+  "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/src/simulations/VisualizationPlotsExtra.cpp.o -c /home/persist/neotec/0rigin/src/simulations/VisualizationPlotsExtra.cpp",
+  "file": "/home/persist/neotec/0rigin/src/simulations/VisualizationPlotsExtra.cpp",
+  "output": "CMakeFiles/TRD.dir/src/simulations/VisualizationPlotsExtra.cpp.o"
+},
+{
+  "directory": "/home/persist/neotec/0rigin/build",
   "command": "/usr/bin/c++ -DTRD_MAIN_EXECUTABLE -I/home/persist/neotec/0rigin/src -I/home/persist/neotec/0rigin/include -I/home/persist/neotec/0rigin/lib -I/home/persist/neotec/0rigin/lib/Nova -I/home/persist/neotec/0rigin/lib/Nova/Core -I/home/persist/neotec/0rigin/lib/imgui -I/home/persist/neotec/0rigin/lib/imgui/backends -isystem /usr/include/SDL2 -O3 -DNDEBUG -std=c++20 -fopenmp -o CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o -c /home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp",
   "file": "/home/persist/neotec/0rigin/test/test_lorentz_force_3d.cpp",
   "output": "CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o"

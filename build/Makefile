@@ -1141,6 +1141,78 @@ src/simulations/TestConfig.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.s
 .PHONY : src/simulations/TestConfig.cpp.s
 
+src/simulations/VisualizationGenerator.o: src/simulations/VisualizationGenerator.cpp.o
+.PHONY : src/simulations/VisualizationGenerator.o
+
+# target to build an object file
+src/simulations/VisualizationGenerator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationGenerator.cpp.o
+.PHONY : src/simulations/VisualizationGenerator.cpp.o
+
+src/simulations/VisualizationGenerator.i: src/simulations/VisualizationGenerator.cpp.i
+.PHONY : src/simulations/VisualizationGenerator.i
+
+# target to preprocess a source file
+src/simulations/VisualizationGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationGenerator.cpp.i
+.PHONY : src/simulations/VisualizationGenerator.cpp.i
+
+src/simulations/VisualizationGenerator.s: src/simulations/VisualizationGenerator.cpp.s
+.PHONY : src/simulations/VisualizationGenerator.s
+
+# target to generate assembly for a file
+src/simulations/VisualizationGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationGenerator.cpp.s
+.PHONY : src/simulations/VisualizationGenerator.cpp.s
+
+src/simulations/VisualizationPlots.o: src/simulations/VisualizationPlots.cpp.o
+.PHONY : src/simulations/VisualizationPlots.o
+
+# target to build an object file
+src/simulations/VisualizationPlots.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationPlots.cpp.o
+.PHONY : src/simulations/VisualizationPlots.cpp.o
+
+src/simulations/VisualizationPlots.i: src/simulations/VisualizationPlots.cpp.i
+.PHONY : src/simulations/VisualizationPlots.i
+
+# target to preprocess a source file
+src/simulations/VisualizationPlots.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationPlots.cpp.i
+.PHONY : src/simulations/VisualizationPlots.cpp.i
+
+src/simulations/VisualizationPlots.s: src/simulations/VisualizationPlots.cpp.s
+.PHONY : src/simulations/VisualizationPlots.s
+
+# target to generate assembly for a file
+src/simulations/VisualizationPlots.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationPlots.cpp.s
+.PHONY : src/simulations/VisualizationPlots.cpp.s
+
+src/simulations/VisualizationPlotsExtra.o: src/simulations/VisualizationPlotsExtra.cpp.o
+.PHONY : src/simulations/VisualizationPlotsExtra.o
+
+# target to build an object file
+src/simulations/VisualizationPlotsExtra.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationPlotsExtra.cpp.o
+.PHONY : src/simulations/VisualizationPlotsExtra.cpp.o
+
+src/simulations/VisualizationPlotsExtra.i: src/simulations/VisualizationPlotsExtra.cpp.i
+.PHONY : src/simulations/VisualizationPlotsExtra.i
+
+# target to preprocess a source file
+src/simulations/VisualizationPlotsExtra.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationPlotsExtra.cpp.i
+.PHONY : src/simulations/VisualizationPlotsExtra.cpp.i
+
+src/simulations/VisualizationPlotsExtra.s: src/simulations/VisualizationPlotsExtra.cpp.s
+.PHONY : src/simulations/VisualizationPlotsExtra.s
+
+# target to generate assembly for a file
+src/simulations/VisualizationPlotsExtra.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TRD.dir/build.make CMakeFiles/TRD.dir/src/simulations/VisualizationPlotsExtra.cpp.s
+.PHONY : src/simulations/VisualizationPlotsExtra.cpp.s
+
 test/test_astrophysical_observations.o: test/test_astrophysical_observations.cpp.o
 .PHONY : test/test_astrophysical_observations.o
 
@@ -2306,6 +2378,15 @@ help:
 	@echo "... src/simulations/TestConfig.o"
 	@echo "... src/simulations/TestConfig.i"
 	@echo "... src/simulations/TestConfig.s"
+	@echo "... src/simulations/VisualizationGenerator.o"
+	@echo "... src/simulations/VisualizationGenerator.i"
+	@echo "... src/simulations/VisualizationGenerator.s"
+	@echo "... src/simulations/VisualizationPlots.o"
+	@echo "... src/simulations/VisualizationPlots.i"
+	@echo "... src/simulations/VisualizationPlots.s"
+	@echo "... src/simulations/VisualizationPlotsExtra.o"
+	@echo "... src/simulations/VisualizationPlotsExtra.i"
+	@echo "... src/simulations/VisualizationPlotsExtra.s"
 	@echo "... test/test_astrophysical_observations.o"
 	@echo "... test/test_astrophysical_observations.i"
 	@echo "... test/test_astrophysical_observations.s"

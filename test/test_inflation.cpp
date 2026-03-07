@@ -31,6 +31,7 @@
 #include <fstream>
 #include <yaml-cpp/yaml.h>
 #include "TRDCore3D.h"
+#include "simulations/VisualizationGenerator.h"
 
 const double PI = 3.14159265358979323846;
 const double M_PLANCK = 1.0;  // Natural units
@@ -146,6 +147,11 @@ public:
             a_history.push_back(a);
             H_history.push_back(H);
             epsilon_history.push_back(epsilon);
+
+            // Feed visualization data
+            double N_current = std::log(a / 1.0); // e-foldings from initial a=1
+            VisualizationGenerator::addDataPoint("efolds", static_cast<float>(t), static_cast<float>(N_current));
+            VisualizationGenerator::addDataPoint("slow_roll", static_cast<float>(t), static_cast<float>(epsilon));
 
             // Check if inflation ends (ε ≥ 1)
             if (!inflation_ended && epsilon >= 1.0) {

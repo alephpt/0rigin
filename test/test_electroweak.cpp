@@ -31,6 +31,7 @@
 #include <vector>
 #include <complex>
 #include <yaml-cpp/yaml.h>
+#include "simulations/VisualizationGenerator.h"
 
 const float PI = 3.14159265358979323846f;
 
@@ -297,6 +298,11 @@ int runElectroweakTest() {
     const float m_W_exp = 80.4f;   // GeV
     const float m_Z_exp = 91.2f;   // GeV
     const float theta_W_exp = 28.7f * PI/180.0f;  // radians
+
+    // Feed mass comparison data: particle_index 0=W, 1=Z, 2=Higgs(photon placeholder)
+    VisualizationGenerator::addDataPoint("mass_comparison", 0.0f, bosons.m_W_plus);
+    VisualizationGenerator::addDataPoint("mass_comparison", 1.0f, bosons.m_Z);
+    VisualizationGenerator::addDataPoint("mass_comparison", 2.0f, bosons.m_photon);
 
     std::cout << "\nBoson    | TRD Prediction | Experiment | Ratio\n";
     std::cout << "---------|----------------|------------|-------\n";

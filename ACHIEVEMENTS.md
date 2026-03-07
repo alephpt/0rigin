@@ -61,55 +61,74 @@ The synchronization field R acts as a conformal factor on flat spacetime. Christ
 
 | Test | What is verified | Quality gate | Result |
 |------|-----------------|--------------|--------|
-| Einstein field equations | G_mu_nu = 8 pi G T_mu_nu from R-field metric | Residual < 10 | PASS |
-| Weak field limit | Newton's law: a = GM/r^2 | < 1% error | PASS (< 0.01%) |
-| Geodesic equation | Particles follow TRD spacetime geodesics | < 1% trajectory error | PASS |
-| Light deflection | Photon bending in R-field curvature | Deflection observed | PASS |
-| Time dilation | Gravitational redshift from R-field gradient | Measurable shift | PASS |
-| Gravitational waves | Binary inspiral: chirp signal, polarization | Orbital decay > 5%, h+/hx within 10% of 1.0 | PASS |
+| Einstein field equations (A4) | G_mu_nu from R-field metric | 7/10 components pass; G_11, G_22 near threshold | PARTIAL |
+| Weak field limit (A2) | Newton's law: a = GM/r^2, 1/r potential | 1/r^2 falloff confirmed | PASS |
+| Gravitational waves (A5) | Wave propagation, polarization, dispersion | h+/hx quadrature, massless omega = k | PASS |
+| Binary vortex merger (A6) | Inspiral, chirp waveform, energy conservation | Correct chirp morphology | PASS |
+
+![A4 Einstein Field Equations](build/output/einstein_field_equations/einstein_field_equations_plot.png)
+![A2 Weak-Field Gravity](build/output/weak_field_3d/weak_field_plot.png)
+![A5 Gravitational Waves](build/output/gravitational_waves/gravitational_waves_plot.png)
+![A6 Binary Vortex Merger](build/output/binary_merger/binary_merger_plot.png)
 
 ### B. Standard Model
 
 | Test | What is verified | Quality gate | Result |
 |------|-----------------|--------------|--------|
-| Particle spectrum | Mass hierarchy from synchronization topology | m2/m1 vs electron/muon ratio | PASS |
-| Three generations | Exactly 3 stable topological families | Winding Q = 1, 2, 3 | PASS |
-| Electroweak | W/Z mass structure | W: 80.4 GeV, Z: 91.2 GeV (within factor 2) | PASS |
-| Strong force | Confinement: V(r) ~ sigma r, alpha_s ~ 0.1 | Linear potential + coupling | PASS |
-| Higgs connection | VEV, 3 Goldstone modes, Higgs mass | m_H = 125 GeV +/- 50%, 3 Goldstone modes | PASS |
-| Fine structure constant | alpha from 3 independent methods | Within factor 2 of 1/137.036 | PASS |
-| Particle scattering | Topological charge conservation, energy conservation | Delta Q = 0, Delta E/E < 1% | PASS |
+| Particle spectrum (B7) | Mass hierarchy from topology | Electron matched; muon within factor 5; tau fails | PARTIAL |
+| Three generations (B3) | Stable topological families | 2 of 3 stable surface states found | PARTIAL |
+| Electroweak (B4) | W/Z mass ratio (Weinberg angle) | m_W/m_Z = 0.904 vs 0.881 (2.6% error) | PASS (ratio) |
+| Strong force (B5) | Asymptotic freedom: alpha_s(Q^2) | Correct running shape; ~40% low vs PDG | PARTIAL |
+| Higgs connection (B6) | VEV, 3 Goldstone modes, mass generation | VEV = 1.00, 3 Goldstone modes confirmed | PASS |
+| Fine structure constant (B2) | alpha from multiple methods | Best: 0.00354 (factor 2 low); other methods fail | FAIL |
+
+![B7 Particle Spectrum](build/output/particle_spectrum_unified/particle_spectrum_plot.png)
+![B4 Electroweak](build/output/electroweak/electroweak_plot.png)
+![B5 Strong Force](build/output/strong_force/strong_force_plot.png)
+![B6 Higgs Connection](build/output/higgs_connection/higgs_connection_plot.png)
+![B2 Fine Structure](build/output/fine_structure_constant/fine_structure_plot.png)
+![B3 Three Generations](build/output/three_generations/three_generations_plot.png)
 
 ### C. Cosmology
 
 | Test | What is verified | Quality gate | Result |
 |------|-----------------|--------------|--------|
-| Friedmann equations | Hubble expansion from TRD vacuum dynamics | H within factor 2 of 70 km/s/Mpc | PASS |
-| Dark matter | Flat rotation curves without exotic particles | v_TRD 2x flatter than Newtonian | PASS |
-| Dark energy | Accelerating expansion: w < -1/3 | Cosmological constant w ~ -1, quintessence w ~ -2/3 | PASS |
-| Inflation | Primordial e-foldings and spectral index | Sufficient inflation | PASS |
-| Cosmological constant | Vacuum energy from synchronization | Finite and calculable | PASS |
+| Friedmann equations (C2) | Scale factor growth, Hubble parameter decline | Qualitatively correct behavior | PASS |
+| Dark matter (C3) | Flat rotation curves without exotic particles | TRD flat vs Newtonian 1/sqrt(r) decline | PASS |
+| Dark energy (C4) | Equation of state w(z) | w = -0.9967 (0.3% from Lambda CDM) | PASS |
+| Inflation (C5) | Primordial e-foldings and slow-roll | N = 59.70, epsilon ~ 0.01 | PASS |
+
+![C2 Friedmann](build/output/friedmann_equations/friedmann_plot.png)
+![C3 Dark Matter](build/output/dark_matter/dark_matter_plot.png)
+![C4 Dark Energy](build/output/dark_energy/dark_energy_plot.png)
+![C5 Inflation](build/output/inflation/inflation_plot.png)
 
 ### D. Electromagnetism and Experiments
 
 | Test | What is verified | Quality gate | Result |
 |------|-----------------|--------------|--------|
-| Lorentz force | F = q(E + v x B) from Stuckelberg gauge | Cyclotron freq < 3% error, energy < 0.01% | PASS |
-| EM-gravity coupling | Electromagnetic field backreaction on R-field | Coupling observed | PASS |
-| Stuckelberg vortex | Gauge-invariant massive photon dynamics | Vortex stability | PASS |
-| Josephson junction | DC: I = Ic sin(Delta theta), AC: f/V = 2e/h | DC fit < 20%, AC exact | PASS |
-| Laboratory scale | BEC, atomic clocks, superfluid predictions | Observable signatures | PASS |
-| Atomic physics | Precision spectroscopy predictions | Measurable corrections | PASS |
+| Lorentz force (D1) | F = q(E + v x B), cyclotron orbit | Perfect orbit closure | PASS |
+| Josephson junction (D2) | DC/AC Josephson effects | AC: f/V linear (exact); DC curve shape approximate | PARTIAL |
+| Atomic physics (D5) | Hydrogen spectroscopy | Balmer < 0.026%, Rydberg 0.24 ppb, fine structure 0.19%, 21cm 0.053% | PASS |
+| Atomic physics (D5) | Lamb shift | 955 MHz vs 1058 MHz (9.7% error) | PARTIAL |
+| Spin-magnetism (D6) | mu vs omega, g-factor, dipole field | Linear mu-omega; g-factor matches extended body | PASS |
+
+![D1 Lorentz Force](build/output/lorentz_force_3d/lorentz_force_plot.png)
+![D2 Josephson Junction](build/output/josephson_junction/josephson_plot.png)
+![D5 Atomic Physics](build/output/D5_AtomicPhysics/d5_atomic_physics_plot.png)
+![D6 Spin-Magnetism](build/output/spin_magnetism/spin_magnetism_plot.png)
 
 ### E. Mathematical Rigor
 
 | Test | What is verified | Quality gate | Result |
 |------|-----------------|--------------|--------|
-| Unitarity | S-matrix: S dagger S = 1 | Norm violation < 1e-10 | PASS |
-| Causality | Signal velocity <= c | Superluminal signals = FAIL (GO/NO-GO) | PASS |
-| Renormalizability | All UV divergences absorbable | Logarithmic structure verified | PASS |
-| Scale invariance | RG flow, beta functions | Measurable scale breaking | PASS |
-| Symmetry analysis | Noether currents, conservation laws | Correct symmetry structure | PASS |
+| Unitarity (E2) | Norm conservation ||Psi||^2 | 0.00 ppm drift over 1000 steps | PASS |
+| Causality (E1) | Signal velocity <= c | max v_g = 0.995c (never exceeds c) | PASS |
+| Knot topology (E3) | Topological protection | Winding number drift 0.0059; energy 6.8% | PARTIAL |
+
+![E2 Unitarity](build/output/unitarity/unitarity_plot.png)
+![E1 Causality](build/output/causality/causality_plot.png)
+![E3 Knot Topology](build/output/knot_topology/knot_topology_plot.png)
 
 ### F. Numerical Methods
 
@@ -164,21 +183,31 @@ Forward + backward evolution phase error:
 
 ## Significance
 
-### What TRD Unifies
+### What TRD Demonstrates
 
-One mechanism — topological phase synchronization — reproduces:
+One mechanism -- topological phase synchronization -- produces qualitatively correct physics across domains:
 
-1. **Mass generation** without a fundamental Higgs scalar. The vacuum synchronization order parameter R plays the role of the Higgs field, with v = 246 GeV as the natural scale.
+1. **Mass generation** without a fundamental Higgs scalar. The vacuum synchronization order parameter R plays the role of the Higgs field, with v = 246 GeV as the natural scale. VEV and 3 Goldstone modes confirmed.
 
-2. **Gravity** as emergent geometry. The metric g = R^2 eta produces Einstein's field equations, Newton's law, geodesic motion, gravitational waves, and light deflection from the same R-field that generates mass.
+2. **Gravity** as emergent geometry. The metric g = R^2 eta produces Newton's law (1/r^2 acceleration, 1/r potential), gravitational wave polarization structure, and binary inspiral chirp signals. Einstein field equations satisfied at order-of-magnitude level (7/10 components clean; spatial diagonal elevated).
 
-3. **Dark matter** without exotic particles. Vacuum synchronization gradients produce flat galactic rotation curves directly from R-field dynamics.
+3. **Dark matter** without exotic particles. Vacuum synchronization gradients produce flat galactic rotation curves directly from R-field dynamics, in contrast to Newtonian 1/sqrt(r) decline.
 
-4. **Dark energy** from vacuum synchronization dynamics. The equation of state w < -1/3 emerges naturally, producing both cosmological-constant-like and quintessence-like behavior.
+4. **Dark energy** from vacuum synchronization dynamics. The equation of state w = -0.9967, within 0.3% of the cosmological constant, emerges naturally.
 
-5. **The Standard Model** particle spectrum. Three generations arise from three stable topological defect classes (winding Q = 1, 2, 3). Electroweak masses, the Higgs mechanism, and confinement all follow from the synchronization topology.
+5. **Electroweak structure** with correct dimensionless ratios. The Weinberg angle m_W/m_Z = 0.904 (2.6% error). Absolute mass scales remain uncalibrated.
 
-6. **Fundamental constants** from geometry. The fine structure constant alpha derives from the ratio of electromagnetic to vacuum energy in topological configurations.
+6. **Asymptotic freedom** with correct running coupling shape, though systematically 40% low.
+
+7. **Precision atomic physics**. Balmer series to 0.026%, Rydberg constant to 0.24 ppb, fine structure splitting to 0.19%, hyperfine 21cm to 0.053%.
+
+### What TRD Does Not Yet Achieve
+
+- Fine structure constant alpha = 1/137 (no extraction method works)
+- Exactly three fermion generations (only 2 stable surface states found)
+- Correct lepton mass hierarchy beyond the electron
+- Lamb shift (9.7% error; QED loop corrections needed)
+- Absolute electroweak mass calibration
 
 ### What Makes This Testable
 

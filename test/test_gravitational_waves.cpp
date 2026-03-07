@@ -39,6 +39,7 @@
 #include <array>
 #include <string>
 #include <fstream>
+#include "simulations/VisualizationGenerator.h"
 
 // ============================================================================
 // Physical Constants (Natural Units)
@@ -434,6 +435,8 @@ bool testChirpSignal(TRD::CSVWriter& csv) {
             GWPolarization gw = computeGWStrain(binary, detector_distance, time);
 
             csv.writeRow(time, f_gw, gw.h_plus, gw.h_cross, gw.amplitude);
+
+            VisualizationGenerator::addDataPoint("waveform", static_cast<float>(time), static_cast<float>(gw.h_plus));
 
             times.push_back(time);
             frequencies_gw.push_back(f_gw);

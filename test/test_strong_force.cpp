@@ -32,6 +32,7 @@
 #include <vector>
 #include <complex>
 #include <yaml-cpp/yaml.h>
+#include "simulations/VisualizationGenerator.h"
 
 const float PI = 3.14159265358979323846f;
 
@@ -392,6 +393,8 @@ int runStrongForceTest() {
 
         float sync = computeColorSynchronization(color);
         float alpha_s = computeRunningCoupling(sync, scales[i]);
+
+        VisualizationGenerator::addDataPoint("alpha_s", scales[i], alpha_s);
 
         std::cout << std::fixed << std::setprecision(1) << std::setw(11) << scales[i]
                  << " | " << std::setprecision(3) << std::setw(4) << sync

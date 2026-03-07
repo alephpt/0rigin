@@ -32,6 +32,7 @@
 #include <vector>
 #include <array>
 #include <algorithm>
+#include "simulations/VisualizationGenerator.h"
 
 const float PI = 3.14159265358979323846f;
 const float G = 1.0f;  // Natural units
@@ -208,6 +209,9 @@ bool testTRDRotationCurve() {
         float v_trd = trdRotationVelocity(r, rho0, R_disk);
         float v_newton = newtonianRotationVelocity(r, rho0, R_disk);
         float ratio = v_trd / v_trd_disk;
+
+        VisualizationGenerator::addDataPoint("rotation_trd", r, v_trd);
+        VisualizationGenerator::addDataPoint("rotation_newtonian", r, v_newton);
 
         std::cout << std::setw(10) << (r / R_disk)
                   << std::setw(15) << v_trd

@@ -8,6 +8,7 @@
  */
 
 #include "simulations/TRDTestRunner.h"
+#include "simulations/VisualizationGenerator.h"
 #include <iostream>
 #include <string>
 
@@ -16,6 +17,7 @@ void printUsage(const char* program_name) {
     std::cout << "\nUsage:" << std::endl;
     std::cout << "  " << program_name << "                         - Run interactive visualization" << std::endl;
     std::cout << "  " << program_name << " --test <config.yaml>    - Run test simulation" << std::endl;
+    std::cout << "  " << program_name << " --test <config.yaml> --plot  - Run test + generate plots" << std::endl;
     std::cout << "  " << program_name << " --help                  - Show this help message" << std::endl;
 
     std::cout << "\nModes:" << std::endl;
@@ -94,132 +96,144 @@ int runAstrophysicalObservationsTest();
 int runAtomicPhysicsTest();
 int runLaboratoryScaleTest();
 
-int runTestMode(const std::string& config_path) {
+int runTestMode(const std::string& config_path, bool generate_plots) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
     std::cout << "Configuration: " << config_path << std::endl;
+    if (generate_plots) {
+        std::cout << "Plot generation: ENABLED" << std::endl;
+    }
 
     // Set global config path for test functions
     extern std::string g_test_config_path;
     g_test_config_path = config_path;
 
+    // Extract test name from config path for visualization
+    std::string test_name = config_path;
+    auto slash = test_name.rfind('/');
+    if (slash != std::string::npos) test_name = test_name.substr(slash + 1);
+    auto dot = test_name.rfind('.');
+    if (dot != std::string::npos) test_name = test_name.substr(0, dot);
+
+    // Clear any previous visualization data
+    VisualizationGenerator::clearData();
+
+    int result = 0;
+
     // Detect test type from config path
     std::string test_type;
     if (config_path.find("lorentz_force_3d") != std::string::npos) {
-        return runLorentzForce3DTest();
+        result = runLorentzForce3DTest();
     } else if (config_path.find("stuckelberg_vortex_3d") != std::string::npos) {
-        return runStuckelbergVortex3DTest();
+        result = runStuckelbergVortex3DTest();
     } else if (config_path.find("geodesic_3d") != std::string::npos) {
-        return runGeodesic3DTest();
+        result = runGeodesic3DTest();
     } else if (config_path.find("weak_field_3d") != std::string::npos) {
-        return runWeakField3DTest();
+        result = runWeakField3DTest();
     } else if (config_path.find("time_dilation_3d") != std::string::npos) {
-        return runTimeDilation3DTest();
+        result = runTimeDilation3DTest();
     } else if (config_path.find("three_body_em_3d") != std::string::npos) {
-        return runThreeBodyEM3DTest();
+        result = runThreeBodyEM3DTest();
     } else if (config_path.find("em_gravity_coupling_3d") != std::string::npos) {
-        return runEMGravityCoupling3DTest();
+        result = runEMGravityCoupling3DTest();
     } else if (config_path.find("einstein_field_equations") != std::string::npos) {
-        return runEinsteinFieldEquationsTest();
+        result = runEinsteinFieldEquationsTest();
     } else if (config_path.find("light_deflection_3d") != std::string::npos) {
-        return runLightDeflection3DTest();
+        result = runLightDeflection3DTest();
     } else if (config_path.find("particle_spectrum") != std::string::npos) {
-        // Create argv array with config path for particle spectrum test
         char* ps_argv[2];
         ps_argv[0] = const_cast<char*>("trd");
         ps_argv[1] = const_cast<char*>(config_path.c_str());
-        return runParticleSpectrumTest(2, ps_argv);
+        result = runParticleSpectrumTest(2, ps_argv);
     } else if (config_path.find("cosmological_constant") != std::string::npos) {
-        return runCosmologicalConstantTest();
+        result = runCosmologicalConstantTest();
     } else if (config_path.find("friedmann_equations") != std::string::npos) {
-        return runFriedmannEquationsTest();
+        result = runFriedmannEquationsTest();
     } else if (config_path.find("dark_matter") != std::string::npos) {
-        return runDarkMatterTest();
+        result = runDarkMatterTest();
     } else if (config_path.find("dark_energy") != std::string::npos) {
-        return runDarkEnergyTest();
+        result = runDarkEnergyTest();
     } else if (config_path.find("inflation") != std::string::npos) {
-        return runInflationTest();
+        result = runInflationTest();
     } else if (config_path.find("unitarity") != std::string::npos) {
-        return runUnitarityTest();
+        result = runUnitarityTest();
     } else if (config_path.find("scale_invariance") != std::string::npos) {
-        return runScaleInvarianceTest();
+        result = runScaleInvarianceTest();
     } else if (config_path.find("symmetry_analysis") != std::string::npos) {
-        return runSymmetryAnalysisTest();
+        result = runSymmetryAnalysisTest();
     } else if (config_path.find("renormalizability") != std::string::npos) {
-        return runRenormalizabilityTest();
+        result = runRenormalizabilityTest();
     } else if (config_path.find("causality") != std::string::npos) {
-        return runCausalityTest();
+        result = runCausalityTest();
     } else if (config_path.find("three_generations") != std::string::npos) {
-        return runThreeGenerationsTest();
+        result = runThreeGenerationsTest();
     } else if (config_path.find("electroweak") != std::string::npos) {
-        return runElectroweakTest();
+        result = runElectroweakTest();
     } else if (config_path.find("strong_force") != std::string::npos) {
-        return runStrongForceTest();
+        result = runStrongForceTest();
     } else if (config_path.find("higgs_connection") != std::string::npos) {
-        return runHiggsConnectionTest();
+        result = runHiggsConnectionTest();
     } else if (config_path.find("particle_scattering") != std::string::npos) {
-        return runParticleScatteringTest();
+        result = runParticleScatteringTest();
     } else if (config_path.find("josephson_junction") != std::string::npos) {
-        return runJosephsonJunctionTest();
+        result = runJosephsonJunctionTest();
     } else if (config_path.find("binary_merger") != std::string::npos) {
-        return runBinaryMergerTest();
+        result = runBinaryMergerTest();
     } else if (config_path.find("spin_magnetism") != std::string::npos) {
-        return runSpinMagnetismTest();
+        result = runSpinMagnetismTest();
     } else if (config_path.find("knot_topology") != std::string::npos) {
-        return runKnotTopologyTest();
+        result = runKnotTopologyTest();
     } else if (config_path.find("multiscale") != std::string::npos) {
-        return runMultiScaleTest();
+        result = runMultiScaleTest();
     } else if (config_path.find("quantum_fluctuations") != std::string::npos) {
-        return runQuantumFluctuationsTest();
+        result = runQuantumFluctuationsTest();
     } else if (config_path.find("finite_temperature") != std::string::npos) {
-        return runFiniteTemperatureTest();
+        result = runFiniteTemperatureTest();
     } else if (config_path.find("hpc_scaling") != std::string::npos) {
-        return runHPCScalingTest();
+        result = runHPCScalingTest();
     } else if (config_path.find("fine_structure_constant") != std::string::npos) {
-        return runFineStructureConstantTest();
+        result = runFineStructureConstantTest();
     } else if (config_path.find("atomic_physics") != std::string::npos) {
-        return runAtomicPhysicsTest();
+        result = runAtomicPhysicsTest();
     } else if (config_path.find("lhc_predictions") != std::string::npos) {
-        return runLHCPredictionsTest();
+        result = runLHCPredictionsTest();
     } else if (config_path.find("astrophysical_observations") != std::string::npos) {
-        return runAstrophysicalObservationsTest();
+        result = runAstrophysicalObservationsTest();
     } else if (config_path.find("laboratory_scale") != std::string::npos) {
-        return runLaboratoryScaleTest();
-    }
-
-    // Default: TRD field theory test (timesync, etc.)
-    // Create test runner
-    TRDTestRunner runner(config_path);
-
-    // Initialize
-    std::cout << "\n[1/3] Initializing..." << std::endl;
-    if (!runner.initialize()) {
-        std::cerr << "\n✗ Initialization failed" << std::endl;
-        return 1;
-    }
-
-    // Run tests
-    std::cout << "\n[2/3] Running tests..." << std::endl;
-    bool success = runner.run();
-
-    // Generate report
-    std::cout << "\n[3/3] Generating report..." << std::endl;
-    runner.generateReport();
-
-    // Summary
-    std::cout << "\n===== Test Summary =====" << std::endl;
-    if (success && runner.allTestsPassed()) {
-        std::cout << "✓ ALL TESTS PASSED" << std::endl;
-        std::cout << "\nValidation criteria met:" << std::endl;
-        std::cout << "  ✓ Norm conservation ||Ψ||² - 1 < 10⁻⁴" << std::endl;
-        std::cout << "  ✓ Energy conservation |ΔE/E₀| < 1%" << std::endl;
-        std::cout << "  ✓ Convergence between N ratios < 5%" << std::endl;
-        return 0;
+        result = runLaboratoryScaleTest();
     } else {
-        std::cout << "✗ TESTS FAILED" << std::endl;
-        std::cout << "\nSome validation criteria not met." << std::endl;
-        std::cout << "Check test report for details." << std::endl;
-        return 1;
+        // Default: TRD field theory test (timesync, etc.)
+        TRDTestRunner runner(config_path);
+
+        std::cout << "\n[1/3] Initializing..." << std::endl;
+        if (!runner.initialize()) {
+            std::cerr << "\n✗ Initialization failed" << std::endl;
+            return 1;
+        }
+
+        std::cout << "\n[2/3] Running tests..." << std::endl;
+        bool success = runner.run();
+
+        std::cout << "\n[3/3] Generating report..." << std::endl;
+        runner.generateReport();
+
+        std::cout << "\n===== Test Summary =====" << std::endl;
+        if (success && runner.allTestsPassed()) {
+            std::cout << "✓ ALL TESTS PASSED" << std::endl;
+            result = 0;
+        } else {
+            std::cout << "✗ TESTS FAILED" << std::endl;
+            result = 1;
+        }
     }
+
+    // Generate visualization if --plot flag was passed
+    if (generate_plots) {
+        std::cout << "\n[Visualization] Generating plots for " << test_name << "..." << std::endl;
+        std::string output_dir = "output/" + test_name;
+        VisualizationGenerator::generateTestPlot(test_name, output_dir);
+    }
+
+    return result;
 }
 
 // Global configuration path for test functions
@@ -259,7 +273,13 @@ int main(int argc, char* argv[]) {
             return 1;
         }
         std::string config_path = argv[2];
-        return runTestMode(config_path);
+        bool generate_plots = false;
+        for (int i = 3; i < argc; ++i) {
+            if (std::string(argv[i]) == "--plot" || std::string(argv[i]) == "-p") {
+                generate_plots = true;
+            }
+        }
+        return runTestMode(config_path, generate_plots);
     }
 
     // Unknown argument

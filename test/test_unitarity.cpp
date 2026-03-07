@@ -36,6 +36,7 @@
 #include <fstream>
 #include <algorithm>
 #include <numeric>
+#include "simulations/VisualizationGenerator.h"
 
 // Physical constants
 const float PI = 3.14159265358979323846f;
@@ -156,6 +157,10 @@ bool testFreeEvolution(float dt, int num_steps, bool verbose = true) {
         for (size_t i = 0; i < grid_size; ++i) {
             theta_field[i] += omega_rotation * dt;
             // R field unchanged in free evolution
+        }
+        if (step % 100 == 0) {
+            double norm_current = computeNorm(R_field, dx, dy, dz);
+            VisualizationGenerator::addDataPoint("norm", static_cast<float>(step), static_cast<float>(norm_current));
         }
     }
 

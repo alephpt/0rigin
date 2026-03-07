@@ -27,6 +27,7 @@
 #include <cmath>
 #include <vector>
 #include <array>
+#include "simulations/VisualizationGenerator.h"
 
 const float PI = 3.14159265358979323846f;
 const float G = 1.0f;  // Natural units
@@ -143,6 +144,8 @@ bool testGravitationalAcceleration() {
         float a_expected = G * M / (r * r);
         float error = std::abs(a_mag - a_expected) / a_expected;
 
+        VisualizationGenerator::addDataPoint("acceleration", r, a_mag);
+
         std::cout << "(" << std::setw(4) << x << "," << std::setw(4) << y << "," << std::setw(4) << z << ")"
                   << std::setw(15) << a_mag
                   << std::setw(15) << a_expected
@@ -183,6 +186,8 @@ bool testGravitationalPotential() {
         float phi = (R - 1.0f);  // epsilon = -GM/r, so phi = epsilon
         float phi_expected = -G * M / r;
         float error = std::abs(phi - phi_expected) / std::abs(phi_expected);
+
+        VisualizationGenerator::addDataPoint("potential", r, phi);
 
         std::cout << std::setw(10) << r
                   << std::setw(15) << phi

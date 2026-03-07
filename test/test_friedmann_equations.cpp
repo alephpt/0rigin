@@ -30,6 +30,7 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include "simulations/VisualizationGenerator.h"
 
 const double PI = 3.14159265358979323846;
 const double C_LIGHT = 299792.458;  // km/s
@@ -268,6 +269,12 @@ bool testMatterDominated() {
 
         hubble_values.push_back(H);
         density_values.push_back(rho);
+
+        // Feed visualization data
+        float t_norm = static_cast<float>(step) / num_steps;
+        VisualizationGenerator::addDataPoint("scale_factor", t_norm,
+            static_cast<float>(universe.getR()));
+        VisualizationGenerator::addDataPoint("hubble", t_norm, static_cast<float>(H));
     }
 
     // Check that H > 0 (expanding universe)

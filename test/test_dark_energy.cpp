@@ -29,6 +29,7 @@
 #include <fstream>
 #include <yaml-cpp/yaml.h>
 #include "TRDCore3D.h"
+#include "simulations/VisualizationGenerator.h"
 
 const double PI = 3.14159265358979323846;
 
@@ -159,6 +160,8 @@ public:
             a_history.push_back(a);
             rho_history.push_back(rho);
             p_history.push_back(p);
+
+            VisualizationGenerator::addDataPoint("equation_of_state", static_cast<float>(t), static_cast<float>(w));
 
             // Compute Hubble parameter: H = √(8πG/3 * ρ)
             // Using natural units where 8πG/3 ≈ 1 for simplicity

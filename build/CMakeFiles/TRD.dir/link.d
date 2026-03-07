@@ -19,6 +19,9 @@ bin/trd: \
   CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o \
   CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o \
   CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o \
+  CMakeFiles/TRD.dir/src/simulations/VisualizationGenerator.cpp.o \
+  CMakeFiles/TRD.dir/src/simulations/VisualizationPlots.cpp.o \
+  CMakeFiles/TRD.dir/src/simulations/VisualizationPlotsExtra.cpp.o \
   CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_three_body_em_3d.cpp.o \
   CMakeFiles/TRD.dir/test/test_stuckelberg_vortex_3d.cpp.o \
@@ -142,6 +145,12 @@ CMakeFiles/TRD.dir/src/simulations/TestConfig.cpp.o:
 CMakeFiles/TRD.dir/src/simulations/TRDTestRunner.cpp.o:
 
 CMakeFiles/TRD.dir/src/simulations/ObservableComputer.cpp.o:
+
+CMakeFiles/TRD.dir/src/simulations/VisualizationGenerator.cpp.o:
+
+CMakeFiles/TRD.dir/src/simulations/VisualizationPlots.cpp.o:
+
+CMakeFiles/TRD.dir/src/simulations/VisualizationPlotsExtra.cpp.o:
 
 CMakeFiles/TRD.dir/test/test_lorentz_force_3d.cpp.o:
 
