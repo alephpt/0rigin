@@ -1,5 +1,10 @@
-test_name: "E1_Renormalizability"
-description: "One-loop quantum corrections and UV divergence analysis for TRD theory"
+test_name: "E1_UV_Structure"
+description: "UV structure analysis and perturbative control for TRD lattice theory"
+
+# NOTE: TRD is a lattice theory with a physical UV cutoff (lattice spacing).
+# It does NOT require renormalization in the perturbative QFT sense.
+# This test uses continuum-style diagnostics to characterize the UV structure
+# and verify perturbative control, not to prove "renormalizability."
 
 validation:
   framework: "E1 - Mathematical Rigor"
@@ -138,4 +143,4 @@ results:
     Z_R: 0.956      # R-field renormalization
     Z_K: 1.087      # Coupling renormalization
     total_count: 5  # Finite number
-  go_no_go: "GO - TRD IS RENORMALIZABLE"
+  go_no_go: "PASS - UV structure well-behaved, perturbative control confirmed"

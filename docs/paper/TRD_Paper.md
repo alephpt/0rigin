@@ -327,7 +327,7 @@ The fine structure constant alpha is derived from the ratio of electromagnetic t
 | Flux quantization | 961.2 | 0.007297 | 131,713 |
 | Geometric mean | 0.094 | 0.007297 | 12.9 |
 
-The energy method is closest, yielding alpha approximately half the QED value. The flux method produces a catastrophically wrong result, and the coupling method is too small by a factor of 30. This is an honest failure: no extraction method currently reproduces alpha = 1/137 from the TRD vacuum. The energy method's factor-of-two discrepancy suggests the correct physics may be present but the extraction procedure requires refinement -- possibly through proper renormalization of the electromagnetic coupling at the lattice scale, or identification of the correct observable combination. This remains an open problem.
+The energy method is closest, yielding alpha approximately half the QED value. The flux method produces a catastrophically wrong result, and the coupling method is too small by a factor of 30. This is an honest failure: no extraction method currently reproduces alpha = 1/137 from the TRD vacuum. The energy method's factor-of-two discrepancy suggests the correct physics may be present but the extraction procedure requires refinement -- possibly through proper scale matching of the electromagnetic coupling between lattice and continuum, or identification of the correct observable combination. This remains an open problem.
 
 ![B2 Fine Structure Constant](../../build/output/fine_structure_constant/fine_structure_plot.png)
 *Figure 6: Left: Four extraction methods on log scale with QED reference (dashed red). Right: Ratio to QED value -- none achieve ratio = 1.*
@@ -569,17 +569,19 @@ All field propagation speeds are verified to satisfy v <= c. The light cone stru
 ![E1 Causality](../../build/output/causality/causality_plot.png)
 *Figure 20: Left: Dispersion relation showing group velocity (blue) always below c and phase velocity (orange) exceeding c at low k. Right: Group velocity approaching but never exceeding the speed of light (max v_g = 0.995c).*
 
-### 8.3 Renormalizability
+### 8.3 Ultraviolet Structure
 
-All ultraviolet divergences are absorbable into a finite number of counterterms. One-loop corrections remain below 50% of tree-level values, confirming perturbative control.
+**Important clarification**: TRD is a lattice theory with a physical UV cutoff at the lattice spacing. It does not produce divergent loop integrals that require renormalization in the traditional perturbative QFT sense. The lattice itself acts as a regulator, and all computed quantities are finite by construction. Claiming "renormalizability" in the QFT sense -- absorbing infinities into counterterms -- is therefore inappropriate. TRD has no infinities to absorb.
 
-### 8.4 Scale Invariance
+The meaningful question for a lattice theory is whether physical observables have well-defined continuum limits as the lattice spacing a -> 0. We verify that one-loop corrections to the effective coupling remain below 50% of tree-level values at the current lattice spacing (64^3 grid), indicating perturbative control at this resolution. Whether the theory has a proper continuum limit (i.e., whether a UV fixed point exists in the renormalization group flow) is an open question that requires systematic study at multiple lattice spacings.
 
-The renormalization group flow is computed via the beta function:
+### 8.4 Scale Dependence
 
-    beta(K) = 0.0127 K^3                                                              (36)
+The effective coupling K varies with the energy scale according to:
 
-This yields a Landau pole at approximately 10^{34} GeV, well above the Planck scale. The theory is perturbatively valid at all experimentally accessible energies.
+    beta(K) = dK/d(ln mu) = 0.0127 K^3                                                (36)
+
+This describes how the coupling runs with scale -- a physically meaningful statement independent of whether the theory is "renormalizable." The positive beta function indicates that K grows at higher energies, with a Landau-type singularity at approximately 10^{34} GeV. Since this is well above the Planck scale (10^{19} GeV), the effective description remains valid at all experimentally accessible energies. However, we emphasize that this is a statement about the lattice theory at its current resolution, not a proof of continuum renormalizability.
 
 ### 8.5 Symmetry Analysis
 
@@ -648,7 +650,7 @@ OpenMP parallelization achieves 86.57% efficiency on 2 cores for the dominant la
 
 ### 10.1 Theoretical Limitations
 
-**Fine structure constant**: No extraction method currently reproduces alpha = 1/137 from the TRD vacuum. The energy method gives alpha = 0.00354 (factor of 2 low), the coupling method gives 0.000244 (factor of 30 low), and the flux method gives a catastrophically wrong value of 961. This is the most significant quantitative failure of the framework and likely requires a fundamentally different extraction procedure or proper renormalization at the lattice scale.
+**Fine structure constant**: No extraction method currently reproduces alpha = 1/137 from the TRD vacuum. The energy method gives alpha = 0.00354 (factor of 2 low), the coupling method gives 0.000244 (factor of 30 low), and the flux method gives a catastrophically wrong value of 961. This is the most significant quantitative failure of the framework and likely requires a fundamentally different extraction procedure or proper scale matching between the lattice and physical observables.
 
 **Three generations**: Only 2 of the required 3 stable surface defect states are found in simulations. The theory does not produce a natural cutoff at three generations. Higher-dimensional extensions may resolve this.
 

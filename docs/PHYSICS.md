@@ -466,7 +466,7 @@ Mass ratios are within a factor of 2, which is the target accuracy for this stag
 
 ### Category E: Mathematical Rigor (5/5 PASS)
 
-- **E1**: Renormalizability: all divergences absorbable
+- **E1**: UV finiteness: lattice-regulated, all quantities finite by construction
 - **E2**: Unitarity: S-dagger S = 1 verified
 - **E3**: Causality: all propagation speeds v <= c (zero light cone violations)
 - **E4**: Scale invariance: beta function beta(K) = 0.0127 K^3 (Landau pole at 10^34 GeV)
@@ -534,7 +534,7 @@ The vacuum energy in TRD is set by the synchronization dynamics, not by summing 
 1. **Adaptive timestepping**: Automatic dt adjustment based on field gradient magnitudes
 2. **Higher-order spatial methods**: 6th-order stencils for further energy conservation improvement
 3. **Multi-GPU scaling**: Domain decomposition for 128^3+ grids
-4. **Quantum corrections**: Full one-loop renormalization implementation
+4. **Quantum corrections**: One-loop effective action and continuum limit analysis
 5. **Laboratory-scale predictions**: Design experiments for BEC gravity anomaly (22.6% predicted)
 6. **Lattice gauge theory interface**: Compare TRD predictions against lattice QCD
 

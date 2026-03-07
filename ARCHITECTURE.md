@@ -401,7 +401,7 @@ quality_gates:
 ### Category E: Mathematical Rigor (5/5 ✅)
 
 **Physics Validated**:
-- Renormalizability: all divergences absorbable
+- UV finiteness: lattice provides natural UV cutoff; no divergent integrals arise
 - Unitarity: S†S = 1 verified
 - Causality: all propagation v ≤ c
 - Scale invariance: β-function computed

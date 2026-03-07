@@ -13,7 +13,7 @@ TRD has completed validation across 44 physics tests spanning general relativity
 | Cosmology | Friedmann equations, dark matter, dark energy, inflation, cosmological constant | Flat rotation curves without exotic particles |
 | Electromagnetism | Lorentz force, EM-gravity coupling, Stuckelberg vortex, three-body EM | Gauge-invariant massive photon dynamics |
 | Condensed Matter | Josephson junction, spin-magnetism, knot topology, knot stability | AC/DC Josephson effects reproduced |
-| Mathematical Rigor | Unitarity, renormalizability, causality, scale invariance, symmetry analysis | S-matrix unitarity verified |
+| Mathematical Rigor | Unitarity, UV finiteness, causality, scale dependence, symmetry analysis | S-matrix unitarity verified |
 
 ## Future Research Directions
 
@@ -23,7 +23,7 @@ TRD has completed validation across 44 physics tests spanning general relativity
 
 **Absolute Mass Scale** - TRD correctly predicts mass ratios but the absolute scale is set by the input parameter v = 246 GeV. Deriving this from first principles would strengthen the theory considerably.
 
-**Quantum Loop Corrections** - Current validation is at tree level. Computing one-loop corrections to the TRD effective action and verifying UV finiteness would address renormalizability beyond the classical regime.
+**Quantum Loop Corrections** - Current validation is at tree level. Computing one-loop corrections to the TRD effective action would verify that perturbative control is maintained and determine whether the lattice theory has a well-defined continuum limit.
 
 ### Computational Development
 

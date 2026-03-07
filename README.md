@@ -180,7 +180,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for comprehensive design documentation.
 - D5: Atomic Physics (Rydberg constant to 11 digits)
 
 **Category E (Mathematical Rigor)**: 5/5 ✅
-- E1: Renormalizability (all divergences absorbable)
+- E1: UV Finiteness (lattice-regulated, no divergences by construction)
 - E2: Unitarity (S†S = 1 verified)
 - E3: Causality (all propagation v ≤ c)
 - E4: Scale Invariance (β-function computed, TeV threshold)
@@ -272,7 +272,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
 - `config/atomic_physics.yaml` - Atomic spectroscopy (11-digit precision)
 
 **Mathematical Rigor (Category E)**:
-- `config/renormalizability.yaml` - One-loop divergences
+- `config/renormalizability.yaml` - UV structure and perturbative control
 - `config/causality.yaml` - Subluminal propagation
 - `config/symmetry_analysis.yaml` - Noether currents, conservation laws
 

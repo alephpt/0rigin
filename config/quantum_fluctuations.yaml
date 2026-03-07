@@ -144,13 +144,13 @@ renormalization:
 success_criteria:
   GO_criteria:
     - "Quantum corrections < 50% of classical values (perturbative)"
-    - "All divergences logarithmic or quadratic (renormalizable)"
+    - "All divergences logarithmic or quadratic (well-behaved UV structure)"
     - "Beta function well-defined (consistent RG flow)"
     - "Energy conservation maintained in classical baseline"
 
   NO_GO_criteria:
     - "Quantum corrections > 50% (non-perturbative breakdown)"
-    - "Non-renormalizable divergences (dimension > 4 operators)"
+    - "Pathological UV divergences (dimension > 4 operators)"
     - "Negative probabilities or unitarity violation"
 
 notes: |

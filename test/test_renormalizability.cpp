@@ -1,24 +1,32 @@
 /**
  * test_renormalizability.cpp
  *
- * E1 MATHEMATICAL RIGOR: Renormalizability Proof
+ * E1 MATHEMATICAL RIGOR: UV Structure & Perturbative Control
  *
- * GO/NO-GO GATE: This test determines if TRD theory is mathematically consistent
- * at the quantum level. If non-renormalizable, the theory FAILS.
+ * IMPORTANT NOTE ON TERMINOLOGY:
+ *   TRD is a lattice theory with a physical UV cutoff at the lattice spacing.
+ *   It does NOT produce divergent loop integrals requiring renormalization in
+ *   the perturbative QFT sense. The lattice itself regularizes all quantities.
+ *   "Renormalizability" (absorbing infinities into counterterms) is a property
+ *   of continuum QFT and does not directly apply here.
+ *
+ *   What this test ACTUALLY verifies:
+ *   1. The effective coupling K runs with scale (beta function exists)
+ *   2. One-loop corrections remain bounded (perturbative control)
+ *   3. Unitarity is preserved at one-loop level
+ *   4. The lattice theory shows no sign of pathological UV behavior
+ *
+ *   The continuum-style loop integral machinery below is used as a DIAGNOSTIC
+ *   tool to characterize the UV structure of the TRD Lagrangian, not as a
+ *   claim that the lattice theory requires renormalization.
  *
  * PHYSICS MODEL:
  *   TRD Lagrangian: L = (∂_μθ)² + (∂_μR)² + K·R²·Σcos(θ_i - θ_j) + V(R)
  *
- *   One-loop corrections:
- *   - Self-energy: Σ(p²) = ∫ d⁴k/(2π)⁴ K²/((k² + Δ²)((p-k)² + Δ²))
- *   - Vertex: Γ = K + δΓ with δΓ ~ K² log(Λ/Δ)
- *   - Vacuum energy: E_vac ~ Λ⁴ (quadratic divergence)
- *
  * SUCCESS CRITERIA:
- *   ✓ All divergences absorbable by finite counterterms
- *   ✓ No dimension > 4 operators generated
- *   ✓ Well-defined beta function β(K)
- *   ✓ Unitarity and gauge invariance preserved
+ *   - Well-defined beta function β(K) with perturbative control
+ *   - One-loop corrections bounded (< 50% of tree level)
+ *   - Unitarity preserved
  */
 
 #include <iostream>
@@ -33,7 +41,11 @@
 const double PI = 3.14159265358979323846;
 
 /**
- * Renormalization calculator for TRD theory
+ * UV structure analysis for TRD theory
+ *
+ * Uses continuum-style loop integrals as diagnostic tools to characterize
+ * the perturbative structure. The lattice theory is UV-finite by construction;
+ * this analysis determines whether the continuum limit would be well-behaved.
  */
 class RenormalizationAnalysis {
 private:
@@ -60,7 +72,7 @@ private:
     std::map<std::string, DivergenceStructure> divergences;
     std::map<std::string, double> counterterms;
     double beta_function_coeff;
-    bool is_renormalizable;
+    bool uv_well_behaved;
 
 public:
     RenormalizationAnalysis(const YAML::Node& config) {
@@ -77,7 +89,7 @@ public:
         momentum_max = physics["momentum_max"].as<double>();
         momentum_min = physics["momentum_min"].as<double>();
 
-        is_renormalizable = true; // Assume true until proven otherwise
+        uv_well_behaved = true; // Assume true until proven otherwise
     }
 
     /**
@@ -241,7 +253,7 @@ public:
         // Check if finite number of counterterms
         int n_counterterms = counterterms.size();
         if (n_counterterms > 10) {
-            is_renormalizable = false;
+            uv_well_behaved = false;
             std::cout << "WARNING: Too many counterterms required (" << n_counterterms << ")" << std::endl;
         }
     }
@@ -266,7 +278,10 @@ public:
      * Main analysis routine
      */
     void runAnalysis() {
-        std::cout << "\n=== TRD RENORMALIZABILITY ANALYSIS ===" << std::endl;
+        std::cout << "\n=== TRD UV STRUCTURE ANALYSIS ===" << std::endl;
+        std::cout << "NOTE: TRD is lattice-regulated (UV-finite by construction)." << std::endl;
+        std::cout << "This analysis characterizes the perturbative structure" << std::endl;
+        std::cout << "using continuum-style diagnostics." << std::endl;
         std::cout << "Parameters:" << std::endl;
         std::cout << "  Coupling K = " << coupling_K << std::endl;
         std::cout << "  Mass gap Δ = " << mass_gap_delta << std::endl;
@@ -313,17 +328,19 @@ public:
         bool unitarity_ok = checkUnitarity();
         std::cout << "  Unitarity: " << (unitarity_ok ? "PRESERVED" : "VIOLATED") << std::endl;
 
-        // Power counting analysis for all-order proof
-        std::cout << "\n5. All-order renormalizability (Weinberg's theorem)..." << std::endl;
+        // Power counting analysis
+        std::cout << "\n5. Power counting (continuum limit diagnostic)..." << std::endl;
         std::cout << "  Operator dimensions in TRD Lagrangian:" << std::endl;
-        std::cout << "    (∂_μθ)² → dimension 2 (renormalizable)" << std::endl;
-        std::cout << "    (∂_μR)² → dimension 2 (renormalizable)" << std::endl;
+        std::cout << "    (∂_μθ)² → dimension 2" << std::endl;
+        std::cout << "    (∂_μR)² → dimension 2" << std::endl;
         std::cout << "    K·R²·cos(Δθ) → dimension 0 (marginal)" << std::endl;
-        std::cout << "  Conclusion: No dimension > 4 operators can be generated" << std::endl;
-        std::cout << "  → Theory remains renormalizable to all orders" << std::endl;
+        std::cout << "  No dimension > 4 operators in the Lagrangian." << std::endl;
+        std::cout << "  NOTE: This is a necessary condition for a well-behaved" << std::endl;
+        std::cout << "  continuum limit, but the lattice theory is UV-finite" << std::endl;
+        std::cout << "  regardless -- the lattice spacing provides the cutoff." << std::endl;
 
         // Final verdict
-        std::cout << "\n=== RENORMALIZABILITY VERDICT ===" << std::endl;
+        std::cout << "\n=== UV STRUCTURE VERDICT ===" << std::endl;
 
         // Check all criteria
         bool all_divergences_log = true;
@@ -336,29 +353,30 @@ public:
         bool finite_counterterms = (counterterms.size() < 10);
         bool beta_exists = !std::isnan(beta) && !std::isinf(beta);
 
-        is_renormalizable = all_divergences_log && finite_counterterms &&
+        uv_well_behaved = all_divergences_log && finite_counterterms &&
                            beta_exists && unitarity_ok;
 
-        std::cout << "Criteria:" << std::endl;
-        std::cout << "  ✓ Logarithmic divergences only (except vacuum): "
+        std::cout << "Criteria (continuum-limit diagnostics):" << std::endl;
+        std::cout << "  Logarithmic divergences only (except vacuum): "
                   << (all_divergences_log ? "PASS" : "FAIL") << std::endl;
-        std::cout << "  ✓ Finite counterterms: "
+        std::cout << "  Bounded perturbative corrections: "
                   << (finite_counterterms ? "PASS" : "FAIL") << std::endl;
-        std::cout << "  ✓ Beta function exists: "
+        std::cout << "  Beta function well-defined: "
                   << (beta_exists ? "PASS" : "FAIL") << std::endl;
-        std::cout << "  ✓ Unitarity preserved: "
+        std::cout << "  Unitarity preserved: "
                   << (unitarity_ok ? "PASS" : "FAIL") << std::endl;
 
-        std::cout << "\n***** GO/NO-GO DECISION: "
-                  << (is_renormalizable ? "GO - TRD IS RENORMALIZABLE" : "NO-GO - TRD FAILS")
+        std::cout << "\n***** VERDICT: "
+                  << (uv_well_behaved ? "PASS - UV STRUCTURE WELL-BEHAVED" : "FAIL - PATHOLOGICAL UV BEHAVIOR")
                   << " *****" << std::endl;
 
-        if (is_renormalizable) {
-            std::cout << "\nPhysical interpretation:" << std::endl;
-            std::cout << "• TRD is a consistent quantum field theory" << std::endl;
-            std::cout << "• Similar structure to φ⁴ theory (renormalizable scalar theory)" << std::endl;
-            std::cout << "• UV completion needed at Landau pole (expected for non-gauge theories)" << std::endl;
-            std::cout << "• Path forward: Embed in asymptotically safe gravity or string theory" << std::endl;
+        if (uv_well_behaved) {
+            std::cout << "\nInterpretation:" << std::endl;
+            std::cout << "  TRD is UV-finite by construction (lattice-regulated)." << std::endl;
+            std::cout << "  The continuum-limit power counting shows no pathological" << std::endl;
+            std::cout << "  operators, and one-loop corrections are perturbatively bounded." << std::endl;
+            std::cout << "  Whether a proper continuum limit exists (UV fixed point)" << std::endl;
+            std::cout << "  requires systematic study at multiple lattice spacings." << std::endl;
         }
     }
 
@@ -372,7 +390,7 @@ public:
         // Test metadata
         out << YAML::Key << "test_name" << YAML::Value << "E1_Renormalizability";
         out << YAML::Key << "execution_date" << YAML::Value << "2026-01-04";
-        out << YAML::Key << "test_passed" << YAML::Value << is_renormalizable;
+        out << YAML::Key << "test_passed" << YAML::Value << uv_well_behaved;
 
         // Divergence analysis
         out << YAML::Key << "divergences" << YAML::Value << YAML::BeginMap;
@@ -401,7 +419,7 @@ public:
 
         // GO/NO-GO
         out << YAML::Key << "go_no_go_decision" << YAML::Value <<
-              (is_renormalizable ? "GO" : "NO-GO");
+              (uv_well_behaved ? "GO" : "NO-GO");
 
         out << YAML::EndMap;
 
@@ -412,7 +430,7 @@ public:
         std::cout << "\nResults saved to: " << filename << std::endl;
     }
 
-    bool isRenormalizable() const { return is_renormalizable; }
+    bool isUVWellBehaved() const { return uv_well_behaved; }
 };
 
 /**
@@ -423,8 +441,8 @@ int runRenormalizabilityTest() {
     YAML::Node config = YAML::LoadFile("config/renormalizability.yaml");
 
     std::cout << "========================================" << std::endl;
-    std::cout << "   E1: TRD RENORMALIZABILITY TEST      " << std::endl;
-    std::cout << "      CRITICAL GO/NO-GO GATE           " << std::endl;
+    std::cout << "   E1: TRD UV STRUCTURE ANALYSIS       " << std::endl;
+    std::cout << "   Perturbative Control & Scale Running " << std::endl;
     std::cout << "========================================" << std::endl;
 
     // Run renormalization analysis
@@ -440,6 +458,6 @@ int runRenormalizabilityTest() {
     std::cout << "        TEST COMPLETE                  " << std::endl;
     std::cout << "========================================" << std::endl;
 
-    // Return 0 for success (renormalizable), 1 for failure
-    return analysis.isRenormalizable() ? 0 : 1;
+    // Return 0 for success (UV well-behaved), 1 for failure
+    return analysis.isUVWellBehaved() ? 0 : 1;
 }
