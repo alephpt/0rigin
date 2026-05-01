@@ -1,0 +1,53 @@
+# Chiral Channel Selector — θ-sweep at fixed R
+#
+# Tests the prediction (from the second external critic) that θ in the chiral
+# mass operator M = ΔR·e^(iθγ⁵) is the chiral rotation angle that selects
+# between scalar and pseudoscalar condensate channels:
+#     scalar(θ)        ∝ cos(θ)·||ψ||
+#     pseudoscalar(θ)  ∝ sin(θ)·||ψ||
+#
+# In the (s, p) plane the order parameter rotates with θ but its magnitude
+# is approximately θ-independent.
+#
+# Required prerequisite: corrected γ⁵ in src/Dirac3D.cpp (Dirac basis,
+# anti-diagonal). Without that fix the test would measure the action of the
+# broken algebra, not the physics.
+
+validation:
+  framework: "Chiral Channel Selector"
+  test_file: "test/test_chiral_channel_selector.cpp"
+
+physics_model: "channel_selector"
+
+physics_params:
+  description: |
+    Hold (R, θ) uniform across a 32³ lattice, initialize a Gaussian wavepacket
+    with the existing Dirac3D::initializeGaussian seed (real upper components,
+    ψ̄ψ > 0, ⟨ψ̄iγ⁵ψ⟩ ≈ 0 initially). Evolve 50 steps via stepWithChiralMass
+    at dt=0.001. Sweep θ over 17 evenly spaced values in [0, π]. Record
+    both condensates at the final time.
+  Nx: 32
+  Ny: 32
+  Nz: 32
+  dt: 0.001
+  n_steps: 50
+  Delta: 1.0
+  R0: 1.0
+  theta_count: 17
+  theta_range: [0.0, 3.141592653589793]
+
+quality_gates:
+  # Exploratory measurement; the success criterion is the shape of the
+  # (scalar, pseudoscalar) trajectory in θ, not a pass/fail gate.
+
+expected_outputs:
+  - output/chiral_channel_selector/condensates_vs_theta.csv
+  - output/chiral_channel_selector/summary.yaml
+
+notes: |
+  If the channel-selector hypothesis holds, the (s, p) trajectory traces an
+  ellipse / circle in the plane parameterized by θ, with angle slope ≈ 1.0
+  and bounded magnitude variation. summary.yaml records the linear fit slope
+  and the relative magnitude spread; the test does NOT enforce a hard pass/fail
+  because we have no external benchmark — this is the first time TRD has
+  measured these condensates.

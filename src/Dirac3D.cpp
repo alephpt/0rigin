@@ -58,18 +58,27 @@ const std::array<std::complex<float>, 16> Dirac3D::beta = {{
     {0,0}, {0,0}, {0,0}, {-1,0}
 }};
 
-// γ^5 = i·γ^0·γ^1·γ^2·γ^3 in the Dirac representation
-// In the chiral representation where we work, γ^5 is diagonal:
-// γ^5 = [ 1   0   0   0 ]
-//       [ 0   1   0   0 ]
-//       [ 0   0  -1   0 ]
-//       [ 0   0   0  -1 ]
-// This gives chirality eigenvalues: +1 for upper components, -1 for lower
+// γ⁵ = i·γ⁰γ¹γ²γ³ in the Dirac representation.
+//
+// Earlier revisions of this file declared γ⁵ = diag(1,1,-1,-1) — but that is
+// the Weyl-basis form, inconsistent with the Dirac-basis β = diag(1,1,-1,-1)
+// and α^k matrices used elsewhere here. {β, γ⁵_diag} = 2β ≠ 0 → broken Clifford.
+//
+// In the Dirac basis (β = diag(I,-I), α^k = anti-diag block) γ⁵ is the
+// off-block identity:
+//   γ⁵ = [ 0   0   1   0 ]
+//        [ 0   0   0   1 ]
+//        [ 1   0   0   0 ]
+//        [ 0   1   0   0 ]
+//
+// This satisfies (γ⁵)² = I and {β, γ⁵} = 0 = {α^k, γ⁵}.
+// Chirality eigenvalues ±1 lie on the chiral combinations (ψ_L, ψ_R) =
+// ((ψ_upper ± ψ_lower)/√2), not directly on (ψ_upper, ψ_lower).
 const std::array<std::complex<float>, 16> Dirac3D::gamma5 = {{
+    {0,0}, {0,0}, {1,0}, {0,0},
+    {0,0}, {0,0}, {0,0}, {1,0},
     {1,0}, {0,0}, {0,0}, {0,0},
-    {0,0}, {1,0}, {0,0}, {0,0},
-    {0,0}, {0,0}, {-1,0}, {0,0},
-    {0,0}, {0,0}, {0,0}, {-1,0}
+    {0,0}, {1,0}, {0,0}, {0,0}
 }};
 
 Dirac3D::Dirac3D(uint32_t Nx, uint32_t Ny, uint32_t Nz)
@@ -417,8 +426,9 @@ void Dirac3D::stepWithChiralMass(const std::vector<float>& R_field,
     //   Separates kinetic (FFT-based) and mass (VV-based) operators
     //
     // Inner: Velocity Verlet for mass evolution
-    //   Handles FULL chiral mass: M = Δ·R·e^{iθγ⁵}
-    //   Uses eigenvalue decomposition: e^{iθγ⁵} acts as e^{±iθ} on upper/lower spinors
+    //   Handles FULL chiral mass: M = Δ·R·e^(iθγ⁵) in the Dirac basis,
+    //   where γ⁵ is anti-diagonal and the coupling mixes upper/lower spinor
+    //   components. See computeMassDerivative for the action.
     //
     // This is the "integral of Velocity Verlet and Strang Splitting with respect to Delta"
     // as confirmed by the user - a hybrid approach combining the strengths of both methods
@@ -445,11 +455,10 @@ void Dirac3D::applyMassVelocityVerlet(
     float Delta, float dt) {
 
     // Velocity Verlet for: dΨ/dt = -i·β·M·Ψ
-    // where M = Δ·R·(cos(θ)·I + i·sin(θ)·γ⁵)
-    //
-    // This implements the FULL chiral coupling including both:
-    //   - Upper spinor sees: M_upper = Δ·R·e^{+iθ}
-    //   - Lower spinor sees: M_lower = Δ·R·e^{-iθ}
+    // where M = Δ·R·e^(iθγ⁵) = Δ·R·(cos(θ)·I + i sin(θ)·γ⁵).
+    // γ⁵ in the Dirac basis is anti-diagonal [[0,I],[I,0]], so the chiral
+    // coupling mixes upper and lower components rather than acting block-
+    // diagonally. See computeMassDerivative for the full action.
     //
     // The Velocity Verlet algorithm:
     //   1. Compute k1 = dΨ/dt at t
@@ -493,68 +502,56 @@ void Dirac3D::computeMassDerivative(
     const std::vector<std::complex<float>> psi_in[4],
     std::vector<std::complex<float>> dpsi_dt[4]) {
 
-    // Compute: dΨ/dt = -i·β·M·Ψ
-    // where M = Δ·R·e^{iθγ⁵}
+    // Compute dΨ/dt = -i·β·M·Ψ where M = Δ·R·e^(iθγ⁵).
     //
-    // CORRECT EIGENVALUE DECOMPOSITION:
-    // Using eigenvalue decomposition of γ⁵:
-    // - Upper spinor (components 0,1): γ⁵ eigenvalue = +1
-    // - Lower spinor (components 2,3): γ⁵ eigenvalue = -1
+    // This is the Dirac-basis evaluation of the chiral mass coupling.
+    // β = diag(1,1,-1,-1) and γ⁵ = anti-diagonal block [[0,I],[I,0]].
     //
-    // Therefore e^{iθγ⁵} acts as:
-    // - e^{+iθ} on upper components (γ⁵ = +1)
-    // - e^{-iθ} on lower components (γ⁵ = -1)
+    // Closed form: e^(iθγ⁵) = cos(θ)·I + i·sin(θ)·γ⁵.
+    // Acting on Ψ = (ψ₀, ψ₁, ψ₂, ψ₃):
+    //   (e^(iθγ⁵) Ψ)_0 = cos(θ)·ψ₀ + i sin(θ)·ψ₂
+    //   (e^(iθγ⁵) Ψ)_1 = cos(θ)·ψ₁ + i sin(θ)·ψ₃
+    //   (e^(iθγ⁵) Ψ)_2 = cos(θ)·ψ₂ + i sin(θ)·ψ₀
+    //   (e^(iθγ⁵) Ψ)_3 = cos(θ)·ψ₃ + i sin(θ)·ψ₁
+    // Then β flips the lower-block sign, and -i·Δ·R scales the result.
     //
-    // This gives:
-    // M·Ψ_upper = Δ·R·e^{+iθ}·Ψ_upper  (complex mass with phase +θ)
-    // M·Ψ_lower = Δ·R·e^{-iθ}·Ψ_lower  (complex mass with phase -θ)
+    // βM is Hermitian here (verified analytically and via the operator
+    // comparison test in test_chiral_operator_comparison.cpp), so the mass
+    // step exp(-i·β·M·dt) is unitary and conserves ⟨ψ|ψ⟩.
     //
-    // This is a UNITARY operator - it only rotates phase, no growth/decay!
-    // |M_upper| = |M_lower| = Δ·R (constant magnitude)
+    // |M_eigenvalue| = Δ·R is constant (M is unitary up to scale Δ·R).
+    // Chirality eigenvalues ±1 live on (ψ_L, ψ_R) = (ψ_upper ± ψ_lower)/√2,
+    // not directly on the upper/lower component split.
 
     for (uint32_t idx = 0; idx < _N_total; ++idx) {
-        float R = R_field[idx];
-        float theta = theta_field[idx];
+        const float R = R_field[idx];
+        const float theta = theta_field[idx];
+        const float ct = std::cos(theta);
+        const float st = std::sin(theta);
+        const std::complex<float> i_st(0.0f, st);  // i·sin(θ)
 
-        // Complex mass for upper components (γ⁵ eigenvalue = +1)
-        // M_upper = Δ·R·e^{+iθ}
-        std::complex<float> M_upper = Delta * R * std::exp(std::complex<float>(0, +theta));
+        const std::complex<float>& p0 = psi_in[0][idx];
+        const std::complex<float>& p1 = psi_in[1][idx];
+        const std::complex<float>& p2 = psi_in[2][idx];
+        const std::complex<float>& p3 = psi_in[3][idx];
 
-        // Complex mass for lower components (γ⁵ eigenvalue = -1)
-        // M_lower = Δ·R·e^{-iθ}
-        std::complex<float> M_lower = Delta * R * std::exp(std::complex<float>(0, -theta));
+        // M·Ψ = Δ·R · (cos(θ)·Ψ + i sin(θ)·γ⁵·Ψ),  γ⁵ swaps (0↔2, 1↔3)
+        const std::complex<float> M0 = Delta * R * (ct * p0 + i_st * p2);
+        const std::complex<float> M1 = Delta * R * (ct * p1 + i_st * p3);
+        const std::complex<float> M2 = Delta * R * (ct * p2 + i_st * p0);
+        const std::complex<float> M3 = Delta * R * (ct * p3 + i_st * p1);
 
-        // Verify unitarity (optional but useful for debugging)
-        #ifdef DEBUG_CHIRAL_MASS
-        float M_upper_mag = std::abs(M_upper);  // Should equal Δ·R
-        float M_lower_mag = std::abs(M_lower);  // Should equal Δ·R
-        assert(std::abs(M_upper_mag - Delta * R) < 1e-6f);
-        assert(std::abs(M_lower_mag - Delta * R) < 1e-6f);
-        #endif
+        // β·(MΨ): β = diag(1,1,-1,-1) flips the lower block
+        const std::complex<float> bM0 =  M0;
+        const std::complex<float> bM1 =  M1;
+        const std::complex<float> bM2 = -M2;
+        const std::complex<float> bM3 = -M3;
 
-        // Apply M to spinor based on eigenvalues
-        std::complex<float> M_psi[4];
-        M_psi[0] = M_upper * psi_in[0][idx];  // Upper component 0 (γ⁵ = +1)
-        M_psi[1] = M_upper * psi_in[1][idx];  // Upper component 1 (γ⁵ = +1)
-        M_psi[2] = M_lower * psi_in[2][idx];  // Lower component 2 (γ⁵ = -1)
-        M_psi[3] = M_lower * psi_in[3][idx];  // Lower component 3 (γ⁵ = -1)
-
-        // Apply β operator in chiral basis
-        // β = [[0, 0, 1, 0],
-        //      [0, 0, 0, 1],
-        //      [1, 0, 0, 0],
-        //      [0, 1, 0, 0]]
-        // This swaps upper/lower components
-        std::complex<float> beta_M_psi[4];
-        beta_M_psi[0] = M_psi[2];   // β row 0: picks component 2
-        beta_M_psi[1] = M_psi[3];   // β row 1: picks component 3
-        beta_M_psi[2] = M_psi[0];   // β row 2: picks component 0
-        beta_M_psi[3] = M_psi[1];   // β row 3: picks component 1
-
-        // dΨ/dt = -i·β·M·Ψ
-        // The -i factor ensures proper unitary time evolution
-        for (int c = 0; c < 4; ++c) {
-            dpsi_dt[c][idx] = std::complex<float>(0, -1) * beta_M_psi[c];
-        }
+        // dΨ/dt = -i · β · M · Ψ
+        const std::complex<float> minus_i(0.0f, -1.0f);
+        dpsi_dt[0][idx] = minus_i * bM0;
+        dpsi_dt[1][idx] = minus_i * bM1;
+        dpsi_dt[2][idx] = minus_i * bM2;
+        dpsi_dt[3][idx] = minus_i * bM3;
     }
 }

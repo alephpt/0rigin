@@ -27,7 +27,22 @@
 #include <algorithm>
 #include <cassert>
 
-// Energy functional for Dirac field with chiral mass
+// Energy functional for Dirac field with chiral mass coupling.
+//
+// E = ⟨ψ|H|ψ⟩  with  H = α·p + β·M,  M = Δ·R·e^(iθγ⁵)
+//
+// Mass-sector contribution per site (using corrected Dirac-basis γ⁵ =
+// anti-diagonal block):
+//   E_mass(i) = ΔR_i · [cos(θ_i)·⟨ψ̄ψ⟩_i  +  sin(θ_i)·⟨ψ̄ iγ⁵ ψ⟩_i]
+// where  ⟨ψ̄ψ⟩  = ψ†βψ = |ψ₀|² + |ψ₁|² − |ψ₂|² − |ψ₃|²
+// and    ⟨ψ̄iγ⁵ψ⟩ = i·ψ†βγ⁵ψ
+//                = i·(ψ̄₀ψ₂ + ψ̄₁ψ₃ − ψ̄₂ψ₀ − ψ̄₃ψ₁)
+//                = −2·Im(ψ̄₀ψ₂ + ψ̄₁ψ₃)
+//
+// This replaces the earlier formula  E_mass = Δ·⟨ρ⟩  (mean of m_L,m_R) which
+// was an artifact of the broken γ⁵ representation: in the corrected basis,
+// the average of the two chiral eigenvalues is Δ·R·cos(θ) (not Δ), and the
+// pseudoscalar piece carries the rest of the mass-sector energy.
 float computeDiracEnergy(const Dirac3D& dirac, const std::vector<float>& R_field,
                          const std::vector<float>& theta_field, float Delta) {
     // Get field dimensions
@@ -35,9 +50,6 @@ float computeDiracEnergy(const Dirac3D& dirac, const std::vector<float>& R_field
     uint32_t Ny = dirac.getNy();
     uint32_t Nz = dirac.getNz();
     uint32_t N = Nx * Ny * Nz;
-
-    // Get density (|ψ|²)
-    auto density = dirac.getDensity();
 
     // Compute kinetic energy contribution from currents
     auto j_x = dirac.getCurrent(0);
@@ -49,15 +61,22 @@ float computeDiracEnergy(const Dirac3D& dirac, const std::vector<float>& R_field
         E_kinetic += 0.5f * (j_x[i]*j_x[i] + j_y[i]*j_y[i] + j_z[i]*j_z[i]);
     }
 
-    // Compute chiral mass contribution
+    // Compute chiral mass contribution from per-site spinor components
+    const auto& psi0 = dirac.getComponent(0);
+    const auto& psi1 = dirac.getComponent(1);
+    const auto& psi2 = dirac.getComponent(2);
+    const auto& psi3 = dirac.getComponent(3);
+
     float E_mass = 0.0f;
     for (uint32_t i = 0; i < N; ++i) {
-        // Effective chiral masses
-        float m_L = Delta * (1.0f + R_field[i] * std::cos(theta_field[i]));
-        float m_R = Delta * (1.0f - R_field[i] * std::cos(theta_field[i]));
-        // Average mass for energy calculation
-        float m_eff = 0.5f * (m_L + m_R);
-        E_mass += m_eff * density[i];
+        const float scalar      = std::norm(psi0[i]) + std::norm(psi1[i])
+                                  - std::norm(psi2[i]) - std::norm(psi3[i]);
+        const std::complex<float> bg5 = std::conj(psi0[i]) * psi2[i]
+                                       + std::conj(psi1[i]) * psi3[i];
+        const float pseudoscalar = -2.0f * bg5.imag();
+        E_mass += Delta * R_field[i] *
+                  (std::cos(theta_field[i]) * scalar +
+                   std::sin(theta_field[i]) * pseudoscalar);
     }
 
     return E_kinetic + E_mass;

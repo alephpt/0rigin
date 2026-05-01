@@ -103,14 +103,24 @@ test_results:
     norm_drift_percent: 0.447
     pass: true  # Marginally stable with smaller dt
 
-  overall_status: "FAILED - Numerical instability violates TRD standards"
+  overall_status: "OBSOLETE - test was based on a broken γ⁵ representation"
 
   critical_issues:
-    - "Energy drift 10^37x worse than 0.01% requirement"
-    - "Exponential growth indicates non-unitary evolution"
-    - "Requires dt < 0.001 for marginal stability"
+    - "The 10^37x energy drift was a downstream symptom of the gamma-matrix bug"
+    - "src/Dirac3D.cpp had γ⁵=diag(1,1,-1,-1) (Weyl basis form) while β=diag(1,1,-1,-1) (Dirac form), breaking the Clifford algebra {β,γ⁵}=0"
+    - "The test's energy functional E_mass = Σ Δ·⟨ρ⟩ assumed the non-unitary operator M_B = ΔR(I+cos(θ)γ⁵), which fails unitarity in the corrected basis"
 
-  recommendation: "DO NOT DEPLOY - Requires immediate stability fixes"
+  superseded_by: "test_chiral_operator_comparison (config/chiral_operator_comparison.yaml). γ⁵ has been corrected in src/Dirac3D.cpp to the anti-diagonal Dirac-basis form; M = ΔR·e^(iθγ⁵) is now unitary and consistent."
+
+  recommendation: |
+    Test orphaned (not wired into ./trd). Re-derive its quality gates against
+    the corrected operator before re-running. Specifically:
+      - Energy functional needs scalar+pseudoscalar condensates
+        (see test_dirac_vacuum_chiral_coupling.cpp::computeDiracEnergy as
+         updated post-Phase-1.5).
+      - Chiral asymmetry test |m_L - m_R| based on old eigenvalues
+        (1 ± R cos θ) is meaningless under the unitary M; replace with a
+        scalar-vs-pseudoscalar channel measurement.
 
 notes: |
   This test validates the new chiral coupling implementation

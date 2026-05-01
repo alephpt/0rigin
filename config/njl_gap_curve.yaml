@@ -1,0 +1,40 @@
+# NJL Gap Curve M(K)
+#
+# Post-processing analysis on top of the Kuramoto phase-diagram CSV.
+# Tests the structural isomorphism between TRD and NJL near criticality:
+#     M_dyn^2 ∝ (K - K_c)   above K_c   (mean-field critical exponent 1/2)
+#
+# Reads output/kuramoto_phase_diagram/R_vs_K.csv (must exist; run
+# config/kuramoto_phase_diagram.yaml first), fits the NJL form by scanning
+# K_c, and writes the resulting fit to summary.yaml + m_vs_K.csv.
+
+validation:
+  framework: "NJL Gap Curve"
+  test_file: "test/test_njl_gap_curve.cpp"
+
+physics_model: "njl_post_processing"
+
+physics_params:
+  description: |
+    Read R(K) from the Kuramoto sweep, compute m_eff = Δ·R, scan K_c over a
+    range bracketing the analytic mean-field value, and fit
+        m_eff² = a·(K − K_c) + b    for K > K_c
+    by linear regression. Pick the K_c that minimizes χ². Report slope a,
+    intercept b, χ²/dof, and best-fit K_c versus the analytic value.
+  Delta: 1.0
+  K_c_scan_range_relative: [0.1, 5.0]
+  K_c_scan_steps: 200
+
+quality_gates:
+  # Exploratory: the test reports a fit; interpretation belongs to the paper.
+
+expected_outputs:
+  - output/njl_gap_curve/m_vs_K.csv
+  - output/njl_gap_curve/summary.yaml
+
+notes: |
+  The structural-isomorphism claim says TRD's R-field equilibrium IS the NJL
+  gap equation. If the M²(K) curve fits the linear form near K_c with intercept
+  ~0 and best-fit K_c close to the analytic mean-field value, that claim is
+  empirically supported. If the fit is poor or K_c is wildly off, the
+  isomorphism is at most superficial.

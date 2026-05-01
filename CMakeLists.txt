@@ -193,6 +193,11 @@ set(TRD_SOURCES
     test/test_navier_stokes.cpp
     test/test_renormalizability.cpp
     test/test_causality.cpp
+    test/test_chiral_operator_comparison.cpp
+    test/test_kuramoto_phase_diagram.cpp
+    test/test_chiral_channel_selector.cpp
+    test/test_njl_gap_curve.cpp
+    src/observables_cpu.cpp
     main.cpp
 )
 

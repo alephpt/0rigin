@@ -95,6 +95,10 @@ int runLHCPredictionsTest();
 int runAstrophysicalObservationsTest();
 int runAtomicPhysicsTest();
 int runLaboratoryScaleTest();
+int runChiralOperatorComparisonTest();
+int runKuramotoPhaseDiagramTest();
+int runChiralChannelSelectorTest();
+int runNJLGapCurveTest();
 
 int runTestMode(const std::string& config_path, bool generate_plots) {
     std::cout << "\n===== TRD Test Mode =====" << std::endl;
@@ -200,6 +204,14 @@ int runTestMode(const std::string& config_path, bool generate_plots) {
         result = runAstrophysicalObservationsTest();
     } else if (config_path.find("laboratory_scale") != std::string::npos) {
         result = runLaboratoryScaleTest();
+    } else if (config_path.find("chiral_operator_comparison") != std::string::npos) {
+        result = runChiralOperatorComparisonTest();
+    } else if (config_path.find("kuramoto_phase_diagram") != std::string::npos) {
+        result = runKuramotoPhaseDiagramTest();
+    } else if (config_path.find("chiral_channel_selector") != std::string::npos) {
+        result = runChiralChannelSelectorTest();
+    } else if (config_path.find("njl_gap_curve") != std::string::npos) {
+        result = runNJLGapCurveTest();
     } else {
         // Default: TRD field theory test (timesync, etc.)
         TRDTestRunner runner(config_path);

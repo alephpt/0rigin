@@ -1,0 +1,55 @@
+# Chiral Mass Operator Comparison
+#
+# Decides empirically which form of the chiral mass operator M is correct:
+#   A) M = ΔR · e^(iθγ⁵)            (unitary; what Dirac3D.cpp actually evolves)
+#   B) M = ΔR · (I + cos(θ)·γ⁵)     (non-unitary; what TRD_Paper.md §2.3 implies)
+#
+# These are mathematically distinct operators with different eigenvalues:
+#   A: λ_± = ΔR · e^(±iθ)            |λ| = ΔR (constant)
+#   B: λ_± = ΔR · (1 ± cos θ)        |λ| varies 0..2ΔR
+#
+# Test approach: build each operator's mass step U_X = exp(-i β M_X dt),
+# verify unitarity, evolve a representative spinor 1000 steps, measure
+# energy / norm / time-reversibility for each.
+#
+# Decision rule: an operator that passes all four constraints
+#   (unitarity < 1e-6, |ΔE/E| < 1e-4, |Δ||ψ|²| < 1e-6, time-reversal < 1e-4)
+# is the correct M. If both pass, prefer unitary for parsimony. If neither
+# passes, the operator definition is broken and must be rederived.
+
+validation:
+  framework: "Chiral Mass Operator Comparison"
+  test_file: "test/test_chiral_operator_comparison.cpp"
+  golden_key: 246  # GeV (informational; this test is in natural units)
+
+physics_model: "operator_validation"
+
+physics_params:
+  description: |
+    Per-site 4x4 matrix-level test (lattice not required for the decision).
+    Parameter grid covers (R, θ) configurations that maximally distinguish
+    the two operators.
+  Delta: 1.0
+  dt: 0.001
+  num_steps: 1000
+  param_grid:
+    - {R: 1.0,  theta: 0.0}
+    - {R: 1.0,  theta: 0.7853981633974483}   # π/4
+    - {R: 1.0,  theta: 1.5707963267948966}   # π/2
+    - {R: 1.0,  theta: 3.141592653589793}    # π
+    - {R: 0.5,  theta: 1.0471975511965976}   # π/3
+
+quality_gates:
+  unitarity_residual: 1.0e-6
+  energy_drift: 1.0e-4
+  norm_drift: 1.0e-6
+  timereversal_error: 1.0e-4
+
+expected_outputs:
+  - output/chiral_operator_comparison/decision.yaml
+
+notes: |
+  This test is the prerequisite for Phase 2 of the post-critique remediation:
+  whichever operator wins decides whether docs/paper/TRD_Paper.md §2.3 is
+  rewritten (if A wins) or src/Dirac3D.cpp grows a non-unitary alternate path
+  (if B wins). Per user direction we do NOT assume the answer.
