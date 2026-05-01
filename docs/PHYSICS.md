@@ -405,8 +405,8 @@ Using v = 246 GeV as the golden key, TRD predicts particle masses:
 | Particle | TRD Prediction | Experimental | Ratio |
 |----------|---------------|-------------|-------|
 | Electron | 0.511 MeV | 0.511 MeV | input |
-| Muon | 172 MeV | 105.7 MeV | 1.6x |
-| Tau | 2840 MeV | 1777 MeV | 1.6x |
+| Muon (Q=2, d=200) | 51.0 MeV | 105.7 MeV | 0.48x (current run) |
+| Tau (Q=3) | not yet stable on current lattice | 1777 MeV | n/a |
 
 Mass ratios are within a factor of 2, which is the target accuracy for this stage of the theory.
 
@@ -415,8 +415,8 @@ Mass ratios are within a factor of 2, which is the target accuracy for this stag
 | Constant | TRD Value | Experimental | Accuracy |
 |----------|-----------|-------------|----------|
 | Fine structure constant alpha | 0.00354 | 0.007297 | 0.49x |
-| Weinberg angle sin^2(theta_W) | 0.2223 | 0.23122 | 96% |
-| W/Z mass ratio | 0.7958 | 0.8815 | 90% |
+| Weinberg angle theta_W | 25.31° | 28.70° | 88% (cos ratio) |
+| cos(theta_W) = m_W/m_Z | 0.904 | 0.877 | 2.6% error |
 | Hubble constant H_0 | 72.71 km/s/Mpc | 67.4-73.0 | 3.9% error |
 | Inflation e-foldings N | 59.70 | 50-70 | in range |
 | Dark energy equation of state w | ~-1 | -1.0 +/- 0.1 | consistent |
@@ -433,22 +433,24 @@ Mass ratios are within a factor of 2, which is the target accuracy for this stag
 
 ## 6. Validation Categories
 
-### Category A: General Relativity (5/5 PASS)
+**Status labels follow paper Appendix A. PHYSICS.md is downstream of `docs/paper/TRD_Paper.md`; if you find a discrepancy, the paper is the source of truth.**
 
-- **A1**: Einstein field equations emerge from R-field curvature: g_mu_nu = R^2 eta_mu_nu
-- **A2**: Weak field limit reproduces Newtonian gravity to 0.01% accuracy
-- **A3**: Geodesic motion follows curved spacetime trajectories
-- **A4**: Light deflection: gravitational lensing angle proportional to 1/b
-- **A5**: Gravitational waves: 40.7% orbital decay, chirp signal detected
+### Category A: General Relativity (4 PASS, 1 PARTIAL)
 
-### Category B: Standard Model (6/6 PASS)
+- **A2**: Weak field limit reproduces Newtonian gravity to 0.01% accuracy → PASS
+- **A3**: Geodesic motion follows curved spacetime trajectories → PASS
+- **A4**: Einstein field equations: 7/10 components below threshold; G_11, G_22 elevated near order-of-magnitude gate → PARTIAL
+- **A5**: Gravitational waves: chirp signal, h_+/h_x polarization, dispersion ω = k → PASS
+- **A6**: Binary vortex merger: inspiral, chirp, energy/angular-momentum conservation → PASS
 
-- **B1**: Particle spectrum within factor 2 for mass ratios
-- **B2**: Fine structure constant alpha = 0.00354 (0.49x QED)
-- **B3**: Three generations (negative result -- limitation identified: pi_1(S^1) = Z infinite)
-- **B4**: Electroweak unification: 6/7 gates pass
-- **B5**: Strong force: asymptotic freedom and confinement validated
-- **B6**: Higgs mechanism: mass generation through R-field, Goldstone modes confirmed
+### Category B: Standard Model (2 PASS, 3 PARTIAL, 1 FAIL)
+
+- **B2**: Fine structure constant — best extraction α = 0.00354 (0.49× QED); other methods fail by orders of magnitude → FAIL
+- **B3**: Three generations — only 2 of 3 stable surface defect states found → PARTIAL
+- **B4**: Electroweak — m_W/m_Z = 0.904 (cos θ_W; 2.6% error); absolute mass scale uncalibrated (~80× low) → PASS (dimensionless ratio)
+- **B5**: Strong force — asymptotic freedom confirmed, but α_s ~40% below PDG across all scales → PARTIAL
+- **B6**: Higgs mechanism — VEV = 1.00, 3 Goldstone modes, mass generation → PASS
+- **B7**: Particle spectrum — electron calibrated; muon/electron ratio 99.85 vs experimental 206.77 (factor 2 low); tau not stable on current lattice → PARTIAL
 
 ### Category C: Cosmology (4/5 PASS, C1 partial)
 

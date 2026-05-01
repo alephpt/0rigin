@@ -70,12 +70,13 @@ TRD (Topological Resonance Dynamics) Engine is a research framework for simulati
 
 **Integration Methods**:
 
-**RK2 Midpoint (Symplectic)**:
+**RK2 Midpoint** (Kuramoto vacuum sector — first-order gradient flow, not Hamiltonian):
 ```
 k1 = f(x_n)
 k2 = f(x_n + dt/2 * k1)
 x_{n+1} = x_n + dt * k2
 ```
+RK2 here is used for **time-reversibility and long-time numerical stability**, not symplecticity per se. The Kuramoto equation is gradient flow toward synchronization (dissipative); energy is NOT conserved by construction. Symplectic-style language belongs only to the conservative sectors (Velocity Verlet for wave equations, Strang for the Dirac mass step).
 
 **Velocity Verlet (Wave Equations)**:
 ```
@@ -146,7 +147,7 @@ TRDEngine3D::runSimulation(dt)
   - Topological solitons (kinks, vortices)
   - Particle scattering
   - Energy functional: E = ∫[(∂θ/∂t)² + (∇θ)² + (1-cos(θ))]dV
-- **Dirac**: i∂_t Ψ = (α·∇ + β·m)Ψ
+- **Dirac**: i∂_t Ψ = (-iα·∇ + βm)Ψ
   - Fermion evolution
   - Mass from vacuum coupling
   - Gauge coupling to EM fields
@@ -176,7 +177,7 @@ TRDEngine3D::runSimulation(dt)
 
 **Dirac3D**: Relativistic spinor dynamics
 - 4-component spinor field (3D + spin)
-- Dirac equation: i∂_t Ψ = (α·∇ + β·m)Ψ
+- Dirac equation: i∂_t Ψ = (-iα·∇ + βm)Ψ
 - TRD mass coupling: m = Δ·R·exp(iθγ⁵)
 
 **Sine-Gordon**: Topological solitons
@@ -286,7 +287,7 @@ quality_gates:
 | Framework integration | 100% TRDCore3D | 🟢 100% |
 | Executable standard | ./trd only | 🟢 Complete |
 
-**Validation**: 92% complete (35/38 tests), all passing energy conservation
+**Validation**: 48 wired tests in current build (44 original + 4 added 2026-05 for operator validation, Kuramoto phase diagram, chiral channel selector, NJL gap curve). Pass/fail status per test is recorded in each `config/<test>.yaml` `test_results:` block; aggregate status appears in `docs/paper/TRD_Paper.md` Appendix A (paper is the canonical source).
 
 ---
 
@@ -370,7 +371,7 @@ quality_gates:
 - Goldstone modes: 3 (W⁺, W⁻, Z) ✓
 - All forces emerge from single Kuramoto framework
 
-**Breakthrough**: Complete Standard Model unified via topological synchronization
+**Status**: Standard Model phenomenology partially reproduced via topological synchronization — strong sector quantitatively low (~40%), three-generation structure incomplete (only 2 of 3 stable surface defects), fine structure constant not yet extracted. See docs/paper/TRD_Paper.md §5 for full pass/fail status.
 
 ### Category C: Cosmology (4/5, C1 partial)
 
@@ -562,5 +563,5 @@ make -j$(nproc)
 ---
 
 **Last Updated**: 2026-01-08
-**Architecture Review**: Current - 92% validation complete
+**Architecture Review**: Current — 48 wired tests; per-test status in YAML `test_results:` blocks and paper Appendix A.
 **Next Major Milestone**: 100% validation (3 tests remaining)

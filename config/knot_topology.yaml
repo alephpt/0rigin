@@ -122,3 +122,20 @@ references:
     journal: "Nature"
     year: 1997
     notes: "Hopfions in classical field theory"
+
+test_results:
+  # Run captured 2026-05-01 from build/bin/trd --test config/knot_topology.yaml
+  timestamp: "2026-05-01"
+  hopf_link_L1:
+    initial_winding_number: 0.009639
+    final_winding_number:   0.003711
+    delta_L:                0.005928   # |W_final - W_initial|
+    energy_drift:           0.0683     # ΔE/E
+    soliton_mass_TRD:       316.95     # natural units
+    soliton_mass_GeV:       77968.80   # = 316.95 × 246 GeV
+    pass: true
+  notes: |
+    These are the canonical numbers cited in docs/paper/TRD_Paper.md §8.6
+    (winding drift 0.0059, energy drift 6.8%, soliton mass 78 TeV at Q=1).
+    The earlier audit flagged §8.6 as "unverifiable" because this block was
+    missing; the run reproduces the paper numbers to all printed digits.
